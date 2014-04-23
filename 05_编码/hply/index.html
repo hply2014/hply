@@ -43,14 +43,14 @@
 	}
 	
 	function go2(url, i){
-		if (i == undefined) i=0;
+		if (i === undefined) i=0;
 		$("#frm2").attr("src", url + "?r=" + Math.random());
 		$("#nav li:eq(" + i + ")").click();
 	}
 </script>
 </head>
 
-<body style="overflow:hidden;" scroll="no">
+<body>
 <div id="dialog" title="Basic dialog" style="display:none"><iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="560px" height="360px" src="fukqk.html"></iframe></div>
 <div id="header" style="background-color:#f5f5f5; width:100%;">
 <div style="font-size:16px;font-family:'黑体';font-weight:bold;padding:10px;height:25px;">项目部工程核算系统</div>
