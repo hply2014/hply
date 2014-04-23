@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>修改密码</title>
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/defualt.js"></script>
+<link rel="stylesheet" href="themes/style.css">
+<script type="text/javascript">
+	function go2(){
+		var url = self.location.href.indexOf("?p=1")>=0 ? "user_list.html" : "huiz1.html";
+		parent.go2(url);
+	}
+</script>
+</head>
+
+<body>
+<div id="panel">
+<table width="100%" border="0" cellpadding="0">
+  <tr>
+    <td width="120">用户名</td>
+    <td><input class="text2" type="text" name="textfield" id="textfield"></td>
+  </tr>
+  <tr>
+    <td>姓名</td>
+    <td colspan="3"><input class="text2" type="text" name="textfield3" id="textfield3"></td>
+  </tr>
+  <tr>
+    <td>原密码</td>
+    <td colspan="3"><input class="text2" type="password" name="textfield3" id="textfield3"></td>
+  </tr>
+  <tr>
+    <td>新密码</td>
+    <td><input class="text2" type="password" name="textfield6" id="textfield6"></td>
+  </tr>
+  <tr>
+    <td>新密码确认</td>
+    <td colspan="3"><input class="text2" type="password" name="textfield3" id="textfield3"></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td><textarea name="textarea" id="textarea" cols="45" rows="5"></textarea></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="3"><a class="btn" href="javascript:go2();" />提交</a>
+	  <a class="btn" href="javascript:go2();" >取消</a></td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

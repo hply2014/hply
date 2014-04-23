@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>往来欠款</title>
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/defualt.js"></script>
+<link rel="stylesheet" href="themes/style.css">
+</head>
+<body>
+<div id="panel">
+<table width="100%" border="0" cellpadding="0">
+  <tr>
+    <td width="120">单据编号</td>
+    <td><input class="text2" type="text" name="textfield" id="textfield"></td>
+  </tr>
+  <tr>
+    <td>欠款分类</td>
+    <td><label>
+        <input name="RadioGroup1" type="radio" id="RadioGroup1_0" value="单选" checked>
+        投标</label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>
+        <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1">
+        押金</label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>
+        <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_2">
+        <input class="text1" type="text" value="其他"/></label></td>
+  </tr>
+  <tr>
+    <td>付款方式</td>
+    <td><select>
+        <option selected value="现金">现金</option>
+        <option  value="银行转帐">银行转帐</option>
+        <option  value="汇款">汇款</option>
+        <option  value="支票">支票</option>
+        <option  value="汇票">汇票</option>
+        <option  value="其他">其他</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td>金额</td>
+    <td><input class="text2" type="text" name="textfield2" id="textfield2"><div style="margin-left:40px;display:inline">工程款余额：000000.00元，往来欠款余额：000000.00元</div></td>
+  </tr>
+  <tr>
+    <td>银行账号</td>
+    <td><input class="text2" type="text" style="width:537px" name="textfield5" id="textfield5"></td>
+  </tr>
+  <tr>
+    <td>银行名称</td>
+    <td><input class="text2" type="text" style="width:537px" name="textfield6" id="textfield6"></td>
+  </tr>
+  <tr>
+    <td>经手人</td>
+    <td><input class="text2" type="text" name="textfield3" id="textfield3"></td>
+  </tr>
+  <tr>
+    <td>创建时间</td>
+    <td><input class="text2" type="text" style="width:120px" name="textfield13" id="textfield13"><img src="themes/date.gif" class="btn_date" /></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td><textarea name="textarea" id="textarea" cols="45" rows="5"></textarea></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="checkbox" name="checkbox" id="checkbox" checked="true"><label for="checkbox">存为草稿</label></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><a class="btn" href="wanglqk_list.html" target="_self">提交</a>
+	  <a class="btn" href="wanglqk_list.html" target="_self">返回</a></td>
+    </td>
+  </tr>
+</table></div>
+</body>
+</html>

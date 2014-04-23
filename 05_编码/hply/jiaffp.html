@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>给甲方的发票</title>
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/defualt.js"></script>
+<link rel="stylesheet" href="themes/style.css">
+</head>
+
+<body>
+<div id="panel">
+<table width="100%" border="0" cellpadding="0">
+  <tr>
+    <td width="120">发票票号</td>
+    <td width="259"><input class="text2" type="text" name="textfield" id="textfield"></td>
+    <td width="120">税金比率（%）</td>
+    <td><input class="text2" style="width:80px" name="textfield5" type="text" id="textfield5" value="3.4"></td>
+  </tr>
+  <tr>
+    <td>发票金额</td>
+    <td><input class="text2" type="text" name="textfield2" id="textfield2"></td>
+    <td>应收税金</td>
+    <td><input class="text2" type="text" name="textfield6" id="textfield6"></td>
+  </tr>
+  <tr>
+    <td>经手人</td>
+    <td colspan="3"><input class="text2" type="text" name="textfield3" id="textfield3"></td>
+  </tr>
+  <tr>
+    <td>创建时间</td>
+    <td colspan="3"><input class="text2" type="text" style="width:120px" name="textfield13" id="textfield13"><img src="themes/date.gif" class="btn_date" /></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan="3"><textarea name="textarea" id="textarea" cols="45" rows="5"></textarea></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="3"><input type="checkbox" name="checkbox" id="checkbox" checked="true"><label for="checkbox">存为草稿</label></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="3"><a class="btn" href="javascript:parent.go2('huiz1.html');" />提交</a>
+	  <a class="btn" href="javascript:parent.go2('huiz1.html');" >取消</a></td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

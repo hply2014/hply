@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>项目部工程核算系统</title>
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<link rel="stylesheet" href="themes/base/jquery.ui.all.css">
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.bgiframe-2.1.2.js"></script>
+<script type="text/javascript" src="js/jquery.ui.core.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.widget.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.mouse.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.draggable.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.position.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.resizable.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.dialog.min.js"></script>
+<script type="text/javascript" src="js/defualt.js"></script>
+
+<link rel="stylesheet" href="themes/style.css">
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#nav li").click(function(){
+			$(".current").removeClass("current");
+			$(this).addClass("current").children().addClass("current");
+			$("body").focus();
+			reset();
+		});
+		go2('huiz1.html');
+		reset();
+	});
+	
+	function show_dialog(){
+		$("#dialog").dialog({
+			modal:true, width:600, height:400, title:"付款情况"
+		});
+	}
+	
+	function reset(){
+		$("#frm2")
+			.width($(window).width())
+			.height($(window).height() - $("#frm2").offset().top);
+	}
+	
+	function go2(url, i){
+		if (i == undefined) i=0;
+		$("#frm2").attr("src", url + "?r=" + Math.random());
+		$("#nav li:eq(" + i + ")").click();
+	}
+</script>
+</head>
+
+<body style="overflow:hidden;" scroll="no">
+<div id="dialog" title="Basic dialog" style="display:none"><iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="560px" height="360px" src="fukqk.html"></iframe></div>
+<div id="header" style="background-color:#f5f5f5; width:100%;">
+<div style="font-size:16px;font-family:'黑体';font-weight:bold;padding:10px;height:25px;">项目部工程核算系统</div>
+	<div style="float:right;padding:0px 5px;position:relative; top:-22px;">
+		登陆时间：0000-00-00 00:00，当前登录用户：<a href="javascript:go2('myinfo.html');" title="点击修改用户信息">王勇</a>，<a href="javascript:go2('user_list.html');" title="点击修改用户信息">用户管理</a>，<a href="login.html">注销</a>
+	</div>
+</div>
+<table border="0" style="margin:3px;clear:both;" class="h1">
+  <tr>
+    <td width="280">项目编号：<input class="text2" style="width:120px" type="text" value="XMF2011-1" /></td>
+    <td width="360">项目名称：山东省煤田</td>
+    <td>甲方名称：山东省煤田地质局</td>
+  </tr>
+</table>
+<ul id="nav">
+	<li class="l10"><a href="javascript:go2('huiz1.html');">首页</a></li>
+	<li><a href="javascript:go2('xiangmgl.html', 1);">合同项目信息</a></li>
+	<li><a href="javascript:go2('hetbcxy.html', 2);">合同补充协议</a></li>
+	<li><a href="javascript:go2('jiaffp.html', 3);">甲方开票情况</a></li>
+	<li><a href="javascript:go2('kehfp.html', 4);">客户开票情况</a></li>
+	<li><a href="javascript:go2('shoukqk.html', 5);">收款情况</a></li>
+	<li><a href="javascript:go2('fukqk.html', 6);">付款情况</a></li>
+	<li><a href="javascript:go2('xingc.html', 7);">型材</a></li>
+	<li><a href="javascript:go2('wanglqk_list.html', 8);">往来欠款</a></li>
+	<li><a href="javascript:go2('huiz2.html', 9);">项目汇总</a></li>
+	<li><a href="javascript:go2('sysinfo.html', 10);">系统管理</a></li>
+</ul>
+<div id="content">
+	<iframe id="frm2" name="frm2" marginwidth="0" marginheight="0" frameborder="0" width="100%" height="560px"></iframe>
+</div>
+</body>
+</html>
