@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 #loginpanel td{text-align:left;padding:5px;}
-#sysname{font-size:16px;margin:20px;font-weight:bold}
+#sysname{font-size:16px;margin:20px;font-weight:bold;font-family:微软雅黑}
 .text0{border:1px solid #d9d9d9;font-size:18px;height:28px;line-height:24px;width:240px;padding:2px;font-family:Consolas}
 .t0{background-color:#FCFAAA}
 .l10{margin-left:10px}
