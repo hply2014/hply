@@ -9,6 +9,10 @@
     <!-- Bootstrap -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">  
+		body{
+			padding-top:60px;
+			padding-bottom:20px;
+		}
 		.bs-docs-nav {
 		  text-shadow: 0 -1px 0 rgba(0,0,0,.15);
 		  border-color: #463265;
@@ -24,8 +28,8 @@
 		  color: #cdbfe3;
 		}
 		.bs-docs-nav .navbar-nav > li > a:hover {
-		  color: #fff;
-		  background-color: #333;
+		  color: #83b7e0;
+		  text-decoration: underline;
 		}
 		.bs-docs-nav .navbar-nav > .active > a,
 		.bs-docs-nav .navbar-nav > .active > a:hover {
@@ -38,6 +42,11 @@
 		.bs-docs-nav .navbar-toggle:hover {
 		  background-color: #463265;
 		  border-color: #463265;
+		}
+		
+		.main{
+			width:100%;
+			padding:10px;
 		}
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -65,7 +74,13 @@
             <li><a href="#">信息平台</a></li>
             <li><a href="#">系统管理</a></li>
           </ul>
-		  
+		  <div class="navbar-form navbar-left">
+			  <div class="form-group">
+				<input type="text" class="form-control" placeholder="输入项目信息">
+			  </div>
+			  <button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-search"></span>搜索</button>
+		  </div>	
 		  <div class="navbar-form pull-right">
 			<div class="btn-group">
 			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -82,10 +97,139 @@
 					</i>注销</a></li>
 			  </ul>
 			</div>
-		  </div>	<!-- pull-righ -->			
+		  </div>	<!-- pull-righ -->		
         </div>
       </div>
     </div>
+	<div class="container main">
+	<button type="button" class="btn btn-success"> 新建项目 </button>
+		<table class="table">
+				<thead>
+				  <tr>
+					<th>序号</th>
+					<th>时间</th>
+					<th>项目信息</th>
+					<th>合同金额</th>
+					<th>结算金额</th>
+					<th>管理费情况</th>
+					<th>给甲方开发票情况</th>
+					<th>从甲方收款情况</th>
+					<th>工程发票情况</th>
+					<th>支付工程款情况</th>
+					<th>税金情况</th>
+					<th>垫付资金情况</th>
+					<th>型材（吨） </th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr class="active">
+					<td>1</td>
+					<td>2014/4/25 23:40</td>
+					<td>项目编号：00000<br/>项目名称：................<br/>合作单位：..............<br/>法人：....</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+				  </tr>
+				  <tr>
+					<td>2</td>
+					<td>2014/4/25 23:40</td>
+					<td>项目编号：00000<br/>项目名称：................<br/>合作单位：..............<br/>法人：....</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+				  </tr>
+				  <tr class="success">
+					<td>3</td>
+					<td>2014/4/25 23:40</td>
+					<td>项目编号：00000<br/>项目名称：................<br/>合作单位：..............<br/>法人：....</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+				  </tr>
+				  <tr>
+					<td>4</td>
+					<td>2014/4/25 23:40</td>
+					<td>项目编号：00000<br/>项目名称：................<br/>合作单位：..............<br/>法人：....</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+				  </tr>
+				  <tr class="warning">
+					<td>5</td>
+					<td>2014/4/25 23:40</td>
+					<td>项目编号：00000<br/>项目名称：................<br/>合作单位：..............<br/>法人：....</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+				  </tr>
+				  <tr>
+					<td>6</td>
+					<td>2014/4/25 23:40</td>
+					<td>项目编号：00000<br/>项目名称：................<br/>合作单位：..............<br/>法人：....</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+				  </tr>
+				  <tr class="danger">
+					<td>7</td>
+					<td>2014/4/25 23:40</td>
+					<td>项目编号：00000<br/>项目名称：................<br/>合作单位：..............<br/>法人：....</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+				  </tr>
+				</tbody>
+			  </table>
+		</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="assets/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
