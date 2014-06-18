@@ -14,7 +14,7 @@ import javax.servlet.ServletContext;
 
 public final class GlobalMessageConext {
 	
-	private static final String PROPERTY_FILE = "classpath:global.properties";
+	private static final String PROPERTY_FILE = "/WEB-INF/classes/global.properties";
 
 	private static GlobalMessageConext context = new GlobalMessageConext();
 
