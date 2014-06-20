@@ -1,4 +1,4 @@
-package hply.webapp.common;
+package hply.common;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
