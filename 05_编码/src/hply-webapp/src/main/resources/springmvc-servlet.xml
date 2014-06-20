@@ -23,5 +23,5 @@
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<!-- @Controller, @Service, @Configuration, etc. -->
-	<context:component-scan base-package="org.cqiyi.hply.controller" />
+	<context:component-scan base-package="hply.web" />
 </beans>
