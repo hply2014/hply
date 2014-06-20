@@ -1,4 +1,4 @@
-package hply.webapp.common;
+package hply.common;
 
 import java.io.FileInputStream;
 import java.io.IOException;

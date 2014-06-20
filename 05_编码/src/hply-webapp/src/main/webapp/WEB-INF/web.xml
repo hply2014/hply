@@ -44,8 +44,8 @@
 
 	<servlet>
 		<servlet-name>initServlet</servlet-name>
-		<servlet-class>hply.webapp.common.ApplicationInitServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
+		<servlet-class>hply.common.ApplicationInitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<!-- 定义错误页面 -->
