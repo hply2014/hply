@@ -23,5 +23,23 @@
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<!-- @Controller, @Service, @Configuration, etc. -->
-	<context:component-scan base-package="org.cqiyi.hply.controller" />
+	<context:component-scan base-package="hply.web" />
+	<context:component-scan base-package="hply.dao" />
+	<context:component-scan base-package="hply.service" />
+	
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hplydb" />
+		<property name="user" value="root" />
+		<property name="password" value="qqwQQW" />
+	</bean>
+
+
+	<!-- 配置Jdbc模板 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
 </beans>
