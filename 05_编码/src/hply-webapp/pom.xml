@@ -64,6 +64,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.31</version>
 		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>hply-webapp</finalName>
