@@ -2,14 +2,10 @@ package hply.dao;
 
 import java.math.BigInteger;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class T3Dao {
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+public class T3Dao extends BaseDAO {
 
 	public int getCount() {
 		String sql = "SELECT COUNT(*) FROM TEST1";

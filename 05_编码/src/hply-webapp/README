@@ -3,4 +3,10 @@ http://dev.mysql.com/doc/
 
 http://localhost:8080/webapp/admin/login.html
 
+hplydb
+User Id=root;Host=localhost;Database=hplydb;password=qqwQQW
+
+
+<Context sessionCookieName="sid">
+
 2014/6/23
