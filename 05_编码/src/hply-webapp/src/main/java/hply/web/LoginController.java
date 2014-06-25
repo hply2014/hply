@@ -1,5 +1,6 @@
 package hply.web;
 
+import hply.common.Utility;
 import hply.service.T3Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class LoginController {
 	public String loginPage() {
 		boolean b = t3Service.hasMatchUser();
 		System.out.println("b=" + b);
+		for (int i = 0; i < 100; i++) {
+			System.out.println(Utility.getRandomUUID());
+		}
 		return "login";
 	}
 

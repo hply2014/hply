@@ -49,7 +49,7 @@ public class Utility {
 		int m1 = calendar.get(Calendar.MONTH);
 		int d1 = calendar.get(Calendar.DATE);
 
-		// 默认为今年，但不是今??
+		// 默认为今年，但不是今
 		String formatString = "MM/dd HH:mm";
 		if (y0 != y1) {
 			// 不是今年
@@ -105,7 +105,7 @@ public class Utility {
 	}
 
 	/**
-	 * 以行为单位读取文件，常用于读面向行的格式化文??
+	 * 以行为单位读取文件，常用于读面向行的格式化文
 	 */
 	public static String getFileContent(String fileName) {
 		File file = new File(fileName);
@@ -119,7 +119,7 @@ public class Utility {
 			reader = new BufferedReader(new FileReader(file));
 
 			String tempString = EMPTY_STRING;
-			// ????读入????，直到读入null为文件结??
+			// 读入，直到读入null为文件结
 			while ((tempString = reader.readLine()) != null) {
 				content.append(tempString + "\n");
 			}
@@ -139,7 +139,7 @@ public class Utility {
 	}
 
 	/**
-	 * 根据分隔符获取最右边的部??
+	 * 根据分隔符获取最右边的部
 	 */
 	public static String getLastStage(String str, String delimiter) {
 		int index = str.lastIndexOf(delimiter);
@@ -156,7 +156,7 @@ public class Utility {
 	}
 
 	/**
-	 * 产生随机字符??
+	 * 产生随机字符
 	 * */
 	public static Random randGen = new Random();
 	private static char[] character = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -202,7 +202,7 @@ public class Utility {
 		return bigInt.toString(16);
 	}
 
-	/* 获取????字符串的md5??*/
+	/* 获取字符串的md5*/
 	public static String getStringMD5(String str) {
 		BigInteger bigInt = null;
 		try {
@@ -227,7 +227,7 @@ public class Utility {
 	}
 
 	public static String dateFormat(Date date) {
-		// 24小时??
+		// 24小时
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		return sdf.format(date);
 	}
@@ -255,7 +255,7 @@ public class Utility {
 				ipAddress = inet.getHostAddress();
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
-				throw new RuntimeException("获取客户端地??????"
+				throw new RuntimeException("获取客户端地"
 						+ getApplicationURL(request));
 			}
 		}
@@ -284,6 +284,12 @@ public class Utility {
 	}
 	public static String nothing(String str) {
 		return StringUtils.isEmpty(str) ? NOTHING_STRING : str;
+	}
+	
+	public static String getRandomUUID(){
+		String str = java.util.UUID.randomUUID().toString();
+		return str.replaceAll("-", "").toLowerCase();
+		
 	}
 
 }

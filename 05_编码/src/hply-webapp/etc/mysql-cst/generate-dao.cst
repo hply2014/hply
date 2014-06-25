@@ -26,7 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
-import com.hhwy.rdc.hfp.model.<%=GetClassName()%>Model;
+import hply.domain.<%=GetClassName()%>;
 
 /**
   * 数据操作类，对应的数据库表： [<%=SourceTable.Name%>]
@@ -34,36 +34,42 @@ import com.hhwy.rdc.hfp.model.<%=GetClassName()%>Model;
   */
 public class <%=GetClassName()%>DAO extends BaseDAO {
 
-	public static <%=GetClassName()%>Model getById(String id) {
-		<%=GetClassName()%>Model obj = jt.queryForObject(
+	private <%=GetClassName()%>DAO instance = new <%=GetClassName()%>DAO();
+
+	public <%=GetClassName()%>DAO getInstance() {
+		return instance;
+	}
+    
+	public <%=GetClassName()%> getById(String id) {
+		<%=GetClassName()%> obj = jdbcTemplate.queryForObject(
 				"select * from <%=SourceTable.Name%> where id=?", mapper, id);
 		return obj;
 	}
 
-	public static List<<%=GetClassName()%>Model> getList() {
-		List<<%=GetClassName()%>Model> list = jt.query("select * from <%=SourceTable.Name%>",
+	public List<<%=GetClassName()%>> getList() {
+		List<<%=GetClassName()%>> list = jdbcTemplate.query("select * from <%=SourceTable.Name%>",
 				mapper);
 		return list;
 	}
 
-	public static int insert(<%=GetClassName()%>Model model) {
+	public int insert(<%=GetClassName()%> model) {
 		final String SQL_INSERT = "<%=GetInsertSQL()%>";
-		return jt.update(SQL_INSERT, <%=GetInsertValues()%>);
+		return jdbcTemplate.update(SQL_INSERT, <%=GetInsertValues()%>);
 	}
 
-	public static int updateById(<%=GetClassName()%>Model model) {
+	public int updateById(<%=GetClassName()%> model) {
         final String SQL_UPDATE = "<%=GetUpdateSQL()%>";
-		return jt.update(SQL_UPDATE, <%=GetUpdateValues()%>);
+		return jdbcTemplate.update(SQL_UPDATE, <%=GetUpdateValues()%>);
 	}
 
-	public static int deleteById(String id) {
-		return jt.update("delete from <%=SourceTable.Name%> where id=?", id);
+	public int deleteById(String id) {
+		return jdbcTemplate.update("delete from <%=SourceTable.Name%> where id=?", id);
 	}
 
-	private static final RowMapper<<%=GetClassName()%>Model> mapper = new RowMapper<<%=GetClassName()%>Model>() {
-		public <%=GetClassName()%>Model mapRow(ResultSet rs, int rowNum)
+	private final RowMapper<<%=GetClassName()%>> mapper = new RowMapper<<%=GetClassName()%>>() {
+		public <%=GetClassName()%> mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			<%=GetClassName()%>Model obj = new <%=GetClassName()%>Model();<%
+			<%=GetClassName()%> obj = new <%=GetClassName()%>();<%
 		foreach(ColumnSchema cs in SourceTable.Columns)
 		{%>
             obj.set<%=GetColumnName(cs)%>( rs.get<%=GetJdbcOracleType(cs)%>("<%=TrimStart(cs.Name, "CQIYI.")%>") );<%}%>;
@@ -72,7 +78,7 @@ public class <%=GetClassName()%>DAO extends BaseDAO {
 	};
     
 //======================================================================================
-// TODO: 附加的其他方法
+// TODO: 附加的其他方法 （ <%=NameSpace%>.<%=GetClassName()%>DAO ）
 //======================================================================================
 
 
@@ -101,11 +107,7 @@ public string ReformatString(string dbObjName)
 public string GetClassName()
 {
 	string n = SourceTable.Name;
-	if(n.StartsWith("T_HFP"))
-	{
-		n = n.Substring(5);
-	}
-	else if(n.StartsWith("T_"))
+	if(n.StartsWith("t_"))
 	{
 		n = n.Substring(2);		
 	}
@@ -115,46 +117,16 @@ public string GetClassName()
 public string GetColumnType(ColumnSchema col)
 {
 	string strType = string.Empty;
-	if( col.NativeType == "NUMBER")
-	{
-		if(col.Scale == 0)
-        {
-            if(col.Precision < 10)
-            {
-                strType="int";
-            }
-            else if(col.Precision < 20)
-            {
-                strType="long";        
-            }
-            else
-            {
-                strType = "What? NUMBER(" + col.Precision + ")";// Too long....
-            } 
-        }
-        else{
-            return "double";// Ignor float and decimal    
-        }
-	}
-    else if(col.NativeType == "VARCHAR" || col.NativeType == "VARCHAR2"
-	         || col.NativeType == "NVARCHAR2" || col.NativeType == "CHAR"
-			 || col.NativeType == "NCHAR" || col.NativeType == "CLOB"
-			 || col.NativeType == "NCLOB" || col.NativeType == "LONG"
-			 || col.NativeType == "UROWID" || col.NativeType == "XMLType")
+	if(col.NativeType == "varchar")
     {
 		strType = "String";
 	}
-    else if(col.NativeType == "DATE" || col.NativeType == "TIMESTAMP")
+    else if(col.NativeType == "datetime")
     {
-		strType = "Timestamp";
-	}
-    else if(col.NativeType == "BFILE" || col.NativeType == "BLOB"
-	         || col.NativeType == "LONG RAW" || col.NativeType == "RAW")
-    {
-		strType="byte[]";
+		strType = "Date";
 	}
     else{
-	    strType = "Unknow";
+	    strType = col.NativeType;
 	}
     return strType;
 }
