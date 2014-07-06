@@ -26,8 +26,8 @@
 	<context:component-scan base-package="hply.web" />
 	<context:component-scan base-package="hply.dao" />
 	<context:component-scan base-package="hply.service" />
-	
-	
+
+
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
@@ -36,6 +36,15 @@
 		<property name="user" value="root" />
 		<property name="password" value="qqwQQW" />
 	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:mybatis/**/*.xml" />
+	</bean>
+
+<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+  <property name="basePackage" value="org.mybatis.jpetstore.persistence" />
+</bean>
 
 
 	<!-- 配置Jdbc模板 -->

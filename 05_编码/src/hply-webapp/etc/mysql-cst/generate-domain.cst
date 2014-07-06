@@ -8,6 +8,7 @@ Create time:2013年8月16日 13:51:47
 <%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the stored procedures should be based on." %> 
 <%@ Property Name="NameSpace" Type="System.String" Default="hply.domain" Optional="False" Category="" Description="" Editor="" EditorBase="" Serializer="" %>
 <%@ Property Name="Author" Type="System.String" Default="ChengQiyi" Optional="False" Category="Author" Description="" Editor="" EditorBase="" Serializer="" %>
+<%@ Map Name="JavaAlias" Src="MySQL-JavaAlias" %>
 <%@ Assembly Name="System.Data" %>
 <%@ Import Namespace="System.Data" %>
 <%@ Assembly Name="SchemaExplorer" %>
@@ -108,6 +109,7 @@ public string GetClassName()
 
 public string GetColumnType(ColumnSchema col)
 {
+    /*
 	string strType = string.Empty;
 	if(col.NativeType == "varchar")
     {
@@ -120,6 +122,10 @@ public string GetColumnType(ColumnSchema col)
     else{
 	    strType = col.NativeType;
 	}
+    */
+    
+    string strType = JavaAlias[col.NativeType];
+    
     return strType;
 }
 

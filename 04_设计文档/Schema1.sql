@@ -46,7 +46,7 @@ CREATE TABLE t_sys_parameter
 	create_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
 	create_user VARCHAR(10),
 	update_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	update_user VARBINARY(10),
+	update_user VARCHAR(10),
 	description VARCHAR(500),
 	PRIMARY KEY (id)
 
