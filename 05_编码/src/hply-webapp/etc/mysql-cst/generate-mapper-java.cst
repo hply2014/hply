@@ -29,14 +29,15 @@ import hply.domain.<%=GetClassName()%>;
 
 public interface <%=GetClassName()%>Mapper {
 
-  void updateInventoryQuantity(Map<String, Object> param);
-
-  int getInventoryQuantity(String itemId);
-
-  List<Item> getItemListByProduct(String productId);
-
-  Item getItem(String itemId);
-
+	  public void insert(<%=GetClassName()%> <%=GetClassName1()%>);
+	  
+	  public void update(<%=GetClassName()%> <%=GetClassName1()%>);
+	  
+	  public void delete(<%=GetClassName()%> <%=GetClassName1()%>);
+	  
+	  public <%=GetClassName()%> get(String id);
+	  
+	  public List<<%=GetClassName()%>> getAll();
 }
 
 
@@ -46,7 +47,7 @@ public string TrimStart(string str1, string str2)
 	return str1.Replace(str2, "");
 }
 
-public string ReformatString(string dbObjName)
+public string ReformatString(string dbObjName, bool up)
 {
 	string[] arr = dbObjName.Split('_');
 	string s = string.Empty;
@@ -54,7 +55,7 @@ public string ReformatString(string dbObjName)
 	{
 		if(arr[i].Length == 0) continue;
 		string fChr = arr[i][0] + string.Empty;
-		s += fChr.ToUpper() + arr[i].Substring(1).ToLower();
+		s += (up || i>0 ? fChr.ToUpper() : fChr.ToLower()) + arr[i].Substring(1).ToLower();
 	}
 	return s;
 }
@@ -67,92 +68,16 @@ public string GetClassName()
 	{
 		n = n.Substring(2);		
 	}
-	return ReformatString(n);
+	return ReformatString(n, true);
 }
 
-public string GetColumnType(ColumnSchema col)
+public string GetClassName1()
 {
-	string strType = string.Empty;
-	if(col.NativeType == "varchar")
-    {
-		strType = "String";
-	}
-    else if(col.NativeType == "datetime")
-    {
-		strType = "Date";
-	}
-    else{
-	    strType = col.NativeType;
-	}
-    return strType;
-}
-
-public string GetColumnName(ColumnSchema col)
-{
-	return ReformatString(col.Name);
-}
-
-public string GetJdbcOracleType(ColumnSchema col)
-{
-    string t = GetColumnType(col);
-	return (t[0] + string.Empty).ToUpper() + t.Substring(1);
-}
-
-public string GetInsertSQL()
-{
-	string f = string.Empty;
-	string v = string.Empty;
-	
-	for(int i=0; i<SourceTable.Columns.Count; i++)
+	string n = SourceTable.Name;
+	if(n.StartsWith("t_"))
 	{
-		f += SourceTable.Columns[i].Name +", ";
-		v +=  "?, ";
+		n = n.Substring(2);		
 	}
-	
-	return string.Format("insert into {0}({1}) values( {2} )", SourceTable.Name, f.Trim().TrimEnd(','),  v.Trim().TrimEnd(','));
-}
-
-
-public string GetInsertValues()
-{
-	string f = string.Empty;
-	string v = string.Empty;
-	
-	for(int i=0; i<SourceTable.Columns.Count; i++)
-	{
-		v +=  "model.get" +  GetColumnName(SourceTable.Columns[i]) + "(), ";
-	}
-	
-	return v.Trim().TrimEnd(',');
-}
-
-public string GetUpdateSQL()
-{
-	string s = string.Empty;
-	
-	for(int i=0; i<SourceTable.Columns.Count; i++)
-	{
-		if(SourceTable.Columns[i].Name.ToUpper() != "ID")
-        {
-			s += string.Format("{0} = ?, ", SourceTable.Columns[i].Name);
-		}
-	}
-	
-	return string.Format("update {0} set {1} where id= ?", SourceTable.Name, s.TrimEnd(", ".ToCharArray()));
-}
-
-public string GetUpdateValues()
-{
-	string v = string.Empty;
-	
-	for(int i=0; i<SourceTable.Columns.Count; i++)
-	{        
-		if(SourceTable.Columns[i].Name.ToUpper() != "ID")
-        {
-			v +=  "model.get" +  GetColumnName(SourceTable.Columns[i]) + "(), ";
-		}
-		
-	}
-    return v + "model.getId()";
+	return ReformatString(n, false);
 }
 </script>

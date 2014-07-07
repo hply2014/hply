@@ -22,11 +22,11 @@ DROP TABLE IF EXISTS t_sys_user CASCADE
 /* Create Tables */
 CREATE TABLE t_sys_authorization
 (
-	id VARCHAR(10) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	resource_id VARCHAR(10),
 	user_id VARCHAR(10),
 	create_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	create_user VARCHAR(10),
+	create_user INT,
 	PRIMARY KEY (id),
 	KEY (resource_id),
 	KEY (user_id)
@@ -37,16 +37,16 @@ CREATE TABLE t_sys_authorization
 
 CREATE TABLE t_sys_parameter
 (
-	id VARCHAR(10) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	en_name VARCHAR(100),
 	cn_name VARCHAR(100),
 	param_value VARCHAR(500),
 	default_value VARCHAR(500),
 	is_inner INT DEFAULT 0,
 	create_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	create_user VARCHAR(10),
+	create_user INT,
 	update_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	update_user VARCHAR(10),
+	update_user INT,
 	description VARCHAR(500),
 	PRIMARY KEY (id)
 
@@ -56,7 +56,7 @@ CREATE TABLE t_sys_parameter
 
 CREATE TABLE t_sys_resource
 (
-	id VARCHAR(10) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	res_code VARCHAR(50),
 	res_name VARCHAR(50),
 	icon VARCHAR(200),
@@ -64,7 +64,7 @@ CREATE TABLE t_sys_resource
 	res_url VARCHAR(500),
 	res_type VARCHAR(50),
 	order_by INT DEFAULT 0,
-	parent_id VARCHAR(10),
+	parent_id INT,
 	enabled INT DEFAULT 1,
 	description VARCHAR(500),
 	PRIMARY KEY (id)
@@ -75,7 +75,7 @@ CREATE TABLE t_sys_resource
 
 CREATE TABLE t_sys_user
 (
-	id VARCHAR(10) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
 	login_name VARCHAR(50),
 	real_name VARCHAR(50),
 	department VARCHAR(50),
@@ -88,9 +88,9 @@ CREATE TABLE t_sys_user
 	enabled INT DEFAULT 1,
 	order_by INT DEFAULT 0,
 	create_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	create_user VARCHAR(10),
+	create_user INT,
 	update_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	update_user VARCHAR(10),
+	update_user INT,
 	description VARCHAR(500),
 	PRIMARY KEY (id)
 
