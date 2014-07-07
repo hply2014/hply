@@ -5,10 +5,10 @@
 
 package hply.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.text.MessageFormat;
 import hply.common.Utility;
+
+import java.io.Serializable;
+import java.text.MessageFormat;
 
 
 /**
@@ -17,7 +17,11 @@ import hply.common.Utility;
   */
 public class SysResource implements Serializable {
         
-  private String id;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6406092571487794627L;
+private String id;
   
 /**
   * ¶Á£¬Êý¾Ý¿âÁÐ£ºid  

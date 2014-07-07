@@ -17,7 +17,11 @@ import hply.common.Utility;
   */
 public class SysAuthorization implements Serializable {
         
-  private String id;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5904992278120466295L;
+private String id;
   
 /**
   * ¶Á£¬Êý¾Ý¿âÁÐ£ºid  

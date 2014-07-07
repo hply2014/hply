@@ -17,7 +17,11 @@ import hply.common.Utility;
   */
 public class HplyUser implements Serializable {
         
-  private String id;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6769559458443612983L;
+private String id;
   
 /**
   * ¶Á£¬Êý¾Ý¿âÁÐ£ºid  

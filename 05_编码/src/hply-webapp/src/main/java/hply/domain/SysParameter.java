@@ -17,7 +17,11 @@ import hply.common.Utility;
   */
 public class SysParameter implements Serializable {
         
-  private String id;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1054042896309793685L;
+private String id;
   
 /**
   * ¶Á£¬Êý¾Ý¿âÁÐ£ºid  
