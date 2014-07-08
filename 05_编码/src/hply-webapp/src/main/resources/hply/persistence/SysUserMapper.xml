@@ -4,7 +4,7 @@
 
 <mapper namespace="hply.persistence.SysUserMapper">
 
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="hply.domain.SysUser">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="SysUser">
     insert into t_sys_user(id, login_name, real_name, department, password, last_login_ip, last_login_time, fails, logined, position, enabled, order_by, create_time, create_user, update_time, update_user, description) values ( #{id}, #{login_name}, #{real_name}, #{department}, #{password}, #{last_login_ip}, #{last_login_time}, #{fails}, #{logined}, #{position}, #{enabled}, #{order_by}, #{create_time}, #{create_user}, #{update_time}, #{update_user}, #{description} )
   </insert>
 
@@ -16,11 +16,11 @@
     delete from t_sys_user where id = #{id}
   </delete>
 
-  <select id="get" parameterType="string" resultType="hply.domain.SysUser">
+  <select id="get" parameterType="string" resultType="SysUser">
     select * from t_sys_user where id = #{id}
   </select>
 
-  <select id="getAll" resultType="hply.domain.SysUser">
+  <select id="getAll" resultType="SysUser">
     select * from t_sys_user
   </select>
 
