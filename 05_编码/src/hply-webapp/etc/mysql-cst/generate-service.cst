@@ -37,23 +37,24 @@ public class <%=GetClassName()%>Service {
     private <%=GetClassName()%>Mapper <%=GetClassName1()%>Mapper;
 
 	  public void insert(<%=GetClassName()%> <%=GetClassName1()%>){
-      
+        <%=GetClassName1()%>Mapper.insert(<%=GetClassName1()%>);
       }
 	  
 	  public void update(<%=GetClassName()%> <%=GetClassName1()%>){
+        <%=GetClassName1()%>Mapper.update(<%=GetClassName1()%>);
       
       }
 	  
-	  public void delete(<%=GetClassName()%> <%=GetClassName1()%>){
-      
+	  public void delete(String id){
+        <%=GetClassName1()%>Mapper.delete(id);
       }
 	  
 	  public <%=GetClassName()%> get(String id){
-        return null;
+        return <%=GetClassName1()%>Mapper.get(id);
       }
 	  
 	  public List<<%=GetClassName()%>> getAll(){
-        return null;
+        return <%=GetClassName1()%>Mapper.getAll();
       }
 }
 

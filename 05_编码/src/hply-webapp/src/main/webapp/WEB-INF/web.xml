@@ -28,7 +28,7 @@
 	</filter-mapping>
 
 	<servlet>
-		<servlet-name>appServlet</servlet-name>
+		<servlet-name>dispatcherServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -38,14 +38,14 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
+		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>initServlet</servlet-name>
 		<servlet-class>hply.common.ApplicationInitServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 
 	<!-- 定义错误页面 -->

@@ -20,9 +20,7 @@ Create time:2013年8月16日 13:51:47
 
 <mapper namespace="<%=NameSpace%>.<%=GetClassName()%>Mapper">
 
-  <cache />
-
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="<%=GetClassName()%>">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="hply.domain.<%=GetClassName()%>">
     <%=GetInsertSQL()%>
   </insert>
 
@@ -30,15 +28,15 @@ Create time:2013年8月16日 13:51:47
     <%=GetUpdateSQL()%>
   </update>
 
-  <delete id="delete">
+  <delete id="delete" parameterType="string">
     delete from <%=SourceTable.Name%> where id = #{id}
   </delete>
 
-  <select id="get" parameterType="string" resultType="<%=GetClassName()%>">
+  <select id="get" parameterType="string" resultType="hply.domain.<%=GetClassName()%>">
     select * from <%=SourceTable.Name%> where id = #{id}
   </select>
 
-  <select id="getAll" resultType="<%=GetClassName()%>">
+  <select id="getAll" parameterType="" resultType="hply.domain.<%=GetClassName()%>">
     select * from <%=SourceTable.Name%>
   </select>
 
@@ -92,6 +90,7 @@ public string GetInsertSQL()
 	
 	for(int i=0; i<SourceTable.Columns.Count; i++)
 	{
+        //if(SourceTable.Columns[i].Name.ToUpper() == "ID") continue;
 		f += SourceTable.Columns[i].Name +", ";
 		v +=  "#{" + SourceTable.Columns[i].Name +"}, ";
 	}

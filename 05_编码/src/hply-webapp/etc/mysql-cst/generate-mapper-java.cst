@@ -34,7 +34,7 @@ public interface <%=GetClassName()%>Mapper {
 	  
 	  public void update(<%=GetClassName()%> <%=GetClassName1()%>);
 	  
-	  public void delete(<%=GetClassName()%> <%=GetClassName1()%>);
+	  public void delete(String id);
 	  
 	  public <%=GetClassName()%> get(String id);
 	  
