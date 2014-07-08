@@ -22,11 +22,11 @@ DROP TABLE IF EXISTS t_sys_user CASCADE
 /* Create Tables */
 CREATE TABLE t_sys_authorization
 (
-	id INT NOT NULL AUTO_INCREMENT,
-	resource_id VARCHAR(10),
-	user_id VARCHAR(10),
+	id CHAR(36) NOT NULL,
+	resource_id CHAR(36),
+	user_id CHAR(36),
 	create_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	create_user INT,
+	create_user CHAR(36),
 	PRIMARY KEY (id),
 	KEY (resource_id),
 	KEY (user_id)
@@ -37,16 +37,16 @@ CREATE TABLE t_sys_authorization
 
 CREATE TABLE t_sys_parameter
 (
-	id INT NOT NULL AUTO_INCREMENT,
+	id CHAR(36) NOT NULL,
 	en_name VARCHAR(100),
 	cn_name VARCHAR(100),
 	param_value VARCHAR(500),
 	default_value VARCHAR(500),
 	is_inner INT DEFAULT 0,
 	create_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	create_user INT,
+	create_user CHAR(36),
 	update_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	update_user INT,
+	update_user CHAR(36),
 	description VARCHAR(500),
 	PRIMARY KEY (id)
 
@@ -56,7 +56,7 @@ CREATE TABLE t_sys_parameter
 
 CREATE TABLE t_sys_resource
 (
-	id INT NOT NULL AUTO_INCREMENT,
+	id CHAR(36) NOT NULL,
 	res_code VARCHAR(50),
 	res_name VARCHAR(50),
 	icon VARCHAR(200),
@@ -64,7 +64,7 @@ CREATE TABLE t_sys_resource
 	res_url VARCHAR(500),
 	res_type VARCHAR(50),
 	order_by INT DEFAULT 0,
-	parent_id INT,
+	parent_id CHAR(36),
 	enabled INT DEFAULT 1,
 	description VARCHAR(500),
 	PRIMARY KEY (id)
@@ -75,7 +75,7 @@ CREATE TABLE t_sys_resource
 
 CREATE TABLE t_sys_user
 (
-	id INT NOT NULL AUTO_INCREMENT,
+	id CHAR(36) NOT NULL,
 	login_name VARCHAR(50),
 	real_name VARCHAR(50),
 	department VARCHAR(50),
@@ -88,13 +88,23 @@ CREATE TABLE t_sys_user
 	enabled INT DEFAULT 1,
 	order_by INT DEFAULT 0,
 	create_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	create_user INT,
+	create_user CHAR(36),
 	update_time DATETIME(0) DEFAULT CURRENT_TIMESTAMP,
-	update_user INT,
+	update_user CHAR(36),
 	description VARCHAR(500),
 	PRIMARY KEY (id)
 
 ) 
 ;
+
+CREATE TABLE t_sys_organization (
+  id char(36) NOT NULL,
+  organization_name varchar(45) DEFAULT NULL,
+  create_time datetime DEFAULT CURRENT_TIMESTAMP,
+  description varchar(500) DEFAULT NULL,
+  PRIMARY KEY (id)
+)
+;
+
 
 SET FOREIGN_KEY_CHECKS=1;

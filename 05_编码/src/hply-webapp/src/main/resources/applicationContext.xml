@@ -35,7 +35,7 @@
 
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<mvc:annotation-driven />
-	<mvc:resources location="/static/" mapping="/static/**" />
+	<mvc:resources location="/assets/" mapping="/assets/**" />
 
 	<!-- Default ViewResolver -->
 	<bean id="viewResolver"
