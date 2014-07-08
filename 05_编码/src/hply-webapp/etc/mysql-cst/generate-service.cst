@@ -6,7 +6,7 @@ Create time:2013年8月16日 13:51:47
 <%@ CodeTemplate Language="C#" TargetLanguage="Java" Inherits="" Debug="False" Description="Template description here." %>
 
 <%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="选择源表." %> 
-<%@ Property Name="NameSpace" Type="System.String" Default="hply.persistence" Optional="False" Category="Context" Description="" Editor="" EditorBase="" Serializer="" %>
+<%@ Property Name="NameSpace" Type="System.String" Default="hply.service" Optional="False" Category="Context" Description="" Editor="" EditorBase="" Serializer="" %>
 <%@ Property Name="Author" Type="System.String" Default="ChengQiyi" Optional="False" Category="Author" Description="" Editor="" EditorBase="" Serializer="" %>
 <%@ Assembly Name="System.Data" %>
 <%@ Import Namespace="System.Data" %>
@@ -24,21 +24,37 @@ package <%=NameSpace%>;
 
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
+import hply.persistence.<%=GetClassName()%>Mapper;
+
 import hply.domain.<%=GetClassName()%>;
 
-@Repository(value = "<%=GetClassName1()%>Mapper")
-public interface <%=GetClassName()%>Mapper {
+@Repository(value = "<%=GetClassName1()%>Service")
+public class <%=GetClassName()%>Service {
+    
+    @Resource(name = "<%=GetClassName1()%>Mapper")
+    private <%=GetClassName()%>Mapper <%=GetClassName1()%>Mapper;
 
-	  public void insert(<%=GetClassName()%> <%=GetClassName1()%>);
+	  public void insert(<%=GetClassName()%> <%=GetClassName1()%>){
+      
+      }
 	  
-	  public void update(<%=GetClassName()%> <%=GetClassName1()%>);
+	  public void update(<%=GetClassName()%> <%=GetClassName1()%>){
+      
+      }
 	  
-	  public void delete(<%=GetClassName()%> <%=GetClassName1()%>);
+	  public void delete(<%=GetClassName()%> <%=GetClassName1()%>){
+      
+      }
 	  
-	  public <%=GetClassName()%> get(String id);
+	  public <%=GetClassName()%> get(String id){
+        return null;
+      }
 	  
-	  public List<<%=GetClassName()%>> getAll();
+	  public List<<%=GetClassName()%>> getAll(){
+        return null;
+      }
 }
 
 
