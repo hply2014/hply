@@ -13,4 +13,7 @@ http://mybatis.github.io/
 
 https://codesmith.atlassian.net/wiki/display/Generator
 
-2014/7/7
+in server.xml
+    <Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443" URIEncoding="utf-8" />
+
+2014/7/9

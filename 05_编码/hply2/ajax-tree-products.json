@@ -1,0 +1,36 @@
+[
+	{"key": "aaa", "title": "Books & Audible", "expanded": true, "tooltip": "this just is a tst.", "children": [
+		{"title": "Books", "expanded": true, "children": [
+			{"title": "Books"},
+			{"title": "Kindle Books"},
+			{"title": "Books For Study"},
+			{"title": "Audiobooks"}
+		]},
+		{"title": "Movies, TV, Music, Games", "expanded": true, "selected": true, "children": [
+			{"title": "Music"},
+			{"title": "MP3 Downloads"},
+			{"title": "Musical Instruments & DJ"},
+			{"title": "Film & TV"},
+			{"title": "Ble-ray"},
+			{"title": "PC & Video Games"}
+		]},
+		{"title": "Electronics & Computers", "expanded": true, "selected": true, "children": [
+			{"title": "Electronics", "expanded": true, "children": [
+				{"title": "Camera & Photo"},
+				{"title": "TV & Home Cinema"},
+				{"title": "Audio & HiFi"},
+				{"title": "Sat Nav & Car Electronics"},
+				{"title": "Phones"},
+				{"title": "Electronic Accessories"}
+			]},
+			{"title": "Computers", "expanded": true, "tooltip": "this just is a tst.", "children": [
+				{"title": "Laptops"},
+				{"title": "Tablets"},
+				{"title": "Computer & Accessories"},
+				{"title": "Computer Components"},
+				{"title": "Software"},
+				{"title": "Printers & Ink", "tooltip": "this just is a tst." }
+			]}
+		]}
+	]}
+]
