@@ -106,5 +106,35 @@ CREATE TABLE t_sys_organization (
 )
 ;
 
+create table t_project (
+id char(36) not null,
+project_code varchar(50), 
+project_name varchar(100), 
+department_id char(36), 
+party_name varchar(100), 
+party_address varchar(200), 
+manager varchar(50), 
+contract_code varchar(50), 
+cooperation varchar(100), 
+legal_assignee varchar(50), 
+is_withholding_offsite tinyint, 
+management_rate DECIMAL(20,4), 
+tax_rate DECIMAL(20,4), 
+contract_amount DECIMAL(20,4), 
+settlement_amount DECIMAL(20,4), 
+duty_paid_time datetime(0), 
+duty_paid_amount DECIMAL(20,4), 
+duty_paid_code varchar(50), 
+capital_occupied DECIMAL(20,4), 
+project_status tinyint, 
+trice datetime(0) default current_timestamp, 
+create_time datetime(0) default current_timestamp, 
+create_user char(36), 
+update_time datetime(0) default current_timestamp, 
+update_user char(36), 
+description varchar(500),
+  primary key (id)
+);
+
 
 SET FOREIGN_KEY_CHECKS=1;
