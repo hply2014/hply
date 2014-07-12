@@ -23,7 +23,7 @@
     </item>
     <item>
       <key>DECIMAL</key>
-      <value>decimal</value>
+      <value>double</value>
     </item>
     <item>
       <key>VARCHAR</key>

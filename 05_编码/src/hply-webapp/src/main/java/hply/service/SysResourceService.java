@@ -6,16 +6,21 @@
 
 package hply.service;
 
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Resource;
-import org.springframework.stereotype.Repository;
+import hply.domain.SysResource;
+import hply.domain.TreeNode;
 import hply.persistence.SysResourceMapper;
 
-import hply.domain.SysResource;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Repository;
 
 @Repository(value = "sysResourceService")
 public class SysResourceService {
+	
+	private final static String ROOT_PARENT_ID = "ROOT";
     
     @Resource(name = "sysResourceMapper")
     private SysResourceMapper sysResourceMapper;
@@ -37,9 +42,31 @@ public class SysResourceService {
         return sysResourceMapper.get(id);
       }
 	  
+	  public List<SysResource> getChildren(String id){
+		  return sysResourceMapper.getChildren(id);
+	  }
+	  
 	  public List<SysResource> getAll(){
         return sysResourceMapper.getAll();
       }
+	  
+	  public List<TreeNode> getTreeNodeList(String userId){
+		  String pid = ROOT_PARENT_ID;
+		  
+		  List<SysResource> list1 = this.getChildren(pid);		  
+		  List<TreeNode> list = new ArrayList<TreeNode>();
+		  for(SysResource item : list1){
+			  TreeNode node = new TreeNode();
+			  node.setId(item.getId());
+			  node.setTitle(item.getResName());
+		  }
+		  
+		  
+		  
+		  return root;
+		  
+		  
+	  }
 }
 
 

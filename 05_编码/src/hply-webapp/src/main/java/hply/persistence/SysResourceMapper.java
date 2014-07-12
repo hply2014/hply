@@ -23,6 +23,8 @@ public interface SysResourceMapper {
 	  public SysResource get(String id);
 	  
 	  public List<SysResource> getAll();
+	  
+	  public List<SysResource> getChildren(String id);
 }
 
 

@@ -23,6 +23,10 @@
   <select id="getAll" resultType="hply.domain.SysResource">
     select * from t_sys_resource
   </select>
+  
+  <select id="getChildren" parameterType="string" resultType="hply.domain.SysResource">
+    select * from t_sys_resource where parent_id=#{id}
+  </select>
 
 </mapper>
 
