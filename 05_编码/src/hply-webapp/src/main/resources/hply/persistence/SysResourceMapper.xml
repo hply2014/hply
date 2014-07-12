@@ -4,18 +4,6 @@
 
 <mapper namespace="hply.persistence.SysResourceMapper">
 
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="hply.domain.SysResource">
-    insert into t_sys_resource(id, res_code, res_name, icon, res_path, res_url, res_type, order_by, parent_id, enabled, description) values ( #{id}, #{res_code}, #{res_name}, #{icon}, #{res_path}, #{res_url}, #{res_type}, #{order_by}, #{parent_id}, #{enabled}, #{description} )
-  </insert>
-
-  <update id="update" parameterType="map">
-    update t_sys_resource set res_code = #{res_code}, res_name = #{res_name}, icon = #{icon}, res_path = #{res_path}, res_url = #{res_url}, res_type = #{res_type}, order_by = #{order_by}, parent_id = #{parent_id}, enabled = #{enabled}, description = #{description} where id = #{id}
-  </update>
-
-  <delete id="delete" parameterType="string">
-    delete from t_sys_resource where id = #{id}
-  </delete>
-
   <select id="get" parameterType="string" resultType="hply.domain.SysResource">
     select * from t_sys_resource where id = #{id}
   </select>
@@ -25,7 +13,7 @@
   </select>
   
   <select id="getChildren" parameterType="string" resultType="hply.domain.SysResource">
-    select * from t_sys_resource where parent_id=#{id}
+    select * from t_sys_resource where ParentID=#{id}
   </select>
 
 </mapper>

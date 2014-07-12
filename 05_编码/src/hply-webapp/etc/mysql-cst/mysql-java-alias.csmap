@@ -73,5 +73,13 @@
       <key>NATIONALVARYINGCHARACTER</key>
       <value>String</value>
     </item>
+    <item>
+      <key>TINYINT</key>
+      <value>int</value>
+    </item>
+    <item>
+      <key>SMALLINT</key>
+      <value>int</value>
+    </item>
   </map>
 </codeSmith>

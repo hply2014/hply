@@ -41,7 +41,7 @@ public class <%=GetClassName()%> implements Serializable {
   private <%=GetColumnType(cs)%> <%=GetColumnName1(cs)%>;
   
 /**
-  * 读，数据库列：<%=TrimStart(cs.Name, "CQIYI.")%>  
+  * 读，数据库列： <%=TrimStart(cs.Name, "CQIYI.")%>  
   * <%=cs.Description%>
   */
 	public <%=GetColumnType(cs)%> get<%=GetColumnName(cs)%>() {
@@ -69,11 +69,6 @@ public class <%=GetClassName()%> implements Serializable {
         return str;
                         
 	}
-    
-//======================================================================================
-// TODO: 附加的其他方法 （ <%=NameSpace%>.<%=GetClassName()%> ）
-//======================================================================================
-
 
 }
 

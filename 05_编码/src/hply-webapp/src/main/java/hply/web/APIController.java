@@ -1,5 +1,9 @@
 package hply.web;
 
+import hply.domain.TreeNode;
+import hply.service.SysResourceService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/api", produces = "text/plain;charset=UTF-8")
 public class APIController {
+
+	@Autowired
+	private SysResourceService sysResourceService;
 
 	@ResponseBody
 	@RequestMapping(value = "/tree/{userId}")
@@ -46,5 +53,14 @@ public class APIController {
 				+ " 				{\"title\": \"Software\"},"
 				+ " 				{\"title\": \"" + userId + "\", \"tooltip\": \"this just is a tst.\" }"
 				+ " 			]}" + " 		]}" + " 	]}" + " ]";
+	}
+	
+
+	@ResponseBody
+	@RequestMapping(value = "/root/{userId}")
+	public TreeNode getResourceTreeRoot(@PathVariable String userId) {
+		System.out.println("getResourceTreeRoot ..." + userId);
+		return sysResourceService.getTreeRoot(userId);
+		
 	}
 }

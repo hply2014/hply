@@ -1,9 +1,9 @@
 /*
--- Query: SELECT * FROM hplydb.t_sys_parameter
+-- Query: SELECT * FROM hplydb_new.t_sys_parameter
 LIMIT 0, 1000
 
--- Date: 2014-07-12 12:59
+-- Date: 2014-07-12 22:48
 */
-INSERT INTO `t_sys_parameter` (`id`,`en_name`,`cn_name`,`param_value`,`default_value`,`is_inner`,`create_time`,`create_user`,`update_time`,`update_user`,`description`) VALUES ('2f0a2f68-097f-11e4-a5cb-080027dbb782','app_name','应用名称','工程项目核算系统','工程项目核算系统',1,'2014-07-12 12:55:06',NULL,'2014-07-12 12:55:06',NULL,NULL);
-INSERT INTO `t_sys_parameter` (`id`,`en_name`,`cn_name`,`param_value`,`default_value`,`is_inner`,`create_time`,`create_user`,`update_time`,`update_user`,`description`) VALUES ('4fe8fe7f-097f-11e4-a5cb-080027dbb782','app_version','应用版本号','V1.0','V1.0',1,'2014-07-12 12:56:02',NULL,'2014-07-12 12:56:02',NULL,NULL);
-INSERT INTO `t_sys_parameter` (`id`,`en_name`,`cn_name`,`param_value`,`default_value`,`is_inner`,`create_time`,`create_user`,`update_time`,`update_user`,`description`) VALUES ('6e053860-097f-11e4-a5cb-080027dbb782','app_publish_time','应用发布时间','2014年8月12日','2014年8月12日',1,'2014-07-12 12:56:52',NULL,'2014-07-12 12:56:52',NULL,NULL);
+INSERT INTO `t_sys_parameter` (`ID`,`ENName`,`CNName`,`ParamValue`,`DefaultValue`,`ISInner`,`CreateTime`,`CreateUser`,`UpdateTime`,`UpdateUser`,`Description`) VALUES ('2f0a2f68-097f-11e4-a5cb-080027dbb782','appname','应用名称','工程项目核算系统','工程项目核算系统',1,'2014-07-12 12:55:06',NULL,'2014-07-12 12:55:06',NULL,NULL);
+INSERT INTO `t_sys_parameter` (`ID`,`ENName`,`CNName`,`ParamValue`,`DefaultValue`,`ISInner`,`CreateTime`,`CreateUser`,`UpdateTime`,`UpdateUser`,`Description`) VALUES ('4fe8fe7f-097f-11e4-a5cb-080027dbb782','appversion','应用版本号','V1.0','V1.0',1,'2014-07-12 12:56:02',NULL,'2014-07-12 12:56:02',NULL,NULL);
+INSERT INTO `t_sys_parameter` (`ID`,`ENName`,`CNName`,`ParamValue`,`DefaultValue`,`ISInner`,`CreateTime`,`CreateUser`,`UpdateTime`,`UpdateUser`,`Description`) VALUES ('6e053860-097f-11e4-a5cb-080027dbb782','apppublishtime','应用发布时间','2014年8月12日','2014年8月12日',1,'2014-07-12 12:56:52',NULL,'2014-07-12 12:56:52',NULL,NULL);

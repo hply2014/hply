@@ -10,7 +10,7 @@ public class TreeNode {
 	private TreeNode parent;
 	private List<TreeNode> children;
 	private String tooltip;
-	private String uri;
+	private String url;
 	private boolean expanded;
 	private boolean selected;
 	private String icon;
@@ -57,11 +57,11 @@ public class TreeNode {
 	public void setTooltip(String tooltip) {
 		this.tooltip = tooltip;
 	}
-	public String getUri() {
-		return uri;
+	public String getUrl() {
+		return url;
 	}
-	public void setUri(String uri) {
-		this.uri = uri;
+	public void setUrl(String uri) {
+		this.url = uri;
 	}
 	public boolean isExpanded() {
 		return expanded;
