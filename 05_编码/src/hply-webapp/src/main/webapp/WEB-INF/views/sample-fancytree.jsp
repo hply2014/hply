@@ -16,7 +16,7 @@
 			icons: false,
 			checkbox: true,
 			source: {
-				url: "api/tree/中文",
+				url: encodeURI("api/tree/中文"),
 				cache: false
 			},
 			activate: function(event, data) {
