@@ -65,17 +65,18 @@ public class SysResourceService {
 	public List<TreeNode> getTreeNodeList(String userId, TreeNode root) {
 		List<SysResource> listR = this.getChildren(root.getId());
 		List<TreeNode> listT = new ArrayList<TreeNode>();
+		root.setChildren(listT);
+		
 		for (SysResource r : listR) {
 			TreeNode node = new TreeNode();
-			System.out.println((++count) + "," + r.toString());
-
+			
 			node.setId(r.getId());
 			node.setTitle(r.getResname());
-			node.setKey(r.getRescode());
+			node.setKey(r.getId());
 			node.setIcon(r.getIcon());
 			node.setUrl(r.getResurl());
 			node.setExpanded(true);
-			node.setSelected(true);
+			node.setSelected(false);
 			node.setTooltip(r.getDescription());
 
 			node.setParent(root);
