@@ -8,6 +8,7 @@ Create time:2013年8月16日 13:51:47
 <%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the stored procedures should be based on." %> 
 <%@ Property Name="NameSpace" Type="System.String" Default="hply.domain" Optional="False" Category="" Description="" Editor="" EditorBase="" Serializer="" %>
 <%@ Property Name="Author" Type="System.String" Default="ChengQiyi" Optional="False" Category="Author" Description="" Editor="" EditorBase="" Serializer="" %>
+
 <%@ Map Name="JavaAlias" Src="mysql-java-alias" %>
 <%@ Assembly Name="System.Data" %>
 <%@ Import Namespace="System.Data" %>
@@ -73,6 +74,12 @@ public class <%=GetClassName()%> implements Serializable {
 }
 
 <script runat="template">
+
+ public override string GetFileName()
+{
+    return GetClassName() + ".java";
+}
+        
 public string TrimStart(string str1, string str2)
 {
 	return str1.Replace(str2, "");

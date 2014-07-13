@@ -20,7 +20,7 @@ Create time:2013年8月16日 13:51:47
 
 <mapper namespace="<%=NameSpace%>.<%=GetClassName()%>Mapper">
 
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="<%=GetClassName()%>">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="hply.domain.<%=GetClassName()%>">
     <%=GetInsertSQL()%>
   </insert>
 
@@ -32,11 +32,11 @@ Create time:2013年8月16日 13:51:47
     delete from <%=SourceTable.Name%> where id = #{id}
   </delete>
 
-  <select id="get" parameterType="string" resultType="<%=GetClassName()%>">
+  <select id="get" parameterType="string" resultType="hply.domain.<%=GetClassName()%>">
     select * from <%=SourceTable.Name%> where id = #{id}
   </select>
 
-  <select id="getAll" resultType="<%=GetClassName()%>">
+  <select id="getAll" resultType="hply.domain.<%=GetClassName()%>">
     select * from <%=SourceTable.Name%>
   </select>
 
@@ -44,6 +44,12 @@ Create time:2013年8月16日 13:51:47
 
 
 <script runat="template">
+
+ public override string GetFileName()
+{
+    return GetClassName() + "Mapper.xml";
+}
+
 public string TrimStart(string str1, string str2)
 {
 	return str1.Replace(str2, "");

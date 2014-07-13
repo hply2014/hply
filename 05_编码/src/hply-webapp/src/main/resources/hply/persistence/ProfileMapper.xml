@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.persistence.ProfileMapper">
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="hply.domain.Profile">
+    insert into t_profile(ID, ProjectID, ExpectedValue, ProfilePoint, Trice, CreateTime, CreateUser, UpdateTime, UpdateUser, Description) values ( #{ID}, #{ProjectID}, #{ExpectedValue}, #{ProfilePoint}, #{Trice}, #{CreateTime}, #{CreateUser}, #{UpdateTime}, #{UpdateUser}, #{Description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_profile set ProjectID = #{ProjectID}, ExpectedValue = #{ExpectedValue}, ProfilePoint = #{ProfilePoint}, Trice = #{Trice}, CreateTime = #{CreateTime}, CreateUser = #{CreateUser}, UpdateTime = #{UpdateTime}, UpdateUser = #{UpdateUser}, Description = #{Description} where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_profile where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="hply.domain.Profile">
+    select * from t_profile where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="hply.domain.Profile">
+    select * from t_profile
+  </select>
+
+</mapper>
+
+

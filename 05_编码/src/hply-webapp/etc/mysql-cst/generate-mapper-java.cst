@@ -43,6 +43,11 @@ public interface <%=GetClassName()%>Mapper {
 
 
 <script runat="template">
+
+ public override string GetFileName()
+{
+    return GetClassName() + "Mapper.java";
+}
 public string TrimStart(string str1, string str2)
 {
 	return str1.Replace(str2, "");

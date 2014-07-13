@@ -25,12 +25,12 @@ package <%=NameSpace%>;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import hply.persistence.<%=GetClassName()%>Mapper;
 
 import hply.domain.<%=GetClassName()%>;
 
-@Repository(value = "<%=GetClassName1()%>Service")
+@Service(value = "<%=GetClassName1()%>Service")
 public class <%=GetClassName()%>Service {
     
     @Resource(name = "<%=GetClassName1()%>Mapper")
@@ -60,6 +60,12 @@ public class <%=GetClassName()%>Service {
 
 
 <script runat="template">
+
+ public override string GetFileName()
+{
+    return GetClassName() + "Service.java";
+}
+
 public string TrimStart(string str1, string str2)
 {
 	return str1.Replace(str2, "");

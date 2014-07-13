@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.persistence.ContractSupplementalAgreementMapper">
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="hply.domain.ContractSupplementalAgreement">
+    insert into t_contract_supplemental_agreement(ID, ProjectID, CsaCode, ManagementRate, ChangeAmount, Trice, CreateTime, CreateUser, UpdateTime, UpdateUser, Description) values ( #{ID}, #{ProjectID}, #{CsaCode}, #{ManagementRate}, #{ChangeAmount}, #{Trice}, #{CreateTime}, #{CreateUser}, #{UpdateTime}, #{UpdateUser}, #{Description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_contract_supplemental_agreement set ProjectID = #{ProjectID}, CsaCode = #{CsaCode}, ManagementRate = #{ManagementRate}, ChangeAmount = #{ChangeAmount}, Trice = #{Trice}, CreateTime = #{CreateTime}, CreateUser = #{CreateUser}, UpdateTime = #{UpdateTime}, UpdateUser = #{UpdateUser}, Description = #{Description} where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_contract_supplemental_agreement where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="hply.domain.ContractSupplementalAgreement">
+    select * from t_contract_supplemental_agreement where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="hply.domain.ContractSupplementalAgreement">
+    select * from t_contract_supplemental_agreement
+  </select>
+
+</mapper>
+
+
