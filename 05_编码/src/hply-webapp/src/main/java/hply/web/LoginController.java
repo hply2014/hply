@@ -1,6 +1,5 @@
 package hply.web;
 
-import hply.domain.SysUser;
 import hply.service.SysUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;

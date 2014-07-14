@@ -5,10 +5,11 @@
 
 package hply.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.text.MessageFormat;
 import hply.common.Utility;
+
+import java.io.Serializable;
+import java.text.MessageFormat;
+
 import org.apache.commons.lang3.StringUtils;
 
 
