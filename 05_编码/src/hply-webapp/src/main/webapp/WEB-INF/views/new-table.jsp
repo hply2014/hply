@@ -17,19 +17,19 @@
 						<td><sf:input path="id" /></td>
 					</tr>
 					<tr>
-						<td>ID</td>
+						<td>t1</td>
 						<td><sf:input path="t1" /></td>
 					</tr>
 					<tr>
-						<td>ID</td>
+						<td>t2</td>
 						<td><sf:input path="t2" /></td>
 					</tr>
 					<tr>
-						<td>ID</td>
+						<td>t3</td>
 						<td><sf:input path="t3" /></td>
 					</tr>
 					<tr>
-						<td>ID</td>
+						<td>t4</td>
 						<td><sf:input path="t4" /></td>
 					</tr>
 					<tr>
