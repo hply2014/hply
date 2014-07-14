@@ -81,5 +81,9 @@
       <key>SMALLINT</key>
       <value>int</value>
     </item>
+    <item>
+      <key>DOUBLE</key>
+      <value>double</value>
+    </item>
   </map>
 </codeSmith>
