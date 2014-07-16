@@ -8,19 +8,23 @@ package hply.service;
 
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
-import org.springframework.stereotype.Service;
-import hply.persistence.NewTableMapper;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import hply.persistence.NewTableMapper;
 import hply.domain.NewTable;
 
-@Service(value = "newTableService")
+@Service
 public class NewTableService {
     
-    @Resource(name = "newTableMapper")
+	@Autowired
     private NewTableMapper newTableMapper;
 
 	  public void insert(NewTable newTable){
+		  System.out.println("insert ...");
         newTableMapper.insert(newTable);
       }
 	  

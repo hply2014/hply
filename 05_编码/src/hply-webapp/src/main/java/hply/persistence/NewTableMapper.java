@@ -6,12 +6,13 @@
 
 package hply.persistence;
 
-import java.util.List;
-import java.util.Map;
-import org.springframework.stereotype.Repository;
 import hply.domain.NewTable;
 
-@Repository(value = "newTableMapper")
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface NewTableMapper {
 
 	  public void insert(NewTable newTable);

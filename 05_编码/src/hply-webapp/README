@@ -16,4 +16,7 @@ https://codesmith.atlassian.net/wiki/display/Generator
 in server.xml
     <Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443" URIEncoding="utf-8" />
 
-2014/7/9
+
+http://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/
+
+2014/7/15

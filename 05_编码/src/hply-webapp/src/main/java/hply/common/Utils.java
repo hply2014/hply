@@ -30,12 +30,11 @@ import org.apache.commons.logging.LogFactory;
  * @author cqiyi
  * 
  */
-public class Utility {
-	
-	public static Log logger = LogFactory.getLog(Utility.class);
+public class Utils {
 
-	public static final String EMPTY_STRING = "";
-	public static final String NOTHING_STRING = "NOTHING";
+	public static Log logger = LogFactory.getLog(Utils.class);
+
+	public static final String EMPTY = StringUtils.EMPTY;
 
 	public static String getSmartTimeFormat(Date date) {
 		Calendar calendar = Calendar.getInstance();
@@ -49,14 +48,14 @@ public class Utility {
 		int m1 = calendar.get(Calendar.MONTH);
 		int d1 = calendar.get(Calendar.DATE);
 
-		// 默认为今年，但不是今
+		// 榛樿涓轰粖骞达紝浣嗕笉鏄粖
 		String formatString = "MM/dd HH:mm";
 		if (y0 != y1) {
-			// 不是今年
+			// 涓嶆槸浠婂勾
 			formatString = "yyyy-MM-dd";
 		} else if (m0 == m1 && d0 == d1) {
-			// 今天
-			formatString = "今天 HH:mm";
+			// 浠婂ぉ
+			formatString = "浠婂ぉ HH:mm";
 		}
 
 		return DateFormatUtils.format(date, formatString);
@@ -70,7 +69,7 @@ public class Utility {
 	public static String getSmartTimeFormat(String str) throws ParseException {
 		// 1964-04-20 20:46:24.000
 		if (StringUtils.isEmpty(str)) {
-			return Utility.EMPTY_STRING;
+			return Utils.EMPTY;
 		}
 		Date date = DateUtils.parseDate(str, new String[] {
 				"yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss" });
@@ -79,7 +78,7 @@ public class Utility {
 	}
 
 	public static String getSmartSize(String size) {
-		return StringUtils.isEmpty(size) ? EMPTY_STRING : getSmartSize(Double
+		return StringUtils.isEmpty(size) ? EMPTY : getSmartSize(Double
 				.parseDouble(size));
 	}
 
@@ -105,12 +104,12 @@ public class Utility {
 	}
 
 	/**
-	 * 以行为单位读取文件，常用于读面向行的格式化文
+	 * 浠ヨ涓哄崟浣嶈鍙栨枃浠讹紝甯哥敤浜庤闈㈠悜琛岀殑鏍煎紡鍖栨枃
 	 */
 	public static String getFileContent(String fileName) {
 		File file = new File(fileName);
 		if (!file.exists()) {
-			throw new IllegalArgumentException("企图读取不存在的文件内容，fileName="
+			throw new IllegalArgumentException("浼佸浘璇诲彇涓嶅瓨鍦ㄧ殑鏂囦欢鍐呭锛宖ileName="
 					+ fileName);
 		}
 		BufferedReader reader = null;
@@ -118,8 +117,8 @@ public class Utility {
 		try {
 			reader = new BufferedReader(new FileReader(file));
 
-			String tempString = EMPTY_STRING;
-			// 读入，直到读入null为文件结
+			String tempString = EMPTY;
+			// 璇诲叆锛岀洿鍒拌鍏ull涓烘枃浠剁粨
 			while ((tempString = reader.readLine()) != null) {
 				content.append(tempString + "\n");
 			}
@@ -139,7 +138,7 @@ public class Utility {
 	}
 
 	/**
-	 * 根据分隔符获取最右边的部
+	 * 鏍规嵁鍒嗛殧绗﹁幏鍙栨渶鍙宠竟鐨勯儴
 	 */
 	public static String getLastStage(String str, String delimiter) {
 		int index = str.lastIndexOf(delimiter);
@@ -147,7 +146,7 @@ public class Utility {
 	}
 
 	public static String getApplicationURL(HttpServletRequest request) {
-		String port = Utility.EMPTY_STRING;
+		String port = EMPTY;
 		if (request.getServerPort() != 80) {
 			port = ":" + request.getServerPort();
 		}
@@ -156,7 +155,7 @@ public class Utility {
 	}
 
 	/**
-	 * 产生随机字符
+	 * 浜х敓闅忔満瀛楃
 	 * */
 	public static Random randGen = new Random();
 	private static char[] character = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -164,7 +163,7 @@ public class Utility {
 
 	public static final String randomString(int length) {
 		if (length < 1) {
-			throw new IllegalArgumentException("企图生成长度小于1的随机字符串，length="
+			throw new IllegalArgumentException("浼佸浘鐢熸垚闀垮害灏忎簬1鐨勯殢鏈哄瓧绗︿覆锛宭ength="
 					+ length);
 		}
 		char[] randBuffer = new char[length];
@@ -176,12 +175,12 @@ public class Utility {
 
 	/**
 	 * 
-	 * 获取文件内容的MD5摘要信息
+	 * 鑾峰彇鏂囦欢鍐呭鐨凪D5鎽樿淇℃伅
 	 */
 	public static String getFileMD5(String fileName) {
 		File file = new File(fileName);
 		if (!file.exists()) {
-			throw new IllegalArgumentException("获取文件内容的MD5摘要信息，文件不存在，fileName="
+			throw new IllegalArgumentException("鑾峰彇鏂囦欢鍐呭鐨凪D5鎽樿淇℃伅锛屾枃浠朵笉瀛樺湪锛宖ileName="
 					+ fileName);
 		}
 		MessageDigest digest = null;
@@ -196,13 +195,13 @@ public class Utility {
 			in.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Utility.EMPTY_STRING;
+			return EMPTY;
 		}
 		BigInteger bigInt = new BigInteger(1, digest.digest());
 		return bigInt.toString(16);
 	}
 
-	/* 获取字符串的md5*/
+	/* 鑾峰彇瀛楃涓茬殑md5 */
 	public static String getStringMD5(String str) {
 		BigInteger bigInt = null;
 		try {
@@ -218,7 +217,7 @@ public class Utility {
 	public static final String ILLEGAL_CHARACTER = " ,;-%&?.|`";
 
 	/**
-	 * 字符串中是否包含非法字符
+	 * 瀛楃涓蹭腑鏄惁鍖呭惈闈炴硶瀛楃
 	 * 
 	 * @return
 	 */
@@ -227,7 +226,7 @@ public class Utility {
 	}
 
 	public static String dateFormat(Date date) {
-		// 24小时
+		// 24灏忔椂
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		return sdf.format(date);
 	}
@@ -250,29 +249,16 @@ public class Utility {
 		if (ipAddress.equals("127.0.0.1")
 				|| ipAddress.equals("0:0:0:0:0:0:0:1")) {
 			try {
-				// 根据网卡取本机配置的IP
+				// 鏍规嵁缃戝崱鍙栨湰鏈洪厤缃殑IP
 				InetAddress inet = InetAddress.getLocalHost();
 				ipAddress = inet.getHostAddress();
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
-				throw new RuntimeException("获取客户端地"
+				throw new RuntimeException("鑾峰彇瀹㈡埛绔湴"
 						+ getApplicationURL(request));
 			}
 		}
 		return ipAddress;
-	}
-
-	/*
-	 * 在脚本执行并上传完成后，运行服务器上的导入数据库脚本
-	 */
-	public static void executeImportMlgFiles() {
-		try {
-			String cmd = "echo executeImportMlgFiles>>mlg.implog";
-			Runtime.getRuntime().exec(cmd);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public static void println(String str) {
@@ -282,14 +268,11 @@ public class Utility {
 	public static void println(String pattern, Object... args) {
 		System.out.println(MessageFormat.format(pattern, args));
 	}
-	public static String nothing(String str) {
-		return StringUtils.isEmpty(str) ? NOTHING_STRING : str;
-	}
-	
-	public static String getRandomUUID(){
+
+	public static String getRandomUUID() {
 		String str = java.util.UUID.randomUUID().toString();
 		return str.replaceAll("-", "").toLowerCase();
-		
+
 	}
 
 }

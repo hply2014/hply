@@ -5,16 +5,20 @@
 
 package hply.domain;
 
-import hply.common.Utility;
+import hply.common.Utils;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  * 模型类，对应的数据库表： [new_table]
@@ -22,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class NewTable implements Serializable {
 
+	@NotNull
 	private String id;
 
 	/**
@@ -44,7 +49,7 @@ public class NewTable implements Serializable {
 		this.id = id;
 	}
 
-	@Size(min = 1, max = 10, message = "输入错误啦")
+	@Size(min = 1, max = 10)
 	private String t1;
 
 	/**
@@ -63,6 +68,7 @@ public class NewTable implements Serializable {
 		this.t1 = t1;
 	}
 
+	@Min(10)
 	private int t2;
 
 	/**
@@ -81,6 +87,7 @@ public class NewTable implements Serializable {
 		this.t2 = t2;
 	}
 
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date t3;
 
 	/**
@@ -121,7 +128,7 @@ public class NewTable implements Serializable {
 	public String toString() {
 		System.out.println(this.getClass().getName() + ".toString():");
 
-		String str = Utility.EMPTY_STRING;
+		String str = Utils.EMPTY;
 		str += MessageFormat.format("\tId=\"{0}\"\n", this.getId());
 		str += MessageFormat.format("\tT1=\"{0}\"\n", this.getT1());
 		str += MessageFormat.format("\tT2=\"{0}\"\n", this.getT2());

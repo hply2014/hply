@@ -8,7 +8,7 @@ package hply.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.text.MessageFormat;
-import hply.common.Utility;
+import hply.common.Utils;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -231,7 +231,7 @@ public class ContractSupplementalAgreement implements Serializable {
 	public String toString() {
 		System.out.println(this.getClass().getName() + ".toString():");
         
-        String str = Utility.EMPTY_STRING;
+        String str = Utils.EMPTY;
         str += MessageFormat.format("\tId=\"{0}\"\n", this.getId());
         str += MessageFormat.format("\tProjectid=\"{0}\"\n", this.getProjectid());
         str += MessageFormat.format("\tCsacode=\"{0}\"\n", this.getCsacode());

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = "/newtable")
@@ -27,13 +28,13 @@ public class NewTableController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public String createNewTable(@Valid NewTable newTable, BindingResult bindingResult){
+		System.out.println("new table=" + newTable);
 		if(bindingResult.hasErrors()){
 			return "new-table";
 		}
 		
 		newTableService.insert(newTable);
-		
-		
-		return "new-table";
+
+		return "success";
 	}
 }

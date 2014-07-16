@@ -9,4 +9,5 @@
 	<typeAliases>
 		<package name="hply.domain" />
 	</typeAliases>
+
 </configuration>

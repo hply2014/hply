@@ -4,8 +4,8 @@
 
 <mapper namespace="hply.persistence.NewTableMapper">
 
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="hply.domain.NewTable">
-    insert into new_table(id, t1, t2, t3, t4) values ( #{id}, #{t1}, #{t2}, #{t3}, #{t4} )
+  <insert id="insert" parameterType="hply.domain.NewTable">
+    insert into new_table(id, t1, t2, t3, t4) values ( #{id}, #{t1}, #{t2}, CURRENT_TIMESTAMP, #{t4} )
   </insert>
 
   <update id="update" parameterType="map">

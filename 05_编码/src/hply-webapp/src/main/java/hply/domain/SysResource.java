@@ -5,7 +5,7 @@
 
 package hply.domain;
 
-import hply.common.Utility;
+import hply.common.Utils;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
@@ -213,7 +213,7 @@ public class SysResource implements Serializable {
 	public String toString() {
 		System.out.println(this.getClass().getName() + ".toString():");
         
-        String str = Utility.EMPTY_STRING;
+        String str = Utils.EMPTY;
         str += MessageFormat.format("\tId=\"{0}\"\n", this.getId());
         str += MessageFormat.format("\tRescode=\"{0}\"\n", this.getRescode());
         str += MessageFormat.format("\tResname=\"{0}\"\n", this.getResname());
