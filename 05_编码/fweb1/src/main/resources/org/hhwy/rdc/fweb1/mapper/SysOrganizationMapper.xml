@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.rdc.fweb1.mapper.SysOrganizationMapper">
+
+  <insert id="insert" parameterType="SysOrganization">
+    insert into t_sys_organization(id, organization_name, create_time, description) values ( #{id}, #{organizationName}, #{createTime}, #{description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_organization set organization_name = #{organizationName}, create_time = #{createTime}, description = #{description},  version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_organization where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysOrganization">
+    select id as Id, organization_name as OrganizationName, create_time as CreateTime, description as Description, version as Version from t_sys_organization where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_organization where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysOrganization">
+    select id as Id, organization_name as OrganizationName, create_time as CreateTime, description as Description, version as Version from t_sys_organization
+  </select>
+
+</mapper>
+

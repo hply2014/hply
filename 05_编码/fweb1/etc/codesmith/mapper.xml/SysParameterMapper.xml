@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.rdc.fweb1.mapper.SysParameterMapper">
+
+  <insert id="insert" parameterType="SysParameter">
+    insert into t_sys_parameter(id, en_name, cn_name, param_value, default_value, is_inner, create_time, create_user, update_time, update_user, description) values ( #{id}, #{enName}, #{cnName}, #{paramValue}, #{defaultValue}, #{isInner}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser}, #{description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_parameter set en_name = #{enName}, cn_name = #{cnName}, param_value = #{paramValue}, default_value = #{defaultValue}, is_inner = #{isInner}, create_time = #{createTime}, create_user = #{createUser}, update_time = #{updateTime}, update_user = #{updateUser}, description = #{description},  version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_parameter where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysParameter">
+    select id as Id, en_name as EnName, cn_name as CnName, param_value as ParamValue, default_value as DefaultValue, is_inner as IsInner, create_time as CreateTime, create_user as CreateUser, update_time as UpdateTime, update_user as UpdateUser, description as Description, version as Version from t_sys_parameter where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_parameter where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysParameter">
+    select id as Id, en_name as EnName, cn_name as CnName, param_value as ParamValue, default_value as DefaultValue, is_inner as IsInner, create_time as CreateTime, create_user as CreateUser, update_time as UpdateTime, update_user as UpdateUser, description as Description, version as Version from t_sys_parameter
+  </select>
+
+</mapper>
+

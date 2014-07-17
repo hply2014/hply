@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.rdc.fweb1.mapper.FieldTypesMapper">
+
+  <insert id="insert" parameterType="FieldTypes">
+    insert into t_field_types(id, field_t01, field_t02, field_t03, field_t04, field_t05, field_t06, field_t07, field_t08, field_t09) values ( #{id}, #{fieldT01}, #{fieldT02}, #{fieldT03}, #{fieldT04}, #{fieldT05}, #{fieldT06}, #{fieldT07}, #{fieldT08}, #{fieldT09} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_field_types set field_t01 = #{fieldT01}, field_t02 = #{fieldT02}, field_t03 = #{fieldT03}, field_t04 = #{fieldT04}, field_t05 = #{fieldT05}, field_t06 = #{fieldT06}, field_t07 = #{fieldT07}, field_t08 = #{fieldT08}, field_t09 = #{fieldT09},  version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_field_types where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="FieldTypes">
+    select id as Id, field_t01 as FieldT01, field_t02 as FieldT02, field_t03 as FieldT03, field_t04 as FieldT04, field_t05 as FieldT05, field_t06 as FieldT06, field_t07 as FieldT07, field_t08 as FieldT08, field_t09 as FieldT09, version as Version from t_field_types where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_field_types where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="FieldTypes">
+    select id as Id, field_t01 as FieldT01, field_t02 as FieldT02, field_t03 as FieldT03, field_t04 as FieldT04, field_t05 as FieldT05, field_t06 as FieldT06, field_t07 as FieldT07, field_t08 as FieldT08, field_t09 as FieldT09, version as Version from t_field_types
+  </select>
+
+</mapper>
+

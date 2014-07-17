@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.rdc.fweb1.mapper.PartyBillingMapper">
+
+  <insert id="insert" parameterType="PartyBilling">
+    insert into t_party_billing(id, project_id, invoice_code, amount, trice, tax_rate, tax_amount, step1_idea, step1_user, step1_time, step_status, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectId}, #{invoiceCode}, #{amount}, #{trice}, #{taxRate}, #{taxAmount}, #{step1Idea}, #{step1User}, #{step1Time}, #{stepStatus}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser}, #{description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_party_billing set project_id = #{projectId}, invoice_code = #{invoiceCode}, amount = #{amount}, trice = #{trice}, tax_rate = #{taxRate}, tax_amount = #{taxAmount}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step_status = #{stepStatus}, create_time = #{createTime}, create_user = #{createUser}, update_time = #{updateTime}, update_user = #{updateUser}, description = #{description},  version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_party_billing where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="PartyBilling">
+    select id as Id, project_id as ProjectId, invoice_code as InvoiceCode, amount as Amount, trice as Trice, tax_rate as TaxRate, tax_amount as TaxAmount, step1_idea as Step1Idea, step1_user as Step1User, step1_time as Step1Time, step_status as StepStatus, create_time as CreateTime, create_user as CreateUser, update_time as UpdateTime, update_user as UpdateUser, description as Description, version as Version from t_party_billing where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_party_billing where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="PartyBilling">
+    select id as Id, project_id as ProjectId, invoice_code as InvoiceCode, amount as Amount, trice as Trice, tax_rate as TaxRate, tax_amount as TaxAmount, step1_idea as Step1Idea, step1_user as Step1User, step1_time as Step1Time, step_status as StepStatus, create_time as CreateTime, create_user as CreateUser, update_time as UpdateTime, update_user as UpdateUser, description as Description, version as Version from t_party_billing
+  </select>
+
+</mapper>
+
