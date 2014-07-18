@@ -49,7 +49,8 @@ public class SysParameterServiceTest extends BaseJUnit4TestCase {
 			service.insert(sysParameter);
 
 			if (this.getRandomBoolean()) {
-				service.update(sysParameter);
+				SysParameter obj = service.get(sysParameter.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

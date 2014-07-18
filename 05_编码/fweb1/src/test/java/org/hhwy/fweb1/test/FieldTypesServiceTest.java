@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.FieldTypesService;
 import org.hhwy.fweb1.domain.FieldTypes;
 
 public class FieldTypesServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private FieldTypesService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,31 +21,26 @@ public class FieldTypesServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			FieldTypes fieldTypes = new FieldTypes();
 
-
-
 			fieldTypes.setFieldT01(this.getRandomString());
 
-            fieldTypes.setFieldT02(this.getRandomDouble()); 
-
+			fieldTypes.setFieldT02(this.getRandomDouble());
 
 			fieldTypes.setFieldT03(this.getRandomString());
 
-
 			fieldTypes.setFieldT04(this.getRandomString());
 
-
-			fieldTypes.setFieldT05(this.getRandomString());        
-            fieldTypes.setFieldT06(this.getRandomDate()); 
-
+			fieldTypes.setFieldT05(this.getRandomString());
+			fieldTypes.setFieldT06(this.getRandomDate());
 
 			fieldTypes.setFieldT07(this.getRandomString());
-            fieldTypes.setFieldT08(this.getRandomInt()); 
-            fieldTypes.setFieldT09(this.getRandomInt()); 
+			fieldTypes.setFieldT08(this.getRandomInt());
+			fieldTypes.setFieldT09(this.getRandomInt());
 
 			service.insert(fieldTypes);
 
 			if (this.getRandomBoolean()) {
-				service.update(fieldTypes);
+				FieldTypes obj = service.get(fieldTypes.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -58,8 +53,8 @@ public class FieldTypesServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<FieldTypes> list = service.getAll();
 		for (FieldTypes obj : list) {
@@ -71,4 +66,3 @@ public class FieldTypesServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

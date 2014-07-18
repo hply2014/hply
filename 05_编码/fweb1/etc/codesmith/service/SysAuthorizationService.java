@@ -19,7 +19,7 @@ public class SysAuthorizationService {
 	  
 	  public void update(SysAuthorization sysAuthorization){
           if(mapper.getVersion(sysAuthorization.getId()) != sysAuthorization.getVersion()){
-            throw new DataVersionConflictException("Updating t_sys_authorization." + sysAuthorization.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_sys_authorization.id=" + sysAuthorization.getId() );
           }
           
         mapper.update(sysAuthorization);

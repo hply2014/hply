@@ -19,7 +19,7 @@ public class ChopService {
 	  
 	  public void update(Chop chop){
           if(mapper.getVersion(chop.getId()) != chop.getVersion()){
-            throw new DataVersionConflictException("Updating t_chop." + chop.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_chop.id=" + chop.getId() );
           }
           
         mapper.update(chop);

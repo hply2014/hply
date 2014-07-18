@@ -19,7 +19,7 @@ public class InformationService {
 	  
 	  public void update(Information information){
           if(mapper.getVersion(information.getId()) != information.getVersion()){
-            throw new DataVersionConflictException("Updating t_information." + information.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_information.id=" + information.getId() );
           }
           
         mapper.update(information);

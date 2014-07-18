@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.CollectionsService;
 import org.hhwy.fweb1.domain.Collections;
 
 public class CollectionsServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private CollectionsService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,43 +21,34 @@ public class CollectionsServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			Collections collections = new Collections();
 
-
-
 			collections.setProjectId(this.getRandomString());
-
 
 			collections.setTicketCode(this.getRandomString());
 
-
 			collections.setSourceOf(this.getRandomString());
-
 
 			collections.setPaymentType(this.getRandomString());
 
-            collections.setAmount(this.getRandomDouble()); 
-
+			collections.setAmount(this.getRandomDouble());
 
 			collections.setBankAccount(this.getRandomString());
 
+			collections.setBankName(this.getRandomString());
+			collections.setTrice(this.getRandomDate());
+			collections.setCreateTime(this.getRandomDate());
 
-			collections.setBankName(this.getRandomString());        
-            collections.setTrice(this.getRandomDate());         
-            collections.setCreateTime(this.getRandomDate()); 
-
-
-			collections.setCreateUser(this.getRandomString());        
-            collections.setUpdateTime(this.getRandomDate()); 
-
+			collections.setCreateUser(this.getRandomString());
+			collections.setUpdateTime(this.getRandomDate());
 
 			collections.setUpdateUser(this.getRandomString());
-
 
 			collections.setDescription(this.getRandomString());
 
 			service.insert(collections);
 
 			if (this.getRandomBoolean()) {
-				service.update(collections);
+				Collections obj = service.get(collections.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -70,8 +61,8 @@ public class CollectionsServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<Collections> list = service.getAll();
 		for (Collections obj : list) {
@@ -83,4 +74,3 @@ public class CollectionsServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

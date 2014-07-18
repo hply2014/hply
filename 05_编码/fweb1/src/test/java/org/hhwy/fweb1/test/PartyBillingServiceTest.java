@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.PartyBillingService;
 import org.hhwy.fweb1.domain.PartyBilling;
 
 public class PartyBillingServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private PartyBillingService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,45 +21,37 @@ public class PartyBillingServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			PartyBilling partyBilling = new PartyBilling();
 
-
-
 			partyBilling.setProjectId(this.getRandomString());
-
 
 			partyBilling.setInvoiceCode(this.getRandomString());
 
-            partyBilling.setAmount(this.getRandomDouble());         
-            partyBilling.setTrice(this.getRandomDate()); 
+			partyBilling.setAmount(this.getRandomDouble());
+			partyBilling.setTrice(this.getRandomDate());
 
-            partyBilling.setTaxRate(this.getRandomDouble()); 
+			partyBilling.setTaxRate(this.getRandomDouble());
 
-            partyBilling.setTaxAmount(this.getRandomDouble()); 
-
+			partyBilling.setTaxAmount(this.getRandomDouble());
 
 			partyBilling.setStep1Idea(this.getRandomString());
 
+			partyBilling.setStep1User(this.getRandomString());
+			partyBilling.setStep1Time(this.getRandomDate());
 
-			partyBilling.setStep1User(this.getRandomString());        
-            partyBilling.setStep1Time(this.getRandomDate()); 
+			partyBilling.setStepStatus(this.getRandomString());
+			partyBilling.setCreateTime(this.getRandomDate());
 
-
-			partyBilling.setStepStatus(this.getRandomString());        
-            partyBilling.setCreateTime(this.getRandomDate()); 
-
-
-			partyBilling.setCreateUser(this.getRandomString());        
-            partyBilling.setUpdateTime(this.getRandomDate()); 
-
+			partyBilling.setCreateUser(this.getRandomString());
+			partyBilling.setUpdateTime(this.getRandomDate());
 
 			partyBilling.setUpdateUser(this.getRandomString());
-
 
 			partyBilling.setDescription(this.getRandomString());
 
 			service.insert(partyBilling);
 
 			if (this.getRandomBoolean()) {
-				service.update(partyBilling);
+				PartyBilling obj = service.get(partyBilling.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -72,8 +64,8 @@ public class PartyBillingServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<PartyBilling> list = service.getAll();
 		for (PartyBilling obj : list) {
@@ -85,4 +77,3 @@ public class PartyBillingServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

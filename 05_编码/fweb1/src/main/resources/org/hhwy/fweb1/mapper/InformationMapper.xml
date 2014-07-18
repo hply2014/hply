@@ -4,29 +4,58 @@
 
 <mapper namespace="org.hhwy.fweb1.mapper.InformationMapper">
 
-  <insert id="insert" parameterType="Information">
-    insert into t_information(id, organization_id, project_name, address, developer, epc_corporation, variety, total_area, real_name, identification, contact, subscriber, trice, create_time, create_user, update_time, update_user, description) values ( #{id}, #{organizationId}, #{projectName}, #{address}, #{developer}, #{epcCorporation}, #{variety}, #{totalArea}, #{realName}, #{identification}, #{contact}, #{subscriber}, #{trice}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser}, #{description} )
-  </insert>
+	<insert id="insert" parameterType="Information">
+		insert into t_information(id, organization_id, project_name, address,
+		developer, epc_corporation, variety, total_area, real_name,
+		identification, contact, subscriber, trice, create_time, create_user,
+		update_time, update_user, description) values ( #{id},
+		#{organizationId}, #{projectName}, #{address}, #{developer},
+		#{epcCorporation}, #{variety}, #{totalArea}, #{realName},
+		#{identification}, #{contact}, #{subscriber}, #{trice}, #{createTime},
+		#{createUser}, #{updateTime}, #{updateUser}, #{description} )
+	</insert>
 
-  <update id="update" parameterType="map">
-    update t_information set organization_id = #{organizationId}, project_name = #{projectName}, address = #{address}, developer = #{developer}, epc_corporation = #{epcCorporation}, variety = #{variety}, total_area = #{totalArea}, real_name = #{realName}, identification = #{identification}, contact = #{contact}, subscriber = #{subscriber}, trice = #{trice}, create_time = #{createTime}, create_user = #{createUser}, update_time = #{updateTime}, update_user = #{updateUser}, description = #{description},  version = version + 1 where id = #{id}
-  </update>
+	<update id="update" parameterType="map">
+		update t_information set organization_id = #{organizationId}, project_name =
+		#{projectName}, address = #{address}, developer = #{developer},
+		epc_corporation = #{epcCorporation}, variety = #{variety}, total_area
+		= #{totalArea}, real_name = #{realName}, identification =
+		#{identification}, contact = #{contact}, subscriber = #{subscriber},
+		trice = #{trice}, create_time = #{createTime}, create_user =
+		#{createUser}, update_time = #{updateTime}, update_user =
+		#{updateUser}, description = #{description}, version = version + 1
+		where id = #{id}
+	</update>
 
-  <delete id="delete" parameterType="string">
-    delete from t_information where id = #{id}
-  </delete>
+	<delete id="delete" parameterType="string">
+		delete from t_information where id = #{id}
+	</delete>
 
-  <select id="get" parameterType="string" resultType="Information">
-    select id as Id, organization_id as OrganizationId, project_name as ProjectName, address as Address, developer as Developer, epc_corporation as EpcCorporation, variety as Variety, total_area as TotalArea, real_name as RealName, identification as Identification, contact as Contact, subscriber as Subscriber, trice as Trice, create_time as CreateTime, create_user as CreateUser, update_time as UpdateTime, update_user as UpdateUser, description as Description, version as Version from t_information where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_information where id = #{id}
-  </select>
+	<select id="get" parameterType="string" resultType="Information">
+		select id as Id, organization_id as OrganizationId, project_name as
+		ProjectName, address as Address, developer as Developer,
+		epc_corporation as EpcCorporation, variety as Variety, total_area as
+		TotalArea, real_name as RealName, identification as Identification,
+		contact as Contact, subscriber as Subscriber, trice as Trice,
+		create_time as CreateTime, create_user as CreateUser, update_time as
+		UpdateTime, update_user as UpdateUser, description as Description,
+		version as Version from t_information where id = #{id}
+	</select>
 
-  <select id="getAll" resultType="Information">
-    select id as Id, organization_id as OrganizationId, project_name as ProjectName, address as Address, developer as Developer, epc_corporation as EpcCorporation, variety as Variety, total_area as TotalArea, real_name as RealName, identification as Identification, contact as Contact, subscriber as Subscriber, trice as Trice, create_time as CreateTime, create_user as CreateUser, update_time as UpdateTime, update_user as UpdateUser, description as Description, version as Version from t_information
-  </select>
+	<select id="getVersion" parameterType="string" resultType="int">
+		select version from t_information where id = #{id}
+	</select>
+
+	<select id="getAll" resultType="Information">
+		select id as Id, organization_id as OrganizationId, project_name as
+		ProjectName, address as Address, developer as Developer,
+		epc_corporation as EpcCorporation, variety as Variety, total_area as
+		TotalArea, real_name as RealName, identification as Identification,
+		contact as Contact, subscriber as Subscriber, trice as Trice,
+		create_time as CreateTime, create_user as CreateUser, update_time as
+		UpdateTime, update_user as UpdateUser, description as Description,
+		version as Version from t_information
+	</select>
 
 </mapper>
 

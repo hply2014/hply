@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.ContractChangeService;
 import org.hhwy.fweb1.domain.ContractChange;
 
 public class ContractChangeServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private ContractChangeService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,33 +21,28 @@ public class ContractChangeServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			ContractChange contractChange = new ContractChange();
 
-
-
 			contractChange.setProjectId(this.getRandomString());
-
 
 			contractChange.setCsaCode(this.getRandomString());
 
-            contractChange.setManagementRate(this.getRandomDouble()); 
+			contractChange.setManagementRate(this.getRandomDouble());
 
-            contractChange.setChangeAmount(this.getRandomDouble());         
-            contractChange.setTrice(this.getRandomDate());         
-            contractChange.setCreateTime(this.getRandomDate()); 
+			contractChange.setChangeAmount(this.getRandomDouble());
+			contractChange.setTrice(this.getRandomDate());
+			contractChange.setCreateTime(this.getRandomDate());
 
-
-			contractChange.setCreateUser(this.getRandomString());        
-            contractChange.setUpdateTime(this.getRandomDate()); 
-
+			contractChange.setCreateUser(this.getRandomString());
+			contractChange.setUpdateTime(this.getRandomDate());
 
 			contractChange.setUpdateUser(this.getRandomString());
-
 
 			contractChange.setDescription(this.getRandomString());
 
 			service.insert(contractChange);
 
 			if (this.getRandomBoolean()) {
-				service.update(contractChange);
+				ContractChange obj = service.get(contractChange.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -60,8 +55,8 @@ public class ContractChangeServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<ContractChange> list = service.getAll();
 		for (ContractChange obj : list) {
@@ -73,4 +68,3 @@ public class ContractChangeServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

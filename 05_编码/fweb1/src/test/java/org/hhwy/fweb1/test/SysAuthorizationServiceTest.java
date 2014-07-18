@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.SysAuthorizationService;
 import org.hhwy.fweb1.domain.SysAuthorization;
 
 public class SysAuthorizationServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private SysAuthorizationService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,21 +21,18 @@ public class SysAuthorizationServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			SysAuthorization sysAuthorization = new SysAuthorization();
 
-
-
 			sysAuthorization.setResourceId(this.getRandomString());
 
-
-			sysAuthorization.setUserId(this.getRandomString());        
-            sysAuthorization.setCreateTime(this.getRandomDate()); 
-
+			sysAuthorization.setUserId(this.getRandomString());
+			sysAuthorization.setCreateTime(this.getRandomDate());
 
 			sysAuthorization.setCreateUser(this.getRandomString());
 
 			service.insert(sysAuthorization);
 
 			if (this.getRandomBoolean()) {
-				service.update(sysAuthorization);
+				SysAuthorization obj = service.get(sysAuthorization.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -48,8 +45,8 @@ public class SysAuthorizationServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<SysAuthorization> list = service.getAll();
 		for (SysAuthorization obj : list) {
@@ -61,4 +58,3 @@ public class SysAuthorizationServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

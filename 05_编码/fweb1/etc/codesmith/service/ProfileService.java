@@ -19,7 +19,7 @@ public class ProfileService {
 	  
 	  public void update(Profile profile){
           if(mapper.getVersion(profile.getId()) != profile.getVersion()){
-            throw new DataVersionConflictException("Updating t_profile." + profile.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_profile.id=" + profile.getId() );
           }
           
         mapper.update(profile);

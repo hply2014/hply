@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.PaymentItemService;
 import org.hhwy.fweb1.domain.PaymentItem;
 
 public class PaymentItemServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private PaymentItemService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,27 +21,23 @@ public class PaymentItemServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			PaymentItem paymentItem = new PaymentItem();
 
-
-
 			paymentItem.setItemName(this.getRandomString());
 
-            paymentItem.setReimbursementCap(this.getRandomDouble());         
-            paymentItem.setCreateTime(this.getRandomDate()); 
+			paymentItem.setReimbursementCap(this.getRandomDouble());
+			paymentItem.setCreateTime(this.getRandomDate());
 
-
-			paymentItem.setCreateUser(this.getRandomString());        
-            paymentItem.setUpdateTime(this.getRandomDate()); 
-
+			paymentItem.setCreateUser(this.getRandomString());
+			paymentItem.setUpdateTime(this.getRandomDate());
 
 			paymentItem.setUpdateUser(this.getRandomString());
-
 
 			paymentItem.setDescription(this.getRandomString());
 
 			service.insert(paymentItem);
 
 			if (this.getRandomBoolean()) {
-				service.update(paymentItem);
+				PaymentItem obj = service.get(paymentItem.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -54,8 +50,8 @@ public class PaymentItemServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<PaymentItem> list = service.getAll();
 		for (PaymentItem obj : list) {
@@ -67,4 +63,3 @@ public class PaymentItemServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

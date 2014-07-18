@@ -32,7 +32,8 @@ public class SysOrganizationServiceTest extends BaseJUnit4TestCase {
 			service.insert(sysOrganization);
 
 			if (this.getRandomBoolean()) {
-				service.update(sysOrganization);
+				SysOrganization obj = service.get(sysOrganization.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

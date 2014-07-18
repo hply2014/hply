@@ -45,7 +45,8 @@ public class ProfileServiceTest extends BaseJUnit4TestCase {
 			service.insert(profile);
 
 			if (this.getRandomBoolean()) {
-				service.update(profile);
+				Profile obj = service.get(profile.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

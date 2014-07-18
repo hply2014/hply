@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.ChopService;
 import org.hhwy.fweb1.domain.Chop;
 
 public class ChopServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private ChopService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,60 +21,45 @@ public class ChopServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			Chop chop = new Chop();
 
-
-
 			chop.setChopCode(this.getRandomString());
-
 
 			chop.setProjectId(this.getRandomString());
 
-
 			chop.setProjectCode(this.getRandomString());
-
 
 			chop.setProjectName(this.getRandomString());
 
-
 			chop.setManager(this.getRandomString());
-
 
 			chop.setContent(this.getRandomString());
 
-
-			chop.setApplyUser(this.getRandomString());        
-            chop.setApplyTime(this.getRandomDate()); 
-
+			chop.setApplyUser(this.getRandomString());
+			chop.setApplyTime(this.getRandomDate());
 
 			chop.setOrganizationId(this.getRandomString());
 
-
 			chop.setStep1Idea(this.getRandomString());
 
-
-			chop.setStep1User(this.getRandomString());        
-            chop.setStep1Time(this.getRandomDate()); 
-
+			chop.setStep1User(this.getRandomString());
+			chop.setStep1Time(this.getRandomDate());
 
 			chop.setStep2Idea(this.getRandomString());
 
-
-			chop.setStep2User(this.getRandomString());        
-            chop.setStep2Time(this.getRandomDate()); 
-
+			chop.setStep2User(this.getRandomString());
+			chop.setStep2Time(this.getRandomDate());
 
 			chop.setStep3Idea(this.getRandomString());
 
-
-			chop.setStep3User(this.getRandomString());        
-            chop.setStep3Time(this.getRandomDate()); 
-
+			chop.setStep3User(this.getRandomString());
+			chop.setStep3Time(this.getRandomDate());
 
 			chop.setStepStatus(this.getRandomString());
 
 			service.insert(chop);
 
 			if (this.getRandomBoolean()) {
-				service.update(chop);
+				Chop obj = service.get(chop.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -87,8 +72,8 @@ public class ChopServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<Chop> list = service.getAll();
 		for (Chop obj : list) {
@@ -100,4 +85,3 @@ public class ChopServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

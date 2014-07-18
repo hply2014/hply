@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.ProfileService;
 import org.hhwy.fweb1.domain.Profile;
 
 public class ProfileServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private ProfileService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,31 +21,26 @@ public class ProfileServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			Profile profile = new Profile();
 
-
-
 			profile.setProjectId(this.getRandomString());
 
-            profile.setExpectedValue(this.getRandomDouble()); 
+			profile.setExpectedValue(this.getRandomDouble());
 
+			profile.setProfilePoint(this.getRandomString());
+			profile.setTrice(this.getRandomDate());
+			profile.setCreateTime(this.getRandomDate());
 
-			profile.setProfilePoint(this.getRandomString());        
-            profile.setTrice(this.getRandomDate());         
-            profile.setCreateTime(this.getRandomDate()); 
-
-
-			profile.setCreateUser(this.getRandomString());        
-            profile.setUpdateTime(this.getRandomDate()); 
-
+			profile.setCreateUser(this.getRandomString());
+			profile.setUpdateTime(this.getRandomDate());
 
 			profile.setUpdateUser(this.getRandomString());
-
 
 			profile.setDescription(this.getRandomString());
 
 			service.insert(profile);
 
 			if (this.getRandomBoolean()) {
-				service.update(profile);
+				Profile obj = service.get(profile.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -58,8 +53,8 @@ public class ProfileServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<Profile> list = service.getAll();
 		for (Profile obj : list) {
@@ -71,4 +66,3 @@ public class ProfileServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

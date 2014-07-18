@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.CustomerBillingService;
 import org.hhwy.fweb1.domain.CustomerBilling;
 
 public class CustomerBillingServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private CustomerBillingService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,34 +21,28 @@ public class CustomerBillingServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			CustomerBilling customerBilling = new CustomerBilling();
 
-
-
 			customerBilling.setProjectId(this.getRandomString());
-
 
 			customerBilling.setInvoiceCode(this.getRandomString());
 
-
 			customerBilling.setInvoiceType(this.getRandomString());
 
-            customerBilling.setAmount(this.getRandomDouble());         
-            customerBilling.setTrice(this.getRandomDate());         
-            customerBilling.setCreateTime(this.getRandomDate()); 
+			customerBilling.setAmount(this.getRandomDouble());
+			customerBilling.setTrice(this.getRandomDate());
+			customerBilling.setCreateTime(this.getRandomDate());
 
-
-			customerBilling.setCreateUser(this.getRandomString());        
-            customerBilling.setUpdateTime(this.getRandomDate()); 
-
+			customerBilling.setCreateUser(this.getRandomString());
+			customerBilling.setUpdateTime(this.getRandomDate());
 
 			customerBilling.setUpdateUser(this.getRandomString());
-
 
 			customerBilling.setDescription(this.getRandomString());
 
 			service.insert(customerBilling);
 
 			if (this.getRandomBoolean()) {
-				service.update(customerBilling);
+				CustomerBilling obj = service.get(customerBilling.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -61,8 +55,8 @@ public class CustomerBillingServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<CustomerBilling> list = service.getAll();
 		for (CustomerBilling obj : list) {
@@ -74,4 +68,3 @@ public class CustomerBillingServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

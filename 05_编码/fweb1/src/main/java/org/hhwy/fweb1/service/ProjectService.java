@@ -19,7 +19,7 @@ public class ProjectService {
 	  
 	  public void update(Project project){
           if(mapper.getVersion(project.getId()) != project.getVersion()){
-            throw new DataVersionConflictException("Updating t_project." + project.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_project.id=" + project.getId() );
           }
           
         mapper.update(project);

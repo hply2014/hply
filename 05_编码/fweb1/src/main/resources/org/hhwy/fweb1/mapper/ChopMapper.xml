@@ -4,29 +4,60 @@
 
 <mapper namespace="org.hhwy.fweb1.mapper.ChopMapper">
 
-  <insert id="insert" parameterType="Chop">
-    insert into t_chop(id, chop_code, project_id, project_code, project_name, manager, content, apply_user, apply_time, organization_id, step1_idea, step1_user, step1_time, step2_idea, step2_user, step2_time, step3_idea, step3_user, step3_time, step_status) values ( #{id}, #{chopCode}, #{projectId}, #{projectCode}, #{projectName}, #{manager}, #{content}, #{applyUser}, #{applyTime}, #{organizationId}, #{step1Idea}, #{step1User}, #{step1Time}, #{step2Idea}, #{step2User}, #{step2Time}, #{step3Idea}, #{step3User}, #{step3Time}, #{stepStatus} )
-  </insert>
+	<insert id="insert" parameterType="Chop">
+		insert into t_chop(id, chop_code, project_id, project_code, project_name,
+		manager, content, apply_user, apply_time, organization_id, step1_idea,
+		step1_user, step1_time, step2_idea, step2_user, step2_time,
+		step3_idea, step3_user, step3_time, step_status) values ( #{id},
+		#{chopCode}, #{projectId}, #{projectCode}, #{projectName}, #{manager},
+		#{content}, #{applyUser}, #{applyTime}, #{organizationId},
+		#{step1Idea}, #{step1User}, #{step1Time}, #{step2Idea}, #{step2User},
+		#{step2Time}, #{step3Idea}, #{step3User}, #{step3Time}, #{stepStatus}
+		)
+	</insert>
 
-  <update id="update" parameterType="map">
-    update t_chop set chop_code = #{chopCode}, project_id = #{projectId}, project_code = #{projectCode}, project_name = #{projectName}, manager = #{manager}, content = #{content}, apply_user = #{applyUser}, apply_time = #{applyTime}, organization_id = #{organizationId}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step2_idea = #{step2Idea}, step2_user = #{step2User}, step2_time = #{step2Time}, step3_idea = #{step3Idea}, step3_user = #{step3User}, step3_time = #{step3Time}, step_status = #{stepStatus},  version = version + 1 where id = #{id}
-  </update>
+	<update id="update" parameterType="map">
+		update t_chop set chop_code = #{chopCode}, project_id = #{projectId},
+		project_code = #{projectCode}, project_name = #{projectName}, manager
+		= #{manager}, content = #{content}, apply_user = #{applyUser},
+		apply_time = #{applyTime}, organization_id = #{organizationId},
+		step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time =
+		#{step1Time}, step2_idea = #{step2Idea}, step2_user = #{step2User},
+		step2_time = #{step2Time}, step3_idea = #{step3Idea}, step3_user =
+		#{step3User}, step3_time = #{step3Time}, step_status = #{stepStatus},
+		version = version + 1 where id = #{id}
+	</update>
 
-  <delete id="delete" parameterType="string">
-    delete from t_chop where id = #{id}
-  </delete>
+	<delete id="delete" parameterType="string">
+		delete from t_chop where id = #{id}
+	</delete>
 
-  <select id="get" parameterType="string" resultType="Chop">
-    select id as Id, chop_code as ChopCode, project_id as ProjectId, project_code as ProjectCode, project_name as ProjectName, manager as Manager, content as Content, apply_user as ApplyUser, apply_time as ApplyTime, organization_id as OrganizationId, step1_idea as Step1Idea, step1_user as Step1User, step1_time as Step1Time, step2_idea as Step2Idea, step2_user as Step2User, step2_time as Step2Time, step3_idea as Step3Idea, step3_user as Step3User, step3_time as Step3Time, step_status as StepStatus, version as Version from t_chop where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_chop where id = #{id}
-  </select>
+	<select id="get" parameterType="string" resultType="Chop">
+		select id as Id, chop_code as ChopCode, project_id as ProjectId,
+		project_code as ProjectCode, project_name as ProjectName, manager as
+		Manager, content as Content, apply_user as ApplyUser, apply_time as
+		ApplyTime, organization_id as OrganizationId, step1_idea as Step1Idea,
+		step1_user as Step1User, step1_time as Step1Time, step2_idea as
+		Step2Idea, step2_user as Step2User, step2_time as Step2Time,
+		step3_idea as Step3Idea, step3_user as Step3User, step3_time as
+		Step3Time, step_status as StepStatus, version as Version from t_chop
+		where id = #{id}
+	</select>
 
-  <select id="getAll" resultType="Chop">
-    select id as Id, chop_code as ChopCode, project_id as ProjectId, project_code as ProjectCode, project_name as ProjectName, manager as Manager, content as Content, apply_user as ApplyUser, apply_time as ApplyTime, organization_id as OrganizationId, step1_idea as Step1Idea, step1_user as Step1User, step1_time as Step1Time, step2_idea as Step2Idea, step2_user as Step2User, step2_time as Step2Time, step3_idea as Step3Idea, step3_user as Step3User, step3_time as Step3Time, step_status as StepStatus, version as Version from t_chop
-  </select>
+	<select id="getVersion" parameterType="string" resultType="int">
+		select version from t_chop where id = #{id}
+	</select>
+
+	<select id="getAll" resultType="Chop">
+		select id as Id, chop_code as ChopCode, project_id as ProjectId,
+		project_code as ProjectCode, project_name as ProjectName, manager as
+		Manager, content as Content, apply_user as ApplyUser, apply_time as
+		ApplyTime, organization_id as OrganizationId, step1_idea as Step1Idea,
+		step1_user as Step1User, step1_time as Step1Time, step2_idea as
+		Step2Idea, step2_user as Step2User, step2_time as Step2Time,
+		step3_idea as Step3Idea, step3_user as Step3User, step3_time as
+		Step3Time, step_status as StepStatus, version as Version from t_chop
+	</select>
 
 </mapper>
 

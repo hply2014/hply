@@ -35,7 +35,8 @@ public class SysAuthorizationServiceTest extends BaseJUnit4TestCase {
 			service.insert(sysAuthorization);
 
 			if (this.getRandomBoolean()) {
-				service.update(sysAuthorization);
+				SysAuthorization obj = service.get(sysAuthorization.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

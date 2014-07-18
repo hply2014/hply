@@ -19,7 +19,7 @@ public class FieldTypesService {
 	  
 	  public void update(FieldTypes fieldTypes){
           if(mapper.getVersion(fieldTypes.getId()) != fieldTypes.getVersion()){
-            throw new DataVersionConflictException("Updating t_field_types." + fieldTypes.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_field_types.id=" + fieldTypes.getId() );
           }
           
         mapper.update(fieldTypes);

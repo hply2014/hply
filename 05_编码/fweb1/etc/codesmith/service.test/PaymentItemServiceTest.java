@@ -41,7 +41,8 @@ public class PaymentItemServiceTest extends BaseJUnit4TestCase {
 			service.insert(paymentItem);
 
 			if (this.getRandomBoolean()) {
-				service.update(paymentItem);
+				PaymentItem obj = service.get(paymentItem.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

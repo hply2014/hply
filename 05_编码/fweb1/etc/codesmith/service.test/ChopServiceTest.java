@@ -74,7 +74,8 @@ public class ChopServiceTest extends BaseJUnit4TestCase {
 			service.insert(chop);
 
 			if (this.getRandomBoolean()) {
-				service.update(chop);
+				Chop obj = service.get(chop.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

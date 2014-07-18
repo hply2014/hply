@@ -38,7 +38,7 @@ public class <%=GetDomainClassName()%>Service {
 	  
 	  public void update(<%=GetDomainClassName()%> <%=GetDomainVariableName()%>){
           if(mapper.getVersion(<%=GetDomainVariableName()%>.getId()) != <%=GetDomainVariableName()%>.getVersion()){
-            throw new DataVersionConflictException("Updating <%=SourceTable.Name%>." + <%=GetDomainVariableName()%>.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， <%=SourceTable.Name%>.id=" + <%=GetDomainVariableName()%>.getId() );
           }
           
         mapper.update(<%=GetDomainVariableName()%>);

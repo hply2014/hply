@@ -48,7 +48,8 @@ public class SysResourceServiceTest extends BaseJUnit4TestCase {
 			service.insert(sysResource);
 
 			if (this.getRandomBoolean()) {
-				service.update(sysResource);
+				SysResource obj = service.get(sysResource.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

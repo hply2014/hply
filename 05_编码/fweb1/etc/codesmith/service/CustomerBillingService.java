@@ -19,7 +19,7 @@ public class CustomerBillingService {
 	  
 	  public void update(CustomerBilling customerBilling){
           if(mapper.getVersion(customerBilling.getId()) != customerBilling.getVersion()){
-            throw new DataVersionConflictException("Updating t_customer_billing." + customerBilling.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_customer_billing.id=" + customerBilling.getId() );
           }
           
         mapper.update(customerBilling);

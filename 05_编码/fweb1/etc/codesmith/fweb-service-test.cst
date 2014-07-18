@@ -53,7 +53,8 @@ public class <%=GetDomainClassName()%>ServiceTest extends BaseJUnit4TestCase {
 			service.insert(<%=GetDomainVariableName()%>);
 
 			if (this.getRandomBoolean()) {
-				service.update(<%=GetDomainVariableName()%>);
+				<%=GetDomainClassName()%> obj = service.get(<%=GetDomainVariableName()%>.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

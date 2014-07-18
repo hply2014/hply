@@ -19,7 +19,7 @@ public class SysOrganizationService {
 	  
 	  public void update(SysOrganization sysOrganization){
           if(mapper.getVersion(sysOrganization.getId()) != sysOrganization.getVersion()){
-            throw new DataVersionConflictException("Updating t_sys_organization." + sysOrganization.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_sys_organization.id=" + sysOrganization.getId() );
           }
           
         mapper.update(sysOrganization);

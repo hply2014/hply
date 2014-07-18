@@ -19,7 +19,7 @@ public class ArrearsService {
 	  
 	  public void update(Arrears arrears){
           if(mapper.getVersion(arrears.getId()) != arrears.getVersion()){
-            throw new DataVersionConflictException("Updating t_arrears." + arrears.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_arrears.id=" + arrears.getId() );
           }
           
         mapper.update(arrears);

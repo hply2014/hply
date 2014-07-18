@@ -19,7 +19,7 @@ public class SysResourceService {
 	  
 	  public void update(SysResource sysResource){
           if(mapper.getVersion(sysResource.getId()) != sysResource.getVersion()){
-            throw new DataVersionConflictException("Updating t_sys_resource." + sysResource.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_sys_resource.id=" + sysResource.getId() );
           }
           
         mapper.update(sysResource);

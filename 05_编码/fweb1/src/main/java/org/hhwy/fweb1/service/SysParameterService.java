@@ -19,7 +19,7 @@ public class SysParameterService {
 	  
 	  public void update(SysParameter sysParameter){
           if(mapper.getVersion(sysParameter.getId()) != sysParameter.getVersion()){
-            throw new DataVersionConflictException("Updating t_sys_parameter." + sysParameter.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_sys_parameter.id=" + sysParameter.getId() );
           }
           
         mapper.update(sysParameter);

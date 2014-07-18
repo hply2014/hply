@@ -60,7 +60,8 @@ public class SysUserServiceTest extends BaseJUnit4TestCase {
 			service.insert(sysUser);
 
 			if (this.getRandomBoolean()) {
-				service.update(sysUser);
+				SysUser obj = service.get(sysUser.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

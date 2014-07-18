@@ -57,7 +57,8 @@ public class PaymentServiceTest extends BaseJUnit4TestCase {
 			service.insert(payment);
 
 			if (this.getRandomBoolean()) {
-				service.update(payment);
+				Payment obj = service.get(payment.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

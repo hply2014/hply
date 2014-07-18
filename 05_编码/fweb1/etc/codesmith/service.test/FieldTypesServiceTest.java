@@ -45,7 +45,8 @@ public class FieldTypesServiceTest extends BaseJUnit4TestCase {
 			service.insert(fieldTypes);
 
 			if (this.getRandomBoolean()) {
-				service.update(fieldTypes);
+				FieldTypes obj = service.get(fieldTypes.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

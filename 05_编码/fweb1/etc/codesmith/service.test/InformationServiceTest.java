@@ -70,7 +70,8 @@ public class InformationServiceTest extends BaseJUnit4TestCase {
 			service.insert(information);
 
 			if (this.getRandomBoolean()) {
-				service.update(information);
+				Information obj = service.get(information.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

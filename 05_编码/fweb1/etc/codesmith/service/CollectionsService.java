@@ -19,7 +19,7 @@ public class CollectionsService {
 	  
 	  public void update(Collections collections){
           if(mapper.getVersion(collections.getId()) != collections.getVersion()){
-            throw new DataVersionConflictException("Updating t_collections." + collections.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_collections.id=" + collections.getId() );
           }
           
         mapper.update(collections);

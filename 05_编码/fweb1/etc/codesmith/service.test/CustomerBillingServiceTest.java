@@ -48,7 +48,8 @@ public class CustomerBillingServiceTest extends BaseJUnit4TestCase {
 			service.insert(customerBilling);
 
 			if (this.getRandomBoolean()) {
-				service.update(customerBilling);
+				CustomerBilling obj = service.get(customerBilling.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

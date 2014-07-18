@@ -57,7 +57,8 @@ public class CollectionsServiceTest extends BaseJUnit4TestCase {
 			service.insert(collections);
 
 			if (this.getRandomBoolean()) {
-				service.update(collections);
+				Collections obj = service.get(collections.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

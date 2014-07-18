@@ -61,7 +61,8 @@ public class ArrearsServiceTest extends BaseJUnit4TestCase {
 			service.insert(arrears);
 
 			if (this.getRandomBoolean()) {
-				service.update(arrears);
+				Arrears obj = service.get(arrears.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

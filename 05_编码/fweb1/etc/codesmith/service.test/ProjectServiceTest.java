@@ -82,7 +82,8 @@ public class ProjectServiceTest extends BaseJUnit4TestCase {
 			service.insert(project);
 
 			if (this.getRandomBoolean()) {
-				service.update(project);
+				Project obj = service.get(project.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

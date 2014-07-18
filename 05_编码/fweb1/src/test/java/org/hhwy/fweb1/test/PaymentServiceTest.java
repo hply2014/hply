@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.PaymentService;
 import org.hhwy.fweb1.domain.Payment;
 
 public class PaymentServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private PaymentService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,43 +21,34 @@ public class PaymentServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			Payment payment = new Payment();
 
-
-
 			payment.setProjectId(this.getRandomString());
-
 
 			payment.setTicketCode(this.getRandomString());
 
-
 			payment.setPayType(this.getRandomString());
-
 
 			payment.setPaymentItemId(this.getRandomString());
 
-            payment.setAmount(this.getRandomDouble()); 
-
+			payment.setAmount(this.getRandomDouble());
 
 			payment.setBankAccount(this.getRandomString());
 
+			payment.setBankName(this.getRandomString());
+			payment.setTrice(this.getRandomDate());
+			payment.setCreateTime(this.getRandomDate());
 
-			payment.setBankName(this.getRandomString());        
-            payment.setTrice(this.getRandomDate());         
-            payment.setCreateTime(this.getRandomDate()); 
-
-
-			payment.setCreateUser(this.getRandomString());        
-            payment.setUpdateTime(this.getRandomDate()); 
-
+			payment.setCreateUser(this.getRandomString());
+			payment.setUpdateTime(this.getRandomDate());
 
 			payment.setUpdateUser(this.getRandomString());
-
 
 			payment.setDescription(this.getRandomString());
 
 			service.insert(payment);
 
 			if (this.getRandomBoolean()) {
-				service.update(payment);
+				Payment obj = service.get(payment.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -70,8 +61,8 @@ public class PaymentServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<Payment> list = service.getAll();
 		for (Payment obj : list) {
@@ -83,4 +74,3 @@ public class PaymentServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

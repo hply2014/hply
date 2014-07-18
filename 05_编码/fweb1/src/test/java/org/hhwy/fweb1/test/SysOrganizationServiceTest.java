@@ -8,10 +8,10 @@ import org.hhwy.fweb1.service.SysOrganizationService;
 import org.hhwy.fweb1.domain.SysOrganization;
 
 public class SysOrganizationServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private SysOrganizationService service;
-    
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,18 +21,16 @@ public class SysOrganizationServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			SysOrganization sysOrganization = new SysOrganization();
 
-
-
-			sysOrganization.setOrganizationName(this.getRandomString());        
-            sysOrganization.setCreateTime(this.getRandomDate()); 
-
+			sysOrganization.setOrganizationName(this.getRandomString());
+			sysOrganization.setCreateTime(this.getRandomDate());
 
 			sysOrganization.setDescription(this.getRandomString());
 
 			service.insert(sysOrganization);
 
 			if (this.getRandomBoolean()) {
-				service.update(sysOrganization);
+				SysOrganization obj = service.get(sysOrganization.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}
@@ -45,8 +43,8 @@ public class SysOrganizationServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
+				+ ", 删除：" + deleteCount + "\n");
 
 		List<SysOrganization> list = service.getAll();
 		for (SysOrganization obj : list) {
@@ -58,4 +56,3 @@ public class SysOrganizationServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-

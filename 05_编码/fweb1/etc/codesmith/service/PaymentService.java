@@ -19,7 +19,7 @@ public class PaymentService {
 	  
 	  public void update(Payment payment){
           if(mapper.getVersion(payment.getId()) != payment.getVersion()){
-            throw new DataVersionConflictException("Updating t_payment." + payment.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_payment.id=" + payment.getId() );
           }
           
         mapper.update(payment);

@@ -19,7 +19,7 @@ public class ContractChangeService {
 	  
 	  public void update(ContractChange contractChange){
           if(mapper.getVersion(contractChange.getId()) != contractChange.getVersion()){
-            throw new DataVersionConflictException("Updating t_contract_change." + contractChange.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_contract_change.id=" + contractChange.getId() );
           }
           
         mapper.update(contractChange);

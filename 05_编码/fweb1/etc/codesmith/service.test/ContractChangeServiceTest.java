@@ -47,7 +47,8 @@ public class ContractChangeServiceTest extends BaseJUnit4TestCase {
 			service.insert(contractChange);
 
 			if (this.getRandomBoolean()) {
-				service.update(contractChange);
+				ContractChange obj = service.get(contractChange.getId());
+				service.update(obj);
 				updateCount++;
 				continue;
 			}

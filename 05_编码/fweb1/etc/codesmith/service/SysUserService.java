@@ -19,7 +19,7 @@ public class SysUserService {
 	  
 	  public void update(SysUser sysUser){
           if(mapper.getVersion(sysUser.getId()) != sysUser.getVersion()){
-            throw new DataVersionConflictException("Updating t_sys_user." + sysUser.getId() );
+            throw new DataVersionConflictException("Data conflict has occurred， t_sys_user.id=" + sysUser.getId() );
           }
           
         mapper.update(sysUser);
