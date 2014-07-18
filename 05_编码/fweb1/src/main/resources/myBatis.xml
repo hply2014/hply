@@ -7,7 +7,7 @@
 	</settings>
 	<!-- 别名 -->
 	<typeAliases>
-		<package name="org.hhwy.rdc.fweb1.domain" />
+		<package name="org.hhwy.fweb1.domain" />
 	</typeAliases>
 
 </configuration>

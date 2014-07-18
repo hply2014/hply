@@ -15,14 +15,14 @@ CreateTime：2014年7月17日 13:43:50
 
 <%@ Template Language="C#" TargetLanguage="Java" %>
 <%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Database" Description="只能选择一个表." %>
-<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.rdc.fweb1" %>
+<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.fweb1" %>
 <%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
 package <%=NameSpace%>.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import <%=NameSpace%>.DataVersionConflictException;
+import <%=NameSpace%>.exception.DataVersionConflictException;
 import <%=NameSpace%>.domain.<%=GetDomainClassName()%>;
 import <%=NameSpace%>.mapper.<%=GetDomainClassName()%>Mapper;
 

@@ -38,12 +38,10 @@
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="org.hhwy.rdc.fweb1.mapper" />
+		<property name="basePackage" value="org.hhwy.fweb1.mapper" />
 	</bean>
 
-	<context:component-scan base-package="org.hhwy.rdc.fweb1.controller" />
-	<context:component-scan base-package="org.hhwy.rdc.fweb1.service" />
-	<context:component-scan base-package="org.hhwy.rdc.fweb1.mapper" />
+	<context:component-scan base-package="org.hhwy.fweb1" />
 
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<mvc:annotation-driven />

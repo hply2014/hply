@@ -5,7 +5,7 @@
   </variables>
   <propertySets>
     <propertySet name="fweb-mapper-xml-all.txt" output="fweb-mapper-xml-all.txt" template="C:\Users\cqiyi\git\hply\05_编码\fweb1\etc\codesmith\fweb-mapper-xml-all.cst">
-      <property name="NameSpace">org.hhwy.rdc.fweb1</property>
+      <property name="NameSpace">org.hhwy.fweb1</property>
       <property name="Author">cqiyi</property>
       <property name="OutputDirectory">.\mapper.xml</property>
       <property name="SourceTables">

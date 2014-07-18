@@ -15,7 +15,7 @@ CreateTime：2014年7月17日 13:34:46
 
 <%@ Template Language="C#" TargetLanguage="Java" %>
 <%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Database" Description="只能选择一个表." %>
-<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.rdc.fweb1" %>
+<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.fweb1" %>
 <%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
 /**
   * @ <%=Author%> create in <%=System.DateTime.Now%> by Template

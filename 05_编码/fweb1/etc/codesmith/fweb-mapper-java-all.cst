@@ -14,7 +14,7 @@ Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID F
 
 <%@ Template Language="C#" TargetLanguage="Text" %>
 <%@ Property Name="SourceTables" Optional="True" Type="SchemaExplorer.TableSchemaCollection" Category="Database" Description="可以选择多张表." %>
-<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.rdc.fweb1" %>
+<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.fweb1" %>
 <%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
 <%@ Property Name="OutputDirectory" Type="System.String" Category="Context" Default=".\mapper.java" %>
 
