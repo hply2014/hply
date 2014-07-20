@@ -19,7 +19,11 @@ import org.apache.commons.lang3.StringUtils;
   */
 public class SysResource implements Serializable {
         
-  private String id;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 515788990141545171L;
+private String id;
   
 /**
   * 读，数据库列： ID  

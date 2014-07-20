@@ -66,10 +66,10 @@ public class SysResourceService {
 		List<SysResource> listR = this.getChildren(root.getId());
 		List<TreeNode> listT = new ArrayList<TreeNode>();
 		root.setChildren(listT);
-		
+
 		for (SysResource r : listR) {
 			TreeNode node = new TreeNode();
-			
+
 			node.setId(r.getId());
 			node.setTitle(r.getResname());
 			node.setKey(r.getId());

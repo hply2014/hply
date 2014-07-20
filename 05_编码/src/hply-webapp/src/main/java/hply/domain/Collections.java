@@ -5,10 +5,12 @@
 
 package hply.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.text.MessageFormat;
 import hply.common.Utils;
+
+import java.io.Serializable;
+import java.text.MessageFormat;
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -18,7 +20,11 @@ import org.apache.commons.lang3.StringUtils;
   */
 public class Collections implements Serializable {
         
-  private String id;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8875581608856253219L;
+private String id;
   
 /**
   * 读，数据库列： ID  

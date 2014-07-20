@@ -26,6 +26,10 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
  */
 public class NewTable implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -702629591541487272L;
 	@NotNull
 	private String id;
 
