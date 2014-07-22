@@ -2,11 +2,13 @@
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.hhwy.fweb1.Utility;
 import org.hhwy.fweb1.domain.FieldTypes;
 import org.hhwy.fweb1.service.FieldTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,15 +33,17 @@ public class FieldTypesRestAPIController {
 	}
 
 	@RequestMapping(value = "/fieldtypes/{id}", method = RequestMethod.PUT)
-	public @ResponseBody String put(@PathVariable FieldTypes fieldTypes) {
+	public @ResponseBody String put(FieldTypes fieldTypes) {
 		service.insert(fieldTypes);
 		return "OK";
 	}
     
-	@RequestMapping(value = "/fieldtypes/{id}", method = RequestMethod.POST)
-	public @ResponseBody String post(@PathVariable FieldTypes fieldTypes) {
-		service.update(fieldTypes);
-		return "OK";
+	@RequestMapping(value="/fieldtypes", method = RequestMethod.POST)
+	public @ResponseBody String post(FieldTypes fieldTypes) {
+		Utility.println("正在插入...");
+		Utility.println(fieldTypes.toString());
+		service.insert(fieldTypes);
+		return "插入成功了的数据";
 	}
 
 	@RequestMapping(value = "/fieldtypes/{id}", method = RequestMethod.DELETE)

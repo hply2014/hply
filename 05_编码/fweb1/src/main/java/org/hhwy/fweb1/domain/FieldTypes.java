@@ -27,9 +27,10 @@ public class FieldTypes implements Serializable {
 	public FieldTypes() {
 		this.version = -1;
 		this.id = Utility.getRandomUUID();
+		Utility.println("创建了一个新对象：" + this.getId());
 
 		// 设定日期为空时的初始值
-		this.fieldT06 = new Date(0);
+//		this.fieldT06 = new Date(0);
 	}
 
 	/**
