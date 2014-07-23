@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>新建测试</title>
+<title>修改测试</title>
 <%@ include file="header.jsp" %>
-	<h1>新建测试</h1>
+	<h1>修改测试</h1>
 	<sf:form modelAttribute="fieldTypes">
 		<table>
 			<tr>
@@ -47,6 +47,7 @@
 				<td><sf:input path="fieldT09" /><sf:errors path="fieldT09" cssClass="error"/></td>
 			</tr>
 		</table>
+		<sf:hidden path="version"/>
 		<input type="submit" value="submit all" />
 	<div><a href='<s:url value="/fieldtypes" />'>返回</a></div>
 	</sf:form>

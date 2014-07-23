@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +32,7 @@ public class FieldTypes implements Serializable {
 		Utility.println("创建了一个新对象：" + this.getId());
 
 		// 设定日期为空时的初始值
-//		this.fieldT06 = new Date(0);
+		// this.fieldT06 = new Date(0);
 	}
 
 	/**
@@ -96,6 +98,8 @@ public class FieldTypes implements Serializable {
 	 * 
 	 */
 
+	@Min(0)
+	@Max(8)
 	private int fieldT08;
 
 	/**
@@ -286,6 +290,7 @@ public class FieldTypes implements Serializable {
 	 * 
 	 */
 	public void setVersion(int version) {
+		Utility.println("Setting version=" + version);
 		this.version = version;
 	}
 
