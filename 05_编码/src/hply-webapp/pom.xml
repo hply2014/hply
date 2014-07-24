@@ -9,7 +9,8 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<org.springframework.version>3.2.9.RELEASE</org.springframework.version>
+		<org.springframework.version>3.2.10.RELEASE</org.springframework.version>
+		<org.springframework.security-version>3.2.4.RELEASE</org.springframework.security-version>
 	</properties>
 
 	<dependencies>
@@ -53,6 +54,12 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-servlet-api</artifactId>
 			<version>7.0.54</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.el</groupId>
+			<artifactId>jboss-el-api_3.0_spec</artifactId>
+			<version>1.0.0.Final</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -109,18 +116,25 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.1.1.Final</version>
 		</dependency>
+
+		<!-- Security (used for CSRF protection only) -->
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.0-rc2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.0-rc2</version>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework.security-version}</version>
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>hply-webapp</finalName>
+		<finalName>fweb1</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

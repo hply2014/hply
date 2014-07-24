@@ -29,7 +29,7 @@ public class SystemController {
 		return "index";
 	}
 
-	@RequestMapping(value = "")
+
 	public String defaultPage() {
 		System.out.println("defaultPage ...");
 		return welcomePage();
@@ -39,21 +39,6 @@ public class SystemController {
 	public String treePage() {
 		System.out.println("treePage ...");
 		return "sample-fancytree";
-	}
-
-	@RequestMapping(value = "projectadd")
-	public String projectPage() {
-		System.out.println("projectPage ...");
-		return "project-add";
-	}
-
-	@RequestMapping(value = "project/save")
-	public String projectSavePage(@ModelAttribute("form") Project project,
-			Model model, BindingResult result) {
-		System.out.println("projectSavePage ...");
-		System.out.println("project code=" + project.getProjectcode());
-		System.out.println("project name=" + project.getProjectname());
-		return "project-add";
 	}
 
 }
