@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.ProjectService;
-import org.hhwy.fweb1.domain.Project;
+import hply.service.ProjectService;
+import hply.domain.Project;
 
 public class ProjectServiceTest extends BaseJUnit4TestCase {
 	

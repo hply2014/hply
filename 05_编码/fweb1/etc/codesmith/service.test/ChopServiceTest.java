@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.ChopService;
-import org.hhwy.fweb1.domain.Chop;
+import hply.service.ChopService;
+import hply.domain.Chop;
 
 public class ChopServiceTest extends BaseJUnit4TestCase {
 	

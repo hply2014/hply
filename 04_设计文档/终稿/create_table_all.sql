@@ -308,8 +308,8 @@ CREATE TABLE `t_sys_parameter` (
 
 CREATE TABLE `t_sys_resource` (
   `id` char(36) NOT NULL COMMENT 'ID',
-  `rescode` varchar(50) DEFAULT NULL COMMENT '资源编码',
-  `resname` varchar(200) DEFAULT NULL COMMENT '图标路径',
+  `res_code` varchar(50) DEFAULT NULL COMMENT '资源编码',
+  `res_name` varchar(200) DEFAULT NULL COMMENT '图标路径',
   `icon` varchar(100) DEFAULT NULL COMMENT '资源名称',
   `res_url` varchar(200) DEFAULT NULL COMMENT 'URL地址',
   `res_type` varchar(50) DEFAULT NULL COMMENT '资源类型',

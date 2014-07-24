@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.SysParameterService;
-import org.hhwy.fweb1.domain.SysParameter;
+import hply.service.SysParameterService;
+import hply.domain.SysParameter;
 
 public class SysParameterServiceTest extends BaseJUnit4TestCase {
 	

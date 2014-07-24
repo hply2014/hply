@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.CustomerBillingService;
-import org.hhwy.fweb1.domain.CustomerBilling;
+import hply.service.CustomerBillingService;
+import hply.domain.CustomerBilling;
 
 public class CustomerBillingServiceTest extends BaseJUnit4TestCase {
 	

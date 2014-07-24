@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.CollectionsService;
-import org.hhwy.fweb1.domain.Collections;
+import hply.service.CollectionsService;
+import hply.domain.Collections;
 
 public class CollectionsServiceTest extends BaseJUnit4TestCase {
 	

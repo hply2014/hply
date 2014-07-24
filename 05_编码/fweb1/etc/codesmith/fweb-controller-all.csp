@@ -4,7 +4,7 @@
     <add key="ConnectionString1" value="User Id=root;Host=localhost;Database=hplydb;password=qqwQQW" />
   </variables>
   <propertySets>
-    <propertySet name="fweb-controller-all.txt" output="fweb-controller-all.txt" template="C:\Users\cqiyi\git\hply\05_编码\fweb1\etc\codesmith\fweb-controller-all.cst">
+    <propertySet name="fweb-controller-all.txt" output="fweb-controller-all.txt" template="fweb-controller-all.cst">
       <property name="SourceTables">
         <connectionString>$(ConnectionString1)</connectionString>
         <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
@@ -83,7 +83,7 @@
       </table>
     </tableList>
       </property>
-      <property name="NameSpace">org.hhwy.fweb1</property>
+      <property name="NameSpace">hply</property>
       <property name="Author">cqiyi</property>
       <property name="OutputDirectory">.\controller</property>
     </propertySet>

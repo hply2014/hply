@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.SysResourceService;
-import org.hhwy.fweb1.domain.SysResource;
+import hply.service.SysResourceService;
+import hply.domain.SysResource;
 
 public class SysResourceServiceTest extends BaseJUnit4TestCase {
 	

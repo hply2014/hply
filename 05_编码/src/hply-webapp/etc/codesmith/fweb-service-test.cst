@@ -1,0 +1,104 @@
+﻿<%-- 
+Name:
+Author: 成七一
+Description:Service Class GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID FRAMEWORK）
+CreateTime：2014年7月17日 13:43:50
+--%>
+
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Assembly Name="System" %>
+<%@ Import Namespace="System" %>
+<%@ Map Name="JavaAlias" Src="mysql-java-alias" %>
+
+<%@ Template Language="C#" TargetLanguage="Java" %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Database" Description="只能选择一个表." %>
+<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.fweb1" %>
+<%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
+package <%=NameSpace%>.test;
+
+import java.util.List;
+import org.hhwy.fweb1.BaseJUnit4TestCase;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import <%=NameSpace%>.service.<%=GetDomainClassName()%>Service;
+import <%=NameSpace%>.domain.<%=GetDomainClassName()%>;
+
+public class <%=GetDomainClassName()%>ServiceTest extends BaseJUnit4TestCase {
+
+	@Autowired
+	private <%=GetDomainClassName()%>Service service;
+    
+	@Test
+	public void allServiceTest() {
+		int objectCount = this.getRandomInt();
+		int deleteCount = 0;
+		int updateCount = 0;
+
+		for (int i = 0; i < objectCount; i++) {
+			<%=GetDomainClassName()%> <%=GetDomainVariableName()%> = new <%=GetDomainClassName()%>();
+            <%foreach(ColumnSchema col in SourceTable.Columns){%>   
+        <%if(col.Name.ToUpper() == "ID" || col.Name.ToUpper() == "VERSION" ) {  continue; }%>
+        <%if(GetJavaType(col) == "Date") { %> 
+        
+            <%=GetDomainVariableName()%>.set<%=StringUtil.ToPascalCase(col.Name)%>(this.getRandomDate()); <% continue; }%>
+        <%if(GetJavaType(col) == "int") { %> 
+            <%=GetDomainVariableName()%>.set<%=StringUtil.ToPascalCase(col.Name)%>(this.getRandomInt()); <% continue; }%>
+        <%if(GetJavaType(col) == "double") { %> 
+            <%=GetDomainVariableName()%>.set<%=StringUtil.ToPascalCase(col.Name)%>(this.getRandomDouble()); <% continue; }%>
+			<%=GetDomainVariableName()%>.set<%=StringUtil.ToPascalCase(col.Name)%>(this.getRandomString());<%}%>
+
+			service.insert(<%=GetDomainVariableName()%>);
+
+			if (this.getRandomBoolean()) {
+				<%=GetDomainClassName()%> obj = service.get(<%=GetDomainVariableName()%>.getId());
+				service.update(obj);
+				updateCount++;
+				continue;
+			}
+
+			if (this.getRandomBoolean() && i > 0) {
+				System.out.println("将被删除：" + <%=GetDomainVariableName()%>.getId());
+				service.delete(<%=GetDomainVariableName()%>.getId());
+				deleteCount++;
+				continue;
+			}
+		}
+
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
+				+ deleteCount + "\n");
+
+		List<<%=GetDomainClassName()%>> list = service.getAll();
+		for (<%=GetDomainClassName()%> obj : list) {
+			System.out.println(obj);
+		}
+
+		service.delete(list.get(0).getId());
+
+	}
+
+}
+
+<script runat="template">
+    public override string GetFileName() {
+        return GetDomainClassName() + "Test.java";
+    }
+    
+    public string GetDomainClassName() {
+        return StringUtil.ToPascalCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetDomainVariableName() {
+        return StringUtil.ToCamelCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetJavaType(ColumnSchema col) {
+        try{
+            return JavaAlias[col.NativeType];
+        }catch(Exception ex){
+            return col.NativeType + "[N/A]";
+        }
+    }
+</script>

@@ -1,11 +1,6 @@
 package hply.web;
 
-import hply.domain.Project;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -40,20 +35,4 @@ public class SystemController {
 		System.out.println("treePage ...");
 		return "sample-fancytree";
 	}
-
-	@RequestMapping(value = "projectadd")
-	public String projectPage() {
-		System.out.println("projectPage ...");
-		return "project-add";
-	}
-
-	@RequestMapping(value = "project/save")
-	public String projectSavePage(@ModelAttribute("form") Project project,
-			Model model, BindingResult result) {
-		System.out.println("projectSavePage ...");
-		System.out.println("project code=" + project.getProjectcode());
-		System.out.println("project name=" + project.getProjectname());
-		return "project-add";
-	}
-
 }

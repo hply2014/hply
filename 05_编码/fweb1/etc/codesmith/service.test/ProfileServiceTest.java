@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.ProfileService;
-import org.hhwy.fweb1.domain.Profile;
+import hply.service.ProfileService;
+import hply.domain.Profile;
 
 public class ProfileServiceTest extends BaseJUnit4TestCase {
 	

@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.FieldTypesService;
-import org.hhwy.fweb1.domain.FieldTypes;
+import hply.service.FieldTypesService;
+import hply.domain.FieldTypes;
 
 public class FieldTypesServiceTest extends BaseJUnit4TestCase {
 	

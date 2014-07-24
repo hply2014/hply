@@ -4,8 +4,8 @@
     <add key="ConnectionString1" value="User Id=root;Host=localhost;Database=hplydb;password=qqwQQW" />
   </variables>
   <propertySets>
-    <propertySet name="fweb-domain-all.txt" output="fweb-domain-all.txt" template="C:\Users\cqiyi\git\hply\05_编码\fweb1\etc\codesmith\fweb-domain-all.cst">
-      <property name="NameSpace">org.hhwy.fweb1</property>
+    <propertySet name="fweb-domain-all.txt" output="fweb-domain-all.txt" template="fweb-domain-all.cst">
+      <property name="NameSpace">hply</property>
       <property name="Author">cqiyi</property>
       <property name="OutputDirectory">.\domain</property>
       <property name="SourceTables">

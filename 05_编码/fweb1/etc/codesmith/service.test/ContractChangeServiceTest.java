@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.ContractChangeService;
-import org.hhwy.fweb1.domain.ContractChange;
+import hply.service.ContractChangeService;
+import hply.domain.ContractChange;
 
 public class ContractChangeServiceTest extends BaseJUnit4TestCase {
 	

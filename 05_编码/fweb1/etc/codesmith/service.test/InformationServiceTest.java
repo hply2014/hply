@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.InformationService;
-import org.hhwy.fweb1.domain.Information;
+import hply.service.InformationService;
+import hply.domain.Information;
 
 public class InformationServiceTest extends BaseJUnit4TestCase {
 	

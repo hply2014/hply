@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.test;
+﻿package hply.test;
 
 import java.util.List;
 import org.hhwy.fweb1.BaseJUnit4TestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.hhwy.fweb1.service.ArrearsService;
-import org.hhwy.fweb1.domain.Arrears;
+import hply.service.ArrearsService;
+import hply.domain.Arrears;
 
 public class ArrearsServiceTest extends BaseJUnit4TestCase {
 	
@@ -24,6 +24,9 @@ public class ArrearsServiceTest extends BaseJUnit4TestCase {
 
 
 			arrears.setProjectId(this.getRandomString());
+
+
+			arrears.setFundsUsing(this.getRandomString());
 
 
 			arrears.setArrearsType(this.getRandomString());
@@ -54,9 +57,6 @@ public class ArrearsServiceTest extends BaseJUnit4TestCase {
 
 
 			arrears.setDescription(this.getRandomString());
-
-
-			arrears.setFundsUsing(this.getRandomString());
 
 			service.insert(arrears);
 

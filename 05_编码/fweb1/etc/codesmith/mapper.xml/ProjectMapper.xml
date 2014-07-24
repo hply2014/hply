@@ -2,80 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.hhwy.fweb1.mapper.ProjectMapper">
+<mapper namespace="hply.mapper.ProjectMapper">
 
-	<insert id="insert" parameterType="Project">
-		insert into t_project(id, project_code, project_name, organization_id,
-		party_name, party_address, manager, contract_code, cooperation,
-		legal_assignee, is_withholding_offsite, management_rate, tax_rate,
-		contract_amount, settlement_amount, duty_paid_time, duty_paid_amount,
-		duty_paid_code, capital_occupied, project_status, trice, create_time,
-		create_user, update_time, update_user, description) values ( #{id},
-		#{projectCode}, #{projectName}, #{organizationId}, #{partyName},
-		#{partyAddress}, #{manager}, #{contractCode}, #{cooperation},
-		#{legalAssignee}, #{isWithholdingOffsite}, #{managementRate},
-		#{taxRate}, #{contractAmount}, #{settlementAmount}, #{dutyPaidTime},
-		#{dutyPaidAmount}, #{dutyPaidCode}, #{capitalOccupied},
-		#{projectStatus}, #{trice}, #{createTime}, #{createUser},
-		#{updateTime}, #{updateUser}, #{description} )
-	</insert>
+  <insert id="insert" parameterType="Project">
+    insert into t_project(id, project_code, project_name, organization_id, party_name, party_address, manager, contract_code, cooperation, legal_assignee, is_withholding_offsite, management_rate, tax_rate, contract_amount, settlement_amount, duty_paid_time, duty_paid_amount, duty_paid_code, capital_occupied, project_status, trice, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectCode}, #{projectName}, #{organizationId}, #{partyName}, #{partyAddress}, #{manager}, #{contractCode}, #{cooperation}, #{legalAssignee}, #{isWithholdingOffsite}, #{managementRate}, #{taxRate}, #{contractAmount}, #{settlementAmount}, #{dutyPaidTime}, #{dutyPaidAmount}, #{dutyPaidCode}, #{capitalOccupied}, #{projectStatus}, #{trice}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser}, #{description} )
+  </insert>
 
-	<update id="update" parameterType="map">
-		update t_project set project_code = #{projectCode}, project_name =
-		#{projectName}, organization_id = #{organizationId}, party_name =
-		#{partyName}, party_address = #{partyAddress}, manager = #{manager},
-		contract_code = #{contractCode}, cooperation = #{cooperation},
-		legal_assignee = #{legalAssignee}, is_withholding_offsite =
-		#{isWithholdingOffsite}, management_rate = #{managementRate}, tax_rate
-		= #{taxRate}, contract_amount = #{contractAmount}, settlement_amount =
-		#{settlementAmount}, duty_paid_time = #{dutyPaidTime},
-		duty_paid_amount = #{dutyPaidAmount}, duty_paid_code =
-		#{dutyPaidCode}, capital_occupied = #{capitalOccupied}, project_status
-		= #{projectStatus}, trice = #{trice}, create_time = #{createTime},
-		create_user = #{createUser}, update_time = #{updateTime}, update_user
-		= #{updateUser}, description = #{description}, version = version + 1
-		where id = #{id}
-	</update>
+  <update id="update" parameterType="map">
+    update t_project set project_code = #{projectCode}, project_name = #{projectName}, organization_id = #{organizationId}, party_name = #{partyName}, party_address = #{partyAddress}, manager = #{manager}, contract_code = #{contractCode}, cooperation = #{cooperation}, legal_assignee = #{legalAssignee}, is_withholding_offsite = #{isWithholdingOffsite}, management_rate = #{managementRate}, tax_rate = #{taxRate}, contract_amount = #{contractAmount}, settlement_amount = #{settlementAmount}, duty_paid_time = #{dutyPaidTime}, duty_paid_amount = #{dutyPaidAmount}, duty_paid_code = #{dutyPaidCode}, capital_occupied = #{capitalOccupied}, project_status = #{projectStatus}, trice = #{trice}, create_time = #{createTime}, create_user = #{createUser}, update_time = #{updateTime}, update_user = #{updateUser}, description = #{description},  version = version + 1 where id = #{id}
+  </update>
 
-	<delete id="delete" parameterType="string">
-		delete from t_project where id = #{id}
-	</delete>
+  <delete id="delete" parameterType="string">
+    delete from t_project where id = #{id}
+  </delete>
 
-	<select id="get" parameterType="string" resultType="Project">
-		select id as Id, project_code as ProjectCode, project_name as ProjectName,
-		organization_id as OrganizationId, party_name as PartyName,
-		party_address as PartyAddress, manager as Manager, contract_code as
-		ContractCode, cooperation as Cooperation, legal_assignee as
-		LegalAssignee, is_withholding_offsite as IsWithholdingOffsite,
-		management_rate as ManagementRate, tax_rate as TaxRate,
-		contract_amount as ContractAmount, settlement_amount as
-		SettlementAmount, duty_paid_time as DutyPaidTime, duty_paid_amount as
-		DutyPaidAmount, duty_paid_code as DutyPaidCode, capital_occupied as
-		CapitalOccupied, project_status as ProjectStatus, trice as Trice,
-		create_time as CreateTime, create_user as CreateUser, update_time as
-		UpdateTime, update_user as UpdateUser, description as Description,
-		version as Version from t_project where id = #{id}
-	</select>
+  <select id="get" parameterType="string" resultType="Project">
+    select id as Id, project_code as ProjectCode, project_name as ProjectName, organization_id as OrganizationId, party_name as PartyName, party_address as PartyAddress, manager as Manager, contract_code as ContractCode, cooperation as Cooperation, legal_assignee as LegalAssignee, is_withholding_offsite as IsWithholdingOffsite, management_rate as ManagementRate, tax_rate as TaxRate, contract_amount as ContractAmount, settlement_amount as SettlementAmount, duty_paid_time as DutyPaidTime, duty_paid_amount as DutyPaidAmount, duty_paid_code as DutyPaidCode, capital_occupied as CapitalOccupied, project_status as ProjectStatus, trice as Trice, create_time as CreateTime, create_user as CreateUser, update_time as UpdateTime, update_user as UpdateUser, description as Description, version as Version from t_project where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_project where id = #{id}
+  </select>
 
-	<select id="getVersion" parameterType="string" resultType="int">
-		select version from t_project where id = #{id}
-	</select>
-
-	<select id="getAll" resultType="Project">
-		select id as Id, project_code as ProjectCode, project_name as ProjectName,
-		organization_id as OrganizationId, party_name as PartyName,
-		party_address as PartyAddress, manager as Manager, contract_code as
-		ContractCode, cooperation as Cooperation, legal_assignee as
-		LegalAssignee, is_withholding_offsite as IsWithholdingOffsite,
-		management_rate as ManagementRate, tax_rate as TaxRate,
-		contract_amount as ContractAmount, settlement_amount as
-		SettlementAmount, duty_paid_time as DutyPaidTime, duty_paid_amount as
-		DutyPaidAmount, duty_paid_code as DutyPaidCode, capital_occupied as
-		CapitalOccupied, project_status as ProjectStatus, trice as Trice,
-		create_time as CreateTime, create_user as CreateUser, update_time as
-		UpdateTime, update_user as UpdateUser, description as Description,
-		version as Version from t_project
-	</select>
+  <select id="getAll" resultType="Project">
+    select id as Id, project_code as ProjectCode, project_name as ProjectName, organization_id as OrganizationId, party_name as PartyName, party_address as PartyAddress, manager as Manager, contract_code as ContractCode, cooperation as Cooperation, legal_assignee as LegalAssignee, is_withholding_offsite as IsWithholdingOffsite, management_rate as ManagementRate, tax_rate as TaxRate, contract_amount as ContractAmount, settlement_amount as SettlementAmount, duty_paid_time as DutyPaidTime, duty_paid_amount as DutyPaidAmount, duty_paid_code as DutyPaidCode, capital_occupied as CapitalOccupied, project_status as ProjectStatus, trice as Trice, create_time as CreateTime, create_user as CreateUser, update_time as UpdateTime, update_user as UpdateUser, description as Description, version as Version from t_project
+  </select>
 
 </mapper>
 

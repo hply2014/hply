@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.mapper.SysAuthorizationMapper">
+
+  <insert id="insert" parameterType="SysAuthorization">
+    insert into t_sys_authorization(id, resource_id, user_id, create_time, create_user) values ( #{id}, #{resourceId}, #{userId}, #{createTime}, #{createUser} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_authorization set resource_id = #{resourceId}, user_id = #{userId}, create_time = #{createTime}, create_user = #{createUser},  version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_authorization where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysAuthorization">
+    select id as id, resource_id as resourceId, user_id as userId, create_time as createTime, create_user as createUser, version as version from t_sys_authorization where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_authorization where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysAuthorization">
+    select id as id, resource_id as resourceId, user_id as userId, create_time as createTime, create_user as createUser, version as version from t_sys_authorization
+  </select>
+
+</mapper>
+

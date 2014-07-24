@@ -2,108 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.hhwy.fweb1.mapper.ProjectSummaryMapper">
+<mapper namespace="hply.mapper.ProjectSummaryMapper">
 
-	<insert id="insert" parameterType="ProjectSummary">
-		insert into t_project_summary(id, trice, description, project_id,
-		organization_id, project_code, project_name, contract_amount,
-		change_amount, settlement_amount, management_rate,
-		management_plan_amount, management_real_amount,
-		management_total_amount, management_owe_amount, party_billing_amount,
-		party_billing_total_amount, collections_amount,
-		collections_total_amount, collections_rate, customer_billing_amount,
-		customer_billing_total_amount, payment_amount, payment_total_amount,
-		tax_rate, tax_plan_amount, tax_real_amount, tax_total_amount,
-		tax_owe_amount, arrears_amount, expected_value, profile_point) values
-		( #{id}, #{trice}, #{description}, #{projectId}, #{organizationId},
-		#{projectCode}, #{projectName}, #{contractAmount}, #{changeAmount},
-		#{settlementAmount}, #{managementRate}, #{managementPlanAmount},
-		#{managementRealAmount}, #{managementTotalAmount},
-		#{managementOweAmount}, #{partyBillingAmount},
-		#{partyBillingTotalAmount}, #{collectionsAmount},
-		#{collectionsTotalAmount}, #{collectionsRate},
-		#{customerBillingAmount}, #{customerBillingTotalAmount},
-		#{paymentAmount}, #{paymentTotalAmount}, #{taxRate}, #{taxPlanAmount},
-		#{taxRealAmount}, #{taxTotalAmount}, #{taxOweAmount},
-		#{arrearsAmount}, #{expectedValue}, #{profilePoint} )
-	</insert>
+  <insert id="insert" parameterType="ProjectSummary">
+    insert into t_project_summary(id, trice, description, project_id, organization_id, project_code, project_name, contract_amount, change_amount, settlement_amount, management_rate, management_plan_amount, management_real_amount, management_total_amount, management_owe_amount, party_billing_amount, party_billing_total_amount, collections_amount, collections_total_amount, collections_rate, customer_billing_amount, customer_billing_total_amount, payment_amount, payment_total_amount, tax_rate, tax_plan_amount, tax_real_amount, tax_total_amount, tax_owe_amount, arrears_amount, expected_value, profile_point) values ( #{id}, #{trice}, #{description}, #{projectId}, #{organizationId}, #{projectCode}, #{projectName}, #{contractAmount}, #{changeAmount}, #{settlementAmount}, #{managementRate}, #{managementPlanAmount}, #{managementRealAmount}, #{managementTotalAmount}, #{managementOweAmount}, #{partyBillingAmount}, #{partyBillingTotalAmount}, #{collectionsAmount}, #{collectionsTotalAmount}, #{collectionsRate}, #{customerBillingAmount}, #{customerBillingTotalAmount}, #{paymentAmount}, #{paymentTotalAmount}, #{taxRate}, #{taxPlanAmount}, #{taxRealAmount}, #{taxTotalAmount}, #{taxOweAmount}, #{arrearsAmount}, #{expectedValue}, #{profilePoint} )
+  </insert>
 
-	<update id="update" parameterType="map">
-		update t_project_summary set trice = #{trice}, description = #{description},
-		project_id = #{projectId}, organization_id = #{organizationId},
-		project_code = #{projectCode}, project_name = #{projectName},
-		contract_amount = #{contractAmount}, change_amount = #{changeAmount},
-		settlement_amount = #{settlementAmount}, management_rate =
-		#{managementRate}, management_plan_amount = #{managementPlanAmount},
-		management_real_amount = #{managementRealAmount},
-		management_total_amount = #{managementTotalAmount},
-		management_owe_amount = #{managementOweAmount}, party_billing_amount =
-		#{partyBillingAmount}, party_billing_total_amount =
-		#{partyBillingTotalAmount}, collections_amount = #{collectionsAmount},
-		collections_total_amount = #{collectionsTotalAmount}, collections_rate
-		= #{collectionsRate}, customer_billing_amount =
-		#{customerBillingAmount}, customer_billing_total_amount =
-		#{customerBillingTotalAmount}, payment_amount = #{paymentAmount},
-		payment_total_amount = #{paymentTotalAmount}, tax_rate = #{taxRate},
-		tax_plan_amount = #{taxPlanAmount}, tax_real_amount =
-		#{taxRealAmount}, tax_total_amount = #{taxTotalAmount}, tax_owe_amount
-		= #{taxOweAmount}, arrears_amount = #{arrearsAmount}, expected_value =
-		#{expectedValue}, profile_point = #{profilePoint}, version = version +
-		1 where id = #{id}
-	</update>
+  <update id="update" parameterType="map">
+    update t_project_summary set trice = #{trice}, description = #{description}, project_id = #{projectId}, organization_id = #{organizationId}, project_code = #{projectCode}, project_name = #{projectName}, contract_amount = #{contractAmount}, change_amount = #{changeAmount}, settlement_amount = #{settlementAmount}, management_rate = #{managementRate}, management_plan_amount = #{managementPlanAmount}, management_real_amount = #{managementRealAmount}, management_total_amount = #{managementTotalAmount}, management_owe_amount = #{managementOweAmount}, party_billing_amount = #{partyBillingAmount}, party_billing_total_amount = #{partyBillingTotalAmount}, collections_amount = #{collectionsAmount}, collections_total_amount = #{collectionsTotalAmount}, collections_rate = #{collectionsRate}, customer_billing_amount = #{customerBillingAmount}, customer_billing_total_amount = #{customerBillingTotalAmount}, payment_amount = #{paymentAmount}, payment_total_amount = #{paymentTotalAmount}, tax_rate = #{taxRate}, tax_plan_amount = #{taxPlanAmount}, tax_real_amount = #{taxRealAmount}, tax_total_amount = #{taxTotalAmount}, tax_owe_amount = #{taxOweAmount}, arrears_amount = #{arrearsAmount}, expected_value = #{expectedValue}, profile_point = #{profilePoint},  version = version + 1 where id = #{id}
+  </update>
 
-	<delete id="delete" parameterType="string">
-		delete from t_project_summary where id = #{id}
-	</delete>
+  <delete id="delete" parameterType="string">
+    delete from t_project_summary where id = #{id}
+  </delete>
 
-	<select id="get" parameterType="string" resultType="ProjectSummary">
-		select id as Id, trice as Trice, description as Description, project_id as
-		ProjectId, organization_id as OrganizationId, project_code as
-		ProjectCode, project_name as ProjectName, contract_amount as
-		ContractAmount, change_amount as ChangeAmount, settlement_amount as
-		SettlementAmount, management_rate as ManagementRate,
-		management_plan_amount as ManagementPlanAmount, management_real_amount
-		as ManagementRealAmount, management_total_amount as
-		ManagementTotalAmount, management_owe_amount as ManagementOweAmount,
-		party_billing_amount as PartyBillingAmount, party_billing_total_amount
-		as PartyBillingTotalAmount, collections_amount as CollectionsAmount,
-		collections_total_amount as CollectionsTotalAmount, collections_rate
-		as CollectionsRate, customer_billing_amount as CustomerBillingAmount,
-		customer_billing_total_amount as CustomerBillingTotalAmount,
-		payment_amount as PaymentAmount, payment_total_amount as
-		PaymentTotalAmount, tax_rate as TaxRate, tax_plan_amount as
-		TaxPlanAmount, tax_real_amount as TaxRealAmount, tax_total_amount as
-		TaxTotalAmount, tax_owe_amount as TaxOweAmount, arrears_amount as
-		ArrearsAmount, expected_value as ExpectedValue, profile_point as
-		ProfilePoint, version as Version from t_project_summary where id =
-		#{id}
-	</select>
+  <select id="get" parameterType="string" resultType="ProjectSummary">
+    select id as Id, trice as Trice, description as Description, project_id as ProjectId, organization_id as OrganizationId, project_code as ProjectCode, project_name as ProjectName, contract_amount as ContractAmount, change_amount as ChangeAmount, settlement_amount as SettlementAmount, management_rate as ManagementRate, management_plan_amount as ManagementPlanAmount, management_real_amount as ManagementRealAmount, management_total_amount as ManagementTotalAmount, management_owe_amount as ManagementOweAmount, party_billing_amount as PartyBillingAmount, party_billing_total_amount as PartyBillingTotalAmount, collections_amount as CollectionsAmount, collections_total_amount as CollectionsTotalAmount, collections_rate as CollectionsRate, customer_billing_amount as CustomerBillingAmount, customer_billing_total_amount as CustomerBillingTotalAmount, payment_amount as PaymentAmount, payment_total_amount as PaymentTotalAmount, tax_rate as TaxRate, tax_plan_amount as TaxPlanAmount, tax_real_amount as TaxRealAmount, tax_total_amount as TaxTotalAmount, tax_owe_amount as TaxOweAmount, arrears_amount as ArrearsAmount, expected_value as ExpectedValue, profile_point as ProfilePoint, version as Version from t_project_summary where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_project_summary where id = #{id}
+  </select>
 
-	<select id="getVersion" parameterType="string" resultType="int">
-		select version from t_project_summary where id = #{id}
-	</select>
-
-	<select id="getAll" resultType="ProjectSummary">
-		select id as Id, trice as Trice, description as Description, project_id as
-		ProjectId, organization_id as OrganizationId, project_code as
-		ProjectCode, project_name as ProjectName, contract_amount as
-		ContractAmount, change_amount as ChangeAmount, settlement_amount as
-		SettlementAmount, management_rate as ManagementRate,
-		management_plan_amount as ManagementPlanAmount, management_real_amount
-		as ManagementRealAmount, management_total_amount as
-		ManagementTotalAmount, management_owe_amount as ManagementOweAmount,
-		party_billing_amount as PartyBillingAmount, party_billing_total_amount
-		as PartyBillingTotalAmount, collections_amount as CollectionsAmount,
-		collections_total_amount as CollectionsTotalAmount, collections_rate
-		as CollectionsRate, customer_billing_amount as CustomerBillingAmount,
-		customer_billing_total_amount as CustomerBillingTotalAmount,
-		payment_amount as PaymentAmount, payment_total_amount as
-		PaymentTotalAmount, tax_rate as TaxRate, tax_plan_amount as
-		TaxPlanAmount, tax_real_amount as TaxRealAmount, tax_total_amount as
-		TaxTotalAmount, tax_owe_amount as TaxOweAmount, arrears_amount as
-		ArrearsAmount, expected_value as ExpectedValue, profile_point as
-		ProfilePoint, version as Version from t_project_summary
-	</select>
+  <select id="getAll" resultType="ProjectSummary">
+    select id as Id, trice as Trice, description as Description, project_id as ProjectId, organization_id as OrganizationId, project_code as ProjectCode, project_name as ProjectName, contract_amount as ContractAmount, change_amount as ChangeAmount, settlement_amount as SettlementAmount, management_rate as ManagementRate, management_plan_amount as ManagementPlanAmount, management_real_amount as ManagementRealAmount, management_total_amount as ManagementTotalAmount, management_owe_amount as ManagementOweAmount, party_billing_amount as PartyBillingAmount, party_billing_total_amount as PartyBillingTotalAmount, collections_amount as CollectionsAmount, collections_total_amount as CollectionsTotalAmount, collections_rate as CollectionsRate, customer_billing_amount as CustomerBillingAmount, customer_billing_total_amount as CustomerBillingTotalAmount, payment_amount as PaymentAmount, payment_total_amount as PaymentTotalAmount, tax_rate as TaxRate, tax_plan_amount as TaxPlanAmount, tax_real_amount as TaxRealAmount, tax_total_amount as TaxTotalAmount, tax_owe_amount as TaxOweAmount, arrears_amount as ArrearsAmount, expected_value as ExpectedValue, profile_point as ProfilePoint, version as Version from t_project_summary
+  </select>
 
 </mapper>
 

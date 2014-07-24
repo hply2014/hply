@@ -1,11 +1,11 @@
-﻿package org.hhwy.fweb1.service;
+﻿package hply.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.hhwy.fweb1.exception.DataVersionConflictException;
-import org.hhwy.fweb1.domain.Chop;
-import org.hhwy.fweb1.mapper.ChopMapper;
+import hply.exception.DataVersionConflictException;
+import hply.domain.Chop;
+import hply.mapper.ChopMapper;
 
 @Service
 public class ChopService {

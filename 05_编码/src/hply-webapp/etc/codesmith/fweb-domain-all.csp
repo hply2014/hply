@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="User Id=root;Host=localhost;Database=test;password=qqwQQW" />
+  </variables>
+  <propertySets>
+    <propertySet name="fweb-domain-all.txt" output="fweb-domain-all.txt" template="D:\eclipse\workspace\fweb\fweb1\etc\codesmith\fweb-domain-all.cst">
+      <property name="NameSpace">org.hhwy.rdc.fweb1</property>
+      <property name="Author">cqiyi</property>
+      <property name="OutputDirectory">.\domain</property>
+      <property name="SourceTables">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <tableList>
+      <table>
+        <owner />
+        <name>new_table</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_field_types</name>
+      </table>
+    </tableList>
+      </property>
+    </propertySet>
+  </propertySets>
+</codeSmith>
