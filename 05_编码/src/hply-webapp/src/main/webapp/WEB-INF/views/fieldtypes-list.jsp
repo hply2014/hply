@@ -15,17 +15,17 @@ page
 	<div></div>
 <div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <strong>提示：</strong> <a href="<s:url value="/fieldtypes/detail/${fieldTypes.id }" />"> ${fieldTypes.fieldT01 }</a>，${message}
+  <strong><a href="<s:url value="/fieldtypes/detail/${fieldTypes.id }" />"> ${fieldTypes.fieldT01 }</a></strong> ，${message}
 </div>
 </c:if>
 <c:if test="${not empty delMessage}">
 <div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <strong>提示：</strong> ${fieldTypes.fieldT01 }，${delMessage}
+  <strong>${fieldTypes.fieldT01 }</strong> ，${delMessage}
 </div>
 </c:if>
 <div class="panel panel-default">
-  <div class="panel-heading">列表页面</div>
+  <div class="panel-heading"><strong>${page_title}</strong></div>
   <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
   <div class="btn-group">
@@ -70,7 +70,7 @@ page
 				<td><c:out value="${fieldTypes.fieldT09}" /></td>
 				<td><a
 					href="<s:url value="/fieldtypes/modify/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>">修改</a>
-					| <a
+					| <a class="delete" data-confirm-message="删除后不可恢复，您确认要删除“<c:out value="${fieldTypes.fieldT01}" />”么？"
 					href="<s:url value="/fieldtypes/delete/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>">删除</a></td>
 			</tr>
 		</c:forEach>

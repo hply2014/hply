@@ -11,7 +11,7 @@ page
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%><%@ include file="header.jsp"%>
 <div class="panel panel-default">
-  <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span>详情页面</div>
+  <div class="panel-heading"><strong>${page_title}</strong></div>
   <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
   <div class="btn-group">
@@ -21,7 +21,7 @@ page
   <a href="<s:url value="/fieldtypes/modify/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 修 改  </a>
 </div>
   <div class="btn-group">
-  <a href="<s:url value="/fieldtypes/delete/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span> 删 除  </a>
+  <a data-confirm-message="删除后不可恢复，您确认要删除“<c:out value="${fieldTypes.fieldT01}" />”么？" href="<s:url value="/fieldtypes/delete/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>" class="btn btn-info delete"><span class="glyphicon glyphicon-trash"></span> 删 除  </a>
 </div>
 </div>
 
@@ -36,7 +36,7 @@ page
 	<div class="form-group">
 		<sf:label path="fieldT02" cssClass="col-sm-2 control-label">fieldT02</sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${fieldTypes.fieldT02 }" /></p>
+			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" groupingUsed="true" value="${fieldTypes.fieldT02 }" /></p>
 		</div>
 	</div>
 	<div class="form-group">
@@ -73,13 +73,13 @@ page
 	<div class="form-group">
 		<sf:label path="fieldT08" cssClass="col-sm-2 control-label">fieldT08</sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${fieldTypes.fieldT08 }" /></p>
+			<p class="form-control-static"><fmt:formatNumber type="number" pattern="#0.00" groupingUsed="true" value="${fieldTypes.fieldT08 }" /></p>
 		</div>
 	</div>
 	<div class="form-group">
 		<sf:label path="fieldT09" cssClass="col-sm-2 control-label">fieldT09</sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${fieldTypes.fieldT09 }" /></p>
+			<p class="form-control-static"><fmt:formatNumber type="number" pattern="#0.00" groupingUsed="true" value="${fieldTypes.fieldT09 }" /></p>
 		</div>
 	</div>	
 </sf:form>

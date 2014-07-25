@@ -33,6 +33,7 @@ public class FieldTypesController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
+		model.addAttribute("page_title", "数据列表");
 		model.addAttribute("list", service.getAll());
 		return JSP_PAGE_LIST;
 	}
@@ -42,7 +43,7 @@ public class FieldTypesController {
 	 */
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
-		Utility.println("detail ...");
+		model.addAttribute("page_title", "详情数据");
 		model.addAttribute("fieldTypes", service.get(id));
 		return JSP_PAGE_DETAIL;
 	}
@@ -52,6 +53,7 @@ public class FieldTypesController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String formCreate(Model model) {
+		model.addAttribute("page_title", "新建数据");
 		model.addAttribute("fieldTypes", new FieldTypes());
 		return JSP_PAGE_CREATE;
 	}
@@ -77,6 +79,7 @@ public class FieldTypesController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String formModify(@PathVariable String id, Model model) {
+		model.addAttribute("page_title", "修改数据");
 		model.addAttribute("fieldTypes", service.get(id));
 		return JSP_PAGE_MODIFY;
 	}

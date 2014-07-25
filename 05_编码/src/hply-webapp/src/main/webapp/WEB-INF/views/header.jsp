@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>项目信息 - 工程项目核算系统</title>
+<title>${page_title} - 工程项目核算系统</title>
     <!-- Bootstrap -->
     <link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
     <style type="text/css">  

@@ -5,7 +5,7 @@
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%><%@ include file="header.jsp"%>
 <div class="panel panel-default">
-  <div class="panel-heading">新建测试</div>
+  <div class="panel-heading"><strong>${page_title}</strong></div>
   <div class="panel-body">
 <sf:form modelAttribute="fieldTypes" cssClass="form-horizontal"
 	role="form">
