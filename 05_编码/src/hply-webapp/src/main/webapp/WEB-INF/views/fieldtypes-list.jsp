@@ -9,25 +9,31 @@ taglib
 	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
 page
 	language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%><!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>列表页面</title>
+	pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%>
 <c:if test="${not empty message}">
-	<div><a href="<s:url value="/fieldtypes/detail/${fieldTypes.id }" />"> ${fieldTypes.fieldT01 }</a>，${message}</div>
+	<div></div>
+<div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong>提示：</strong> <a href="<s:url value="/fieldtypes/detail/${fieldTypes.id }" />"> ${fieldTypes.fieldT01 }</a>，${message}
+</div>
 </c:if>
 <c:if test="${not empty delMessage}">
-	<div>${fieldTypes.fieldT01 }，${delMessage}</div>
-</c:if>
-<h1>列表页面</h1>
-<div>
-	<a href="<c:url value="/fieldtypes/create" />">新建</a>
+<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong>提示：</strong> ${fieldTypes.fieldT01 }，${delMessage}
 </div>
-<table border="1" width="100%">
+</c:if>
+<div class="panel panel-default">
+  <div class="panel-heading">列表页面</div>
+  <div class="panel-body">
+<div class="btn-toolbar" role="toolbar">
+  <div class="btn-group">
+  <a href="<c:url value="/fieldtypes/create" />" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> 新 建 </a>
+</div>
+</div>
+
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th>#</th>
@@ -70,4 +76,6 @@ page
 		</c:forEach>
 	</tbody>
 </table>
+  </div>
+</div>
 <%@ include file="bottom.jsp"%>

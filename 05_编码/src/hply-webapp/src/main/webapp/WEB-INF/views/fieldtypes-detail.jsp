@@ -9,58 +9,80 @@ taglib
 	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
 page
 	language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%><!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>详情页面</title>
-<%@ include file="header.jsp"%>
-<h1>详情页面</h1>
-<div>
-	<a href="<s:url value="/fieldtypes" />">返回</a> | <a
-		href="<s:url value="/fieldtypes/modify/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>">修改</a>
-	| <a
-		href="<s:url value="/fieldtypes/delete/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>">删除</a>
+	pageEncoding="utf-8"%><%@ include file="header.jsp"%>
+<div class="panel panel-default">
+  <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span>详情页面</div>
+  <div class="panel-body">
+<div class="btn-toolbar" role="toolbar">
+  <div class="btn-group">
+  <a href="<s:url value="/fieldtypes" />" class="btn btn-info"><span class="glyphicon glyphicon-share-alt"></span> 返 回  </a>
 </div>
-<table>
-	<tr>
-		<td>fieldt01</td>
-		<td><c:out value="${fieldTypes.fieldT01 }" /></td>
-	</tr>
-	<tr>
-		<td>fieldt02</td>
-		<td><c:out value="${fieldTypes.fieldT02 }" /></td>
-	</tr>
-	<tr>
-		<td>fieldt03</td>
-		<td><c:out value="${fieldTypes.fieldT03 }" /></td>
-	</tr>
-	<tr>
-		<td>fieldt04</td>
-		<td><c:out value="${fieldTypes.fieldT04 }" /></td>
-	</tr>
-	<tr>
-		<td>fieldt05</td>
-		<td><c:out value="${fieldTypes.fieldT05 }" /></td>
-	</tr>
-	<tr>
-		<td>fieldT06</td>
-		<td><fmt:formatDate value="${fieldTypes.fieldT06}"
-				pattern="yyyy-MM-dd HH:mm:ss" /></td>
-	</tr>
-	<tr>
-		<td>fieldT07</td>
-		<td><c:out value="${fieldTypes.fieldT07 }" /></td>
-	</tr>
-	<tr>
-		<td>fieldT08</td>
-		<td><c:out value="${fieldTypes.fieldT08 }" /></td>
-	</tr>
-	<tr>
-		<td>fieldT09</td>
-		<td><c:out value="${fieldTypes.fieldT09 }" /></td>
-	</tr>
-</table>
+  <div class="btn-group">
+  <a href="<s:url value="/fieldtypes/modify/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 修 改  </a>
+</div>
+  <div class="btn-group">
+  <a href="<s:url value="/fieldtypes/delete/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span> 删 除  </a>
+</div>
+</div>
+
+<sf:form modelAttribute="fieldTypes" cssClass="form-horizontal"
+	role="form">
+	<div class="form-group">
+		<sf:label path="fieldT01" cssClass="col-sm-2 control-label">fieldT01</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${fieldTypes.fieldT01 }" /></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<sf:label path="fieldT02" cssClass="col-sm-2 control-label">fieldT02</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${fieldTypes.fieldT02 }" /></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<sf:label path="fieldT03" cssClass="col-sm-2 control-label">fieldT03</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${fieldTypes.fieldT03 }" /></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<sf:label path="fieldT04" cssClass="col-sm-2 control-label">fieldT04</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${fieldTypes.fieldT04 }" /></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<sf:label path="fieldT05" cssClass="col-sm-2 control-label">fieldT05</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${fieldTypes.fieldT05 }" /></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<sf:label path="fieldT06" cssClass="col-sm-2 control-label">fieldT06</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><fmt:formatDate value="${fieldTypes.fieldT06}"
+				pattern="yyyy-MM-dd HH:mm:ss" /></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<sf:label path="fieldT07" cssClass="col-sm-2 control-label">fieldT07</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${fieldTypes.fieldT07 }" /></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<sf:label path="fieldT08" cssClass="col-sm-2 control-label">fieldT08</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${fieldTypes.fieldT08 }" /></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<sf:label path="fieldT09" cssClass="col-sm-2 control-label">fieldT09</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${fieldTypes.fieldT09 }" /></p>
+		</div>
+	</div>	
+</sf:form>
+  </div>
+</div>
 <%@ include file="bottom.jsp"%>
