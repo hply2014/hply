@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="User Id=root;Host=localhost;Database=hplydb;password=qqwQQW" />
+  </variables>
+  <propertySets>
+    <propertySet name="fweb-service-all.txt" output="fweb-service-all.txt" template="fweb-service-all.cst">
+      <property name="NameSpace">hply</property>
+      <property name="Author">cqiyi</property>
+      <property name="OutputDirectory">.\service</property>
+      <property name="SourceTables">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <tableList>
+      <table>
+        <owner />
+        <name>t_arrears</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_chop</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_collections</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_contract_change</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_customer_billing</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_field_types</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_information</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_party_billing</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_payment</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_payment_item</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_profile</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_project</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_project_summary</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_authorization</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_organization</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_parameter</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_resource</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_user</name>
+      </table>
+    </tableList>
+      </property>
+    </propertySet>
+  </propertySets>
+</codeSmith>

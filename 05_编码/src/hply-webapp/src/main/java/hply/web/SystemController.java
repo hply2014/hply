@@ -23,12 +23,6 @@ public class SystemController {
 		return "index";
 	}
 
-	@RequestMapping(value = "")
-	public String defaultPage() {
-		System.out.println("defaultPage ...");
-		return welcomePage();
-	}
-
 	@RequestMapping(value = "tree")
 	public String treePage() {
 		System.out.println("treePage ...");

@@ -1,0 +1,137 @@
+﻿<%-- 
+Name:
+Author: 成七一
+Description:Service Class GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID FRAMEWORK）
+CreateTime：2014年7月17日 13:43:50
+--%>
+
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Assembly Name="System" %>
+<%@ Import Namespace="System" %>
+<%@ Map Name="JavaAlias" Src="mysql-java-alias" %>
+
+<%@ Template Language="C#" TargetLanguage="HTML" %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Database" Description="只能选择一个表." %>
+<%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
+<<%=P()%>@ page isELIgnored="false"<%=P()%>><<%=P()%>@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"<%=P()%>><<%=P()%>@ 
+taglib
+	uri="http://www.springframework.org/tags" prefix="s"<%=P()%>><<%=P()%>@ 
+taglib
+	uri="http://www.springframework.org/tags/form" prefix="sf"<%=P()%>><<%=P()%>@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"<%=P()%>><<%=P()%>@ 
+page
+	language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"<%=P()%>>
+<<%=P()%>@ include file="header.jsp"<%=P()%>>
+<c:if test="${not empty message}">
+	<div></div>
+<div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong><a href="<s:url value="/<%=GetDomainUri()%>/detail/${<%=GetDomainVariableName()%>.id }" />"> ${<%=GetDomainVariableName()%>.id }</a></strong> ，${message}
+</div>
+</c:if>
+<c:if test="${not empty delMessage}">
+<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong>${<%=GetDomainVariableName()%>.id }</strong> ，${delMessage}
+</div>
+</c:if>
+<div class="panel panel-default">
+  <div class="panel-heading"><strong>${page_title}</strong>（<c:out value="${list.size()}" />条数据）</div>
+  <div class="panel-body">
+<div class="btn-toolbar" role="toolbar">
+  <div class="btn-group">
+  <a href="<c:url value="/<%=GetDomainUri()%>/create" />" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> 新 建 </a>
+</div>
+</div>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>#</th>
+            <%
+	foreach(ColumnSchema col in SourceTable.Columns)
+	{
+        if(Ignored(col)) continue;
+	%>    
+			<th><%=col.Description%></th>
+    <%}%>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<<%=P()%>
+			int i = 0;
+		<%=P()%>>
+		<c:forEach items="${list}" var="<%=GetDomainVariableName()%>">
+			<tr>
+				<td><<%=P()%>=++i<%=P()%>></td>
+            <% int i = 0;
+	foreach(ColumnSchema col in SourceTable.Columns)
+	{
+        if(Ignored(col)) continue; if(i++ == 0 ){
+	%>  
+				<td><a
+					href="<s:url value="/<%=GetDomainUri()%>/detail/{id}"><s:param name="id" value="${<%=GetDomainVariableName()%>.id }" /></s:url>"><c:out
+							value="${<%=GetDomainVariableName()%>.<%=StringUtil.ToCamelCase(col.Name)%>}" /></a></td>  <% continue; } 
+                            if(GetJavaType(col) == "Date")  { %>
+				<td><fmt:formatDate value="${<%=GetDomainVariableName()%>.<%=StringUtil.ToCamelCase(col.Name)%>}"
+						pattern="yyyy-MM-dd" /></td>  <%continue; }%>
+				<td><c:out value="${<%=GetDomainVariableName()%>.<%=StringUtil.ToCamelCase(col.Name)%>}" /></td><%}%>
+				<td><a
+					href="<s:url value="/<%=GetDomainUri()%>/modify/{id}"><s:param name="id" value="${<%=GetDomainVariableName()%>.id }" /></s:url>">修改</a>
+					| <a class="delete" data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${<%=GetDomainVariableName()%>.id}" />】么？"
+					href="<s:url value="/<%=GetDomainUri()%>/delete/{id}"><s:param name="id" value="${<%=GetDomainVariableName()%>.id }" /></s:url>">删除</a></td>
+			</tr>
+		</c:forEach>
+	</tbody>
+</table>
+  </div>
+</div>
+<<%=P()%>@ include file="bottom.jsp"<%=P()%>>
+<script runat="template">
+    public string P(){
+        return "%";
+    }
+    
+    public bool Ignored(ColumnSchema col){
+        string ignored = "/version/id/create_user/create_time/update_user/update_time/";
+        string cn = "/" + col.Name.ToLower() + "/";
+        return ignored.IndexOf(cn) >= 0;
+    }
+    
+    public override string GetFileName() {
+        return GetDomainUri() + "-list.jsp";
+    }
+    
+    public string GetDescription(){
+        string[] dlist = SourceTable.Description.Split('_');
+        return dlist[dlist.Length - 1];
+    }
+    
+    public string GetDomainClassName() {
+        return StringUtil.ToPascalCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetDomainVariableName() {
+        return StringUtil.ToCamelCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetDomainUri() {
+        return StringUtil.ToPascalCase(SourceTable.Name.TrimStart("t_".ToCharArray())).ToLower();
+    }
+    
+    public string GetJavaType(ColumnSchema col) {
+        try{
+            return JavaAlias[col.NativeType];
+        }catch(Exception ex){
+            return col.NativeType + "[N/A]";
+        }
+    }
+</script>

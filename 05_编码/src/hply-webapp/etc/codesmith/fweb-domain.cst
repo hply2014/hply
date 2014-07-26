@@ -57,8 +57,6 @@ public class <%=GetClassName()%> implements Serializable {
       * [<%=col.Name %>]，
       * <%= col.Description %>
       */
-      
-      <%if(!col.AllowDBNull) {%>@NotNull<%} %>
       <%if(GetJavaType(col) == "Date") {%>@DateTimeFormat(iso=ISO.DATE)<%} %>
       private <%=JavaAlias[col.NativeType]%> <%=StringUtil.ToCamelCase(col.Name)%>;
       
