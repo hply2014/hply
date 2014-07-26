@@ -23,21 +23,27 @@
     <script src="<s:url value="/assets/jquery.min.js" />"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
-    <<script type="text/javascript">
-<!--
-$(document).ready(function(){
-	$(".delete").click(function(){
-		$("#myModalContent").html($(this).attr("data-confirm-message"));
-		$('#myModal').data("href", $(this).attr("href")).modal("show");
-		return false;
-	});
-	
-	$("#myModal .btn-danger").click(function(){
-		$('#myModal').modal("hide");
-		self.location.replace($("#myModal").data("href"));
-	});
-})
-//-->
+    <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
+    <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" />" charset="UTF-8"></script>
+    <script type="text/javascript">
+		$(function() {
+			$(".delete").click(function(){
+				$("#myModalContent").html($(this).attr("data-confirm-message"));
+				$('#myModal').data("href", $(this).attr("href")).modal("show");
+				return false;
+			});
+			
+			$("#myModal .btn-danger").click(function(){
+				$('#myModal').modal("hide");
+				self.location.replace($("#myModal").data("href"));
+			});
+		
+		    $(".input-group.date").datepicker({
+		        language: "zh-CN",
+		        autoclose: true,
+		        todayHighlight: true
+		    });
+		});
 </script>
   </body>
 </html>

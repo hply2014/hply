@@ -8,6 +8,7 @@
 <title>${page_title} - 工程项目核算系统</title>
     <!-- Bootstrap -->
     <link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
+    <link href="<s:url value="/assets/bootstrap-datepicker/css/datepicker3.css" />" rel="stylesheet">
     <style type="text/css">  
 		body{
 			padding-top:50px;

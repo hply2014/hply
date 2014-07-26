@@ -25,7 +25,7 @@ page
 </div>
 </c:if>
 <div class="panel panel-default">
-  <div class="panel-heading"><strong>${page_title}</strong></div>
+  <div class="panel-heading"><strong>${page_title}</strong>（<c:out value="${list.size()}" />条数据）</div>
   <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
   <div class="btn-group">

@@ -6,6 +6,7 @@ import hply.service.FieldTypesService;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,51 +53,57 @@ public class FieldTypesController {
 	 * 新建页面
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String formCreate(Model model) {
-		model.addAttribute("page_title", "新建数据");
+	public String createForm(Model model) {
 		model.addAttribute("fieldTypes", new FieldTypes());
-		return JSP_PAGE_CREATE;
-	}
-
-	/*
-	 * 新建页面的提交动作
-	 */
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid FieldTypes fieldTypes,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
-		if (result.hasErrors()) {
-			return JSP_PAGE_CREATE;
-		}
-		Utility.println(fieldTypes.toString());
-		service.insert(fieldTypes);
-		redirectAttrs.addFlashAttribute("message", "创建成功");
-		redirectAttrs.addFlashAttribute("fieldTypes", fieldTypes);
-		return "redirect:" + URI;
+		model.addAttribute("page_title", "插入数据");
+		return JSP_PAGE_MODIFY;
 	}
 
 	/*
 	 * 修改页面
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
-	public String formModify(@PathVariable String id, Model model) {
-		model.addAttribute("page_title", "修改数据");
+	public String updateForm(@PathVariable String id, Model model) {
 		model.addAttribute("fieldTypes", service.get(id));
+		model.addAttribute("page_title", "修改数据");
 		return JSP_PAGE_MODIFY;
 	}
 
 	/*
-	 * 修改页面的提交动作
+	 * 处理新建页面的提交动作
 	 */
-	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processModifySubmit(@PathVariable String id,
-			@Valid FieldTypes fieldTypes, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public String processCreateSubmit(@Valid FieldTypes fieldTypes,
+			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+		Utility.println(fieldTypes.toString());
+		
 		if (result.hasErrors()) {
 			return JSP_PAGE_MODIFY;
 		}
+
+		service.insert(fieldTypes);
+		redirectAttrs.addFlashAttribute("message", "插入成功");
+
+		redirectAttrs.addFlashAttribute("fieldTypes", fieldTypes);
+		return "redirect:" + URI;
+	}
+
+	/*
+	 * 处理修改页面的提交动作
+	 */
+	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
+	public String processUpdateSubmit(@PathVariable String id,
+			@Valid FieldTypes fieldTypes, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(fieldTypes.toString());
+		
+		if (result.hasErrors()) {
+			return JSP_PAGE_MODIFY;
+		}
+
 		service.update(fieldTypes);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
+
 		redirectAttrs.addFlashAttribute("fieldTypes", fieldTypes);
 		return "redirect:" + URI;
 	}
