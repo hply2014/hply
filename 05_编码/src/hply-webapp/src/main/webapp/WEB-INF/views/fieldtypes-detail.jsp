@@ -21,7 +21,7 @@ page
   <a href="<s:url value="/fieldtypes/modify/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 修 改  </a>
 </div>
   <div class="btn-group">
-  <a data-confirm-message="删除后不可恢复，您确认要删除“<c:out value="${fieldTypes.fieldT01}" />”么？" href="<s:url value="/fieldtypes/delete/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>" class="btn btn-info delete"><span class="glyphicon glyphicon-trash"></span> 删 除  </a>
+  <a data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${fieldTypes.fieldT01}" />】么？" href="<s:url value="/fieldtypes/delete/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>" class="btn btn-info delete"><span class="glyphicon glyphicon-trash"></span> 删 除  </a>
 </div>
 </div>
 

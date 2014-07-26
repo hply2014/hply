@@ -1,5 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%><!DOCTYPE html>
+<%@ page isELIgnored="false"%><%@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ 
+taglib
+	uri="http://www.springframework.org/tags" prefix="s"%><%@ 
+taglib
+	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
+page
+	language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%><!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
@@ -68,7 +78,7 @@
     <script src="assets/js/bootstrap.min.js"></script>
 	<script>
 		function login(){
-			self.location = "index.html";
+			self.location = "<s:url value="/" />";
 		}
 	</script>
   </body>

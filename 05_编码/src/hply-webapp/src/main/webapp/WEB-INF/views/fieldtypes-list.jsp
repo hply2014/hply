@@ -70,7 +70,7 @@ page
 				<td><c:out value="${fieldTypes.fieldT09}" /></td>
 				<td><a
 					href="<s:url value="/fieldtypes/modify/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>">修改</a>
-					| <a class="delete" data-confirm-message="删除后不可恢复，您确认要删除“<c:out value="${fieldTypes.fieldT01}" />”么？"
+					| <a class="delete" data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${fieldTypes.fieldT01}" />】么？"
 					href="<s:url value="/fieldtypes/delete/{id}"><s:param name="id" value="${fieldTypes.id }" /></s:url>">删除</a></td>
 			</tr>
 		</c:forEach>

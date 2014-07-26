@@ -18,7 +18,6 @@ public class SystemController {
 		return "logout";
 	}
 
-	@RequestMapping(value = "index.html")
 	public String welcomePage() {
 		System.out.println("welcomePage ...");
 		return "index";

@@ -26,7 +26,6 @@ public class FieldTypesController {
 	public static final String URI = "/fieldtypes";
 	public static final String JSP_PAGE_LIST = "fieldtypes-list";
 	public static final String JSP_PAGE_DETAIL = "fieldtypes-detail";
-	public static final String JSP_PAGE_CREATE = "fieldtypes-create";
 	public static final String JSP_PAGE_MODIFY = "fieldtypes-modify";
 
 	/*
