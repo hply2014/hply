@@ -1,66 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%><!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>修改密码 - 工程项目核算系统</title>
-
-    <!-- Bootstrap -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">  
-
-    </style>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="assets/html5shiv.js"></script>
-      <script src="assets/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body> 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand hidden-sm">工程项目核算系统</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#">工程核算</a></li>
-            <li><a href="#">盖章管理</a></li>
-            <li><a href="#">信息平台</a></li>
-            <li><a href="#">系统管理</a></li>
-          </ul>
-		  
-		  <div class="navbar-form pull-right">
-			<div class="btn-group">
-			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-				成七一　<span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu pull-right" role="menu">
-				<li><a href="#">锁定</a></li>
-				<li><a href="change-password.html"><i class="icon-tags"></i> 修改密码</a></li>
-				<li class="divider"></li> 	
-				<li><a href="#">问题反馈</a></li>
-				<li><a href="#">关于</a></li>
-				<li class="divider"></li>
-				<li><a href="logout.html"><i class=" icon-off">
-					</i>注销</a></li>
-			  </ul>
+<%@ page isELIgnored="false"%><%@ taglib
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ taglib
+	uri="http://www.springframework.org/tags" prefix="s"%><%@ taglib
+	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ page
+	language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%><%@ include file="header.jsp"%>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>${page_title}</strong>
+	</div>
+	<div class="panel-body">
+		<sf:form modelAttribute="chop" cssClass="form-horizontal" role="form">
+			<div class="form-group">
+				<sf:label path="chopCode" cssClass="col-sm-2 control-label">编号</sf:label>
+				<div class="col-sm-10">
+					<sf:input cssClass="form-control" path="chopCode"
+						placeholder="请输入文字..." />
+					<sf:errors path="chopCode" cssClass="error" />
+				</div>
 			</div>
-		  </div>	<!-- pull-righ -->			
-        </div>
-      </div>
-    </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="assets/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  </body>
-</html>
+		</sf:form>
+	</div>
+</div>
+
+<%@ include file="bottom.jsp"%>

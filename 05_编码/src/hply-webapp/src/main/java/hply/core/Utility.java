@@ -71,15 +71,13 @@ public class Utility {
 		if (StringUtils.isEmpty(str)) {
 			return Utility.EMPTY;
 		}
-		Date date = DateUtils.parseDate(str, new String[] {
-				"yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss" });
+		Date date = DateUtils.parseDate(str, new String[] { "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss" });
 
 		return getSmartTimeFormat(date);
 	}
 
 	public static String getSmartSize(String size) {
-		return StringUtils.isEmpty(size) ? EMPTY : getSmartSize(Double
-				.parseDouble(size));
+		return StringUtils.isEmpty(size) ? EMPTY : getSmartSize(Double.parseDouble(size));
 	}
 
 	public static String getSmartSize(double size) {
@@ -109,8 +107,7 @@ public class Utility {
 	public static String getFileContent(String fileName) {
 		File file = new File(fileName);
 		if (!file.exists()) {
-			throw new IllegalArgumentException("企图读取不存在的文件内容，fileName="
-					+ fileName);
+			throw new IllegalArgumentException("企图读取不存在的文件内容，fileName=" + fileName);
 		}
 		BufferedReader reader = null;
 		StringBuffer content = new StringBuffer();
@@ -150,21 +147,18 @@ public class Utility {
 		if (request.getServerPort() != 80) {
 			port = ":" + request.getServerPort();
 		}
-		return request.getScheme() + "://" + request.getServerName() + port
-				+ request.getContextPath() + "/";
+		return request.getScheme() + "://" + request.getServerName() + port + request.getContextPath() + "/";
 	}
 
 	/**
 	 * 产生随机字符
 	 * */
 	public static Random randGen = new Random();
-	private static char[] character = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-			.toCharArray();
+	private static char[] character = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
 	public static final String randomString(int length) {
 		if (length < 1) {
-			throw new IllegalArgumentException("企图生成长度小于1的随机字符串，length="
-					+ length);
+			throw new IllegalArgumentException("企图生成长度小于1的随机字符串，length=" + length);
 		}
 		char[] randBuffer = new char[length];
 		for (int i = 0; i < randBuffer.length; i++) {
@@ -180,8 +174,7 @@ public class Utility {
 	public static String getFileMD5(String fileName) {
 		File file = new File(fileName);
 		if (!file.exists()) {
-			throw new IllegalArgumentException("获取文件内容的MD5摘要信息，文件不存在，fileName="
-					+ fileName);
+			throw new IllegalArgumentException("获取文件内容的MD5摘要信息，文件不存在，fileName=" + fileName);
 		}
 		MessageDigest digest = null;
 		int len;
@@ -234,28 +227,23 @@ public class Utility {
 	public static String getClientIpAddress(HttpServletRequest request) {
 		String ipAddress = request.getHeader("x-forwarded-for");
 
-		if (StringUtils.isEmpty(ipAddress)
-				|| "unknown".equalsIgnoreCase(ipAddress)) {
+		if (StringUtils.isEmpty(ipAddress) || "unknown".equalsIgnoreCase(ipAddress)) {
 			ipAddress = request.getHeader("Proxy-Client-IP");
 		}
-		if (StringUtils.isEmpty(ipAddress)
-				|| "unknown".equalsIgnoreCase(ipAddress)) {
+		if (StringUtils.isEmpty(ipAddress) || "unknown".equalsIgnoreCase(ipAddress)) {
 			ipAddress = request.getHeader("WL-Proxy-Client-IP");
 		}
-		if (StringUtils.isEmpty(ipAddress)
-				|| "unknown".equalsIgnoreCase(ipAddress)) {
+		if (StringUtils.isEmpty(ipAddress) || "unknown".equalsIgnoreCase(ipAddress)) {
 			ipAddress = request.getRemoteAddr();
 		}
-		if (ipAddress.equals("127.0.0.1")
-				|| ipAddress.equals("0:0:0:0:0:0:0:1")) {
+		if (ipAddress.equals("127.0.0.1") || ipAddress.equals("0:0:0:0:0:0:0:1")) {
 			try {
 				// 根据网卡取本机配置的IP
 				InetAddress inet = InetAddress.getLocalHost();
 				ipAddress = inet.getHostAddress();
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
-				throw new RuntimeException("获取客户端地"
-						+ getApplicationURL(request));
+				throw new RuntimeException("获取客户端地" + getApplicationURL(request));
 			}
 		}
 		return ipAddress;

@@ -1,3 +1,4 @@
+<%@page import="hply.core.BaseContext"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%><!DOCTYPE html>
 <html lang="zh-CN">
@@ -5,7 +6,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${page_title}- 工程项目核算系统</title>
+<title>${page_title}-工程项目核算系统</title>
 <!-- Bootstrap -->
 <link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />"
 	rel="stylesheet">
@@ -106,17 +107,18 @@ strong {
 					<div class="btn-group">
 						<button type="button" class="btn btn-primary dropdown-toggle"
 							data-toggle="dropdown" title="在0000/00/00 00:00登录的">
-							张梦 <span class="caret"></span>
+							<%=BaseContext.getCurrentSysUser().getRealName()%>
+							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu pull-right" role="menu">
 							<li><a href="#">锁定</a></li>
-							<li><a href="<s:url value="/change-password.html" />"><i
+							<li><a href="<s:url value="/password" />"><i
 									class="icon-tags"></i> 修改密码</a></li>
 							<li class="divider"></li>
 							<li><a href="#">问题反馈</a></li>
 							<li><a href="#">关于</a></li>
 							<li class="divider"></li>
-							<li><a href="<s:url value="/logout.html" />"><i
+							<li><a href="<s:url value="/logout" />"><i
 									class=" icon-off"> </i>注销</a></li>
 						</ul>
 					</div>
