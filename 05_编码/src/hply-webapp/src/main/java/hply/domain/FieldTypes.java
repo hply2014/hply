@@ -5,7 +5,7 @@
 
 package hply.domain;
 
-import hply.Utility;
+import hply.core.Utility;
 
 import java.io.Serializable;
 import java.text.MessageFormat;

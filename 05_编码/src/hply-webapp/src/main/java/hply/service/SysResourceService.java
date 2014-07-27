@@ -36,6 +36,14 @@ public class SysResourceService {
         return mapper.getAll();
       }
 	  
+	  /*
+	   * 根据UserID获取所有具有权限的资源清单
+	   */
+	  public List<SysResource> getPermissionResource(String userId){
+		  //TODO 根据UserID获取所有具有权限的资源清单
+		  return null;
+	  }
+	  
 		private final static String ROOT_PARENT_ID = "root";
 		
 
@@ -77,5 +85,7 @@ public class SysResourceService {
 
 			return listT;
 		}
+		
+		
 }
 

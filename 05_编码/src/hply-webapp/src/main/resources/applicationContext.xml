@@ -39,6 +39,42 @@
 		<property name="basePackage" value="hply.mapper" />
 	</bean>
 
+	<context:component-scan base-package="hply.core" />
+	<context:component-scan base-package="hply.mapper" />
+	<context:component-scan base-package="hply.service" />
+
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/login/success" />
+		<property name="unauthorizedUrl" value="/unauthorized" />
+		<property name="filterChainDefinitions">
+			<value>
+				/logout = logout
+				/assets/** = anon
+				/** = authc
+			</value>
+		</property>
+	</bean>
+
+	<bean id="myRealm" class="hply.core.JdbcRealm" />
+	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="myRealm" />
+		<property name="sessionMode" value="http" />
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after -->
+	<!-- the lifecycleBeanProcessor has run: -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" />
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
 	<bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter">
 		<constructor-arg>
 			<bean
@@ -49,8 +85,4 @@
 		tags or Thymeleaf. See http://localhost:8080/#forms and form.jsp for examples -->
 	<bean id="requestDataValueProcessor"
 		class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor" />
-
-	<context:component-scan base-package="hply.service" />
-	<context:component-scan base-package="hply.mapper" />
-	<context:component-scan base-package="hply.domain" />
 </beans>

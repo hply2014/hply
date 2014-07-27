@@ -1,6 +1,6 @@
 package hply;
 
-import hply.Utility;
+import hply.core.Utility;
 
 import java.util.Date;
 

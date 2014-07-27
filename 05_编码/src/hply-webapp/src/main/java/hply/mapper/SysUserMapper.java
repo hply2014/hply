@@ -29,4 +29,6 @@ public interface SysUserMapper {
 	public int getVersion(String id);
 
 	public List<SysUser> getAll();
+
+	public SysUser getByLoginName(String loginName);
 }

@@ -1,7 +1,7 @@
 ﻿package hply.web;
 
 
-import hply.Utility;
+import hply.core.Utility;
 import hply.domain.ContractChange;
 import hply.service.ContractChangeService;
 
