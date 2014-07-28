@@ -96,7 +96,7 @@ public class Project implements Serializable {
       * 合作单位
       */
       
-      private String cooperation;
+      private String corperation;
       
     /**
       * [legal_assignee]，
@@ -349,16 +349,16 @@ public class Project implements Serializable {
       * [cooperation] getter，
       * 合作单位
       */
-    	public String getCooperation () {
-            return StringUtils.trimToEmpty(cooperation);
+    	public String getCorperation () {
+            return StringUtils.trimToEmpty(corperation);
     	}
 
     /**
       * [cooperation] setter，
       * 合作单位
       */
-    	public void setCooperation(String cooperation) {
-    		this.cooperation = cooperation;
+    	public void setCooperation(String corperation) {
+    		this.corperation = corperation;
     	}
     /**
       * [legal_assignee] getter，
@@ -644,7 +644,7 @@ public class Project implements Serializable {
         str += MessageFormat.format("PartyAddress=\"{0}\",", this.getPartyAddress());
         str += MessageFormat.format("Manager=\"{0}\",", this.getManager());
         str += MessageFormat.format("ContractCode=\"{0}\",", this.getContractCode());
-        str += MessageFormat.format("Cooperation=\"{0}\",", this.getCooperation());
+        str += MessageFormat.format("Corperation=\"{0}\",", this.getCorperation());
         str += MessageFormat.format("LegalAssignee=\"{0}\",", this.getLegalAssignee());
         str += MessageFormat.format("IsWithholdingOffsite=\"{0}\",", this.getIsWithholdingOffsite());
         str += MessageFormat.format("ManagementRate=\"{0}\",", this.getManagementRate());

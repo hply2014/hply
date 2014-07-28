@@ -5,11 +5,11 @@
 <mapper namespace="hply.mapper.PartyBillingMapper">
 
   <insert id="insert" parameterType="PartyBilling">
-    insert into t_party_billing(id, project_id, invoice_code, amount, trice, tax_rate, tax_amount, step1_idea, step1_user, step1_time, step_status, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectId}, #{invoiceCode}, #{amount}, #{trice}, #{taxRate}, #{taxAmount}, #{step1Idea}, #{step1User}, #{step1Time}, #{stepStatus}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser}, #{description} )
+    insert into t_party_billing(id, project_id, invoice_code, amount, trice, tax_rate, tax_amount, step1_idea, step1_user, step1_time, step_status, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectId}, #{invoiceCode}, #{amount}, #{trice}, #{taxRate}, #{taxAmount}, #{step1Idea}, #{step1User}, #{step1Time}, #{stepStatus}, now(), #{createUser}, now(), #{updateUser}, #{description} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_party_billing set project_id = #{projectId}, invoice_code = #{invoiceCode}, amount = #{amount}, trice = #{trice}, tax_rate = #{taxRate}, tax_amount = #{taxAmount}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step_status = #{stepStatus}, create_time = #{createTime}, create_user = #{createUser}, update_time = #{updateTime}, update_user = #{updateUser}, description = #{description},  version = version + 1 where id = #{id}
+    update t_party_billing set project_id = #{projectId}, invoice_code = #{invoiceCode}, amount = #{amount}, trice = #{trice}, tax_rate = #{taxRate}, tax_amount = #{taxAmount}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step_status = #{stepStatus}, update_time = now(), update_user = #{updateUser}, description = #{description}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">

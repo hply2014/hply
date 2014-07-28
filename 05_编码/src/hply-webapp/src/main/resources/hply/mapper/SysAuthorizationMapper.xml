@@ -5,11 +5,11 @@
 <mapper namespace="hply.mapper.SysAuthorizationMapper">
 
   <insert id="insert" parameterType="SysAuthorization">
-    insert into t_sys_authorization(id, resource_id, user_id, create_time, create_user) values ( #{id}, #{resourceId}, #{userId}, #{createTime}, #{createUser} )
+    insert into t_sys_authorization(id, resource_id, user_id, create_time, create_user) values ( #{id}, #{resourceId}, #{userId}, now(), #{createUser} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_sys_authorization set resource_id = #{resourceId}, user_id = #{userId}, create_time = #{createTime}, create_user = #{createUser},  version = version + 1 where id = #{id}
+    update t_sys_authorization set resource_id = #{resourceId}, user_id = #{userId},   version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">

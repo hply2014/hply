@@ -9,7 +9,7 @@
   </insert>
 
   <update id="update" parameterType="map">
-    update t_sys_resource set res_code = #{resCode}, res_name = #{resName}, icon = #{icon}, res_url = #{resUrl}, res_type = #{resType}, order_by = #{orderBy}, parent_id = #{parentId}, enabled = #{enabled}, description = #{description},  version = version + 1 where id = #{id}
+    update t_sys_resource set res_code = #{resCode}, res_name = #{resName}, icon = #{icon}, res_url = #{resUrl}, res_type = #{resType}, order_by = #{orderBy}, parent_id = #{parentId}, enabled = #{enabled}, description = #{description}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">

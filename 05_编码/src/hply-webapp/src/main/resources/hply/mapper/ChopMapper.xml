@@ -9,7 +9,7 @@
   </insert>
 
   <update id="update" parameterType="map">
-    update t_chop set chop_code = #{chopCode}, project_id = #{projectId}, project_code = #{projectCode}, project_name = #{projectName}, manager = #{manager}, content = #{content}, apply_user = #{applyUser}, apply_time = #{applyTime}, organization_id = #{organizationId}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step2_idea = #{step2Idea}, step2_user = #{step2User}, step2_time = #{step2Time}, step3_idea = #{step3Idea}, step3_user = #{step3User}, step3_time = #{step3Time}, step_status = #{stepStatus},  version = version + 1 where id = #{id}
+    update t_chop set chop_code = #{chopCode}, project_id = #{projectId}, project_code = #{projectCode}, project_name = #{projectName}, manager = #{manager}, content = #{content}, apply_user = #{applyUser}, apply_time = #{applyTime}, organization_id = #{organizationId}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step2_idea = #{step2Idea}, step2_user = #{step2User}, step2_time = #{step2Time}, step3_idea = #{step3Idea}, step3_user = #{step3User}, step3_time = #{step3Time}, step_status = #{stepStatus}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">

@@ -5,11 +5,11 @@
 <mapper namespace="hply.mapper.ArrearsMapper">
 
   <insert id="insert" parameterType="Arrears">
-    insert into t_arrears(id, project_id, funds_using, arrears_type, pay_type, amount, interest_amount, interest_rate, bank_account, bank_name, trice, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectId}, #{fundsUsing}, #{arrearsType}, #{payType}, #{amount}, #{interestAmount}, #{interestRate}, #{bankAccount}, #{bankName}, #{trice}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser}, #{description} )
+    insert into t_arrears(id, project_id, funds_using, arrears_type, pay_type, amount, interest_amount, interest_rate, bank_account, bank_name, trice, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectId}, #{fundsUsing}, #{arrearsType}, #{payType}, #{amount}, #{interestAmount}, #{interestRate}, #{bankAccount}, #{bankName}, #{trice}, now(), #{createUser}, now(), #{updateUser}, #{description} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_arrears set project_id = #{projectId}, funds_using = #{fundsUsing}, arrears_type = #{arrearsType}, pay_type = #{payType}, amount = #{amount}, interest_amount = #{interestAmount}, interest_rate = #{interestRate}, bank_account = #{bankAccount}, bank_name = #{bankName}, trice = #{trice}, create_time = #{createTime}, create_user = #{createUser}, update_time = #{updateTime}, update_user = #{updateUser}, description = #{description},  version = version + 1 where id = #{id}
+    update t_arrears set project_id = #{projectId}, funds_using = #{fundsUsing}, arrears_type = #{arrearsType}, pay_type = #{payType}, amount = #{amount}, interest_amount = #{interestAmount}, interest_rate = #{interestRate}, bank_account = #{bankAccount}, bank_name = #{bankName}, trice = #{trice}, update_time = now(), update_user = #{updateUser}, description = #{description}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">

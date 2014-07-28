@@ -5,11 +5,11 @@
 <mapper namespace="hply.mapper.SysOrganizationMapper">
 
   <insert id="insert" parameterType="SysOrganization">
-    insert into t_sys_organization(id, organization_name, create_time, description) values ( #{id}, #{organizationName}, #{createTime}, #{description} )
+    insert into t_sys_organization(id, organization_name, create_time, description) values ( #{id}, #{organizationName}, now(), #{description} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_sys_organization set organization_name = #{organizationName}, create_time = #{createTime}, description = #{description},  version = version + 1 where id = #{id}
+    update t_sys_organization set organization_name = #{organizationName}, description = #{description}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">
