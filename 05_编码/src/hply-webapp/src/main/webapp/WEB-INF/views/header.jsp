@@ -1,5 +1,14 @@
-<%@page import="hply.core.BaseContext"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@page import="hply.web.*"%><%@ page isELIgnored="false"%><%@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ 
+taglib
+	uri="http://www.springframework.org/tags" prefix="s"%><%@ 
+taglib
+	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
+page
+	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%><!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -106,8 +115,9 @@ strong {
 				<div class="navbar-form pull-right">
 					<div class="btn-group">
 						<button type="button" class="btn btn-primary dropdown-toggle"
-							data-toggle="dropdown" title="在0000/00/00 00:00登录的">
-							<%=BaseContext.getCurrentSysUser().getRealName()%>
+							data-toggle="dropdown"
+							title="在<%=BaseController.getLoginTime()%>登录的">
+							<%=BaseController.getCurrentRealName()%>
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu pull-right" role="menu">

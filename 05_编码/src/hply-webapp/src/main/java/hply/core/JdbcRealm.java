@@ -4,7 +4,7 @@ import hply.domain.SysResource;
 import hply.domain.SysUser;
 import hply.service.SysResourceService;
 import hply.service.SysUserService;
-import hply.web.HomeController;
+import hply.web.BaseController;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -71,7 +70,7 @@ public class JdbcRealm extends AuthorizingRealm implements Realm, InitializingBe
 		}
 
 		Utility.println("loginName=" + loginName);
-		SysUser user = BaseContext.getCurrentSysUser();
+		SysUser user = BaseController.getCurrentSysUser();
 
 		if (user == null) {
 			throw new AuthenticationException();
