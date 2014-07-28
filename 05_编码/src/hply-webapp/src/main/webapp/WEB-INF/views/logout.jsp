@@ -1,5 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%><!DOCTYPE html>
+<%@ page isELIgnored="false"%><%@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ 
+taglib
+	uri="http://www.springframework.org/tags" prefix="s"%><%@ 
+taglib
+	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
+page
+	language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%><!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
@@ -8,7 +18,8 @@
     <title>退出 - 工程项目核算系统</title>
 
     <!-- Bootstrap -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />"
+	rel="stylesheet" media="screen">
     <style type="text/css"> 
       body {
         padding-top: 50px;
@@ -21,8 +32,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="assets/html5shiv.js"></script>
-      <script src="assets/respond.min.js"></script>
+      <script src="<s:url value="assets/html5shiv.js"/>"></script>
+      <script src="<s:url value="assets/respond.min.js"/>"></script>
     <![endif]-->
   </head>
   <body>
@@ -42,13 +53,8 @@
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="assets/jquery.min.js"></script>
+    <script src="<s:url value="assets/jquery.min.js"/>"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="assets/js/bootstrap.min.js"></script>
-	<script>
-		function login(){
-			self.location = "index.html";
-		}
-	</script>
+    <script src="<s:url value="assets/bootstrap/js/bootstrap.min.js"/>"></script>
   </body>
 </html>

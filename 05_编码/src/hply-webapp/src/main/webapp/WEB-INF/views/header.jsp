@@ -1,4 +1,4 @@
-<%@page import="hply.web.*"%><%@ page isELIgnored="false"%><%@ 
+<%@page import="hply.core.*"%><%@ page isELIgnored="false"%><%@ 
 taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ 
 taglib
@@ -116,8 +116,8 @@ strong {
 					<div class="btn-group">
 						<button type="button" class="btn btn-primary dropdown-toggle"
 							data-toggle="dropdown"
-							title="在<%=BaseController.getLoginTime()%>登录的">
-							<%=BaseController.getCurrentRealName()%>
+							title="在<%=SessionHelper.getLoginTime()%>登录的">
+							<%=SessionHelper.getCurrentRealName()%>
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu pull-right" role="menu">

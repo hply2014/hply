@@ -4,7 +4,6 @@ import hply.domain.SysResource;
 import hply.domain.SysUser;
 import hply.service.SysResourceService;
 import hply.service.SysUserService;
-import hply.web.BaseController;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -70,7 +69,7 @@ public class JdbcRealm extends AuthorizingRealm implements Realm, InitializingBe
 		}
 
 		Utility.println("loginName=" + loginName);
-		SysUser user = BaseController.getCurrentSysUser();
+		SysUser user = SessionHelper.getCurrentSysUser();
 
 		if (user == null) {
 			throw new AuthenticationException();

@@ -1,17 +1,29 @@
 package hply.web;
 
+import hply.core.SessionHelper;
+import hply.domain.SysUser;
+import hply.service.SysUserService;
+
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Controller
 @RequestMapping(value = "/")
-public class HomeController extends BaseController {
+public class HomeController {
 	Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+	@Autowired
+	private SysUserService service;
 
 	public static final String JSP_LOGIN = "login";
 	public static final String JSP_LOGOUT = "logout";
@@ -23,12 +35,18 @@ public class HomeController extends BaseController {
 	}
 
 	@RequestMapping(value = JSP_LOGIN, method = RequestMethod.POST)
-	public String processLoginSubmit(@RequestParam String loginName,
-			@RequestParam String password, Model model) {
+	public String processLoginSubmit(@RequestParam String loginName, @RequestParam String password, Model model) {
 		logger.debug("登录验证 ...");
+		SysUser user = service.getByLoginName(loginName);
+		if (user == null) {
+			model.addAttribute("loginName", loginName);
+			model.addAttribute("message", "登陆用户不存在。");
+			return JSP_LOGIN;
+		}
 
 		try {
-			BaseController.login(loginName, password);
+			SessionHelper.setAttribute(SessionHelper.CURRENT_SYS_USER, user);
+			SessionHelper.login(loginName, password);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			model.addAttribute("loginName", loginName);
