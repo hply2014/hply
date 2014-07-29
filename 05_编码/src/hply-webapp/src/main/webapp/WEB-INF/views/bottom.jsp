@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 </div>
 
 <div class="modal fade" id="myModal">
@@ -32,10 +33,15 @@
 <script src="<s:url value="/assets/jquery.min.js" />"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
-<script src="<s:url value="/assets/jquery-ui.min.js" />" type="text/javascript"></script>
-<script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
-<script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" />" charset="UTF-8"></script>
-<script src="<s:url value="/assets/jquery.fancytree.js" />" type="text/javascript"></script>
+<script src="<s:url value="/assets/jquery-ui.min.js" />"
+	type="text/javascript"></script>
+<script
+	src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
+<script
+	src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" />"
+	charset="UTF-8"></script>
+<script src="<s:url value="/assets/jquery.fancytree.js" />"
+	type="text/javascript"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".delete").click(function() {
@@ -59,16 +65,17 @@
 			icons : false,
 			checkbox : true,
 			source : {
-				url : encodeURI("<s:url value="/api/tree/{userId}"/>"),
+				url : encodeURI("<s:url value="/api/tree/${userId}"/>"),
 				cache : false
 			},
 			activate : function(event, data) {
 				data.node.setSelected(true);
 			},
 			select : function(event, data) {
-				var s = data.node.key;
-				alert("res_id=" + s + ",user_id=${userId}");
-				//TODO: 保存数据...
+				// var s = data.node.key;
+				$.post("<s:url value="/api/auth/${userId}"/>" + "/" + data.node.key, function(data) {
+					alert(data);
+				}, "text");
 
 			}
 		});

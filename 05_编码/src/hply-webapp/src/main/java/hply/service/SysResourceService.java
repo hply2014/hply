@@ -1,7 +1,9 @@
 ﻿package hply.service;
 
+import hply.domain.SysAuthorization;
 import hply.domain.SysResource;
 import hply.domain.TreeNode;
+import hply.mapper.SysAuthorizationMapper;
 import hply.mapper.SysResourceMapper;
 
 import java.util.ArrayList;
@@ -15,6 +17,9 @@ public class SysResourceService {
 
 	@Autowired
 	private SysResourceMapper mapper;
+
+	@Autowired
+	private SysAuthorizationMapper authMapper;
 
 	public void insert(SysResource sysResource) {
 		mapper.insert(sysResource);
@@ -49,8 +54,9 @@ public class SysResourceService {
 	public TreeNode getTreeRoot(String userId) {
 		TreeNode root = new TreeNode();
 		root.setId(ROOT_PARENT_ID);
+		List<SysAuthorization> auth = authMapper.getAuthorizationByUserId(userId);
 
-		getTreeNodeList(userId, root);
+		getTreeNodeList(auth, userId, root);
 
 		return root;
 	}
@@ -59,7 +65,7 @@ public class SysResourceService {
 		return mapper.getChildren(id);
 	}
 
-	public List<TreeNode> getTreeNodeList(String userId, TreeNode root) {
+	public List<TreeNode> getTreeNodeList(List<SysAuthorization> auth, String userId, TreeNode root) {
 		List<SysResource> listR = this.getChildren(root.getId());
 		List<TreeNode> listT = new ArrayList<TreeNode>();
 		root.setChildren(listT);
@@ -73,13 +79,24 @@ public class SysResourceService {
 			node.setIcon(r.getIcon());
 			node.setUrl(r.getResUrl());
 			node.setExpanded(true);
-			node.setSelected(false);
+
+			boolean selected = false;
+
+			for (int i = 0; i < auth.size(); i++) {
+				selected = auth.get(i).getResourceId().equals(r.getId());
+				if (selected) {
+					auth.remove(i);
+					break;
+				}
+			}
+
+			node.setSelected(selected);
 			node.setTooltip(r.getDescription());
 
 			node.setParent(root);
 			listT.add(node);
 
-			node.setChildren(getTreeNodeList(userId, node));
+			node.setChildren(getTreeNodeList(auth, userId, node));
 		}
 
 		return listT;

@@ -97,8 +97,33 @@ strong {
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">工程核算</a></li>
 					<li><a href="#">盖章管理</a></li>
-					<li><a href="#">信息平台</a></li>
+					<li><a href="#">信息登记</a></li>
 					<li><a href="#">系统管理</a></li>
+					            <li class="dropdown">
+              <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                财务核算
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Action</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Another action</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Something else here</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Separated link</a></li>
+              </ul>
+            </li><li class="dropdown">
+              <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                系统管理
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<s:url value="/sysuser" />">用户</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<s:url value="/sysorganization" />">部门</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<s:url value="/sysparameter" />">参数设置</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Separated link</a></li>
+              </ul>
+            </li>
 				</ul>
 				<div class="navbar-form navbar-left">
 					<div class="form-group">

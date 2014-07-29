@@ -1,8 +1,10 @@
 package hply.web;
 
 import hply.core.Utility;
+import hply.domain.SysAuthorization;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
+import hply.service.SysAuthorizationService;
 import hply.service.SysResourceService;
 import hply.service.SysUserService;
 
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -25,8 +28,11 @@ public class APIController {
 	@Autowired
 	private SysUserService sysUserService;
 
+	@Autowired
+	private SysAuthorizationService sysAuthorizationService;
+
 	@RequestMapping(value = "/tree/{userId}")
-	public @ResponseBody TreeNode getTreeData(@PathVariable String userId) {
+	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
 		System.out.println("getTreeData ..." + userId);
 		return sysResourceService.getTreeRoot(userId);
 	}
@@ -51,6 +57,16 @@ public class APIController {
 		user.setPassword(hashedPassword);
 		sysUserService.update(user);
 		return "RESET PASSWORD:" + user + "\r\n";
+	}
+
+	@RequestMapping(value = "/auth/{userId}/{resourceId}", method = RequestMethod.POST)
+	public @ResponseBody String authorization(@PathVariable String userId, @PathVariable String resourceId) {
+		//TODO 删除授权还没有实现，根据userId和ResoourceId获取对象，Mybatis的多个参数
+		SysAuthorization sysAuthorization = new SysAuthorization();
+		sysAuthorization.setUserId(userId);
+		sysAuthorization.setResourceId(resourceId);
+		sysAuthorizationService.insert(sysAuthorization);
+		return "授权成功";
 	}
 
 }

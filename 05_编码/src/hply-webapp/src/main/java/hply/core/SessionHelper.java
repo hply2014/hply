@@ -1,9 +1,12 @@
 package hply.core;
 
+import hply.domain.SysResource;
 import hply.domain.SysUser;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -13,6 +16,7 @@ public class SessionHelper {
 
 	public static final String CURRENT_SYS_USER = "__CURRENT_SYS_USER";
 	public static final String CURRENT_LOGIN_TIME = "__CURRENT_LOGIN_TIME";
+	public static final String CURRENT_PERMISSION = "__CURRENT_PERMISSION";
 
 	public static void login(String loginName, String password) {
 		Subject currentUser = SecurityUtils.getSubject();
@@ -54,5 +58,17 @@ public class SessionHelper {
 
 	public static Object getAttribute(Object key) {
 		return SecurityUtils.getSubject().getSession().getAttribute(key);
+	}
+
+	public static List<SysResource> getPerminssion(String parentId, String Type) {
+		List<SysResource> filter = new ArrayList<SysResource>();
+		List<SysResource> list = (List<SysResource>) getAttribute(CURRENT_PERMISSION);
+		for (SysResource r : list) {
+			if (r.getParentId().equals(parentId) && r.getResType().equals(Type)) {
+				filter.add(r);
+			}
+		}
+
+		return filter;
 	}
 }

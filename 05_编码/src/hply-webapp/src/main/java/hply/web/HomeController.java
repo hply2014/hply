@@ -1,18 +1,20 @@
 package hply.web;
 
 import hply.core.SessionHelper;
+import hply.domain.SysResource;
 import hply.domain.SysUser;
+import hply.service.SysResourceService;
 import hply.service.SysUserService;
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,9 @@ public class HomeController {
 
 	@Autowired
 	private SysUserService service;
+
+	@Autowired
+	private SysResourceService sysResourceService;
 
 	public static final String JSP_LOGIN = "login";
 	public static final String JSP_LOGOUT = "logout";
@@ -54,6 +59,8 @@ public class HomeController {
 			return JSP_LOGIN;
 		}
 		// No problems, show authenticated view…
+		List<SysResource> list = sysResourceService.getPermission(user.getId());
+		SessionHelper.setAttribute(SessionHelper.CURRENT_PERMISSION, list);
 
 		return "redirect:/";
 	}

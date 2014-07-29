@@ -40,16 +40,11 @@ page
 			<th>登陆名</th>
 			<th>姓名</th>
 			<th>所在部门</th>
-			<th>密码</th>
 			<th>最后登陆IP</th>
 			<th>最后登陆时间</th>
-			<th>连续登录失败次数</th>
 			<th>登陆总次数</th>
 			<th>职务</th>
 			<th>是否禁用</th>
-			<th>顺序号</th>
-			<th>备注</th>
-			<th>下次登录是否必须修改密码</th>
 			<th>操作</th>
 		</tr>
 	</thead>
@@ -65,17 +60,13 @@ page
 							value="${sysUser.loginName}" /></a></td>  
 				<td><c:out value="${sysUser.realName}" /></td>
 				<td><c:out value="${sysUser.organizationId}" /></td>
-				<td><c:out value="${sysUser.password}" /></td>
 				<td><c:out value="${sysUser.lastLoginIp}" /></td>
 				<td><fmt:formatDate value="${sysUser.lastLoginTime}"
 						pattern="yyyy-MM-dd" /></td>  
-				<td><c:out value="${sysUser.fails}" /></td>
 				<td><c:out value="${sysUser.logined}" /></td>
 				<td><c:out value="${sysUser.position}" /></td>
 				<td><c:out value="${sysUser.enabled}" /></td>
-				<td><c:out value="${sysUser.orderBy}" /></td>
 				<td><c:out value="${sysUser.description}" /></td>
-				<td><c:out value="${sysUser.mustChangePassword}" /></td>
 				<td><a
 					href="<s:url value="/sysuser/modify/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>">修改</a>
 					| <a class="delete" data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysUser.id}" />】么？"

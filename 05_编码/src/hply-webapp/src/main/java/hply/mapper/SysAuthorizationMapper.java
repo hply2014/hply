@@ -29,4 +29,6 @@ public interface SysAuthorizationMapper {
 	public int getVersion(String id);
 
 	public List<SysAuthorization> getAll();
+
+	public List<SysAuthorization> getAuthorizationByUserId(String userId);
 }
