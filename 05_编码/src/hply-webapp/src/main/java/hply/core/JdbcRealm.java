@@ -49,7 +49,7 @@ public class JdbcRealm extends AuthorizingRealm implements Realm, InitializingBe
 
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		Set<String> permissions = new HashSet<String>();
-		List<SysResource> permissionResource = sysResourceService.getPermissionResource(user.getId());
+		List<SysResource> permissionResource = sysResourceService.getPermission(user.getId());
 		for (SysResource resource : permissionResource) {
 			permissions.add(resource.getResCode());
 		}
@@ -86,7 +86,8 @@ public class JdbcRealm extends AuthorizingRealm implements Realm, InitializingBe
 	}
 
 	@Override
-	protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) throws AuthenticationException {
+	protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info)
+			throws AuthenticationException {
 		UsernamePasswordToken t = token instanceof UsernamePasswordToken ? (UsernamePasswordToken) token : null;
 		SimpleAuthenticationInfo i = info instanceof SimpleAuthenticationInfo ? (SimpleAuthenticationInfo) info : null;
 

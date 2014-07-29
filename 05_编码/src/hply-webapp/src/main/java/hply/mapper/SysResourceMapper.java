@@ -29,6 +29,8 @@ public interface SysResourceMapper {
 	public int getVersion(String id);
 
 	public List<SysResource> getAll();
+	
+	public List<SysResource> getPermission(String userId);
 
 	public List<SysResource> getChildren(String id);
 }

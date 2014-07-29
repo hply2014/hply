@@ -27,6 +27,5 @@
   <select id="getAll" resultType="SysOrganization">
     select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization
   </select>
-
 </mapper>
 

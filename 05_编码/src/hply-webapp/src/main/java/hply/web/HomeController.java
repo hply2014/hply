@@ -80,8 +80,9 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "tree")
-	public String treePage() {
+	public String treePage(Model model) {
 		System.out.println("treePage ...");
+		model.addAttribute("page_title", "业务授权");
 		return "sample-fancytree";
 	}
 }
