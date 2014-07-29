@@ -78,11 +78,4 @@ public class HomeController {
 		System.out.println("changePassword ...");
 		return "change-password";
 	}
-
-	@RequestMapping(value = "tree")
-	public String treePage(Model model) {
-		System.out.println("treePage ...");
-		model.addAttribute("page_title", "业务授权");
-		return "sample-fancytree";
-	}
 }

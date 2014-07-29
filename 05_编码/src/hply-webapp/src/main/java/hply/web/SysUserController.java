@@ -1,6 +1,5 @@
 ﻿package hply.web;
 
-
 import hply.core.Utility;
 import hply.domain.SysUser;
 import hply.service.SysUserService;
@@ -16,20 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping(value = SysUserController.URI)
 public class SysUserController {
-    
+
 	@Autowired
-    private SysUserService service;
+	private SysUserService service;
 
 	public static final String URI = "/sysuser";
 	public static final String JSP_PAGE_LIST = "sysuser-list";
 	public static final String JSP_PAGE_DETAIL = "sysuser-detail";
 	public static final String JSP_PAGE_MODIFY = "sysuser-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
@@ -74,10 +71,10 @@ public class SysUserController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid SysUser sysUser,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid SysUser sysUser, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(sysUser.toString());
-		
+
 		if (result.hasErrors()) {
 			return JSP_PAGE_MODIFY;
 		}
@@ -93,11 +90,10 @@ public class SysUserController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id,
-			@Valid SysUser sysUser, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid SysUser sysUser, BindingResult result,
+			Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(sysUser.toString());
-		
+
 		if (result.hasErrors()) {
 			return JSP_PAGE_MODIFY;
 		}
@@ -113,13 +109,22 @@ public class SysUserController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		SysUser sysUser = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("sysUser", sysUser);
 		return "redirect:" + URI;
 	}
-}
 
+	/*
+	 * 根据用户id，设置资源权限
+	 */
+	@RequestMapping(value = "auth/{id}")
+	public String authorization(@PathVariable String id, Model model) {
+		System.out.println("authorization tree ...");
+		model.addAttribute("page_title", "业务授权");
+		model.addAttribute("userId", id);
+		return "sample-fancytree";
+	}
+}

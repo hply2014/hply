@@ -59,7 +59,7 @@
 			icons : false,
 			checkbox : true,
 			source : {
-				url : encodeURI("api/tree/中文"),
+				url : encodeURI("<s:url value="/api/tree/{userId}"/>"),
 				cache : false
 			},
 			activate : function(event, data) {
@@ -67,7 +67,7 @@
 			},
 			select : function(event, data) {
 				var s = data.node.key;
-				alert(s);
+				alert("res_id=" + s + ",user_id=${userId}");
 				//TODO: 保存数据...
 
 			}

@@ -18,6 +18,9 @@ page
   <a href="<s:url value="/sysuser" />" class="btn btn-info"><span class="glyphicon glyphicon-share-alt"></span> 返 回  </a>
 </div>
   <div class="btn-group">
+  <a href="<s:url value="/sysuser/auth/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 授 权  </a>
+</div>
+  <div class="btn-group">
   <a href="<s:url value="/sysuser/modify/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 修 改  </a>
 </div>
   <div class="btn-group">
