@@ -9,6 +9,7 @@ import hply.domain.SysAuthorization;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -31,4 +32,7 @@ public interface SysAuthorizationMapper {
 	public List<SysAuthorization> getAll();
 
 	public List<SysAuthorization> getAuthorizationByUserId(String userId);
+
+	public SysAuthorization getByUserIdAndResource(@Param("userId") String userId,
+			@Param("resourceId") String resourceId);
 }

@@ -1,12 +1,12 @@
 ﻿package hply.service;
 
+import hply.domain.SysAuthorization;
+import hply.mapper.SysAuthorizationMapper;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import hply.domain.SysAuthorization;
-import hply.mapper.SysAuthorizationMapper;
 
 @Service
 public class SysAuthorizationService {
@@ -37,4 +37,9 @@ public class SysAuthorizationService {
 	public List<SysAuthorization> getAuthorizationByUserId(String userId) {
 		return mapper.getAuthorizationByUserId(userId);
 	}
+
+	public SysAuthorization getByUserIdAndResource(String userId, String resourceId) {
+		return mapper.getByUserIdAndResource(userId, resourceId);
+	}
+
 }

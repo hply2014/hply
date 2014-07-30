@@ -16,7 +16,7 @@
     delete from t_sys_user where id = #{id}
   </delete>
 
-  <select id="get" parameterType="string" resultType="SysUser">
+  <select id="get" resultType="SysUser">
     select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword from t_sys_user where id = #{id}
   </select>
   
@@ -28,7 +28,7 @@
     select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword from t_sys_user
   </select>
   
-  <select id="getByLoginName" parameterType="string" resultType="SysUser">
+  <select id="getByLoginName" resultType="SysUser">
     select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword from t_sys_user where login_name = #{loginName}
   </select>
 

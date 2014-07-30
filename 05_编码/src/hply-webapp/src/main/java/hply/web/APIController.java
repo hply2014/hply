@@ -61,12 +61,18 @@ public class APIController {
 
 	@RequestMapping(value = "/auth/{userId}/{resourceId}", method = RequestMethod.POST)
 	public @ResponseBody String authorization(@PathVariable String userId, @PathVariable String resourceId) {
-		//TODO 删除授权还没有实现，根据userId和ResoourceId获取对象，Mybatis的多个参数
-		SysAuthorization sysAuthorization = new SysAuthorization();
-		sysAuthorization.setUserId(userId);
-		sysAuthorization.setResourceId(resourceId);
-		sysAuthorizationService.insert(sysAuthorization);
-		return "授权成功";
+		// TODO 删除授权还没有实现，根据userId和ResoourceId获取对象，Mybatis的多个参数
+		SysAuthorization auth = sysAuthorizationService.getByUserIdAndResource(userId, resourceId);
+		if (auth != null) {
+			sysAuthorizationService.delete(auth.getId());
+			return "授权取消，执行成功";
+		} else {
+			SysAuthorization sysAuthorization = new SysAuthorization();
+			sysAuthorization.setUserId(userId);
+			sysAuthorization.setResourceId(resourceId);
+			sysAuthorizationService.insert(sysAuthorization);
+		}
+		return "授权设置，执行成功";
 	}
 
 }
