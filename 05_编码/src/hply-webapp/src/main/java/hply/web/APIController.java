@@ -34,7 +34,7 @@ public class APIController {
 	@RequestMapping(value = "/tree/{userId}")
 	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
 		System.out.println("getTreeData ..." + userId);
-		return sysResourceService.getTreeRoot(userId);
+		return sysResourceService.getRootTreeNode(userId);
 	}
 
 	@RequestMapping(value = "/resetall/{password}")

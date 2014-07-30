@@ -49,9 +49,11 @@ public class SysResourceService {
 		return mapper.getPermission(userId);
 	}
 
-	private final static String ROOT_PARENT_ID = "root";
+	public static final String ROOT_PARENT_ID = "root";
+	public static final String TYPE_NAVIGATION = "navigation";
+	public static final String TYPE_SUBMENU = "submenu";
 
-	public TreeNode getTreeRoot(String userId) {
+	public TreeNode getRootTreeNode(String userId) {
 		TreeNode root = new TreeNode();
 		root.setId(ROOT_PARENT_ID);
 		List<SysAuthorization> auth = authMapper.getAuthorizationByUserId(userId);

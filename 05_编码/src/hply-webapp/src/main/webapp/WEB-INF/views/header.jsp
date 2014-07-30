@@ -1,12 +1,15 @@
 <%@page import="hply.core.*"%><%@ page isELIgnored="false"%><%@ 
-taglib uri="http://java.sun.com/jsp/jstl/core"
-	prefix="c"%><%@ 
-taglib uri="http://www.springframework.org/tags" prefix="s"%><%@ 
-taglib uri="http://www.springframework.org/tags/form"
-	prefix="sf"%><%@ 
-taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
-page language="java"
-	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%><!DOCTYPE html>
+taglib
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ 
+taglib
+	uri="http://www.springframework.org/tags" prefix="s"%><%@ 
+taglib
+	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
+taglib
+	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
+page
+	language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%><!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -14,8 +17,11 @@ page language="java"
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${page_title}-工程项目核算系统</title>
 <!-- Bootstrap -->
-<link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
-<link href="<s:url value="/assets/bootstrap-datepicker/css/datepicker3.css" />" rel="stylesheet">
+<link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />"
+	rel="stylesheet">
+<link
+	href="<s:url value="/assets/bootstrap-datepicker/css/datepicker3.css" />"
+	rel="stylesheet">
 <link href="<s:url value="/assets/ui.fancytree.css" />" rel="stylesheet">
 <style type="text/css">
 body {
@@ -46,7 +52,8 @@ body {
 	text-decoration: underline;
 }
 
-.bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover {
+.bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover
+	{
 	color: #fff;
 	background-color: #555;
 }
@@ -88,42 +95,47 @@ strong {
 	<div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand hidden-sm">工程项目核算系统</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">工程核算</a></li>
-					<li><a href="#">盖章管理</a></li>
-					<li><a href="#">信息登记</a></li>
-					<li><a href="#">系统管理</a></li>
-					            <li class="dropdown">
-              <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                财务核算
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Another action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Something else here</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Separated link</a></li>
-              </ul>
-            </li><li class="dropdown">
-              <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                系统管理
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<s:url value="/sysuser" />">用户</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<s:url value="/sysorganization" />">部门</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<s:url value="/sysparameter" />">参数设置</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Separated link</a></li>
-              </ul>
-            </li>
+					<%
+						request.setAttribute("navigationTree", SessionHelper.getAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE));
+					%>
+					<c:forEach items="${navigationTree}" var="root">
+						<li class="dropdown"><a id="drop2" href="#"
+							class="dropdown-toggle" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ${root.title } <span
+								class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+								<c:forEach items="${root.children}" var="node">
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="<s:url value="${node.url }" />">${node.title }</a></li>
+								</c:forEach>
+							</ul></li>
+					</c:forEach>
+					<li class="dropdown"><a id="drop2" href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 系统管理 <span
+							class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="<s:url value="/sysuser" />">用户</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="<s:url value="/sysorganization" />">部门</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="<s:url value="/sysparameter" />">参数设置</a></li>
+							<li role="presentation" class="divider"></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1"
+								href="http://twitter.com/fat">Separated link</a></li>
+						</ul></li>
 				</ul>
 				<div class="navbar-form navbar-left">
 					<div class="form-group">
@@ -135,19 +147,22 @@ strong {
 				</div>
 				<div class="navbar-form pull-right">
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+						<button type="button" class="btn btn-primary dropdown-toggle"
+							data-toggle="dropdown"
 							title="在<%=SessionHelper.getLoginTime()%>登录的">
 							<%=SessionHelper.getCurrentRealName()%>
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu pull-right" role="menu">
 							<li><a href="#">锁定</a></li>
-							<li><a href="<s:url value="/password" />"><i class="icon-tags"></i> 修改密码</a></li>
+							<li><a href="<s:url value="/password" />"><i
+									class="icon-tags"></i> 修改密码</a></li>
 							<li class="divider"></li>
 							<li><a href="#">问题反馈</a></li>
 							<li><a href="#">关于</a></li>
 							<li class="divider"></li>
-							<li><a href="<s:url value="/logout" />"><i class=" icon-off"> </i>注销</a></li>
+							<li><a href="<s:url value="/logout" />"><i
+									class=" icon-off"> </i>注销</a></li>
 						</ul>
 					</div>
 				</div>
