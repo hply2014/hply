@@ -68,10 +68,10 @@
 	</div>
 
 	<div class="form-group">
-		<sf:label path="cooperation" cssClass="col-sm-2 control-label">合作单位</sf:label>
+		<sf:label path="corperation" cssClass="col-sm-2 control-label">合作单位</sf:label>
 		<div class="col-sm-10">
-			<sf:input cssClass="form-control" path="cooperation" placeholder="请输入文字..." />
-            <sf:errors path="cooperation" cssClass="error" />
+			<sf:input cssClass="form-control" path="corperation" placeholder="请输入文字..." />
+            <sf:errors path="corperation" cssClass="error" />
 		</div>
 	</div>
 

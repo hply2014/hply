@@ -57,10 +57,27 @@ public class SysResourceService {
 		TreeNode root = new TreeNode();
 		root.setId(ROOT_PARENT_ID);
 		List<SysAuthorization> auth = authMapper.getAuthorizationByUserId(userId);
-
 		getTreeNodeList(auth, userId, root);
-
 		return root;
+	}
+
+	public TreeNode getMenuRoot(String userId) {
+		TreeNode root = getRootTreeNode(userId).getChildren().get(0);
+		filterNode(root);
+		return root;
+	}
+
+	private void filterNode(TreeNode root) {
+		List<TreeNode> children = root.getChildren();
+		for (int i = 0; i < children.size();) {
+			TreeNode node = children.get(i);
+			if (node.isSelected() && node.getType().equals("navigation")) {
+				filterNode(node);
+				i++;
+			} else {
+				children.remove(i);
+			}
+		}
 	}
 
 	public List<SysResource> getChildren(String id) {
@@ -81,6 +98,7 @@ public class SysResourceService {
 			node.setIcon(r.getIcon());
 			node.setUrl(r.getResUrl());
 			node.setExpanded(true);
+			node.setType(r.getResType());
 
 			boolean selected = false;
 

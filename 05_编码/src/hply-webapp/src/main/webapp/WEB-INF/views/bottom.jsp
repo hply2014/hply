@@ -74,7 +74,7 @@
 			select : function(event, data) {
 				// var s = data.node.key;
 				$.post("<s:url value="/api/auth/${userId}"/>" + "/" + data.node.key, function(data) {
-					alert(data);
+					//alert(data);
 				}, "text");
 
 			}

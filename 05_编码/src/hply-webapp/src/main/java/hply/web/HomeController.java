@@ -59,8 +59,7 @@ public class HomeController {
 			return JSP_LOGIN;
 		}
 		// No problems, show authenticated view…
-		SessionHelper.setAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE, sysResourceService.getRootTreeNode(user.getId()).getChildren()
-				.get(0).getChildren());
+		SessionHelper.setAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE, sysResourceService.getMenuRoot(user.getId()));
 
 		return "redirect:/";
 	}

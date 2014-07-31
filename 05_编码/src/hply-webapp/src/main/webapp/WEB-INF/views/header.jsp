@@ -29,12 +29,6 @@ body {
 	padding-bottom: 20px;
 }
 
-.bs-docs-nav {
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, .15);
-	border-color: #463265;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, .1);
-}
-
 .bs-docs-nav .navbar-collapse {
 	border-color: #463265;
 }
@@ -49,7 +43,6 @@ body {
 
 .bs-docs-nav .navbar-nav>li>a:hover {
 	color: #83b7e0;
-	text-decoration: underline;
 }
 
 .bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover
@@ -80,6 +73,10 @@ strong {
 	width: 600px;
 }
 
+.fancytree-selected .fancytree-title {
+  font-style: normal;
+}
+
 #fancytree1>ul.fancytree-container {
 	border: none;
 }
@@ -100,12 +97,12 @@ strong {
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand hidden-sm">工程项目核算系统</a>
+				<a class="navbar-brand hidden-sm" href="<s:url value="/" />">工程项目核算系统</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<%
-						request.setAttribute("navigationTree", SessionHelper.getAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE));
+						request.setAttribute("navigationTree", SessionHelper.getMenuRoot().getChildren());
 					%>
 					<c:forEach items="${navigationTree}" var="root">
 						<li class="dropdown"><a id="drop2" href="#"
@@ -120,22 +117,6 @@ strong {
 								</c:forEach>
 							</ul></li>
 					</c:forEach>
-					<li class="dropdown"><a id="drop2" href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> 系统管理 <span
-							class="caret"></span>
-					</a>
-						<ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="<s:url value="/sysuser" />">用户</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="<s:url value="/sysorganization" />">部门</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="<s:url value="/sysparameter" />">参数设置</a></li>
-							<li role="presentation" class="divider"></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="http://twitter.com/fat">Separated link</a></li>
-						</ul></li>
 				</ul>
 				<div class="navbar-form navbar-left">
 					<div class="form-group">

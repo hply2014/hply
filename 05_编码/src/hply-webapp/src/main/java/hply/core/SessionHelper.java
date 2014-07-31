@@ -61,7 +61,7 @@ public class SessionHelper {
 		return SecurityUtils.getSubject().getSession().getAttribute(key);
 	}
 
-	public static TreeNode getRootTreeNode() {
+	public static TreeNode getMenuRoot() {
 		return (TreeNode) getAttribute(CURRENT_ROOT_TREE_NODE);
 	}
 

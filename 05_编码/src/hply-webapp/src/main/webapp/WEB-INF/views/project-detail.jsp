@@ -77,9 +77,9 @@ page
 	</div>
 
 	<div class="form-group">
-		<sf:label path="cooperation" cssClass="col-sm-2 control-label">合作单位</sf:label>
+		<sf:label path="corperation" cssClass="col-sm-2 control-label">合作单位</sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.cooperation}" /></p>
+			<p class="form-control-static"><c:out value="${project.corperation}" /></p>
 		</div>
 	</div>
 

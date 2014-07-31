@@ -17,6 +17,15 @@ public class TreeNode {
 	private boolean expanded;
 	private boolean selected;
 	private String icon;
+	private String type;
+
+	public String getType() {
+		return StringUtils.trimToEmpty(type);
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getIcon() {
 		return StringUtils.trimToEmpty(icon);
