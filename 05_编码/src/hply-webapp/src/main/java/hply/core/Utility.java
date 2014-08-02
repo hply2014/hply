@@ -259,7 +259,7 @@ public class Utility {
 
 	public static String getRandomUUID() {
 		String str = java.util.UUID.randomUUID().toString();
-		return str.replaceAll("-", "").toLowerCase();
+		return str.toLowerCase();
 
 	}
 

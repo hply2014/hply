@@ -51,7 +51,6 @@ public class SysResourceService {
 
 	public static final String ROOT_PARENT_ID = "root";
 	public static final String TYPE_NAVIGATION = "navigation";
-	public static final String TYPE_SUBMENU = "submenu";
 
 	public TreeNode getRootTreeNode(String userId) {
 		TreeNode root = new TreeNode();
@@ -71,7 +70,7 @@ public class SysResourceService {
 		List<TreeNode> children = root.getChildren();
 		for (int i = 0; i < children.size();) {
 			TreeNode node = children.get(i);
-			if (node.isSelected() && node.getType().equals("navigation")) {
+			if (node.isSelected() && TYPE_NAVIGATION.equals(node.getType())) {
 				filterNode(node);
 				i++;
 			} else {
@@ -97,8 +96,9 @@ public class SysResourceService {
 			node.setKey(r.getId());
 			node.setIcon(r.getIcon());
 			node.setUrl(r.getResUrl());
-			node.setExpanded(true);
+			node.setExpanded(TYPE_NAVIGATION.equals(r.getResType()));
 			node.setType(r.getResType());
+			node.setDescription(r.getDescription());
 
 			boolean selected = false;
 

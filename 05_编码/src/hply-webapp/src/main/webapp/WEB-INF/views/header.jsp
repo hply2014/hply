@@ -23,6 +23,16 @@ page
 	href="<s:url value="/assets/bootstrap-datepicker/css/datepicker3.css" />"
 	rel="stylesheet">
 <link href="<s:url value="/assets/ui.fancytree.css" />" rel="stylesheet">
+
+<script src="<s:url value="/assets/jquery.min.js" />"></script>
+<script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
+<script src="<s:url value="/assets/jquery-ui.min.js" />"></script>
+
+<!--[if lt IE 9]>
+      <script src="<s:url value="/assets/html5shiv.js" />"></script>
+      <script src="<s:url value="/assets/respond.min.js" />"></script>
+    <![endif]-->
+
 <style type="text/css">
 body {
 	padding-top: 50px;
@@ -74,19 +84,13 @@ strong {
 }
 
 .fancytree-selected .fancytree-title {
-  font-style: normal;
+	font-style: normal;
 }
 
 #fancytree1>ul.fancytree-container {
 	border: none;
 }
 </style>
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="<s:url value="/assets/html5shiv.js" />"></script>
-      <script src="<s:url value="/assets/respond.min.js" />"></script>
-    <![endif]-->
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
@@ -104,19 +108,21 @@ strong {
 					<%
 						request.setAttribute("navigationTree", SessionHelper.getMenuRoot().getChildren());
 					%>
-					<c:forEach items="${navigationTree}" var="root">
-						<li class="dropdown"><a id="drop2" href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ${root.title } <span
-								class="caret"></span>
-						</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
-								<c:forEach items="${root.children}" var="node">
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="<s:url value="${node.url }" />">${node.title }</a></li>
-								</c:forEach>
-							</ul></li>
-					</c:forEach>
+					<c:forEach items="${navigationTree}" var="root"><c:choose><c:when test="${root.children.size() == 0}">
+								<li title="${root.description }"><a
+									href="<s:url value="${root.url }" />">${root.title }</a></li></c:when><c:otherwise>
+								<li class="dropdown" title="${root.description }"><a
+									href="javascript:void();" class="dropdown-toggle"
+									data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false"> ${root.title } <span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+										<c:forEach items="${root.children}" var="node">
+											<li role="presentation" title="${node.description }"><a
+												role="menuitem" tabindex="-1"
+												href="<s:url value="${node.url }" />">${node.title }</a></li>
+										</c:forEach></ul></li>
+							</c:otherwise></c:choose></c:forEach>
 				</ul>
 				<div class="navbar-form navbar-left">
 					<div class="form-group">
@@ -151,4 +157,3 @@ strong {
 			</div>
 		</div>
 	</div>
-	<div class="container main">

@@ -42,8 +42,9 @@ public class SysUserController {
 	 */
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
-		model.addAttribute("page_title", "系统用户的详情信息");
-		model.addAttribute("sysUser", service.get(id));
+		SysUser user = service.get(id);
+		model.addAttribute("sysUser", user);
+		model.addAttribute("page_title", user.getRealName() + "的详情信息");
 		return JSP_PAGE_DETAIL;
 	}
 
@@ -71,8 +72,7 @@ public class SysUserController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid SysUser sysUser, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid SysUser sysUser, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(sysUser.toString());
 
 		if (result.hasErrors()) {
@@ -90,8 +90,8 @@ public class SysUserController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid SysUser sysUser, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid SysUser sysUser, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(sysUser.toString());
 
 		if (result.hasErrors()) {
@@ -124,7 +124,6 @@ public class SysUserController {
 	public String authorization(@PathVariable String id, Model model) {
 		System.out.println("authorization tree ...");
 		model.addAttribute("page_title", "业务授权");
-		model.addAttribute("userId", id);
 		return "sample-fancytree";
 	}
 }

@@ -10,12 +10,14 @@ import hply.service.SysUserService;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -51,12 +53,22 @@ public class APIController {
 	}
 
 	@RequestMapping(value = "/reset/{loginName}/{password}")
-	public @ResponseBody String resetPassword(@PathVariable String loginName, @PathVariable String password) {
+	public @ResponseBody String reset(@PathVariable String loginName, @PathVariable String password) {
 		SysUser user = sysUserService.getByLoginName(loginName);
 		String hashedPassword = new Sha256Hash(password, user.getId(), 1).toString();
 		user.setPassword(hashedPassword);
 		sysUserService.update(user);
 		return "RESET PASSWORD:" + user + "\r\n";
+	}
+
+	@RequestMapping(value = "/resetpassword")
+	public @ResponseBody String resetPassword(@RequestParam String id, @RequestParam String password) {
+		SysUser user = sysUserService.get(id);
+		System.out.println("id=" + id + ",password=" + password);
+		String hashedPassword = new Sha256Hash(password, user.getId(), 1).toString();
+		user.setPassword(hashedPassword);
+		sysUserService.update(user);
+		return "密码重置成功，" + user.getRealName();
 	}
 
 	@RequestMapping(value = "/auth/{userId}/{resourceId}", method = RequestMethod.POST)

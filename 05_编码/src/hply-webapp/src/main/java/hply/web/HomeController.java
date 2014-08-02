@@ -80,8 +80,9 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "password", method = RequestMethod.GET)
-	public String changePassword() {
+	public String changePassword(Model model) {
 		System.out.println("changePassword ...");
+		model.addAttribute("page_title", "修改密码");
 		return "change-password";
 	}
 }

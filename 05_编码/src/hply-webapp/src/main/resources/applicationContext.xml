@@ -51,7 +51,7 @@
 				/logout = anon
 				/assets/** = anon
 				# authc
-				/** = anon
+				/** = authc
 			</value>
 		</property>
 	</bean>
