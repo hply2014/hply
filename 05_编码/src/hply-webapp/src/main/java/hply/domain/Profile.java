@@ -33,6 +33,7 @@ public class Profile implements Serializable {
 	public Profile() {
 		this.id = Utility.getRandomUUID();
         this.version = -1;
+        this.trice = new Date();
 	}
 
     /**

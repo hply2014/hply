@@ -33,6 +33,7 @@ public class PartyBilling implements Serializable {
 	public PartyBilling() {
 		this.id = Utility.getRandomUUID();
         this.version = -1;
+        this.trice = new Date();
 	}
 
     /**

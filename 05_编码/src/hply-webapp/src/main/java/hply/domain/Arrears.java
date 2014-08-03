@@ -33,6 +33,7 @@ public class Arrears implements Serializable {
 	public Arrears() {
 		this.id = Utility.getRandomUUID();
         this.version = -1;
+        this.trice = new Date();
 	}
 
     /**

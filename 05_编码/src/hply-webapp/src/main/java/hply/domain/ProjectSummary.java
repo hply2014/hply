@@ -33,6 +33,7 @@ public class ProjectSummary implements Serializable {
 	public ProjectSummary() {
 		this.id = Utility.getRandomUUID();
         this.version = -1;
+        this.trice = new Date();
 	}
 
     /**

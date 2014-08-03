@@ -33,6 +33,7 @@ public class CustomerBilling implements Serializable {
 	public CustomerBilling() {
 		this.id = Utility.getRandomUUID();
         this.version = -1;
+        this.trice = new Date();
 	}
 
     /**

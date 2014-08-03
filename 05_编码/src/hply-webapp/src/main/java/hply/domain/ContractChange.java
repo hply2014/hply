@@ -33,6 +33,7 @@ public class ContractChange implements Serializable {
 	public ContractChange() {
 		this.id = Utility.getRandomUUID();
         this.version = -1;
+        this.trice = new Date();
 	}
 
     /**

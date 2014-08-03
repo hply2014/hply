@@ -21,7 +21,7 @@ page
 			</button>
 			<strong><a
 				href="<s:url value="/sysorganization/detail/${sysOrganization.id }" />">
-					${sysOrganization.id }</a></strong> ，${message}
+					${sysOrganization.organizationName }</a></strong> ，${message}
 		</div>
 	</c:if>
 	<c:if test="${not empty delMessage}">
@@ -31,7 +31,7 @@ page
 			<button type="button" class="close" data-dismiss="alert">
 				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 			</button>
-			<strong>${sysOrganization.id }</strong> ，${delMessage}
+			<strong>${sysOrganization.organizationName }</strong> ，${delMessage}
 		</div>
 	</c:if>
 	<div class="panel panel-default">
@@ -72,7 +72,7 @@ page
 							<td><a
 								href="<s:url value="/sysorganization/modify/{id}"><s:param name="id" value="${sysOrganization.id }" /></s:url>">修改</a>
 								| <a class="delete"
-								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysOrganization.id}" />】么？"
+								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysOrganization.organizationName}" />】么？"
 								href="<s:url value="/sysorganization/delete/{id}"><s:param name="id" value="${sysOrganization.id }" /></s:url>">删除</a></td>
 						</tr>
 					</c:forEach>

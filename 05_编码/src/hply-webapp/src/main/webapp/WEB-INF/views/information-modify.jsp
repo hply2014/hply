@@ -125,50 +125,6 @@
 				</div>
 
 				<div class="form-group">
-					<sf:label path="createTime" cssClass="col-sm-2 control-label">创建时间</sf:label>
-					<div class="col-sm-10">
-						<div class="input-group date">
-							<sf:input cssClass="form-control" path="createTime"
-								data-date-format="yyyy-mm-dd" />
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-calendar"></i></span>
-						</div>
-						<sf:errors path="createTime" cssClass="error" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<sf:label path="createUser" cssClass="col-sm-2 control-label">创建用户</sf:label>
-					<div class="col-sm-10">
-						<sf:input cssClass="form-control" path="createUser"
-							placeholder="请输入文字..." />
-						<sf:errors path="createUser" cssClass="error" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<sf:label path="updateTime" cssClass="col-sm-2 control-label">修改时间</sf:label>
-					<div class="col-sm-10">
-						<div class="input-group date">
-							<sf:input cssClass="form-control" path="updateTime"
-								data-date-format="yyyy-mm-dd" />
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-calendar"></i></span>
-						</div>
-						<sf:errors path="updateTime" cssClass="error" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<sf:label path="updateUser" cssClass="col-sm-2 control-label">修改用户</sf:label>
-					<div class="col-sm-10">
-						<sf:input cssClass="form-control" path="updateUser"
-							placeholder="请输入文字..." />
-						<sf:errors path="updateUser" cssClass="error" />
-					</div>
-				</div>
-
-				<div class="form-group">
 					<sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
 					<div class="col-sm-10">
 						<sf:input cssClass="form-control" path="description"

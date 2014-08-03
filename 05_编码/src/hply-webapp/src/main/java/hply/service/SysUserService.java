@@ -1,17 +1,18 @@
 ﻿package hply.service;
 
+import hply.core.DataVersionConflictException;
+import hply.core.SessionHelper;
+import hply.domain.SysUser;
+import hply.mapper.SysUserMapper;
+
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import hply.domain.SysUser;
-import hply.mapper.SysUserMapper;
-import hply.core.DataVersionConflictException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 /**
@@ -27,6 +28,7 @@ public class SysUserService {
 	 * 11_系统用户，插入对象
 	 */
 	public void insert(SysUser sysUser) {
+		sysUser.setCreateUser(SessionHelper.getCurrentSysUser().getId());
 		hashedPassword(sysUser);
 		mapper.insert(sysUser);
 	}
@@ -35,6 +37,7 @@ public class SysUserService {
 	 * 11_系统用户，不进行冲突检测的更新
 	 */
 	public void update(SysUser sysUser) {
+		sysUser.setUpdateUser(SessionHelper.getCurrentSysUser().getId());
 		hashedPassword(sysUser);
 		mapper.update(sysUser);
 	}
@@ -43,6 +46,7 @@ public class SysUserService {
 	 * 11_系统用户，更新数据前检测冲突，防止并发更新错误。
 	 */
 	public void updateNoConflict(SysUser sysUser) {
+		sysUser.setUpdateUser(SessionHelper.getCurrentSysUser().getId());
 		if (mapper.getVersion(sysUser.getId()) != sysUser.getVersion()) {
 			throw new DataVersionConflictException("Data conflict has occurred， t_sys_user.id=" + sysUser.getId());
 		}

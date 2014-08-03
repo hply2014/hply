@@ -1,13 +1,16 @@
 ﻿package hply.service;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import hply.core.DataVersionConflictException;
+import hply.core.SessionHelper;
 import hply.domain.SysAuthorization;
 import hply.mapper.SysAuthorizationMapper;
-import hply.core.DataVersionConflictException;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 /**
@@ -23,6 +26,7 @@ public class SysAuthorizationService {
 	 * 13_授权关系，插入对象
 	 */
 	public void insert(SysAuthorization sysAuthorization) {
+		sysAuthorization.setCreateUser(SessionHelper.getCurrentSysUser().getId());
 		mapper.insert(sysAuthorization);
 	}
 

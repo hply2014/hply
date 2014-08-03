@@ -29,7 +29,7 @@ page
 				</div>
 				<div class="btn-group">
 					<a
-						data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysOrganization.id}" />】么？"
+						data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysOrganization.organizationName}" />】么？"
 						href="<s:url value="/sysorganization/delete/{id}"><s:param name="id" value="${sysOrganization.id }" /></s:url>"
 						class="btn btn-info delete"><span
 						class="glyphicon glyphicon-trash"></span> 删 除 </a>

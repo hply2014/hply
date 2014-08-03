@@ -21,7 +21,7 @@ page
 			</button>
 			<strong><a
 				href="<s:url value="/project/detail/${project.id }" />">
-					${project.id }</a></strong> ，${message}
+					${project.projectName }</a></strong> ，${message}
 		</div>
 	</c:if>
 	<c:if test="${not empty delMessage}">
@@ -31,7 +31,7 @@ page
 			<button type="button" class="close" data-dismiss="alert">
 				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 			</button>
-			<strong>${project.id }</strong> ，${delMessage}
+			<strong>${project.projectName }</strong> ，${delMessage}
 		</div>
 	</c:if>
 	<div class="panel panel-default">
@@ -111,7 +111,7 @@ page
 							<td><a
 								href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
 								| <a class="delete"
-								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${project.id}" />】么？"
+								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${project.projectName}" />】么？"
 								href="<s:url value="/project/delete/{id}"><s:param name="id" value="${project.id }" /></s:url>">删除</a></td>
 						</tr>
 					</c:forEach>
