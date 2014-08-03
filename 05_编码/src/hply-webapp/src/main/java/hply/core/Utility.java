@@ -36,6 +36,15 @@ public class Utility {
 
 	public static final String EMPTY = StringUtils.EMPTY;
 
+	public static boolean isNull(Object arg) {
+		if (arg instanceof String) {
+			return StringUtils.isEmpty(arg.toString());
+		} else if (arg instanceof Integer) {
+			// return (int) arg == 0;
+		}
+		return arg == null;
+	}
+
 	public static String getSmartTimeFormat(Date date) {
 		Calendar calendar = Calendar.getInstance();
 		int y0 = calendar.get(Calendar.YEAR);

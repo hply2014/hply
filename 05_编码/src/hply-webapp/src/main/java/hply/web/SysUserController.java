@@ -2,10 +2,12 @@
 
 import hply.core.Utility;
 import hply.domain.SysUser;
+import hply.service.SysOrganizationService;
 import hply.service.SysUserService;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ public class SysUserController {
 
 	@Autowired
 	private SysUserService service;
+
+	@Autowired
+	private SysOrganizationService orgService;
 
 	public static final String URI = "/sysuser";
 	public static final String JSP_PAGE_LIST = "sysuser-list";
@@ -54,6 +59,7 @@ public class SysUserController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		model.addAttribute("sysUser", new SysUser());
+		model.addAttribute("orglist", orgService.getAll());
 		model.addAttribute("page_title", "新建系统用户");
 		return JSP_PAGE_MODIFY;
 	}
@@ -64,6 +70,7 @@ public class SysUserController {
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
 		model.addAttribute("sysUser", service.get(id));
+		model.addAttribute("orglist", orgService.getAll());
 		model.addAttribute("page_title", "修改系统用户");
 		return JSP_PAGE_MODIFY;
 	}

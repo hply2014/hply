@@ -209,41 +209,42 @@ page
 </div>
 <div class="modal fade" id="resetPasswordModal">
 	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title">重置【${sysUser.realName}】的密码</h4>
-			</div>
-			<div class="modal-body">
-				<form class="form-horizontal" role="form" id="resetform">
+		<form class="form-horizontal" role="form" id="resetPasswordForm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">重置【${sysUser.realName}】的密码</h4>
+				</div>
+				<div class="modal-body">
+
 					<div class="form-group">
 						<label for="password" class="col-sm-3 control-label">新密码</label>
 						<div class="col-sm-6">
-							<input class="form-control" id="p1" type="password"
+							<input class="form-control" id="password" type="password"
 								name="password" placeholder="密码长度在4个字符以上" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="p2" class="col-sm-3 control-label">确认</label>
+						<label for="password2" class="col-sm-3 control-label">确认</label>
 						<div class="col-sm-6">
-							<input class="form-control" type="password" id="p2"
-								placeholder="请再输一遍新密码" />
+							<input class="form-control" type="password" name="password2"
+								id="password2" placeholder="请再输一遍新密码" />
 						</div>
 					</div>
 					<input type="hidden" name="id" value="${sysUser.id }">
-				</form>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">
+						<span class="glyphicon glyphicon-saved"></span> 确定
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<span class="glyphicon glyphicon-share-alt"></span> 取消
+					</button>
+				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-saved"></span> 确定
-				</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">
-					<span class="glyphicon glyphicon-share-alt"></span> 取消
-				</button>
-			</div>
-		</div>
+		</form>
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
@@ -276,23 +277,35 @@ page
 			$("#resetPasswordModal").modal("show");
 			return false;
 		});
-		$("#resetPasswordModal .btn-primary").click(function() {
-			if ($("#p1").val() == "") {
-				alert("密码不能为空。");
-				return;
+
+		$("#resetPasswordForm").validate({
+			submitHandler : function() {
+				$.post("<s:url value="/api/resetpassword"/>", $("#resetPasswordForm").serialize(), function(data) {
+					alert(data);
+				}, "text");
+				$("#resetPasswordModal").modal("hide");
+			},
+			errorElement : "p",
+			rules : {
+				password : {
+					required : true,
+					minlength : 4
+				},
+				password2 : {
+					required : true,
+					minlength : 4,
+					equalTo : "#password"
+				}
+			},
+			messages : {
+				password : {
+					minlength : "密码长度至少需要4位。"
+				},
+				password2 : {
+					minlength : "确认密码长度至少需要4位。",
+					equalTo : "必须与新密码完全一致。"
+				}
 			}
-			if ($("#p1").val() != $("#p2").val()) {
-				alert("两次输入密码不一致，请重新输入。");
-				return;
-			}
-			if ($("#p1").val().length < 4) {
-				alert("密码长度过短，至少4位。");
-				return;
-			}
-			$.post("<s:url value="/api/resetpassword"/>", $("#resetform").serialize(), function(data) {
-				alert(data);
-			}, "text");
-			$("#resetPasswordModal").modal("hide");
 		});
 	});
 </script>

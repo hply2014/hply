@@ -21,7 +21,7 @@ page
 			</button>
 			<strong><a
 				href="<s:url value="/sysuser/detail/${sysUser.id }" />">
-					${sysUser.id }</a></strong> ，${message}
+					${sysUser.realName }</a></strong> ，${message}
 		</div>
 	</c:if>
 	<c:if test="${not empty delMessage}">
@@ -31,7 +31,7 @@ page
 			<button type="button" class="close" data-dismiss="alert">
 				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 			</button>
-			<strong>${sysUser.id }</strong> ，${delMessage}
+			<strong>${sysUser.realName }</strong> ，${delMessage}
 		</div>
 	</c:if>
 	<div class="panel panel-default">

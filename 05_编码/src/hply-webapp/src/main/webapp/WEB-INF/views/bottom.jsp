@@ -28,6 +28,12 @@
 <!-- /.modal -->
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" />" charset="UTF-8"></script>
+<script src="<s:url value="/assets/jquery-validation/jquery.validate.min.js" />"></script>
+<script src="<s:url value="/assets/jquery-validation/localization/messages_zh.min.js" />"></script>
+<script src="<s:url value="/assets/bootstrap-select/js/bootstrap-select.min.js" />"></script>
+<script src="<s:url value="/assets/bootstrap-select/js/i18n/defaults-zh_CN.min.js" />"></script>
+<script src="<s:url value="/assets/bootstrap-icheck/icheck.min.js" />"></script>
+
 <script type="text/javascript">
 	$(function() {
 		$(".delete").click(function() {
@@ -46,7 +52,12 @@
 			autoclose : true,
 			todayHighlight : true
 		});
-
+		$('.selectpicker').selectpicker();
+		$(".icheckbox").iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%'
+          });
 	});
 </script>
 </body>

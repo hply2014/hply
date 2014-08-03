@@ -1,6 +1,7 @@
 ﻿package hply.test;
 
 import hply.BaseJUnit4TestCase;
+import hply.core.Utility;
 import hply.domain.SysUser;
 import hply.service.SysUserService;
 
@@ -10,10 +11,18 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SysUserServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private SysUserService service;
-    
+
+	@Test
+	public void mybatisTest() {
+		SysUser user = service.getAll().get(0);
+		System.out.println("user.getLastLoginTime()=" + Utility.isNull(user.getLastLoginTime()));
+		System.out.println("user.getFails()=" + Utility.isNull(user.getFails()));
+		System.out.println("user.getUpdateUser()=" + Utility.isNull(user.getUpdateUser()));
+	}
+
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -23,41 +32,31 @@ public class SysUserServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			SysUser sysUser = new SysUser();
 
-
-
 			sysUser.setLoginName(this.getRandomString());
-
 
 			sysUser.setRealName(this.getRandomString());
 
-
 			sysUser.setOrganizationId(this.getRandomString());
-
 
 			sysUser.setPassword(this.getRandomString());
 
-
-			sysUser.setLastLoginIp(this.getRandomString());        
-            sysUser.setLastLoginTime(this.getRandomDate()); 
-            sysUser.setFails(this.getRandomInt()); 
-            sysUser.setLogined(this.getRandomInt()); 
-
+			sysUser.setLastLoginIp(this.getRandomString());
+			sysUser.setLastLoginTime(this.getRandomDate());
+			sysUser.setFails(this.getRandomInt());
+			sysUser.setLogined(this.getRandomInt());
 
 			sysUser.setPosition(this.getRandomString());
-            sysUser.setEnabled(this.getRandomInt()); 
-            sysUser.setOrderBy(this.getRandomInt());         
-            sysUser.setCreateTime(this.getRandomDate()); 
+			sysUser.setEnabled(this.getRandomInt());
+			sysUser.setOrderBy(this.getRandomInt());
+			sysUser.setCreateTime(this.getRandomDate());
 
-
-			sysUser.setCreateUser(this.getRandomString());        
-            sysUser.setUpdateTime(this.getRandomDate()); 
-
+			sysUser.setCreateUser(this.getRandomString());
+			sysUser.setUpdateTime(this.getRandomDate());
 
 			sysUser.setUpdateUser(this.getRandomString());
 
-
 			sysUser.setDescription(this.getRandomString());
-            sysUser.setMustChangePassword(this.getRandomInt()); 
+			sysUser.setMustChangePassword(this.getRandomInt());
 
 			service.insert(sysUser);
 
@@ -76,8 +75,7 @@ public class SysUserServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
-				+ deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除：" + deleteCount + "\n");
 
 		List<SysUser> list = service.getAll();
 		for (SysUser obj : list) {
@@ -89,4 +87,3 @@ public class SysUserServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
-
