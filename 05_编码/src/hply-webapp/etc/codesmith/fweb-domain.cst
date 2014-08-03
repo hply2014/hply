@@ -31,7 +31,7 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
-import <%=NameSpace%>.Utility;
+import <%=NameSpace%>.core.Utility;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 

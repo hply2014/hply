@@ -74,7 +74,15 @@ Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID F
         {
             if(col.Name.ToUpper() == "VERSION") continue;
             f += col.Name + ", ";
-            v += "#{" + StringUtil.ToCamelCase(col.Name) + "}, ";
+            if(col.Name.ToUpper() == "CREATE_TIME"){
+                v += "now(), ";
+            }else if(col.Name.ToUpper() == "UPDATE_TIME"){
+                v += "now(), ";
+            }else if(col.Name.ToUpper() == "UPDATE_USER"){
+                v += "#{createUser}, ";
+            }else{
+                v += "#{" + StringUtil.ToCamelCase(col.Name) + "}, ";
+            }
         }
     	
     	return string.Format("insert into {0}({1}) values ( {2} )", SourceTable.Name, f.Trim().TrimEnd(','),  v.Trim().TrimEnd(','));
@@ -89,16 +97,31 @@ Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID F
             if(col.Name.ToUpper() == "ID") {
                 continue;
             }
-            
-            if(col.Name.ToUpper() == "VERSION") {
-                s += " version = version + 1, ";
+            if(col.Name.ToUpper() == "CREATE_TIME") {
+                continue;
+            }
+            if(col.Name.ToUpper() == "CREATE_USER") {
                 continue;
             }
             
-            s += string.Format("{0} = #{{{1}}}, ", col.Name, StringUtil.ToCamelCase(col.Name));
+            if(col.Name.ToUpper() == "VERSION") {
+                continue;
+            }
+            
+            if(col.Name.ToUpper() == "UPDATE_TIME") {
+                s += " update_time = now(), ";
+                continue;
+            }
+            
+            if(GetJavaType(col) == "String"){
+                s += string.Format("<if test=\"{1} != ''\">{0} = #{{{1}}},</if> ", col.Name, StringUtil.ToCamelCase(col.Name));
+            }else{
+                s += string.Format("<if test=\"{1} != null\">{0} = #{{{1}}},</if> ", col.Name, StringUtil.ToCamelCase(col.Name));
+            }
+            
         }
     	
-    	return string.Format("update {0} set {1} where id = #{{id}}", SourceTable.Name, s.Trim().TrimEnd(','));
+    	return string.Format("update {0} set {1} version = version + 1 where id = #{{id}}", SourceTable.Name, s.Trim());
     }
     
     public string GetSelectFields()

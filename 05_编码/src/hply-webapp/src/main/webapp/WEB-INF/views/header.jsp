@@ -67,6 +67,10 @@ body {
 	border-color: #463265;
 }
 
+.main form{
+	width:960px;
+}
+
 strong {
 	font-family: 微软雅黑, 黑体;
 }
@@ -74,10 +78,6 @@ strong {
 .main {
 	width: 100%;
 	padding: 10px;
-}
-
-.main form {
-	width: 600px;
 }
 
 .fancytree-selected .fancytree-title {
@@ -92,12 +92,16 @@ p.error {
 	background: url("<s:url value="/assets/jquery-validation/images/unchecked.gif"/>") no-repeat 0px 0px;
 	padding-left: 16px;
 	color:#D9534F;
+	position:relative;
+	top:10px;
 }
 
 p.success {
 	background: url("<s:url value="/assets/jquery-validation/images/checked.gif "/>") no-repeat 0px 0px;
 	padding-left: 16px;
 	color:#D9534F;
+	position:relative;
+	top:10px;
 }
 
 #warning {
@@ -144,7 +148,7 @@ p.success {
 						</c:choose>
 					</c:forEach>
 				</ul>
-				<div class="navbar-form navbar-left">
+				<div class="navbar-form navbar-left hidden">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="输入项目信息">
 					</div>

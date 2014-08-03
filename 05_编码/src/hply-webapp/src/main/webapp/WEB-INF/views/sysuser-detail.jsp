@@ -33,7 +33,7 @@ page
 				</div>
 				<div class="btn-group">
 					<a
-						data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysUser.id}" />】么？"
+						data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysUser.realName}" />】么？"
 						href="<s:url value="/sysuser/delete/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>"
 						class="btn btn-info delete"><span
 						class="glyphicon glyphicon-trash"></span> 删 除 </a>
@@ -218,7 +218,6 @@ page
 					<h4 class="modal-title">重置【${sysUser.realName}】的密码</h4>
 				</div>
 				<div class="modal-body">
-
 					<div class="form-group">
 						<label for="password" class="col-sm-3 control-label">新密码</label>
 						<div class="col-sm-6">
@@ -273,7 +272,7 @@ page
 
 	$(function() {
 		$("#btn_reset").click(function() {
-			$("#p1, #p2").val("");
+			$("#password, #password2").val("");
 			$("#resetPasswordModal").modal("show");
 			return false;
 		});

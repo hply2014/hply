@@ -21,6 +21,7 @@ public class SysUserServiceTest extends BaseJUnit4TestCase {
 		System.out.println("user.getLastLoginTime()=" + Utility.isNull(user.getLastLoginTime()));
 		System.out.println("user.getFails()=" + Utility.isNull(user.getFails()));
 		System.out.println("user.getUpdateUser()=" + Utility.isNull(user.getUpdateUser()));
+		
 	}
 
 	@Test
@@ -40,8 +41,8 @@ public class SysUserServiceTest extends BaseJUnit4TestCase {
 
 			sysUser.setPassword(this.getRandomString());
 
-			sysUser.setLastLoginIp(this.getRandomString());
-			sysUser.setLastLoginTime(this.getRandomDate());
+//			sysUser.setLastLoginIp(this.getRandomString());
+//			sysUser.setLastLoginTime(this.getRandomDate());
 			sysUser.setFails(this.getRandomInt());
 			sysUser.setLogined(this.getRandomInt());
 

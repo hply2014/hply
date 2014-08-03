@@ -4,29 +4,62 @@
 
 <mapper namespace="hply.mapper.ArrearsMapper">
 
-  <insert id="insert" parameterType="Arrears">
-    insert into t_arrears(id, project_id, funds_using, arrears_type, pay_type, amount, interest_amount, interest_rate, bank_account, bank_name, trice, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectId}, #{fundsUsing}, #{arrearsType}, #{payType}, #{amount}, #{interestAmount}, #{interestRate}, #{bankAccount}, #{bankName}, #{trice}, now(), #{createUser}, now(), #{updateUser}, #{description} )
-  </insert>
+	<insert id="insert" parameterType="Arrears">
+		insert into t_arrears(id, project_id, funds_using, arrears_type, pay_type,
+		amount, interest_amount, interest_rate, bank_account, bank_name,
+		trice, create_time, create_user, update_time, update_user,
+		description, status) values ( #{id}, #{projectId}, #{fundsUsing},
+		#{arrearsType}, #{payType}, #{amount}, #{interestAmount},
+		#{interestRate}, #{bankAccount}, #{bankName}, #{trice}, now(),
+		#{createUser}, now(), #{createUser}, #{description}, #{status} )
+	</insert>
 
-  <update id="update" parameterType="map">
-    update t_arrears set project_id = #{projectId}, funds_using = #{fundsUsing}, arrears_type = #{arrearsType}, pay_type = #{payType}, amount = #{amount}, interest_amount = #{interestAmount}, interest_rate = #{interestRate}, bank_account = #{bankAccount}, bank_name = #{bankName}, trice = #{trice}, update_time = now(), update_user = #{updateUser}, description = #{description}, version = version + 1 where id = #{id}
-  </update>
+	<update id="update" parameterType="map">
+		update t_arrears set
+		<if test="projectId != ''">project_id = #{projectId},</if>
+		<if test="fundsUsing != ''">funds_using = #{fundsUsing},</if>
+		<if test="arrearsType != ''">arrears_type = #{arrearsType},</if>
+		<if test="payType != ''">pay_type = #{payType},</if>
+		<if test="amount != null">amount = #{amount},</if>
+		<if test="interestAmount != null">interest_amount = #{interestAmount},</if>
+		<if test="interestRate != null">interest_rate = #{interestRate},</if>
+		<if test="bankAccount != ''">bank_account = #{bankAccount},</if>
+		<if test="bankName != ''">bank_name = #{bankName},</if>
+		<if test="trice != null">trice = #{trice},</if>
+		update_time = now(),
+		<if test="updateUser != ''">update_user = #{updateUser},</if>
+		<if test="description != ''">description = #{description},</if>
+		<if test="status != null">status = #{status},</if>
+		version = version + 1 where id = #{id}
+	</update>
 
-  <delete id="delete" parameterType="string">
-    delete from t_arrears where id = #{id}
-  </delete>
+	<delete id="delete" parameterType="string">
+		delete from t_arrears where id = #{id}
+	</delete>
 
-  <select id="get" parameterType="string" resultType="Arrears">
-    select id as id, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_arrears where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_arrears where id = #{id}
-  </select>
+	<select id="get" parameterType="string" resultType="Arrears">
+		select id as id, project_id as projectId, funds_using as fundsUsing,
+		arrears_type as arrearsType, pay_type as payType, amount as amount,
+		interest_amount as interestAmount, interest_rate as interestRate,
+		bank_account as bankAccount, bank_name as bankName, trice as trice,
+		create_time as createTime, create_user as createUser, update_time as
+		updateTime, update_user as updateUser, description as description,
+		version as version, status as status from t_arrears where id = #{id}
+	</select>
 
-  <select id="getAll" resultType="Arrears">
-    select id as id, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_arrears
-  </select>
+	<select id="getVersion" parameterType="string" resultType="int">
+		select version from t_arrears where id = #{id}
+	</select>
+
+	<select id="getAll" resultType="Arrears">
+		select id as id, project_id as projectId, funds_using as fundsUsing,
+		arrears_type as arrearsType, pay_type as payType, amount as amount,
+		interest_amount as interestAmount, interest_rate as interestRate,
+		bank_account as bankAccount, bank_name as bankName, trice as trice,
+		create_time as createTime, create_user as createUser, update_time as
+		updateTime, update_user as updateUser, description as description,
+		version as version, status as status from t_arrears
+	</select>
 
 </mapper>
 

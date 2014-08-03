@@ -4,29 +4,58 @@
 
 <mapper namespace="hply.mapper.CollectionsMapper">
 
-  <insert id="insert" parameterType="Collections">
-    insert into t_collections(id, project_id, ticket_code, source_of, payment_type, amount, bank_account, bank_name, trice, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectId}, #{ticketCode}, #{sourceOf}, #{paymentType}, #{amount}, #{bankAccount}, #{bankName}, #{trice}, now(), #{createUser}, now(), #{updateUser}, #{description} )
-  </insert>
+	<insert id="insert" parameterType="Collections">
+		insert into t_collections(id, project_id, ticket_code, source_of,
+		payment_type, amount, bank_account, bank_name, trice, create_time,
+		create_user, update_time, update_user, description, status) values (
+		#{id}, #{projectId}, #{ticketCode}, #{sourceOf}, #{paymentType},
+		#{amount}, #{bankAccount}, #{bankName}, #{trice}, now(),
+		#{createUser}, now(), #{createUser}, #{description}, #{status} )
+	</insert>
 
-  <update id="update" parameterType="map">
-    update t_collections set project_id = #{projectId}, ticket_code = #{ticketCode}, source_of = #{sourceOf}, payment_type = #{paymentType}, amount = #{amount}, bank_account = #{bankAccount}, bank_name = #{bankName}, trice = #{trice}, update_time = now(), update_user = #{updateUser}, description = #{description}, version = version + 1 where id = #{id}
-  </update>
+	<update id="update" parameterType="map">
+		update t_collections set
+		<if test="projectId != ''">project_id = #{projectId},</if>
+		<if test="ticketCode != ''">ticket_code = #{ticketCode},</if>
+		<if test="sourceOf != ''">source_of = #{sourceOf},</if>
+		<if test="paymentType != ''">payment_type = #{paymentType},</if>
+		<if test="amount != null">amount = #{amount},</if>
+		<if test="bankAccount != ''">bank_account = #{bankAccount},</if>
+		<if test="bankName != ''">bank_name = #{bankName},</if>
+		<if test="trice != null">trice = #{trice},</if>
+		update_time = now(),
+		<if test="updateUser != ''">update_user = #{updateUser},</if>
+		<if test="description != ''">description = #{description},</if>
+		<if test="status != null">status = #{status},</if>
+		version = version + 1 where id = #{id}
+	</update>
 
-  <delete id="delete" parameterType="string">
-    delete from t_collections where id = #{id}
-  </delete>
+	<delete id="delete" parameterType="string">
+		delete from t_collections where id = #{id}
+	</delete>
 
-  <select id="get" parameterType="string" resultType="Collections">
-    select id as id, project_id as projectId, ticket_code as ticketCode, source_of as sourceOf, payment_type as paymentType, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_collections where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_collections where id = #{id}
-  </select>
+	<select id="get" parameterType="string" resultType="Collections">
+		select id as id, project_id as projectId, ticket_code as ticketCode,
+		source_of as sourceOf, payment_type as paymentType, amount as amount,
+		bank_account as bankAccount, bank_name as bankName, trice as trice,
+		create_time as createTime, create_user as createUser, update_time as
+		updateTime, update_user as updateUser, description as description,
+		version as version, status as status from t_collections where id =
+		#{id}
+	</select>
 
-  <select id="getAll" resultType="Collections">
-    select id as id, project_id as projectId, ticket_code as ticketCode, source_of as sourceOf, payment_type as paymentType, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_collections
-  </select>
+	<select id="getVersion" parameterType="string" resultType="int">
+		select version from t_collections where id = #{id}
+	</select>
+
+	<select id="getAll" resultType="Collections">
+		select id as id, project_id as projectId, ticket_code as ticketCode,
+		source_of as sourceOf, payment_type as paymentType, amount as amount,
+		bank_account as bankAccount, bank_name as bankName, trice as trice,
+		create_time as createTime, create_user as createUser, update_time as
+		updateTime, update_user as updateUser, description as description,
+		version as version, status as status from t_collections
+	</select>
 
 </mapper>
 

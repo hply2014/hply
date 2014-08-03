@@ -10,7 +10,6 @@ import hply.service.SysUserService;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,8 +43,6 @@ public class APIController {
 		String str = Utility.EMPTY;
 		List<SysUser> list = sysUserService.getAll();
 		for (SysUser user : list) {
-			String hashedPassword = new Sha256Hash(password, user.getId(), 1).toString();
-			user.setPassword(hashedPassword);
 			sysUserService.update(user);
 			str += "RESET PASSWORD:" + user.getLoginName() + "," + user.getRealName() + "\r\n";
 		}
@@ -55,20 +52,29 @@ public class APIController {
 	@RequestMapping(value = "/reset/{loginName}/{password}")
 	public @ResponseBody String reset(@PathVariable String loginName, @PathVariable String password) {
 		SysUser user = sysUserService.getByLoginName(loginName);
-		String hashedPassword = new Sha256Hash(password, user.getId(), 1).toString();
-		user.setPassword(hashedPassword);
 		sysUserService.update(user);
 		return "RESET PASSWORD:" + user + "\r\n";
 	}
 
-	@RequestMapping(value = "/resetpassword")
+	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
 	public @ResponseBody String resetPassword(@RequestParam String id, @RequestParam String password) {
 		SysUser user = sysUserService.get(id);
 		System.out.println("id=" + id + ",password=" + password);
-		String hashedPassword = new Sha256Hash(password, user.getId(), 1).toString();
-		user.setPassword(hashedPassword);
+		user.setPassword(password);
 		sysUserService.update(user);
 		return "密码重置成功，" + user.getRealName();
+	}
+
+	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
+	public @ResponseBody String changePassword(@RequestParam String id, @RequestParam String password0, @RequestParam String password) {
+		SysUser user = sysUserService.get(id);
+		String hashedPassword = new Sha256Hash(password0, user.getId(), 1).toString();
+		if (!hashedPassword.equals(user.getPassword())) {
+			return "原密码输入错误，请重新输入。";
+		}
+		user.setPassword(password);
+		sysUserService.update(user);
+		return "密码修改成功，" + user.getRealName();
 	}
 
 	@RequestMapping(value = "/auth/{userId}/{resourceId}", method = RequestMethod.POST)

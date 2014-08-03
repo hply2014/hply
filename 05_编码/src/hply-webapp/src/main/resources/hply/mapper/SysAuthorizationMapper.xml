@@ -11,8 +11,10 @@
 	</insert>
 
 	<update id="update" parameterType="map">
-		update t_sys_authorization set resource_id = #{resourceId}, user_id =
-		#{userId}, version = version + 1 where id = #{id}
+		update t_sys_authorization set
+		<if test="resourceId != ''">resource_id = #{resourceId},</if>
+		<if test="userId != ''">user_id = #{userId},</if>
+		version = version + 1 where id = #{id}
 	</update>
 
 	<delete id="delete" parameterType="string">
@@ -20,38 +22,39 @@
 	</delete>
 
 	<select id="get" parameterType="string" resultType="SysAuthorization">
-		select id as id, resource_id as resourceId, user_id as
-		userId, create_time
+		select id as id, resource_id as resourceId, user_id as userId, create_time
 		as createTime, create_user as createUser, version as version from
-		t_sys_authorization where id =
-		#{id}
+		t_sys_authorization where id = #{id}
 	</select>
 
 	<select id="getVersion" parameterType="string" resultType="int">
-		select version from t_sys_authorization where id =
-		#{id}
+		select version from t_sys_authorization where id = #{id}
 	</select>
 
 	<select id="getAll" resultType="SysAuthorization">
 		select id as id, resource_id as resourceId, user_id as userId, create_time
-		as
-		createTime, create_user as createUser, version as version from
+		as createTime, create_user as createUser, version as version from
 		t_sys_authorization
 	</select>
 
+
 	<select id="getAuthorizationByUserId" resultType="SysAuthorization">
-		select id as id, resource_id as
+		select id as
+		id, resource_id as
 		resourceId, user_id as userId, create_time
-		as createTime, create_user as createUser, version as version from
+		as
+		createTime, create_user as createUser, version as version from
 		t_sys_authorization where user_id = #{userId}
 	</select>
 
-	<select id="getByUserIdAndResource" resultType="SysAuthorization">select id as id, resource_id as resourceId, user_id as userId,
+	<select id="getByUserIdAndResource" resultType="SysAuthorization">select id as id,
+		resource_id as resourceId, user_id as userId,
 		create_time
-		as createTime, create_user as createUser, version as version from
-		t_sys_authorization where user_id =
+		as createTime,
+		create_user as createUser, version as version from
+		t_sys_authorization
+		where user_id =
 		#{userId} and resource_id = #{resourceId}
 	</select>
-
 </mapper>
 

@@ -1,12 +1,14 @@
 package hply.web;
 
 import hply.core.SessionHelper;
-import hply.domain.SysResource;
+import hply.core.Utility;
 import hply.domain.SysUser;
 import hply.service.SysResourceService;
 import hply.service.SysUserService;
 
-import java.util.List;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -40,7 +42,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = JSP_LOGIN, method = RequestMethod.POST)
-	public String processLoginSubmit(@RequestParam String loginName, @RequestParam String password, Model model) {
+	public String processLoginSubmit(HttpServletRequest request, @RequestParam String loginName, @RequestParam String password, Model model) {
 		logger.debug("登录验证 ...");
 		SysUser user = service.getByLoginName(loginName);
 		if (user == null) {
@@ -60,6 +62,12 @@ public class HomeController {
 		}
 		// No problems, show authenticated view…
 		SessionHelper.setAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE, sysResourceService.getMenuRoot(user.getId()));
+		user.setLastLoginIp(Utility.getClientIpAddress(request));
+		user.setLastLoginTime(new Date());
+		user.setLogined(user.getLogined() + 1);
+		user.setFails(0);
+		user.setPassword(null);
+		service.update(user);
 
 		return "redirect:/";
 	}
@@ -81,8 +89,10 @@ public class HomeController {
 
 	@RequestMapping(value = "password", method = RequestMethod.GET)
 	public String changePassword(Model model) {
+		SysUser currentUser = SessionHelper.getCurrentSysUser();
 		System.out.println("changePassword ...");
-		model.addAttribute("page_title", "修改密码");
+		model.addAttribute("page_title", "修改" + currentUser.getRealName() + "的密码");
+		model.addAttribute("userId", currentUser.getId());
 		return "change-password";
 	}
 }

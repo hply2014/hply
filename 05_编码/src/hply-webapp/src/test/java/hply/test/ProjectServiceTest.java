@@ -46,7 +46,7 @@ public class ProjectServiceTest extends BaseJUnit4TestCase {
 			project.setContractCode(this.getRandomString());
 
 
-			project.setCooperation(this.getRandomString());
+			project.setCorperation(this.getRandomString());
 
 
 			project.setLegalAssignee(this.getRandomString());

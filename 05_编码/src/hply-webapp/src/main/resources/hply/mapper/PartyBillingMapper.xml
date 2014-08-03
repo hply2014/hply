@@ -4,29 +4,62 @@
 
 <mapper namespace="hply.mapper.PartyBillingMapper">
 
-  <insert id="insert" parameterType="PartyBilling">
-    insert into t_party_billing(id, project_id, invoice_code, amount, trice, tax_rate, tax_amount, step1_idea, step1_user, step1_time, step_status, create_time, create_user, update_time, update_user, description) values ( #{id}, #{projectId}, #{invoiceCode}, #{amount}, #{trice}, #{taxRate}, #{taxAmount}, #{step1Idea}, #{step1User}, #{step1Time}, #{stepStatus}, now(), #{createUser}, now(), #{updateUser}, #{description} )
-  </insert>
+	<insert id="insert" parameterType="PartyBilling">
+		insert into t_party_billing(id, project_id, invoice_code, amount, trice,
+		tax_rate, tax_amount, step1_idea, step1_user, step1_time, step_status,
+		create_time, create_user, update_time, update_user, description,
+		status) values ( #{id}, #{projectId}, #{invoiceCode}, #{amount},
+		#{trice}, #{taxRate}, #{taxAmount}, #{step1Idea}, #{step1User},
+		#{step1Time}, #{stepStatus}, now(), #{createUser}, now(),
+		#{createUser}, #{description}, #{status} )
+	</insert>
 
-  <update id="update" parameterType="map">
-    update t_party_billing set project_id = #{projectId}, invoice_code = #{invoiceCode}, amount = #{amount}, trice = #{trice}, tax_rate = #{taxRate}, tax_amount = #{taxAmount}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step_status = #{stepStatus}, update_time = now(), update_user = #{updateUser}, description = #{description}, version = version + 1 where id = #{id}
-  </update>
+	<update id="update" parameterType="map">
+		update t_party_billing set
+		<if test="projectId != ''">project_id = #{projectId},</if>
+		<if test="invoiceCode != ''">invoice_code = #{invoiceCode},</if>
+		<if test="amount != null">amount = #{amount},</if>
+		<if test="trice != null">trice = #{trice},</if>
+		<if test="taxRate != null">tax_rate = #{taxRate},</if>
+		<if test="taxAmount != null">tax_amount = #{taxAmount},</if>
+		<if test="step1Idea != ''">step1_idea = #{step1Idea},</if>
+		<if test="step1User != ''">step1_user = #{step1User},</if>
+		<if test="step1Time != null">step1_time = #{step1Time},</if>
+		<if test="stepStatus != ''">step_status = #{stepStatus},</if>
+		update_time = now(),
+		<if test="updateUser != ''">update_user = #{updateUser},</if>
+		<if test="description != ''">description = #{description},</if>
+		<if test="status != null">status = #{status},</if>
+		version = version + 1 where id = #{id}
+	</update>
 
-  <delete id="delete" parameterType="string">
-    delete from t_party_billing where id = #{id}
-  </delete>
+	<delete id="delete" parameterType="string">
+		delete from t_party_billing where id = #{id}
+	</delete>
 
-  <select id="get" parameterType="string" resultType="PartyBilling">
-    select id as id, project_id as projectId, invoice_code as invoiceCode, amount as amount, trice as trice, tax_rate as taxRate, tax_amount as taxAmount, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step_status as stepStatus, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_party_billing where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_party_billing where id = #{id}
-  </select>
+	<select id="get" parameterType="string" resultType="PartyBilling">
+		select id as id, project_id as projectId, invoice_code as invoiceCode,
+		amount as amount, trice as trice, tax_rate as taxRate, tax_amount as
+		taxAmount, step1_idea as step1Idea, step1_user as step1User,
+		step1_time as step1Time, step_status as stepStatus, create_time as
+		createTime, create_user as createUser, update_time as updateTime,
+		update_user as updateUser, description as description, version as
+		version, status as status from t_party_billing where id = #{id}
+	</select>
 
-  <select id="getAll" resultType="PartyBilling">
-    select id as id, project_id as projectId, invoice_code as invoiceCode, amount as amount, trice as trice, tax_rate as taxRate, tax_amount as taxAmount, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step_status as stepStatus, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_party_billing
-  </select>
+	<select id="getVersion" parameterType="string" resultType="int">
+		select version from t_party_billing where id = #{id}
+	</select>
+
+	<select id="getAll" resultType="PartyBilling">
+		select id as id, project_id as projectId, invoice_code as invoiceCode,
+		amount as amount, trice as trice, tax_rate as taxRate, tax_amount as
+		taxAmount, step1_idea as step1Idea, step1_user as step1User,
+		step1_time as step1Time, step_status as stepStatus, create_time as
+		createTime, create_user as createUser, update_time as updateTime,
+		update_user as updateUser, description as description, version as
+		version, status as status from t_party_billing
+	</select>
 
 </mapper>
 

@@ -1,13 +1,15 @@
 ﻿package hply.web;
 
 import hply.core.Utility;
+import hply.domain.SysOrganization;
 import hply.domain.SysUser;
 import hply.service.SysOrganizationService;
 import hply.service.SysUserService;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +40,16 @@ public class SysUserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("page_title", "系统用户");
-		model.addAttribute("list", service.getAll());
+		List<SysUser> userlist = service.getAll();
+		for (SysUser user : userlist) {
+			SysOrganization org = orgService.get(user.getOrganizationId());
+			if (org != null) {
+				user.setOrganizationId(org.getOrganizationName());
+			} else {
+				user.setOrganizationId(Utility.EMPTY);
+			}
+		}
+		model.addAttribute("list", userlist);
 		return JSP_PAGE_LIST;
 	}
 
@@ -69,9 +80,11 @@ public class SysUserController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
-		model.addAttribute("sysUser", service.get(id));
+		SysUser user = service.get(id);
+		model.addAttribute("sysUser", user);
 		model.addAttribute("orglist", orgService.getAll());
-		model.addAttribute("page_title", "修改系统用户");
+		model.addAttribute("page_title", "修改" + user.getRealName() + "的信息");
+		model.addAttribute("is_modify", "1");
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -83,6 +96,8 @@ public class SysUserController {
 		Utility.println(sysUser.toString());
 
 		if (result.hasErrors()) {
+			model.addAttribute("orglist", orgService.getAll());
+			model.addAttribute("page_title", "新建系统用户");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -100,10 +115,14 @@ public class SysUserController {
 	public String processUpdateSubmit(@PathVariable String id, @Valid SysUser sysUser, BindingResult result, Model model,
 			RedirectAttributes redirectAttrs) {
 		Utility.println(sysUser.toString());
-
 		if (result.hasErrors()) {
+			model.addAttribute("orglist", orgService.getAll());
+			model.addAttribute("page_title", "修改" + sysUser.getRealName() + "的信息");
+			model.addAttribute("is_modify", "1");
 			return JSP_PAGE_MODIFY;
 		}
+		// 修改除密码之外的其他信息
+		sysUser.setPassword(null);
 
 		service.update(sysUser);
 		redirectAttrs.addFlashAttribute("message", "修改成功");

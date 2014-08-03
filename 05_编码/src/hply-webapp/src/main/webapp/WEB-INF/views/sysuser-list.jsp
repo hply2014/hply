@@ -55,11 +55,11 @@ page
 						<th>登陆名</th>
 						<th>姓名</th>
 						<th>所在部门</th>
+						<th>职务</th>
 						<th>最后登陆IP</th>
 						<th>最后登陆时间</th>
 						<th>登陆总次数</th>
-						<th>职务</th>
-						<th>是否禁用</th>
+						<th>启用</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -75,17 +75,16 @@ page
 										value="${sysUser.loginName}" /></a></td>
 							<td><c:out value="${sysUser.realName}" /></td>
 							<td><c:out value="${sysUser.organizationId}" /></td>
+							<td><c:out value="${sysUser.position}" /></td>
 							<td><c:out value="${sysUser.lastLoginIp}" /></td>
 							<td><fmt:formatDate value="${sysUser.lastLoginTime}"
-									pattern="yyyy-MM-dd" /></td>
+									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td><c:out value="${sysUser.logined}" /></td>
-							<td><c:out value="${sysUser.position}" /></td>
-							<td><c:out value="${sysUser.enabled}" /></td>
-							<td><c:out value="${sysUser.description}" /></td>
+							<td><c:out value="${sysUser.enabled == 1 ? '启用' : '禁用'}" /></td>
 							<td><a
 								href="<s:url value="/sysuser/modify/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>">修改</a>
 								| <a class="delete"
-								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysUser.id}" />】么？"
+								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysUser.realName}" />】么？"
 								href="<s:url value="/sysuser/delete/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>">删除</a></td>
 						</tr>
 					</c:forEach>

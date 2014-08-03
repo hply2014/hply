@@ -1,13 +1,11 @@
 package hply.core;
 
-import hply.domain.SysResource;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -62,7 +60,18 @@ public class SessionHelper {
 	}
 
 	public static TreeNode getMenuRoot() {
-		return (TreeNode) getAttribute(CURRENT_ROOT_TREE_NODE);
+		try {
+			TreeNode root =(TreeNode) getAttribute(CURRENT_ROOT_TREE_NODE);
+			if(root.getChildren() == null){
+				root.setChildren(new ArrayList<TreeNode>());
+			}
+			return root;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			TreeNode root = new TreeNode();
+			root.setChildren(new ArrayList<TreeNode>());
+			return root;
+		}
 	}
 
 }

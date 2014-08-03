@@ -4,29 +4,68 @@
 
 <mapper namespace="hply.mapper.InformationMapper">
 
-  <insert id="insert" parameterType="Information">
-    insert into t_information(id, organization_id, project_name, address, developer, epc_corporation, variety, total_area, real_name, identification, contact, subscriber, trice, create_time, create_user, update_time, update_user, description) values ( #{id}, #{organizationId}, #{projectName}, #{address}, #{developer}, #{epcCorporation}, #{variety}, #{totalArea}, #{realName}, #{identification}, #{contact}, #{subscriber}, #{trice}, now(), #{createUser}, now(), #{updateUser}, #{description} )
-  </insert>
+	<insert id="insert" parameterType="Information">
+		insert into t_information(id, organization_id, project_name, address,
+		developer, epc_corporation, variety, total_area, real_name,
+		identification, contact, subscriber, trice, create_time, create_user,
+		update_time, update_user, description, status) values ( #{id},
+		#{organizationId}, #{projectName}, #{address}, #{developer},
+		#{epcCorporation}, #{variety}, #{totalArea}, #{realName},
+		#{identification}, #{contact}, #{subscriber}, #{trice}, now(),
+		#{createUser}, now(), #{createUser}, #{description}, #{status} )
+	</insert>
 
-  <update id="update" parameterType="map">
-    update t_information set organization_id = #{organizationId}, project_name = #{projectName}, address = #{address}, developer = #{developer}, epc_corporation = #{epcCorporation}, variety = #{variety}, total_area = #{totalArea}, real_name = #{realName}, identification = #{identification}, contact = #{contact}, subscriber = #{subscriber}, trice = #{trice}, update_time = now(), update_user = #{updateUser}, description = #{description}, version = version + 1 where id = #{id}
-  </update>
+	<update id="update" parameterType="map">
+		update t_information set
+		<if test="organizationId != ''">organization_id = #{organizationId},</if>
+		<if test="projectName != ''">project_name = #{projectName},</if>
+		<if test="address != ''">address = #{address},</if>
+		<if test="developer != ''">developer = #{developer},</if>
+		<if test="epcCorporation != ''">epc_corporation = #{epcCorporation},</if>
+		<if test="variety != ''">variety = #{variety},</if>
+		<if test="totalArea != ''">total_area = #{totalArea},</if>
+		<if test="realName != ''">real_name = #{realName},</if>
+		<if test="identification != ''">identification = #{identification},</if>
+		<if test="contact != ''">contact = #{contact},</if>
+		<if test="subscriber != ''">subscriber = #{subscriber},</if>
+		<if test="trice != null">trice = #{trice},</if>
+		update_time = now(),
+		<if test="updateUser != ''">update_user = #{updateUser},</if>
+		<if test="description != ''">description = #{description},</if>
+		<if test="status != null">status = #{status},</if>
+		version = version + 1 where id = #{id}
+	</update>
 
-  <delete id="delete" parameterType="string">
-    delete from t_information where id = #{id}
-  </delete>
+	<delete id="delete" parameterType="string">
+		delete from t_information where id = #{id}
+	</delete>
 
-  <select id="get" parameterType="string" resultType="Information">
-    select id as id, organization_id as organizationId, project_name as projectName, address as address, developer as developer, epc_corporation as epcCorporation, variety as variety, total_area as totalArea, real_name as realName, identification as identification, contact as contact, subscriber as subscriber, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_information where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_information where id = #{id}
-  </select>
+	<select id="get" parameterType="string" resultType="Information">
+		select id as id, organization_id as organizationId, project_name as
+		projectName, address as address, developer as developer,
+		epc_corporation as epcCorporation, variety as variety, total_area as
+		totalArea, real_name as realName, identification as identification,
+		contact as contact, subscriber as subscriber, trice as trice,
+		create_time as createTime, create_user as createUser, update_time as
+		updateTime, update_user as updateUser, description as description,
+		version as version, status as status from t_information where id =
+		#{id}
+	</select>
 
-  <select id="getAll" resultType="Information">
-    select id as id, organization_id as organizationId, project_name as projectName, address as address, developer as developer, epc_corporation as epcCorporation, variety as variety, total_area as totalArea, real_name as realName, identification as identification, contact as contact, subscriber as subscriber, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_information
-  </select>
+	<select id="getVersion" parameterType="string" resultType="int">
+		select version from t_information where id = #{id}
+	</select>
+
+	<select id="getAll" resultType="Information">
+		select id as id, organization_id as organizationId, project_name as
+		projectName, address as address, developer as developer,
+		epc_corporation as epcCorporation, variety as variety, total_area as
+		totalArea, real_name as realName, identification as identification,
+		contact as contact, subscriber as subscriber, trice as trice,
+		create_time as createTime, create_user as createUser, update_time as
+		updateTime, update_user as updateUser, description as description,
+		version as version, status as status from t_information
+	</select>
 
 </mapper>
 
