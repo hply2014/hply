@@ -9,85 +9,103 @@
 		<strong>${page_title}</strong>
 	</div>
 	<div class="panel-body">
-		<sf:form modelAttribute="arrears" cssClass="form-horizontal"
+		<sf:form modelAttribute="information" cssClass="form-horizontal"
 			role="form">
 	<div class="form-group">
-		<sf:label path="projectId" cssClass="col-sm-2 control-label">项目ID</sf:label>
+		<sf:label path="organizationId" cssClass="col-sm-2 control-label">所在部门</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="projectId" placeholder="请输入文字..." />
-            <sf:errors path="projectId" cssClass="error" />
+			<sf:input cssClass="form-control" path="organizationId" placeholder="请输入文字..." />
+            <sf:errors path="organizationId" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="fundsUsing" cssClass="col-sm-2 control-label">资金使用方</sf:label>
+		<sf:label path="projectName" cssClass="col-sm-2 control-label">项目名称</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="fundsUsing" placeholder="请输入文字..." />
-            <sf:errors path="fundsUsing" cssClass="error" />
+			<sf:input cssClass="form-control" path="projectName" placeholder="请输入文字..." />
+            <sf:errors path="projectName" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="arrearsType" cssClass="col-sm-2 control-label">欠款分类</sf:label>
+		<sf:label path="address" cssClass="col-sm-2 control-label">地址</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="arrearsType" placeholder="请输入文字..." />
-            <sf:errors path="arrearsType" cssClass="error" />
+			<sf:input cssClass="form-control" path="address" placeholder="请输入文字..." />
+            <sf:errors path="address" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="payType" cssClass="col-sm-2 control-label">支付方式</sf:label>
+		<sf:label path="developer" cssClass="col-sm-2 control-label">开发商</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="payType" placeholder="请输入文字..." />
-            <sf:errors path="payType" cssClass="error" />
+			<sf:input cssClass="form-control" path="developer" placeholder="请输入文字..." />
+            <sf:errors path="developer" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="amount" cssClass="col-sm-2 control-label">金额</sf:label>
+		<sf:label path="epcCorporation" cssClass="col-sm-2 control-label">总包单位</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="amount" placeholder="请输入数字，可以带小数..." />
-            <sf:errors path="amount" cssClass="error" />
+			<sf:input cssClass="form-control" path="epcCorporation" placeholder="请输入文字..." />
+            <sf:errors path="epcCorporation" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="interestAmount" cssClass="col-sm-2 control-label">利息额</sf:label>
+		<sf:label path="variety" cssClass="col-sm-2 control-label">品种</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="interestAmount" placeholder="请输入数字，可以带小数..." />
-            <sf:errors path="interestAmount" cssClass="error" />
+			<sf:input cssClass="form-control" path="variety" placeholder="请输入文字..." />
+            <sf:errors path="variety" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="interestRate" cssClass="col-sm-2 control-label">利率</sf:label>
+		<sf:label path="totalArea" cssClass="col-sm-2 control-label">总面积</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="interestRate" placeholder="请输入数字，可以带小数..." />
-            <sf:errors path="interestRate" cssClass="error" />
+			<sf:input cssClass="form-control" path="totalArea" placeholder="请输入文字..." />
+            <sf:errors path="totalArea" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="bankAccount" cssClass="col-sm-2 control-label">银行账号</sf:label>
+		<sf:label path="realName" cssClass="col-sm-2 control-label">姓名</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="bankAccount" placeholder="请输入文字..." />
-            <sf:errors path="bankAccount" cssClass="error" />
+			<sf:input cssClass="form-control" path="realName" placeholder="请输入文字..." />
+            <sf:errors path="realName" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="bankName" cssClass="col-sm-2 control-label">开户行名称</sf:label>
+		<sf:label path="identification" cssClass="col-sm-2 control-label">身份证号</sf:label>
 		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="bankName" placeholder="请输入文字..." />
-            <sf:errors path="bankName" cssClass="error" />
+			<sf:input cssClass="form-control" path="identification" placeholder="请输入文字..." />
+            <sf:errors path="identification" cssClass="error" />
+		</div>
+        <div class="col-sm-4"></div>
+	</div>
+
+	<div class="form-group">
+		<sf:label path="contact" cssClass="col-sm-2 control-label">联系方式</sf:label>
+		<div class="col-sm-4">
+			<sf:input cssClass="form-control" path="contact" placeholder="请输入文字..." />
+            <sf:errors path="contact" cssClass="error" />
+		</div>
+        <div class="col-sm-4"></div>
+	</div>
+
+	<div class="form-group">
+		<sf:label path="subscriber" cssClass="col-sm-2 control-label">登记人</sf:label>
+		<div class="col-sm-4">
+			<sf:input cssClass="form-control" path="subscriber" placeholder="请输入文字..." />
+            <sf:errors path="subscriber" cssClass="error" />
 		</div>
         <div class="col-sm-4"></div>
 	</div>
@@ -130,7 +148,7 @@
 					</button>
 				</div>
 				<div class="col-sm-1 control-label">
-					<a href='<s:url value="/arrears" />' class="btn btn-default"><span
+					<a href='<s:url value="/information" />' class="btn btn-default"><span
 						class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 				</div>
 			</div>
@@ -149,23 +167,27 @@
 				error.appendTo(element.parent("div").next("div"));
 			},
 			rules : { 	
-                projectId : {
+                organizationId : {
                 }, 
-                fundsUsing : {
+                projectName : {
                 }, 
-                arrearsType : {
+                address : {
                 }, 
-                payType : {
+                developer : {
                 }, 
-                amount : {
+                epcCorporation : {
                 }, 
-                interestAmount : {
+                variety : {
                 }, 
-                interestRate : {
+                totalArea : {
                 }, 
-                bankAccount : {
+                realName : {
                 }, 
-                bankName : {
+                identification : {
+                }, 
+                contact : {
+                }, 
+                subscriber : {
                 }, 
                 trice : {
                 }, 

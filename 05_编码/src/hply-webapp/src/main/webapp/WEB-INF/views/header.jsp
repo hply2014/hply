@@ -68,7 +68,7 @@ body {
 }
 
 .main form{
-	width:960px;
+	width:80%;
 }
 
 strong {

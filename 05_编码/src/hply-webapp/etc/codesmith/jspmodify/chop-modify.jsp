@@ -201,6 +201,15 @@
 		</div>
         <div class="col-sm-4"></div>
 	</div>
+
+	<div class="form-group">
+		<sf:label path="status" cssClass="col-sm-2 control-label">数据状态，0：草稿/1：正式</sf:label>
+		<div class="col-sm-4">
+			<sf:input cssClass="form-control" path="status" placeholder="请输入文字..." />
+            <sf:errors path="status" cssClass="error" />
+		</div>
+        <div class="col-sm-4"></div>
+	</div>
 			<div>
 				<div class="col-sm-4 control-label">
 					<button type="submit" class="btn btn-primary">

@@ -52,24 +52,16 @@ page
 					<tr>
 						<th>#</th>
 						<th>编号</th>
-						<th>项目ID</th>
+						<th>申请时间</th>
+						<th>申请人</th>
+						<th>所在部门</th>
 						<th>项目编号</th>
 						<th>项目名称</th>
 						<th>项目经理</th>
 						<th>主要内容</th>
-						<th>申请人</th>
-						<th>申请时间</th>
-						<th>所在部门</th>
-						<th>事业部/项目部审核意见</th>
-						<th>事业部/项目部审核人</th>
-						<th>事业部/项目部审核时间</th>
-						<th>财务部审核意见</th>
-						<th>财务部审核人</th>
-						<th>财务部审核时间</th>
-						<th>经办人办理结果</th>
-						<th>经办人</th>
-						<th>经办时间</th>
-						<th>流程状态</th>
+						<th>部门审核</th>
+						<th>财务审核</th>
+						<th>经办状态</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -83,33 +75,25 @@ page
 							<td><a
 								href="<s:url value="/chop/detail/{id}"><s:param name="id" value="${chop.id }" /></s:url>"><c:out
 										value="${chop.chopCode}" /></a></td>
-							<td><c:out value="${chop.projectId}" /></td>
+							<td><fmt:formatDate value="${chop.applyTime}"
+									pattern="yyyy-MM-dd" /></td>
+							<td><c:out value="${chop.applyUser}" /></td>
+							<td><c:out value="${chop.organizationId}" /></td>
 							<td><c:out value="${chop.projectCode}" /></td>
 							<td><c:out value="${chop.projectName}" /></td>
 							<td><c:out value="${chop.manager}" /></td>
 							<td><c:out value="${chop.content}" /></td>
-							<td><c:out value="${chop.applyUser}" /></td>
-							<td><fmt:formatDate value="${chop.applyTime}"
+							<td><c:out value="${chop.step1Idea}" /><c:out value="${chop.step1User}" /><fmt:formatDate value="${chop.step1Time}"
 									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${chop.organizationId}" /></td>
-							<td><c:out value="${chop.step1Idea}" /></td>
-							<td><c:out value="${chop.step1User}" /></td>
-							<td><fmt:formatDate value="${chop.step1Time}"
+							<td><c:out value="${chop.step2Idea}" /><c:out value="${chop.step2User}" /><fmt:formatDate value="${chop.step2Time}"
 									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${chop.step2Idea}" /></td>
-							<td><c:out value="${chop.step2User}" /></td>
-							<td><fmt:formatDate value="${chop.step2Time}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${chop.step3Idea}" /></td>
-							<td><c:out value="${chop.step3User}" /></td>
-							<td><fmt:formatDate value="${chop.step3Time}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${chop.stepStatus}" /></td>
+							<td><c:out value="${chop.step3Idea}" /><c:out value="${chop.step3User}" /><fmt:formatDate value="${chop.step3Time}"
+									pattern="yyyy-MM-dd" /><c:out value="${chop.stepStatus}" /></td>
 							<td><a
 								href="<s:url value="/chop/modify/{id}"><s:param name="id" value="${chop.id }" /></s:url>">修改</a>
 								| <a class="delete"
 								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${chop.id}" />】么？"
-								href="<s:url value="/chop/delete/{id}"><s:param name="id" value="${chop.id }" /></s:url>">删除</a></td>
+								href="<s:url value="/chop/delete/{id}"><s:param name="id" value="${chop.chopCode }" /></s:url>">删除</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -22,7 +22,7 @@ CreateTime：2014年7月17日 13:43:50
 	uri="http://www.springframework.org/tags/form" prefix="sf"<%=P()%>><<%=P()%>@ page
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"<%=P()%>><<%=P()%>@ include file="header.jsp"<%=P()%>>
-<div class="panel panel-default">
+<div class="container main"><div class="panel panel-default">
 	<div class="panel-heading">
 		<strong>${page_title}</strong>
 	</div>
@@ -34,7 +34,7 @@ CreateTime：2014年7月17日 13:43:50
         if(Ignored(col)) continue;%>
 	<div class="form-group">
 		<sf:label path="<%=StringUtil.ToCamelCase(col.Name)%>" cssClass="col-sm-2 control-label"><%=col.Description%></sf:label>
-		<div class="col-sm-10"><%if(GetJavaType(col) == "Date") {%>
+		<div class="col-sm-4"><%if(GetJavaType(col) == "Date") {%>
 					<div class="input-group date">
 						<sf:input cssClass="form-control" path="<%=StringUtil.ToCamelCase(col.Name)%>"
 							data-date-format="yyyy-mm-dd" />
@@ -45,10 +45,11 @@ CreateTime：2014年7月17日 13:43:50
 			<sf:input cssClass="form-control" path="<%=StringUtil.ToCamelCase(col.Name)%>" placeholder="请输入文字..." /><%} %>
             <sf:errors path="<%=StringUtil.ToCamelCase(col.Name)%>" cssClass="error" />
 		</div>
+        <div class="col-sm-4"></div>
 	</div>
     <%}%>
 			<div>
-				<div class="col-sm-5 control-label">
+				<div class="col-sm-4 control-label">
 					<button type="submit" class="btn btn-primary">
 						<span class="glyphicon glyphicon-ok"></span> 提 交
 					</button>
@@ -61,8 +62,25 @@ CreateTime：2014年7月17日 13:43:50
 
 		</sf:form>
 	</div>
-</div>
-
+</div></div>
+<script type="text/javascript">
+	$(function() {
+		$("form").validate({
+			errorElement : "p",
+			success: function(label) {
+				label.text("　").addClass("success");
+			},
+			errorPlacement: function(error, element) {
+				error.appendTo(element.parent("div").next("div"));
+			},
+			rules : { 	<%foreach(ColumnSchema col in SourceTable.Columns){ 
+        if(Ignored(col)) continue;%>
+                <%=StringUtil.ToCamelCase(col.Name)%> : {
+                }, <%} %>
+			}
+		});
+	});
+</script>
 <<%=P()%>@ include file="bottom.jsp"<%=P()%>>
 <script runat="template">
     public string P(){
@@ -70,7 +88,7 @@ CreateTime：2014年7月17日 13:43:50
     }
     
     public bool Ignored(ColumnSchema col){
-        string ignored = "/version/id/";
+        string ignored = "/version/id/create_user/create_time/update_time/update_user/";
         string cn = "/" + col.Name.ToLower() + "/";
         return ignored.IndexOf(cn) >= 0;
     }

@@ -53,19 +53,15 @@ page
 				<thead>
 					<tr>
 						<th>#</th>
+						<th>登记时间</th>
 						<th>所在部门</th>
 						<th>项目名称</th>
 						<th>地址</th>
 						<th>开发商</th>
-						<th>总包单位</th>
-						<th>品种</th>
-						<th>总面积</th>
 						<th>姓名</th>
 						<th>身份证号</th>
 						<th>联系方式</th>
 						<th>登记人</th>
-						<th>登记时间</th>
-						<th>备注</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -77,25 +73,20 @@ page
 						<tr>
 							<td><%=++i%></td>
 							<td><a
-								href="<s:url value="/information/detail/{id}"><s:param name="id" value="${information.id }" /></s:url>"><c:out
-										value="${information.organizationId}" /></a></td>
+								href="<s:url value="/information/detail/{id}"><s:param name="id" value="${information.id }" /></s:url>"><fmt:formatDate value="${information.trice}"
+									pattern="yyyy-MM-dd" /></a></td>
+							<td><c:out value="${information.organizationId}" /></td>
 							<td><c:out value="${information.projectName}" /></td>
 							<td><c:out value="${information.address}" /></td>
 							<td><c:out value="${information.developer}" /></td>
-							<td><c:out value="${information.epcCorporation}" /></td>
-							<td><c:out value="${information.variety}" /></td>
-							<td><c:out value="${information.totalArea}" /></td>
 							<td><c:out value="${information.realName}" /></td>
 							<td><c:out value="${information.identification}" /></td>
 							<td><c:out value="${information.contact}" /></td>
 							<td><c:out value="${information.subscriber}" /></td>
-							<td><fmt:formatDate value="${information.trice}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${information.description}" /></td>
 							<td><a
 								href="<s:url value="/information/modify/{id}"><s:param name="id" value="${information.id }" /></s:url>">修改</a>
 								| <a class="delete"
-								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${information.id}" />】么？"
+								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${information.projectName}" />】么？"
 								href="<s:url value="/information/delete/{id}"><s:param name="id" value="${information.id }" /></s:url>">删除</a></td>
 						</tr>
 					</c:forEach>
