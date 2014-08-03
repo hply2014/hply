@@ -92,7 +92,7 @@ page
 							<td><c:out value="${project.partyAddress}" /></td>
 							<td><c:out value="${project.manager}" /></td>
 							<td><c:out value="${project.contractCode}" /></td>
-							<td><c:out value="${project.cooperation}" /></td>
+							<td><c:out value="${project.corperation}" /></td>
 							<td><c:out value="${project.legalAssignee}" /></td>
 							<td><c:out value="${project.isWithholdingOffsite}" /></td>
 							<td><c:out value="${project.managementRate}" /></td>

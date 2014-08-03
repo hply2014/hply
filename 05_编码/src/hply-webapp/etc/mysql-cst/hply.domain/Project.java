@@ -170,22 +170,22 @@ public class Project implements Serializable {
 	}
 		
         
-  private String cooperation;
+  private String corperation;
   
 /**
-  * 读，数据库列： Cooperation  
+  * 读，数据库列： Corperation  
   * 
   */
-	public String getCooperation() {
-        return StringUtils.trimToEmpty(cooperation);
+	public String getCorperation() {
+        return StringUtils.trimToEmpty(corperation);
 	}
 
 /**
-  * 写，数据库列：Cooperation  
+  * 写，数据库列：Corperation  
   * 
   */
-	public void setCooperation(String cooperation) {
-		this.cooperation = cooperation;
+	public void setCorperation(String corperation) {
+		this.corperation = corperation;
 	}
 		
         
@@ -525,7 +525,7 @@ public class Project implements Serializable {
         str += MessageFormat.format("\tPartyaddress=\"{0}\"\n", this.getPartyaddress());
         str += MessageFormat.format("\tManager=\"{0}\"\n", this.getManager());
         str += MessageFormat.format("\tContractcode=\"{0}\"\n", this.getContractcode());
-        str += MessageFormat.format("\tCooperation=\"{0}\"\n", this.getCooperation());
+        str += MessageFormat.format("\tCorperation=\"{0}\"\n", this.getCorperation());
         str += MessageFormat.format("\tLegalassignee=\"{0}\"\n", this.getLegalassignee());
         str += MessageFormat.format("\tIswithholdingoffsite=\"{0}\"\n", this.getIswithholdingoffsite());
         str += MessageFormat.format("\tManagementrate=\"{0}\"\n", this.getManagementrate());

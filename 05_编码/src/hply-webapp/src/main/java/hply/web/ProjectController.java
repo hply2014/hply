@@ -57,6 +57,7 @@ public class ProjectController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		model.addAttribute("project", new Project());
+		model.addAttribute("orglist", orgService.getAll());
 		model.addAttribute("page_title", "新建合同项目信息");
 		return JSP_PAGE_MODIFY;
 	}
@@ -67,6 +68,7 @@ public class ProjectController {
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
 		model.addAttribute("project", service.get(id));
+		model.addAttribute("orglist", orgService.getAll());
 		model.addAttribute("page_title", "修改合同项目信息");
 		return JSP_PAGE_MODIFY;
 	}
@@ -79,6 +81,7 @@ public class ProjectController {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
+			model.addAttribute("orglist", orgService.getAll());
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -98,6 +101,7 @@ public class ProjectController {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
+			model.addAttribute("orglist", orgService.getAll());
 			return JSP_PAGE_MODIFY;
 		}
 
