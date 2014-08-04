@@ -37,6 +37,7 @@ public class CustomerBilling implements Serializable {
         this.version = -1;
         this.trice = new Date();
         this.createUser = SessionHelper.getCurrentSysUser().getId();
+        this.status = 0;
 	}
 
     /**
@@ -72,7 +73,7 @@ public class CustomerBilling implements Serializable {
       * 发票金额
       */
       
-      private double amount;
+      private Double amount;
       
     /**
       * [trice]，
@@ -195,7 +196,7 @@ public class CustomerBilling implements Serializable {
       * [amount] getter，
       * 发票金额
       */
-    	public double getAmount () {
+    	public Double getAmount () {
     		return this.amount;
     	}
 
@@ -203,7 +204,7 @@ public class CustomerBilling implements Serializable {
       * [amount] setter，
       * 发票金额
       */
-    	public void setAmount(double amount) {
+    	public void setAmount(Double amount) {
     		this.amount = amount;
     	}
     /**

@@ -37,6 +37,7 @@ public class Chop implements Serializable {
         this.version = -1;
         this.applyTime = new Date();
         this.applyUser = SessionHelper.getCurrentSysUser().getId();
+        this.status = 0;
 	}
 
     /**

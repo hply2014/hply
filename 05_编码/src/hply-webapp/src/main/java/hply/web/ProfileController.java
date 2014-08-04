@@ -79,6 +79,7 @@ public class ProfileController {
 		Utility.println(profile.toString());
 		
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -99,6 +100,7 @@ public class ProfileController {
 		Utility.println(profile.toString());
 		
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 

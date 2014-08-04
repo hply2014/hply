@@ -57,7 +57,7 @@ public class PaymentItem implements Serializable {
       * 报销比例上限
       */
       
-      private double reimbursementCap;
+      private Double reimbursementCap;
       
     /**
       * [create_time]，
@@ -136,7 +136,7 @@ public class PaymentItem implements Serializable {
       * [reimbursement_cap] getter，
       * 报销比例上限
       */
-    	public double getReimbursementCap () {
+    	public Double getReimbursementCap () {
     		return this.reimbursementCap;
     	}
 
@@ -144,7 +144,7 @@ public class PaymentItem implements Serializable {
       * [reimbursement_cap] setter，
       * 报销比例上限
       */
-    	public void setReimbursementCap(double reimbursementCap) {
+    	public void setReimbursementCap(Double reimbursementCap) {
     		this.reimbursementCap = reimbursementCap;
     	}
     /**

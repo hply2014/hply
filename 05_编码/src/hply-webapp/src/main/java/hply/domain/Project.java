@@ -37,6 +37,7 @@ public class Project implements Serializable {
         this.version = -1;
         this.trice = new Date();
         this.createUser = SessionHelper.getCurrentSysUser().getId();
+        this.status = 0;
 	}
 
     /**
@@ -121,28 +122,28 @@ public class Project implements Serializable {
       * 管理费率
       */
       
-      private double managementRate;
+      private Double managementRate;
       
     /**
       * [tax_rate]，
       * 税金比率
       */
       
-      private double taxRate;
+      private Double taxRate;
       
     /**
       * [contract_amount]，
       * 合同金额
       */
       
-      private double contractAmount;
+      private Double contractAmount;
       
     /**
       * [settlement_amount]，
       * 结算金额
       */
       
-      private double settlementAmount;
+      private Double settlementAmount;
       
     /**
       * [duty_paid_time]，
@@ -156,7 +157,7 @@ public class Project implements Serializable {
       * 印花税上交金额
       */
       
-      private double dutyPaidAmount;
+      private Double dutyPaidAmount;
       
     /**
       * [duty_paid_code]，
@@ -170,7 +171,7 @@ public class Project implements Serializable {
       * 占用资金情况
       */
       
-      private double capitalOccupied;
+      private Double capitalOccupied;
       
     /**
       * [project_status]，
@@ -240,14 +241,14 @@ public class Project implements Serializable {
       * 应收管理费
       */
       
-      private double managementPlanAmount;
+      private Double managementPlanAmount;
       
     /**
       * [tax_plan_amount]，
       * 应缴税金
       */
       
-      private double taxPlanAmount;
+      private Double taxPlanAmount;
       
     
     /**
@@ -419,7 +420,7 @@ public class Project implements Serializable {
       * [management_rate] getter，
       * 管理费率
       */
-    	public double getManagementRate () {
+    	public Double getManagementRate () {
     		return this.managementRate;
     	}
 
@@ -427,14 +428,14 @@ public class Project implements Serializable {
       * [management_rate] setter，
       * 管理费率
       */
-    	public void setManagementRate(double managementRate) {
+    	public void setManagementRate(Double managementRate) {
     		this.managementRate = managementRate;
     	}
     /**
       * [tax_rate] getter，
       * 税金比率
       */
-    	public double getTaxRate () {
+    	public Double getTaxRate () {
     		return this.taxRate;
     	}
 
@@ -442,14 +443,14 @@ public class Project implements Serializable {
       * [tax_rate] setter，
       * 税金比率
       */
-    	public void setTaxRate(double taxRate) {
+    	public void setTaxRate(Double taxRate) {
     		this.taxRate = taxRate;
     	}
     /**
       * [contract_amount] getter，
       * 合同金额
       */
-    	public double getContractAmount () {
+    	public Double getContractAmount () {
     		return this.contractAmount;
     	}
 
@@ -457,14 +458,14 @@ public class Project implements Serializable {
       * [contract_amount] setter，
       * 合同金额
       */
-    	public void setContractAmount(double contractAmount) {
+    	public void setContractAmount(Double contractAmount) {
     		this.contractAmount = contractAmount;
     	}
     /**
       * [settlement_amount] getter，
       * 结算金额
       */
-    	public double getSettlementAmount () {
+    	public Double getSettlementAmount () {
     		return this.settlementAmount;
     	}
 
@@ -472,7 +473,7 @@ public class Project implements Serializable {
       * [settlement_amount] setter，
       * 结算金额
       */
-    	public void setSettlementAmount(double settlementAmount) {
+    	public void setSettlementAmount(Double settlementAmount) {
     		this.settlementAmount = settlementAmount;
     	}
     /**
@@ -494,7 +495,7 @@ public class Project implements Serializable {
       * [duty_paid_amount] getter，
       * 印花税上交金额
       */
-    	public double getDutyPaidAmount () {
+    	public Double getDutyPaidAmount () {
     		return this.dutyPaidAmount;
     	}
 
@@ -502,7 +503,7 @@ public class Project implements Serializable {
       * [duty_paid_amount] setter，
       * 印花税上交金额
       */
-    	public void setDutyPaidAmount(double dutyPaidAmount) {
+    	public void setDutyPaidAmount(Double dutyPaidAmount) {
     		this.dutyPaidAmount = dutyPaidAmount;
     	}
     /**
@@ -524,7 +525,7 @@ public class Project implements Serializable {
       * [capital_occupied] getter，
       * 占用资金情况
       */
-    	public double getCapitalOccupied () {
+    	public Double getCapitalOccupied () {
     		return this.capitalOccupied;
     	}
 
@@ -532,7 +533,7 @@ public class Project implements Serializable {
       * [capital_occupied] setter，
       * 占用资金情况
       */
-    	public void setCapitalOccupied(double capitalOccupied) {
+    	public void setCapitalOccupied(Double capitalOccupied) {
     		this.capitalOccupied = capitalOccupied;
     	}
     /**
@@ -674,7 +675,7 @@ public class Project implements Serializable {
       * [management_plan_amount] getter，
       * 应收管理费
       */
-    	public double getManagementPlanAmount () {
+    	public Double getManagementPlanAmount () {
     		return this.managementPlanAmount;
     	}
 
@@ -682,14 +683,14 @@ public class Project implements Serializable {
       * [management_plan_amount] setter，
       * 应收管理费
       */
-    	public void setManagementPlanAmount(double managementPlanAmount) {
+    	public void setManagementPlanAmount(Double managementPlanAmount) {
     		this.managementPlanAmount = managementPlanAmount;
     	}
     /**
       * [tax_plan_amount] getter，
       * 应缴税金
       */
-    	public double getTaxPlanAmount () {
+    	public Double getTaxPlanAmount () {
     		return this.taxPlanAmount;
     	}
 
@@ -697,7 +698,7 @@ public class Project implements Serializable {
       * [tax_plan_amount] setter，
       * 应缴税金
       */
-    	public void setTaxPlanAmount(double taxPlanAmount) {
+    	public void setTaxPlanAmount(Double taxPlanAmount) {
     		this.taxPlanAmount = taxPlanAmount;
     	}
     

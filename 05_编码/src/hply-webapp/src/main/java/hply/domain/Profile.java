@@ -37,6 +37,7 @@ public class Profile implements Serializable {
         this.version = -1;
         this.trice = new Date();
         this.createUser = SessionHelper.getCurrentSysUser().getId();
+        this.status = 0;
 	}
 
     /**
@@ -58,7 +59,7 @@ public class Profile implements Serializable {
       * 预计用量
       */
       
-      private double expectedValue;
+      private Double expectedValue;
       
     /**
       * [profile_point]，
@@ -158,7 +159,7 @@ public class Profile implements Serializable {
       * [expected_value] getter，
       * 预计用量
       */
-    	public double getExpectedValue () {
+    	public Double getExpectedValue () {
     		return this.expectedValue;
     	}
 
@@ -166,7 +167,7 @@ public class Profile implements Serializable {
       * [expected_value] setter，
       * 预计用量
       */
-    	public void setExpectedValue(double expectedValue) {
+    	public void setExpectedValue(Double expectedValue) {
     		this.expectedValue = expectedValue;
     	}
     /**

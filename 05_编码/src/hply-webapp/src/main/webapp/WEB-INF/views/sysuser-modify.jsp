@@ -113,7 +113,20 @@
 								class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 						</div>
 					</div>
-
+					<c:if test="${not empty errors}">
+						<div id="alert-error" class="col-sm-6 col-sm-offset-5">
+							<div class="alert alert-danger alert-dismissible fade in"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert">
+									<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+								</button>
+								<h4>数据提交错误</h4>
+								<p>
+									<sf:errors path="*" />
+								</p>
+							</div>
+						</div>
+					</c:if>
 				</sf:form>
 			</div>
 		</div>

@@ -37,6 +37,7 @@ public class PartyBilling implements Serializable {
         this.version = -1;
         this.trice = new Date();
         this.createUser = SessionHelper.getCurrentSysUser().getId();
+        this.status = 0;
 	}
 
     /**
@@ -65,7 +66,7 @@ public class PartyBilling implements Serializable {
       * 发票金额
       */
       
-      private double amount;
+      private Double amount;
       
     /**
       * [trice]，
@@ -79,14 +80,14 @@ public class PartyBilling implements Serializable {
       * 税率
       */
       
-      private double taxRate;
+      private Double taxRate;
       
     /**
       * [tax_amount]，
       * 应收税金
       */
       
-      private double taxAmount;
+      private Double taxAmount;
       
     /**
       * [step1_idea]，
@@ -215,7 +216,7 @@ public class PartyBilling implements Serializable {
       * [amount] getter，
       * 发票金额
       */
-    	public double getAmount () {
+    	public Double getAmount () {
     		return this.amount;
     	}
 
@@ -223,7 +224,7 @@ public class PartyBilling implements Serializable {
       * [amount] setter，
       * 发票金额
       */
-    	public void setAmount(double amount) {
+    	public void setAmount(Double amount) {
     		this.amount = amount;
     	}
     /**
@@ -245,7 +246,7 @@ public class PartyBilling implements Serializable {
       * [tax_rate] getter，
       * 税率
       */
-    	public double getTaxRate () {
+    	public Double getTaxRate () {
     		return this.taxRate;
     	}
 
@@ -253,14 +254,14 @@ public class PartyBilling implements Serializable {
       * [tax_rate] setter，
       * 税率
       */
-    	public void setTaxRate(double taxRate) {
+    	public void setTaxRate(Double taxRate) {
     		this.taxRate = taxRate;
     	}
     /**
       * [tax_amount] getter，
       * 应收税金
       */
-    	public double getTaxAmount () {
+    	public Double getTaxAmount () {
     		return this.taxAmount;
     	}
 
@@ -268,7 +269,7 @@ public class PartyBilling implements Serializable {
       * [tax_amount] setter，
       * 应收税金
       */
-    	public void setTaxAmount(double taxAmount) {
+    	public void setTaxAmount(Double taxAmount) {
     		this.taxAmount = taxAmount;
     	}
     /**

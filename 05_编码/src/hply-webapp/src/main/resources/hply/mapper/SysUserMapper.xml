@@ -80,7 +80,7 @@
 		description, version as
 		version, must_change_password as
 		mustChangePassword from t_sys_user
-		order by order_by
+		order by order by update_time desc
 	</select>
 
 

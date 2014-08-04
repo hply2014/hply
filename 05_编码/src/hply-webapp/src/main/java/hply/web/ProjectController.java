@@ -1,7 +1,11 @@
 ﻿package hply.web;
 
+import java.util.List;
+
 import hply.core.Utility;
 import hply.domain.Project;
+import hply.domain.SysOrganization;
+import hply.domain.SysUser;
 import hply.service.ProjectService;
 import hply.service.SysOrganizationService;
 
@@ -37,7 +41,16 @@ public class ProjectController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("page_title", "合同项目信息");
-		model.addAttribute("list", service.getAll());
+		List<Project> list = service.getAll();
+		for (Project item : list) {
+			SysOrganization org = orgService.get(item.getOrganizationId());
+			if (org != null) {
+				item.setOrganizationId(org.getOrganizationName());
+			} else {
+				item.setOrganizationId(Utility.EMPTY);
+			}
+		}
+		model.addAttribute("list", list);
 		return JSP_PAGE_LIST;
 	}
 
@@ -82,6 +95,7 @@ public class ProjectController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("orglist", orgService.getAll());
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -102,6 +116,7 @@ public class ProjectController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("orglist", orgService.getAll());
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 

@@ -32,6 +32,7 @@ public class FieldTypes implements Serializable {
 	public FieldTypes() {
 		this.id = Utility.getRandomUUID();
         this.version = -1;
+        this.status = 0;
 	}
 
     /**
@@ -53,7 +54,7 @@ public class FieldTypes implements Serializable {
       * 
       */
       
-      private double fieldT02;
+      private Double fieldT02;
       
     /**
       * [field_t03]，
@@ -153,7 +154,7 @@ public class FieldTypes implements Serializable {
       * [field_t02] getter，
       * 
       */
-    	public double getFieldT02 () {
+    	public Double getFieldT02 () {
     		return this.fieldT02;
     	}
 
@@ -161,7 +162,7 @@ public class FieldTypes implements Serializable {
       * [field_t02] setter，
       * 
       */
-    	public void setFieldT02(double fieldT02) {
+    	public void setFieldT02(Double fieldT02) {
     		this.fieldT02 = fieldT02;
     	}
     /**

@@ -98,6 +98,7 @@ public class SysUserController {
 		if (result.hasErrors()) {
 			model.addAttribute("orglist", orgService.getAll());
 			model.addAttribute("page_title", "新建系统用户");
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -119,6 +120,7 @@ public class SysUserController {
 			model.addAttribute("orglist", orgService.getAll());
 			model.addAttribute("page_title", "修改" + sysUser.getRealName() + "的信息");
 			model.addAttribute("is_modify", "1");
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 

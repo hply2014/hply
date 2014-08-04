@@ -79,6 +79,7 @@ public class ProjectSummaryController {
 		Utility.println(projectSummary.toString());
 		
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -99,6 +100,7 @@ public class ProjectSummaryController {
 		Utility.println(projectSummary.toString());
 		
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 

@@ -91,168 +91,168 @@ public class ProjectSummary implements Serializable {
       * 合同金额
       */
       
-      private double contractAmount;
+      private Double contractAmount;
       
     /**
       * [change_amount]，
       * 合同调增额
       */
       
-      private double changeAmount;
+      private Double changeAmount;
       
     /**
       * [settlement_amount]，
       * 合同结算额
       */
       
-      private double settlementAmount;
+      private Double settlementAmount;
       
     /**
       * [management_rate]，
       * 比率
       */
       
-      private double managementRate;
+      private Double managementRate;
       
     /**
       * [management_plan_amount]，
       * 应收管理费
       */
       
-      private double managementPlanAmount;
+      private Double managementPlanAmount;
       
     /**
       * [management_real_amount]，
       * 实收管理费
       */
       
-      private double managementRealAmount;
+      private Double managementRealAmount;
       
     /**
       * [management_total_amount]，
       * 累计收管理费
       */
       
-      private double managementTotalAmount;
+      private Double managementTotalAmount;
       
     /**
       * [management_owe_amount]，
       * 尚欠管理费
       */
       
-      private double managementOweAmount;
+      private Double managementOweAmount;
       
     /**
       * [party_billing_amount]，
       * 发票金额
       */
       
-      private double partyBillingAmount;
+      private Double partyBillingAmount;
       
     /**
       * [party_billing_total_amount]，
       * 累计开票
       */
       
-      private double partyBillingTotalAmount;
+      private Double partyBillingTotalAmount;
       
     /**
       * [collections_amount]，
       * 收款金额
       */
       
-      private double collectionsAmount;
+      private Double collectionsAmount;
       
     /**
       * [collections_total_amount]，
       * 累计收款
       */
       
-      private double collectionsTotalAmount;
+      private Double collectionsTotalAmount;
       
     /**
       * [collections_rate]，
       * 回收率
       */
       
-      private double collectionsRate;
+      private Double collectionsRate;
       
     /**
       * [customer_billing_amount]，
       * 发票金额
       */
       
-      private double customerBillingAmount;
+      private Double customerBillingAmount;
       
     /**
       * [customer_billing_total_amount]，
       * 累计开票
       */
       
-      private double customerBillingTotalAmount;
+      private Double customerBillingTotalAmount;
       
     /**
       * [payment_amount]，
       * 支付金额
       */
       
-      private double paymentAmount;
+      private Double paymentAmount;
       
     /**
       * [payment_total_amount]，
       * 累计
       */
       
-      private double paymentTotalAmount;
+      private Double paymentTotalAmount;
       
     /**
       * [tax_rate]，
       * 比率
       */
       
-      private double taxRate;
+      private Double taxRate;
       
     /**
       * [tax_plan_amount]，
       * 应缴税金
       */
       
-      private double taxPlanAmount;
+      private Double taxPlanAmount;
       
     /**
       * [tax_real_amount]，
       * 已缴税金
       */
       
-      private double taxRealAmount;
+      private Double taxRealAmount;
       
     /**
       * [tax_total_amount]，
       * 累计已缴税金
       */
       
-      private double taxTotalAmount;
+      private Double taxTotalAmount;
       
     /**
       * [tax_owe_amount]，
       * 尚欠税金
       */
       
-      private double taxOweAmount;
+      private Double taxOweAmount;
       
     /**
       * [arrears_amount]，
       * 金额
       */
       
-      private double arrearsAmount;
+      private Double arrearsAmount;
       
     /**
       * [expected_value]，
       * 预计用量
       */
       
-      private double expectedValue;
+      private Double expectedValue;
       
     /**
       * [profile_point]，
@@ -385,7 +385,7 @@ public class ProjectSummary implements Serializable {
       * [contract_amount] getter，
       * 合同金额
       */
-    	public double getContractAmount () {
+    	public Double getContractAmount () {
     		return this.contractAmount;
     	}
 
@@ -393,14 +393,14 @@ public class ProjectSummary implements Serializable {
       * [contract_amount] setter，
       * 合同金额
       */
-    	public void setContractAmount(double contractAmount) {
+    	public void setContractAmount(Double contractAmount) {
     		this.contractAmount = contractAmount;
     	}
     /**
       * [change_amount] getter，
       * 合同调增额
       */
-    	public double getChangeAmount () {
+    	public Double getChangeAmount () {
     		return this.changeAmount;
     	}
 
@@ -408,14 +408,14 @@ public class ProjectSummary implements Serializable {
       * [change_amount] setter，
       * 合同调增额
       */
-    	public void setChangeAmount(double changeAmount) {
+    	public void setChangeAmount(Double changeAmount) {
     		this.changeAmount = changeAmount;
     	}
     /**
       * [settlement_amount] getter，
       * 合同结算额
       */
-    	public double getSettlementAmount () {
+    	public Double getSettlementAmount () {
     		return this.settlementAmount;
     	}
 
@@ -423,14 +423,14 @@ public class ProjectSummary implements Serializable {
       * [settlement_amount] setter，
       * 合同结算额
       */
-    	public void setSettlementAmount(double settlementAmount) {
+    	public void setSettlementAmount(Double settlementAmount) {
     		this.settlementAmount = settlementAmount;
     	}
     /**
       * [management_rate] getter，
       * 比率
       */
-    	public double getManagementRate () {
+    	public Double getManagementRate () {
     		return this.managementRate;
     	}
 
@@ -438,14 +438,14 @@ public class ProjectSummary implements Serializable {
       * [management_rate] setter，
       * 比率
       */
-    	public void setManagementRate(double managementRate) {
+    	public void setManagementRate(Double managementRate) {
     		this.managementRate = managementRate;
     	}
     /**
       * [management_plan_amount] getter，
       * 应收管理费
       */
-    	public double getManagementPlanAmount () {
+    	public Double getManagementPlanAmount () {
     		return this.managementPlanAmount;
     	}
 
@@ -453,14 +453,14 @@ public class ProjectSummary implements Serializable {
       * [management_plan_amount] setter，
       * 应收管理费
       */
-    	public void setManagementPlanAmount(double managementPlanAmount) {
+    	public void setManagementPlanAmount(Double managementPlanAmount) {
     		this.managementPlanAmount = managementPlanAmount;
     	}
     /**
       * [management_real_amount] getter，
       * 实收管理费
       */
-    	public double getManagementRealAmount () {
+    	public Double getManagementRealAmount () {
     		return this.managementRealAmount;
     	}
 
@@ -468,14 +468,14 @@ public class ProjectSummary implements Serializable {
       * [management_real_amount] setter，
       * 实收管理费
       */
-    	public void setManagementRealAmount(double managementRealAmount) {
+    	public void setManagementRealAmount(Double managementRealAmount) {
     		this.managementRealAmount = managementRealAmount;
     	}
     /**
       * [management_total_amount] getter，
       * 累计收管理费
       */
-    	public double getManagementTotalAmount () {
+    	public Double getManagementTotalAmount () {
     		return this.managementTotalAmount;
     	}
 
@@ -483,14 +483,14 @@ public class ProjectSummary implements Serializable {
       * [management_total_amount] setter，
       * 累计收管理费
       */
-    	public void setManagementTotalAmount(double managementTotalAmount) {
+    	public void setManagementTotalAmount(Double managementTotalAmount) {
     		this.managementTotalAmount = managementTotalAmount;
     	}
     /**
       * [management_owe_amount] getter，
       * 尚欠管理费
       */
-    	public double getManagementOweAmount () {
+    	public Double getManagementOweAmount () {
     		return this.managementOweAmount;
     	}
 
@@ -498,14 +498,14 @@ public class ProjectSummary implements Serializable {
       * [management_owe_amount] setter，
       * 尚欠管理费
       */
-    	public void setManagementOweAmount(double managementOweAmount) {
+    	public void setManagementOweAmount(Double managementOweAmount) {
     		this.managementOweAmount = managementOweAmount;
     	}
     /**
       * [party_billing_amount] getter，
       * 发票金额
       */
-    	public double getPartyBillingAmount () {
+    	public Double getPartyBillingAmount () {
     		return this.partyBillingAmount;
     	}
 
@@ -513,14 +513,14 @@ public class ProjectSummary implements Serializable {
       * [party_billing_amount] setter，
       * 发票金额
       */
-    	public void setPartyBillingAmount(double partyBillingAmount) {
+    	public void setPartyBillingAmount(Double partyBillingAmount) {
     		this.partyBillingAmount = partyBillingAmount;
     	}
     /**
       * [party_billing_total_amount] getter，
       * 累计开票
       */
-    	public double getPartyBillingTotalAmount () {
+    	public Double getPartyBillingTotalAmount () {
     		return this.partyBillingTotalAmount;
     	}
 
@@ -528,14 +528,14 @@ public class ProjectSummary implements Serializable {
       * [party_billing_total_amount] setter，
       * 累计开票
       */
-    	public void setPartyBillingTotalAmount(double partyBillingTotalAmount) {
+    	public void setPartyBillingTotalAmount(Double partyBillingTotalAmount) {
     		this.partyBillingTotalAmount = partyBillingTotalAmount;
     	}
     /**
       * [collections_amount] getter，
       * 收款金额
       */
-    	public double getCollectionsAmount () {
+    	public Double getCollectionsAmount () {
     		return this.collectionsAmount;
     	}
 
@@ -543,14 +543,14 @@ public class ProjectSummary implements Serializable {
       * [collections_amount] setter，
       * 收款金额
       */
-    	public void setCollectionsAmount(double collectionsAmount) {
+    	public void setCollectionsAmount(Double collectionsAmount) {
     		this.collectionsAmount = collectionsAmount;
     	}
     /**
       * [collections_total_amount] getter，
       * 累计收款
       */
-    	public double getCollectionsTotalAmount () {
+    	public Double getCollectionsTotalAmount () {
     		return this.collectionsTotalAmount;
     	}
 
@@ -558,14 +558,14 @@ public class ProjectSummary implements Serializable {
       * [collections_total_amount] setter，
       * 累计收款
       */
-    	public void setCollectionsTotalAmount(double collectionsTotalAmount) {
+    	public void setCollectionsTotalAmount(Double collectionsTotalAmount) {
     		this.collectionsTotalAmount = collectionsTotalAmount;
     	}
     /**
       * [collections_rate] getter，
       * 回收率
       */
-    	public double getCollectionsRate () {
+    	public Double getCollectionsRate () {
     		return this.collectionsRate;
     	}
 
@@ -573,14 +573,14 @@ public class ProjectSummary implements Serializable {
       * [collections_rate] setter，
       * 回收率
       */
-    	public void setCollectionsRate(double collectionsRate) {
+    	public void setCollectionsRate(Double collectionsRate) {
     		this.collectionsRate = collectionsRate;
     	}
     /**
       * [customer_billing_amount] getter，
       * 发票金额
       */
-    	public double getCustomerBillingAmount () {
+    	public Double getCustomerBillingAmount () {
     		return this.customerBillingAmount;
     	}
 
@@ -588,14 +588,14 @@ public class ProjectSummary implements Serializable {
       * [customer_billing_amount] setter，
       * 发票金额
       */
-    	public void setCustomerBillingAmount(double customerBillingAmount) {
+    	public void setCustomerBillingAmount(Double customerBillingAmount) {
     		this.customerBillingAmount = customerBillingAmount;
     	}
     /**
       * [customer_billing_total_amount] getter，
       * 累计开票
       */
-    	public double getCustomerBillingTotalAmount () {
+    	public Double getCustomerBillingTotalAmount () {
     		return this.customerBillingTotalAmount;
     	}
 
@@ -603,14 +603,14 @@ public class ProjectSummary implements Serializable {
       * [customer_billing_total_amount] setter，
       * 累计开票
       */
-    	public void setCustomerBillingTotalAmount(double customerBillingTotalAmount) {
+    	public void setCustomerBillingTotalAmount(Double customerBillingTotalAmount) {
     		this.customerBillingTotalAmount = customerBillingTotalAmount;
     	}
     /**
       * [payment_amount] getter，
       * 支付金额
       */
-    	public double getPaymentAmount () {
+    	public Double getPaymentAmount () {
     		return this.paymentAmount;
     	}
 
@@ -618,14 +618,14 @@ public class ProjectSummary implements Serializable {
       * [payment_amount] setter，
       * 支付金额
       */
-    	public void setPaymentAmount(double paymentAmount) {
+    	public void setPaymentAmount(Double paymentAmount) {
     		this.paymentAmount = paymentAmount;
     	}
     /**
       * [payment_total_amount] getter，
       * 累计
       */
-    	public double getPaymentTotalAmount () {
+    	public Double getPaymentTotalAmount () {
     		return this.paymentTotalAmount;
     	}
 
@@ -633,14 +633,14 @@ public class ProjectSummary implements Serializable {
       * [payment_total_amount] setter，
       * 累计
       */
-    	public void setPaymentTotalAmount(double paymentTotalAmount) {
+    	public void setPaymentTotalAmount(Double paymentTotalAmount) {
     		this.paymentTotalAmount = paymentTotalAmount;
     	}
     /**
       * [tax_rate] getter，
       * 比率
       */
-    	public double getTaxRate () {
+    	public Double getTaxRate () {
     		return this.taxRate;
     	}
 
@@ -648,14 +648,14 @@ public class ProjectSummary implements Serializable {
       * [tax_rate] setter，
       * 比率
       */
-    	public void setTaxRate(double taxRate) {
+    	public void setTaxRate(Double taxRate) {
     		this.taxRate = taxRate;
     	}
     /**
       * [tax_plan_amount] getter，
       * 应缴税金
       */
-    	public double getTaxPlanAmount () {
+    	public Double getTaxPlanAmount () {
     		return this.taxPlanAmount;
     	}
 
@@ -663,14 +663,14 @@ public class ProjectSummary implements Serializable {
       * [tax_plan_amount] setter，
       * 应缴税金
       */
-    	public void setTaxPlanAmount(double taxPlanAmount) {
+    	public void setTaxPlanAmount(Double taxPlanAmount) {
     		this.taxPlanAmount = taxPlanAmount;
     	}
     /**
       * [tax_real_amount] getter，
       * 已缴税金
       */
-    	public double getTaxRealAmount () {
+    	public Double getTaxRealAmount () {
     		return this.taxRealAmount;
     	}
 
@@ -678,14 +678,14 @@ public class ProjectSummary implements Serializable {
       * [tax_real_amount] setter，
       * 已缴税金
       */
-    	public void setTaxRealAmount(double taxRealAmount) {
+    	public void setTaxRealAmount(Double taxRealAmount) {
     		this.taxRealAmount = taxRealAmount;
     	}
     /**
       * [tax_total_amount] getter，
       * 累计已缴税金
       */
-    	public double getTaxTotalAmount () {
+    	public Double getTaxTotalAmount () {
     		return this.taxTotalAmount;
     	}
 
@@ -693,14 +693,14 @@ public class ProjectSummary implements Serializable {
       * [tax_total_amount] setter，
       * 累计已缴税金
       */
-    	public void setTaxTotalAmount(double taxTotalAmount) {
+    	public void setTaxTotalAmount(Double taxTotalAmount) {
     		this.taxTotalAmount = taxTotalAmount;
     	}
     /**
       * [tax_owe_amount] getter，
       * 尚欠税金
       */
-    	public double getTaxOweAmount () {
+    	public Double getTaxOweAmount () {
     		return this.taxOweAmount;
     	}
 
@@ -708,14 +708,14 @@ public class ProjectSummary implements Serializable {
       * [tax_owe_amount] setter，
       * 尚欠税金
       */
-    	public void setTaxOweAmount(double taxOweAmount) {
+    	public void setTaxOweAmount(Double taxOweAmount) {
     		this.taxOweAmount = taxOweAmount;
     	}
     /**
       * [arrears_amount] getter，
       * 金额
       */
-    	public double getArrearsAmount () {
+    	public Double getArrearsAmount () {
     		return this.arrearsAmount;
     	}
 
@@ -723,14 +723,14 @@ public class ProjectSummary implements Serializable {
       * [arrears_amount] setter，
       * 金额
       */
-    	public void setArrearsAmount(double arrearsAmount) {
+    	public void setArrearsAmount(Double arrearsAmount) {
     		this.arrearsAmount = arrearsAmount;
     	}
     /**
       * [expected_value] getter，
       * 预计用量
       */
-    	public double getExpectedValue () {
+    	public Double getExpectedValue () {
     		return this.expectedValue;
     	}
 
@@ -738,7 +738,7 @@ public class ProjectSummary implements Serializable {
       * [expected_value] setter，
       * 预计用量
       */
-    	public void setExpectedValue(double expectedValue) {
+    	public void setExpectedValue(Double expectedValue) {
     		this.expectedValue = expectedValue;
     	}
     /**

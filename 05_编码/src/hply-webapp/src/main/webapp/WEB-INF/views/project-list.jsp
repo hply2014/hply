@@ -55,25 +55,14 @@ page
 						<th>项目编号</th>
 						<th>项目名称</th>
 						<th>所在部门</th>
-						<th>甲方名称</th>
-						<th>甲方地址</th>
 						<th>项目经理</th>
-						<th>合同号</th>
-						<th>合作单位</th>
-						<th>法人代表</th>
-						<th>异地代扣代缴</th>
 						<th>管理费率</th>
 						<th>税金比率</th>
 						<th>合同金额</th>
-						<th>结算金额</th>
-						<th>印花税上交时间</th>
 						<th>印花税上交金额</th>
-						<th>印花税收据编号</th>
-						<th>占用资金情况</th>
+						<th>占用资金</th>
 						<th>项目状态</th>
 						<th>登记时间</th>
-						<th>备注</th>
-						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -88,31 +77,15 @@ page
 										value="${project.projectCode}" /></a></td>
 							<td><c:out value="${project.projectName}" /></td>
 							<td><c:out value="${project.organizationId}" /></td>
-							<td><c:out value="${project.partyName}" /></td>
-							<td><c:out value="${project.partyAddress}" /></td>
 							<td><c:out value="${project.manager}" /></td>
-							<td><c:out value="${project.contractCode}" /></td>
-							<td><c:out value="${project.corperation}" /></td>
-							<td><c:out value="${project.legalAssignee}" /></td>
-							<td><c:out value="${project.isWithholdingOffsite}" /></td>
 							<td><c:out value="${project.managementRate}" /></td>
 							<td><c:out value="${project.taxRate}" /></td>
-							<td><c:out value="${project.contractAmount}" /></td>
-							<td><c:out value="${project.settlementAmount}" /></td>
-							<td><fmt:formatDate value="${project.dutyPaidTime}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${project.dutyPaidAmount}" /></td>
-							<td><c:out value="${project.dutyPaidCode}" /></td>
+							<td><c:out value="${project.contractAmount}" /><c:if test="${not empty project.settlementAmount && project.settlementAmount > 0 }"><br/>结算：<c:out value="${project.settlementAmount}" /></c:if></td>
+							<td data-toggle="tooltip" data-placement="top" title="时间：<fmt:formatDate value="${project.dutyPaidTime}" pattern="yyyy-MM-dd" />，收据编号：<c:out value="${project.dutyPaidCode}" />"><c:out value="${project.dutyPaidAmount}" /></td>
 							<td><c:out value="${project.capitalOccupied}" /></td>
 							<td><c:out value="${project.projectStatus}" /></td>
 							<td><fmt:formatDate value="${project.trice}"
 									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${project.description}" /></td>
-							<td><a
-								href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
-								| <a class="delete"
-								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${project.projectName}" />】么？"
-								href="<s:url value="/project/delete/{id}"><s:param name="id" value="${project.id }" /></s:url>">删除</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

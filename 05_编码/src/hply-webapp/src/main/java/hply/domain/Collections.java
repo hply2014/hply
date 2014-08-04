@@ -37,6 +37,7 @@ public class Collections implements Serializable {
         this.version = -1;
         this.trice = new Date();
         this.createUser = SessionHelper.getCurrentSysUser().getId();
+        this.status = 0;
 	}
 
     /**
@@ -79,7 +80,7 @@ public class Collections implements Serializable {
       * 收款金额
       */
       
-      private double amount;
+      private Double amount;
       
     /**
       * [bank_account]，
@@ -231,7 +232,7 @@ public class Collections implements Serializable {
       * [amount] getter，
       * 收款金额
       */
-    	public double getAmount () {
+    	public Double getAmount () {
     		return this.amount;
     	}
 
@@ -239,7 +240,7 @@ public class Collections implements Serializable {
       * [amount] setter，
       * 收款金额
       */
-    	public void setAmount(double amount) {
+    	public void setAmount(Double amount) {
     		this.amount = amount;
     	}
     /**

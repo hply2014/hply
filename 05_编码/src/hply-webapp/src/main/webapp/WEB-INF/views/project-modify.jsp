@@ -121,29 +121,17 @@
 				</div>
 
 				<div class="form-group">
-					<!-- 
-					<sf:label path="isWithholdingOffsite"
-						cssClass="col-sm-2 control-label">异地代扣代缴</sf:label>
-					<div class="col-sm-4">
-						<sf:input cssClass="form-control" path="isWithholdingOffsite"
-							placeholder="请输入文字..." />
-						<sf:errors path="isWithholdingOffsite" cssClass="error" />
+					<div class="col-sm-2"></div>
+					<div class="col-sm-4 checkbox">
+						<sf:checkbox cssClass="icheckbox" path="isWithholdingOffsite"
+							id="isWithholdingOffsite" value="1" />
+						<label for="isWithholdingOffsite">异地代扣代缴</label>
 					</div>
-					<div class="col-sm-4"></div> -->
-					<label class="col-sm-2 control-label">&nbsp;</label>
-					<div class="col-sm-2 checkbox">
-						<label class="control-label"><sf:checkbox
-								cssClass="icheckbox" path="isWithholdingOffsite" value="1" /><span>异地代扣代缴</span></label>
-						<sf:errors path="isWithholdingOffsite" cssClass="error" />
+					<div class="col-sm-4 checkbox">
+						<sf:checkbox cssClass="icheckbox" path="capitalOccupied"
+							id="capitalOccupied" value="1" />
+						<label for="capitalOccupied">占用资金情况</label>
 					</div>
-					<div class="col-sm-1"></div>
-					<label class="col-sm-2 control-label">&nbsp;</label>
-					<div class="col-sm-2 checkbox">
-						<label class="control-label"><sf:checkbox
-								cssClass="icheckbox" path="capitalOccupied" value="1" /><span>占用资金情况</span></label>
-						<sf:errors path="capitalOccupied" cssClass="error" />
-					</div>
-					<div class="col-sm-1"></div>
 				</div>
 
 				<div class="form-group">
@@ -213,7 +201,20 @@
 							class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 					</div>
 				</div>
-
+				<c:if test="${not empty errors}">
+					<div id="alert-error" class="col-sm-6 col-sm-offset-5">
+						<div class="alert alert-danger alert-dismissible fade in"
+							role="alert">
+							<button type="button" class="close" data-dismiss="alert">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4>数据提交错误</h4>
+							<p>
+								<sf:errors path="*" />
+							</p>
+						</div>
+					</div>
+				</c:if>
 			</sf:form>
 		</div>
 	</div>

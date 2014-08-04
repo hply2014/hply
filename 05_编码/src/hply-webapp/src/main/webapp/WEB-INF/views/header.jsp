@@ -107,6 +107,11 @@ p.success {
 #warning {
 	display: none;
 }
+
+#alert-error {
+	position: absolute;
+	top:120px;
+}
 </style>
 </head>
 <body>

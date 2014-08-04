@@ -93,6 +93,7 @@ public class InformationController {
 		Utility.println(information.toString());
 
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -112,6 +113,7 @@ public class InformationController {
 		Utility.println(information.toString());
 
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 

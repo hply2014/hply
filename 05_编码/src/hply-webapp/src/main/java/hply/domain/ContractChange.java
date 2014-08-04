@@ -37,6 +37,7 @@ public class ContractChange implements Serializable {
         this.version = -1;
         this.trice = new Date();
         this.createUser = SessionHelper.getCurrentSysUser().getId();
+        this.status = 0;
 	}
 
     /**
@@ -65,14 +66,14 @@ public class ContractChange implements Serializable {
       * 管理费率
       */
       
-      private double managementRate;
+      private Double managementRate;
       
     /**
       * [change_amount]，
       * 增减金额
       */
       
-      private double changeAmount;
+      private Double changeAmount;
       
     /**
       * [trice]，
@@ -180,7 +181,7 @@ public class ContractChange implements Serializable {
       * [management_rate] getter，
       * 管理费率
       */
-    	public double getManagementRate () {
+    	public Double getManagementRate () {
     		return this.managementRate;
     	}
 
@@ -188,14 +189,14 @@ public class ContractChange implements Serializable {
       * [management_rate] setter，
       * 管理费率
       */
-    	public void setManagementRate(double managementRate) {
+    	public void setManagementRate(Double managementRate) {
     		this.managementRate = managementRate;
     	}
     /**
       * [change_amount] getter，
       * 增减金额
       */
-    	public double getChangeAmount () {
+    	public Double getChangeAmount () {
     		return this.changeAmount;
     	}
 
@@ -203,7 +204,7 @@ public class ContractChange implements Serializable {
       * [change_amount] setter，
       * 增减金额
       */
-    	public void setChangeAmount(double changeAmount) {
+    	public void setChangeAmount(Double changeAmount) {
     		this.changeAmount = changeAmount;
     	}
     /**

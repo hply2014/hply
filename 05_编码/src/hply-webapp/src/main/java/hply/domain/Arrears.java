@@ -37,6 +37,7 @@ public class Arrears implements Serializable {
         this.version = -1;
         this.trice = new Date();
         this.createUser = SessionHelper.getCurrentSysUser().getId();
+        this.status = 0;
 	}
 
     /**
@@ -79,21 +80,21 @@ public class Arrears implements Serializable {
       * 金额
       */
       
-      private double amount;
+      private Double amount;
       
     /**
       * [interest_amount]，
       * 利息额
       */
       
-      private double interestAmount;
+      private Double interestAmount;
       
     /**
       * [interest_rate]，
       * 利率
       */
       
-      private double interestRate;
+      private Double interestRate;
       
     /**
       * [bank_account]，
@@ -245,7 +246,7 @@ public class Arrears implements Serializable {
       * [amount] getter，
       * 金额
       */
-    	public double getAmount () {
+    	public Double getAmount () {
     		return this.amount;
     	}
 
@@ -253,14 +254,14 @@ public class Arrears implements Serializable {
       * [amount] setter，
       * 金额
       */
-    	public void setAmount(double amount) {
+    	public void setAmount(Double amount) {
     		this.amount = amount;
     	}
     /**
       * [interest_amount] getter，
       * 利息额
       */
-    	public double getInterestAmount () {
+    	public Double getInterestAmount () {
     		return this.interestAmount;
     	}
 
@@ -268,14 +269,14 @@ public class Arrears implements Serializable {
       * [interest_amount] setter，
       * 利息额
       */
-    	public void setInterestAmount(double interestAmount) {
+    	public void setInterestAmount(Double interestAmount) {
     		this.interestAmount = interestAmount;
     	}
     /**
       * [interest_rate] getter，
       * 利率
       */
-    	public double getInterestRate () {
+    	public Double getInterestRate () {
     		return this.interestRate;
     	}
 
@@ -283,7 +284,7 @@ public class Arrears implements Serializable {
       * [interest_rate] setter，
       * 利率
       */
-    	public void setInterestRate(double interestRate) {
+    	public void setInterestRate(Double interestRate) {
     		this.interestRate = interestRate;
     	}
     /**
