@@ -11,7 +11,7 @@ public class SysResourceServiceTest extends BaseJUnit4TestCase {
 
 	@Autowired
 	private SysResourceService service;
-
+    
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,19 +21,29 @@ public class SysResourceServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			SysResource sysResource = new SysResource();
 
-			sysResource.setRescode(this.getRandomString());
 
-			sysResource.setResname(this.getRandomString());
+
+			sysResource.setResourceCode(this.getRandomString());
+
+
+			sysResource.setResourceName(this.getRandomString());
+
 
 			sysResource.setIcon(this.getRandomString());
 
-			sysResource.setResUrl(this.getRandomString());
 
-			sysResource.setResType(this.getRandomString());
-			sysResource.setOrderBy(this.getRandomInt());
+			sysResource.setResourceUri(this.getRandomString());
+
+
+			sysResource.setResourceType(this.getRandomString());
+            sysResource.setOrderId(this.getRandomInt()); 
+
 
 			sysResource.setParentId(this.getRandomString());
-			sysResource.setEnabled(this.getRandomInt());
+
+
+			sysResource.setEnabled(this.getRandomString());
+
 
 			sysResource.setDescription(this.getRandomString());
 
@@ -54,8 +64,8 @@ public class SysResourceServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
-				+ ", 删除：" + deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
+				+ deleteCount + "\n");
 
 		List<SysResource> list = service.getAll();
 		for (SysResource obj : list) {
@@ -67,3 +77,4 @@ public class SysResourceServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
+

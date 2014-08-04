@@ -27,7 +27,7 @@ import <%=NameSpace%>.service.<%=GetDomainClassName()%>Service;
 import <%=NameSpace%>.domain.<%=GetDomainClassName()%>;
 
 public class <%=GetDomainClassName()%>ServiceTest extends BaseJUnit4TestCase {
-	
+
 	@Autowired
 	private <%=GetDomainClassName()%>Service service;
     

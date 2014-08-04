@@ -11,7 +11,7 @@ public class SysParameterServiceTest extends BaseJUnit4TestCase {
 
 	@Autowired
 	private SysParameterService service;
-
+    
 	@Test
 	public void allServiceTest() {
 		int objectCount = this.getRandomInt();
@@ -21,20 +21,28 @@ public class SysParameterServiceTest extends BaseJUnit4TestCase {
 		for (int i = 0; i < objectCount; i++) {
 			SysParameter sysParameter = new SysParameter();
 
+
+
 			sysParameter.setEnName(this.getRandomString());
+
 
 			sysParameter.setCnName(this.getRandomString());
 
+
 			sysParameter.setParamValue(this.getRandomString());
 
-			sysParameter.setDefaultValue(this.getRandomString());
-			sysParameter.setIsInner(this.getRandomInt());
-			sysParameter.setCreateTime(this.getRandomDate());
 
-			sysParameter.setCreateUser(this.getRandomString());
-			sysParameter.setUpdateTime(this.getRandomDate());
+			sysParameter.setDefaultValue(this.getRandomString());
+            sysParameter.setIsInner(this.getRandomInt());         
+            sysParameter.setCreateTime(this.getRandomDate()); 
+
+
+			sysParameter.setCreateUser(this.getRandomString());        
+            sysParameter.setUpdateTime(this.getRandomDate()); 
+
 
 			sysParameter.setUpdateUser(this.getRandomString());
+
 
 			sysParameter.setDescription(this.getRandomString());
 
@@ -55,8 +63,8 @@ public class SysParameterServiceTest extends BaseJUnit4TestCase {
 			}
 		}
 
-		System.out.println("写入：" + objectCount + ", 修改：" + updateCount
-				+ ", 删除：" + deleteCount + "\n");
+		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
+				+ deleteCount + "\n");
 
 		List<SysParameter> list = service.getAll();
 		for (SysParameter obj : list) {
@@ -68,3 +76,4 @@ public class SysParameterServiceTest extends BaseJUnit4TestCase {
 	}
 
 }
+

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.fweb1.mapper.NewTableMapper">
+
+  <insert id="insert" parameterType="NewTable">
+    insert into new_table(id, t1, t2, t3, t4) values ( #{id}, #{t1}, #{t2}, #{t3}, #{t4} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update new_table set t1 = #{t1}, t2 = #{t2}, t3 = #{t3}, t4 = #{t4},  version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from new_table where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="NewTable">
+    select id as Id, t1 as T1, t2 as T2, t3 as T3, t4 as T4, version as Version from new_table where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from new_table where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="NewTable">
+    select id as Id, t1 as T1, t2 as T2, t3 as T3, t4 as T4, version as Version from new_table
+  </select>
+
+</mapper>
+

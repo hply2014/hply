@@ -1,0 +1,41 @@
+﻿<%-- 
+Name:
+Author: 成七一
+Description:Service Class GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID FRAMEWORK）
+CreateTime：2014年7月17日 13:43:50
+--%>
+
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Assembly Name="System" %>
+<%@ Import Namespace="System" %>
+<%@ Map Name="JavaAlias" Src="mysql-java-alias" %>
+
+<%@ Template Language="C#" TargetLanguage="Text" %>
+<%@ Property Name="SourceTables" Optional="True" Type="SchemaExplorer.TableSchemaCollection" Category="Database" Description="可以选择多张表." %>
+<%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
+<%@ Property Name="OutputDirectory" Type="System.String" Category="Context" Default=".\jspmodify" %>
+
+<%@ Register Name="JspModify" Template="fweb-jsp-modify.cst" MergeProperties="False" ExcludeProperties="" %>
+
+<%		
+	output();
+%>
+
+<script runat="template">
+    public void output() {
+        foreach(TableSchema table in SourceTables)
+    	{
+            String fileName = OutputDirectory + "\\" + StringUtil.ToPascalCase(table.Name.TrimStart("t_".ToCharArray())).ToLower() + "-modify.jsp";
+            this.Response.WriteLine(new System.IO.FileInfo(fileName).FullName + "...");
+            JspModify jsp = this.Create<JspModify>();
+            jsp.SourceTable = table;
+            jsp.Author = Author;
+            jsp.RenderToFile(fileName, true);
+        }
+        this.Response.WriteLine("\r\nTotal " + SourceTables.Count + " generated successfull.");
+    }
+
+</script>

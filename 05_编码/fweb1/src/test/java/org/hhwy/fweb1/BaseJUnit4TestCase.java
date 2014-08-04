@@ -2,6 +2,7 @@ package org.hhwy.fweb1;
 
 import java.util.Date;
 
+import org.hhwy.fweb1.core.Utility;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -23,15 +24,15 @@ public abstract class BaseJUnit4TestCase extends
 		return getRandomInt() > MAX / 2;
 	}
 
-	protected String getRandomString(){
-		return Utility.randomString(5) + ",²âÊÔ";
+	protected String getRandomString() {
+		return Utility.randomString(5) + ",æµ‹è¯•";
 	}
-	
-	protected Date getRandomDate(){
+
+	protected Date getRandomDate() {
 		return new Date((long) (Math.random() * 1E8));
 	}
 
-	protected double getRandomDouble(){
+	protected double getRandomDouble() {
 		return Math.random() * 1E3;
 	}
 }

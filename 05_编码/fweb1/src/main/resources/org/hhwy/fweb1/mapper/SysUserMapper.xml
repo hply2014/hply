@@ -11,20 +11,28 @@
 		description, must_change_password) values ( #{id}, #{loginName},
 		#{realName}, #{organizationId}, #{password}, #{lastLoginIp},
 		#{lastLoginTime}, #{fails}, #{logined}, #{position}, #{enabled},
-		#{orderBy}, #{createTime}, #{createUser}, #{updateTime},
-		#{updateUser}, #{description}, #{mustChangePassword} )
+		#{orderBy}, now(), #{createUser}, now(), #{createUser},
+		#{description}, #{mustChangePassword} )
 	</insert>
 
 	<update id="update" parameterType="map">
-		update t_sys_user set login_name = #{loginName}, real_name = #{realName},
-		organization_id = #{organizationId}, password = #{password},
-		last_login_ip = #{lastLoginIp}, last_login_time = #{lastLoginTime},
-		fails = #{fails}, logined = #{logined}, position = #{position},
-		enabled = #{enabled}, order_by = #{orderBy}, create_time =
-		#{createTime}, create_user = #{createUser}, update_time =
-		#{updateTime}, update_user = #{updateUser}, description =
-		#{description}, version = version + 1, must_change_password =
-		#{mustChangePassword} where id = #{id}
+		update t_sys_user set
+		<if test="loginName != null">login_name = #{loginName},</if>
+		<if test="realName != null">real_name = #{realName},</if>
+		<if test="organizationId != null">organization_id = #{organizationId},</if>
+		<if test="password != null">password = #{password},</if>
+		<if test="lastLoginIp != null">last_login_ip = #{lastLoginIp},</if>
+		<if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
+		<if test="fails != null">fails = #{fails},</if>
+		<if test="logined != null">logined = #{logined},</if>
+		<if test="position != null">position = #{position},</if>
+		<if test="enabled != null">enabled = #{enabled},</if>
+		<if test="orderBy != null">order_by = #{orderBy},</if>
+		update_time = now(),
+		<if test="updateUser != null">update_user = #{updateUser},</if>
+		<if test="description != null">description = #{description},</if>
+		<if test="mustChangePassword != null">must_change_password = #{mustChangePassword},</if>
+		version = version + 1 where id = #{id}
 	</update>
 
 	<delete id="delete" parameterType="string">
@@ -32,14 +40,14 @@
 	</delete>
 
 	<select id="get" parameterType="string" resultType="SysUser">
-		select id as Id, login_name as LoginName, real_name as RealName,
-		organization_id as OrganizationId, password as Password, last_login_ip
-		as LastLoginIp, last_login_time as LastLoginTime, fails as Fails,
-		logined as Logined, position as Position, enabled as Enabled, order_by
-		as OrderBy, create_time as CreateTime, create_user as CreateUser,
-		update_time as UpdateTime, update_user as UpdateUser, description as
-		Description, version as Version, must_change_password as
-		MustChangePassword from t_sys_user where id = #{id}
+		select id as id, login_name as loginName, real_name as realName,
+		organization_id as organizationId, password as password, last_login_ip
+		as lastLoginIp, last_login_time as lastLoginTime, fails as fails,
+		logined as logined, position as position, enabled as enabled, order_by
+		as orderBy, create_time as createTime, create_user as createUser,
+		update_time as updateTime, update_user as updateUser, description as
+		description, version as version, must_change_password as
+		mustChangePassword from t_sys_user where id = #{id}
 	</select>
 
 	<select id="getVersion" parameterType="string" resultType="int">
@@ -47,15 +55,33 @@
 	</select>
 
 	<select id="getAll" resultType="SysUser">
-		select id as Id, login_name as LoginName, real_name as RealName,
-		organization_id as OrganizationId, password as Password, last_login_ip
-		as LastLoginIp, last_login_time as LastLoginTime, fails as Fails,
-		logined as Logined, position as Position, enabled as Enabled, order_by
-		as OrderBy, create_time as CreateTime, create_user as CreateUser,
-		update_time as UpdateTime, update_user as UpdateUser, description as
-		Description, version as Version, must_change_password as
-		MustChangePassword from t_sys_user
+		select id as id, login_name as loginName, real_name as realName,
+		organization_id as organizationId, password as password, last_login_ip
+		as lastLoginIp, last_login_time as lastLoginTime, fails as fails,
+		logined as logined, position as position, enabled as enabled, order_by
+		as orderBy, create_time as createTime, create_user as createUser,
+		update_time as updateTime, update_user as updateUser, description as
+		description, version as version, must_change_password as
+		mustChangePassword from t_sys_user
 	</select>
 
+	<select id="getByLoginName" resultType="SysUser">
+		select id as id,
+		login_name as loginName, real_name as realName,
+		organization_id as
+		organizationId, password as password, last_login_ip
+		as lastLoginIp,
+		last_login_time as lastLoginTime, fails as fails,
+		logined as logined,
+		position as position, enabled as enabled, order_by
+		as orderBy,
+		create_time as createTime, create_user as createUser,
+		update_time as
+		updateTime, update_user as updateUser, description as
+		description,
+		version as version, must_change_password as
+		mustChangePassword from
+		t_sys_user where login_name = #{loginName}
+	</select>
 </mapper>
 

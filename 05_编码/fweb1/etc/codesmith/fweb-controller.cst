@@ -1,0 +1,174 @@
+﻿<%-- 
+Name:
+Author: 成七一
+Description:Service Class GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID FRAMEWORK）
+CreateTime：2014年7月17日 13:43:50
+--%>
+
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Assembly Name="System" %>
+<%@ Import Namespace="System" %>
+<%@ Map Name="JavaAlias" Src="mysql-java-alias" %>
+
+<%@ Template Language="C#" TargetLanguage="Java" %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Database" Description="只能选择一个表." %>
+<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.fweb1" %>
+<%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
+package <%=NameSpace%>.controller;
+
+
+import <%=NameSpace%>.core.Utility;
+import <%=NameSpace%>.domain.<%=GetDomainClassName()%>;
+import <%=NameSpace%>.service.<%=GetDomainClassName()%>Service;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+@Controller
+@RequestMapping(value = <%=GetDomainClassName()%>Controller.URI)
+public class <%=GetDomainClassName()%>Controller {
+    
+	@Autowired
+    private <%=GetDomainClassName()%>Service service;
+
+	public static final String URI = "/<%=GetDomainUri()%>";
+	public static final String JSP_PAGE_LIST = "<%=GetDomainUri()%>-list";
+	public static final String JSP_PAGE_DETAIL = "<%=GetDomainUri()%>-detail";
+	public static final String JSP_PAGE_MODIFY = "<%=GetDomainUri()%>-modify";
+    
+    
+	/*
+	 * 列表页面
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public String list(Model model) {
+		model.addAttribute("page_title", "<%=GetDescription()%>");
+		model.addAttribute("list", service.getAll());
+		return JSP_PAGE_LIST;
+	}
+
+	/*
+	 * 详情页面
+	 */
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	public String detail(@PathVariable String id, Model model) {
+		model.addAttribute("page_title", "<%=GetDescription()%>的详情信息");
+		model.addAttribute("<%=GetDomainVariableName()%>", service.get(id));
+		return JSP_PAGE_DETAIL;
+	}
+
+	/*
+	 * 新建页面
+	 */
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public String createForm(Model model) {
+		model.addAttribute("<%=GetDomainVariableName()%>", new <%=GetDomainClassName()%>());
+		model.addAttribute("page_title", "新建<%=GetDescription()%>");
+		return JSP_PAGE_MODIFY;
+	}
+
+	/*
+	 * 修改页面
+	 */
+	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
+	public String updateForm(@PathVariable String id, Model model) {
+		model.addAttribute("<%=GetDomainVariableName()%>", service.get(id));
+		model.addAttribute("page_title", "修改<%=GetDescription()%>");
+		return JSP_PAGE_MODIFY;
+	}
+
+	/*
+	 * 处理新建页面的提交动作
+	 */
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public String processCreateSubmit(@Valid <%=GetDomainClassName()%> <%=GetDomainVariableName()%>,
+			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+		Utility.println(<%=GetDomainVariableName()%>.toString());
+		
+		if (result.hasErrors()) {
+			return JSP_PAGE_MODIFY;
+		}
+
+		service.insert(<%=GetDomainVariableName()%>);
+		redirectAttrs.addFlashAttribute("message", "插入成功");
+
+		redirectAttrs.addFlashAttribute("<%=GetDomainVariableName()%>", <%=GetDomainVariableName()%>);
+		return "redirect:" + URI;
+	}
+
+	/*
+	 * 处理修改页面的提交动作
+	 */
+	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
+	public String processUpdateSubmit(@PathVariable String id,
+			@Valid <%=GetDomainClassName()%> <%=GetDomainVariableName()%>, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
+		Utility.println(<%=GetDomainVariableName()%>.toString());
+		
+		if (result.hasErrors()) {
+			return JSP_PAGE_MODIFY;
+		}
+
+		service.update(<%=GetDomainVariableName()%>);
+		redirectAttrs.addFlashAttribute("message", "修改成功");
+
+		redirectAttrs.addFlashAttribute("<%=GetDomainVariableName()%>", <%=GetDomainVariableName()%>);
+		return "redirect:" + URI;
+	}
+
+	/*
+	 * 删除页面
+	 */
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String processDeleteSubmit(@PathVariable String id,
+			RedirectAttributes redirectAttrs) {
+		<%=GetDomainClassName()%> <%=GetDomainVariableName()%> = service.get(id);
+		service.delete(id);
+		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
+		redirectAttrs.addFlashAttribute("<%=GetDomainVariableName()%>", <%=GetDomainVariableName()%>);
+		return "redirect:" + URI;
+	}
+}
+
+<script runat="template">
+    public override string GetFileName() {
+        return GetDomainClassName() + "Controller.java";
+    }
+    
+    public string GetDescription(){
+        string[] dlist = SourceTable.Description.Split('_');
+        return dlist[dlist.Length - 1];
+    }
+    
+    public string GetDomainClassName() {
+        return StringUtil.ToPascalCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetDomainVariableName() {
+        return StringUtil.ToCamelCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetDomainUri() {
+        return StringUtil.ToPascalCase(SourceTable.Name.TrimStart("t_".ToCharArray())).ToLower();
+    }
+    
+    public string GetJavaType(ColumnSchema col) {
+        try{
+            return JavaAlias[col.NativeType];
+        }catch(Exception ex){
+            return col.NativeType + "[N/A]";
+        }
+    }
+</script>
