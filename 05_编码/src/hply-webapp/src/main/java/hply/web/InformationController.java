@@ -5,7 +5,6 @@ import java.util.List;
 import hply.core.Utility;
 import hply.domain.Information;
 import hply.domain.SysOrganization;
-import hply.domain.SysUser;
 import hply.service.InformationService;
 import hply.service.SysOrganizationService;
 

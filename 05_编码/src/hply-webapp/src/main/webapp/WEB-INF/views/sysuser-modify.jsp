@@ -51,14 +51,12 @@
 						</div>
 					</c:if>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">&nbsp;</label>
-						<div class="col-sm-4 checkbox">
-							<label class="control-label"><sf:checkbox
-									cssClass="icheckbox" path="mustChangePassword"
-									value="0" /><span>下次登录必须修改密码</span></label>
-							<sf:errors path="mustChangePassword" cssClass="error" />
+						<div class="col-sm-2"></div>
+						<div class="col-sm-6 checkbox">
+							<sf:checkbox cssClass="icheckbox" path="mustChangePassword"
+								id="mustChangePassword" value="1" />
+							<label for="mustChangePassword">下次登录必须修改密码</label>
 						</div>
-						<div class="col-sm-4"></div>
 					</div>
 					<div class="form-group">
 						<sf:label path="organizationId" cssClass="col-sm-2 control-label">所在部门</sf:label>
@@ -80,13 +78,11 @@
 						<div class="col-sm-4"></div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">&nbsp;</label>
-						<div class="col-sm-4 checkbox">
-							<label class="control-label"><sf:checkbox
-									cssClass="icheckbox" path="enabled" value="1" /><span>启用，允许登录系统</span></label>
-							<sf:errors path="enabled" cssClass="error" />
+						<div class="col-sm-2"></div>
+						<div class="col-sm-6 checkbox">
+							<sf:checkbox cssClass="icheckbox" path="enabled" id="enabled"
+								value="1" /><label for="enabled">启用，允许登录系统</label>
 						</div>
-						<div class="col-sm-4"></div>
 					</div>
 					<div class="form-group">
 						<sf:label path="orderBy" cssClass="col-sm-2 control-label">顺序号</sf:label>
@@ -127,10 +123,10 @@
 	$(function() {
 		$("form").validate({
 			errorElement : "p",
-			success: function(label) {
+			success : function(label) {
 				label.text("　").addClass("success");
 			},
-			errorPlacement: function(error, element) {
+			errorPlacement : function(error, element) {
 				error.appendTo(element.parent("div").next("div"));
 			},
 			rules : {
@@ -151,7 +147,7 @@
 			},
 			messages : {
 				loginName : {
-					minlength : "要求英文字母、数字，长度在3 ~ 10之间。"
+					minlength : "要求英文字母、数字，长度在3 ~ 20之间。"
 				},
 				password : {
 					minlength : "密码长度至少需要4位。"

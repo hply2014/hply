@@ -159,10 +159,7 @@ p.success {
 				<div class="navbar-form pull-right">
 					<div class="btn-group">
 						<button type="button" class="btn btn-primary dropdown-toggle"
-							data-toggle="dropdown"
-							title="在<%=SessionHelper.getLoginTime()%>登录的">
-							<%=SessionHelper.getCurrentRealName()%>
-							<span class="caret"></span>
+							data-toggle="dropdown" title="在<%=SessionHelper.getLoginTime()%>登录的"><%=SessionHelper.getCurrentRealName()%><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu pull-right" role="menu">
 							<li><a href="#">锁定</a></li>

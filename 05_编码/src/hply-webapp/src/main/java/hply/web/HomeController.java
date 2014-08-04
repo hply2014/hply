@@ -64,9 +64,9 @@ public class HomeController {
 		SessionHelper.setAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE, sysResourceService.getMenuRoot(user.getId()));
 		user.setLastLoginIp(Utility.getClientIpAddress(request));
 		user.setLastLoginTime(new Date());
-		user.setLogined(user.getLogined() + 1);
+		int logined = user.getLogined() == null ? 0 : user.getLogined().intValue();
+		user.setLogined(logined + 1);
 		user.setFails(0);
-		user.setPassword(null);
 		service.update(user);
 
 		return "redirect:/";

@@ -121,8 +121,6 @@ public class SysUserController {
 			model.addAttribute("is_modify", "1");
 			return JSP_PAGE_MODIFY;
 		}
-		// 修改除密码之外的其他信息
-		sysUser.setPassword(null);
 
 		service.update(sysUser);
 		redirectAttrs.addFlashAttribute("message", "修改成功");

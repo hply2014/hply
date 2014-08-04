@@ -7,7 +7,6 @@ import hply.mapper.SysUserMapper;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,6 @@ public class SysUserService {
 	 */
 	public void update(SysUser sysUser) {
 		sysUser.setUpdateUser(SessionHelper.getCurrentSysUser().getId());
-		hashedPassword(sysUser);
 		mapper.update(sysUser);
 	}
 
@@ -50,7 +48,6 @@ public class SysUserService {
 		if (mapper.getVersion(sysUser.getId()) != sysUser.getVersion()) {
 			throw new DataVersionConflictException("Data conflict has occurred， t_sys_user.id=" + sysUser.getId());
 		}
-		hashedPassword(sysUser);
 		mapper.update(sysUser);
 	}
 
@@ -80,10 +77,11 @@ public class SysUserService {
 		return user;
 	}
 
-	private void hashedPassword(SysUser sysUser) {
-		if (StringUtils.isNotEmpty(sysUser.getPassword()) && sysUser.getPassword().length() < 64) {
-			String hashedPassword = new Sha256Hash(sysUser.getPassword(), sysUser.getId(), 1).toString();
-			sysUser.setPassword(hashedPassword);
-		}
+	public void hashedPassword(SysUser sysUser) {
+		// if (StringUtils.isNotEmpty(sysUser.getPassword()) &&
+		// sysUser.getPassword().length() < 64) {
+		String hashedPassword = new Sha256Hash(sysUser.getPassword(), sysUser.getId(), 1).toString();
+		sysUser.setPassword(hashedPassword);
+		// }
 	}
 }

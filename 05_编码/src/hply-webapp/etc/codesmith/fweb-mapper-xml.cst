@@ -114,9 +114,9 @@ Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID F
             }
             
             if(GetJavaType(col) == "String"){
-                s += string.Format("<if test=\"{1} != ''\">{0} = #{{{1}}},</if> ", col.Name, StringUtil.ToCamelCase(col.Name));
+                s += string.Format("{0} = #{{{1}}}, ", col.Name, StringUtil.ToCamelCase(col.Name));
             }else{
-                s += string.Format("<if test=\"{1} != null\">{0} = #{{{1}}},</if> ", col.Name, StringUtil.ToCamelCase(col.Name));
+                s += string.Format("{0} = #{{{1}}}, ", col.Name, StringUtil.ToCamelCase(col.Name));
             }
             
         }

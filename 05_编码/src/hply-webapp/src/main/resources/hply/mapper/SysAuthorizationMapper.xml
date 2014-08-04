@@ -11,10 +11,8 @@
 	</insert>
 
 	<update id="update" parameterType="map">
-		update t_sys_authorization set
-		<if test="resourceId != ''">resource_id = #{resourceId},</if>
-		<if test="userId != ''">user_id = #{userId},</if>
-		version = version + 1 where id = #{id}
+		update t_sys_authorization set resource_id = #{resourceId}, user_id =
+		#{userId}, version = version + 1 where id = #{id}
 	</update>
 
 	<delete id="delete" parameterType="string">
@@ -36,7 +34,6 @@
 		as createTime, create_user as createUser, version as version from
 		t_sys_authorization
 	</select>
-
 
 	<select id="getAuthorizationByUserId" resultType="SysAuthorization">
 		select id as
