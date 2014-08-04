@@ -28,7 +28,7 @@ taglib
 page
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"<%=P()%>><<%=P()%>@ include file="header.jsp"<%=P()%>>
-<div class="panel panel-default">
+<div class="container main"><div class="panel panel-default">
   <div class="panel-heading"><strong>${page_title}</strong></div>
   <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
@@ -59,7 +59,7 @@ page
     <%}%>
 </sf:form>
   </div>
-</div>
+</div></div>
 <<%=P()%>@ include file="bottom.jsp"<%=P()%>>
 <script runat="template">
     public string P(){

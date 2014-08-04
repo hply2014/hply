@@ -17,10 +17,10 @@ CreateTime：2014年7月17日 13:43:50
 <%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Database" Description="只能选择一个表." %>
 <%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.fweb1" %>
 <%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
-package <%=NameSpace%>.web;
+package <%=NameSpace%>.controller;
 
 
-import <%=NameSpace%>.Utility;
+import <%=NameSpace%>.core.Utility;
 import <%=NameSpace%>.domain.<%=GetDomainClassName()%>;
 import <%=NameSpace%>.service.<%=GetDomainClassName()%>Service;
 

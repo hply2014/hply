@@ -71,11 +71,7 @@ public class <%=GetClassName()%> implements Serializable {
       * <%= col.Description %>
       */
     	public <%=GetJavaType(col)%> get<%= StringUtil.ToPascalCase(col.Name) %> () {
-        <%if(GetJavaType(col).Equals("String")) {%>
-            return StringUtils.trimToEmpty(<%=StringUtil.ToCamelCase(col.Name)%>);
-            <%} else { %>
-    		return <%=StringUtil.ToCamelCase(col.Name)%>;
-            <%} %>
+    		return this.<%=StringUtil.ToCamelCase(col.Name)%>;
     	}
 
     /**
@@ -93,8 +89,9 @@ public class <%=GetClassName()%> implements Serializable {
         
         String str = StringUtils.EMPTY;<%
 		foreach(ColumnSchema col in SourceTable.Columns)
-		{%>
-        str += MessageFormat.format("<%= StringUtil.ToPascalCase(col.Name) %>=\"{0}\",", this.get<%= StringUtil.ToPascalCase(col.Name) %>());<%}%>;
+		{if(GetJavaType(col).Equals("String")) {%>
+        str += MessageFormat.format("<%= StringUtil.ToPascalCase(col.Name) %>=\"{0}\",", StringUtils.trimToEmpty(this.get<%= StringUtil.ToPascalCase(col.Name) %>()));<%} else { %>
+        str += MessageFormat.format("<%= StringUtil.ToPascalCase(col.Name) %>=\"{0}\",", this.get<%= StringUtil.ToPascalCase(col.Name) %>());<%}}%>;
         return str;
                         
 	}

@@ -39,11 +39,11 @@
     </item>
     <item>
       <key>INTEGER</key>
-      <value>int</value>
+      <value>Integer</value>
     </item>
     <item>
       <key>INT</key>
-      <value>int</value>
+      <value>Integer</value>
     </item>
     <item>
       <key>FLOAT</key>
@@ -75,11 +75,11 @@
     </item>
     <item>
       <key>TINYINT</key>
-      <value>int</value>
+      <value>Integer</value>
     </item>
     <item>
       <key>SMALLINT</key>
-      <value>int</value>
+      <value>Integer</value>
     </item>
     <item>
       <key>DOUBLE</key>
