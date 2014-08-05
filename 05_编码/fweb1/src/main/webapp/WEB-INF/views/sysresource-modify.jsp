@@ -11,98 +11,133 @@
 	<div class="panel-body">
 		<sf:form modelAttribute="sysResource" cssClass="form-horizontal"
 			role="form">
-	<div class="form-group">
-		<sf:label path="resourceCode" cssClass="col-sm-2 control-label">资源编码</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="resourceCode" placeholder="请输入文字..." />
-            <sf:errors path="resourceCode" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
+				<div class="row"><div class="col-sm-8">
+        <div class="row">
+							<label for="resourceCode" class="col-sm-2 control-label">资源编码</label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
 
-	<div class="form-group">
-		<sf:label path="resourceName" cssClass="col-sm-2 control-label">资源名称</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="resourceName" placeholder="请输入文字..." />
-            <sf:errors path="resourceName" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
+								<sf:input cssClass="form-control" path="resourceCode"
+									placeholder="资源编码" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        
 
-	<div class="form-group">
-		<sf:label path="icon" cssClass="col-sm-2 control-label">图标路径</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="icon" placeholder="请输入文字..." />
-            <sf:errors path="icon" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
+        
+							<label for="resourceName" class="col-sm-2 control-label">资源名称</label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
 
-	<div class="form-group">
-		<sf:label path="resourceUri" cssClass="col-sm-2 control-label">URL地址</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="resourceUri" placeholder="请输入文字..." />
-            <sf:errors path="resourceUri" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
+								<sf:input cssClass="form-control" path="resourceName"
+									placeholder="资源名称" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        </div>
 
-	<div class="form-group">
-		<sf:label path="resourceType" cssClass="col-sm-2 control-label">资源类型</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="resourceType" placeholder="请输入文字..." />
-            <sf:errors path="resourceType" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
+        <div class="row">
+							<label for="icon" class="col-sm-2 control-label">图标路径</label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
 
-	<div class="form-group">
-		<sf:label path="orderId" cssClass="col-sm-2 control-label">顺序号</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="orderId" placeholder="请输入文字..." />
-            <sf:errors path="orderId" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
+								<sf:input cssClass="form-control" path="icon"
+									placeholder="图标路径" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        
 
-	<div class="form-group">
-		<sf:label path="parentId" cssClass="col-sm-2 control-label">父ID</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="parentId" placeholder="请输入文字..." />
-            <sf:errors path="parentId" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
+        
+							<label for="resourceUri" class="col-sm-2 control-label">URL地址</label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
 
-	<div class="form-group">
-		<sf:label path="enabled" cssClass="col-sm-2 control-label">是否禁用</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="enabled" placeholder="请输入文字..." />
-            <sf:errors path="enabled" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
+								<sf:input cssClass="form-control" path="resourceUri"
+									placeholder="URL地址" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        </div>
 
-	<div class="form-group">
-		<sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
-		<div class="col-sm-4">
-			<sf:input cssClass="form-control" path="description" placeholder="请输入文字..." />
-            <sf:errors path="description" cssClass="error" />
-		</div>
-        <div class="col-sm-4"></div>
-	</div>
-			<div>
-				<div class="col-sm-4 control-label">
-					<button type="submit" class="btn btn-primary">
-						<span class="glyphicon glyphicon-ok"></span> 提 交
-					</button>
-				</div>
-				<div class="col-sm-1 control-label">
-					<a href='<s:url value="/sysresource" />' class="btn btn-default"><span
-						class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+        <div class="row">
+							<label for="resourceType" class="col-sm-2 control-label">资源类型</label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
+
+								<sf:input cssClass="form-control" path="resourceType"
+									placeholder="资源类型" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        
+
+        
+							<label for="orderId" class="col-sm-2 control-label">顺序号</label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
+
+								<sf:input cssClass="form-control" path="orderId"
+									placeholder="顺序号" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        </div>
+
+        <div class="row">
+							<label for="parentId" class="col-sm-2 control-label">父ID</label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
+
+								<sf:input cssClass="form-control" path="parentId"
+									placeholder="父ID" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        
+
+        
+							<label for="enabled" class="col-sm-2 control-label">是否禁用</label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
+
+								<sf:input cssClass="form-control" path="enabled"
+									placeholder="是否禁用" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        </div>
+						<div class="row">
+							<sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
+							<div class="col-sm-10">
+								<sf:textarea cssClass="form-control" rows="3" path="description"
+									placeholder="备注，500字以内" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+						</div>
+                        
+						<button type="submit" class="btn btn-info pull-right">
+							<span class="glyphicon glyphicon-ok"></span> 提 交
+						</button>
+						<a href='<s:url value="/sysresource" />' class="btn btn-link"><span
+							class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                        
 				</div>
 			</div>
-
+				<c:if test="${not empty errors}">
+					<div id="alert-error" class="col-sm-6 col-sm-offset-5">
+						<div class="alert alert-danger alert-dismissible fade in"
+							role="alert">
+							<button type="button" class="close" data-dismiss="alert">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4>请求错误</h4>
+							<p>
+								<sf:errors path="*" />
+							</p>
+						</div>
+					</div>
+				</c:if>
 		</sf:form>
 	</div>
 </div></div>

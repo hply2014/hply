@@ -73,4 +73,8 @@ public class SessionHelper {
 		return root;
 	}
 
+	public static String getCurrentUserId() {
+		return getCurrentSysUser().getId();
+	}
+
 }

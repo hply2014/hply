@@ -26,7 +26,6 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<div class="navbar-fixed-bottom pull-right"><div id="error-panel" class="pull-right">错误提示：</div></div>
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" />" charset="UTF-8"></script>
 <script src="<s:url value="/assets/jquery-validation/jquery.validate.min.js" />"></script>

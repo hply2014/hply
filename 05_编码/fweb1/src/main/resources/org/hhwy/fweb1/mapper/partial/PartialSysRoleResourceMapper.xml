@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.fweb1.mapper.partial.PartialSysRoleResourceMapper">
+
+  <insert id="insert" parameterType="SysRoleResource">
+    insert into t_sys_role_resource(id, role_id, resource_id, create_time, create_user) values ( #{id}, #{roleId}, #{resourceId}, now(), #{createUser} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_role_resource set role_id = #{roleId}, resource_id = #{resourceId}, version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_role_resource where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysRoleResource">
+    select id as id, role_id as roleId, resource_id as resourceId, create_time as createTime, create_user as createUser, version as version from t_sys_role_resource where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_role_resource where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysRoleResource">
+    select id as id, role_id as roleId, resource_id as resourceId, create_time as createTime, create_user as createUser, version as version from t_sys_role_resource
+  </select>
+
+</mapper>
+

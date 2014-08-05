@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.fweb1.mapper.partial.PartialSysRoleMapper">
+
+  <insert id="insert" parameterType="SysRole">
+    insert into t_sys_role(id, name, description, is_default) values ( #{id}, #{name}, #{description}, #{isDefault} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_role set name = #{name}, description = #{description}, is_default = #{isDefault}, version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_role where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysRole">
+    select id as id, name as name, description as description, is_default as isDefault, version as version from t_sys_role where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_role where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysRole">
+    select id as id, name as name, description as description, is_default as isDefault, version as version from t_sys_role
+  </select>
+
+</mapper>
+

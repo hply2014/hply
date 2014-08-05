@@ -1,0 +1,42 @@
+﻿<%-- 
+Name:
+Author: 成七一
+Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID FRAMEWORK）
+--%>
+
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Assembly Name="System" %>
+<%@ Import Namespace="System" %>
+<%@ Map Name="JavaAlias" Src="mysql-java-alias" %>
+
+<%@ Template Language="C#" TargetLanguage="Text" %>
+<%@ Property Name="SourceTables" Optional="True" Type="SchemaExplorer.TableSchemaCollection" Category="Database" Description="可以选择多张表." %>
+<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.rdc.fweb1" %>
+<%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
+<%@ Property Name="OutputDirectory" Type="System.String" Category="Context" Default=".\mapper.java" %>
+
+<%@ Register Name="Mapper" Template="fweb-mapper-java.cst" MergeProperties="False" ExcludeProperties="" %>
+
+<%		
+	output();
+%>
+
+<script runat="template">
+    public void output() {
+        foreach(TableSchema table in SourceTables)
+    	{
+            String fileName = OutputDirectory + "\\Partial" + StringUtil.ToPascalCase(table.Name.TrimStart("t_".ToCharArray())) + "Mapper.java";
+            this.Response.WriteLine(new System.IO.FileInfo(fileName).FullName + "...");
+            Mapper mapper = this.Create<Mapper>();
+            mapper.SourceTable = table;
+            mapper.Author = Author;
+            mapper.NameSpace = NameSpace;
+            mapper.RenderToFile(fileName, true);
+        }
+        this.Response.WriteLine("\r\nTotal " + SourceTables.Count + " generated successfull.");
+    }
+
+</script>

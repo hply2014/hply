@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.fweb1.mapper.partial.PartialSysParameterMapper">
+
+  <insert id="insert" parameterType="SysParameter">
+    insert into t_sys_parameter(id, en_name, cn_name, param_value, default_value, is_inner, create_time, create_user, update_time, update_user, description) values ( #{id}, #{enName}, #{cnName}, #{paramValue}, #{defaultValue}, #{isInner}, now(), #{createUser}, now(), #{createUser}, #{description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_parameter set en_name = #{enName}, cn_name = #{cnName}, param_value = #{paramValue}, default_value = #{defaultValue}, is_inner = #{isInner},  update_time = now(), update_user = #{updateUser}, description = #{description}, version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_parameter where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysParameter">
+    select id as id, en_name as enName, cn_name as cnName, param_value as paramValue, default_value as defaultValue, is_inner as isInner, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_sys_parameter where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_parameter where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysParameter">
+    select id as id, en_name as enName, cn_name as cnName, param_value as paramValue, default_value as defaultValue, is_inner as isInner, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_sys_parameter
+  </select>
+
+</mapper>
+

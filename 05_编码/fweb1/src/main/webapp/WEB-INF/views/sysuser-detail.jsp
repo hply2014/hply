@@ -25,6 +25,74 @@ page
 </div>
 </div>
 
+	<sf:form modelAttribute="sysUser" cssClass="form-horizontal"
+				role="form">
+				<div class="row">
+					<div class="col-sm-8">
+						<div class="row">
+							<sf:label path="loginName" cssClass="col-sm-2 control-label">登陆名</sf:label>
+							<div class="col-sm-4">
+								<p class="form-control-static help-block"><c:out value="${sysUser.loginName}" /></p>
+							</div>
+							<sf:label path="realName" cssClass="col-sm-2 control-label">姓名</sf:label>
+							<div class="col-sm-4">
+								<p class="form-control-static"><c:out value="${sysUser.realName}" /></p>
+							</div>
+						</div>
+						<div class="row">
+							<sf:label path="password" cssClass="col-sm-2 control-label">密码</sf:label>
+							<div class="col-sm-4">
+									<p class="form-control-static"><c:out value="${sysUser.password}" /></p>
+							</div>
+						</div>
+						<div class="row">
+							<sf:label path="organizationId" cssClass="col-sm-2 control-label">所在部门</sf:label>
+							<div class="col-sm-4">
+								<p class="form-control-static help-block"><c:out value="${sysUser.organizationId}" /></p>
+							</div>
+							<sf:label path="position" cssClass="col-sm-2 control-label">职务</sf:label>
+							<div class="col-sm-4">
+								<sf:input cssClass="form-control" path="position"
+									placeholder="请输入文字..." />
+								<p class="help-block">&nbsp;</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2 checkbox">
+								<sf:checkbox cssClass="icheckbox" path="enabled" id="enabled"
+									value="1" />
+								<label for="enabled">启用</label>
+								<p class="help-block">&nbsp;</p>
+							</div>
+							<div class="col-sm-4 col-sm-offset-2 checkbox">
+								<sf:checkbox cssClass="icheckbox" path="mustChangePassword"
+									id="mustChangePassword" value="1" />
+								<label for="mustChangePassword">下次登录必须修改密码</label>
+								<p class="help-block">&nbsp;</p>
+							</div>
+						</div>
+						<div class="row">
+							<sf:label path="lastLoginIp" cssClass="col-sm-2 control-label">最后登陆IP</sf:label>
+							<div class="col-sm-4">
+								<p class="form-control-static"><c:out value="${sysUser.lastLoginIp}" /></p>
+							</div>
+							<sf:label path="realName" cssClass="col-sm-2 control-label">最后登陆时间</sf:label>
+							<div class="col-sm-4">
+								<p class="form-control-static"><fmt:formatDate value="${sysUser.lastLoginTime}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+							</div>
+						</div>
+						<div class="row">
+							<sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
+							<div class="col-sm-10">
+								<sf:textarea readonly="true" cssClass="form-control" rows="3" path="description"
+									placeholder="请输入文字..." />
+								<p class="help-block">&nbsp;</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</sf:form>
+			
 <sf:form modelAttribute="sysUser" cssClass="form-horizontal"
 	role="form">
 	<div class="form-group">
@@ -34,6 +102,7 @@ page
 		</div>
 	</div>
 
+	
 	<div class="form-group">
 		<sf:label path="realName" cssClass="col-sm-2 control-label">姓名</sf:label>
 		<div class="col-sm-10">

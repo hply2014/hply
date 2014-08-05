@@ -5,27 +5,16 @@
 
 package org.hhwy.fweb1.mapper;
 
-import java.util.List;
-import org.springframework.stereotype.Repository;
 import org.hhwy.fweb1.domain.SysUser;
+import org.hhwy.fweb1.mapper.partial.PartialSysUserMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * 数据表： [t_sys_user] 系统用户
  */
 @Repository
-public interface SysUserMapper {
-
-	public void insert(SysUser sysUser);
-
-	public void update(SysUser sysUser);
-
-	public void delete(String id);
-
-	public SysUser get(String id);
-
-	public int getVersion(String id);
-
-	public List<SysUser> getAll();
-
+public interface SysUserMapper extends PartialSysUserMapper {
+	
+	
 	public SysUser getByLoginName(String loginName);
 }

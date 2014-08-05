@@ -7,6 +7,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.hhwy.fweb1.core.DataVersionConflictException;
 import org.hhwy.fweb1.domain.SysUser;
 import org.hhwy.fweb1.mapper.SysUserMapper;
+import org.hhwy.fweb1.mapper.partial.PartialSysUserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

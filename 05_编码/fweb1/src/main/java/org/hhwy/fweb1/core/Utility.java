@@ -274,5 +274,10 @@ public class Utility {
 		return str.replaceAll("-", "").toLowerCase();
 
 	}
+	
+
+	public static String getCurrentUserId() {
+		return SessionHelper.getCurrentSysUser().getId();
+	}
 
 }

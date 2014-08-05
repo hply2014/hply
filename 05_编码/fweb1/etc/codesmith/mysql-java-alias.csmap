@@ -85,5 +85,9 @@
       <key>DOUBLE</key>
       <value>double</value>
     </item>
+    <item>
+      <key>BIT</key>
+      <value>boolean</value>
+    </item>
   </map>
 </codeSmith>
