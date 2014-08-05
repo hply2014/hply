@@ -1,13 +1,13 @@
 ﻿package hply.web;
 
-import java.util.List;
-
 import hply.core.Utility;
 import hply.domain.Project;
 import hply.domain.SysOrganization;
-import hply.domain.SysUser;
 import hply.service.ProjectService;
 import hply.service.SysOrganizationService;
+import hply.service.SysParameterService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -29,6 +29,9 @@ public class ProjectController {
 
 	@Autowired
 	private SysOrganizationService orgService;
+
+	@Autowired
+	private SysParameterService paramService;
 
 	public static final String URI = "/project";
 	public static final String JSP_PAGE_LIST = "project-list";
@@ -59,8 +62,9 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
-		model.addAttribute("page_title", "合同项目信息的详情信息");
-		model.addAttribute("project", service.get(id));
+		Project project = service.get(id);
+		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
+		model.addAttribute("project", project);
 		return JSP_PAGE_DETAIL;
 	}
 
@@ -69,7 +73,9 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		model.addAttribute("project", new Project());
+		Project project = new Project();
+		project.setProjectCode(paramService.getNextCode("HTXM"));
+		model.addAttribute("project", project);
 		model.addAttribute("orglist", orgService.getAll());
 		model.addAttribute("page_title", "新建合同项目信息");
 		return JSP_PAGE_MODIFY;
@@ -80,9 +86,10 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
-		model.addAttribute("project", service.get(id));
+		Project project = service.get(id);
+		model.addAttribute("page_title", "修改合同项目信息" + project.getProjectName() + "（" + project.getProjectCode() + "）");
+		model.addAttribute("project", project);
 		model.addAttribute("orglist", orgService.getAll());
-		model.addAttribute("page_title", "修改合同项目信息");
 		return JSP_PAGE_MODIFY;
 	}
 

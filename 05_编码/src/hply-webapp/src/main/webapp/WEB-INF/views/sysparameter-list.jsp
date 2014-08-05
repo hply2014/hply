@@ -57,7 +57,7 @@ page
 						<th>参数中文名称</th>
 						<th>参数值</th>
 						<th>默认值</th>
-						<th>是否系统内置</th>
+						<th>系统内置</th>
 						<th>备注</th>
 						<th>操作</th>
 					</tr>
@@ -75,7 +75,7 @@ page
 							<td><c:out value="${sysParameter.cnName}" /></td>
 							<td><c:out value="${sysParameter.paramValue}" /></td>
 							<td><c:out value="${sysParameter.defaultValue}" /></td>
-							<td><c:out value="${sysParameter.isInner}" /></td>
+							<td><c:out value="${sysParameter.isInner ? '是' : '否'}" /></td>
 							<td><c:out value="${sysParameter.description}" /></td>
 							<td><a
 								href="<s:url value="/sysparameter/modify/{id}"><s:param name="id" value="${sysParameter.id }" /></s:url>">修改</a>

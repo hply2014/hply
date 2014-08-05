@@ -2,31 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ProfileMapper">
+<mapper namespace="hply.mapper.ProfileMapper">
 
-  <insert id="insert" parameterType="Profile">
-    insert into t_profile(id, project_id, expected_value, profile_point, trice, create_time, create_user, update_time, update_user, description, status) values ( #{id}, #{projectId}, #{expectedValue}, #{profilePoint}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status} )
-  </insert>
-
-  <update id="update" parameterType="map">
-    update t_profile set project_id = #{projectId}, expected_value = #{expectedValue}, profile_point = #{profilePoint}, trice = #{trice},  update_time = now(), update_user = #{updateUser}, description = #{description}, status = #{status}, version = version + 1 where id = #{id}
-  </update>
-
-  <delete id="delete" parameterType="string">
-    delete from t_profile where id = #{id}
-  </delete>
-
-  <select id="get" parameterType="string" resultType="Profile">
-    select id as id, project_id as projectId, expected_value as expectedValue, profile_point as profilePoint, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_profile where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_profile where id = #{id}
-  </select>
-
-  <select id="getAll" resultType="Profile">
-    select id as id, project_id as projectId, expected_value as expectedValue, profile_point as profilePoint, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_profile
-  </select>
 
 </mapper>
 

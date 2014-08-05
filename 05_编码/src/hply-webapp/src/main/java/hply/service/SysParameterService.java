@@ -69,4 +69,8 @@ public class SysParameterService {
 	public List<SysParameter> getAll() {
 		return mapper.getAll();
 	}
+
+	public String getNextCode(String prefixCode) {
+		return mapper.getNextCode(prefixCode);
+	}
 }

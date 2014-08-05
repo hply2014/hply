@@ -51,7 +51,7 @@
     </item>
     <item>
       <key>BOOLEAN</key>
-      <value>boolean</value>
+      <value>Boolean</value>
     </item>
     <item>
       <key>CLOB</key>
@@ -83,7 +83,11 @@
     </item>
     <item>
       <key>DOUBLE</key>
-      <value>double</value>
+      <value>Double</value>
+    </item>
+    <item>
+      <key>BIT</key>
+      <value>Boolean</value>
     </item>
   </map>
 </codeSmith>

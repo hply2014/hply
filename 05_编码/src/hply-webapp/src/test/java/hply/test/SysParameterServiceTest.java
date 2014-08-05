@@ -16,6 +16,13 @@ public class SysParameterServiceTest extends BaseJUnit4TestCase {
     
 	@Test
 	public void allServiceTest() {
+
+		System.out.println(service.getNextCode("htxm"));
+		System.out.println(service.getNextCode("htxm"));
+		System.out.println(service.getNextCode("htxm"));
+		System.out.println(service.getNextCode("yzsq"));
+		System.out.println(service.getNextCode("bcxy"));
+		
 		int objectCount = this.getRandomInt();
 		int deleteCount = 0;
 		int updateCount = 0;
@@ -35,7 +42,7 @@ public class SysParameterServiceTest extends BaseJUnit4TestCase {
 
 
 			sysParameter.setDefaultValue(this.getRandomString());
-            sysParameter.setIsInner(this.getRandomInt());         
+            sysParameter.setIsInner(this.getRandomBoolean());         
             sysParameter.setCreateTime(this.getRandomDate()); 
 
 

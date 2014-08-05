@@ -47,7 +47,7 @@ public class SysUserServiceTest extends BaseJUnit4TestCase {
 			sysUser.setLogined(this.getRandomInt());
 
 			sysUser.setPosition(this.getRandomString());
-			sysUser.setEnabled(this.getRandomInt());
+			sysUser.setEnabled(this.getRandomBoolean());
 			sysUser.setOrderBy(this.getRandomInt());
 			sysUser.setCreateTime(this.getRandomDate());
 
@@ -57,7 +57,7 @@ public class SysUserServiceTest extends BaseJUnit4TestCase {
 			sysUser.setUpdateUser(this.getRandomString());
 
 			sysUser.setDescription(this.getRandomString());
-			sysUser.setMustChangePassword(this.getRandomInt());
+			sysUser.setMustChangePassword(this.getRandomBoolean());
 
 			service.insert(sysUser);
 

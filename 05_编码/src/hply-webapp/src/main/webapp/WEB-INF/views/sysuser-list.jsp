@@ -80,7 +80,7 @@ page
 							<td><fmt:formatDate value="${sysUser.lastLoginTime}"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td><c:out value="${sysUser.logined}" /></td>
-							<td><c:out value="${sysUser.enabled == 1 ? '启用' : '禁用'}" /></td>
+							<td><c:out value="${sysUser.enabled ? '启用' : '禁用'}" /></td>
 							<td><a
 								href="<s:url value="/sysuser/modify/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>">修改</a>
 								| <a class="delete"

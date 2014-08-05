@@ -1,9 +1,9 @@
 ﻿package hply.web;
 
-
 import hply.core.Utility;
 import hply.domain.ContractChange;
 import hply.service.ContractChangeService;
+import hply.service.SysParameterService;
 
 import javax.validation.Valid;
 
@@ -16,20 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping(value = ContractChangeController.URI)
 public class ContractChangeController {
-    
+
 	@Autowired
-    private ContractChangeService service;
+	private ContractChangeService service;
+
+	@Autowired
+	private SysParameterService paramService;
 
 	public static final String URI = "/contractchange";
 	public static final String JSP_PAGE_LIST = "contractchange-list";
 	public static final String JSP_PAGE_DETAIL = "contractchange-detail";
 	public static final String JSP_PAGE_MODIFY = "contractchange-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
@@ -55,7 +56,9 @@ public class ContractChangeController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		model.addAttribute("contractChange", new ContractChange());
+		ContractChange cc = new ContractChange();
+		model.addAttribute("contractChange", cc);
+		cc.setCsaCode(paramService.getNextCode("HTXM"));
 		model.addAttribute("page_title", "新建合同补充协议");
 		return JSP_PAGE_MODIFY;
 	}
@@ -74,10 +77,10 @@ public class ContractChangeController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid ContractChange contractChange,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid ContractChange contractChange, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(contractChange.toString());
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
@@ -94,11 +97,10 @@ public class ContractChangeController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id,
-			@Valid ContractChange contractChange, BindingResult result, Model model,
+	public String processUpdateSubmit(@PathVariable String id, @Valid ContractChange contractChange, BindingResult result, Model model,
 			RedirectAttributes redirectAttrs) {
 		Utility.println(contractChange.toString());
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
@@ -115,8 +117,7 @@ public class ContractChangeController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		ContractChange contractChange = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -124,4 +125,3 @@ public class ContractChangeController {
 		return "redirect:" + URI;
 	}
 }
-

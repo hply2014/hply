@@ -4,46 +4,5 @@
 
 <mapper namespace="hply.mapper.CustomerBillingMapper">
 
-	<insert id="insert" parameterType="CustomerBilling">
-		insert into t_customer_billing(id, project_id, invoice_code, invoice_type,
-		amount, trice, create_time, create_user, update_time, update_user,
-		description, status) values ( #{id}, #{projectId}, #{invoiceCode},
-		#{invoiceType}, #{amount}, #{trice}, now(), #{createUser}, now(),
-		#{createUser}, #{description}, #{status} )
-	</insert>
-
-	<update id="update" parameterType="map">
-		update t_customer_billing set project_id = #{projectId}, invoice_code =
-		#{invoiceCode}, invoice_type = #{invoiceType}, amount = #{amount},
-		trice = #{trice}, update_time = now(), update_user = #{updateUser},
-		description = #{description}, status = #{status}, version = version +
-		1 where id = #{id}
-	</update>
-
-	<delete id="delete" parameterType="string">
-		delete from t_customer_billing where id = #{id}
-	</delete>
-
-	<select id="get" parameterType="string" resultType="CustomerBilling">
-		select id as id, project_id as projectId, invoice_code as invoiceCode,
-		invoice_type as invoiceType, amount as amount, trice as trice,
-		create_time as createTime, create_user as createUser, update_time as
-		updateTime, update_user as updateUser, description as description,
-		version as version, status as status from t_customer_billing where id
-		= #{id}
-	</select>
-
-	<select id="getVersion" parameterType="string" resultType="int">
-		select version from t_customer_billing where id = #{id}
-	</select>
-
-	<select id="getAll" resultType="CustomerBilling">
-		select id as id, project_id as projectId, invoice_code as invoiceCode,
-		invoice_type as invoiceType, amount as amount, trice as trice,
-		create_time as createTime, create_user as createUser, update_time as
-		updateTime, update_user as updateUser, description as description,
-		version as version, status as status from t_customer_billing order by trice desc
-	</select>
-
 </mapper>
 

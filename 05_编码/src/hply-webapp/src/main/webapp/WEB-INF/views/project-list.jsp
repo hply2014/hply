@@ -63,6 +63,7 @@ page
 						<th>占用资金</th>
 						<th>项目状态</th>
 						<th>登记时间</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -80,12 +81,23 @@ page
 							<td><c:out value="${project.manager}" /></td>
 							<td><c:out value="${project.managementRate}" /></td>
 							<td><c:out value="${project.taxRate}" /></td>
-							<td><c:out value="${project.contractAmount}" /><c:if test="${not empty project.settlementAmount && project.settlementAmount > 0 }"><br/>结算：<c:out value="${project.settlementAmount}" /></c:if></td>
-							<td data-toggle="tooltip" data-placement="top" title="时间：<fmt:formatDate value="${project.dutyPaidTime}" pattern="yyyy-MM-dd" />，收据编号：<c:out value="${project.dutyPaidCode}" />"><c:out value="${project.dutyPaidAmount}" /></td>
+							<td><c:out value="${project.contractAmount}" />
+								<c:if
+									test="${not empty project.settlementAmount && project.settlementAmount > 0 }">
+									<br />结算：<c:out value="${project.settlementAmount}" />
+								</c:if></td>
+							<td data-toggle="tooltip" data-placement="top"
+								title="时间：<fmt:formatDate value="${project.dutyPaidTime}" pattern="yyyy-MM-dd" />，收据编号：<c:out value="${project.dutyPaidCode}" />"><c:out
+									value="${project.dutyPaidAmount}" /></td>
 							<td><c:out value="${project.capitalOccupied}" /></td>
 							<td><c:out value="${project.projectStatus}" /></td>
 							<td><fmt:formatDate value="${project.trice}"
 									pattern="yyyy-MM-dd" /></td>
+							<td><a
+								href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
+								| <a class="delete"
+								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${project.projectName}" />】么？"
+								href="<s:url value="/project/delete/{id}"><s:param name="id" value="${project.id }" /></s:url>">删除</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

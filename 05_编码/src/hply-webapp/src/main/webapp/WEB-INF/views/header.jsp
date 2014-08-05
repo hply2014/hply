@@ -67,10 +67,6 @@ body {
 	border-color: #463265;
 }
 
-.main form{
-	width:80%;
-}
-
 strong {
 	font-family: 微软雅黑, 黑体;
 }
@@ -88,30 +84,26 @@ strong {
 	border: none;
 }
 
-p.error {
-	background: url("<s:url value="/assets/jquery-validation/images/unchecked.gif"/>") no-repeat 0px 0px;
-	padding-left: 16px;
-	color:#D9534F;
-	position:relative;
-	top:10px;
-}
-
-p.success {
-	background: url("<s:url value="/assets/jquery-validation/images/checked.gif "/>") no-repeat 0px 0px;
-	padding-left: 16px;
-	color:#D9534F;
-	position:relative;
-	top:10px;
-}
-
 #warning {
 	display: none;
 }
-
 #alert-error {
 	position: absolute;
 	top:120px;
 }
+
+.required-field-block {
+    position: relative;   
+}
+
+.required-field-block .required-icon {
+    position: absolute;
+    font-size: 150%;
+    margin-left:-15px;
+    margin-top:5px;
+    color:#a94442
+}
+
 </style>
 </head>
 <body>

@@ -22,29 +22,6 @@ Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID F
 
 <mapper namespace="<%=NameSpace%>.mapper.<%=GetDomainClassName()%>Mapper">
 
-  <insert id="insert" parameterType="<%=GetDomainClassName()%>">
-    <%=GetInsertSQL()%>
-  </insert>
-
-  <update id="update" parameterType="map">
-    <%=GetUpdateSQL()%>
-  </update>
-
-  <delete id="delete" parameterType="string">
-    delete from <%=SourceTable.Name%> where id = #{id}
-  </delete>
-
-  <select id="get" parameterType="string" resultType="<%=GetDomainClassName()%>">
-    select <%=GetSelectFields()%> from <%=SourceTable.Name%> where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from <%=SourceTable.Name%> where id = #{id}
-  </select>
-
-  <select id="getAll" resultType="<%=GetDomainClassName()%>">
-    select <%=GetSelectFields()%> from <%=SourceTable.Name%>
-  </select>
 
 </mapper>
 
@@ -114,9 +91,9 @@ Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID F
             }
             
             if(GetJavaType(col) == "String"){
-                s += string.Format("{0} = #{{{1}}}, ", col.Name, StringUtil.ToCamelCase(col.Name));
+                s += string.Format("<if test=\"{1} != ''\">{0} = #{{{1}}},</if> ", col.Name, StringUtil.ToCamelCase(col.Name));
             }else{
-                s += string.Format("{0} = #{{{1}}}, ", col.Name, StringUtil.ToCamelCase(col.Name));
+                s += string.Format("<if test=\"{1} != null\">{0} = #{{{1}}},</if> ", col.Name, StringUtil.ToCamelCase(col.Name));
             }
             
         }

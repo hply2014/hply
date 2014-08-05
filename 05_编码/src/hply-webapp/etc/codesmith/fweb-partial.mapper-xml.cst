@@ -1,0 +1,138 @@
+﻿<%-- 
+Name:
+Author: 成七一
+Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID FRAMEWORK）
+--%>
+
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Assembly Name="System" %>
+<%@ Import Namespace="System" %>
+<%@ Map Name="JavaAlias" Src="mysql-java-alias" %>
+
+<%@ Template Language="C#" TargetLanguage="XML" %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Database" Description="只能选择一个表." %>
+<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.rdc.fweb1" %>
+<%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="<%=NameSpace%>.mapper.partial.Partial<%=GetDomainClassName()%>Mapper">
+
+  <insert id="insert" parameterType="<%=GetDomainClassName()%>">
+    <%=GetInsertSQL()%>
+  </insert>
+
+  <update id="update" parameterType="map">
+    <%=GetUpdateSQL()%>
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from <%=SourceTable.Name%> where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="<%=GetDomainClassName()%>">
+    select <%=GetSelectFields()%> from <%=SourceTable.Name%> where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from <%=SourceTable.Name%> where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="<%=GetDomainClassName()%>">
+    select <%=GetSelectFields()%> from <%=SourceTable.Name%>
+  </select>
+
+</mapper>
+
+<script runat="template">
+    public override string GetFileName() {
+        return GetDomainClassName() + "Mapper.xml";
+    }
+    
+    public string GetDomainClassName() {
+        return StringUtil.ToPascalCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetJavaType(ColumnSchema col) {
+        try{
+            return JavaAlias[col.NativeType];
+        }catch(Exception ex){
+            return col.NativeType + "[N/A]";
+        }
+    }
+
+    public string GetInsertSQL()
+    {
+    	string f = string.Empty;
+    	string v = string.Empty;
+        
+        foreach(ColumnSchema col in SourceTable.Columns)
+        {
+            if(col.Name.ToUpper() == "VERSION") continue;
+            f += col.Name + ", ";
+            if(col.Name.ToUpper() == "CREATE_TIME"){
+                v += "now(), ";
+            }else if(col.Name.ToUpper() == "UPDATE_TIME"){
+                v += "now(), ";
+            }else if(col.Name.ToUpper() == "UPDATE_USER"){
+                v += "#{createUser}, ";
+            }else{
+                v += "#{" + StringUtil.ToCamelCase(col.Name) + "}, ";
+            }
+        }
+    	
+    	return string.Format("insert into {0}({1}) values ( {2} )", SourceTable.Name, f.Trim().TrimEnd(','),  v.Trim().TrimEnd(','));
+    }
+
+    public string GetUpdateSQL()
+    {
+    	string s = string.Empty;
+        
+        foreach(ColumnSchema col in SourceTable.Columns)
+        {
+            if(col.Name.ToUpper() == "ID") {
+                continue;
+            }
+            if(col.Name.ToUpper() == "CREATE_TIME") {
+                continue;
+            }
+            if(col.Name.ToUpper() == "CREATE_USER") {
+                continue;
+            }
+            
+            if(col.Name.ToUpper() == "VERSION") {
+                continue;
+            }
+            
+            if(col.Name.ToUpper() == "UPDATE_TIME") {
+                s += " update_time = now(), ";
+                continue;
+            }
+            
+            if(GetJavaType(col) == "String"){
+                s += string.Format("{0} = #{{{1}}}, ", col.Name, StringUtil.ToCamelCase(col.Name));
+            }else{
+                s += string.Format("{0} = #{{{1}}}, ", col.Name, StringUtil.ToCamelCase(col.Name));
+            }
+            
+        }
+    	
+    	return string.Format("update {0} set {1} version = version + 1 where id = #{{id}}", SourceTable.Name, s.Trim());
+    }
+    
+    public string GetSelectFields()
+    {
+    	string s = string.Empty;
+        
+        foreach(ColumnSchema col in SourceTable.Columns)
+        {
+            s += string.Format("{0} as {1}, ", col.Name, StringUtil.ToCamelCase(col.Name));
+        }
+    	
+    	return s.Trim().TrimEnd(',');
+    }
+</script>

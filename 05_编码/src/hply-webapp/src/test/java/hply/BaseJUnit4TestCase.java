@@ -21,7 +21,7 @@ public abstract class BaseJUnit4TestCase extends
 		return (int) (Math.random() * (MAX - MIN) + MIN);
 	}
 
-	protected boolean getRandomBoolean() {
+	protected Boolean getRandomBoolean() {
 		return getRandomInt() > MAX / 2;
 	}
 

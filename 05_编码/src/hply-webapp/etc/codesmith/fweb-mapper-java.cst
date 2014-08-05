@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 import <%=NameSpace%>.domain.<%=GetDomainClassName()%>;
+import <%=NameSpace%>.mapper.partial.Partial<%=GetDomainClassName()%>Mapper;
 
 
 
@@ -36,19 +37,8 @@ import <%=NameSpace%>.domain.<%=GetDomainClassName()%>;
   * <%=SourceTable.Description %>
   */
 @Repository
-public interface <%=GetDomainClassName()%>Mapper {
+public interface <%=GetDomainClassName()%>Mapper extends Partial<%=GetDomainClassName()%>Mapper {
 
-	  public void insert(<%=GetDomainClassName()%> <%=GetDomainVariableName()%>);
-	  
-	  public void update(<%=GetDomainClassName()%> <%=GetDomainVariableName()%>);
-	  
-	  public void delete(String id);
-	  
-	  public <%=GetDomainClassName()%> get(String id);
-      
-	  public int getVersion(String id);
-	  
-	  public List<<%=GetDomainClassName()%>> getAll();
 }
 
 <script runat="template">

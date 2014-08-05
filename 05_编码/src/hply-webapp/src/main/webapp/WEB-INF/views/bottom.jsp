@@ -54,9 +54,9 @@
 		});
 		$('.selectpicker').selectpicker();
 		$(".icheckbox").iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%'
+		    checkboxClass: 'icheckbox_minimal',
+		    radioClass: 'iradio_minimal',
+		    increaseArea: '20%' // optional
           });
 	});
 </script>

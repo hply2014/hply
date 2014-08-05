@@ -1,5 +1,7 @@
 package hply.core;
 
+import hply.domain.SysUser;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -270,6 +272,11 @@ public class Utility {
 		String str = java.util.UUID.randomUUID().toString();
 		return str.toLowerCase();
 
+	}
+
+	public static String getCurrentUserId() {
+		SysUser user = SessionHelper.getCurrentSysUser();
+		return user == null ? null : user.getId();
 	}
 
 }
