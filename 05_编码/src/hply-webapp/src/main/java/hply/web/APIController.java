@@ -1,5 +1,6 @@
 package hply.web;
 
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.SysAuthorization;
 import hply.domain.SysUser;
@@ -73,12 +74,17 @@ public class APIController {
 	public @ResponseBody String changePassword(@RequestParam String id, @RequestParam String password0, @RequestParam String password) {
 		SysUser user = sysUserService.get(id);
 		String hashedPassword = new Sha256Hash(password0, user.getId(), 1).toString();
+		if (password0.equals(password)) {
+			return "原密码与新密码不能一样。";
+		}
 		if (!hashedPassword.equals(user.getPassword())) {
 			return "原密码输入错误，请重新输入。";
 		}
 		user.setPassword(password);
 		sysUserService.hashedPassword(user);
+		user.setMustChangePassword(false);
 		sysUserService.update(user);
+		SessionHelper.setAttribute(SessionHelper.CURRENT_SYS_USER, user);
 		return "密码修改成功，" + user.getRealName();
 	}
 

@@ -124,10 +124,20 @@ public class SysUserController {
 			return JSP_PAGE_MODIFY;
 		}
 
-		service.update(sysUser);
+		SysUser user0 = service.get(sysUser.getId());
+		user0.setLoginName(sysUser.getLoginName());
+		user0.setRealName(sysUser.getRealName());
+		user0.setMustChangePassword(sysUser.getMustChangePassword());
+		user0.setOrganizationId(sysUser.getOrganizationId());
+		user0.setPosition(sysUser.getPosition());
+		user0.setEnabled(sysUser.getEnabled());
+		user0.setOrderBy(sysUser.getOrderBy());
+		user0.setDescription(sysUser.getDescription());
+		
+		service.update(user0);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
-		redirectAttrs.addFlashAttribute("sysUser", sysUser);
+		redirectAttrs.addFlashAttribute("sysUser", user0);
 		return "redirect:" + URI;
 	}
 

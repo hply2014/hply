@@ -60,18 +60,19 @@ public class SessionHelper {
 	}
 
 	public static TreeNode getMenuRoot() {
-		try {
-			TreeNode root =(TreeNode) getAttribute(CURRENT_ROOT_TREE_NODE);
-			if(root.getChildren() == null){
-				root.setChildren(new ArrayList<TreeNode>());
+		SysUser user = getCurrentSysUser();
+		if (user != null && user.getMustChangePassword() == false) {
+			try {
+				TreeNode root = (TreeNode) getAttribute(CURRENT_ROOT_TREE_NODE);
+				if (root != null && root.getChildren() != null)
+					return root;
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
-			return root;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			TreeNode root = new TreeNode();
-			root.setChildren(new ArrayList<TreeNode>());
-			return root;
 		}
+		TreeNode root = new TreeNode();
+		root.setChildren(new ArrayList<TreeNode>());
+		return root;
 	}
 
 }

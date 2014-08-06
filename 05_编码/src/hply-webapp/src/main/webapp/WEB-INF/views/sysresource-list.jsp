@@ -59,8 +59,6 @@ page
 						<th>URL地址</th>
 						<th>资源类型</th>
 						<th>顺序号</th>
-						<th>父ID</th>
-						<th>是否禁用</th>
 						<th>备注</th>
 						<th>操作</th>
 					</tr>
@@ -80,8 +78,6 @@ page
 							<td><c:out value="${sysResource.resUrl}" /></td>
 							<td><c:out value="${sysResource.resType}" /></td>
 							<td><c:out value="${sysResource.orderBy}" /></td>
-							<td><c:out value="${sysResource.parentId}" /></td>
-							<td><c:out value="${sysResource.enabled}" /></td>
 							<td><c:out value="${sysResource.description}" /></td>
 							<td><a
 								href="<s:url value="/sysresource/modify/{id}"><s:param name="id" value="${sysResource.id }" /></s:url>">修改</a>

@@ -4,5 +4,7 @@
 
 <mapper namespace="hply.mapper.ProjectMapper">
 
+	<select id="refreshAllStatus" resultType="int">select
+		refresh_all_status()</select>
 </mapper>
 

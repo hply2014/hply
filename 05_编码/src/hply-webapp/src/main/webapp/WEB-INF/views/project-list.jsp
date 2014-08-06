@@ -52,6 +52,7 @@ page
 				<thead>
 					<tr>
 						<th>#</th>
+						<th></th>
 						<th>项目编号</th>
 						<th>项目名称</th>
 						<th>所在部门</th>
@@ -73,6 +74,7 @@ page
 					<c:forEach items="${list}" var="project">
 						<tr>
 							<td><%=++i%></td>
+							<td><span class="glyphicon <c:out value="${project.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
 							<td><a
 								href="<s:url value="/project/detail/{id}"><s:param name="id" value="${project.id }" /></s:url>"><c:out
 										value="${project.projectCode}" /></a></td>
