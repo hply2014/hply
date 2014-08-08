@@ -45,13 +45,15 @@ public class JdbcRealm extends AuthorizingRealm implements Realm, InitializingBe
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		SysUser user = (SysUser) super.getAvailablePrincipal(principals);
+		String userId = (String) super.getAvailablePrincipal(principals);
 
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		Set<String> permissions = new HashSet<String>();
-		List<SysResource> permissionResource = sysResourceService.getPermission(user.getId());
+		List<SysResource> permissionResource = sysResourceService.getPermission(userId);
 		for (SysResource resource : permissionResource) {
-			permissions.add(resource.getResCode());
+			if (StringUtils.isNotEmpty(resource.getResCode())) {
+				permissions.add(resource.getResCode());
+			}
 		}
 
 		info.addStringPermissions(permissions);
@@ -62,32 +64,27 @@ public class JdbcRealm extends AuthorizingRealm implements Realm, InitializingBe
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		UsernamePasswordToken upt = (UsernamePasswordToken) token;
-		String loginName = upt.getUsername();
+		// 渠道的Username是userId，而不是loginName
+		String userId = upt.getUsername();
 		// Null username is invalid
-		if (StringUtils.isEmpty(loginName)) {
+		if (StringUtils.isEmpty(userId)) {
 			throw new AccountException("Null usernames are not allowed by this realm.");
 		}
-
-		Utility.println("loginName=" + loginName);
 		SysUser user = SessionHelper.getCurrentSysUser();
+
+		Utility.println("current logined user is:" + user);
 
 		if (user == null) {
 			throw new AuthenticationException();
 		}
 
-		// 将loginName换成UserID
-		if (token instanceof UsernamePasswordToken) {
-			((UsernamePasswordToken) token).setUsername(user.getId());
-		}
-
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getLoginName(), user.getPassword(), getName());
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, user.getPassword(), getName());
 
 		return info;
 	}
 
 	@Override
-	protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info)
-			throws AuthenticationException {
+	protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) throws AuthenticationException {
 		UsernamePasswordToken t = token instanceof UsernamePasswordToken ? (UsernamePasswordToken) token : null;
 		SimpleAuthenticationInfo i = info instanceof SimpleAuthenticationInfo ? (SimpleAuthenticationInfo) info : null;
 

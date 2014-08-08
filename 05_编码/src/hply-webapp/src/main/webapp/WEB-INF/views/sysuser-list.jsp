@@ -7,6 +7,8 @@ taglib
 	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
 taglib
 	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
+	taglib
+	prefix="shiro" uri="http://shiro.apache.org/tags"%><%@ 
 page
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -42,10 +44,11 @@ page
 		</div>
 		<div class="panel-body">
 			<div class="btn-toolbar" role="toolbar">
+				<shiro:hasPermission name="`sysuser_create`">
 				<div class="btn-group">
 					<a href="<c:url value="/sysuser/create" />" class="btn btn-info"><span
 						class="glyphicon glyphicon-plus"></span> 新 建 </a>
-				</div>
+				</div></shiro:hasPermission>
 			</div>
 
 			<table class="table table-hover">
@@ -81,7 +84,17 @@ page
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td><c:out value="${sysUser.logined}" /></td>
 							<td><c:out value="${sysUser.enabled ? '启用' : '禁用'}" /></td>
-							<td><a
+							<td>
+							<td><c:if test="${project.status == 1 }">
+									<shiro:hasPermission name="`sysuser_modify`"></shiro:hasPermission>
+							</c:if>
+							<c:if test="${project.status != 1 }">
+									<shiro:hasPermission name="`sysuser_create`"></shiro:hasPermission>
+							</c:if>
+									<shiro:hasPermission name="`sysuser_delete`"></shiro:hasPermission>
+							
+							
+							<a
 								href="<s:url value="/sysuser/modify/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>">修改</a>
 								| <a class="delete"
 								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysUser.realName}" />】么？"

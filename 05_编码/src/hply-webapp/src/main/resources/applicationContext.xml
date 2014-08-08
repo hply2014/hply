@@ -47,14 +47,9 @@
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/login" />
-		<property name="filters">
-			<util:map>
-				<entry key="authc">
-					<bean class="hply.core.MyAuthenticationFilter" />
-				</entry>
-			</util:map>
-		</property>
+		<property name="loginUrl" value="/login" /><!-- <property name="filters"> 
+			<util:map> <entry key="authc"> <bean class="hply.core.MyAuthenticationFilter" 
+			/> </entry> </util:map> </property> -->
 		<property name="filterChainDefinitions">
 			<value>
 				/login = anon
@@ -66,13 +61,13 @@
 		</property>
 	</bean>
 
-	<bean id="myRealm" class="hply.core.JdbcRealm" />
-
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="myRealm" />
 		<!-- <property name="sessionMode" value="http" /> -->
 	</bean>
+
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<bean id="myRealm" class="hply.core.JdbcRealm" />
 
 	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after -->
 	<!-- the lifecycleBeanProcessor has run: -->

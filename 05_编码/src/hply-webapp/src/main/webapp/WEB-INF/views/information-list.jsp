@@ -43,6 +43,7 @@ page
 		<div class="panel-body">
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
+					<shiro:hasPermission name="`project_create`"></shiro:hasPermission>
 					<a href="<c:url value="/information/create" />"
 						class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
 						新 建 </a>
@@ -73,8 +74,8 @@ page
 						<tr>
 							<td><%=++i%></td>
 							<td><a
-								href="<s:url value="/information/detail/{id}"><s:param name="id" value="${information.id }" /></s:url>"><fmt:formatDate value="${information.trice}"
-									pattern="yyyy-MM-dd" /></a></td>
+								href="<s:url value="/information/detail/{id}"><s:param name="id" value="${information.id }" /></s:url>"><fmt:formatDate
+										value="${information.trice}" pattern="yyyy-MM-dd" /></a></td>
 							<td><c:out value="${information.organizationId}" /></td>
 							<td><c:out value="${information.projectName}" /></td>
 							<td><c:out value="${information.address}" /></td>
@@ -83,7 +84,14 @@ page
 							<td><c:out value="${information.identification}" /></td>
 							<td><c:out value="${information.contact}" /></td>
 							<td><c:out value="${information.subscriber}" /></td>
-							<td><a
+							<td><c:if test="${project.status == 1 }">
+									<shiro:hasPermission name="`sysuser_modify`"></shiro:hasPermission>
+								</c:if> <c:if test="${project.status != 1 }">
+									<shiro:hasPermission name="`sysuser_create`"></shiro:hasPermission>
+								</c:if> <shiro:hasPermission name="`sysuser_delete`"></shiro:hasPermission>
+
+
+								<a
 								href="<s:url value="/information/modify/{id}"><s:param name="id" value="${information.id }" /></s:url>">修改</a>
 								| <a class="delete"
 								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${information.projectName}" />】么？"

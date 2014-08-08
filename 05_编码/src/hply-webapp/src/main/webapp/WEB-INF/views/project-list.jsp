@@ -7,6 +7,8 @@ taglib
 	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
 taglib
 	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
+	taglib
+	prefix="shiro" uri="http://shiro.apache.org/tags"%><%@ 
 page
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -42,10 +44,12 @@ page
 		</div>
 		<div class="panel-body">
 			<div class="btn-toolbar" role="toolbar">
-				<div class="btn-group">
-					<a href="<c:url value="/project/create" />" class="btn btn-info"><span
-						class="glyphicon glyphicon-plus"></span> 新 建 </a>
-				</div>
+				<shiro:hasPermission name="`project_create`">
+					<div class="btn-group">
+						<a href="<c:url value="/project/create" />" class="btn btn-info"><span
+							class="glyphicon glyphicon-plus"></span> 新 建 </a>
+					</div>
+				</shiro:hasPermission>
 			</div>
 
 			<table class="table table-hover">
@@ -74,7 +78,8 @@ page
 					<c:forEach items="${list}" var="project">
 						<tr>
 							<td><%=++i%></td>
-							<td><span class="glyphicon <c:out value="${project.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
+							<td><span
+								class="glyphicon <c:out value="${project.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
 							<td><a
 								href="<s:url value="/project/detail/{id}"><s:param name="id" value="${project.id }" /></s:url>"><c:out
 										value="${project.projectCode}" /></a></td>
@@ -83,8 +88,7 @@ page
 							<td><c:out value="${project.manager}" /></td>
 							<td><c:out value="${project.managementRate}" /></td>
 							<td><c:out value="${project.taxRate}" /></td>
-							<td><c:out value="${project.contractAmount}" />
-								<c:if
+							<td><c:out value="${project.contractAmount}" /> <c:if
 									test="${not empty project.settlementAmount && project.settlementAmount > 0 }">
 									<br />结算：<c:out value="${project.settlementAmount}" />
 								</c:if></td>
@@ -95,11 +99,22 @@ page
 							<td><c:out value="${project.projectStatus}" /></td>
 							<td><fmt:formatDate value="${project.trice}"
 									pattern="yyyy-MM-dd" /></td>
-							<td><a
-								href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
-								| <a class="delete"
-								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${project.projectName}" />】么？"
-								href="<s:url value="/project/delete/{id}"><s:param name="id" value="${project.id }" /></s:url>">删除</a></td>
+							<td><c:if test="${project.status == 1 }">
+									<shiro:hasPermission name="`project_modify`">
+										<a
+											href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
+									</shiro:hasPermission>
+								</c:if>
+								<c:if test="${project.status != 1 }">
+									<shiro:hasPermission name="`project_create`">
+										<a
+											href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
+									</shiro:hasPermission>
+								</c:if> <shiro:hasPermission name="`project_delete`">
+									<a class="delete"
+										data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${project.projectName}" />】么？"
+										href="<s:url value="/project/delete/{id}"><s:param name="id" value="${project.id }" /></s:url>">删除</a>
+								</shiro:hasPermission></td>
 						</tr>
 					</c:forEach>
 				</tbody>

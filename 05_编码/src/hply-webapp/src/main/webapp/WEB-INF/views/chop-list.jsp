@@ -41,10 +41,12 @@ page
 		</div>
 		<div class="panel-body">
 			<div class="btn-toolbar" role="toolbar">
-				<div class="btn-group">
-					<a href="<c:url value="/chop/create" />" class="btn btn-info"><span
-						class="glyphicon glyphicon-plus"></span> 新 建 </a>
-				</div>
+				<shiro:hasPermission name="`chop_create`">
+					<div class="btn-group">
+						<a href="<c:url value="/chop/create" />" class="btn btn-info"><span
+							class="glyphicon glyphicon-plus"></span> 新 建 </a>
+					</div>
+				</shiro:hasPermission>
 			</div>
 
 			<table class="table table-hover">
@@ -83,13 +85,23 @@ page
 							<td><c:out value="${chop.projectName}" /></td>
 							<td><c:out value="${chop.manager}" /></td>
 							<td><c:out value="${chop.content}" /></td>
-							<td><c:out value="${chop.step1Idea}" /><c:out value="${chop.step1User}" /><fmt:formatDate value="${chop.step1Time}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${chop.step2Idea}" /><c:out value="${chop.step2User}" /><fmt:formatDate value="${chop.step2Time}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${chop.step3Idea}" /><c:out value="${chop.step3User}" /><fmt:formatDate value="${chop.step3Time}"
-									pattern="yyyy-MM-dd" /><c:out value="${chop.stepStatus}" /></td>
-							<td><a
+							<td><c:out value="${chop.step1Idea}" /> <c:out
+									value="${chop.step1User}" /> <fmt:formatDate
+									value="${chop.step1Time}" pattern="yyyy-MM-dd" /></td>
+							<td><c:out value="${chop.step2Idea}" /> <c:out
+									value="${chop.step2User}" /> <fmt:formatDate
+									value="${chop.step2Time}" pattern="yyyy-MM-dd" /></td>
+							<td><c:out value="${chop.step3Idea}" /> <c:out
+									value="${chop.step3User}" /> <fmt:formatDate
+									value="${chop.step3Time}" pattern="yyyy-MM-dd" /> <c:out
+									value="${chop.stepStatus}" /></td>
+							<td><c:if test="${chop.status == 1 }">
+									<shiro:hasPermission name="`chop_modify`"></shiro:hasPermission>
+								</c:if> <c:if test="${chop.status != 1 }">
+									<shiro:hasPermission name="`chop_create`"></shiro:hasPermission>
+								</c:if> <shiro:hasPermission name="`chop_delete`"></shiro:hasPermission>
+
+								<a
 								href="<s:url value="/chop/modify/{id}"><s:param name="id" value="${chop.id }" /></s:url>">修改</a>
 								| <a class="delete"
 								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${chop.id}" />】么？"

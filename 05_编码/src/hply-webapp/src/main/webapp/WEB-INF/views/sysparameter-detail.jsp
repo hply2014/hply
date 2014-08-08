@@ -7,6 +7,8 @@ taglib
 	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
 taglib
 	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
+	taglib
+	prefix="shiro" uri="http://shiro.apache.org/tags"%><%@ 
 page
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%><%@ include file="header.jsp"%><div
@@ -21,12 +23,13 @@ page
 					<a href="<s:url value="/sysparameter" />" class="btn btn-info"><span
 						class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 				</div>
+				<shiro:hasPermission name="`project_create`">
 				<div class="btn-group">
 					<a
 						href="<s:url value="/sysparameter/modify/{id}"><s:param name="id" value="${sysParameter.id }" /></s:url>"
 						class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span>
 						修 改 </a>
-				</div>
+				</div></shiro:hasPermission>
 				<div class="btn-group">
 					<a
 						data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${sysParameter.id}" />】么？"

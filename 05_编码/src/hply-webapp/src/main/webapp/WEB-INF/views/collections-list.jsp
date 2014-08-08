@@ -42,11 +42,12 @@ page
 		</div>
 		<div class="panel-body">
 			<div class="btn-toolbar" role="toolbar">
+					<shiro:hasPermission name="`collections_create`">
 				<div class="btn-group">
 					<a href="<c:url value="/collections/create" />"
 						class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
 						新 建 </a>
-				</div>
+				</div></shiro:hasPermission>
 			</div>
 
 			<table class="table table-hover">
@@ -84,7 +85,13 @@ page
 							<td><fmt:formatDate value="${collections.trice}"
 									pattern="yyyy-MM-dd" /></td>
 							<td><c:out value="${collections.description}" /></td>
-							<td><a
+							<td><c:if test="${collections.status == 1 }">
+									<shiro:hasPermission name="`collections_modify`"></shiro:hasPermission>
+								</c:if> <c:if test="${collections.status != 1 }">
+									<shiro:hasPermission name="`collections_create`"></shiro:hasPermission>
+								</c:if> <shiro:hasPermission name="`collections_delete`"></shiro:hasPermission>
+
+								<a
 								href="<s:url value="/collections/modify/{id}"><s:param name="id" value="${collections.id }" /></s:url>">修改</a>
 								| <a class="delete"
 								data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${collections.id}" />】么？"

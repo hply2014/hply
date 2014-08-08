@@ -42,7 +42,6 @@ public class HomeController {
 	@RequestMapping(value = JSP_LOGIN, method = RequestMethod.GET)
 	public String showLogin() {
 		SessionHelper.sysResourceService = sysResourceService;
-		logger.debug("显示登录页 ...");
 		return JSP_LOGIN;
 	}
 
@@ -58,7 +57,7 @@ public class HomeController {
 
 		try {
 			SessionHelper.setAttribute(SessionHelper.CURRENT_SYS_USER, user);
-			SessionHelper.login(loginName, password);
+			SessionHelper.login(user.getId(), password);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			model.addAttribute("loginName", loginName);

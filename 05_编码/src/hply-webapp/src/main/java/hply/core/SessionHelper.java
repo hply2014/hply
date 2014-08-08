@@ -11,7 +11,7 @@ import java.util.Date;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 
 public class SessionHelper {
 
@@ -21,10 +21,10 @@ public class SessionHelper {
 
 	public static SysResourceService sysResourceService;
 	
-	public static void login(String loginName, String password) {
+	public static void login(String userId, String password) {
 		Subject currentUser = SecurityUtils.getSubject();
 		setAttribute(CURRENT_LOGIN_TIME, new Date());
-		UsernamePasswordToken token = new UsernamePasswordToken(loginName, password);
+		UsernamePasswordToken token = new UsernamePasswordToken(userId, password);
 		// ”Remember Me” built-in, just do this:
 		token.setRememberMe(false);
 
@@ -61,6 +61,11 @@ public class SessionHelper {
 
 	public static Object getAttribute(Object key) {
 		return SecurityUtils.getSubject().getSession().getAttribute(key);
+	}
+	
+	public static Model putAllIntoModel(Model model){
+//		model.addAttribute("navigationTree", getMenuRoot().getChildren());
+		return model;
 	}
 
 	public static TreeNode getMenuRoot() {
