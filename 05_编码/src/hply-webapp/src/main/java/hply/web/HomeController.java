@@ -35,12 +35,13 @@ public class HomeController {
 
 	@Autowired
 	private ProjectService projectService;
-	
+
 	public static final String JSP_LOGIN = "login";
 	public static final String JSP_LOGOUT = "logout";
 
 	@RequestMapping(value = JSP_LOGIN, method = RequestMethod.GET)
 	public String showLogin() {
+		SessionHelper.sysResourceService = sysResourceService;
 		logger.debug("显示登录页 ...");
 		return JSP_LOGIN;
 	}
@@ -64,24 +65,25 @@ public class HomeController {
 			model.addAttribute("message", "登录验证失败，用户或密码错误。");
 			return JSP_LOGIN;
 		}
-		
+
 		// No problems, show authenticated view…
 
-		//如果账号被禁用
-		if(user.getEnabled() == false){
+		// 如果账号被禁用
+		if (user.getEnabled() == false) {
 			model.addAttribute("loginName", loginName);
 			model.addAttribute("message", "该用户已被禁用，请联系管理员。");
 			return JSP_LOGIN;
-			
+
 		}
-		
-		if(user.getMustChangePassword()){
+
+		if (user.getMustChangePassword()) {
 			model.addAttribute("page_title", "修改" + user.getRealName() + "的密码");
 			model.addAttribute("userId", user.getId());
 			return "change-password";
 		}
-		
-		SessionHelper.setAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE, sysResourceService.getMenuRoot(user.getId()));
+
+		// SessionHelper.setAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE,
+		// sysResourceService.getMenuRoot(user.getId()));
 		user.setLastLoginIp(Utility.getClientIpAddress(request));
 		user.setLastLoginTime(new Date());
 		int logined = user.getLogined() == null ? 0 : user.getLogined().intValue();

@@ -2,6 +2,7 @@ package hply.core;
 
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
+import hply.service.SysResourceService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Date;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SessionHelper {
 
@@ -17,6 +19,8 @@ public class SessionHelper {
 	public static final String CURRENT_LOGIN_TIME = "__CURRENT_LOGIN_TIME";
 	public static final String CURRENT_ROOT_TREE_NODE = "__CURRENT_PERMISSION";
 
+	public static SysResourceService sysResourceService;
+	
 	public static void login(String loginName, String password) {
 		Subject currentUser = SecurityUtils.getSubject();
 		setAttribute(CURRENT_LOGIN_TIME, new Date());
@@ -61,9 +65,10 @@ public class SessionHelper {
 
 	public static TreeNode getMenuRoot() {
 		SysUser user = getCurrentSysUser();
-		if (user != null && user.getMustChangePassword() == false) {
+		System.out.println("user=" + user);
+		if (user != null && user.getMustChangePassword() == false && sysResourceService != null) {
 			try {
-				TreeNode root = (TreeNode) getAttribute(CURRENT_ROOT_TREE_NODE);
+				TreeNode root = sysResourceService.getMenuRoot(user.getId());
 				if (root != null && root.getChildren() != null)
 					return root;
 			} catch (Exception ex) {
