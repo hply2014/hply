@@ -74,7 +74,7 @@ public class ProjectController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		Project project = new Project();
-		project.setProjectCode(paramService.getNextCode("HTXM"));
+		project.setProjectCode(paramService.getNextCode("xm"));
 		model.addAttribute("project", project);
 		model.addAttribute("orglist", orgService.getAll());
 		model.addAttribute("page_title", "新建合同项目信息");

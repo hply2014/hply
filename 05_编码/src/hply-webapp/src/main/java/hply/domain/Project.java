@@ -35,8 +35,6 @@ public class Project implements Serializable {
         this.createTime = new Date(); 
 		this.createUser = Utility.getCurrentUserId(); 
         this.version = -1; 
-        //TODO 合同项目编号
-        this.projectCode = "";
 	}
 
     /**

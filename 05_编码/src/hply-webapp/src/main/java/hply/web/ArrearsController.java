@@ -4,6 +4,7 @@
 import hply.core.Utility;
 import hply.domain.Arrears;
 import hply.service.ArrearsService;
+import hply.service.SysParameterService;
 
 import javax.validation.Valid;
 
@@ -23,6 +24,8 @@ public class ArrearsController {
     
 	@Autowired
     private ArrearsService service;
+	@Autowired
+	private SysParameterService paramService;
 
 	public static final String URI = "/arrears";
 	public static final String JSP_PAGE_LIST = "arrears-list";
@@ -46,7 +49,11 @@ public class ArrearsController {
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
 		model.addAttribute("page_title", "往来欠款的详情信息");
-		model.addAttribute("arrears", service.get(id));
+Arrears item = service.get(id);
+//TODO 编号
+//item.setProjectCode(paramService.getNextCode("xm"));
+		
+		model.addAttribute("arrears", item);
 		return JSP_PAGE_DETAIL;
 	}
 
