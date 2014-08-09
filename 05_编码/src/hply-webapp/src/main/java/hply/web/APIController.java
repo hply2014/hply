@@ -103,5 +103,14 @@ public class APIController {
 		}
 		return "授权设置，执行成功";
 	}
+	
+	/*
+	 * 
+	 */
+	@RequestMapping(value = "/capitaloccupied/{projectId}", method = RequestMethod.POST)
+	public @ResponseBody String getCapitalOccupied(@PathVariable String projectId){
+		//TODO 计算占用资金情况
+		return "这是占用资金情况,123";
+	}
 
 }

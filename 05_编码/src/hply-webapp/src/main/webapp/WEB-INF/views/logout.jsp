@@ -1,15 +1,15 @@
-<%@ page isELIgnored="false"%><%@ 
-taglib
-	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ 
-taglib
-	uri="http://www.springframework.org/tags" prefix="s"%><%@ 
-taglib
-	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
-taglib
-	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
-page
-	language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%><!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@page import="hply.core.*"%>
+<%@ page isELIgnored="false"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+
+<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">

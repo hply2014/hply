@@ -1,15 +1,15 @@
-<%@ page isELIgnored="false"%><%@ 
-taglib
-	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ 
-taglib
-	uri="http://www.springframework.org/tags" prefix="s"%><%@ 
-taglib
-	uri="http://www.springframework.org/tags/form" prefix="sf"%><%@ 
-taglib
-	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%><%@ 
-page
-	language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%><!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@page import="hply.core.*"%>
+<%@ page isELIgnored="false"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -18,8 +18,7 @@ page
 <title>登录 - 工程项目核算系统</title>
 
 <!-- Bootstrap -->
-<link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />"
-	rel="stylesheet" media="screen">
+<link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />" rel="stylesheet" media="screen">
 <style type="text/css">
 body {
 	padding-top: 140px;
@@ -62,55 +61,53 @@ h3 {
 </head>
 <body>
 
-	<c:if test="${not empty message}">
-		<div class="bs-example">
-			<div class="alert alert-warning alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<strong>${message}</strong>
-			</div>
-		</div>
-		<!-- /example -->
-	</c:if>
-	<div class="container">
-		<h3>工程项目核算系统</h3>
-		<div class="jumbotron form-horizontal">
-			<sf:form>
-				<div class="form-group">
-					<label for="loginName" class="col-sm-2 control-label">用户</label>
-					<div class="col-sm-10">
-						<input id="loginName" type="text" class="form-control" name="loginName"
-							placeholder="输入用户登录名" value="${loginName}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="password" class="col-sm-2 control-label">密码</label>
-					<div class="col-sm-10">
-						<input id="password" type="password" class="form-control" name="password"
-							placeholder="输入密码">
-					</div>
-				</div>
-				<div class="login-group">
-					<button class="btn btn-primary" type="submit" role="button">登
-						录 &raquo;</button>
-				</div>
-			</sf:form>
-		</div>
-	</div>
-	<!-- /container -->
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="<s:url value="/assets/jquery.min.js" />"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
-	<script type="text/javascript">
-		$(function() {
-			if($("#loginName").val() != ""){
-				$("#password").focus().select();
-			}else{
-				$("#loginName").focus();
-			}
-		});
-	</script>
+    <c:if test="${not empty message}">
+        <div class="bs-example">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <strong>${message}</strong>
+            </div>
+        </div>
+        <!-- /example -->
+    </c:if>
+    <div class="container">
+        <h3>工程项目核算系统</h3>
+        <div class="jumbotron form-horizontal">
+            <sf:form>
+                <div class="form-group">
+                    <label for="loginName" class="col-sm-2 control-label">用户</label>
+                    <div class="col-sm-10">
+                        <input id="loginName" type="text" class="form-control" name="loginName" placeholder="输入用户登录名"
+                            value="${loginName}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input id="password" type="password" class="form-control" name="password" placeholder="输入密码">
+                    </div>
+                </div>
+                <div class="login-group">
+                    <button class="btn btn-primary" type="submit" role="button">登 录 &raquo;</button>
+                </div>
+            </sf:form>
+        </div>
+    </div>
+    <!-- /container -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="<s:url value="/assets/jquery.min.js" />"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
+    <script type="text/javascript">
+					$(function() {
+						if ($("#loginName").val() != "") {
+							$("#password").focus().select();
+						} else {
+							$("#loginName").focus();
+						}
+					});
+				</script>
 </body>
 </html>

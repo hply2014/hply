@@ -2,8 +2,10 @@
 
 
 import hply.core.Utility;
+import hply.domain.Arrears;
 import hply.domain.Collections;
 import hply.service.CollectionsService;
+import hply.service.SysParameterService;
 
 import javax.validation.Valid;
 
@@ -24,6 +26,9 @@ public class CollectionsController {
 	@Autowired
     private CollectionsService service;
 
+	@Autowired
+	private SysParameterService paramService;
+	
 	public static final String URI = "/collections";
 	public static final String JSP_PAGE_LIST = "collections-list";
 	public static final String JSP_PAGE_DETAIL = "collections-detail";
@@ -55,7 +60,10 @@ public class CollectionsController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		model.addAttribute("collections", new Collections());
+		Collections collections = new Collections();
+		collections.setTicketCode(paramService.getNextCode("collections_code"));
+		
+		model.addAttribute("collections", collections);
 		model.addAttribute("page_title", "新建收款情况");
 		return JSP_PAGE_MODIFY;
 	}

@@ -70,7 +70,23 @@ public class SysParameterService {
 		return mapper.getAll();
 	}
 
+	public SysParameter getByEnName(String enName) {
+		return mapper.getByEnName(enName);
+	}
+
 	public String getNextCode(String prefixCode) {
 		return mapper.getNextCode(prefixCode);
 	}
+
+	public double getParamDoubleValue(String enName) {
+		try {
+			SysParameter p = getByEnName(enName);
+			return Double.valueOf(p.getParamValue());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return 0.0;
+
+	}
+
 }

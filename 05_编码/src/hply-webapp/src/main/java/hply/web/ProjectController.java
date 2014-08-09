@@ -74,9 +74,11 @@ public class ProjectController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		Project project = new Project();
-		project.setProjectCode(paramService.getNextCode("xm"));
+		project.setProjectCode(paramService.getNextCode("project_code"));
 		model.addAttribute("project", project);
 		model.addAttribute("orglist", orgService.getAll());
+		project.setManagementRate(paramService.getParamDoubleValue("default_manager_rate"));
+		project.setTaxRate(paramService.getParamDoubleValue("default_tax_rate"));
 		model.addAttribute("page_title", "新建合同项目信息");
 		return JSP_PAGE_MODIFY;
 	}
@@ -87,7 +89,7 @@ public class ProjectController {
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
 		Project project = service.get(id);
-		model.addAttribute("page_title", "修改合同项目信息" + project.getProjectName() + "（" + project.getProjectCode() + "）");
+		model.addAttribute("page_title", "修改合同项目信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
 		model.addAttribute("project", project);
 		model.addAttribute("orglist", orgService.getAll());
 		return JSP_PAGE_MODIFY;

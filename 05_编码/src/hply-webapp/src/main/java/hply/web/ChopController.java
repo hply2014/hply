@@ -78,9 +78,9 @@ public class ChopController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		Chop chop = new Chop();
-		chop.setChopCode(paramService.getNextCode("yzsq"));
+		chop.setChopCode(paramService.getNextCode("chop_code"));
 		model.addAttribute("chop", chop);
-		model.addAttribute("page_title", "新建盖章管理");
+		model.addAttribute("page_title", "新建用章申请");
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -90,7 +90,7 @@ public class ChopController {
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
 		model.addAttribute("chop", service.get(id));
-		model.addAttribute("page_title", "修改盖章管理");
+		model.addAttribute("page_title", "修改用章申请");
 		return JSP_PAGE_MODIFY;
 	}
 

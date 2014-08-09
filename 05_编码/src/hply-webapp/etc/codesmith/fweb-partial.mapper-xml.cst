@@ -43,7 +43,7 @@ Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID F
   </select>
 
   <select id="getAll" resultType="<%=GetDomainClassName()%>">
-    select <%=GetSelectFields()%> from <%=SourceTable.Name%>
+    select <%=GetSelectFields()%> from <%=SourceTable.Name%> <%string f=GetSelectFields(); if(f.Contains("trice")){%>order by trice desc<%} else if(f.Contains("update_time")){%>order by update_time desc<%} else if(f.Contains("create_time")){%>order by create_time desc<%}%>
   </select>
 
 </mapper>

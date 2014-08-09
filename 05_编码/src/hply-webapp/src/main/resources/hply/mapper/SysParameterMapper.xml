@@ -10,14 +10,19 @@
 		paramValue, default_value as
 		defaultValue, is_inner as isInner,
 		create_time as createTime,
-		create_user as createUser, update_time as
+		create_user as createUser,
+		update_time as
 		updateTime, update_user as
 		updateUser, description as description,
 		version as version from
-		t_sys_parameter where en_name = #{enName}
+		t_sys_parameter
+		where en_name = #{enName}
 	</select>
 	<select id="getNextCode" resultType="string">select
-		get_next_code(#{prefixCode})</select>
+		get_next_code(#{prefixCode})
+	</select>
+	
+	
 
 </mapper>
 

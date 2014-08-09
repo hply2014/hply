@@ -57,8 +57,8 @@ public class ContractChangeController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		ContractChange cc = new ContractChange();
+		cc.setCsaCode(paramService.getNextCode("cc_code"));
 		model.addAttribute("contractChange", cc);
-		cc.setCsaCode(paramService.getNextCode("HTXM"));
 		model.addAttribute("page_title", "新建合同补充协议");
 		return JSP_PAGE_MODIFY;
 	}
