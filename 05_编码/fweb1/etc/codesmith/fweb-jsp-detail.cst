@@ -25,6 +25,8 @@ taglib
 	uri="http://www.springframework.org/tags/form" prefix="sf"<%=P()%>><<%=P()%>@ 
 taglib
 	uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"<%=P()%>><<%=P()%>@ 
+	taglib
+	prefix="shiro" uri="http://shiro.apache.org/tags"<%=P()%>><<%=P()%>@ 
 page
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"<%=P()%>><<%=P()%>@ include file="header.jsp"<%=P()%>>
@@ -35,12 +37,21 @@ page
   <div class="btn-group">
   <a href="<s:url value="/<%=GetDomainUri()%>" />" class="btn btn-info"><span class="glyphicon glyphicon-share-alt"></span> 返 回  </a>
 </div>
-  <div class="btn-group">
-  <a href="<s:url value="/<%=GetDomainUri()%>/modify/{id}"><s:param name="id" value="${<%=GetDomainVariableName()%>.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 修 改  </a>
-</div>
-  <div class="btn-group">
-  <a data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${<%=GetDomainVariableName()%>.id}" />】么？" href="<s:url value="/<%=GetDomainUri()%>/delete/{id}"><s:param name="id" value="${<%=GetDomainVariableName()%>.id }" /></s:url>" class="btn btn-info delete"><span class="glyphicon glyphicon-trash"></span> 删 除  </a>
-</div>
+<shiro:hasPermission name="`<%=GetDomainUri()%>_modify`">
+				<div class="btn-group">
+					<a
+						href="<s:url value="/<%=GetDomainUri()%>/modify/{id}"><s:param name="id" value="${<%=GetDomainVariableName()%>.id }" /></s:url>"
+						class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span>
+						修 改 </a>
+				</div></shiro:hasPermission>
+                <shiro:hasPermission name="`<%=GetDomainUri()%>_delete`">
+				<div class="btn-group">
+					<a
+						data-confirm-message="<%=GetDescription()%>数据：<c:out value="${<%=GetDomainVariableName()%>.id}" />，将被永久删除，操作不可撤销，是否确认？"
+						href="<s:url value="/<%=GetDomainUri()%>/delete/{id}"><s:param name="id" value="${<%=GetDomainVariableName()%>.id }" /></s:url>"
+						class="btn btn-info delete"><span
+						class="glyphicon glyphicon-trash"></span> 删 除 </a>
+				</div></shiro:hasPermission>
 </div>
 
 <sf:form modelAttribute="<%=GetDomainVariableName()%>" cssClass="form-horizontal"

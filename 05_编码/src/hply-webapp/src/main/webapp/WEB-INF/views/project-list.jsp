@@ -1,4 +1,4 @@
-<%@ page isELIgnored="false"%><%@ 
+﻿<%@ page isELIgnored="false"%><%@ 
 taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ 
 taglib
@@ -13,50 +13,36 @@ page
 	language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%><div class="container main">
-	<c:if test="${not empty message}">
-		<div></div>
-		<div
-			class="alert alert-success alert-dismissible col-md-offset-2 affix"
-			role="alert">
-			<button type="button" class="close" data-dismiss="alert">
-				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-			</button>
-			<strong><a
-				href="<s:url value="/project/detail/${project.id }" />">
-					${project.projectName }</a></strong> ，${message}
-		</div>
-	</c:if>
-	<c:if test="${not empty delMessage}">
-		<div
-			class="alert alert-warning alert-dismissible col-md-offset-2 affix"
-			role="alert">
-			<button type="button" class="close" data-dismiss="alert">
-				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-			</button>
-			<strong>${project.projectName }</strong> ，${delMessage}
-		</div>
-	</c:if>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<strong>${page_title}</strong>（
-			<c:out value="${list.size()}" />
-			条数据）
-		</div>
-		<div class="panel-body">
-			<div class="btn-toolbar" role="toolbar">
-				<shiro:hasPermission name="`project_create`">
+<c:if test="${not empty message}">
+	<div></div>
+<div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong><a href="<s:url value="/project/detail/${project.id }" />"> ${project.id }</a></strong> ，${message}
+</div>
+</c:if>
+<c:if test="${not empty delMessage}">
+<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong>${project.id }</strong> ，${delMessage}
+</div>
+</c:if>
+<div class="panel panel-default">
+  <div class="panel-heading"><strong>合同项目信息</strong>（<c:out value="${list.size()}" />条数据）</div>
+  <div class="panel-body">
+<div class="btn-toolbar" role="toolbar">
+          <shiro:hasPermission name="`project_create`">
 					<div class="btn-group">
 						<a href="<c:url value="/project/create" />" class="btn btn-info"><span
 							class="glyphicon glyphicon-plus"></span> 新 建 </a>
 					</div>
 				</shiro:hasPermission>
-			</div>
+</div>
 
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th></th>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th></th>
 						<th>项目编号</th>
 						<th>项目名称</th>
 						<th>所在部门</th>
@@ -69,18 +55,17 @@ page
 						<th>项目状态</th>
 						<th>登记时间</th>
 						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						int i = 0;
-					%>
-					<c:forEach items="${list}" var="project">
-						<tr>
-							<td><%=++i%></td>
-							<td><span
-								class="glyphicon <c:out value="${project.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
-							<td><a
+		</tr>
+	</thead>
+	<tbody>
+		<%
+			int i = 0;
+		%>
+		<c:forEach items="${list}" var="project">
+			<tr>
+				<td><%=++i%></td>
+                <td><span class="glyphicon <c:out value="${project.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
+					<td><a
 								href="<s:url value="/project/detail/{id}"><s:param name="id" value="${project.id }" /></s:url>"><c:out
 										value="${project.projectCode}" /></a></td>
 							<td><c:out value="${project.projectName}" /></td>
@@ -99,7 +84,7 @@ page
 							<td><c:out value="${project.projectStatus}" /></td>
 							<td><fmt:formatDate value="${project.trice}"
 									pattern="yyyy-MM-dd" /></td>
-							<td><c:if test="${project.status == 1 }">
+				<td><c:if test="${project.status == 1 }">
 									<shiro:hasPermission name="`project_modify`">
 										<a
 											href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
@@ -112,14 +97,15 @@ page
 									</shiro:hasPermission>
 								</c:if> <shiro:hasPermission name="`project_delete`">
 									<a class="delete"
-										data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${project.projectName}" />】么？"
+										data-confirm-message="合同项目信息数据：<c:out value="${project.id}" />，将被永久删除，操作不可撤销，是否确认？"
 										href="<s:url value="/project/delete/{id}"><s:param name="id" value="${project.id }" /></s:url>">删除</a>
-								</shiro:hasPermission></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
+								</shiro:hasPermission>
+
+</td>
+			</tr>
+		</c:forEach>
+	</tbody>
+</table>
+  </div>
+</div></div>
 <%@ include file="bottom.jsp"%>

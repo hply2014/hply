@@ -104,6 +104,11 @@ strong {
     color:#a94442
 }
 
+.invalid input{
+	background-color:#fff0f0
+}
+
+.valid input{background-color:#f0fff0;}
 </style>
 </head>
 <body>
