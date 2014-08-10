@@ -4,6 +4,8 @@
 
 <mapper namespace="hply.mapper.partial.PartialContractChangeMapper">
 
+  <cache />
+  
   <insert id="insert" parameterType="ContractChange">
     insert into t_contract_change(id, project_id, csa_code, management_rate, change_amount, trice, create_time, create_user, update_time, update_user, description, status) values ( #{id}, #{projectId}, #{csaCode}, #{managementRate}, #{changeAmount}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status} )
   </insert>

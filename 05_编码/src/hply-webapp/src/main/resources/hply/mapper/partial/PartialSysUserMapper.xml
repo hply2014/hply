@@ -4,6 +4,8 @@
 
 <mapper namespace="hply.mapper.partial.PartialSysUserMapper">
 
+  <cache />
+  
   <insert id="insert" parameterType="SysUser">
     insert into t_sys_user(id, login_name, real_name, organization_id, password, last_login_ip, last_login_time, fails, logined, position, enabled, order_by, create_time, create_user, update_time, update_user, description, must_change_password) values ( #{id}, #{loginName}, #{realName}, #{organizationId}, #{password}, #{lastLoginIp}, #{lastLoginTime}, #{fails}, #{logined}, #{position}, #{enabled}, #{orderBy}, now(), #{createUser}, now(), #{createUser}, #{description}, #{mustChangePassword} )
   </insert>

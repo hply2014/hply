@@ -4,5 +4,6 @@
 
 <mapper namespace="hply.mapper.ArrearsMapper">
 
+  <cache />
 </mapper>
 

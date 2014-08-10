@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="hply.mapper.SysUserMapper">
+  <cache />
 	<select id="getByLoginName" resultType="SysUser">
 		select id as id,
 		login_name as loginName, real_name as realName,

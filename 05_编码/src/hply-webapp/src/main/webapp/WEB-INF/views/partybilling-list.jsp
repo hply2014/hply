@@ -65,9 +65,8 @@
                                 class="glyphicon <c:out value="${partyBilling.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                             <td><%=++i%></td>
                             <td><a
-                                href="<s:url value="/partybilling/detail/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>"><c:out
-                                        value="${partyBilling.projectId}" /></a></td>
-                            <td><c:out value="${partyBilling.invoiceCode}" /></td>
+                                href="<s:url value="/partybilling/detail/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>"><c:out value="${partyBilling.invoiceCode}" /></a></td>
+                            <td>${ partyBilling.projectId}</td>
                             <td><c:out value="${partyBilling.amount}" /></td>
                             <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${partyBilling.taxRate}" /></td>

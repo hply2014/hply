@@ -4,6 +4,7 @@
 
 <mapper namespace="hply.mapper.SysResourceMapper">
 
+  <cache />
 	<select id="getPermission" parameterType="string" resultType="SysResource">
 		select id as Id, res_code as ResCode, res_name as resName, icon as
 		Icon, res_url as ResUrl, res_type as ResType, order_by as

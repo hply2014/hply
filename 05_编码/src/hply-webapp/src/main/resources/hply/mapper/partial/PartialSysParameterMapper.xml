@@ -4,6 +4,8 @@
 
 <mapper namespace="hply.mapper.partial.PartialSysParameterMapper">
 
+  <cache />
+  
   <insert id="insert" parameterType="SysParameter">
     insert into t_sys_parameter(id, en_name, cn_name, param_value, default_value, is_inner, create_time, create_user, update_time, update_user, description) values ( #{id}, #{enName}, #{cnName}, #{paramValue}, #{defaultValue}, #{isInner}, now(), #{createUser}, now(), #{createUser}, #{description} )
   </insert>

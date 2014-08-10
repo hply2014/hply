@@ -4,6 +4,7 @@
 
 <mapper namespace="hply.mapper.ContractChangeMapper">
 
+  <cache />
 
 </mapper>
 

@@ -22,6 +22,8 @@ Description: Mybatis Mapper XML GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID F
 
 <mapper namespace="<%=NameSpace%>.mapper.partial.Partial<%=GetDomainClassName()%>Mapper">
 
+  <cache />
+  
   <insert id="insert" parameterType="<%=GetDomainClassName()%>">
     <%=GetInsertSQL()%>
   </insert>

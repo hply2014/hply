@@ -4,6 +4,8 @@
 
 <mapper namespace="hply.mapper.partial.PartialSysOrganizationMapper">
 
+  <cache />
+  
   <insert id="insert" parameterType="SysOrganization">
     insert into t_sys_organization(id, organization_name, create_time, description) values ( #{id}, #{organizationName}, now(), #{description} )
   </insert>
@@ -25,7 +27,7 @@
   </select>
 
   <select id="getAll" resultType="SysOrganization">
-    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization order by version desc
+    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization order by create_time desc
   </select>
 
 </mapper>

@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="hply.mapper.SysAuthorizationMapper">
+  <cache />
 	<select id="getAuthorizationByUserId" resultType="SysAuthorization">
 		select id as
 		id, resource_id as

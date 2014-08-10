@@ -4,6 +4,7 @@
 
 <mapper namespace="hply.mapper.SysParameterMapper">
 
+  <cache />
 	<select id="getByEnName" resultType="SysParameter">
 		select id as id, en_name as
 		enName, cn_name as cnName, param_value as

@@ -4,19 +4,22 @@
 
 <mapper namespace="hply.mapper.partial.PartialProjectSummaryMapper">
 
+	<cache />
+
 	<insert id="insert" parameterType="ProjectSummary">
 		insert into t_project_summary(id, trice, description, project_id, organization_id, project_code, project_name,
 		contract_amount, change_amount, settlement_amount, management_rate, management_plan_amount, management_real_amount,
 		management_total_amount, management_owe_amount, party_billing_amount, party_billing_total_amount, collections_amount,
 		collections_total_amount, collections_rate, customer_billing_amount, customer_billing_total_amount, payment_amount,
 		payment_total_amount, tax_rate, tax_plan_amount, tax_real_amount, tax_total_amount, tax_owe_amount, arrears_amount,
-		expected_value, profile_point, create_time) values ( #{id}, #{trice}, #{description}, #{projectId}, #{organizationId},
-		#{projectCode}, #{projectName}, #{contractAmount}, #{changeAmount}, #{settlementAmount}, #{managementRate},
-		#{managementPlanAmount}, #{managementRealAmount}, #{managementTotalAmount}, #{managementOweAmount},
-		#{partyBillingAmount}, #{partyBillingTotalAmount}, #{collectionsAmount}, #{collectionsTotalAmount},
-		#{collectionsRate}, #{customerBillingAmount}, #{customerBillingTotalAmount}, #{paymentAmount}, #{paymentTotalAmount},
-		#{taxRate}, #{taxPlanAmount}, #{taxRealAmount}, #{taxTotalAmount}, #{taxOweAmount}, #{arrearsAmount},
-		#{expectedValue}, #{profilePoint}, now() )
+		expected_value, profile_point, create_time, serial_id, table_name, change_total_amount) values ( #{id}, #{trice},
+		#{description}, #{projectId}, #{organizationId}, #{projectCode}, #{projectName}, #{contractAmount}, #{changeAmount},
+		#{settlementAmount}, #{managementRate}, #{managementPlanAmount}, #{managementRealAmount}, #{managementTotalAmount},
+		#{managementOweAmount}, #{partyBillingAmount}, #{partyBillingTotalAmount}, #{collectionsAmount},
+		#{collectionsTotalAmount}, #{collectionsRate}, #{customerBillingAmount}, #{customerBillingTotalAmount},
+		#{paymentAmount}, #{paymentTotalAmount}, #{taxRate}, #{taxPlanAmount}, #{taxRealAmount}, #{taxTotalAmount},
+		#{taxOweAmount}, #{arrearsAmount}, #{expectedValue}, #{profilePoint}, now(), #{serialId}, #{tableName},
+		#{changeTotalAmount} )
 	</insert>
 
 	<update id="update" parameterType="map">
@@ -31,7 +34,8 @@
 		#{customerBillingTotalAmount}, payment_amount = #{paymentAmount}, payment_total_amount = #{paymentTotalAmount},
 		tax_rate = #{taxRate}, tax_plan_amount = #{taxPlanAmount}, tax_real_amount = #{taxRealAmount}, tax_total_amount =
 		#{taxTotalAmount}, tax_owe_amount = #{taxOweAmount}, arrears_amount = #{arrearsAmount}, expected_value =
-		#{expectedValue}, profile_point = #{profilePoint}, version = version + 1 where id = #{id}
+		#{expectedValue}, profile_point = #{profilePoint}, serial_id = #{serialId}, table_name = #{tableName},
+		change_total_amount = #{changeTotalAmount}, version = version + 1 where id = #{id}
 	</update>
 
 	<delete id="delete" parameterType="string">
@@ -49,8 +53,9 @@
 		customerBillingAmount, customer_billing_total_amount as customerBillingTotalAmount, payment_amount as paymentAmount,
 		payment_total_amount as paymentTotalAmount, tax_rate as taxRate, tax_plan_amount as taxPlanAmount, tax_real_amount as
 		taxRealAmount, tax_total_amount as taxTotalAmount, tax_owe_amount as taxOweAmount, arrears_amount as arrearsAmount,
-		expected_value as expectedValue, profile_point as profilePoint, version as version, create_time as createTime from
-		t_project_summary where id = #{id}
+		expected_value as expectedValue, profile_point as profilePoint, version as version, create_time as createTime,
+		serial_id as serialId, table_name as tableName, change_total_amount as changeTotalAmount from t_project_summary where
+		id = #{id}
 	</select>
 
 	<select id="getVersion" parameterType="string" resultType="int">
@@ -68,8 +73,9 @@
 		customerBillingAmount, customer_billing_total_amount as customerBillingTotalAmount, payment_amount as paymentAmount,
 		payment_total_amount as paymentTotalAmount, tax_rate as taxRate, tax_plan_amount as taxPlanAmount, tax_real_amount as
 		taxRealAmount, tax_total_amount as taxTotalAmount, tax_owe_amount as taxOweAmount, arrears_amount as arrearsAmount,
-		expected_value as expectedValue, profile_point as profilePoint, version as version, create_time as createTime from
-		t_project_summary 
+		expected_value as expectedValue, profile_point as profilePoint, version as version, create_time as createTime,
+		serial_id as serialId, table_name as tableName, change_total_amount as changeTotalAmount from t_project_summary order
+		by serial_id desc
 	</select>
 
 </mapper>
