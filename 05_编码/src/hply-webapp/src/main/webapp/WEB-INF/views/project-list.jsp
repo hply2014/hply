@@ -72,9 +72,8 @@
                                     test="${not empty project.settlementAmount && project.settlementAmount > 0 }">
                                     <br />结算：<c:out value="${project.settlementAmount}" />
                                 </c:if></td>
-                            <td><span data-toggle="tooltip" 
-title="时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern="yyyy-MM-dd" />，收据编号：<c:out value='${project.dutyPaidCode}' />"><c:out
-                                    value="${project.dutyPaidAmount}" /><span></td>
+                            <td><span data-toggle="tooltip" title="时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' />，收据编号：<c:out value='${project.dutyPaidCode}' />"> 
+                            <c:out value="${project.dutyPaidAmount}" /><span></td>
                             <td><c:out value="${project.capitalOccupied}" /></td>
                             <td title="<c:out value="${project.createUser}" />"><fmt:formatDate value="${project.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:choose>
