@@ -39,10 +39,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th></th>
-                        <th>项目ID</th>
+                        <th>#</th>
                         <th>发票票号</th>
+                        <th>项目名称</th>
                         <th>发票金额</th>
                         <th>开票时间</th>
                         <th>税率</th>
@@ -50,9 +50,9 @@
                         <th>审核意见</th>
                         <th>审核人</th>
                         <th>审核时间</th>
+                        <th>创建用户</th>
                         <th>流程状态</th>
-                        <th>备注</th>
-                        <th>操作</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,9 +61,9 @@
                     %>
                     <c:forEach items="${list}" var="partyBilling">
                         <tr>
-                            <td><%=++i%></td>
                             <td><span
                                 class="glyphicon <c:out value="${partyBilling.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
+                            <td><%=++i%></td>
                             <td><a
                                 href="<s:url value="/partybilling/detail/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>"><c:out
                                         value="${partyBilling.projectId}" /></a></td>
@@ -75,8 +75,8 @@
                             <td><c:out value="${partyBilling.step1Idea}" /></td>
                             <td><c:out value="${partyBilling.step1User}" /></td>
                             <td><fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" /></td>
+                            <td><c:out value="${partyBilling.createUser}" /></td>
                             <td><c:out value="${partyBilling.stepStatus}" /></td>
-                            <td><c:out value="${partyBilling.description}" /></td>
                             <td><c:if test="${partybilling.status == 1 }">
                                     <shiro:hasPermission name="`partybilling_modify`">
                                         <a

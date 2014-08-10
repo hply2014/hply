@@ -19,7 +19,7 @@
 <sf:form modelAttribute="arrears" cssClass="form-horizontal"
 	role="form">
 	<div class="form-group">
-		<sf:label path="projectId" cssClass="col-sm-2 control-label">项目ID</sf:label>
+		<sf:label path="projectId" cssClass="col-sm-2 control-label">项目名称</sf:label>
 		<div class="col-sm-10">
 			<p class="form-control-static"><c:out value="${arrears.projectId}" /></p>
 		</div>

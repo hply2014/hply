@@ -40,8 +40,9 @@
                         <th>#</th>
 
                         <th>机构名称</th>
+                        <th>创建时间</th>
                         <th>备注</th>
-                        <th>操作</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,7 @@
                             <td><a
                                 href="<s:url value="/sysorganization/detail/{id}"><s:param name="id" value="${sysOrganization.id }" /></s:url>"><c:out
                                         value="${sysOrganization.organizationName}" /></a></td>
+                            <td><fmt:formatDate value="${sysOrganization.createTime}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${sysOrganization.description}" /></td>
                             <td><a
                                 href="<s:url value="/sysorganization/modify/{id}"><s:param name="id" value="${sysOrganization.id }" /></s:url>">修改</a>

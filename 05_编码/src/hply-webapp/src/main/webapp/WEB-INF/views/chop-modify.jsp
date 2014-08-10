@@ -15,49 +15,52 @@
 								<b class="required-icon">*</b>
 								<sf:input cssClass="form-control" path="chopCode"
 									placeholder="编号" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
-							<label for="projectId" class="col-sm-2 control-label">项目ID</label>
-							<div class="col-sm-4 ">
-								<sf:input cssClass="form-control" path="projectId"
-									placeholder="项目ID" />
-								<p class="help-block">&nbsp;</p>
-							</div></div>
+							<label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
+                                <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
+                                <sf:select cssClass="form-control selectpicker" path="projectId" items="${projectlist }"
+                                    itemValue="id" itemLabel="projectName" />
+                                <p class="help-block" />
+                            </div>
+							</div>
         <div class="row">
 							<label for="projectCode" class="col-sm-2 control-label">项目编号</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="projectCode"
 									placeholder="项目编号" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="projectName" class="col-sm-2 control-label">项目名称</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="projectName"
 									placeholder="项目名称" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="manager" class="col-sm-2 control-label">项目经理</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="manager"
 									placeholder="项目经理" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="content" class="col-sm-2 control-label">主要内容</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="content"
 									placeholder="主要内容" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="applyUser" class="col-sm-2 control-label">申请人</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="applyUser"
 									placeholder="申请人" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="applyTime" class="col-sm-2 control-label">申请时间</label>
@@ -68,28 +71,28 @@
 						<span class="input-group-addon"><i
 							class="glyphicon glyphicon-calendar"></i></span>
 					</div>
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="organizationId" class="col-sm-2 control-label">所在部门</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="organizationId"
 									placeholder="所在部门" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="step1Idea" class="col-sm-2 control-label">事业部/项目部审核意见</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="step1Idea"
 									placeholder="事业部/项目部审核意见" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="step1User" class="col-sm-2 control-label">事业部/项目部审核人</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="step1User"
 									placeholder="事业部/项目部审核人" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="step1Time" class="col-sm-2 control-label">事业部/项目部审核时间</label>
@@ -100,21 +103,21 @@
 						<span class="input-group-addon"><i
 							class="glyphicon glyphicon-calendar"></i></span>
 					</div>
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="step2Idea" class="col-sm-2 control-label">财务部审核意见</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="step2Idea"
 									placeholder="财务部审核意见" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="step2User" class="col-sm-2 control-label">财务部审核人</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="step2User"
 									placeholder="财务部审核人" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="step2Time" class="col-sm-2 control-label">财务部审核时间</label>
@@ -125,21 +128,21 @@
 						<span class="input-group-addon"><i
 							class="glyphicon glyphicon-calendar"></i></span>
 					</div>
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="step3Idea" class="col-sm-2 control-label">经办人办理结果</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="step3Idea"
 									placeholder="经办人办理结果" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="step3User" class="col-sm-2 control-label">经办人</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="step3User"
 									placeholder="经办人" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="step3Time" class="col-sm-2 control-label">经办时间</label>
@@ -150,14 +153,14 @@
 						<span class="input-group-addon"><i
 							class="glyphicon glyphicon-calendar"></i></span>
 					</div>
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="stepStatus" class="col-sm-2 control-label">流程状态</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="stepStatus"
 									placeholder="流程状态" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>                        
 						<button type="submit" class="btn btn-info pull-right">
 							<span class="glyphicon glyphicon-ok"></span> 提 交

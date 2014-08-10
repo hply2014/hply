@@ -11,23 +11,26 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="row">
-                            <label for="projectId" class="col-sm-2 control-label">项目ID</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" />
-                                <p class="help-block">&nbsp;</p>
-                            </div>
-
                             <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
+                            <label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
+                                <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
+                                <sf:select cssClass="form-control selectpicker" path="projectId" items="${projectlist }"
+                                    itemValue="id" itemLabel="projectName" />
+                                <p class="help-block" />
+                            </div>
+
                         </div>
                         <div class="row">
                             <label for="amount" class="col-sm-2 control-label">发票金额</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="amount" placeholder="发票金额" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="trice" class="col-sm-2 control-label">开票时间</label>
@@ -36,33 +39,33 @@
                                     <sf:input cssClass="form-control" path="trice" data-date-format="yyyy-mm-dd" />
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="taxRate" class="col-sm-2 control-label">税率</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="taxRate" placeholder="税率" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="taxAmount" class="col-sm-2 control-label">应收税金</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="taxAmount" placeholder="应收税金" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="step1Idea" class="col-sm-2 control-label">审核意见</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="step1Idea" placeholder="审核意见" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="step1User" class="col-sm-2 control-label">审核人</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="step1User" placeholder="审核人" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
@@ -72,20 +75,20 @@
                                     <sf:input cssClass="form-control" path="step1Time" data-date-format="yyyy-mm-dd" />
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="stepStatus" class="col-sm-2 control-label">流程状态</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="stepStatus" placeholder="流程状态" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
                             <div class="col-sm-10">
                                 <sf:textarea cssClass="form-control" rows="3" path="description" placeholder="备注，500字以内" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
 
@@ -119,6 +122,7 @@
 <!--/container main -->
 <script type="text/javascript">
 	$(function() {
+		$(":text[value='0.0']").val('');
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {

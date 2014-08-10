@@ -10,50 +10,53 @@
             <sf:form modelAttribute="collections" cssClass="form-horizontal" role="form">
                 <div class="row">
                     <div class="col-sm-8">
-                        <div class="row">
-                            <label for="projectId" class="col-sm-2 control-label">项目ID</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" />
-                                <p class="help-block">&nbsp;</p>
-                            </div>
-
-                            <label for="ticketCode" class="col-sm-2 control-label">凭证号</label>
+                        <div class="row"> 
+						<label for="ticketCode" class="col-sm-2 control-label">凭证号</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="ticketCode" placeholder="凭证号" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
+                            <label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
+                                <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
+                                <sf:select cssClass="form-control selectpicker" path="projectId" items="${projectlist }"
+                                    itemValue="id" itemLabel="projectName" />
+                                <p class="help-block" />
+                            </div>
+                           
                         </div>
                         <div class="row">
                             <label for="sourceOf" class="col-sm-2 control-label">款项来源</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="sourceOf" placeholder="款项来源" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="paymentType" class="col-sm-2 control-label">收款方式</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="paymentType" placeholder="收款方式" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="amount" class="col-sm-2 control-label">收款金额</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="amount" placeholder="收款金额" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="bankAccount" class="col-sm-2 control-label">银行账号</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="bankAccount" placeholder="银行账号" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="bankName" class="col-sm-2 control-label">开户行名称</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="bankName" placeholder="开户行名称" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="trice" class="col-sm-2 control-label">收款时间</label>
@@ -62,14 +65,14 @@
                                     <sf:input cssClass="form-control" path="trice" data-date-format="yyyy-mm-dd" />
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
                             <div class="col-sm-10">
                                 <sf:textarea cssClass="form-control" rows="3" path="description" placeholder="备注，500字以内" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
 

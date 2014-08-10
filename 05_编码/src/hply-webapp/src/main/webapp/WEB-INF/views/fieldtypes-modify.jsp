@@ -14,35 +14,35 @@
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="fieldT01"
 									placeholder="" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="fieldT02" class="col-sm-2 control-label"></label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="fieldT02"
 									placeholder="" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="fieldT03" class="col-sm-2 control-label"></label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="fieldT03"
 									placeholder="" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="fieldT04" class="col-sm-2 control-label"></label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="fieldT04"
 									placeholder="" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="fieldT05" class="col-sm-2 control-label"></label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="fieldT05"
 									placeholder="" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="fieldT06" class="col-sm-2 control-label"></label>
@@ -53,28 +53,28 @@
 						<span class="input-group-addon"><i
 							class="glyphicon glyphicon-calendar"></i></span>
 					</div>
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="fieldT07" class="col-sm-2 control-label"></label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="fieldT07"
 									placeholder="" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="fieldT08" class="col-sm-2 control-label"></label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="fieldT08"
 									placeholder="" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="fieldT09" class="col-sm-2 control-label"></label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="fieldT09"
 									placeholder="" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>                        
 						<button type="submit" class="btn btn-info pull-right">
 							<span class="glyphicon glyphicon-ok"></span> 提 交

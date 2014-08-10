@@ -39,15 +39,17 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th></th>
-                        <th>项目ID</th>
+                        <th>#</th>
+                        <th>项目名称</th>
                         <th>发票票号</th>
                         <th>发票类别</th>
                         <th>发票金额</th>
                         <th>开票时间</th>
+                        <th>创建用户</th>
                         <th>备注</th>
-                        <th>操作</th>
+                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -56,16 +58,17 @@
                     %>
                     <c:forEach items="${list}" var="customerBilling">
                         <tr>
-                            <td><%=++i%></td>
-                            <td><span
+                           <td><span
                                 class="glyphicon <c:out value="${customerBilling.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
-                            <td><a
+                            <td><%=++i%></td>
+                             <td><a
                                 href="<s:url value="/customerbilling/detail/{id}"><s:param name="id" value="${customerBilling.id }" /></s:url>"><c:out
                                         value="${customerBilling.projectId}" /></a></td>
                             <td><c:out value="${customerBilling.invoiceCode}" /></td>
                             <td><c:out value="${customerBilling.invoiceType}" /></td>
                             <td><c:out value="${customerBilling.amount}" /></td>
                             <td><fmt:formatDate value="${customerBilling.trice}" pattern="yyyy-MM-dd" /></td>
+                            <td><c:out value="${customerBilling.createUser}" /></td>
                             <td><c:out value="${customerBilling.description}" /></td>
                             <td><c:if test="${customerbilling.status == 1 }">
                                     <shiro:hasPermission name="`customerbilling_modify`">

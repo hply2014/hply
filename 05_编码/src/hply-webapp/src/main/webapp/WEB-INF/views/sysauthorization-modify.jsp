@@ -14,14 +14,14 @@
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="resourceId"
 									placeholder="资源ID" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="userId" class="col-sm-2 control-label">用户ID</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="userId"
 									placeholder="用户ID" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>                        
 						<button type="submit" class="btn btn-info pull-right">
 							<span class="glyphicon glyphicon-ok"></span> 提 交

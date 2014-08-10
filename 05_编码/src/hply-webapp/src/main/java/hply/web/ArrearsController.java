@@ -2,8 +2,12 @@
 
 import hply.core.Utility;
 import hply.domain.Arrears;
+import hply.domain.SysUser;
 import hply.service.ArrearsService;
 import hply.service.SysParameterService;
+import hply.service.SysUserService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -25,6 +29,9 @@ public class ArrearsController {
 	@Autowired
 	private SysParameterService paramService;
 
+	@Autowired
+	private SysUserService sysUserService;
+
 	public static final String URI = "/arrears";
 	public static final String JSP_PAGE_LIST = "arrears-list";
 	public static final String JSP_PAGE_DETAIL = "arrears-detail";
@@ -36,7 +43,13 @@ public class ArrearsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("page_title", "往来欠款");
-		model.addAttribute("list", service.getAll());
+		List<Arrears> list = service.getAll();
+		for (Arrears item : list) {
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("list", list);
+
 		return JSP_PAGE_LIST;
 	}
 

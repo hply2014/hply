@@ -63,7 +63,7 @@
 			<th>金额</th>
 			<th>预计用量</th>
 			<th>型材点</th>
-			<th>操作</th>
+			
 		</tr>
 	</thead>
 	<tbody>

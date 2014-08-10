@@ -30,8 +30,8 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>#</th>
 			<th></th>
+			<th>#</th>
 			<th>编号</th>
 			<th>项目ID</th>
 			<th>项目编号</th>
@@ -51,7 +51,7 @@
 			<th>经办人</th>
 			<th>经办时间</th>
 			<th>流程状态</th>
-			<th>操作</th>
+			
 		</tr>
 	</thead>
 	<tbody>
@@ -60,9 +60,9 @@
 		%>
 		<c:forEach items="${list}" var="chop">
 			<tr>
+				<td><span class="glyphicon <c:out value="${chop.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
 				<td><%=++i%></td>
-                <td><span class="glyphicon <c:out value="${chop.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
-				<td><a
+                <td><a
 					href="<s:url value="/chop/detail/{id}"><s:param name="id" value="${chop.id }" /></s:url>"><c:out
 							value="${chop.chopCode}" /></a></td>  
 				<td><c:out value="${chop.projectId}" /></td>

@@ -14,26 +14,26 @@
                             <label for="projectId" class="col-sm-2 control-label">项目ID</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="invoiceType" class="col-sm-2 control-label">发票类别</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="invoiceType" placeholder="发票类别" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="amount" class="col-sm-2 control-label">发票金额</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="amount" placeholder="发票金额" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
@@ -43,14 +43,14 @@
                                     <sf:input cssClass="form-control" path="trice" data-date-format="yyyy-mm-dd" />
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
                             <div class="col-sm-10">
                                 <sf:textarea cssClass="form-control" rows="3" path="description" placeholder="备注，500字以内" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
 

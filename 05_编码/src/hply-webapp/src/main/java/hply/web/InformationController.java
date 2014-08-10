@@ -1,12 +1,14 @@
 ﻿package hply.web;
 
-import java.util.List;
-
 import hply.core.Utility;
 import hply.domain.Information;
 import hply.domain.SysOrganization;
+import hply.domain.SysUser;
 import hply.service.InformationService;
 import hply.service.SysOrganizationService;
+import hply.service.SysUserService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -29,6 +31,9 @@ public class InformationController {
 	@Autowired
 	private SysOrganizationService orgService;
 
+	@Autowired
+	private SysUserService sysUserService;
+
 	public static final String URI = "/information";
 	public static final String JSP_PAGE_LIST = "information-list";
 	public static final String JSP_PAGE_DETAIL = "information-detail";
@@ -43,11 +48,10 @@ public class InformationController {
 		List<Information> list = service.getAll();
 		for (Information item : list) {
 			SysOrganization org = orgService.get(item.getOrganizationId());
-			if (org != null) {
-				item.setOrganizationId(org.getOrganizationName());
-			} else {
-				item.setOrganizationId(Utility.EMPTY);
-			}
+			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("list", list);
 		return JSP_PAGE_LIST;

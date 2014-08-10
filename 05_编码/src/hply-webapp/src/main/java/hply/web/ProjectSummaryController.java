@@ -1,6 +1,5 @@
 ﻿package hply.web;
 
-
 import hply.core.Utility;
 import hply.domain.ProjectSummary;
 import hply.service.ProjectSummaryService;
@@ -16,20 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping(value = ProjectSummaryController.URI)
 public class ProjectSummaryController {
-    
+
 	@Autowired
-    private ProjectSummaryService service;
+	private ProjectSummaryService service;
 
 	public static final String URI = "/projectsummary";
 	public static final String JSP_PAGE_LIST = "projectsummary-list";
 	public static final String JSP_PAGE_DETAIL = "projectsummary-detail";
 	public static final String JSP_PAGE_MODIFY = "projectsummary-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
@@ -74,10 +71,10 @@ public class ProjectSummaryController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid ProjectSummary projectSummary,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid ProjectSummary projectSummary, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(projectSummary.toString());
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
@@ -94,11 +91,10 @@ public class ProjectSummaryController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id,
-			@Valid ProjectSummary projectSummary, BindingResult result, Model model,
+	public String processUpdateSubmit(@PathVariable String id, @Valid ProjectSummary projectSummary, BindingResult result, Model model,
 			RedirectAttributes redirectAttrs) {
 		Utility.println(projectSummary.toString());
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
@@ -115,8 +111,7 @@ public class ProjectSummaryController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		ProjectSummary projectSummary = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -124,4 +119,3 @@ public class ProjectSummaryController {
 		return "redirect:" + URI;
 	}
 }
-

@@ -10,25 +10,27 @@
 			role="form">
 				<div class="row"><div class="col-sm-8">
         <div class="row">
-							<label for="projectId" class="col-sm-2 control-label">项目ID</label>
-							<div class="col-sm-4 ">
-								<sf:input cssClass="form-control" path="projectId"
-									placeholder="项目ID" />
-								<p class="help-block">&nbsp;</p>
-							</div>
+							<label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
+                                <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
+                                <sf:select cssClass="form-control selectpicker" path="projectId" items="${projectlist }"
+                                    itemValue="id" itemLabel="projectName" />
+                                <p class="help-block" />
+                            </div>
         
 							<label for="expectedValue" class="col-sm-2 control-label">预计用量</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="expectedValue"
 									placeholder="预计用量" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="profilePoint" class="col-sm-2 control-label">型材点</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="profilePoint"
 									placeholder="型材点" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="trice" class="col-sm-2 control-label">登记时间</label>
@@ -39,14 +41,14 @@
 						<span class="input-group-addon"><i
 							class="glyphicon glyphicon-calendar"></i></span>
 					</div>
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
 						<div class="row">
 							<sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
 							<div class="col-sm-10">
 								<sf:textarea cssClass="form-control" rows="3" path="description"
 									placeholder="备注，500字以内" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
 						</div>
                         

@@ -41,7 +41,10 @@
 
                         <th>资源ID</th>
                         <th>用户ID</th>
-                        <th>操作</th>
+                        <th>创建时间</th>
+                        <th>创建用户</th>
+                        
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,6 +59,10 @@
                                 href="<s:url value="/sysauthorization/detail/{id}"><s:param name="id" value="${sysAuthorization.id }" /></s:url>"><c:out
                                         value="${sysAuthorization.resourceId}" /></a></td>
                             <td><c:out value="${sysAuthorization.userId}" /></td>
+							
+                            <td><fmt:formatDate value="${sysAuthorization.createTime}" pattern="yyyy-MM-dd" /></td>
+                            <td><c:out value="${sysAuthorization.createUser}" /></td>
+							
                             <td><a
                                 href="<s:url value="/sysauthorization/modify/{id}"><s:param name="id" value="${sysAuthorization.id }" /></s:url>">修改</a>
                                 <a class="delete"

@@ -14,40 +14,40 @@
                             <label for="enName" class="col-sm-2 control-label">参数英文名称</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="enName" placeholder="参数英文名称" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="cnName" class="col-sm-2 control-label">参数中文名称</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="cnName" placeholder="参数中文名称" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="paramValue" class="col-sm-2 control-label">参数值</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="paramValue" placeholder="参数值" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="defaultValue" class="col-sm-2 control-label">默认值</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="defaultValue" placeholder="默认值" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4 col-sm-offset-2 checkbox">
                                 <sf:checkbox cssClass="icheckbox" path="isInner" id="isInner" value="1" />
                                 <label for="isInner">系统内置</label>
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
                             <div class="col-sm-10">
                                 <sf:textarea cssClass="form-control" rows="3" path="description" placeholder="备注，500字以内" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
 

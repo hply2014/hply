@@ -39,8 +39,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th></th>
+                        <th>#</th>
                         <th>所在部门</th>
                         <th>项目名称</th>
                         <th>地址</th>
@@ -51,10 +51,10 @@
                         <th>姓名</th>
                         <th>身份证号</th>
                         <th>联系方式</th>
-                        <th>登记人</th>
-                        <th>登记时间</th>
+                        <th>登记信息</th>
                         <th>备注</th>
-                        <th>操作</th>
+                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -63,10 +63,10 @@
                     %>
                     <c:forEach items="${list}" var="information">
                         <tr>
-                            <td><%=++i%></td>
                             <td><span
                                 class="glyphicon <c:out value="${information.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
-                            <td><a
+                           <td><%=++i%></td>
+                             <td><a
                                 href="<s:url value="/information/detail/{id}"><s:param name="id" value="${information.id }" /></s:url>"><c:out
                                         value="${information.organizationId}" /></a></td>
                             <td><c:out value="${information.projectName}" /></td>
@@ -78,8 +78,7 @@
                             <td><c:out value="${information.realName}" /></td>
                             <td><c:out value="${information.identification}" /></td>
                             <td><c:out value="${information.contact}" /></td>
-                            <td><c:out value="${information.subscriber}" /></td>
-                            <td><fmt:formatDate value="${information.trice}" pattern="yyyy-MM-dd" /></td>
+                            <td><c:out value="${information.createUser}" /><br/><fmt:formatDate value="${information.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${information.description}" /></td>
                             <td><c:if test="${information.status == 1 }">
                                     <shiro:hasPermission name="`information_modify`">

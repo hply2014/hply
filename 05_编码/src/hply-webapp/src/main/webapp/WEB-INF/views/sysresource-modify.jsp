@@ -14,63 +14,63 @@
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="resCode"
 									placeholder="资源编码" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="resName" class="col-sm-2 control-label">图标路径</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="resName"
 									placeholder="图标路径" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="icon" class="col-sm-2 control-label">资源名称</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="icon"
 									placeholder="资源名称" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="resUrl" class="col-sm-2 control-label">URL地址</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="resUrl"
 									placeholder="URL地址" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="resType" class="col-sm-2 control-label">资源类型</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="resType"
 									placeholder="资源类型" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="orderBy" class="col-sm-2 control-label">顺序号</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="orderBy"
 									placeholder="顺序号" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
         <div class="row">
 							<label for="parentId" class="col-sm-2 control-label">父ID</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="parentId"
 									placeholder="父ID" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
         
 							<label for="enabled" class="col-sm-2 control-label">是否禁用</label>
 							<div class="col-sm-4 ">
 								<sf:input cssClass="form-control" path="enabled"
 									placeholder="是否禁用" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div></div>
 						<div class="row">
 							<sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
 							<div class="col-sm-10">
 								<sf:textarea cssClass="form-control" rows="3" path="description"
 									placeholder="备注，500字以内" />
-								<p class="help-block">&nbsp;</p>
+								<p class="help-block" />
 							</div>
 						</div>
                         

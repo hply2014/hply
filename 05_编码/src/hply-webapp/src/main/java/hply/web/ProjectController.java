@@ -3,9 +3,11 @@
 import hply.core.Utility;
 import hply.domain.Project;
 import hply.domain.SysOrganization;
+import hply.domain.SysUser;
 import hply.service.ProjectService;
 import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
+import hply.service.SysUserService;
 
 import java.util.List;
 
@@ -33,6 +35,9 @@ public class ProjectController {
 	@Autowired
 	private SysParameterService paramService;
 
+	@Autowired
+	private SysUserService sysUserService;
+
 	public static final String URI = "/project";
 	public static final String JSP_PAGE_LIST = "project-list";
 	public static final String JSP_PAGE_DETAIL = "project-detail";
@@ -48,6 +53,9 @@ public class ProjectController {
 		for (Project item : list) {
 			SysOrganization org = orgService.get(item.getOrganizationId());
 			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("list", list);
 		return JSP_PAGE_LIST;

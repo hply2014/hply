@@ -29,6 +29,9 @@ public class SysUserController {
 	@Autowired
 	private SysOrganizationService orgService;
 
+	@Autowired
+	private SysUserService sysUserService;
+
 	public static final String URI = "/sysuser";
 	public static final String JSP_PAGE_LIST = "sysuser-list";
 	public static final String JSP_PAGE_DETAIL = "sysuser-detail";
@@ -43,12 +46,12 @@ public class SysUserController {
 		List<SysUser> userlist = service.getAll();
 		for (SysUser user : userlist) {
 			SysOrganization org = orgService.get(user.getOrganizationId());
-			if (org != null) {
-				user.setOrganizationId(org.getOrganizationName());
-			} else {
-				user.setOrganizationId(Utility.EMPTY);
-			}
+			user.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+
+			SysUser createUser = sysUserService.get(user.getCreateUser());
+			user.setCreateUser(createUser != null ? createUser.getRealName() : Utility.EMPTY);
 		}
+
 		model.addAttribute("list", userlist);
 		return JSP_PAGE_LIST;
 	}
@@ -133,7 +136,7 @@ public class SysUserController {
 		user0.setEnabled(sysUser.getEnabled());
 		user0.setOrderBy(sysUser.getOrderBy());
 		user0.setDescription(sysUser.getDescription());
-		
+
 		service.update(user0);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 

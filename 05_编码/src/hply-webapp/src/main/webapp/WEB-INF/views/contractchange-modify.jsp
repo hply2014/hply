@@ -89,7 +89,6 @@
 <!--/container main -->
 <script type="text/javascript">
 	$(function() {
-		$(":text[value='0.0']").val('');
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {

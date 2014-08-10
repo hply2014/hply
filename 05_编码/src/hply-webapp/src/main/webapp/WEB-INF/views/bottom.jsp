@@ -36,6 +36,8 @@
 
 <script type="text/javascript">
 	$(function() {
+	<%--	$(":text[value='0.0']").val(null); --%>
+		
 		$(".delete").click(function() {
 			$("#myModalContent").html($(this).attr("data-confirm-message"));
 			$('#myModal').data("href", $(this).attr("href")).modal("show");
@@ -58,6 +60,8 @@
 			radioClass : 'iradio_minimal',
 			increaseArea : '20%' // optional
 		});
+		
+		$("[data-toggle]").tooltip();
 	});
 </script>
 </body>

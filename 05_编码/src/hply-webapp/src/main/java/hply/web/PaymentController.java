@@ -1,10 +1,15 @@
 ﻿package hply.web;
 
 import hply.core.Utility;
-import hply.domain.Collections;
 import hply.domain.Payment;
+import hply.domain.Project;
+import hply.domain.SysUser;
 import hply.service.PaymentService;
+import hply.service.ProjectService;
 import hply.service.SysParameterService;
+import hply.service.SysUserService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -23,8 +28,15 @@ public class PaymentController {
 
 	@Autowired
 	private PaymentService service;
+
 	@Autowired
 	private SysParameterService paramService;
+
+	@Autowired
+	private ProjectService projectService;
+
+	@Autowired
+	private SysUserService sysUserService;
 
 	public static final String URI = "/payment";
 	public static final String JSP_PAGE_LIST = "payment-list";
@@ -37,7 +49,17 @@ public class PaymentController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("page_title", "付款情况");
-		model.addAttribute("list", service.getAll());
+
+		List<Payment> list = service.getAll();
+		for (Payment item : list) {
+			Project pjt = projectService.get(item.getProjectId());
+			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
+
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("list", list);
+
 		return JSP_PAGE_LIST;
 	}
 
@@ -57,6 +79,8 @@ public class PaymentController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
 		Payment payment = new Payment();
 		payment.setTicketCode(paramService.getNextCode("payment_code"));
 
@@ -70,6 +94,8 @@ public class PaymentController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
 		model.addAttribute("payment", service.get(id));
 		model.addAttribute("page_title", "修改付款情况");
 		return JSP_PAGE_MODIFY;

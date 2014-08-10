@@ -38,14 +38,16 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th></th>
-                        <th>项目ID</th>
+                        <th>#</th>
+                        <th>项目名称</th>
                         <th>预计用量</th>
                         <th>型材点</th>
                         <th>登记时间</th>
+                        <th>创建用户</th>
                         <th>备注</th>
-                        <th>操作</th>
+                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -54,15 +56,16 @@
                     %>
                     <c:forEach items="${list}" var="profile">
                         <tr>
-                            <td><%=++i%></td>
                             <td><span
                                 class="glyphicon <c:out value="${profile.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
+                            <td><%=++i%></td>
                             <td><a
                                 href="<s:url value="/profile/detail/{id}"><s:param name="id" value="${profile.id }" /></s:url>"><c:out
                                         value="${profile.projectId}" /></a></td>
                             <td><c:out value="${profile.expectedValue}" /></td>
                             <td><c:out value="${profile.profilePoint}" /></td>
                             <td><fmt:formatDate value="${profile.trice}" pattern="yyyy-MM-dd" /></td>
+                            <td><c:out value="${profile.createUser}" /></td>
                             <td><c:out value="${profile.description}" /></td>
                             <td><c:if test="${profile.status == 1 }">
                                     <shiro:hasPermission name="`profile_modify`">

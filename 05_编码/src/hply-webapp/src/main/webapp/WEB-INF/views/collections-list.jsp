@@ -39,18 +39,20 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th></th>
-                        <th>项目ID</th>
+                        <th>#</th>
                         <th>凭证号</th>
+                        <th>项目名称</th>
                         <th>款项来源</th>
                         <th>收款方式</th>
                         <th>收款金额</th>
                         <th>银行账号</th>
                         <th>开户行名称</th>
                         <th>收款时间</th>
+                        <th>创建用户</th>
                         <th>备注</th>
-                        <th>操作</th>
+                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -59,9 +61,9 @@
                     %>
                     <c:forEach items="${list}" var="collections">
                         <tr>
-                            <td><%=++i%></td>
                             <td><span
                                 class="glyphicon <c:out value="${collections.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
+                            <td><%=++i%></td>
                             <td><a
                                 href="<s:url value="/collections/detail/{id}"><s:param name="id" value="${collections.id }" /></s:url>"><c:out
                                         value="${collections.projectId}" /></a></td>
@@ -72,6 +74,7 @@
                             <td><c:out value="${collections.bankAccount}" /></td>
                             <td><c:out value="${collections.bankName}" /></td>
                             <td><fmt:formatDate value="${collections.trice}" pattern="yyyy-MM-dd" /></td>
+                            <td><c:out value="${collections.createUser}" /></td>
                             <td><c:out value="${collections.description}" /></td>
                             <td><c:if test="${collections.status == 1 }">
                                     <shiro:hasPermission name="`collections_modify`">

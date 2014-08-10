@@ -228,7 +228,6 @@
 			$("#capitalOccupied").html(result);
 		}, "text");
 		
-		$(":text[value='0.0']").val('');
 
 		$("#contractAmount, #managementRate").keyup(function() {
 			if ($("#settlementAmount").val() > 0)

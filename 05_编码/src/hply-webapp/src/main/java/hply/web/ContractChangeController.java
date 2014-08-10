@@ -3,10 +3,11 @@
 import hply.core.Utility;
 import hply.domain.ContractChange;
 import hply.domain.Project;
-import hply.domain.SysOrganization;
+import hply.domain.SysUser;
 import hply.service.ContractChangeService;
 import hply.service.ProjectService;
 import hply.service.SysParameterService;
+import hply.service.SysUserService;
 
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class ContractChangeController {
 	@Autowired
 	private ProjectService projectService;
 
+	@Autowired
+	private SysUserService sysUserService;
+
 	public static final String URI = "/contractchange";
 	public static final String JSP_PAGE_LIST = "contractchange-list";
 	public static final String JSP_PAGE_DETAIL = "contractchange-detail";
@@ -49,6 +53,9 @@ public class ContractChangeController {
 		for (ContractChange item : list) {
 			Project pjt = projectService.get(item.getProjectId());
 			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
+
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 
 		model.addAttribute("list", list);
@@ -87,7 +94,11 @@ public class ContractChangeController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
-		model.addAttribute("contractChange", service.get(id));
+		ContractChange cc = service.get(id);
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
+		model.addAttribute("contractChange", cc);
+
 		model.addAttribute("page_title", "修改合同补充协议");
 		return JSP_PAGE_MODIFY;
 	}

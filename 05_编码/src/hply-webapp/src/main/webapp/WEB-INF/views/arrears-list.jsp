@@ -36,8 +36,10 @@ page
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>#</th>
-			<th>项目ID</th>
+                        <th></th>
+                        <th>#</th>
+			<th>凭证号</th>
+			<th>项目名称</th>
 			<th>资金使用方</th>
 			<th>欠款分类</th>
 			<th>支付方式</th>
@@ -47,10 +49,9 @@ page
 			<th>银行账号</th>
 			<th>开户行名称</th>
 			<th>登记时间</th>
+                        <th>创建用户</th>
 			<th>备注</th>
-			<th>数据状态，0：草稿/1：正式</th>
-			<th>凭证号</th>
-			<th>操作</th>
+			
 		</tr>
 	</thead>
 	<tbody>
@@ -59,7 +60,9 @@ page
 		%>
 		<c:forEach items="${list}" var="arrears">
 			<tr>
+               <td><span class="glyphicon <c:out value="${arrears.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
 				<td><%=++i%></td>
+				<td><c:out value="${arrears.arrearsCode}" /></td>
 				<td><a
 					href="<s:url value="/arrears/detail/{id}"><s:param name="id" value="${arrears.id }" /></s:url>"><c:out
 							value="${arrears.projectId}" /></a></td>  
@@ -73,9 +76,8 @@ page
 				<td><c:out value="${arrears.bankName}" /></td>
 				<td><fmt:formatDate value="${arrears.trice}"
 						pattern="yyyy-MM-dd" /></td>  
+                            <td><c:out value="${arrears.createUser}" /></td>
 				<td><c:out value="${arrears.description}" /></td>
-				<td><c:out value="${arrears.status}" /></td>
-				<td><c:out value="${arrears.arrearsCode}" /></td>
 				<td><a
 					href="<s:url value="/arrears/modify/{id}"><s:param name="id" value="${arrears.id }" /></s:url>">修改</a>
 					| <a class="delete" data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${arrears.id}" />】么？"

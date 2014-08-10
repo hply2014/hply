@@ -43,8 +43,10 @@
 
                         <th>付款科目名称</th>
                         <th>报销比例上限</th>
+                        <th>创建用户</th>
                         <th>备注</th>
-                        <th>操作</th>
+                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -59,6 +61,7 @@
                                 href="<s:url value="/paymentitem/detail/{id}"><s:param name="id" value="${paymentItem.id }" /></s:url>"><c:out
                                         value="${paymentItem.itemName}" /></a></td>
                             <td><c:out value="${paymentItem.reimbursementCap}" /></td>
+                            <td><c:out value="${paymentItem.createUser}" /></td>
                             <td><c:out value="${paymentItem.description}" /></td>
                             <td><shiro:hasPermission name="`paymentitem_modify`">
                                     <a

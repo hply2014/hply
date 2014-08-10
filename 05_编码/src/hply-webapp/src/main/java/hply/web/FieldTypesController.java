@@ -1,9 +1,9 @@
 ﻿package hply.web;
 
-
 import hply.core.Utility;
 import hply.domain.FieldTypes;
 import hply.service.FieldTypesService;
+import hply.service.SysUserService;
 
 import javax.validation.Valid;
 
@@ -16,20 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping(value = FieldTypesController.URI)
 public class FieldTypesController {
-    
+
 	@Autowired
-    private FieldTypesService service;
+	private FieldTypesService service;
+
+	@Autowired
+	private SysUserService sysUserService;
 
 	public static final String URI = "/fieldtypes";
 	public static final String JSP_PAGE_LIST = "fieldtypes-list";
 	public static final String JSP_PAGE_DETAIL = "fieldtypes-detail";
 	public static final String JSP_PAGE_MODIFY = "fieldtypes-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
@@ -74,10 +75,9 @@ public class FieldTypesController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid FieldTypes fieldTypes,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid FieldTypes fieldTypes, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(fieldTypes.toString());
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
@@ -94,11 +94,10 @@ public class FieldTypesController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id,
-			@Valid FieldTypes fieldTypes, BindingResult result, Model model,
+	public String processUpdateSubmit(@PathVariable String id, @Valid FieldTypes fieldTypes, BindingResult result, Model model,
 			RedirectAttributes redirectAttrs) {
 		Utility.println(fieldTypes.toString());
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
@@ -115,8 +114,7 @@ public class FieldTypesController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		FieldTypes fieldTypes = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -124,4 +122,3 @@ public class FieldTypesController {
 		return "redirect:" + URI;
 	}
 }
-

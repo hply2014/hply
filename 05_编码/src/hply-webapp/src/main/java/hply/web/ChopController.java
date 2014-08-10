@@ -51,11 +51,7 @@ public class ChopController {
 		List<Chop> list = service.getAll();
 		for (Chop item : list) {
 			SysUser user = sysUserService.get(item.getApplyUser());
-			if (user != null) {
-				item.setApplyUser(user.getRealName());
-			} else {
-				item.setApplyUser(Utility.EMPTY);
-			}
+			item.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("list", list);
 

@@ -1,9 +1,14 @@
 ﻿package hply.web;
 
-
 import hply.core.Utility;
 import hply.domain.CustomerBilling;
+import hply.domain.Project;
+import hply.domain.SysUser;
 import hply.service.CustomerBillingService;
+import hply.service.ProjectService;
+import hply.service.SysUserService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,27 +21,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping(value = CustomerBillingController.URI)
 public class CustomerBillingController {
-    
+
 	@Autowired
-    private CustomerBillingService service;
+	private CustomerBillingService service;
+	@Autowired
+	private ProjectService projectService;
+	@Autowired
+	private SysUserService sysUserService;
 
 	public static final String URI = "/customerbilling";
 	public static final String JSP_PAGE_LIST = "customerbilling-list";
 	public static final String JSP_PAGE_DETAIL = "customerbilling-detail";
 	public static final String JSP_PAGE_MODIFY = "customerbilling-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("page_title", "客户开票情况");
-		model.addAttribute("list", service.getAll());
+
+		List<CustomerBilling> list = service.getAll();
+		for (CustomerBilling item : list) {
+			Project pjt = projectService.get(item.getProjectId());
+			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
+
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("list", list);
 		return JSP_PAGE_LIST;
 	}
 
@@ -55,6 +71,8 @@ public class CustomerBillingController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
 		model.addAttribute("customerBilling", new CustomerBilling());
 		model.addAttribute("page_title", "新建客户开票情况");
 		return JSP_PAGE_MODIFY;
@@ -65,6 +83,8 @@ public class CustomerBillingController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
 		model.addAttribute("customerBilling", service.get(id));
 		model.addAttribute("page_title", "修改客户开票情况");
 		return JSP_PAGE_MODIFY;
@@ -74,10 +94,10 @@ public class CustomerBillingController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid CustomerBilling customerBilling,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid CustomerBilling customerBilling, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(customerBilling.toString());
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
@@ -94,11 +114,10 @@ public class CustomerBillingController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id,
-			@Valid CustomerBilling customerBilling, BindingResult result, Model model,
+	public String processUpdateSubmit(@PathVariable String id, @Valid CustomerBilling customerBilling, BindingResult result, Model model,
 			RedirectAttributes redirectAttrs) {
 		Utility.println(customerBilling.toString());
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
@@ -115,8 +134,7 @@ public class CustomerBillingController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		CustomerBilling customerBilling = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -124,4 +142,3 @@ public class CustomerBillingController {
 		return "redirect:" + URI;
 	}
 }
-

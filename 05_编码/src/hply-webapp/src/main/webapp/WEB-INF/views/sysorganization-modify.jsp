@@ -14,14 +14,14 @@
                             <label for="organizationName" class="col-sm-2 control-label">机构名称</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="organizationName" placeholder="机构名称" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
                             <div class="col-sm-10">
                                 <sf:textarea cssClass="form-control" rows="3" path="description" placeholder="备注，500字以内" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
 
