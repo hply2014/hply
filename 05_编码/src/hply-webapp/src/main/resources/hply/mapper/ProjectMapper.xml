@@ -5,6 +5,12 @@
 <mapper namespace="hply.mapper.ProjectMapper">
 
 	<select id="refreshAllStatus" resultType="int">select
-		refresh_all_status()</select>
+		refresh_all_status()
+	</select>
+
+	<select id="getAllNames" resultType="Project">
+		select id as id,concat('[',project_code,']',project_name) as projectName
+		from t_project order by create_time desc
+	</select>
 </mapper>
 

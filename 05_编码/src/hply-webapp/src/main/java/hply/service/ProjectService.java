@@ -73,4 +73,8 @@ public class ProjectService {
 	public int refreshAllStatus() {
 		return mapper.refreshAllStatus();
 	}
+
+	public List<Project> getAllNames() {
+		return mapper.getAllNames();
+	}
 }

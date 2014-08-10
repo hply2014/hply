@@ -15,27 +15,32 @@
                             <div class="col-sm-4 required-field-block">
                                 <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="csaCode" placeholder="增补协议编号" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
-                            <label for="projectId" class="col-sm-2 control-label">项目ID</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" />
-                                <p class="help-block">&nbsp;</p>
+                            <label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
+                                <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
+                                <sf:select cssClass="form-control selectpicker" path="projectId" items="${projectlist }"
+                                    itemValue="id" itemLabel="projectName" />
+                                <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="managementRate" class="col-sm-2 control-label">管理费率（%）</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="managementRate" placeholder="管理费率" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
 
                             <label for="changeAmount" class="col-sm-2 control-label">增减金额</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="changeAmount" placeholder="增减金额" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
+                        <%--
                         <div class="row">
                             <label for="trice" class="col-sm-2 control-label">增补时间</label>
                             <div class="col-sm-4 ">
@@ -43,14 +48,14 @@
                                     <sf:input cssClass="form-control" path="trice" data-date-format="yyyy-mm-dd" />
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
-                        </div>
+                        </div> --%>
                         <div class="row">
                             <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
                             <div class="col-sm-10">
                                 <sf:textarea cssClass="form-control" rows="3" path="description" placeholder="备注，500字以内" />
-                                <p class="help-block">&nbsp;</p>
+                                <p class="help-block" />
                             </div>
                         </div>
 
@@ -84,6 +89,7 @@
 <!--/container main -->
 <script type="text/javascript">
 	$(function() {
+		$(":text[value='0.0']").val('');
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {
@@ -97,8 +103,14 @@
 				csaCode : {
 					required : true
 				},
-				managementRate : {},
-				changeAmount : {},
+				managementRate : {
+					number : true,
+					range : [ 0, 100 ]
+				},
+				changeAmount : {
+					required : true,
+					number : true
+				},
 				trice : {},
 				description : {},
 			}

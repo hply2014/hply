@@ -2,8 +2,13 @@
 
 import hply.core.Utility;
 import hply.domain.ContractChange;
+import hply.domain.Project;
+import hply.domain.SysOrganization;
 import hply.service.ContractChangeService;
+import hply.service.ProjectService;
 import hply.service.SysParameterService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -26,6 +31,9 @@ public class ContractChangeController {
 	@Autowired
 	private SysParameterService paramService;
 
+	@Autowired
+	private ProjectService projectService;
+
 	public static final String URI = "/contractchange";
 	public static final String JSP_PAGE_LIST = "contractchange-list";
 	public static final String JSP_PAGE_DETAIL = "contractchange-detail";
@@ -37,7 +45,13 @@ public class ContractChangeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("page_title", "合同补充协议");
-		model.addAttribute("list", service.getAll());
+		List<ContractChange> list = service.getAll();
+		for (ContractChange item : list) {
+			Project pjt = projectService.get(item.getProjectId());
+			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
+		}
+
+		model.addAttribute("list", list);
 		return JSP_PAGE_LIST;
 	}
 
@@ -58,6 +72,11 @@ public class ContractChangeController {
 	public String createForm(Model model) {
 		ContractChange cc = new ContractChange();
 		cc.setCsaCode(paramService.getNextCode("cc_code"));
+		cc.setManagementRate(paramService.getParamDoubleValue("default_manager_rate"));
+
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
+
 		model.addAttribute("contractChange", cc);
 		model.addAttribute("page_title", "新建合同补充协议");
 		return JSP_PAGE_MODIFY;

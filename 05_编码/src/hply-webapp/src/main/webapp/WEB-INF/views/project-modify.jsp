@@ -32,10 +32,61 @@
                                     items="${orglist }" itemValue="id" itemLabel="organizationName" />
                                 <p class="help-block" />
                             </div>
+                            <label for="manager" class="col-sm-2 control-label">项目经理</label>
+                            <div class="col-sm-4 ">
+                                <sf:input cssClass="form-control" path="manager" placeholder="项目经理" />
+                                <p class="help-block" />
+                            </div>
+                        </div>
+                        <div class="row">
 
+                            <div class="col-sm-4 col-sm-offset-2 checkbox">
+                                <sf:checkbox cssClass="icheckbox" path="isWithholdingOffsite" id="isWithholdingOffsite"
+                                    value="1" />
+                                <label for="isWithholdingOffsite">异地代扣代缴</label>
+                                <p class="help-block" />
+                            </div>
                             <label for="contractAmount" class="col-sm-2 control-label">合同金额</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="contractAmount" placeholder="合同金额" />
+                                <p class="help-block" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="managementRate" class="col-sm-2 control-label">管理费率（%）</label>
+                            <div class="col-sm-4 ">
+                                <sf:input cssClass="form-control" path="managementRate" placeholder="管理费率" />
+                                <p class="help-block" />
+                            </div>
+                            <label for="managementPlanAmount" class="col-sm-2 control-label">应收管理费</label>
+                            <div class="col-sm-4 ">
+                                <sf:input cssClass="form-control" path="managementPlanAmount" placeholder="应收管理费" />
+                                <p class="help-block" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="taxRate" class="col-sm-2 control-label">税金比率（%）</label>
+                            <div class="col-sm-4 ">
+                                <sf:input cssClass="form-control" path="taxRate" placeholder="税金比率" />
+                                <p class="help-block" />
+                            </div>
+                            <label for="taxPlanAmount" class="col-sm-2 control-label">应缴税金</label>
+                            <div class="col-sm-4 ">
+                                <sf:input cssClass="form-control" path="taxPlanAmount" placeholder="应缴税金" />
+                                <p class="help-block" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="settlementAmount" class="col-sm-2 control-label">结算金额</label>
+                            <div class="col-sm-4 ">
+                                <sf:input cssClass="form-control" path="settlementAmount" placeholder="结算金额" />
+                                <p class="help-block" />
+                            </div>
+                            <label for="capitalOccupied" class="col-sm-2 control-label">占用资金情况</label>
+                            <div class="col-sm-4 ">
+                                <%--
+                                <sf:input cssClass="form-control" path="capitalOccupied" placeholder="占用资金情况" /> --%>
+                                <p class="form-control-static" id="capitalOccupied">&nbsp;</p>
                                 <p class="help-block" />
                             </div>
                         </div>
@@ -90,11 +141,6 @@
                                                 <sf:input cssClass="form-control" path="contractCode" placeholder="合同号" />
                                                 <p class="help-block" />
                                             </div>
-                                            <label for="manager" class="col-sm-2 control-label">项目经理</label>
-                                            <div class="col-sm-4 ">
-                                                <sf:input cssClass="form-control" path="manager" placeholder="项目经理" />
-                                                <p class="help-block" />
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="tab3warning">
@@ -133,53 +179,6 @@
                             </div>
                         </div>
                         <div class="row">
-
-                            <div class="col-sm-4 col-sm-offset-2 checkbox">
-                                <sf:checkbox cssClass="icheckbox" path="isWithholdingOffsite" id="isWithholdingOffsite"
-                                    value="1" />
-                                <label for="isWithholdingOffsite">异地代扣代缴</label>
-                                <p class="help-block" />
-                            </div>
-                            <label for="capitalOccupied" class="col-sm-2 control-label">占用资金情况</label>
-                            <div class="col-sm-4 ">
-                                <%--
-                                <sf:input cssClass="form-control" path="capitalOccupied" placeholder="占用资金情况" /> --%>
-                                <p class="form-control-static" id="capitalOccupied">&nbsp;</p>
-                                <p class="help-block" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="managementRate" class="col-sm-2 control-label">管理费率（%）</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="managementRate" placeholder="管理费率" />
-                                <p class="help-block" />
-                            </div>
-                            <label for="managementPlanAmount" class="col-sm-2 control-label">应收管理费</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="managementPlanAmount" placeholder="应收管理费" />
-                                <p class="help-block" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="taxRate" class="col-sm-2 control-label">税金比率（%）</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="taxRate" placeholder="税金比率" />
-                                <p class="help-block" />
-                            </div>
-                            <label for="taxPlanAmount" class="col-sm-2 control-label">应缴税金</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="taxPlanAmount" placeholder="应缴税金" />
-                                <p class="help-block" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="settlementAmount" class="col-sm-2 control-label">结算金额</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="settlementAmount" placeholder="结算金额" />
-                                <p class="help-block" />
-                            </div>
-                        </div>
-                        <div class="row">
                             <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
                             <div class="col-sm-10">
                                 <sf:textarea cssClass="form-control" rows="3" path="description" placeholder="备注，500字以内" />
@@ -193,6 +192,14 @@
                         <a href='<s:url value="/project" />' class="btn btn-link"><span
                             class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="bs-callout bs-callout-danger">
+                            <h4>操作提示</h4>
+                            <p>1、当项目尚未结算（结算金额 = 0.00）时，应收管理费 = 合同金额 × 管理费率；应缴税金 = 合同金额 × 税金比率。</p>
+                            <p>2、当项目已结算（结算金额 > 0.00）时，应收管理费 = 结算金额 × 管理费率；应缴税金 = 结算金额 × 税金比率。</p>
+                            <p>3、管理费率默认3.6%，税金比率默认3.4%，可由管理员在系统设置中修改。</p>
+                        </div>
                     </div>
                 </div>
                 <c:if test="${not empty errors}">
@@ -217,15 +224,39 @@
 <!--/container main -->
 <script type="text/javascript">
 	$(function() {
-		$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {
-		}, function(result) {
+		$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {}, function(result) {
 			$("#capitalOccupied").html(result);
 		}, "text");
+		
+		$(":text[value='0.0']").val('');
+
+		$("#contractAmount, #managementRate").keyup(function() {
+			if ($("#settlementAmount").val() > 0)
+				return;
+			var amount = $("#contractAmount").val() * $("#managementRate").val() / 100;
+			$("#managementPlanAmount").val(amount.toFixed(2));
+		});
+
+		$("#contractAmount, #taxRate").keyup(function() {
+			if ($("#settlementAmount").val() > 0)
+				return;
+			var amount = $("#contractAmount").val() * $("#taxRate").val() / 100;
+			$("#taxPlanAmount").val(amount.toFixed(2));
+		});
+
+		$("#settlementAmount").keyup(function() {
+			var amount = $("#settlementAmount").val() > 0 ? $("#settlementAmount").val() : $("#contractAmount").val();
+			var a1 = amount * $("#managementRate").val() / 100;
+			$("#managementPlanAmount").val(a1.toFixed(2));
+			var a2 = amount * $("#taxRate").val() / 100;
+			$("#taxPlanAmount").val(a2.toFixed(2));
+		});
 
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {
-				$(element).next().html('<b class="glyphicon glyphicon-ok text-success"></b><i>正确</i>');
+
+				$(element).next().html('<b class="glyphicon glyphicon-ok text-success"></b>');//<i>正确</i>
 			},
 			errorPlacement : function(error, element) {
 				element.next().html('<b class="glyphicon glyphicon-remove text-danger"></b><i>' + error.html() + "</i>");
@@ -245,19 +276,39 @@
 				corperation : {},
 				legalAssignee : {},
 				isWithholdingOffsite : {},
-				managementRate : {},
-				taxRate : {},
-				contractAmount : {},
-				settlementAmount : {},
+				managementRate : {
+					number : true,
+					range : [ 0, 100 ]
+				},
+				taxRate : {
+					number : true,
+					range : [ 0, 100 ]
+				},
+				contractAmount : {
+					number : true,
+					min : 1
+				},
+				settlementAmount : {
+					number : true,
+					min : 0
+				},
 				dutyPaidTime : {},
-				dutyPaidAmount : {},
+				dutyPaidAmount : {
+					number : true
+				},
 				dutyPaidCode : {},
 				capitalOccupied : {},
 				projectStatus : {},
 				trice : {},
 				description : {},
-				managementPlanAmount : {},
-				taxPlanAmount : {},
+				managementPlanAmount : {
+					number : true,
+					min : 0
+				},
+				taxPlanAmount : {
+					number : true,
+					min : 0
+				},
 			}
 		});
 	});

@@ -5,8 +5,12 @@
 
 package hply.mapper;
 
-import org.springframework.stereotype.Repository;
+import hply.domain.Project;
 import hply.mapper.partial.PartialProjectMapper;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
 
 /**
  * 数据表： [t_project] 01_合同项目信息
@@ -14,4 +18,6 @@ import hply.mapper.partial.PartialProjectMapper;
 @Repository
 public interface ProjectMapper extends PartialProjectMapper {
 	public int refreshAllStatus();
+
+	public List<Project> getAllNames();
 }

@@ -47,11 +47,7 @@ public class ProjectController {
 		List<Project> list = service.getAll();
 		for (Project item : list) {
 			SysOrganization org = orgService.get(item.getOrganizationId());
-			if (org != null) {
-				item.setOrganizationId(org.getOrganizationName());
-			} else {
-				item.setOrganizationId(Utility.EMPTY);
-			}
+			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
 		}
 		model.addAttribute("list", list);
 		return JSP_PAGE_LIST;

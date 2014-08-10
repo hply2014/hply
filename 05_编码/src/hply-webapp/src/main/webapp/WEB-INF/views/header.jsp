@@ -20,10 +20,15 @@
 <link rel="stylesheet" href="<s:url value="/assets/ui.fancytree.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap-select/css/bootstrap-select.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap-icheck/skins/all.css" />">
+<%--
+<link rel="stylesheet" href="<s:url value="/assets/select2/3.5.1/select2.css" />">
+ --%>
 <script src="<s:url value="/assets/jquery.min.js" />"></script>
-<script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
 <script src="<s:url value="/assets/jquery-ui.min.js" />"></script>
-
+<script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
+<%--
+<script src="<s:url value="/assets/select2/3.5.1/select2.min.js" />"></script>
+ --%>
 <!--[if lt IE 9]>
       <script src="<s:url value="/assets/html5shiv.js" />"></script>
       <script src="<s:url value="/assets/respond.min.js" />"></script>
@@ -66,7 +71,7 @@ body {
 	border-color: #463265;
 }
 
-strong {
+strong, .bs-callout h4 {
 	font-family: 微软雅黑, 黑体;
 }
 
@@ -108,10 +113,60 @@ strong {
 	background-color: #fff0f0
 }
 
-.valid input {
+.success input {
 	background-color: #f0fff0;
 }
 
+
+.bs-callout{
+    padding:20px;
+    margin:20px 0;
+    border:1px solid #eee;
+    border-left-width:5px;
+    border-radius:3px
+}
+
+.bs-callout h4{
+    margin-top:0;
+    margin-bottom:5px
+    
+}
+
+.bs-callout p:last-child{
+    margin-bottom:0
+}
+
+.bs-callout code{
+    border-radius:3px
+}
+
+.bs-callout+.bs-callout{
+    margin-top:-5px
+}
+
+.bs-callout-danger{
+    border-left-color:#d9534f
+}
+
+.bs-callout-danger h4{
+    color:#d9534f
+}
+
+.bs-callout-warning{
+    border-left-color:#f0ad4e
+}
+
+.bs-callout-warning h4{
+    color:#f0ad4e
+}
+
+.bs-callout-info{
+    border-left-color:#5bc0de
+}
+
+.bs-callout-info h4{
+    color:#5bc0de
+}
 
 .panel.with-nav-tabs .panel-heading{
     padding: 5px 5px 0 5px;
