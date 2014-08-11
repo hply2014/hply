@@ -95,6 +95,27 @@ public class PartyBillingController {
 	}
 
 	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/step1/{id}", method = RequestMethod.GET)
+	public String step1Form(@PathVariable String id, Model model) {
+		PartyBilling pb = service.get(id);
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
+		String pn = Utility.EMPTY;
+		for (Project p : projectlist) {
+			if (p.getId().equals(pb.getProjectId())) {
+				pn = p.getProjectName();
+			}
+		}
+		model.addAttribute("newProjectName", pn);
+		model.addAttribute("partyBilling", pb);
+		model.addAttribute("page_title", "审核甲方开票情况");
+		model.addAttribute("step1", 1);
+		return JSP_PAGE_MODIFY;
+	}
+
+	/*
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)

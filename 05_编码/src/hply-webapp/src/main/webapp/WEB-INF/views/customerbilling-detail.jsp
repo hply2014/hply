@@ -119,14 +119,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <sf:label path="status" cssClass="col-sm-2 control-label">数据状态，0：草稿/1：正式</sf:label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static">
-                            <c:out value="${customerBilling.status}" />
-                        </p>
-                    </div>
-                </div>
             </sf:form>
         </div>
     </div>

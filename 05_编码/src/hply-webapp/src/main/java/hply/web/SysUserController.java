@@ -48,8 +48,8 @@ public class SysUserController {
 			SysOrganization org = orgService.get(user.getOrganizationId());
 			user.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
 
-			SysUser createUser = sysUserService.get(user.getCreateUser());
-			user.setCreateUser(createUser != null ? createUser.getRealName() : Utility.EMPTY);
+			SysUser updateUser = sysUserService.get(user.getUpdateUser());
+			user.setUpdateUser(updateUser != null ? updateUser.getRealName() : Utility.EMPTY);
 		}
 
 		model.addAttribute("list", userlist);

@@ -77,7 +77,6 @@ public class SysResourceService {
 	 * 根据UserID获取所有具有权限的资源清单
 	 */
 	public List<SysResource> getPermission(String userId) {
-		// TODO 根据UserID获取所有具有权限的资源清单
 		return mapper.getPermission(userId);
 	}
 

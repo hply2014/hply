@@ -60,6 +60,9 @@
                             <td>金额：<c:out value="${projectSummary.contractAmount}" /> <c:if
                                     test="${projectSummary.changeAmount > 0}">
                                     <br />调增：<c:out value="${projectSummary.changeAmount}" />
+                                </c:if><c:if
+                                    test="${projectSummary.changeAmount > 0}">
+                                    <br />累计：<c:out value="${projectSummary.changeTotalAmount}" />
                                 </c:if> <c:if test="${projectSummary.settlementAmount > 0 }">
                                     <br />结算：<c:out value="${projectSummary.settlementAmount}" />
                                 </c:if>

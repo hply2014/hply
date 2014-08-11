@@ -90,7 +90,6 @@ public class APIController {
 
 	@RequestMapping(value = "/auth/{userId}/{resourceId}", method = RequestMethod.POST)
 	public @ResponseBody String authorization(@PathVariable String userId, @PathVariable String resourceId) {
-		// TODO 删除授权还没有实现，根据userId和ResoourceId获取对象，Mybatis的多个参数
 		SysAuthorization auth = sysAuthorizationService.getByUserIdAndResource(userId, resourceId);
 		if (auth != null) {
 			sysAuthorizationService.delete(auth.getId());
@@ -111,6 +110,18 @@ public class APIController {
 	public @ResponseBody String getCapitalOccupied(@PathVariable String projectId) {
 		// TODO 计算占用资金情况
 		return "这是占用资金情况,123";
+	}
+
+	@RequestMapping(value = "/taxplanamount", method = RequestMethod.POST)
+	public @ResponseBody String updateTaxPlanAmount(@RequestParam String id, @RequestParam Double data) {
+		//TODO 修改应缴税金
+		return "OK: " + id + "," + data;
+	}
+
+	@RequestMapping(value = "/managementplanamount", method = RequestMethod.POST)
+	public @ResponseBody String updateManagementPlanAmount(@RequestParam String id, @RequestParam Double data) {
+		//TODO 修改应收税金
+		return "OK: " + id + "," + data;
 	}
 
 }

@@ -1,228 +1,339 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%>
 
-<div class="container main"><div class="panel panel-default">
-  <div class="panel-heading"><strong>${page_title}</strong></div>
-  <div class="panel-body">
-<div class="btn-toolbar" role="toolbar">
-  <div class="btn-group">
-  <a href="<s:url value="/project" />" class="btn btn-info"><span class="glyphicon glyphicon-share-alt"></span> 返 回  </a>
+<div class="container main">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>${page_title}</strong>
+        </div>
+        <div class="panel-body">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group">
+                    <a href="<s:url value="/project" />" class="btn btn-info"><span
+                        class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                </div>
+                <shiro:hasPermission name="`project_modify1`">
+                    <div class="btn-group">
+                        <a href="javascript:void(0);" id="modify1" class="btn btn-info"><span
+                            class="glyphicon glyphicon-edit"></span> 修改应缴税金 </a>
+                    </div>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="`project_modify2`">
+                    <div class="btn-group">
+                        <a href="javascript:void(0);" id="modify2" class="btn btn-info"><span
+                            class="glyphicon glyphicon-log-in"></span> 修改应收管理费 </a>
+                    </div>
+                </shiro:hasPermission>
+            </div>
+
+            <sf:form modelAttribute="project" cssClass="form-horizontal" role="form">
+                <div class="form-group">
+                    <sf:label path="projectCode" cssClass="col-sm-2 control-label">项目编号</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.projectCode}" />
+                        </p>
+                    </div>
+                    <sf:label path="projectName" cssClass="col-sm-2 control-label">项目名称</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.projectName}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="organizationId" cssClass="col-sm-2 control-label">所在部门</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.organizationId}" />
+                        </p>
+                    </div>
+                    <sf:label path="partyName" cssClass="col-sm-2 control-label">甲方名称</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.partyName}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="partyAddress" cssClass="col-sm-2 control-label">甲方地址</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.partyAddress}" />
+                        </p>
+                    </div>
+                    <sf:label path="manager" cssClass="col-sm-2 control-label">项目经理</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.manager}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="contractCode" cssClass="col-sm-2 control-label">合同号</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.contractCode}" />
+                        </p>
+                    </div>
+                    <sf:label path="corperation" cssClass="col-sm-2 control-label">合作单位</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.corperation}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group"></div>
+
+                <div class="form-group">
+                    <sf:label path="legalAssignee" cssClass="col-sm-2 control-label">法人代表</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.legalAssignee}" />
+                        </p>
+                    </div>
+                    <sf:label path="isWithholdingOffsite" cssClass="col-sm-2 control-label">异地代扣代缴</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.isWithholdingOffsite}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="managementRate" cssClass="col-sm-2 control-label">管理费率</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatNumber pattern="#,##0.00" value="${project.managementRate}" />
+                        </p>
+                    </div>
+                    <sf:label path="taxRate" cssClass="col-sm-2 control-label">税金比率</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatNumber pattern="#,##0.00" value="${project.taxRate}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="contractAmount" cssClass="col-sm-2 control-label">合同金额</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatNumber pattern="#,##0.00" value="${project.contractAmount}" />
+                        </p>
+                    </div>
+                    <sf:label path="settlementAmount" cssClass="col-sm-2 control-label">结算金额</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatNumber pattern="#,##0.00" value="${project.settlementAmount}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="dutyPaidTime" cssClass="col-sm-2 control-label">印花税上交时间</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatDate value="${project.dutyPaidTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                        </p>
+                    </div>
+                    <sf:label path="dutyPaidAmount" cssClass="col-sm-2 control-label">印花税上交金额</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatNumber pattern="#,##0.00" value="${project.dutyPaidAmount}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="dutyPaidCode" cssClass="col-sm-2 control-label">印花税收据编号</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.dutyPaidCode}" />
+                        </p>
+                    </div>
+                    <label for="capitalOccupied" class="col-sm-2 control-label">占用资金情况</label>
+                    <div class="col-sm-4 ">
+                        <%--
+                                <sf:input cssClass="form-control" path="capitalOccupied" placeholder="占用资金情况" /> --%>
+                        <p class="form-control-static" id="capitalOccupied">&nbsp;</p>
+                        <p class="help-block" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="managementPlanAmount" cssClass="col-sm-2 control-label">应收管理费</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatNumber pattern="#,##0.00" value="${project.managementPlanAmount}" />
+                        </p>
+                    </div>
+                    <sf:label path="taxPlanAmount" cssClass="col-sm-2 control-label">应缴税金</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatNumber pattern="#,##0.00" value="${project.taxPlanAmount}" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="createUser" cssClass="col-sm-2 control-label">创建用户</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.createUser}" />
+                        </p>
+                    </div>
+                    <sf:label path="createTime" cssClass="col-sm-2 control-label">创建时间</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatDate value="${project.createTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="updateUser" cssClass="col-sm-2 control-label">修改用户</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.updateUser}" />
+                        </p>
+                    </div>
+                    <sf:label path="updateTime" cssClass="col-sm-2 control-label">修改时间</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <fmt:formatDate value="${project.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static">
+                            <c:out value="${project.description}" />
+                        </p>
+                    </div>
+                </div>
+            </sf:form>
+        </div>
+    </div>
 </div>
-<shiro:hasPermission name="`project_modify`">
-				<div class="btn-group">
-					<a
-						href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>"
-						class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span>
-						修 改 </a>
-				</div></shiro:hasPermission>
-                <shiro:hasPermission name="`project_delete`">
-				<div class="btn-group">
-					<a
-						data-confirm-message="合同项目信息数据：<c:out value="${project.id}" />，将被永久删除，操作不可撤销，是否确认？"
-						href="<s:url value="/project/delete/{id}"><s:param name="id" value="${project.id }" /></s:url>"
-						class="btn btn-info delete"><span
-						class="glyphicon glyphicon-trash"></span> 删 除 </a>
-				</div></shiro:hasPermission>
+
+
+<div class="modal fade" id="modelTaxPlanAmount">
+    <div class="modal-dialog">
+        <form class="form-horizontal" role="form" id="formTaxPlanAmount">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">修改应缴税金</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="data" class="col-sm-3 control-label">应缴税金</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="data" type="text" name="data" placeholder="应缴税金" />
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="${project.id }">
+                </div>
+                <div class="modal-footer">
+                    <button id="btnM1" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-saved"></span> 确定
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-share-alt"></span> 取消
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </form>
+    </div>
+    <!-- /.modal-dialog -->
 </div>
+<!-- /.modal -->
 
-<sf:form modelAttribute="project" cssClass="form-horizontal"
-	role="form">
-	<div class="form-group">
-		<sf:label path="projectCode" cssClass="col-sm-2 control-label">项目编号</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.projectCode}" /></p>
-		</div>
-	</div>
 
-	<div class="form-group">
-		<sf:label path="projectName" cssClass="col-sm-2 control-label">项目名称</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.projectName}" /></p>
-		</div>
-	</div>
+<div class="modal fade" id="modelManagementPlanAmount">
+    <div class="modal-dialog">
+        <form class="form-horizontal" role="form" id="formManagementPlanAmount">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">修改应收管理费</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="data" class="col-sm-3 control-label">应收管理费</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="data" type="text" name="data" placeholder="应收管理费" />
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="${project.id }">
+                </div>
+                <div class="modal-footer">
+                    <button id="btnM2" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-saved"></span> 确定
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-share-alt"></span> 取消
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </form>
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
-	<div class="form-group">
-		<sf:label path="organizationId" cssClass="col-sm-2 control-label">所在部门</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.organizationId}" /></p>
-		</div>
-	</div>
+<script type="text/javascript">
+	$(function() {
+		$("#modify1").click(function() {
+			$("#modelManagementPlanAmount #data").val('');
+			$("#modelTaxPlanAmount").modal("show");
+			return false;
+		});
 
-	<div class="form-group">
-		<sf:label path="partyName" cssClass="col-sm-2 control-label">甲方名称</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.partyName}" /></p>
-		</div>
-	</div>
+		$("#btnM1").click(function() {
+			//修改应缴税金
+			$.post("<s:url value='/api/taxplanamount' />", $("#formTaxPlanAmount").serialize(), function(result) {
+				alert(result);
+				if (result.indexOf("成功") >= 0) {
+					$("#modelTaxPlanAmount").modal("hide");
+				}
+			}, "text");
+		});
 
-	<div class="form-group">
-		<sf:label path="partyAddress" cssClass="col-sm-2 control-label">甲方地址</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.partyAddress}" /></p>
-		</div>
-	</div>
+		$("#modify2").click(function() {
+			$("#modelManagementPlanAmount #data").val('');
+			$("#modelManagementPlanAmount").modal("show");
+			return false;
+		});
 
-	<div class="form-group">
-		<sf:label path="manager" cssClass="col-sm-2 control-label">项目经理</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.manager}" /></p>
-		</div>
-	</div>
+		$("#btnM2").click(function() {
+			//修改应收管理费
+			$.post("<s:url value='/api/managementplanamount' />", $("#formManagementPlanAmount").serialize(), function(result) {
+				alert(result);
+				if (result.indexOf("成功") >= 0) {
+					$("#modelManagementPlanAmount").modal("hide");
+				}
+			}, "text");
+		});
 
-	<div class="form-group">
-		<sf:label path="contractCode" cssClass="col-sm-2 control-label">合同号</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.contractCode}" /></p>
-		</div>
-	</div>
+		$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {}, function(result) {
+			$("#capitalOccupied").html(result);
+		}, "text");
+	});
+</script>
 
-	<div class="form-group">
-		<sf:label path="corperation" cssClass="col-sm-2 control-label">合作单位</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.corperation}" /></p>
-		</div>
-	</div>
 
-	<div class="form-group">
-		<sf:label path="legalAssignee" cssClass="col-sm-2 control-label">法人代表</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.legalAssignee}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="isWithholdingOffsite" cssClass="col-sm-2 control-label">异地代扣代缴</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.isWithholdingOffsite}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="managementRate" cssClass="col-sm-2 control-label">管理费率</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${project.managementRate}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="taxRate" cssClass="col-sm-2 control-label">税金比率</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${project.taxRate}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="contractAmount" cssClass="col-sm-2 control-label">合同金额</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${project.contractAmount}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="settlementAmount" cssClass="col-sm-2 control-label">结算金额</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${project.settlementAmount}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="dutyPaidTime" cssClass="col-sm-2 control-label">印花税上交时间</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${project.dutyPaidTime}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="dutyPaidAmount" cssClass="col-sm-2 control-label">印花税上交金额</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${project.dutyPaidAmount}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="dutyPaidCode" cssClass="col-sm-2 control-label">印花税收据编号</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.dutyPaidCode}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="capitalOccupied" cssClass="col-sm-2 control-label">占用资金情况</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${project.capitalOccupied}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="projectStatus" cssClass="col-sm-2 control-label">项目状态</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.projectStatus}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="trice" cssClass="col-sm-2 control-label">登记时间</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${project.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="createTime" cssClass="col-sm-2 control-label">创建时间</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${project.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="createUser" cssClass="col-sm-2 control-label">创建用户</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.createUser}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="updateTime" cssClass="col-sm-2 control-label">修改时间</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${project.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="updateUser" cssClass="col-sm-2 control-label">修改用户</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.updateUser}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.description}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="status" cssClass="col-sm-2 control-label">数据状态，0：草稿/1：正式</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${project.status}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="managementPlanAmount" cssClass="col-sm-2 control-label">应收管理费</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${project.managementPlanAmount}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="taxPlanAmount" cssClass="col-sm-2 control-label">应缴税金</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${project.taxPlanAmount}" /></p>
-		</div>
-	</div>
-</sf:form>
-  </div>
-</div></div>
 <%@ include file="bottom.jsp"%>

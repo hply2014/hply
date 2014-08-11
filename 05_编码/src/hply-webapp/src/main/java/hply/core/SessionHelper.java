@@ -39,6 +39,10 @@ public class SessionHelper {
 		Object obj = getAttribute(CURRENT_SYS_USER);
 		return obj instanceof SysUser ? (SysUser) obj : null;
 	}
+	
+	public static String getCurrentUserId(){
+		return getCurrentSysUser() != null ? getCurrentSysUser().getId() : Utility.EMPTY;
+	}
 
 	public static String getCurrentRealName() {
 		SysUser user = getCurrentSysUser();

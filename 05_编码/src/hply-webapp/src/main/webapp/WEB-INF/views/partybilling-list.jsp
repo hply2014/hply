@@ -43,15 +43,12 @@
                         <th>#</th>
                         <th>发票票号</th>
                         <th>项目名称</th>
-                        <th>发票金额</th>
-                        <th>开票时间</th>
                         <th>税率</th>
-                        <th>应收税金</th>
-                        <th>审核意见</th>
-                        <th>审核人</th>
-                        <th>审核时间</th>
-                        <th>创建用户</th>
-                        <th>流程状态</th>
+                        <th>发票金额</th>
+                        <th>开票人</th>
+                        <th>开票时间</th>
+                        <th>审核情况</th>
+                        <th>审核状态</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -65,32 +62,35 @@
                                 class="glyphicon <c:out value="${partyBilling.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                             <td><%=++i%></td>
                             <td><a
-                                href="<s:url value="/partybilling/detail/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>"><c:out value="${partyBilling.invoiceCode}" /></a></td>
+                                href="<s:url value="/partybilling/detail/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>"><c:out
+                                        value="${partyBilling.invoiceCode}" /></a></td>
                             <td>${ partyBilling.projectId}</td>
+                            <td><c:out value="${partyBilling.taxRate}" />%</td>
                             <td><c:out value="${partyBilling.amount}" /></td>
-                            <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" /></td>
-                            <td><c:out value="${partyBilling.taxRate}" /></td>
-                            <td><c:out value="${partyBilling.taxAmount}" /></td>
-                            <td><c:out value="${partyBilling.step1Idea}" /></td>
-                            <td><c:out value="${partyBilling.step1User}" /></td>
-                            <td><fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${partyBilling.createUser}" /></td>
-                            <td><c:out value="${partyBilling.stepStatus}" /></td>
-                            <td><c:if test="${partybilling.status == 1 }">
-                                    <shiro:hasPermission name="`partybilling_modify`">
+                            <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><c:if test="${not empty partyBilling.step1Idea}">意见：<c:out
+                                        value="${partyBilling.step1Idea}" />
+                                </c:if> <c:if test="${not empty partyBilling.step1User}">
+                                    <br />审核人：<c:out value="${partyBilling.step1User}" />
+                                </c:if> <c:if test="${not empty partyBilling.step1Time}">
+                                    <br />审核时间：<fmt:formatDate value="${partyBilling.step1Time}"
+                                        pattern="yyyy-MM-dd HH:mm:ss" />
+                                </c:if></td>
+                            <td>${partyBilling.stepStatus == 1 ? '已' : '未'}审核</td>
+                            <td><c:if test="${ partyBilling.stepStatus != 1 }">
+                                    <shiro:hasPermission name="`partybilling_step1`">
                                         <a
-                                            href="<s:url value="/partybilling/modify/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">修改</a>
+                                            href="<s:url value="/partybilling/step1/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">审核</a>
                                     </shiro:hasPermission>
-                                </c:if> <c:if test="${partyBilling.status != 1 }">
                                     <shiro:hasPermission name="`partybilling_create`">
                                         <a
                                             href="<s:url value="/partybilling/modify/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="甲方开票情况数据：<c:out value="${partyBilling.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/partybilling/delete/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">删除</a>
                                     </shiro:hasPermission>
-                                </c:if> <shiro:hasPermission name="`partybilling_delete`">
-                                    <a class="delete"
-                                        data-confirm-message="甲方开票情况数据：<c:out value="${partyBilling.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                        href="<s:url value="/partybilling/delete/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td>
+                                </c:if></td>
                         </tr>
                     </c:forEach>
                 </tbody>

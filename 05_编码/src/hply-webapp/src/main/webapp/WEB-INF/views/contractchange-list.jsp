@@ -45,10 +45,9 @@
                         <th>项目名称</th>
                         <th>管理费率</th>
                         <th>增减金额</th>
-                        <th>增补时间</th>
-                        <th>创建用户</th>
+                        <th>登记人</th>
+                        <th>登记时间</th>
                         <th>备注</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,27 +65,9 @@
                             <td><c:out value="${contractChange.projectId}" /></td>
                             <td><c:out value="${contractChange.managementRate}" /></td>
                             <td><c:out value="${contractChange.changeAmount}" /></td>
-                            <td><fmt:formatDate value="${contractChange.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${contractChange.createUser}" /></td>
+                            <td><fmt:formatDate value="${contractChange.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                             <td><c:out value="${contractChange.description}" /></td>
-                            <td><c:choose>
-                                    <c:when test="${contractChange.status == 1}">
-                                        <shiro:hasPermission name="`contractchange_modify`">
-                                            <a
-                                                href="<s:url value="/contractchange/modify/{id}"><s:param name="id" value="${contractChange.id }" /></s:url>">修改</a>
-                                        </shiro:hasPermission>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <shiro:hasPermission name="`contractchange_create`">
-                                            <a
-                                                href="<s:url value="/contractchange/modify/{id}"><s:param name="id" value="${contractChange.id }" /></s:url>">修改</a>
-                                        </shiro:hasPermission>
-                                    </c:otherwise>
-                                </c:choose> <shiro:hasPermission name="`contractchange_delete`">
-                                    <a class="delete"
-                                        data-confirm-message="合同补充协议数据：<c:out value="${contractChange.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                        href="<s:url value="/contractchange/delete/{id}"><s:param name="id" value="${contractChange.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td>
                         </tr>
                     </c:forEach>
                 </tbody>

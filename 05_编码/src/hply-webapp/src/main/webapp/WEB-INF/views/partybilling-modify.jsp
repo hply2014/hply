@@ -10,93 +10,123 @@
             <sf:form modelAttribute="partyBilling" cssClass="form-horizontal" role="form">
                 <div class="row">
                     <div class="col-sm-8">
-                        <div class="row">
-                            <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
-                                <p class="help-block" />
-                            </div>
-                            <label for="projectId" class="col-sm-2 control-label">项目名称</label>
-                            <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
-                                <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
-                                <sf:select cssClass="form-control selectpicker" path="projectId" items="${projectlist }"
-                                    itemValue="id" itemLabel="projectName" />
-                                <p class="help-block" />
-                            </div>
+                        <c:choose>
+                            <c:when test="${step1 == 1}">
 
-                        </div>
-                        <div class="row">
-                            <label for="amount" class="col-sm-2 control-label">发票金额</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="amount" placeholder="发票金额" />
-                                <p class="help-block" />
-                            </div>
 
-                            <label for="trice" class="col-sm-2 control-label">开票时间</label>
-                            <div class="col-sm-4 ">
-                                <div class="input-group date">
-                                    <sf:input cssClass="form-control" path="trice" data-date-format="yyyy-mm-dd" />
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                <div class="row">
+                                    <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
+                                    <div class="col-sm-4 ">
+                                        <p class="form-control-static">
+                                            <c:out value="${partyBilling.invoiceCode}" />
+                                        </p>
+                                    </div>
+                                    <label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                                    <div class="col-sm-4 required-field-block">
+                                        <p class="form-control-static">
+                                            <c:out value="${newProjectName}" />
+                                        </p>
+                                    </div>
+
                                 </div>
-                                <p class="help-block" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="taxRate" class="col-sm-2 control-label">税率</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="taxRate" placeholder="税率" />
-                                <p class="help-block" />
-                            </div>
+                                <div class="row">
+                                    <label for="taxRate" class="col-sm-2 control-label">税率</label>
+                                    <div class="col-sm-4 ">
+                                        <p class="form-control-static">
+                                            <c:out value="${partyBilling.taxRate}" />
+                                            %
+                                        </p>
 
-                            <label for="taxAmount" class="col-sm-2 control-label">应收税金</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="taxAmount" placeholder="应收税金" />
-                                <p class="help-block" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="step1Idea" class="col-sm-2 control-label">审核意见</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="step1Idea" placeholder="审核意见" />
-                                <p class="help-block" />
-                            </div>
-
-                            <label for="step1User" class="col-sm-2 control-label">审核人</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="step1User" placeholder="审核人" />
-                                <p class="help-block" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label for="step1Time" class="col-sm-2 control-label">审核时间</label>
-                            <div class="col-sm-4 ">
-                                <div class="input-group date">
-                                    <sf:input cssClass="form-control" path="step1Time" data-date-format="yyyy-mm-dd" />
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                    <label for="amount" class="col-sm-2 control-label">发票金额</label>
+                                    <div class="col-sm-4 ">
+                                        <p class="form-control-static">
+                                            <c:out value="${partyBilling.amount}" />
+                                        </p>
+                                    </div>
                                 </div>
-                                <p class="help-block" />
-                            </div>
 
-                            <label for="stepStatus" class="col-sm-2 control-label">流程状态</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="stepStatus" placeholder="流程状态" />
-                                <p class="help-block" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
-                            <div class="col-sm-10">
-                                <sf:textarea cssClass="form-control" rows="3" path="description" placeholder="备注，500字以内" />
-                                <p class="help-block" />
-                            </div>
-                        </div>
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-6 checkbox">
+                                        <sf:checkbox cssClass="icheckbox" path="stepStatus" id="stepStatus" value="1" />
+                                        <label for="stepStatus">同意</label>
+                                        <p class="help-block" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="step1Idea" class="col-sm-2 control-label">审核意见</label>
+                                    <div class="col-sm-4 ">
+                                        <sf:input id="s1" cssClass="form-control" path="step1Idea" placeholder="审核意见" />
+                                        <p class="help-block" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
+                                    <div class="col-sm-10">
+                                        <sf:textarea cssClass="form-control" rows="3" path="description"
+                                            placeholder="备注，500字以内" />
+                                        <p class="help-block" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2"></div>
+                                    <button id="succ" type="button" class="btn btn-success" disabled="disabled">
+                                        <span class="glyphicon glyphicon-ok"></span> 同意
+                                    </button>
+                                    <button id="dang" type="button" class="btn btn-danger sm-offset-3">
+                                        <span class="glyphicon glyphicon-remove"></span> 拒绝
+                                    </button>
+                                    <a href='<s:url value="/partybilling" />' class="btn btn-link"><span
+                                        class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="row">
+                                    <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
+                                    <div class="col-sm-4 required-field-block">
+                                        <b class="required-icon">*</b>
+                                        <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
+                                        <p class="help-block" />
+                                    </div>
+                                    <label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                                    <div class="col-sm-4 required-field-block">
+                                        <b class="required-icon">*</b>
+                                        <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
+                                        <sf:select cssClass="form-control selectpicker" path="projectId"
+                                            items="${projectlist }" itemValue="id" itemLabel="projectName" />
+                                        <p class="help-block" />
+                                    </div>
 
-                        <button type="submit" class="btn btn-info pull-right">
-                            <span class="glyphicon glyphicon-ok"></span> 提 交
-                        </button>
-                        <a href='<s:url value="/partybilling" />' class="btn btn-link"><span
-                            class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                                </div>
+                                <div class="row">
+                                    <label for="taxRate" class="col-sm-2 control-label">税率（%）</label>
+                                    <div class="col-sm-4 ">
+                                        <sf:input cssClass="form-control" path="taxRate" placeholder="税率" />
+                                        <p class="help-block" />
+                                    </div>
+                                    <label for="amount" class="col-sm-2 control-label">发票金额</label>
+                                    <div class="col-sm-4 ">
+                                        <sf:input cssClass="form-control" path="amount" placeholder="发票金额" />
+                                        <p class="help-block" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
+                                    <div class="col-sm-10">
+                                        <sf:textarea cssClass="form-control" rows="3" path="description"
+                                            placeholder="备注，500字以内" />
+                                        <p class="help-block" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-info pull-right">
+                                    <span class="glyphicon glyphicon-ok"></span> 提 交
+                                </button>
+                                <a href='<s:url value="/partybilling" />' class="btn btn-link"><span
+                                    class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                            </c:otherwise>
+                        </c:choose>
+
 
                     </div>
                 </div>
@@ -123,6 +153,22 @@
 <script type="text/javascript">
 	$(function() {
 		$(":text[value='0.0']").val('');
+
+		$('input').on('ifChecked', function(event) {
+			$("#s1").val('同意，审核通过');
+			$(".btn-success").removeAttr("disabled");
+		}).on('ifUnchecked', function(event) {
+			$("#s1").val('不同意，请重新修订');
+			$(".btn-success").attr("disabled", "disabled");
+		});
+
+		$("#succ").click(function(){
+			alert("同意");
+		});
+		$("#dang").click(function(){
+			alert("拒绝");
+		});
+		
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {
@@ -133,11 +179,21 @@
 			},
 			rules : {
 				projectId : {},
-				invoiceCode : {},
-				amount : {},
+				invoiceCode : {
+					required : true
+				},
+				amount : {
+					required : true,
+					number : true
+				},
 				trice : {},
-				taxRate : {},
-				taxAmount : {},
+				taxRate : {
+					number : true,
+					range : [ 0, 100 ]
+				},
+				taxAmount : {
+					number : true
+				},
 				step1Idea : {},
 				step1User : {},
 				step1Time : {},

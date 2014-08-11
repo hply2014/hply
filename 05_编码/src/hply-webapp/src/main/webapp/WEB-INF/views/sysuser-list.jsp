@@ -27,12 +27,10 @@
         </div>
         <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
-                <shiro:hasPermission name="`sysuser_create`">
                     <div class="btn-group">
                         <a href="<c:url value="/sysuser/create" />" class="btn btn-info"><span
                             class="glyphicon glyphicon-plus"></span> 新 建 </a>
                     </div>
-                </shiro:hasPermission>
             </div>
             <table class="table table-hover">
                 <thead>
@@ -46,7 +44,7 @@
                         <th>最后登陆时间</th>
                         <th>登陆总次数</th>
                         <th>启用</th>
-                        <th>创建用户</th>
+                        <th>修改用户</th>
                         <th></th>
                         
                     </tr>
@@ -68,7 +66,7 @@
                             <td><fmt:formatDate value="${sysUser.lastLoginTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                             <td><c:out value="${sysUser.logined}" /></td>
                             <td><c:out value="${sysUser.enabled ? '启用' : '禁用'}" /></td>
-                            <td><c:out value="${sysUser.createUser}" /></td>
+                            <td><c:out value="${sysUser.updateUser}" /></td>
 
                             <td><a
                                 href="<s:url value="/sysuser/modify/{id}"><s:param name="id" value="${sysUser.id }" /></s:url>">修改</a>

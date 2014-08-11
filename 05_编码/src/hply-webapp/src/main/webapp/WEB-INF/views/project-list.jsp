@@ -43,13 +43,13 @@
                         <th>项目编号</th>
                         <th>项目名称</th>
                         <th>所在部门</th>
+                        <th>项目经理</th>
                         <th>管理费率</th>
                         <th>税金比率</th>
                         <th>合同金额</th>
                         <th>印花税上交金额</th>
-                        <th>占用资金</th>
+                        <th>登记人</th>
                         <th>登记时间</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,7 +65,8 @@
                                 href="<s:url value="/project/detail/{id}"><s:param name="id" value="${project.id }" /></s:url>"><c:out
                                         value="${project.projectCode}" /></a></td>
                             <td><c:out value="${project.projectName}" /></td>
-                            <td><span data-toggle="tooltip" title="<c:out value='${project.manager}' />"><c:out value="${project.organizationId}" /></span></td>
+                            <td><c:out value="${project.organizationId}" /></td>
+                            <td><c:out value='${project.manager}' /></td>
                             <td><c:out value="${project.managementRate}" /></td>
                             <td><c:out value="${project.taxRate}" /></td>
                             <td><c:out value="${project.contractAmount}" /> <c:if
@@ -74,28 +75,9 @@
                                 </c:if></td>
                             <td><span data-toggle="tooltip" title="时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' />，收据编号：<c:out value='${project.dutyPaidCode}' />"> 
                             <c:out value="${project.dutyPaidAmount}" /><span></td>
-                            <td><c:out value="${project.capitalOccupied}" /></td>
-                            <td title="<c:out value="${project.createUser}" />"><fmt:formatDate value="${project.trice}" pattern="yyyy-MM-dd" /></td>
-                            <td><c:choose>
-                                    <c:when test="${project.status == 1}">
-                                        <shiro:hasPermission name="`project_modify`">
-                                            <a
-                                                href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
-                                        </shiro:hasPermission>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <shiro:hasPermission name="`project_create`">
-                                            <a
-                                                href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>">修改</a>
-                                        </shiro:hasPermission>
-                                    </c:otherwise>
-                                </c:choose>
-                                <shiro:hasPermission name="`project_delete`">
-                                    <a class="delete"
-                                        data-confirm-message="合同项目信息数据：<c:out value="${project.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                        href="<s:url value="/project/delete/{id}"><s:param name="id" value="${project.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td>
-                        </tr>
+                         <td><c:out value="${project.createUser}" /></td>
+                            <td title="<c:out value="${project.createUser}" />"><fmt:formatDate value="${project.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            </tr>
                     </c:forEach>
                 </tbody>
             </table>
