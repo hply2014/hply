@@ -29,13 +29,13 @@
                         <div class="row">
                             <label for="sourceOf" class="col-sm-2 control-label">款项来源</label>
                             <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="sourceOf" placeholder="款项来源" />
+                                <sf:select cssClass="form-control selectpicker" path="sourceOf" items="${sourceoflist }" />
                                 <p class="help-block" />
                             </div>
 
                             <label for="paymentType" class="col-sm-2 control-label">收款方式</label>
                             <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="paymentType" placeholder="收款方式" />
+                                <sf:select cssClass="form-control selectpicker" path="paymentType" items="${paymenttypelist }" />
                                 <p class="help-block" />
                             </div>
                         </div>
@@ -56,15 +56,6 @@
                             <label for="bankName" class="col-sm-2 control-label">开户行名称</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="bankName" placeholder="开户行名称" />
-                                <p class="help-block" />
-                            </div>
-
-                            <label for="trice" class="col-sm-2 control-label">收款时间</label>
-                            <div class="col-sm-4 ">
-                                <div class="input-group date">
-                                    <sf:input cssClass="form-control" path="trice" data-date-format="yyyy-mm-dd" />
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                </div>
                                 <p class="help-block" />
                             </div>
                         </div>

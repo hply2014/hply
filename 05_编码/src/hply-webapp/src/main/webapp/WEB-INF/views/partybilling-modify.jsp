@@ -71,10 +71,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>
-                                    <button id="succ" type="button" class="btn btn-success" disabled="disabled">
+                                    <button id="succ" type="submit" class="btn btn-success" disabled="disabled">
                                         <span class="glyphicon glyphicon-ok"></span> 同意
                                     </button>
-                                    <button id="dang" type="button" class="btn btn-danger sm-offset-3">
+                                    <button id="dang" type="submit" class="btn btn-danger sm-offset-3">
                                         <span class="glyphicon glyphicon-remove"></span> 拒绝
                                     </button>
                                     <a href='<s:url value="/partybilling" />' class="btn btn-link"><span
@@ -162,12 +162,18 @@
 			$(".btn-success").attr("disabled", "disabled");
 		});
 
+		/*
 		$("#succ").click(function(){
-			alert("同意");
+			$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {}, function(result) {
+				$("#capitalOccupied").html(result);
+			}, "text");
 		});
 		$("#dang").click(function(){
-			alert("拒绝");
+			$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {}, function(result) {
+				$("#capitalOccupied").html(result);
+			}, "text");
 		});
+		*/
 		
 		$("form").validate({
 			errorElement : "i",

@@ -11,38 +11,32 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="row">
-                            <label for="projectId" class="col-sm-2 control-label">项目ID</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" />
+                            <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
+                                <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
                                 <p class="help-block" />
                             </div>
-
-                            <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
+                            <label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
+                                <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
+                                <sf:select cssClass="form-control selectpicker" path="projectId" items="${projectlist }"
+                                    itemValue="id" itemLabel="projectName" />
                                 <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="invoiceType" class="col-sm-2 control-label">发票类别</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="invoiceType" placeholder="发票类别" />
-                                <p class="help-block" />
-                            </div>
-
-                            <label for="amount" class="col-sm-2 control-label">发票金额</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="amount" placeholder="发票金额" />
+                            <div class="col-sm-4 required-field-block">
+                                <sf:select cssClass="form-control selectpicker" path="invoiceType" items="${typelist }" />
                                 <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
-                            <label for="trice" class="col-sm-2 control-label">开票时间</label>
+                            <label for="amount" class="col-sm-2 control-label">发票金额</label>
                             <div class="col-sm-4 ">
-                                <div class="input-group date">
-                                    <sf:input cssClass="form-control" path="trice" data-date-format="yyyy-mm-dd" />
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                </div>
+                                <sf:input cssClass="form-control" path="amount" placeholder="发票金额" />
                                 <p class="help-block" />
                             </div>
                         </div>
@@ -94,9 +88,14 @@
 			},
 			rules : {
 				projectId : {},
-				invoiceCode : {},
+				invoiceCode : {
+					required : true
+				},
 				invoiceType : {},
-				amount : {},
+				amount : {
+					required : true,
+					number : true
+				},
 				trice : {},
 				description : {},
 			}

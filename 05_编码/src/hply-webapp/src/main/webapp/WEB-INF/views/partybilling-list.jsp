@@ -47,8 +47,8 @@
                         <th>发票金额</th>
                         <th>开票人</th>
                         <th>开票时间</th>
-                        <th>审核情况</th>
                         <th>审核状态</th>
+                        <th>审核情况</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -69,15 +69,10 @@
                             <td><c:out value="${partyBilling.amount}" /></td>
                             <td><c:out value="${partyBilling.createUser}" /></td>
                             <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                            <td><c:if test="${not empty partyBilling.step1Idea}">意见：<c:out
-                                        value="${partyBilling.step1Idea}" />
-                                </c:if> <c:if test="${not empty partyBilling.step1User}">
-                                    <br />审核人：<c:out value="${partyBilling.step1User}" />
-                                </c:if> <c:if test="${not empty partyBilling.step1Time}">
-                                    <br />审核时间：<fmt:formatDate value="${partyBilling.step1Time}"
-                                        pattern="yyyy-MM-dd HH:mm:ss" />
-                                </c:if></td>
                             <td>${partyBilling.stepStatus == 1 ? '已' : '未'}审核</td>
+                            <td><c:if test="${not empty partyBilling.step1User}">${partyBilling.step1User}：“${partyBilling.step1Idea}”<br /><fmt:formatDate
+                                        value="${partyBilling.step1Time}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                </c:if></td>
                             <td><c:if test="${ partyBilling.stepStatus != 1 }">
                                     <shiro:hasPermission name="`partybilling_step1`">
                                         <a

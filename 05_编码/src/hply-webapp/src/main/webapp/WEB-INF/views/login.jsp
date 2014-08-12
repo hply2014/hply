@@ -79,14 +79,13 @@ h3 {
                 <div class="form-group">
                     <label for="loginName" class="col-sm-2 control-label">用户</label>
                     <div class="col-sm-10">
-                        <input id="loginName" type="text" class="form-control" name="loginName" placeholder="输入用户登录名"
-                            value="${loginName}">
+                        <input id="loginName" type="text" class="form-control" name="loginName" value="${loginName}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
-                        <input id="password" type="password" class="form-control" name="password" placeholder="输入密码">
+                        <input id="password" type="password" class="form-control" name="password">
                     </div>
                 </div>
                 <div class="login-group">

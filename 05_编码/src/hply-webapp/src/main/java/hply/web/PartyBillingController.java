@@ -1,13 +1,16 @@
 ﻿package hply.web;
 
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.PartyBilling;
 import hply.domain.Project;
 import hply.domain.SysUser;
 import hply.service.PartyBillingService;
 import hply.service.ProjectService;
+import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -33,6 +36,9 @@ public class PartyBillingController {
 
 	@Autowired
 	private SysUserService sysUserService;
+	
+	@Autowired
+	private SysParameterService paramService;
 
 	public static final String URI = "/partybilling";
 	public static final String JSP_PAGE_LIST = "partybilling-list";
@@ -53,6 +59,9 @@ public class PartyBillingController {
 
 			SysUser user = sysUserService.get(item.getCreateUser());
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+			
+			SysUser user1 = sysUserService.get(item.getStep1User());
+			item.setStep1User(user1 != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("list", list);
 
@@ -76,8 +85,10 @@ public class PartyBillingController {
 	public String createForm(Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
-		model.addAttribute("partyBilling", new PartyBilling());
-
+		PartyBilling paryBilling = new PartyBilling();
+		paryBilling.setTaxRate(paramService.getParamDoubleValue("default_tax_rate"));
+		
+		model.addAttribute("partyBilling", paryBilling);
 		model.addAttribute("page_title", "新建甲方开票情况");
 		return JSP_PAGE_MODIFY;
 	}
@@ -154,6 +165,34 @@ public class PartyBillingController {
 		return "redirect:" + URI;
 	}
 
+
+	/*
+	 * 处理审核页面的提交动作
+	 */
+	@RequestMapping(value = "/step1/{id}", method = RequestMethod.POST)
+	public String processCheckSubmit(@PathVariable String id, @Valid PartyBilling partyBilling, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
+		Utility.println(partyBilling.toString());
+
+		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
+			return JSP_PAGE_MODIFY;
+		}
+		
+		PartyBilling pb = service.get(id);
+		pb.setStepStatus(partyBilling.getStepStatus());
+		pb.setStep1Idea(partyBilling.getStep1Idea());
+		pb.setStep1User(SessionHelper.getCurrentUserId());
+		pb.setStep1Time(new Date());
+		pb.setDescription(partyBilling.getDescription());
+
+		service.update(pb);
+		redirectAttrs.addFlashAttribute("message", "审核成功");
+
+		redirectAttrs.addFlashAttribute("partyBilling", pb);
+		return "redirect:" + URI;
+	}
+	
 	/*
 	 * 删除页面
 	 */

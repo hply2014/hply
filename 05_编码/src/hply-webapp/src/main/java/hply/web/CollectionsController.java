@@ -82,6 +82,10 @@ public class CollectionsController {
 		model.addAttribute("projectlist", projectlist);
 		Collections collections = new Collections();
 		collections.setTicketCode(paramService.getNextCode("collections_code"));
+		String sourceOfs = paramService.getByEnName("source_of").getParamValue();
+		String payTypes = paramService.getByEnName("pay_types").getParamValue();
+		model.addAttribute("sourceoflist", sourceOfs.split("/"));
+		model.addAttribute("paymenttypelist", payTypes.split("/"));
 
 		model.addAttribute("collections", collections);
 		model.addAttribute("page_title", "新建收款情况");

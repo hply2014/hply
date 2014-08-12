@@ -48,7 +48,6 @@
                         <th>开票时间</th>
                         <th>创建用户</th>
                         <th>备注</th>
-                        <th></th>
                         
                     </tr>
                 </thead>
@@ -70,21 +69,6 @@
                             <td><fmt:formatDate value="${customerBilling.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${customerBilling.createUser}" /></td>
                             <td><c:out value="${customerBilling.description}" /></td>
-                            <td><c:if test="${customerbilling.status == 1 }">
-                                    <shiro:hasPermission name="`customerbilling_modify`">
-                                        <a
-                                            href="<s:url value="/customerbilling/modify/{id}"><s:param name="id" value="${customerBilling.id }" /></s:url>">修改</a>
-                                    </shiro:hasPermission>
-                                </c:if> <c:if test="${customerBilling.status != 1 }">
-                                    <shiro:hasPermission name="`customerbilling_create`">
-                                        <a
-                                            href="<s:url value="/customerbilling/modify/{id}"><s:param name="id" value="${customerBilling.id }" /></s:url>">修改</a>
-                                    </shiro:hasPermission>
-                                </c:if> <shiro:hasPermission name="`customerbilling_delete`">
-                                    <a class="delete"
-                                        data-confirm-message="客户开票情况数据：<c:out value="${customerBilling.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                        href="<s:url value="/customerbilling/delete/{id}"><s:param name="id" value="${customerBilling.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td>
                         </tr>
                     </c:forEach>
                 </tbody>

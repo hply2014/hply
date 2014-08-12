@@ -6,6 +6,7 @@ import hply.domain.Project;
 import hply.domain.SysUser;
 import hply.service.CustomerBillingService;
 import hply.service.ProjectService;
+import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
 import java.util.List;
@@ -31,6 +32,9 @@ public class CustomerBillingController {
 	private ProjectService projectService;
 	@Autowired
 	private SysUserService sysUserService;
+
+	@Autowired
+	private SysParameterService paramService;
 
 	public static final String URI = "/customerbilling";
 	public static final String JSP_PAGE_LIST = "customerbilling-list";
@@ -66,6 +70,8 @@ public class CustomerBillingController {
 		return JSP_PAGE_DETAIL;
 	}
 
+	private static final String[] typelist = new String[] { "材料", "劳务", "其他" };
+
 	/*
 	 * 新建页面
 	 */
@@ -73,6 +79,8 @@ public class CustomerBillingController {
 	public String createForm(Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
+		String types = paramService.getByEnName("billing_types").getParamValue();
+		model.addAttribute("typelist", types.split("/"));
 		model.addAttribute("customerBilling", new CustomerBilling());
 		model.addAttribute("page_title", "新建客户开票情况");
 		return JSP_PAGE_MODIFY;
