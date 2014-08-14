@@ -32,12 +32,6 @@
                                 <sf:select cssClass="form-control selectpicker" path="sourceOf" items="${sourceoflist }" />
                                 <p class="help-block" />
                             </div>
-
-                            <label for="paymentType" class="col-sm-2 control-label">收款方式</label>
-                            <div class="col-sm-4 ">
-                                <sf:select cssClass="form-control selectpicker" path="paymentType" items="${paymenttypelist }" />
-                                <p class="help-block" />
-                            </div>
                         </div>
                         <div class="row">
                             <label for="amount" class="col-sm-2 control-label">收款金额</label>
@@ -46,9 +40,9 @@
                                 <p class="help-block" />
                             </div>
 
-                            <label for="bankAccount" class="col-sm-2 control-label">银行账号</label>
+                            <label for="paymentType" class="col-sm-2 control-label">收款方式</label>
                             <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="bankAccount" placeholder="银行账号" />
+                                <sf:select cssClass="form-control selectpicker" path="paymentType" items="${paymenttypelist }" />
                                 <p class="help-block" />
                             </div>
                         </div>
@@ -56,6 +50,12 @@
                             <label for="bankName" class="col-sm-2 control-label">开户行名称</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="bankName" placeholder="开户行名称" />
+                                <p class="help-block" />
+                            </div>
+
+                            <label for="bankAccount" class="col-sm-2 control-label">银行账号</label>
+                            <div class="col-sm-4 ">
+                                <sf:input cssClass="form-control" path="bankAccount" placeholder="银行账号" />
                                 <p class="help-block" />
                             </div>
                         </div>

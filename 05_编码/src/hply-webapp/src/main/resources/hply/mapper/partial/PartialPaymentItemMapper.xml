@@ -19,7 +19,7 @@
   </delete>
 
   <select id="get" parameterType="string" resultType="PaymentItem">
-    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item where id = #{id}
+    select id as id, CONCAT(item_name, '(', round(reimbursement_cap, 2), '%)') as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item where id = #{id}
   </select>
   
   <select id="getVersion" parameterType="string" resultType="int">
@@ -27,7 +27,7 @@
   </select>
 
   <select id="getAll" resultType="PaymentItem">
-    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item order by update_time desc
+    select id as id, CONCAT(item_name, '(', round(reimbursement_cap, 2), '%)') as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item order by update_time desc
   </select>
 
 </mapper>

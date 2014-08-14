@@ -48,11 +48,9 @@
                         <th>收款金额</th>
                         <th>银行账号</th>
                         <th>开户行名称</th>
+                        <th>收款人</th>
                         <th>收款时间</th>
-                        <th>创建用户</th>
                         <th>备注</th>
-                        <th></th>
-                        
                     </tr>
                 </thead>
                 <tbody>
@@ -73,9 +71,10 @@
                             <td><c:out value="${collections.amount}" /></td>
                             <td><c:out value="${collections.bankAccount}" /></td>
                             <td><c:out value="${collections.bankName}" /></td>
-                            <td><fmt:formatDate value="${collections.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${collections.createUser}" /></td>
+                            <td><fmt:formatDate value="${collections.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                             <td><c:out value="${collections.description}" /></td>
+                            <%--
                             <td><c:if test="${collections.status == 1 }">
                                     <shiro:hasPermission name="`collections_modify`">
                                         <a
@@ -90,7 +89,7 @@
                                     <a class="delete"
                                         data-confirm-message="收款情况数据：<c:out value="${collections.id}" />，将被永久删除，操作不可撤销，是否确认？"
                                         href="<s:url value="/collections/delete/{id}"><s:param name="id" value="${collections.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td>
+                                </shiro:hasPermission></td> --%>
                         </tr>
                     </c:forEach>
                 </tbody>

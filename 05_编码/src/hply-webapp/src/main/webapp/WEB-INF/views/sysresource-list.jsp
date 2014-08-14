@@ -40,7 +40,6 @@
                         <th>#</th>
 
                         <th>资源编码</th>
-                        <th>图标路径</th>
                         <th>资源名称</th>
                         <th>URL地址</th>
                         <th>资源类型</th>
@@ -62,7 +61,6 @@
                                 href="<s:url value="/sysresource/detail/{id}"><s:param name="id" value="${sysResource.id }" /></s:url>"><c:out
                                         value="${sysResource.resCode}" /></a></td>
                             <td><c:out value="${sysResource.resName}" /></td>
-                            <td><c:out value="${sysResource.icon}" /></td>
                             <td><c:out value="${sysResource.resUrl}" /></td>
                             <td><c:out value="${sysResource.resType}" /></td>
                             <td><c:out value="${sysResource.orderBy}" /></td>

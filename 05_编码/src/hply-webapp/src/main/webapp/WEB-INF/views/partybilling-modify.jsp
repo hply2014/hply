@@ -157,9 +157,11 @@
 		$('input').on('ifChecked', function(event) {
 			$("#s1").val('同意，审核通过');
 			$(".btn-success").removeAttr("disabled");
+			$(".btn-danger").attr("disabled", "disabled");
 		}).on('ifUnchecked', function(event) {
 			$("#s1").val('不同意，请重新修订');
 			$(".btn-success").attr("disabled", "disabled");
+			$(".btn-danger").removeAttr("disabled");
 		});
 
 		/*

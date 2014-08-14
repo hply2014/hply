@@ -2,8 +2,10 @@
 
 import hply.core.Utility;
 import hply.domain.Payment;
+import hply.domain.PaymentItem;
 import hply.domain.Project;
 import hply.domain.SysUser;
+import hply.service.PaymentItemService;
 import hply.service.PaymentService;
 import hply.service.ProjectService;
 import hply.service.SysParameterService;
@@ -38,6 +40,9 @@ public class PaymentController {
 	@Autowired
 	private SysUserService sysUserService;
 
+	@Autowired
+	private PaymentItemService paymentItemService;
+
 	public static final String URI = "/payment";
 	public static final String JSP_PAGE_LIST = "payment-list";
 	public static final String JSP_PAGE_DETAIL = "payment-detail";
@@ -57,6 +62,10 @@ public class PaymentController {
 
 			SysUser user = sysUserService.get(item.getCreateUser());
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+
+			PaymentItem pi = paymentItemService.get(item.getPaymentItemId());
+			item.setPaymentItemId(pi != null ? pi.getItemName() : Utility.EMPTY);
+
 		}
 		model.addAttribute("list", list);
 
@@ -83,6 +92,12 @@ public class PaymentController {
 		model.addAttribute("projectlist", projectlist);
 		Payment payment = new Payment();
 		payment.setTicketCode(paramService.getNextCode("payment_code"));
+
+		String payTypes = paramService.getByEnName("pay_types").getParamValue();
+		model.addAttribute("paymenttypelist", payTypes.split("/"));
+
+		List<PaymentItem> pi = paymentItemService.getAll();
+		model.addAttribute("paymentitemlist", pi);
 
 		model.addAttribute("payment", payment);
 		model.addAttribute("page_title", "新建付款情况");
