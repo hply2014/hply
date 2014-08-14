@@ -39,7 +39,6 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-sm-4 col-sm-offset-2 checkbox">
                                 <sf:checkbox cssClass="icheckbox" path="isWithholdingOffsite" id="isWithholdingOffsite"
                                     value="1" />
@@ -82,12 +81,10 @@
                                 <sf:input cssClass="form-control" path="settlementAmount" placeholder="结算金额" />
                                 <p class="help-block" />
                             </div>
-                            <label for="capitalOccupied" class="col-sm-2 control-label">占用资金情况</label>
-                            <div class="col-sm-4 ">
-                                <%--
-                                <sf:input cssClass="form-control" path="capitalOccupied" placeholder="占用资金情况" /> --%>
-                                <p class="form-control-static" id="capitalOccupied">&nbsp;</p>
-                                <p class="help-block" />
+                            <div class="col-sm-4 col-sm-offset-2 checkbox">
+                                <sf:checkbox cssClass="icheckbox" path="capitalOccupied" id="capitalOccupied" value="1" />
+                                <label for="capitalOccupied">占用资金情况</label>
+                                <p class="help-block" /><input type="hidden" name="capitalOccupied" value="0" />
                             </div>
                         </div>
                         <div class="panel with-nav-tabs panel-default">
@@ -225,9 +222,8 @@
 <script type="text/javascript">
 	$(function() {
 		$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {}, function(result) {
-			$("#capitalOccupied").html(result);
+			$("#capitalOccupied").html(result + "，（往来欠款累计）");
 		}, "text");
-		
 
 		$("#contractAmount, #managementRate").keyup(function() {
 			if ($("#settlementAmount").val() > 0)

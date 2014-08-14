@@ -5,10 +5,13 @@ import hply.core.Utility;
 import hply.domain.SysAuthorization;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
+import hply.service.ArrearsService;
+import hply.service.ProjectService;
 import hply.service.SysAuthorizationService;
 import hply.service.SysResourceService;
 import hply.service.SysUserService;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -32,6 +35,12 @@ public class APIController {
 
 	@Autowired
 	private SysAuthorizationService sysAuthorizationService;
+
+	@Autowired
+	private ProjectService projectService;
+
+	@Autowired
+	private ArrearsService arrearsService;
 
 	@RequestMapping(value = "/tree/{userId}")
 	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
@@ -108,20 +117,30 @@ public class APIController {
 	 */
 	@RequestMapping(value = "/capitaloccupied/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getCapitalOccupied(@PathVariable String projectId) {
-		// TODO 计算占用资金情况
-		return "这是占用资金情况,123";
+		// 计算占用资金情况
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+		double v = arrearsService.getTotalByProject(projectId);
+		return df.format(v);
 	}
 
 	@RequestMapping(value = "/taxplanamount", method = RequestMethod.POST)
 	public @ResponseBody String updateTaxPlanAmount(@RequestParam String id, @RequestParam Double data) {
-		//TODO 修改应缴税金
-		return "OK: " + id + "," + data;
+		// 修改应缴税金
+		if (data == null || data == 0) {
+			return "应缴税金修改失败，可能是输入的值无效。";
+		}
+		projectService.updateTaxPlanAmount(id, data);
+		return "应缴税金修改成功，额度： " + data;
 	}
 
 	@RequestMapping(value = "/managementplanamount", method = RequestMethod.POST)
 	public @ResponseBody String updateManagementPlanAmount(@RequestParam String id, @RequestParam Double data) {
-		//TODO 修改应收税金
-		return "OK: " + id + "," + data;
+		// 修改应收管理费
+		if (data == null || data == 0) {
+			return "应收管理费修改失败，可能是输入的值无效。";
+		}
+		projectService.updateManagementPlanAmount(id, data);
+		return "应收管理费修改成功，额度： " + data;
 	}
 
 }

@@ -14,13 +14,13 @@
                 </div>
                 <shiro:hasPermission name="`project_modify1`">
                     <div class="btn-group">
-                        <a href="javascript:void(0);" id="modify1" class="btn btn-info"><span
+                        <a href="javascript:void(0);" id="modify1" class="btn btn-danger"><span
                             class="glyphicon glyphicon-edit"></span> 修改应缴税金 </a>
                     </div>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="`project_modify2`">
                     <div class="btn-group">
-                        <a href="javascript:void(0);" id="modify2" class="btn btn-info"><span
+                        <a href="javascript:void(0);" id="modify2" class="btn btn-danger"><span
                             class="glyphicon glyphicon-log-in"></span> 修改应收管理费 </a>
                     </div>
                 </shiro:hasPermission>
@@ -238,7 +238,9 @@
                     <div class="form-group">
                         <label for="data" class="col-sm-3 control-label">应缴税金</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="data" type="text" name="data" placeholder="应缴税金" />
+                            <input class="form-control" id="data" type="text"
+                                value="<fmt:formatNumber pattern='#0.00' value='${project.taxPlanAmount}'/>" name="data"
+                                placeholder="应缴税金" />
                         </div>
                     </div>
                     <input type="hidden" name="id" value="${project.id }">
@@ -274,7 +276,9 @@
                     <div class="form-group">
                         <label for="data" class="col-sm-3 control-label">应收管理费</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="data" type="text" name="data" placeholder="应收管理费" />
+                            <input class="form-control" id="data" type="text" name="data"
+                                value="<fmt:formatNumber pattern='#0.00' value='${project.managementPlanAmount}' />"
+                                placeholder="应收管理费" />
                         </div>
                     </div>
                     <input type="hidden" name="id" value="${project.id }">
@@ -298,7 +302,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#modify1").click(function() {
-			$("#modelManagementPlanAmount #data").val('');
+			// $("#modelTaxPlanAmount #data").val('');
 			$("#modelTaxPlanAmount").modal("show");
 			return false;
 		});
@@ -309,12 +313,13 @@
 				alert(result);
 				if (result.indexOf("成功") >= 0) {
 					$("#modelTaxPlanAmount").modal("hide");
+					self.location.reload();
 				}
 			}, "text");
 		});
 
 		$("#modify2").click(function() {
-			$("#modelManagementPlanAmount #data").val('');
+			// $("#modelManagementPlanAmount #data").val('');
 			$("#modelManagementPlanAmount").modal("show");
 			return false;
 		});
@@ -325,12 +330,13 @@
 				alert(result);
 				if (result.indexOf("成功") >= 0) {
 					$("#modelManagementPlanAmount").modal("hide");
+					self.location.reload();
 				}
 			}, "text");
 		});
 
 		$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {}, function(result) {
-			$("#capitalOccupied").html(result);
+			$("#capitalOccupied").html("${project.capitalOccupied == 1 ? '是' : '否'}，往来欠款累计：" + result);
 		}, "text");
 	});
 </script>

@@ -77,4 +77,17 @@ public class ProjectService {
 	public List<Project> getAllNames() {
 		return mapper.getAllNames();
 	}
+	
+	public void updateManagementPlanAmount(String projectId, double amount){
+		Project p = this.get(projectId);
+		p.setManagementPlanAmount(amount);
+		this.update(p);
+		
+	}
+	
+	public void updateTaxPlanAmount(String projectId, double amount){
+		Project p = this.get(projectId);
+		p.setTaxPlanAmount(amount);
+		this.update(p);
+	}
 }

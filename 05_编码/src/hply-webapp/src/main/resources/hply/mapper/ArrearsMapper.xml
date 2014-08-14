@@ -4,6 +4,10 @@
 
 <mapper namespace="hply.mapper.ArrearsMapper">
 
-  <cache />
+  <cache />  
+  
+  <select id="getTotalByProject" parameterType="string" resultType="double">
+    select sum(amount + interest_amount) from t_arrears where project_id = #{projectId}
+  </select>
 </mapper>
 
