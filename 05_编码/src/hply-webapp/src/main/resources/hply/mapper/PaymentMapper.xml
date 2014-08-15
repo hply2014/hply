@@ -4,5 +4,11 @@
 
 <mapper namespace="hply.mapper.PaymentMapper">
 
+	<cache />
+
+	<select id="getToalPayment" parameterType="string" resultType="double">
+		select sum(ifnull(amount, 0)) from t_payment where project_id
+		= #{projectId}
+	</select>
 </mapper>
 

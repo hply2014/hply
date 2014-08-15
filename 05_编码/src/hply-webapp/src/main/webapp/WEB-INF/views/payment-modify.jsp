@@ -82,6 +82,17 @@
                             class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 
                     </div>
+                    <div class="col-sm-4">
+                        <div class="bs-callout bs-callout-danger">
+                            <h4>报销上限提示</h4>
+                            <p>　　已开票额：0000.00</p>
+                            <p>　　报销上限：0000.00</p>
+                            <p>　　报销剩余：0000.00</p>
+                            <h4>欠款提示</h4>
+                            <p>　　工程欠款：<span id="d1">0000.00</span></p>
+                            <p>　　往来欠款：<span id="d2">0000.00</span></p>
+                        </div>
+                    </div>
                 </div>
                 <c:if test="${not empty errors}">
                     <div id="alert-error" class="col-sm-6 col-sm-offset-5">
@@ -105,6 +116,10 @@
 <!--/container main -->
 <script type="text/javascript">
 	$(function() {
+		$.post("<s:url value='/api/suprplusamounts/${payment.projectId}' />", {}, function(result) {
+			alert(result);
+		}, "text");
+		
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {
@@ -129,6 +144,22 @@
 				trice : {},
 				description : {},
 			}
+		});
+
+		function refreshAmount(projectId){
+    		$.post("<s:url value='/api/suprplusamounts/' />" + projectId, {}, function(result) {
+    			if(result.indexOf('|') > 0){
+    				var arr = result.split("|");
+    				$("#d1").html(arr[0]);
+    				$("#d2").html(arr[1]);
+    			}
+    		}, "text");
+		}
+		refreshAmount(jQuery("#projectId").val());
+		
+		
+		$("#projectId").change(function(){
+			refreshAmount($(this).val());
 		});
 	});
 </script>

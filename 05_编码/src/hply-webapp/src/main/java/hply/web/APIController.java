@@ -6,6 +6,7 @@ import hply.domain.SysAuthorization;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
 import hply.service.ArrearsService;
+import hply.service.CollectionsService;
 import hply.service.ProjectService;
 import hply.service.SysAuthorizationService;
 import hply.service.SysResourceService;
@@ -41,6 +42,9 @@ public class APIController {
 
 	@Autowired
 	private ArrearsService arrearsService;
+
+	@Autowired
+	private CollectionsService collectionsService;
 
 	@RequestMapping(value = "/tree/{userId}")
 	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
@@ -119,8 +123,9 @@ public class APIController {
 	public @ResponseBody String getCapitalOccupied(@PathVariable String projectId) {
 		// 计算占用资金情况
 		DecimalFormat df = new DecimalFormat("#,##0.00");
-		double v = arrearsService.getTotalByProject(projectId);
-		return df.format(v);
+		Double v = arrearsService.getTotalByProject(projectId);
+		double d = v != null ? v.doubleValue() : 0;
+		return df.format(d);
 	}
 
 	@RequestMapping(value = "/taxplanamount", method = RequestMethod.POST)
@@ -141,6 +146,19 @@ public class APIController {
 		}
 		projectService.updateManagementPlanAmount(id, data);
 		return "应收管理费修改成功，额度： " + data;
+	}
+
+	@RequestMapping(value = "/suprplusamounts/{projectId}")
+	public @ResponseBody String getSurplusAmounts(@PathVariable String projectId) {
+		// 计算的工程款剩余
+		double d1 = collectionsService.getSurplusProjectAmount(projectId);
+
+		// 计算的往来欠款总额
+		Double val2 = arrearsService.getTotalByProject(projectId);
+		double d2 = val2 != null ? val2.doubleValue() : 0;
+
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+		return df.format(d1) + "|" + df.format(d2);
 	}
 
 }

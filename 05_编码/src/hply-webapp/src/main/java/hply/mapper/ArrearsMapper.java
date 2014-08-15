@@ -14,5 +14,5 @@ import hply.mapper.partial.PartialArrearsMapper;
  */
 @Repository
 public interface ArrearsMapper extends PartialArrearsMapper {
-	public double getTotalByProject(String projectId);
+	public Double getTotalByProject(String projectId);
 }

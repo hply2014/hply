@@ -74,7 +74,7 @@
                                 </c:if> <c:if test="${projectSummary.managementTotalAmount > 0 }">
                                     <br /> 累计：<c:out value="${projectSummary.managementTotalAmount}" />
                                 </c:if> <br /> 尚欠：<c:out value="${projectSummary.managementOweAmount}" /></td>
-                            <td><c:if test="${projectSummary.partyBillingAmount} > 0">开票：<c:out
+                            <td><c:if test="${projectSummary.partyBillingAmount > 0}">开票：<c:out
                                         value="${projectSummary.partyBillingAmount}" />
                                     <br />
                                 </c:if> <c:if test="${projectSummary.partyBillingTotalAmount > 0}">累计：<c:out
@@ -83,7 +83,7 @@
                             <td><c:if test="${projectSummary.collectionsAmount > 0}">收款：<c:out
                                         value="${projectSummary.collectionsAmount}" />
                                     <br />
-                                </c:if> <c:if test="${projectSummary.collectionsTotalAmount} > 0">累计：<c:out
+                                </c:if> <c:if test="${projectSummary.collectionsTotalAmount > 0 }">累计：<c:out
                                         value="${projectSummary.collectionsTotalAmount}" />
                                 </c:if> <c:if test="${projectSummary.collectionsRate > 0}">
                                     <br />回款率：<c:out value="${projectSummary.collectionsRate}" />%</c:if></td>

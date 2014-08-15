@@ -70,8 +70,7 @@ public class ArrearsService {
 		return mapper.getAll();
 	}
 	
-	public double getTotalByProject(String projectId){
-		//TODO 计算某项目的往来欠款累积和，也就是垫付资金情况
-		return 0;
+	public Double getTotalByProject(String projectId){
+		return mapper.getTotalByProject(projectId);
 	}
 }

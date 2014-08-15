@@ -86,7 +86,7 @@ public class CollectionsController {
 		String payTypes = paramService.getByEnName("pay_types").getParamValue();
 		model.addAttribute("sourceoflist", sourceOfs.split("/"));
 		model.addAttribute("paymenttypelist", payTypes.split("/"));
-
+		
 		model.addAttribute("collections", collections);
 		model.addAttribute("page_title", "新建收款情况");
 		return JSP_PAGE_MODIFY;

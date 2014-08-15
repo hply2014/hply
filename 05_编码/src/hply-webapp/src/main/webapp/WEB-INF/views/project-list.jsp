@@ -50,6 +50,7 @@
                         <th>印花税上交金额</th>
                         <th>登记人</th>
                         <th>登记时间</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,17 +68,22 @@
                             <td><c:out value="${project.projectName}" /></td>
                             <td><c:out value="${project.organizationId}" /></td>
                             <td><c:out value='${project.manager}' /></td>
-                            <td><c:out value="${project.managementRate}" /></td>
-                            <td><c:out value="${project.taxRate}" /></td>
+                            <td><c:out value="${project.managementRate}" />%</td>
+                            <td><c:out value="${project.taxRate}" />%</td>
                             <td><c:out value="${project.contractAmount}" /> <c:if
                                     test="${not empty project.settlementAmount && project.settlementAmount > 0 }">
                                     <br />结算：<c:out value="${project.settlementAmount}" />
                                 </c:if></td>
-                            <td><span data-toggle="tooltip" title="时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' />，收据编号：<c:out value='${project.dutyPaidCode}' />"> 
-                            <c:out value="${project.dutyPaidAmount}" /><span></td>
-                         <td><c:out value="${project.createUser}" /></td>
-                            <td title="<c:out value="${project.createUser}" />"><fmt:formatDate value="${project.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                            </tr>
+                            <td><span data-toggle="tooltip"
+                                title="<c:if test='${not empty project.dutyPaidTime }'>时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' /></c:if><c:if test="${not empty project.dutyPaidCode}">，收据编号：${project.dutyPaidCode}</c:if>">
+                                    <c:out value="${project.dutyPaidAmount}" /><span></td>
+                            <td><c:out value="${project.createUser}" /></td>
+                            <td title="<c:out value="${project.createUser}" />"><fmt:formatDate
+                                    value="${project.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><shiro:hasPermission name="`project_modify`">
+                                    <a href="<s:url value="/project/modify/${project.id }" />">修改</a>
+                                </shiro:hasPermission></td>
+                        </tr>
                     </c:forEach>
                 </tbody>
             </table>

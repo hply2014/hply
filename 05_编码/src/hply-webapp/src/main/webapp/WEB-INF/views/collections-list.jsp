@@ -62,10 +62,10 @@
                             <td><span
                                 class="glyphicon <c:out value="${collections.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                             <td><%=++i%></td>
+                            <td><c:out value="${collections.ticketCode}" /></td>
                             <td><a
                                 href="<s:url value="/collections/detail/{id}"><s:param name="id" value="${collections.id }" /></s:url>"><c:out
                                         value="${collections.projectId}" /></a></td>
-                            <td><c:out value="${collections.ticketCode}" /></td>
                             <td><c:out value="${collections.sourceOf}" /></td>
                             <td><c:out value="${collections.paymentType}" /></td>
                             <td><c:out value="${collections.amount}" /></td>

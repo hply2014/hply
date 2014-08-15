@@ -6,8 +6,8 @@
 
   <cache />  
   
-  <select id="getTotalByProject" parameterType="string" resultType="double">
-    select sum(amount + interest_amount) from t_arrears where project_id = #{projectId}
+  <select id="getTotalByProject" parameterType="string" resultType="Double">
+    select sum(ifnull(amount, 0) + ifnull(interest_amount, 0)) from t_arrears where project_id = #{projectId}
   </select>
 </mapper>
 

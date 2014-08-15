@@ -4,6 +4,7 @@ import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
 import hply.domain.Collections;
 import hply.mapper.CollectionsMapper;
+import hply.mapper.PaymentMapper;
 
 import java.util.List;
 
@@ -21,6 +22,9 @@ public class CollectionsService {
 
 	@Autowired
 	private CollectionsMapper mapper;
+
+	@Autowired
+	private PaymentService paymentService;
 
 	/**
 	 * 05_收款情况，插入对象
@@ -68,5 +72,25 @@ public class CollectionsService {
 	 */
 	public List<Collections> getAll() {
 		return mapper.getAll();
+	}
+
+	/*
+	 * 收的工程款总额
+	 */
+	public Double getTotalProjectAmount(String projectId) {
+		return mapper.getTotalProjectAmount(projectId);
+	}
+
+	/*
+	 * 计算工程剩余
+	 */
+	public double getSurplusProjectAmount(String projectId) {
+		Double val1 = this.getTotalProjectAmount(projectId);
+		double d1 = val1 != null ? val1.doubleValue() : 0;
+		
+		Double val2 = paymentService.getToalPayment(projectId);
+		double d2 = val2 != null ? val2.doubleValue() : 0;
+		
+		return d1 - d2;
 	}
 }
