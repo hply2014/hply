@@ -84,13 +84,15 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="bs-callout bs-callout-danger">
-                            <h4>报销上限提示</h4>
+                            <h4>报销提示</h4>
                             <p>　　已开票额：0000.00</p>
                             <p>　　报销上限：0000.00</p>
                             <p>　　报销剩余：0000.00</p>
                             <h4>欠款提示</h4>
                             <p>　　工程欠款：<span id="d1">0000.00</span></p>
-                            <p>　　往来欠款：<span id="d2">0000.00</span></p>
+                            <p>　　往来欠款：<span id="d2">0000.00</span>（本金）</p>
+                            <h4>操作提示</h4>
+                            <p><span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span></p>
                         </div>
                     </div>
                 </div>

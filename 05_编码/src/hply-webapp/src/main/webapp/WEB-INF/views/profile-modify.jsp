@@ -31,17 +31,6 @@
 								<sf:input cssClass="form-control" path="profilePoint"
 									placeholder="型材点" />
 								<p class="help-block" />
-							</div>
-        
-							<label for="trice" class="col-sm-2 control-label">登记时间</label>
-							<div class="col-sm-4 ">
-					<div class="input-group date">
-						<sf:input cssClass="form-control" path="trice"
-							data-date-format="yyyy-mm-dd" />
-						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-calendar"></i></span>
-					</div>
-								<p class="help-block" />
 							</div></div>
 						<div class="row">
 							<sf:label path="description" cssClass="col-sm-2 control-label">备注</sf:label>
@@ -59,6 +48,15 @@
 							class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                         
 				</div>
+                    <div class="col-sm-4">
+                        <div class="bs-callout bs-callout-danger">
+                            <h4>欠款提示</h4>
+                            <p>　　工程欠款：<span id="d1">0000.00</span></p>
+                            <p>　　往来欠款：<span id="d2">0000.00</span>（本金）</p>
+                            <h4>操作提示</h4>
+                            <p><span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span></p>
+                        </div>
+                    </div>
 			</div>
 				<c:if test="${not empty errors}">
 					<div id="alert-error" class="col-sm-6 col-sm-offset-5">

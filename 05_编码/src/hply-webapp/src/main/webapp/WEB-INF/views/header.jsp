@@ -72,7 +72,7 @@ body {
 	border-color: #463265;
 }
 
-strong, .bs-callout h4 {
+strong, h1, h2, h3, h4 {
 	font-family: 微软雅黑, 黑体;
 }
 

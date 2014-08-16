@@ -55,6 +55,12 @@
                             class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 
                     </div>
+                    <div class="col-sm-4">
+                        <div class="bs-callout bs-callout-danger">
+                            <h4>操作提示</h4>
+                            <p><span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span></p>
+                        </div>
+                    </div>
                 </div>
                 <c:if test="${not empty errors}">
                     <div id="alert-error" class="col-sm-6 col-sm-offset-5">

@@ -2,8 +2,10 @@
 
 import hply.core.Utility;
 import hply.domain.Arrears;
+import hply.domain.Project;
 import hply.domain.SysUser;
 import hply.service.ArrearsService;
+import hply.service.ProjectService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
@@ -31,6 +33,9 @@ public class ArrearsController {
 
 	@Autowired
 	private SysUserService sysUserService;
+	
+	@Autowired
+	private ProjectService projectService;
 
 	public static final String URI = "/arrears";
 	public static final String JSP_PAGE_LIST = "arrears-list";
@@ -68,7 +73,15 @@ public class ArrearsController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
+		String arrearsTypes = paramService.getByEnName("arrears_type").getParamValue();
+		String payTypes = paramService.getByEnName("pay_types").getParamValue();
+		model.addAttribute("arrearsTypes", arrearsTypes.split("/"));
+		model.addAttribute("payTypes", payTypes.split("/"));
+		
 		Arrears item = new Arrears();
+		item.setInterestRate(paramService.getParamDoubleValue("interest_rate"));
 		item.setArrearsCode(paramService.getNextCode("arrears_code"));
 		model.addAttribute("arrears", item);
 		model.addAttribute("page_title", "新建往来欠款");

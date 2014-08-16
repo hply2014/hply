@@ -126,8 +126,13 @@
                                     class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                             </c:otherwise>
                         </c:choose>
-
-
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="bs-callout bs-callout-danger">
+                            <h4>操作提示</h4>
+                            <p>1、此信息提交后，需由相关领导审核通过后，方可生效。</p>
+                            <p>2、未审核通过前，信息可以修改或删除，审核后不可修改。</p>
+                        </div>
                     </div>
                 </div>
                 <c:if test="${not empty errors}">
