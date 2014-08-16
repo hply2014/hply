@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="User Id=root;Host=localhost;Database=test;password=qqwQQW" />
+  </variables>
+  <propertySets>
+    <propertySet name="fweb-springmvc-all.txt" output="fweb-springmvc-all.txt" template="D:\fweb-template\fweb-springmvc-all.cst">
+      <property name="Author">cqiyi</property>
+      <property name="JspListPath">D:\eclipse\workspace\fresource2\fresource2\src\main\webapp\WEB-INF\views</property>
+      <property name="ServicePath">D:\eclipse\workspace\fresource2\fresource2\src\main\java\com\hhwy\fresource\service</property>
+      <property name="SourceTables">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <tableList>
+      <table>
+        <owner />
+        <name>t_field_types</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_organization</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_parameter</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_resource</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_role</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_role_resources</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_user</name>
+      </table>
+      <table>
+        <owner />
+        <name>t_sys_user_roles</name>
+      </table>
+    </tableList>
+      </property>
+      <property name="NameSpace">com.hhwy.resource2</property>
+      <property name="DomainPath">D:\eclipse\workspace\fresource2\fresource2\src\main\java\com\hhwy\fresource\domain</property>
+      <property name="PartialMapperJavaPath">D:\eclipse\workspace\fresource2\fresource2\src\main\java\com\hhwy\fresource\mapper\partial</property>
+      <property name="PartialMapperXMLPath">D:\eclipse\workspace\fresource2\fresource2\src\main\resources\com\hhwy\fresource2\mapper\partial</property>
+      <property name="MapperJavaPath">D:\eclipse\workspace\fresource2\fresource2\src\main\java\com\hhwy\fresource\mapper</property>
+      <property name="MapperXMLPath">D:\eclipse\workspace\fresource2\fresource2\src\main\resources\com\hhwy\fresource2\mapper</property>
+      <property name="ServiceTestPath">D:\eclipse\workspace\fresource2\fresource2\src\test\java\org\hhwy\fweb1\test</property>
+      <property name="ControllerPath">D:\eclipse\workspace\fresource2\fresource2\src\main\java\com\hhwy\fresource\web</property>
+      <property name="JspDetailPath">D:\eclipse\workspace\fresource2\fresource2\src\main\webapp\WEB-INF\views</property>
+      <property name="JspModifyPath">D:\eclipse\workspace\fresource2\fresource2\src\main\webapp\WEB-INF\views</property>
+    </propertySet>
+  </propertySets>
+</codeSmith>
