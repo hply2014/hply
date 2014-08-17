@@ -70,7 +70,6 @@ public class CustomerBillingController {
 		return JSP_PAGE_DETAIL;
 	}
 
-	private static final String[] typelist = new String[] { "材料", "劳务", "其他" };
 
 	/*
 	 * 新建页面

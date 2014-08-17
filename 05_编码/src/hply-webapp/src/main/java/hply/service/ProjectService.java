@@ -70,12 +70,17 @@ public class ProjectService {
 		return mapper.getAll();
 	}
 
-	public int refreshAllStatus() {
-		return mapper.refreshAllStatus();
+	public void updateAllStatus() {
+		mapper.updateAllStatus();
 	}
 
 	public List<Project> getAllNames() {
 		return mapper.getAllNames();
+	}
+	
+	public double getTotalAmount(String projectId){
+		Double d = mapper.getTotalAmount(projectId);
+		return d != null ? d.doubleValue() : 0.0;
 	}
 	
 	public void updateManagementPlanAmount(String projectId, double amount){

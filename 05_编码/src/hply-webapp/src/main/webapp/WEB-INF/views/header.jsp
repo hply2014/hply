@@ -469,7 +469,7 @@ strong, h1, h2, h3, h4 {
                 <div class="navbar-form pull-right">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                            title="在<%=SessionHelper.getLoginTime()%>登录的"><%=SessionHelper.getCurrentRealName()%><span
+                            title="在<%=SessionHelper.getLoginTime()%>登录的"><%=SessionHelper.getCurrentRealName()%>　<span
                                 class="caret"></span>
                         </button>
                         <ul class="dropdown-menu pull-right" role="menu">

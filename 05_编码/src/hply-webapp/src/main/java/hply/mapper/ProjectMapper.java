@@ -17,7 +17,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ProjectMapper extends PartialProjectMapper {
-	public int refreshAllStatus();
-
 	public List<Project> getAllNames();
+
+	public void updateAllStatus();
+	
+	public Double getTotalAmount(String projectId);
 }

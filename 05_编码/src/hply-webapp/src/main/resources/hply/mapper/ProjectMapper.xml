@@ -4,9 +4,9 @@
 
 <mapper namespace="hply.mapper.ProjectMapper">
 
-	<select id="refreshAllStatus" resultType="int">select
-		refresh_all_status()
-	</select>
+	<update id="updateAllStatus">call proc_update_all_status()</update>
+	
+	<select id="getTotalAmount" resultType="Double">select get_total_amount(#{projectId})</select>
 
 	<select id="getAllNames" resultType="Project">
 		select id as id,concat('[',project_code,']',project_name) as projectName

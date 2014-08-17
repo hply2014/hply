@@ -2,11 +2,15 @@ package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
+import hply.domain.PaymentItem;
 import hply.domain.SysAuthorization;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
 import hply.service.ArrearsService;
 import hply.service.CollectionsService;
+import hply.service.PartyBillingService;
+import hply.service.PaymentItemService;
+import hply.service.PaymentService;
 import hply.service.ProjectService;
 import hply.service.SysAuthorizationService;
 import hply.service.SysResourceService;
@@ -45,6 +49,15 @@ public class APIController {
 
 	@Autowired
 	private CollectionsService collectionsService;
+
+	@Autowired
+	private PartyBillingService paryBillingService;
+
+	@Autowired
+	private PaymentService paymentService;
+
+	@Autowired
+	private PaymentItemService paymentItemService;
 
 	@RequestMapping(value = "/tree/{userId}")
 	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
@@ -128,27 +141,30 @@ public class APIController {
 		return df.format(d);
 	}
 
-	@RequestMapping(value = "/taxplanamount", method = RequestMethod.POST)
-	public @ResponseBody String updateTaxPlanAmount(@RequestParam String id, @RequestParam Double data) {
-		// 修改应缴税金
-		if (data == null || data == 0) {
-			return "应缴税金修改失败，可能是输入的值无效。";
-		}
-		projectService.updateTaxPlanAmount(id, data);
-		return "应缴税金修改成功，额度： " + data;
-	}
+	// @RequestMapping(value = "/taxplanamount", method = RequestMethod.POST)
+	// public @ResponseBody String updateTaxPlanAmount(@RequestParam String id,
+	// @RequestParam Double data) {
+	// // 修改应缴税金
+	// if (data == null || data == 0) {
+	// return "应缴税金修改失败，可能是输入的值无效。";
+	// }
+	// projectService.updateTaxPlanAmount(id, data);
+	// return "应缴税金修改成功，额度： " + data;
+	// }
+	//
+	// @RequestMapping(value = "/managementplanamount", method =
+	// RequestMethod.POST)
+	// public @ResponseBody String updateManagementPlanAmount(@RequestParam
+	// String id, @RequestParam Double data) {
+	// // 修改应收管理费
+	// if (data == null || data == 0) {
+	// return "应收管理费修改失败，可能是输入的值无效。";
+	// }
+	// projectService.updateManagementPlanAmount(id, data);
+	// return "应收管理费修改成功，额度： " + data;
+	// }
 
-	@RequestMapping(value = "/managementplanamount", method = RequestMethod.POST)
-	public @ResponseBody String updateManagementPlanAmount(@RequestParam String id, @RequestParam Double data) {
-		// 修改应收管理费
-		if (data == null || data == 0) {
-			return "应收管理费修改失败，可能是输入的值无效。";
-		}
-		projectService.updateManagementPlanAmount(id, data);
-		return "应收管理费修改成功，额度： " + data;
-	}
-
-	@RequestMapping(value = "/suprplusamounts/{projectId}")
+	@RequestMapping(value = "/suprplusamounts/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getSurplusAmounts(@PathVariable String projectId) {
 		// 计算的工程款剩余
 		double d1 = collectionsService.getSurplusProjectAmount(projectId);
@@ -157,8 +173,27 @@ public class APIController {
 		Double val2 = arrearsService.getTotalByProject(projectId);
 		double d2 = val2 != null ? val2.doubleValue() : 0;
 
-		DecimalFormat df = new DecimalFormat("#,##0.00");
-		return df.format(d1) + "|" + df.format(d2);
+		DecimalFormat dformat = new DecimalFormat("#,##0.00");
+		return dformat.format(d1) + "|" + dformat.format(d2);
+	}
+
+	@RequestMapping(value = "/alllimitamount/{projectId}/{itemId}", method = RequestMethod.POST)
+	public @ResponseBody String getAllLimitAmount(@PathVariable String projectId, @PathVariable String itemId) {
+		// 计算某工程指定期间费用项目的限额
+
+		// 已审核通过的开票额
+		double d1 = paryBillingService.getCheckedAmount(projectId);
+
+		// 该期间费用的累计报销额
+		double d2 = paymentService.getTotalPaymentByItem(projectId, itemId);
+
+		PaymentItem pi = paymentItemService.get(itemId);
+		double limitA = d1 * pi.getReimbursementCap() / 100;
+
+		DecimalFormat dformat = new DecimalFormat("#,##0.00");
+
+		// 已开票额|报销上限|报销累计|报销剩余
+		return dformat.format(d1) + "|" + dformat.format(limitA) + "|" + dformat.format(d2) + "|" + dformat.format(limitA - d2);
 	}
 
 }

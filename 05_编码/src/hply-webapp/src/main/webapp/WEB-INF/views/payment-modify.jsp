@@ -12,7 +12,8 @@
                     <div class="col-sm-8">
                         <div class="row">
                             <label for="ticketCode" class="col-sm-2 control-label">凭证号</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="ticketCode" placeholder="凭证号" />
                                 <p class="help-block" />
                             </div>
@@ -29,7 +30,8 @@
                         <div class="row">
 
                             <label for="paymentItemId" class="col-sm-2 control-label">付款科目</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:select cssClass="form-control selectpicker" path="paymentItemId"
                                     items="${paymentitemlist }" itemValue="id" itemLabel="itemName" />
                                 <p class="help-block" />
@@ -43,13 +45,15 @@
                         </div>
                         <div class="row">
                             <label for="amount" class="col-sm-2 control-label">付款金额</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="amount" placeholder="付款金额" />
                                 <p class="help-block" />
                             </div>
 
                             <label for="payType" class="col-sm-2 control-label">支付方式</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:select cssClass="form-control selectpicker" path="payType"
                                     items="${paymenttypelist }" />
                                 <p class="help-block" />
@@ -84,15 +88,30 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="bs-callout bs-callout-danger">
-                            <h4>报销提示</h4>
-                            <p>　　已开票额：0000.00</p>
-                            <p>　　报销上限：0000.00</p>
-                            <p>　　报销剩余：0000.00</p>
-                            <h4>欠款提示</h4>
-                            <p>　　工程欠款：<span id="d1">0000.00</span></p>
-                            <p>　　往来欠款：<span id="d2">0000.00</span>（本金）</p>
                             <h4>操作提示</h4>
-                            <p><span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span></p>
+                            <p>
+                                <span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span>
+                            </p>
+                            <h4>报销提示</h4>
+                            <p>
+                                已开票额：<span id="checkedAmount">0000.00</span>
+                            </p>
+                            <p>
+                                报销上限：<span id="limitAmount">0000.00</span>
+                            </p>
+                            <p>
+                                报销累计：<span id="totalAmount">0000.00</span>
+                            </p>
+                            <p>
+                                报销剩余：<span id="oweAmount">0000.00</span>
+                            </p>
+                            <h4>欠款提示</h4>
+                            <p>
+                                工程欠款：<span id="d1">0000.00</span>
+                            </p>
+                            <p>
+                                往来欠款：<span id="d2">0000.00</span>（本金）
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -118,10 +137,10 @@
 <!--/container main -->
 <script type="text/javascript">
 	$(function() {
-		$.post("<s:url value='/api/suprplusamounts/${payment.projectId}' />", {}, function(result) {
-			alert(result);
-		}, "text");
-		
+		jQuery.validator.addMethod("allowLimit", function(value, element) {
+			return false;
+		}, "请正确填写您的邮政编码");
+
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {
@@ -139,7 +158,8 @@
 				paymentItemId : {},
 				amount : {
 					required : true,
-					number : true
+					number : true,
+					max : 0
 				},
 				bankAccount : {},
 				bankName : {},
@@ -148,21 +168,50 @@
 			}
 		});
 
-		function refreshAmount(projectId){
-    		$.post("<s:url value='/api/suprplusamounts/' />" + projectId, {}, function(result) {
-    			if(result.indexOf('|') > 0){
-    				var arr = result.split("|");
-    				$("#d1").html(arr[0]);
-    				$("#d2").html(arr[1]);
-    			}
-    		}, "text");
+		function refreshLimitAmount() {
+			//刷新了上限额度，4个值
+			$.post("<s:url value='/api/alllimitamount/' />" + jQuery("#projectId").val() + "/" + jQuery("#paymentItemId").val(), {},
+					function(result) {
+						var arr = result.split("|");
+						if (arr.length >= 4) {
+							$("#checkedAmount").html(arr[0]);
+							$("#limitAmount").html(arr[1]);
+							$("#totalAmount").html(arr[2]);
+							$("#oweAmount").html(arr[3]);
+							$("#amount").rules("add", {
+								max : parseFloat(arr[3].replace(/,/g, ''))
+							});
+						}
+					}, "text");
+
 		}
-		refreshAmount(jQuery("#projectId").val());
-		
-		
-		$("#projectId").change(function(){
-			refreshAmount($(this).val());
+
+		function refreshOweAmount() {
+			//获取工程欠款余额及往来欠款总额
+			$.post("<s:url value='/api/suprplusamounts/' />" + jQuery("#projectId").val(), {}, function(result) {
+				var arr = result.split("|");
+				if (arr.length >= 2) {
+					var arr = result.split("|");
+					$("#d1").html(arr[0]);
+					$("#d2").html(arr[1]);
+				}
+			}, "text");
+
+		}
+
+		//在界面上选择了项目
+		$("#projectId").change(function() {
+			refreshLimitAmount();
+			refreshOweAmount();
 		});
+
+		//选择了付款科目
+		$("#paymentItemId").change(function() {
+			refreshLimitAmount();
+		});
+
+		refreshLimitAmount();
+		refreshOweAmount();
 	});
 </script>
 <%@ include file="bottom.jsp"%>

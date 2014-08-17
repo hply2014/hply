@@ -14,5 +14,7 @@ import hply.mapper.partial.PartialCollectionsMapper;
  */
 @Repository
 public interface CollectionsMapper extends PartialCollectionsMapper {
-	public Double getTotalProjectAmount(String projectId);
+	
+	//实际已经收的工程款
+	public Double getTotalCollectionsAmount(String projectId);
 }

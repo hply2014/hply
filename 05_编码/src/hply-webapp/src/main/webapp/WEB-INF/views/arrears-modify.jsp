@@ -28,13 +28,15 @@
                         </div>
                         <div class="row">
                             <label for="arrearsType" class="col-sm-2 control-label">欠款分类</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:select cssClass="form-control selectpicker" path="arrearsType"
                                     items="${arrearsTypes }" />
                                 <p class="help-block" />
                             </div>
                             <label for="amount" class="col-sm-2 control-label">金额</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="amount" placeholder="金额" />
                                 <p class="help-block" />
                             </div>
@@ -42,9 +44,9 @@
                         <div class="row">
                             <div class="col-sm-4 col-sm-offset-2 checkbox">
                                 <sf:checkbox cssClass="icheckbox" path="interestRate" id="interestRate" value="1" />
-                                <label for="interestRate">此笔费用需要计息</label>
+                                <label for="interestRate">此笔费用计息</label>
                                 <p class="help-block" />
-                            </div>
+                            </div><input type="hidden" name="interestRate" value="0" />
                         </div>
                         <div class="row">
                             <label for="fundsUsing" class="col-sm-2 control-label">资金使用方</label>

@@ -50,6 +50,9 @@ public class ArrearsController {
 		model.addAttribute("page_title", "往来欠款");
 		List<Arrears> list = service.getAll();
 		for (Arrears item : list) {
+			Project pjt = projectService.get(item.getProjectId());
+			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
+
 			SysUser user = sysUserService.get(item.getCreateUser());
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}

@@ -17,5 +17,9 @@ import hply.mapper.partial.PartialPartyBillingMapper;
 @Repository
 public interface PartyBillingMapper extends PartialPartyBillingMapper {
 
+	/*
+	 * 获取指定项目的已审核的开票额度
+	 */
+	public Double getCheckedAmount(String projectId);
 }
 

@@ -7,8 +7,15 @@
 	<cache />
 
 	<select id="getToalPayment" parameterType="string" resultType="double">
-		select sum(ifnull(amount, 0)) from t_payment where project_id
+		select sum(amount) from t_payment where
+		project_id
 		= #{projectId}
+	</select>
+
+	<select id="getTotalPaymentByItem" resultType="double">
+		select sum(amount) totalAmount from t_payment
+		where
+		project_id=#{projectId} and payment_item_id=#{paymentItemId}
 	</select>
 </mapper>
 

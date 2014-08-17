@@ -90,7 +90,8 @@ public class HomeController {
 		user.setFails(0);
 		service.update(user);
 
-		projectService.refreshAllStatus();
+		//刷新所有业务数据状态
+		projectService.updateAllStatus();
 		return "redirect:/";
 	}
 

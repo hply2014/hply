@@ -69,4 +69,12 @@ public class PartyBillingService {
 	public List<PartyBilling> getAll() {
 		return mapper.getAll();
 	}
+
+	/*
+	 * 获取指定项目的已审核的开票额度
+	 */
+	public double getCheckedAmount(String projectId) {
+		Double d = mapper.getCheckedAmount(projectId);
+		return d != null ? d.doubleValue() : 0.0;
+	}
 }

@@ -42,7 +42,7 @@ public class PaymentController {
 
 	@Autowired
 	private PaymentItemService paymentItemService;
-
+	
 	public static final String URI = "/payment";
 	public static final String JSP_PAGE_LIST = "payment-list";
 	public static final String JSP_PAGE_DETAIL = "payment-detail";
@@ -98,7 +98,7 @@ public class PaymentController {
 
 		List<PaymentItem> pi = paymentItemService.getAll();
 		model.addAttribute("paymentitemlist", pi);
-
+		
 		model.addAttribute("payment", payment);
 		model.addAttribute("page_title", "新建付款情况");
 		return JSP_PAGE_MODIFY;

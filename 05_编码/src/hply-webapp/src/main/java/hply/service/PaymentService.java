@@ -69,11 +69,17 @@ public class PaymentService {
 	public List<Payment> getAll() {
 		return mapper.getAll();
 	}
-	
+
 	/*
 	 * 付款总额
 	 */
-	public double getToalPayment(String projectId){
+	public double getToalPayment(String projectId) {
 		return 0;
 	}
+
+	public double getTotalPaymentByItem(String projectId, String paymentItemId) {
+		Double d = mapper.getTotalPaymentByItem(projectId, paymentItemId);
+		return d != null ? d.doubleValue() : 0.0;
+	}
+
 }

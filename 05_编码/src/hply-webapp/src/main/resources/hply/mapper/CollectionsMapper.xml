@@ -6,7 +6,7 @@
 
 	<cache />
 
-	<select id="getTotalProjectAmount" parameterType="string" resultType="Double">
+	<select id="getTotalCollectionsAmount" parameterType="string" resultType="Double">
 		select sum(ifnull(amount, 0)) from t_collections where
 		project_id=#{projectId} and source_of='工程款'
 	</select>
