@@ -114,7 +114,7 @@ strong, h1, h2, h3, h4 {
 	background-color: #fff0f0
 }
 
-.success input {
+.valid input {
 	background-color: #f0fff0;
 }
 

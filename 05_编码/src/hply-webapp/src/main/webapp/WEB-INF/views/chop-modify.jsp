@@ -195,13 +195,12 @@
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {
-				$(element)
-						.next()
-						.html(
-								'<b class="glyphicon glyphicon-ok text-success"></b><i>正确</i>');
+				$(element).parent().addClass("valid");
+				$(element).next().html('');
+				//.next().html('<b class="glyphicon glyphicon-ok text-success"></b><i>正确</i>');
 			},
 			errorPlacement : function(error, element) {
-				element.next().html(
+				element.parent().addClass("invalid");
 						'<b class="glyphicon glyphicon-remove text-danger"></b><i>'
 								+ error.html() + "</i>");
 			},
