@@ -68,7 +68,15 @@ public class ContractChangeController {
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
 		model.addAttribute("page_title", "合同补充协议的详情信息");
-		model.addAttribute("contractChange", service.get(id));
+		
+		ContractChange cc = service.get(id);
+
+		SysUser u1 = sysUserService.get(cc.getCreateUser());
+		cc.setCreateUser(u1 != null ? u1.getRealName() : Utility.EMPTY);
+		SysUser u2 = sysUserService.get(cc.getUpdateUser());
+		cc.setUpdateUser(u2 != null ? u2.getRealName() : Utility.EMPTY);
+		
+		model.addAttribute("contractChange", cc);
 		return JSP_PAGE_DETAIL;
 	}
 

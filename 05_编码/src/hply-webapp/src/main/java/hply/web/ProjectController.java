@@ -68,6 +68,16 @@ public class ProjectController {
 	public String detail(@PathVariable String id, Model model) {
 		Project project = service.get(id);
 		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
+		SysOrganization org = orgService.get(project.getOrganizationId());
+		project.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+
+
+		SysUser u1 = sysUserService.get(project.getCreateUser());
+		project.setCreateUser(u1 != null ? u1.getRealName() : Utility.EMPTY);
+
+		SysUser u2 = sysUserService.get(project.getUpdateUser());
+		project.setUpdateUser(u2 != null ? u2.getRealName() : Utility.EMPTY);
+		
 		model.addAttribute("project", project);
 		return JSP_PAGE_DETAIL;
 	}

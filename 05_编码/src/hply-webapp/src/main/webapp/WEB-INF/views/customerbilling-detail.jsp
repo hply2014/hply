@@ -2,7 +2,7 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>${page_title}</strong>
         </div>

@@ -24,7 +24,7 @@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"
             <strong>${arrears.id }</strong> ，${delMessage}
         </div>
     </c:if>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>${page_title}</strong>（
             <c:out value="${list.size()}" />

@@ -1,7 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%>
 
-<div class="container main"><div class="panel panel-default">
+<div class="container main"><div class="panel panel-primary">
 	<div class="panel-heading">
 		<strong>${page_title}</strong>
 	</div>
@@ -18,11 +18,13 @@
 								<p class="help-block" />
 							</div>
         
+                        </div>
+                        <div class="row">
 							<label for="projectId" class="col-sm-2 control-label">项目名称</label>
-                            <div class="col-sm-4 required-field-block">
+                            <div class="col-sm-8 required-field-block">
                                 <b class="required-icon">*</b>
                                 <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
-                                <sf:select cssClass="form-control selectpicker" path="projectId" items="${projectlist }"
+                                <sf:select cssClass="form-control select2" path="projectId" items="${projectlist }"
                                     itemValue="id" itemLabel="projectName" />
                                 <p class="help-block" />
                             </div>

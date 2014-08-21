@@ -20,11 +20,11 @@
             <strong>${projectSummary.id }</strong> ，${delMessage}
         </div>
     </c:if>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>多项目汇总</strong>（
             <c:out value="${list.size()}" />
-            条数据）
+            条数据）<a target="blank" href="<s:url value='/projectsummary/full' />">新窗口打开</a>
         </div>
         <div class="panel-body">
             <table class="table table-hover">

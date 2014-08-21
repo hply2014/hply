@@ -30,9 +30,8 @@
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" />" charset="UTF-8"></script>
 <script src="<s:url value="/assets/jquery-validation/jquery.validate.min.js" />"></script>
 <script src="<s:url value="/assets/jquery-validation/localization/messages_zh.min.js" />"></script>
-<%--
 <script src="<s:url value="/assets/bootstrap-select/js/bootstrap-select.min.js" />"></script>
-<script src="<s:url value="/assets/bootstrap-select/js/i18n/defaults-zh_CN.min.js" />"></script>  --%>
+<script src="<s:url value="/assets/bootstrap-select/js/i18n/defaults-zh_CN.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-icheck/icheck.min.js" />"></script>
 
 <script type="text/javascript">
@@ -55,7 +54,7 @@
 			autoclose : true,
 			todayHighlight : true
 		});
-		<%-- $('.selectpicker').selectpicker();  --%>
+		 $('.selectpicker').selectpicker();
 		$(".icheckbox").iCheck({
 			checkboxClass : 'icheckbox_minimal',
 			radioClass : 'iradio_minimal',
@@ -63,7 +62,7 @@
 		});
 		
 		$("[data-toggle]").tooltip();
-		$("select").select2();
+		$(".select2").select2();
 	});
 </script>
 </body>

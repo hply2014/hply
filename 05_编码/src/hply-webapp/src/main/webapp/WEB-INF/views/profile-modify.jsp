@@ -2,7 +2,7 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>${page_title}</strong>
         </div>
@@ -12,17 +12,18 @@
                     <div class="col-sm-8">
                         <div class="row">
                             <label for="projectId" class="col-sm-2 control-label">项目名称</label>
-                            <div class="col-sm-9 required-field-block">
+                            <div class="col-sm-8 required-field-block">
                                 <b class="required-icon">*</b>
                                 <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
-                                <sf:select cssClass="form-control" path="projectId" items="${projectlist }"
+                                <sf:select cssClass="form-control select2" path="projectId" items="${projectlist }"
                                     itemValue="id" itemLabel="projectName" />
                                 <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="expectedValue" class="col-sm-2 control-label">预计用量</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="expectedValue" placeholder="预计用量" />
                                 <p class="help-block" />
                             </div>
@@ -100,6 +101,23 @@
 				trice : {},
 				description : {},
 			}
+		});
+		
+
+		function refreshAmount(projectId){
+    		$.post("<s:url value='/api/suprplusamounts/' />" + projectId, {}, function(result) {
+    			if(result.indexOf('|') > 0){
+    				var arr = result.split("|");
+    				$("#d1").html(arr[0]);
+    				$("#d2").html(arr[1]);
+    			}
+    		}, "text");
+		}
+		refreshAmount(jQuery("#projectId").val());
+		
+		
+		$("#projectId").change(function(){
+			refreshAmount($(this).val());
 		});
 	});
 </script>

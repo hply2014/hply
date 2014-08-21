@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-10 col-md-offset-1">
 
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-body">
                     <h4>欢迎登录</h4>
                     <h1>工程项目核算系统</h1>

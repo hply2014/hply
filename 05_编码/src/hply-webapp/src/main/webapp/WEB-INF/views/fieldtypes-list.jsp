@@ -15,7 +15,7 @@
   <strong>${fieldTypes.id }</strong> ，${delMessage}
 </div>
 </c:if>
-<div class="panel panel-default">
+<div class="panel panel-primary">
   <div class="panel-heading"><strong>所有数据类型的测试样表</strong>（<c:out value="${list.size()}" />条数据）</div>
   <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">

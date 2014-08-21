@@ -20,7 +20,7 @@
             <strong>${sysResource.id }</strong> ，${delMessage}
         </div>
     </c:if>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>系统资源</strong>（
             <c:out value="${list.size()}" />

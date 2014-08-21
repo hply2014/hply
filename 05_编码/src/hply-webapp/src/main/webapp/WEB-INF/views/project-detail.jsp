@@ -2,7 +2,7 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>${page_title}</strong>
         </div>
@@ -12,16 +12,12 @@
                     <a href="<s:url value="/project" />" class="btn btn-info"><span
                         class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                 </div>
-                <shiro:hasPermission name="`project_modify1`">
+                
+                <shiro:hasPermission name="`project_modify`">
                     <div class="btn-group">
-                        <a href="javascript:void(0);" id="modify1" class="btn btn-danger"><span
-                            class="glyphicon glyphicon-edit"></span> 修改应缴税金 </a>
-                    </div>
-                </shiro:hasPermission>
-                <shiro:hasPermission name="`project_modify2`">
-                    <div class="btn-group">
-                        <a href="javascript:void(0);" id="modify2" class="btn btn-danger"><span
-                            class="glyphicon glyphicon-log-in"></span> 修改应收管理费 </a>
+                        <a
+                            href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>"
+                            class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 修 改 </a>
                     </div>
                 </shiro:hasPermission>
             </div>
@@ -224,119 +220,10 @@
 </div>
 
 
-<div class="modal fade" id="modelTaxPlanAmount">
-    <div class="modal-dialog">
-        <form class="form-horizontal" role="form" id="formTaxPlanAmount">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title">修改应缴税金</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="data" class="col-sm-3 control-label">应缴税金</label>
-                        <div class="col-sm-6">
-                            <input class="form-control" id="data" type="text"
-                                value="<fmt:formatNumber pattern='#0.00' value='${project.taxPlanAmount}'/>" name="data"
-                                placeholder="应缴税金" />
-                        </div>
-                    </div>
-                    <input type="hidden" name="id" value="${project.id }">
-                </div>
-                <div class="modal-footer">
-                    <button id="btnM1" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-saved"></span> 确定
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        <span class="glyphicon glyphicon-share-alt"></span> 取消
-                    </button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </form>
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-
-<div class="modal fade" id="modelManagementPlanAmount">
-    <div class="modal-dialog">
-        <form class="form-horizontal" role="form" id="formManagementPlanAmount">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title">修改应收管理费</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="data" class="col-sm-3 control-label">应收管理费</label>
-                        <div class="col-sm-6">
-                            <input class="form-control" id="data" type="text" name="data"
-                                value="<fmt:formatNumber pattern='#0.00' value='${project.managementPlanAmount}' />"
-                                placeholder="应收管理费" />
-                        </div>
-                    </div>
-                    <input type="hidden" name="id" value="${project.id }">
-                </div>
-                <div class="modal-footer">
-                    <button id="btnM2" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-saved"></span> 确定
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        <span class="glyphicon glyphicon-share-alt"></span> 取消
-                    </button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </form>
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
 <script type="text/javascript">
 	$(function() {
-		$("#modify1").click(function() {
-			// $("#modelTaxPlanAmount #data").val('');
-			$("#modelTaxPlanAmount").modal("show");
-			return false;
-		});
-
-		$("#btnM1").click(function() {
-			//修改应缴税金
-			$.post("<s:url value='/api/taxplanamount' />", $("#formTaxPlanAmount").serialize(), function(result) {
-				alert(result);
-				if (result.indexOf("成功") >= 0) {
-					$("#modelTaxPlanAmount").modal("hide");
-					self.location.reload();
-				}
-			}, "text");
-		});
-
-		$("#modify2").click(function() {
-			// $("#modelManagementPlanAmount #data").val('');
-			$("#modelManagementPlanAmount").modal("show");
-			return false;
-		});
-
-		$("#btnM2").click(function() {
-			//修改应收管理费
-			$.post("<s:url value='/api/managementplanamount' />", $("#formManagementPlanAmount").serialize(), function(result) {
-				alert(result);
-				if (result.indexOf("成功") >= 0) {
-					$("#modelManagementPlanAmount").modal("hide");
-					self.location.reload();
-				}
-			}, "text");
-		});
-
 		$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {}, function(result) {
-			$("#capitalOccupied").html("${project.capitalOccupied == 1 ? '是' : '否'}，往来欠款累计：" + result);
+			$("#capitalOccupied").html("${project.capitalOccupied == 1 ? '是' : '否'}，<span class=\"label label-info\">往来欠款累计：" + result + "</span>");
 		}, "text");
 	});
 </script>
