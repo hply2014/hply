@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -43,13 +44,22 @@ public class ProjectController {
 	public static final String JSP_PAGE_DETAIL = "project-detail";
 	public static final String JSP_PAGE_MODIFY = "project-modify";
 
+
 	/*
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model) {
+	public String list(@RequestParam(value="p", required = false) Integer p, Model model) {
+		int pageIndex = p != null ? p.intValue() : 0;
 		model.addAttribute("page_title", "合同项目信息");
-		List<Project> list = service.getAll();
+		int pageSize = paramService.getParamIntValue("page_size", 30);
+		int rowCount = service.getRowCount();
+		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
+		model.addAttribute("rowCount", rowCount);
+		model.addAttribute("pageIndex", pageIndex);
+		model.addAttribute("pageCount", pageCount);
+
+		List<Project> list = service.getAll(pageIndex * pageSize, 30);
 		for (Project item : list) {
 			SysOrganization org = orgService.get(item.getOrganizationId());
 			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
@@ -67,17 +77,17 @@ public class ProjectController {
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
 		Project project = service.get(id);
-		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
+		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode()
+				+ "）");
 		SysOrganization org = orgService.get(project.getOrganizationId());
 		project.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
-
 
 		SysUser u1 = sysUserService.get(project.getCreateUser());
 		project.setCreateUser(u1 != null ? u1.getRealName() : Utility.EMPTY);
 
 		SysUser u2 = sysUserService.get(project.getUpdateUser());
 		project.setUpdateUser(u2 != null ? u2.getRealName() : Utility.EMPTY);
-		
+
 		model.addAttribute("project", project);
 		return JSP_PAGE_DETAIL;
 	}
@@ -113,7 +123,8 @@ public class ProjectController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Project project, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Project project, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
@@ -133,8 +144,8 @@ public class ProjectController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid Project project, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid Project project, BindingResult result,
+			Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {

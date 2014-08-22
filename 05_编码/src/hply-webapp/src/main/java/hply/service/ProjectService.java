@@ -66,31 +66,35 @@ public class ProjectService {
 	/**
 	 * 01_合同项目信息，获取所有对象
 	 */
-	public List<Project> getAll() {
-		return mapper.getAll();
+	public List<Project> getAll(int pageIndex, int pageSize) {
+		return mapper.getAll(pageIndex, pageSize);
 	}
 
 	public void updateAllStatus() {
 		mapper.updateAllStatus();
 	}
 
+	public int getRowCount() {
+		return mapper.getRowCount();
+	}
+
 	public List<Project> getAllNames() {
 		return mapper.getAllNames();
 	}
-	
-	public double getTotalAmount(String projectId){
+
+	public double getTotalAmount(String projectId) {
 		Double d = mapper.getTotalAmount(projectId);
 		return d != null ? d.doubleValue() : 0.0;
 	}
-	
-	public void updateManagementPlanAmount(String projectId, double amount){
+
+	public void updateManagementPlanAmount(String projectId, double amount) {
 		Project p = this.get(projectId);
 		p.setManagementPlanAmount(amount);
 		this.update(p);
-		
+
 	}
-	
-	public void updateTaxPlanAmount(String projectId, double amount){
+
+	public void updateTaxPlanAmount(String projectId, double amount) {
 		Project p = this.get(projectId);
 		p.setTaxPlanAmount(amount);
 		this.update(p);

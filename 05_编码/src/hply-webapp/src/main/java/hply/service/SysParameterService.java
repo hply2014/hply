@@ -44,7 +44,8 @@ public class SysParameterService {
 	public void updateNoConflict(SysParameter sysParameter) {
 		sysParameter.setUpdateUser(SessionHelper.getCurrentSysUser().getId());
 		if (mapper.getVersion(sysParameter.getId()) != sysParameter.getVersion()) {
-			throw new DataVersionConflictException("Data conflict has occurred， t_sys_parameter.id=" + sysParameter.getId());
+			throw new DataVersionConflictException("Data conflict has occurred， t_sys_parameter.id="
+					+ sysParameter.getId());
 		}
 		mapper.update(sysParameter);
 	}
@@ -76,6 +77,16 @@ public class SysParameterService {
 
 	public String getNextCode(String prefixCode) {
 		return mapper.getNextCode(prefixCode);
+	}
+
+	public int getParamIntValue(String enName, int defaultValue) {
+		try {
+			SysParameter p = getByEnName(enName);
+			return Integer.valueOf(p.getParamValue());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return defaultValue;
 	}
 
 	public double getParamDoubleValue(String enName) {

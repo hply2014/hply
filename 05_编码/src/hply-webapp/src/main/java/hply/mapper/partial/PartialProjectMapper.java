@@ -6,7 +6,10 @@
 package hply.mapper.partial;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
 import hply.domain.Project;
 
 
@@ -28,6 +31,8 @@ public interface PartialProjectMapper {
       
 	  public int getVersion(String id);
 	  
-	  public List<Project> getAll();
+	  public int getRowCount();
+	  
+	  public List<Project> getAll(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 }
 

@@ -61,6 +61,10 @@
 	<select id="getVersion" parameterType="string" resultType="int">
 		select version from t_project_summary where id = #{id}
 	</select>
+	
+	<select id="getRowCount" resultType="int">
+		select count(*) from t_project_summary
+	</select>
 
 	<select id="getAll" resultType="ProjectSummary">
 		select id as id, trice as trice, description as description, project_id as projectId, organization_id as organizationId,
