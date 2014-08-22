@@ -19,17 +19,18 @@
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap-datepicker/css/datepicker3.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/ui.fancytree.css" />">
-<link rel="stylesheet" href="<s:url value="/assets/bootstrap-select/css/bootstrap-select.css" />">
-<link rel="stylesheet" href="<s:url value="/assets/bootstrap-icheck/skins/all.css" />">
 <%--
-<link rel="stylesheet" href="<s:url value="/assets/select2/3.5.1/select2.css" />">
+<link rel="stylesheet" href="<s:url value="/assets/bootstrap-select/css/bootstrap-select.css" />">
  --%>
+<link rel="stylesheet" href="<s:url value="/assets/bootstrap-icheck/skins/all.css" />">
+<link rel="stylesheet" href="<s:url value="/assets/select2/3.5.1/select2.css" />">
+<link rel="stylesheet" href="<s:url value="/assets/select2/3.5.1/select2-bootstrap.css" />">
+
 <script src="<s:url value="/assets/jquery.min.js" />"></script>
 <script src="<s:url value="/assets/jquery-ui.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
-<%--
 <script src="<s:url value="/assets/select2/3.5.1/select2.min.js" />"></script>
- --%>
+<script src="<s:url value="/assets/select2/3.5.1/select2_locale_zh-CN.js" />"></script>
 <!--[if lt IE 9]>
       <script src="<s:url value="/assets/html5shiv.js" />"></script>
       <script src="<s:url value="/assets/respond.min.js" />"></script>

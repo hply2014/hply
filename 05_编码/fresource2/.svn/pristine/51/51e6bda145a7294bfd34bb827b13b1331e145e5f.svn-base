@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hhwy.fresource2.mapper.SysUserMapper">
+
+  <insert id="insert" parameterType="SysUser">
+    insert into t_sys_user(id, login_name, password, real_name, organization_name, jobs, last_login_ip, last_login_time, fails, logined, must_change_password, enabled, create_time, create_user, update_time, update_user, description) values ( #{id}, #{loginName}, #{password}, #{realName}, #{organizationName}, #{jobs}, #{lastLoginIp}, #{lastLoginTime}, #{fails}, #{logined}, #{mustChangePassword}, #{enabled}, now(), #{createUser}, now(), #{createUser}, #{description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_user set <if test="loginName != ''">login_name = #{loginName},</if> <if test="password != ''">password = #{password},</if> <if test="realName != ''">real_name = #{realName},</if> <if test="organizationName != ''">organization_name = #{organizationName},</if> <if test="jobs != ''">jobs = #{jobs},</if> <if test="lastLoginIp != ''">last_login_ip = #{lastLoginIp},</if> <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if> <if test="fails != null">fails = #{fails},</if> <if test="logined != null">logined = #{logined},</if> <if test="mustChangePassword != null">must_change_password = #{mustChangePassword},</if> <if test="enabled != null">enabled = #{enabled},</if>  update_time = now(), <if test="updateUser != ''">update_user = #{updateUser},</if> <if test="description != ''">description = #{description},</if> version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_user where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysUser">
+    select id as id, login_name as loginName, password as password, real_name as realName, organization_name as organizationName, jobs as jobs, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, must_change_password as mustChangePassword, enabled as enabled, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, version as version, description as description from t_sys_user where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_user where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysUser">
+    select id as id, login_name as loginName, password as password, real_name as realName, organization_name as organizationName, jobs as jobs, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, must_change_password as mustChangePassword, enabled as enabled, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, version as version, description as description from t_sys_user
+  </select>
+
+</mapper>
+

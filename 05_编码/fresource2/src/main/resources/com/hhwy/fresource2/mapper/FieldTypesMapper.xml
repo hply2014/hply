@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hhwy.fresource2.mapper.FieldTypesMapper">
+
+  <insert id="insert" parameterType="FieldTypes">
+    insert into t_field_types(id, field_t01, field_t02, field_t03, field_t04, field_t05, field_t06, field_t07, field_t08) values ( #{id}, #{fieldT01}, #{fieldT02}, #{fieldT03}, #{fieldT04}, #{fieldT05}, #{fieldT06}, #{fieldT07}, #{fieldT08} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_field_types set <if test="fieldT01 != ''">field_t01 = #{fieldT01},</if> <if test="fieldT02 != null">field_t02 = #{fieldT02},</if> <if test="fieldT03 != null">field_t03 = #{fieldT03},</if> <if test="fieldT04 != null">field_t04 = #{fieldT04},</if> <if test="fieldT05 != null">field_t05 = #{fieldT05},</if> <if test="fieldT06 != null">field_t06 = #{fieldT06},</if> <if test="fieldT07 != null">field_t07 = #{fieldT07},</if> <if test="fieldT08 != null">field_t08 = #{fieldT08},</if> version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_field_types where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="FieldTypes">
+    select id as id, field_t01 as fieldT01, field_t02 as fieldT02, field_t03 as fieldT03, field_t04 as fieldT04, field_t05 as fieldT05, field_t06 as fieldT06, field_t07 as fieldT07, field_t08 as fieldT08, version as version from t_field_types where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_field_types where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="FieldTypes">
+    select id as id, field_t01 as fieldT01, field_t02 as fieldT02, field_t03 as fieldT03, field_t04 as fieldT04, field_t05 as fieldT05, field_t06 as fieldT06, field_t07 as fieldT07, field_t08 as fieldT08, version as version from t_field_types
+  </select>
+
+</mapper>
+

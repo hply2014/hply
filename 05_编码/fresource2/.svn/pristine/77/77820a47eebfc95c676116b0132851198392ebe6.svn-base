@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hhwy.fresource2.mapper.SysOrganizationMapper">
+
+  <insert id="insert" parameterType="SysOrganization">
+    insert into t_sys_organization(id, org_code, org_name, order_id, parent_id, create_time, create_user, update_time, update_user, ext_01, ext_02, ext_03, ext_04, description) values ( #{id}, #{orgCode}, #{orgName}, #{orderId}, #{parentId}, now(), #{createUser}, now(), #{createUser}, #{ext01}, #{ext02}, #{ext03}, #{ext04}, #{description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_organization set <if test="orgCode != ''">org_code = #{orgCode},</if> <if test="orgName != ''">org_name = #{orgName},</if> <if test="orderId != ''">order_id = #{orderId},</if> <if test="parentId != ''">parent_id = #{parentId},</if>  update_time = now(), <if test="updateUser != ''">update_user = #{updateUser},</if> <if test="ext01 != ''">ext_01 = #{ext01},</if> <if test="ext02 != ''">ext_02 = #{ext02},</if> <if test="ext03 != ''">ext_03 = #{ext03},</if> <if test="ext04 != ''">ext_04 = #{ext04},</if> <if test="description != ''">description = #{description},</if> version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_organization where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysOrganization">
+    select id as id, org_code as orgCode, org_name as orgName, order_id as orderId, parent_id as parentId, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, ext_01 as ext01, ext_02 as ext02, ext_03 as ext03, ext_04 as ext04, version as version, description as description from t_sys_organization where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_organization where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysOrganization">
+    select id as id, org_code as orgCode, org_name as orgName, order_id as orderId, parent_id as parentId, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, ext_01 as ext01, ext_02 as ext02, ext_03 as ext03, ext_04 as ext04, version as version, description as description from t_sys_organization
+  </select>
+
+</mapper>
+

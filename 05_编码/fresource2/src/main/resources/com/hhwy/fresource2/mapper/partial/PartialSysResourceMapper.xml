@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hhwy.fresource2.mapper.partial.PartialSysResourceMapper">
+
+  <insert id="insert" parameterType="SysResource">
+    insert into t_sys_resource(id, resource_code, resource_name, icon, resource_uri, resource_type, parent_id, order_id, access_uris, no_access_uris, enabled, ext_01, ext_02, ext_03, ext_04, description) values ( #{id}, #{resourceCode}, #{resourceName}, #{icon}, #{resourceUri}, #{resourceType}, #{parentId}, #{orderId}, #{accessUris}, #{noAccessUris}, #{enabled}, #{ext01}, #{ext02}, #{ext03}, #{ext04}, #{description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_resource set resource_code = #{resourceCode}, resource_name = #{resourceName}, icon = #{icon}, resource_uri = #{resourceUri}, resource_type = #{resourceType}, parent_id = #{parentId}, order_id = #{orderId}, access_uris = #{accessUris}, no_access_uris = #{noAccessUris}, enabled = #{enabled}, ext_01 = #{ext01}, ext_02 = #{ext02}, ext_03 = #{ext03}, ext_04 = #{ext04}, description = #{description}, version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_resource where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysResource">
+    select id as id, resource_code as resourceCode, resource_name as resourceName, icon as icon, resource_uri as resourceUri, resource_type as resourceType, parent_id as parentId, order_id as orderId, access_uris as accessUris, no_access_uris as noAccessUris, enabled as enabled, ext_01 as ext01, ext_02 as ext02, ext_03 as ext03, ext_04 as ext04, version as version, description as description from t_sys_resource where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_resource where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="SysResource">
+    select id as id, resource_code as resourceCode, resource_name as resourceName, icon as icon, resource_uri as resourceUri, resource_type as resourceType, parent_id as parentId, order_id as orderId, access_uris as accessUris, no_access_uris as noAccessUris, enabled as enabled, ext_01 as ext01, ext_02 as ext02, ext_03 as ext03, ext_04 as ext04, version as version, description as description from t_sys_resource
+  </select>
+
+</mapper>
+
