@@ -66,7 +66,7 @@
                             <td><c:out value="${contractChange.managementRate}" /></td>
                             <td><c:out value="${contractChange.changeAmount}" /></td>
                             <td><c:out value="${contractChange.createUser}" /></td>
-                            <td><fmt:formatDate value="${contractChange.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${contractChange.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${contractChange.description}" /></td>
                         </tr>
                     </c:forEach>

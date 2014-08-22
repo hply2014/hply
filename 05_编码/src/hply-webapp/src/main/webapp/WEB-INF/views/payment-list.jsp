@@ -67,7 +67,7 @@
                             <td><c:out value="${payment.payType}" /></td>
                             <td><c:out value="${payment.amount}" /></td>
                             <td><c:out value="${payment.createUser}" /></td>
-                            <td><fmt:formatDate value="${payment.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${payment.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${payment.description}" /></td>
                             <%--
 				<td><c:if test="${payment.status == 1 }">

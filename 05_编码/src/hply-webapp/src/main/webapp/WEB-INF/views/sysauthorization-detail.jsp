@@ -47,7 +47,7 @@
                     <sf:label path="createTime" cssClass="col-sm-2 control-label">创建时间</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${sysAuthorization.createTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${sysAuthorization.createTime}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>

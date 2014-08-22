@@ -175,7 +175,7 @@ public class Project implements Serializable {
       * 项目状态
       */
       
-      private Integer projectStatus;
+      private String projectStatus;
       
     /**
       * [trice]，
@@ -537,7 +537,7 @@ public class Project implements Serializable {
       * [project_status] getter，
       * 项目状态
       */
-    	public Integer getProjectStatus () {
+    	public String getProjectStatus () {
     		return this.projectStatus;
     	}
 
@@ -545,7 +545,7 @@ public class Project implements Serializable {
       * [project_status] setter，
       * 项目状态
       */
-    	public void setProjectStatus(Integer projectStatus) {
+    	public void setProjectStatus(String projectStatus) {
     		this.projectStatus = projectStatus;
     	}
     /**

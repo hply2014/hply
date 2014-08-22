@@ -33,7 +33,7 @@
                     <sf:label path="trice" cssClass="col-sm-2 control-label">时间</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${projectSummary.trice}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${projectSummary.trice}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>
@@ -312,7 +312,7 @@
                     <sf:label path="createTime" cssClass="col-sm-2 control-label">创建时间，数据生成时间</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${projectSummary.createTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${projectSummary.createTime}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>

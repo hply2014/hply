@@ -67,7 +67,7 @@ public class ProjectServiceTest extends BaseJUnit4TestCase {
 			project.setDutyPaidCode(this.getRandomString());
 
             project.setCapitalOccupied(this.getRandomDouble()); 
-            project.setProjectStatus(this.getRandomInt());         
+            project.setProjectStatus(this.getRandomString());         
             project.setTrice(this.getRandomDate());         
             project.setCreateTime(this.getRandomDate()); 
 

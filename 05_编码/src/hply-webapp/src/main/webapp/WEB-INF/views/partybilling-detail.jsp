@@ -60,7 +60,7 @@
                     <sf:label path="trice" cssClass="col-sm-2 control-label">开票时间</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     <sf:label path="step1Time" cssClass="col-sm-2 control-label">审核时间</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                     <sf:label path="createTime" cssClass="col-sm-2 control-label">创建时间</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${partyBilling.createTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${partyBilling.createTime}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                     <sf:label path="updateTime" cssClass="col-sm-2 control-label">修改时间</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${partyBilling.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${partyBilling.updateTime}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>

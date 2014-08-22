@@ -72,7 +72,7 @@
                             <td><c:out value="${collections.bankAccount}" /></td>
                             <td><c:out value="${collections.bankName}" /></td>
                             <td><c:out value="${collections.createUser}" /></td>
-                            <td><fmt:formatDate value="${collections.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${collections.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${collections.description}" /></td>
                             <%--
                             <td><c:if test="${collections.status == 1 }">

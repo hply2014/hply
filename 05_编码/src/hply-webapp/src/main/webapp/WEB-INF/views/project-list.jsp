@@ -79,7 +79,7 @@
                                     <c:out value="${project.dutyPaidAmount}" /><span></td>
                             <td><c:out value="${project.createUser}" /></td>
                             <td title="<c:out value="${project.createUser}" />"><fmt:formatDate
-                                    value="${project.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                                    value="${project.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><shiro:hasPermission name="`project_modify`">
                                     <a href="<s:url value="/project/modify/${project.id }" />">修改</a>
                                 </shiro:hasPermission></td>

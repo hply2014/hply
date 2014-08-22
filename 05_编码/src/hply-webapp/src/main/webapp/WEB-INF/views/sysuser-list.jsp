@@ -63,7 +63,7 @@
                             <td><c:out value="${sysUser.organizationId}" /></td>
                             <td><c:out value="${sysUser.position}" /></td>
                             <td><c:out value="${sysUser.lastLoginIp}" /></td>
-                            <td><fmt:formatDate value="${sysUser.lastLoginTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${sysUser.lastLoginTime}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${sysUser.logined}" /></td>
                             <td><c:out value="${sysUser.enabled ? '启用' : '禁用'}" /></td>
                             <td><c:out value="${sysUser.updateUser}" /></td>

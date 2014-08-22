@@ -75,7 +75,7 @@
 							<div class="col-sm-9">
 								<p class="form-control-static">
 									<fmt:formatDate value="${sysUser.lastLoginTime}"
-										pattern="yyyy-MM-dd HH:mm:ss" />
+										pattern="yyyy-MM-dd" />
 								</p>
 							</div>
 						</div>
@@ -130,7 +130,7 @@
 							<div class="col-sm-9">
 								<p class="form-control-static">
 									<fmt:formatDate value="${sysUser.createTime}"
-										pattern="yyyy-MM-dd HH:mm:ss" />
+										pattern="yyyy-MM-dd" />
 								</p>
 							</div>
 						</div>
@@ -149,7 +149,7 @@
 							<div class="col-sm-9">
 								<p class="form-control-static">
 									<fmt:formatDate value="${sysUser.updateTime}"
-										pattern="yyyy-MM-dd HH:mm:ss" />
+										pattern="yyyy-MM-dd" />
 								</p>
 							</div>
 						</div>

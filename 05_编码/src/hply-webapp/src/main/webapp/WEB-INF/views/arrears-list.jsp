@@ -74,7 +74,7 @@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"
                             <td><span <c:if test="${arrears.interestRate > 0 }">title="此笔费用计算利息" class="label label-default"</c:if>><c:out value="${arrears.amount >=0 ? arrears.amount : 0.0}" /></span></td>
                             <td><c:out value="${arrears.amount < 0 ? arrears.amount*-1 : 0.0}" /></td>
                             <td><c:out value="${arrears.interestAmount}" /></td>
-                            <td><fmt:formatDate value="${arrears.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${arrears.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${arrears.createUser}" /></td>
                             <td><c:out value="${arrears.description}" /></td>
                             <%--

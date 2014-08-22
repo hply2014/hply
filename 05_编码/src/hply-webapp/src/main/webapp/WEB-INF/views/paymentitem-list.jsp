@@ -68,7 +68,7 @@
                                         value="${paymentItem.itemName}" /></a></td>
                             <td><fmt:formatNumber value="${paymentItem.reimbursementCap}" pattern="#.00" /> %</td>
                             <td><c:out value="${paymentItem.createUser}" /></td>
-                            <td><fmt:formatDate value="${paymentItem.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${paymentItem.createTime}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${paymentItem.description}" /></td>
                             <td><shiro:hasPermission name="`payment-item`">
                                     <a

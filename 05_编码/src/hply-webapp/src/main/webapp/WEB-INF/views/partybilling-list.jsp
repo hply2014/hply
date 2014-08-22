@@ -68,10 +68,10 @@
                             <td><c:out value="${partyBilling.taxRate}" />%</td>
                             <td><c:out value="${partyBilling.amount}" /></td>
                             <td><c:out value="${partyBilling.createUser}" /></td>
-                            <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" /></td>
                             <td>${partyBilling.stepStatus == 1 ? '已' : '未'}审核</td>
                             <td><c:if test="${not empty partyBilling.step1User}">${partyBilling.step1User}：“${partyBilling.step1Idea}”<br /><fmt:formatDate
-                                        value="${partyBilling.step1Time}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
                             <td><c:if test="${ partyBilling.stepStatus != 1 }">
                                     <shiro:hasPermission name="`partybilling_step1`">

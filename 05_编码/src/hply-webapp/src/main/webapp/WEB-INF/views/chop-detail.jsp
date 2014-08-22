@@ -79,7 +79,7 @@
 	<div class="form-group">
 		<sf:label path="applyTime" cssClass="col-sm-2 control-label">申请时间</sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${chop.applyTime}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+			<p class="form-control-static"><fmt:formatDate value="${chop.applyTime}" pattern="yyyy-MM-dd" /></p>
 		</div>
 	</div>
 
@@ -107,7 +107,7 @@
 	<div class="form-group">
 		<sf:label path="step1Time" cssClass="col-sm-2 control-label">事业部/项目部审核时间</sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${chop.step1Time}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+			<p class="form-control-static"><fmt:formatDate value="${chop.step1Time}" pattern="yyyy-MM-dd" /></p>
 		</div>
 	</div>
 
@@ -128,7 +128,7 @@
 	<div class="form-group">
 		<sf:label path="step2Time" cssClass="col-sm-2 control-label">财务部审核时间</sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${chop.step2Time}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+			<p class="form-control-static"><fmt:formatDate value="${chop.step2Time}" pattern="yyyy-MM-dd" /></p>
 		</div>
 	</div>
 
@@ -149,7 +149,7 @@
 	<div class="form-group">
 		<sf:label path="step3Time" cssClass="col-sm-2 control-label">经办时间</sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${chop.step3Time}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+			<p class="form-control-static"><fmt:formatDate value="${chop.step3Time}" pattern="yyyy-MM-dd" /></p>
 		</div>
 	</div>
 

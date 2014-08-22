@@ -134,7 +134,7 @@
                     <sf:label path="dutyPaidTime" cssClass="col-sm-2 control-label">印花税上交时间</sf:label>
                     <div class="col-sm-4">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${project.dutyPaidTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${project.dutyPaidTime}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                     <sf:label path="dutyPaidAmount" cssClass="col-sm-2 control-label">印花税上交金额</sf:label>
@@ -186,7 +186,7 @@
                     <sf:label path="createTime" cssClass="col-sm-2 control-label">创建时间</sf:label>
                     <div class="col-sm-4">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${project.createTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${project.createTime}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
                     <sf:label path="updateTime" cssClass="col-sm-2 control-label">修改时间</sf:label>
                     <div class="col-sm-4">
                         <p class="form-control-static">
-                            <fmt:formatDate value="${project.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${project.updateTime}" pattern="yyyy-MM-dd" />
                         </p>
                     </div>
                 </div>

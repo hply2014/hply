@@ -65,7 +65,7 @@
 	<div class="form-group">
 		<sf:label path="fieldT06" cssClass="col-sm-2 control-label"></sf:label>
 		<div class="col-sm-10">
-			<p class="form-control-static"><fmt:formatDate value="${fieldTypes.fieldT06}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+			<p class="form-control-static"><fmt:formatDate value="${fieldTypes.fieldT06}" pattern="yyyy-MM-dd" /></p>
 		</div>
 	</div>
 
