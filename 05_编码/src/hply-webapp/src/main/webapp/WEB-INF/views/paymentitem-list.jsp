@@ -20,7 +20,7 @@
             <strong>${paymentItem.id }</strong> ，${delMessage}
         </div>
     </c:if>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>付款科目</strong>（
             <c:out value="${list.size()}" />

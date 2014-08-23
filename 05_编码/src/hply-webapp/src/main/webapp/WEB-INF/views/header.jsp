@@ -17,11 +17,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${page_title}- 工程项目核算系统</title>
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />">
+<link rel="stylesheet" href="<s:url value="/assets/bootstrap/css/bootstrap-theme1.min.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap-datepicker/css/datepicker3.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/ui.fancytree.css" />">
-<%--
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap-select/css/bootstrap-select.css" />">
- --%>
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap-icheck/skins/all.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/select2/3.5.1/select2.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/select2/3.5.1/select2-bootstrap.css" />">

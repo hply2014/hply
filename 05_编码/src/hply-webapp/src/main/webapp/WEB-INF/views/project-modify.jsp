@@ -2,7 +2,7 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>${page_title}</strong>
         </div>
@@ -46,19 +46,22 @@
                                 <p class="help-block" />
                             </div>
                             <label for="contractAmount" class="col-sm-2 control-label">合同金额</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="contractAmount" placeholder="合同金额" />
                                 <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="managementRate" class="col-sm-2 control-label">管理费率（%）</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="managementRate" placeholder="管理费率" />
                                 <p class="help-block" />
                             </div>
                             <label for="managementPlanAmount" class="col-sm-2 control-label">应收管理费</label>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="managementPlanAmount" placeholder="应收管理费" />
                                 <p class="help-block" />
                             </div>

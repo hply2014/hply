@@ -36,6 +36,16 @@ public class ProjectSummaryController {
 		model.addAttribute("list", service.getAll());
 		return JSP_PAGE_LIST;
 	}
+	
+	/*
+	 * 列表页面
+	 */
+	@RequestMapping(value = "/full", method = RequestMethod.GET)
+	public String listFull(Model model) {
+		model.addAttribute("page_title", "多项目汇总");
+		model.addAttribute("list", service.getAll());
+		return "projectsummary-list-full";
+	}
 
 	/*
 	 * 详情页面

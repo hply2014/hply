@@ -2,7 +2,7 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>${page_title}</strong>
         </div>
@@ -30,15 +30,6 @@
 
             <sf:form modelAttribute="contractChange" cssClass="form-horizontal" role="form">
                 <div class="form-group">
-                    <sf:label path="projectId" cssClass="col-sm-2 control-label">项目ID</sf:label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static">
-                            <c:out value="${contractChange.projectId}" />
-                        </p>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <sf:label path="csaCode" cssClass="col-sm-2 control-label">增补协议编号</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
@@ -46,12 +37,21 @@
                         </p>
                     </div>
                 </div>
+                <div class="form-group">
+                    <sf:label path="projectId" cssClass="col-sm-2 control-label">项目名称</sf:label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">
+                            <c:out value="${contractChange.projectId}" />
+                        </p>
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <sf:label path="managementRate" cssClass="col-sm-2 control-label">管理费率</sf:label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <fmt:formatNumber pattern="#,##0.00" value="${contractChange.managementRate}" />
+                            <fmt:formatNumber pattern="#,##0.00" value="${contractChange.managementRate}" />%
                         </p>
                     </div>
                 </div>
