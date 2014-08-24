@@ -51,7 +51,18 @@ public class ProjectSummaryService {
 	public void delete(String id) {
 		mapper.delete(id);
 	}
+	
+	public int getRowCount() {
+		return mapper.getRowCount();
+	}
 
+	/**
+	 * 00_多项目汇总，分页
+	 */
+	public List<ProjectSummary> getAll(int pageIndex, int pageSize) {
+		return mapper.getAll(pageIndex, pageSize);
+	}
+	
 	/**
 	 * 00_多项目汇总，根据主键获取一个对象
 	 */
@@ -60,9 +71,9 @@ public class ProjectSummaryService {
 	}
 
 	/**
-	 * 00_多项目汇总，获取所有对象
-	 */
-	public List<ProjectSummary> getAll() {
-		return mapper.getAll();
-	}
+//	 * 00_多项目汇总，获取所有对象
+//	 */
+//	public List<ProjectSummary> getAll() {
+//		return mapper.getAll();
+//	}
 }

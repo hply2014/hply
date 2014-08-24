@@ -164,6 +164,9 @@ public class APIController {
 	// return "应收管理费修改成功，额度： " + data;
 	// }
 
+	/*
+	 * 
+	 */
 	@RequestMapping(value = "/suprplusamounts/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getSurplusAmounts(@PathVariable String projectId) {
 		// 计算的工程款剩余
@@ -172,14 +175,18 @@ public class APIController {
 		// 计算的往来欠款总额
 		Double val2 = arrearsService.getTotalByProject(projectId);
 		double d2 = val2 != null ? val2.doubleValue() : 0;
+		
+		//计算工程款结存
+		double j0 = collectionsService.getTotalCollectionsAmount(projectId) - paymentService.getToalPayment(projectId);
 
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
-		return dformat.format(d1) + "|" + dformat.format(d2);
+		
+		// 工程款剩余（合同款 - 收款）|往来欠款总额|工程款结余（收-付）
+		return dformat.format(d1) + "|" + dformat.format(d2) + "|" + dformat.format(j0);
 	}
 
 	@RequestMapping(value = "/alllimitamount/{projectId}/{itemId}", method = RequestMethod.POST)
 	public @ResponseBody String getAllLimitAmount(@PathVariable String projectId, @PathVariable String itemId) {
-		// 计算某工程指定期间费用项目的限额
 
 		// 已审核通过的开票额
 		double d1 = paryBillingService.getCheckedAmount(projectId);
@@ -187,6 +194,7 @@ public class APIController {
 		// 该期间费用的累计报销额
 		double d2 = paymentService.getTotalPaymentByItem(projectId, itemId);
 
+		// 计算某工程指定期间费用项目的限额
 		PaymentItem pi = paymentItemService.get(itemId);
 		double limitA = d1 * pi.getReimbursementCap() / 100;
 

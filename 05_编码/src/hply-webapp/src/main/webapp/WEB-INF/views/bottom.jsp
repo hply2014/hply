@@ -63,6 +63,10 @@
 		
 		$("[data-toggle]").tooltip();
 		$(".select2").select2();
+		
+		$(".pager .disabled a").click(function() {
+			return false;
+		});
 	});
 </script>
 </body>

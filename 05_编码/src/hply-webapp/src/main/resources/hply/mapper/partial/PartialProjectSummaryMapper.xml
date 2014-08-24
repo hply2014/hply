@@ -65,7 +65,7 @@
 	<select id="getRowCount" resultType="int">
 		select count(*) from t_project_summary
 	</select>
-
+	
 	<select id="getAll" resultType="ProjectSummary">
 		select id as id, trice as trice, description as description, project_id as projectId, organization_id as organizationId,
 		project_code as projectCode, project_name as projectName, contract_amount as contractAmount, change_amount as
@@ -79,7 +79,7 @@
 		taxRealAmount, tax_total_amount as taxTotalAmount, tax_owe_amount as taxOweAmount, arrears_amount as arrearsAmount,
 		expected_value as expectedValue, profile_point as profilePoint, version as version, create_time as createTime,
 		serial_id as serialId, table_name as tableName, change_total_amount as changeTotalAmount from t_project_summary order
-		by serial_id desc
+		by serial_id desc limit #{pageSize} offset #{pageIndex}
 	</select>
 
 </mapper>

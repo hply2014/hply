@@ -47,7 +47,6 @@
                             </div>
                             <label for="contractAmount" class="col-sm-2 control-label">合同金额</label>
                             <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="contractAmount" placeholder="合同金额" />
                                 <p class="help-block" />
                             </div>
@@ -55,13 +54,11 @@
                         <div class="row">
                             <label for="managementRate" class="col-sm-2 control-label">管理费率（%）</label>
                             <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="managementRate" placeholder="管理费率" />
                                 <p class="help-block" />
                             </div>
                             <label for="managementPlanAmount" class="col-sm-2 control-label">应收管理费</label>
                             <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="managementPlanAmount" placeholder="应收管理费" />
                                 <p class="help-block" />
                             </div>
@@ -286,11 +283,9 @@
 				},
 				contractAmount : {
 					number : true,
-					min : 1
 				},
 				settlementAmount : {
 					number : true,
-					min : 0
 				},
 				dutyPaidTime : {},
 				dutyPaidAmount : {
@@ -303,11 +298,9 @@
 				description : {},
 				managementPlanAmount : {
 					number : true,
-					min : 0
 				},
 				taxPlanAmount : {
 					number : true,
-					min : 0
 				},
 			}
 		});

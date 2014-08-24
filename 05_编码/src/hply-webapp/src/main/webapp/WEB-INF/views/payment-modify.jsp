@@ -112,7 +112,10 @@
                                 工程欠款：<span id="d1">0000.00</span>
                             </p>
                             <p>
-                                往来欠款：<span id="d2">0000.00</span>（本金）
+                                往来欠款：<span id="d2">0000.00</span>
+                            </p>
+                            <p>
+                                工程款结存：<span id="j0">0000.00</span>
                             </p>
                         </div>
                     </div>
@@ -192,13 +195,13 @@
 		}
 
 		function refreshOweAmount() {
-			//获取工程欠款余额及往来欠款总额
+			//获取工程欠款余额，往来欠款总额和工程款结存
 			$.post("<s:url value='/api/suprplusamounts/' />" + jQuery("#projectId").val(), {}, function(result) {
 				var arr = result.split("|");
-				if (arr.length >= 2) {
-					var arr = result.split("|");
+				if (arr.length >= 3) {
 					$("#d1").html(arr[0]);
 					$("#d2").html(arr[1]);
+					$("#j0").html(arr[2]);
 				}
 			}, "text");
 

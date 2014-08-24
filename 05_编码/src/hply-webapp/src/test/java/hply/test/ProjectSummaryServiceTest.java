@@ -111,7 +111,7 @@ public class ProjectSummaryServiceTest extends BaseJUnit4TestCase {
 		System.out.println("写入：" + objectCount + ", 修改：" + updateCount + ", 删除："
 				+ deleteCount + "\n");
 
-		List<ProjectSummary> list = service.getAll();
+		List<ProjectSummary> list = service.getAll(0, 10);
 		for (ProjectSummary obj : list) {
 			System.out.println(obj);
 		}

@@ -5,7 +5,12 @@
   
 package hply.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
+
+import hply.domain.Project;
+import hply.domain.ProjectSummary;
 import hply.mapper.partial.PartialProjectSummaryMapper;
 
 

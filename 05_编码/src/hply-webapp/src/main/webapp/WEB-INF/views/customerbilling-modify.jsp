@@ -13,7 +13,6 @@
                         <div class="row">
                             <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
                             <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
                                 <p class="help-block" />
                             </div>
@@ -101,7 +100,6 @@
 			rules : {
 				projectId : {},
 				invoiceCode : {
-					required : true
 				},
 				invoiceType : {},
 				amount : {

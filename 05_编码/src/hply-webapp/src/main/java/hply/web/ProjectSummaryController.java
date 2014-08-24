@@ -1,8 +1,12 @@
 ﻿package hply.web;
 
+import java.util.List;
+
 import hply.core.Utility;
+import hply.domain.Project;
 import hply.domain.ProjectSummary;
 import hply.service.ProjectSummaryService;
+import hply.service.SysParameterService;
 
 import javax.validation.Valid;
 
@@ -13,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -21,6 +26,9 @@ public class ProjectSummaryController {
 
 	@Autowired
 	private ProjectSummaryService service;
+	
+	@Autowired
+	private SysParameterService paramService;
 
 	public static final String URI = "/projectsummary";
 	public static final String JSP_PAGE_LIST = "projectsummary-list";
@@ -31,9 +39,21 @@ public class ProjectSummaryController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model) {
+	public String list(@RequestParam(value="p", required = false) Integer p, Model model) {
 		model.addAttribute("page_title", "多项目汇总");
-		model.addAttribute("list", service.getAll());
+
+		int pageSize = paramService.getParamIntValue("page_size", 30);
+		int rowCount = service.getRowCount();
+		int pageIndex = p != null ? p.intValue() : 0;
+		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
+		model.addAttribute("rowCount", rowCount);
+		model.addAttribute("pageIndex", pageIndex);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("currentPageStarted", pageIndex * pageSize);
+
+		List<ProjectSummary> list = service.getAll(pageIndex * pageSize, pageSize);
+		
+		model.addAttribute("list", list);
 		return JSP_PAGE_LIST;
 	}
 	
@@ -43,7 +63,7 @@ public class ProjectSummaryController {
 	@RequestMapping(value = "/full", method = RequestMethod.GET)
 	public String listFull(Model model) {
 		model.addAttribute("page_title", "多项目汇总");
-		model.addAttribute("list", service.getAll());
+		model.addAttribute("list", service.getAll(0, 100));
 		return "projectsummary-list-full";
 	}
 

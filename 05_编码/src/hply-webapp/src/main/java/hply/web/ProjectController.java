@@ -58,8 +58,9 @@ public class ProjectController {
 		model.addAttribute("rowCount", rowCount);
 		model.addAttribute("pageIndex", pageIndex);
 		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("currentPageStarted", pageIndex * pageSize);
 
-		List<Project> list = service.getAll(pageIndex * pageSize, 30);
+		List<Project> list = service.getAll(pageIndex * pageSize, pageSize);
 		for (Project item : list) {
 			SysOrganization org = orgService.get(item.getOrganizationId());
 			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
