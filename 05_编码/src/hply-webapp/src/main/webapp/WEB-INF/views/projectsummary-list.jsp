@@ -21,12 +21,13 @@
         </div>
     </c:if>
     <div class="panel panel-primary">
-        <div class="panel-heading">
-            <strong>多项目汇总</strong>（
+        <div class="panel-heading"><strong>多项目汇总</strong>（
             <c:out value="${list.size()}" />
-            条数据）<a target="blank" href="<s:url value='/projectsummary/full' />">新窗口打开</a>
+            条数据）
         </div>
         <div class="panel-body">
+        <a target="blank" href="<s:url value='/projectsummary/full' />" class="btn btn-link"><span
+                            class="glyphicon glyphicon-share-alt"></span> 新窗口打开</a>
             <table class="table table-hover">
                 <thead>
                     <tr>
