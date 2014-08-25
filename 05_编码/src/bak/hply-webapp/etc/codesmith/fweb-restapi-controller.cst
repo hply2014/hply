@@ -1,0 +1,95 @@
+﻿<%-- 
+Name:
+Author: 成七一
+Description:Service Class GENERATE TEMPLATE FOR FWEB（FOREVER WEB RAPID FRAMEWORK）
+CreateTime：2014年7月17日 13:43:50
+--%>
+
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Assembly Name="System" %>
+<%@ Import Namespace="System" %>
+<%@ Map Name="JavaAlias" Src="mysql-java-alias" %>
+
+<%@ Template Language="C#" TargetLanguage="Java" %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Database" Description="只能选择一个表." %>
+<%@ Property Name="NameSpace" Type="System.String" Category="Context" Default="org.hhwy.fweb1" %>
+<%@ Property Name="Author" Type="System.String" Category="Context" Default="cqiyi" %>
+package <%=NameSpace%>.restapi;
+
+import java.util.List;
+
+import <%=NameSpace%>.domain.<%=GetDomainClassName()%>;
+import <%=NameSpace%>.service.<%=GetDomainClassName()%>Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+@Controller
+@RequestMapping(value = "/api", produces = "application/json;charset=UTF-8")
+public class <%=GetDomainClassName()%>RestAPIController {
+    
+	@Autowired
+    private <%=GetDomainClassName()%>Service service;
+    
+    @RequestMapping(value = "/<%=GetDomainUri()%>", method = RequestMethod.GET)
+	public @ResponseBody List<<%=GetDomainClassName()%>> get() {
+		return service.getAll();
+	}
+
+	@RequestMapping(value = "/<%=GetDomainUri()%>/{id}", method = RequestMethod.GET)
+	public @ResponseBody <%=GetDomainClassName()%> get(@PathVariable String id) {
+		return service.get(id);
+	}
+
+	@RequestMapping(value = "/<%=GetDomainUri()%>/{id}", method = RequestMethod.PUT)
+	public @ResponseBody String put(@PathVariable <%=GetDomainClassName()%> <%=GetDomainVariableName()%>) {
+		service.insert(<%=GetDomainVariableName()%>);
+		return "OK";
+	}
+    
+	@RequestMapping(value = "/<%=GetDomainUri()%>/{id}", method = RequestMethod.POST)
+	public @ResponseBody String post(@PathVariable <%=GetDomainClassName()%> <%=GetDomainVariableName()%>) {
+		service.update(<%=GetDomainVariableName()%>);
+		return "OK";
+	}
+
+	@RequestMapping(value = "/<%=GetDomainUri()%>/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody String delete(@PathVariable String id) {
+		service.delete(id);
+		return "OK";
+	}
+}
+
+<script runat="template">
+    public override string GetFileName() {
+        return GetDomainClassName() + "Mapper.java";
+    }
+    
+    public string GetDomainClassName() {
+        return StringUtil.ToPascalCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetDomainVariableName() {
+        return StringUtil.ToCamelCase(SourceTable.Name.TrimStart("t_".ToCharArray()));
+    }
+    
+    public string GetDomainUri() {
+        return StringUtil.ToPascalCase(SourceTable.Name.TrimStart("t_".ToCharArray())).ToLower();
+    }
+    
+    public string GetJavaType(ColumnSchema col) {
+        try{
+            return JavaAlias[col.NativeType];
+        }catch(Exception ex){
+            return col.NativeType + "[N/A]";
+        }
+    }
+</script>

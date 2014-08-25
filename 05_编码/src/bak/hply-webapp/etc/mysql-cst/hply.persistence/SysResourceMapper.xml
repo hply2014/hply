@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.persistence.SysResourceMapper">
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="hply.domain.SysResource">
+    insert into t_sys_resource(ID, ResCode, ResName, Icon, ResUrl, ResType, OrderBY, ParentID, Enabled, Description) values ( #{ID}, #{ResCode}, #{ResName}, #{Icon}, #{ResUrl}, #{ResType}, #{OrderBY}, #{ParentID}, #{Enabled}, #{Description} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_resource set ResCode = #{ResCode}, ResName = #{ResName}, Icon = #{Icon}, ResUrl = #{ResUrl}, ResType = #{ResType}, OrderBY = #{OrderBY}, ParentID = #{ParentID}, Enabled = #{Enabled}, Description = #{Description} where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_resource where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="hply.domain.SysResource">
+    select * from t_sys_resource where id = #{id}
+  </select>
+
+  <select id="getAll" resultType="hply.domain.SysResource">
+    select * from t_sys_resource
+  </select>
+
+</mapper>
+
+

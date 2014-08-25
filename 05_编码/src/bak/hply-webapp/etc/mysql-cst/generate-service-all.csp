@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="User Id=root;Host=localhost;Database=hplydb_new;password=qqwQQW" />
+  </variables>
+  <propertySets>
+  
+    <propertySet name="ArrearsService.java" output="hply.service\ArrearsService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_arrears</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+	
+    <propertySet name="ChopService.java" output="hply.service\ChopService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_chop</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+	
+    <propertySet name="CollectionsService.java" output="hply.service\CollectionsService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_collections</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+
+	
+    <propertySet name="ContractSupplementalAgreementService.java" output="hply.service\ContractSupplementalAgreementService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_contract_supplemental_agreement</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="CustomerBillingService.java" output="hply.service\CustomerBillingService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_customer_billing</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="InformationService.java" output="hply.service\InformationService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_information</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="PartyBillingService.java" output="hply.service\PartyBillingService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_party_billing</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="PaymentService.java" output="hply.service\PaymentService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_payment</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="PaymentItemService.java" output="hply.service\PaymentItemService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_payment_item</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="ProfileService.java" output="hply.service\ProfileService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_profile</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="ProjectService.java" output="hply.service\ProjectService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_project</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysAuthorizationService.java" output="hply.service\SysAuthorizationService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_authorization</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysOrganizationService.java" output="hply.service\SysOrganizationService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_organization</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysParameterService.java" output="hply.service\SysParameterService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_parameter</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysResourceService.java" output="hply.service\SysResourceService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_resource</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysUserService.java" output="hply.service\SysUserService.java" template="generate-service.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_user</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.service</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+  </propertySets>
+</codeSmith>

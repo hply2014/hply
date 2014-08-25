@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="User Id=root;Host=localhost;Database=hplydb_new;password=qqwQQW" />
+  </variables>
+  <propertySets>
+  
+    <propertySet name="ArrearsMapper.java" output="hply.persistence\ArrearsMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_arrears</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+	
+    <propertySet name="ChopMapper.java" output="hply.persistence\ChopMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_chop</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+	
+    <propertySet name="CollectionsMapper.java" output="hply.persistence\CollectionsMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_collections</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+
+	
+    <propertySet name="ContractSupplementalAgreementMapper.java" output="hply.persistence\ContractSupplementalAgreementMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_contract_supplemental_agreement</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="CustomerBillingMapper.java" output="hply.persistence\CustomerBillingMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_customer_billing</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="InformationMapper.java" output="hply.persistence\InformationMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_information</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="PartyBillingMapper.java" output="hply.persistence\PartyBillingMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_party_billing</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="PaymentMapper.java" output="hply.persistence\PaymentMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_payment</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="PaymentItemMapper.java" output="hply.persistence\PaymentItemMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_payment_item</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="ProfileMapper.java" output="hply.persistence\ProfileMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_profile</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="ProjectMapper.java" output="hply.persistence\ProjectMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_project</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysAuthorizationMapper.java" output="hply.persistence\SysAuthorizationMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_authorization</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysOrganizationMapper.java" output="hply.persistence\SysOrganizationMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_organization</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysParameterMapper.java" output="hply.persistence\SysParameterMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_parameter</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysResourceMapper.java" output="hply.persistence\SysResourceMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_resource</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+    <propertySet name="SysUserMapper.java" output="hply.persistence\SysUserMapper.java" template="generate-mapper-java.cst">
+      <property name="SourceTable">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+        <table>
+      <owner />
+      <name>t_sys_user</name>
+    </table>
+      </property>
+      <property name="NameSpace">hply.persistence</property>
+      <property name="Author">ChengQiyi</property>
+    </propertySet>
+	
+  </propertySets>
+</codeSmith>
