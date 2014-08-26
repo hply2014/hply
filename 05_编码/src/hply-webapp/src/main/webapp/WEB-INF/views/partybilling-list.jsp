@@ -2,23 +2,33 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
-<c:if test="${not empty message}">
-	<div></div>
-<div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
-  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <strong><a href="<s:url value="/partybilling/detail/${partyBilling.id }" />"> ${partyBilling.id }</a></strong> ，${message}
-</div>
-</c:if>
-<c:if test="${not empty delMessage}">
-<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
-  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <strong>${partyBilling.id }</strong> ，${delMessage}
-</div>
-</c:if>
-<div class="panel panel-primary">
-  <div class="panel-heading"><strong>甲方开票情况</strong>（共<c:out value="${rowCount}" />行
-            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
-   <div class="panel-body">
+    <c:if test="${not empty message}">
+        <div></div>
+        <div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <strong><a href="<s:url value="/partybilling/detail/${partyBilling.id }" />"> ${partyBilling.id }</a></strong>
+            ，${message}
+        </div>
+    </c:if>
+    <c:if test="${not empty delMessage}">
+        <div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <strong>${partyBilling.id }</strong> ，${delMessage}
+        </div>
+    </c:if>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <strong>甲方开票情况</strong>（ 共
+            <c:out value="${rowCount}" />
+            行
+            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>
+            ）
+        </div>
+        <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
                 <shiro:hasPermission name="`partybilling_create`">
                     <div class="btn-group">
@@ -35,8 +45,8 @@
                         <th>#</th>
                         <th>发票票号</th>
                         <th>项目名称</th>
-                        <th>税率</th>
-                        <th>发票金额</th>
+                        <th class="amount">税率</th>
+                        <th class="amount">发票金额</th>
                         <th>开票人</th>
                         <th>开票时间</th>
                         <th>审核状态</th>
@@ -57,13 +67,13 @@
                                 href="<s:url value="/partybilling/detail/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>"><c:out
                                         value="${partyBilling.invoiceCode}" /></a></td>
                             <td>${ partyBilling.projectId}</td>
-                            <td><c:out value="${partyBilling.taxRate}" />%</td>
-                            <td><c:out value="${partyBilling.amount}" /></td>
-                            <td><c:out value="${partyBilling.createUser}" /></td>
+                            <td><fmt:formatNumber value="${partyBilling.taxRate}" pattern="0.00" />%</td>
+                            <td class="amount"><fmt:formatNumber value="${partyBilling.amount}" pattern="###,###,###,###,##0.00" /></td>
+                            <td class="amount"><c:out value="${partyBilling.createUser}" /></td>
                             <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" /></td>
                             <td>${partyBilling.stepStatus == 1 ? '已' : '未'}审核</td>
-                            <td><c:if test="${not empty partyBilling.step1User}">${partyBilling.step1User}：“${partyBilling.step1Idea}”<br /><fmt:formatDate
-                                        value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
+                            <td><c:if test="${not empty partyBilling.step1User}">${partyBilling.step1User}：“${partyBilling.step1Idea}”<br />
+                                    <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
                             <td><c:if test="${ partyBilling.stepStatus != 1 }">
                                     <shiro:hasPermission name="`partybilling_step1`">
@@ -99,6 +109,7 @@
                     <div class="col-sm-2">&nbsp;</div>
                 </div>
             </c:if>
-  </div>
-</div></div>
+        </div>
+    </div>
+</div>
 <%@ include file="bottom.jsp"%>

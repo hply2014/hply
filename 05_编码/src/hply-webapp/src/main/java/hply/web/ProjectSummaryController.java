@@ -2,7 +2,10 @@
 
 import hply.core.Utility;
 import hply.domain.ProjectSummary;
+import hply.domain.SysOrganization;
+import hply.domain.SysUser;
 import hply.service.ProjectSummaryService;
+import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 
 import java.util.List;
@@ -25,6 +28,9 @@ public class ProjectSummaryController {
 
 	@Autowired
 	private ProjectSummaryService service;
+	
+	@Autowired
+	private SysOrganizationService orgService;
 
 	@Autowired
 	private SysParameterService paramService;
@@ -50,6 +56,7 @@ public class ProjectSummaryController {
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
 		List<ProjectSummary> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+
 		model.addAttribute("list", list);
 
 		return JSP_PAGE_LIST;
@@ -71,6 +78,10 @@ public class ProjectSummaryController {
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
 		List<ProjectSummary> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+		for (ProjectSummary item : list) {
+			SysOrganization org = orgService.get(item.getOrganizationId());
+			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+		}
 		model.addAttribute("list", list);
 		return "projectsummary-list-full";
 	}

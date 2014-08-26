@@ -16,7 +16,7 @@
 </div>
 </c:if>
 <div class="panel panel-primary">
-  <div class="panel-heading"><strong>客户开票情况</strong>（共<c:out value="${rowCount}" />行
+  <div class="panel-heading"><strong>客户开票情况</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
   <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -36,7 +36,7 @@
                         <th>项目名称</th>
                         <th>发票票号</th>
                         <th>发票类别</th>
-                        <th>发票金额</th>
+                        <th class="amount">发票金额</th>
                         <th>开票时间</th>
                         <th>创建用户</th>
                         <th>备注</th>
@@ -57,7 +57,7 @@
                                         value="${customerBilling.projectId}" /></a></td>
                             <td><c:out value="${customerBilling.invoiceCode}" /></td>
                             <td><c:out value="${customerBilling.invoiceType}" /></td>
-                            <td><c:out value="${customerBilling.amount}" /></td>
+                            <td class="amount"><fmt:formatNumber value="${customerBilling.amount}" pattern="###,###,###,###,##0.00" /></td>
                             <td><fmt:formatDate value="${customerBilling.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${customerBilling.createUser}" /></td>
                             <td><c:out value="${customerBilling.description}" /></td>

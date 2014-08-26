@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.fweb1.mapper.SysResourceMapper">
+
+	<insert id="insert" parameterType="SysResource">
+		insert into t_sys_resource(id, rescode, resname, icon, res_url, res_type,
+		order_by, parent_id, enabled, description) values ( #{id}, #{rescode},
+		#{resname}, #{icon}, #{resUrl}, #{resType}, #{orderBy}, #{parentId},
+		#{enabled}, #{description} )
+	</insert>
+
+	<update id="update" parameterType="map">
+		update t_sys_resource set rescode = #{rescode}, resname = #{resname}, icon =
+		#{icon}, res_url = #{resUrl}, res_type = #{resType}, order_by =
+		#{orderBy}, parent_id = #{parentId}, enabled = #{enabled}, description
+		= #{description}, version = version + 1 where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		delete from t_sys_resource where id = #{id}
+	</delete>
+
+	<select id="get" parameterType="string" resultType="SysResource">
+		select id as Id, rescode as Rescode, resname as Resname, icon as Icon,
+		res_url as ResUrl, res_type as ResType, order_by as OrderBy, parent_id
+		as ParentId, enabled as Enabled, description as Description, version
+		as Version from t_sys_resource where id = #{id}
+	</select>
+
+	<select id="getVersion" parameterType="string" resultType="int">
+		select version from t_sys_resource where id = #{id}
+	</select>
+
+	<select id="getAll" resultType="SysResource">
+		select id as Id, rescode as Rescode, resname as Resname, icon as Icon,
+		res_url as ResUrl, res_type as ResType, order_by as OrderBy, parent_id
+		as ParentId, enabled as Enabled, description as Description, version
+		as Version from t_sys_resource
+	</select>
+
+</mapper>
+

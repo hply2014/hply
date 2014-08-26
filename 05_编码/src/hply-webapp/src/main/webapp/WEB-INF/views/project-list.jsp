@@ -16,7 +16,7 @@
 </div>
 </c:if>
 <div class="panel panel-primary">
-  <div class="panel-heading"><strong>合同项目信息</strong>（共<c:out value="${rowCount}" />行
+  <div class="panel-heading"><strong>合同项目信息</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
    <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -37,10 +37,10 @@
                         <th>项目名称</th>
                         <th>所在部门</th>
                         <th>项目经理</th>
-                        <th>管理费率</th>
-                        <th>税金比率</th>
-                        <th>合同金额</th>
-                        <th>印花税上交金额</th>
+                        <th class="amount">管理费率</th>
+                        <th class="amount">税金比率</th>
+                        <th class="amount">合同金额</th>
+                        <th class="amount">印花税上交金额</th>
                         <th>登记人</th>
                         <th>登记时间</th>
                         <th></th>
@@ -62,16 +62,16 @@
                             <td><c:out value="${project.projectName}" /></td>
                             <td><c:out value="${project.organizationId}" /></td>
                             <td><c:out value='${project.manager}' /></td>
-                            <td><fmt:formatNumber value="${project.managementRate}" pattern="#0.00" />%</td>
-                            <td><fmt:formatNumber value="${project.taxRate}" pattern="#0.00" />%</td>
-                            <td><fmt:formatNumber value="${project.contractAmount}"
-                                    pattern="###,###,###,###,###0.00" />
+                            <td class="amount"><fmt:formatNumber value="${project.managementRate}" pattern="#0.00" />%</td>
+                            <td class="amount"><fmt:formatNumber value="${project.taxRate}" pattern="#0.00" />%</td>
+                            <td class="amount"><fmt:formatNumber value="${project.contractAmount}"
+                                    pattern="###,###,###,###,##0.00" />
                                 <c:if test="${not empty project.settlementAmount && project.settlementAmount > 0 }">
-                                    <br />结算：<fmt:formatNumber value="${project.settlementAmount}" pattern="###,###,###,###,###0.00" />
+                                    <br />结算：<fmt:formatNumber value="${project.settlementAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if></td>
-                            <td><span data-toggle="tooltip"
+                            <td class="amount"><span data-toggle="tooltip"
                                 title="<c:if test='${not empty project.dutyPaidTime }'>时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' /></c:if><c:if test="${not empty project.dutyPaidCode}">，收据编号：${project.dutyPaidCode}</c:if>">
-                                    <fmt:formatNumber value="${project.dutyPaidAmount}" pattern="###,###,###,###,###0.00" /><span></td>
+                                    <fmt:formatNumber value="${project.dutyPaidAmount}" pattern="###,###,###,###,##0.00" /><span></td>
                             <td><c:out value="${project.createUser}" /></td>
                             <td title="<c:out value="${project.createUser}" />"><fmt:formatDate
                                     value="${project.trice}" pattern="yyyy-MM-dd" /></td>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.mapper.partial.PartialInformationMapper">
+
+  <insert id="insert" parameterType="Information">
+    insert into t_information(id, organization_id, project_name, address, developer, epc_corporation, variety, total_area, real_name, identification, contact, subscriber, trice, create_time, create_user, update_time, update_user, description, status) values ( #{id}, #{organizationId}, #{projectName}, #{address}, #{developer}, #{epcCorporation}, #{variety}, #{totalArea}, #{realName}, #{identification}, #{contact}, #{subscriber}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_information set organization_id = #{organizationId}, project_name = #{projectName}, address = #{address}, developer = #{developer}, epc_corporation = #{epcCorporation}, variety = #{variety}, total_area = #{totalArea}, real_name = #{realName}, identification = #{identification}, contact = #{contact}, subscriber = #{subscriber}, trice = #{trice},  update_time = now(), update_user = #{updateUser}, description = #{description}, status = #{status}, version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_information where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="Information">
+    select id as id, organization_id as organizationId, project_name as projectName, address as address, developer as developer, epc_corporation as epcCorporation, variety as variety, total_area as totalArea, real_name as realName, identification as identification, contact as contact, subscriber as subscriber, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_information where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_information where id = #{id}
+  </select>
+  
+  <select id="getAll" resultType="Information">
+    select id as id, organization_id as organizationId, project_name as projectName, address as address, developer as developer, epc_corporation as epcCorporation, variety as variety, total_area as totalArea, real_name as realName, identification as identification, contact as contact, subscriber as subscriber, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_information
+  </select>
+  
+  <select id="getRowCount" resultType="int">
+    select count(*) from t_information
+  </select>
+
+  <select id="getAllPaged" parameterType="Information" resultType="Information">
+    select id as id, organization_id as organizationId, project_name as projectName, address as address, developer as developer, epc_corporation as epcCorporation, variety as variety, total_area as totalArea, real_name as realName, identification as identification, contact as contact, subscriber as subscriber, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_information limit #{pageSize} offset #{pageIndex}
+  </select>
+</mapper>
+

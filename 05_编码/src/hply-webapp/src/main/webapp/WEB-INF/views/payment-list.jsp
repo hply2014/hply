@@ -16,7 +16,7 @@
 </div>
 </c:if>
 <div class="panel panel-default">
-  <div class="panel-heading"><strong>付款情况</strong>（共<c:out value="${rowCount}" />行
+  <div class="panel-heading"><strong>付款情况</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
   <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -37,7 +37,7 @@
                         <th>项目名称</th>
                         <th>付款科目</th>
                         <th>支付方式</th>
-                        <th>付款金额</th>
+                        <th class="amount">付款金额</th>
                         <th>付款人</th>
                         <th>付款时间</th>
                         <th>备注</th>
@@ -58,7 +58,7 @@
                                         value="${payment.projectId}" /></a></td>
                             <td><c:out value="${payment.paymentItemId}" /></td>
                             <td><c:out value="${payment.payType}" /></td>
-                            <td><c:out value="${payment.amount}" /></td>
+                            <td class="amount"><fmt:formatNumber value="${payment.amount}" pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${payment.createUser}" /></td>
                             <td><fmt:formatDate value="${payment.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${payment.description}" /></td>

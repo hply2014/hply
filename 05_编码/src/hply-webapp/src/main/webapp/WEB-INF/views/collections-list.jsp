@@ -16,7 +16,7 @@
 </div>
 </c:if>
 <div class="panel panel-primary">
-  <div class="panel-heading"><strong>收款情况</strong>（共<c:out value="${rowCount}" />行
+  <div class="panel-heading"><strong>收款情况</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
  <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -37,9 +37,7 @@
                         <th>项目名称</th>
                         <th>款项来源</th>
                         <th>收款方式</th>
-                        <th>收款金额</th>
-                        <th>银行账号</th>
-                        <th>开户行名称</th>
+                        <th class="amount">收款金额</th>
                         <th>收款人</th>
                         <th>收款时间</th>
                         <th>备注</th>
@@ -60,9 +58,7 @@
                                         value="${collections.projectId}" /></a></td>
                             <td><c:out value="${collections.sourceOf}" /></td>
                             <td><c:out value="${collections.paymentType}" /></td>
-                            <td><c:out value="${collections.amount}" /></td>
-                            <td><c:out value="${collections.bankAccount}" /></td>
-                            <td><c:out value="${collections.bankName}" /></td>
+                            <td class="amount"><fmt:formatNumber value="${collections.amount}" pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${collections.createUser}" /></td>
                             <td><fmt:formatDate value="${collections.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${collections.description}" /></td>

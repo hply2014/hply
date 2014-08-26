@@ -80,6 +80,10 @@ strong, h1, h2, h3, h4 {
 	padding: 10px;
 }
 
+.amount{
+    text-align:right;
+}
+
 .fancytree-selected .fancytree-title {
 	font-style: normal;
 }

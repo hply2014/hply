@@ -16,7 +16,7 @@
 </div>
 </c:if>
  <div class="panel panel-primary">
-  <div class="panel-heading"><strong>往来欠款</strong>（共<c:out value="${rowCount}" />行
+  <div class="panel-heading"><strong>往来欠款</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
   <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -34,10 +34,10 @@
                         <th>凭证号</th>
                         <th>项目名称</th>
                         <th>款项分类</th>
+                        <th class="amount">借款金额</th>
+                        <th class="amount">还款金额</th>
+                        <th class="amount">计息</th>
                         <th>支付方式</th>
-                        <th>借款金额</th>
-                        <th>还款金额</th>
-                        <th>计息</th>
                         <th>登记时间</th>
                         <th>登记人</th>
                         <th>备注</th>
@@ -58,10 +58,10 @@
                                         value="${arrears.arrearsCode}" /></a></td>
                             <td><c:out value="${arrears.projectId}" /></td>
                             <td><c:out value="${arrears.arrearsType}" /></td>
+                            <td class="amount"><span <c:if test="${arrears.interestRate > 0 }">title="此笔费用计算利息" class="label label-default"</c:if>><fmt:formatNumber value="${arrears.amount >=0 ? arrears.amount : 0.0}" pattern="###,###,###,###,##0.00"/></span></td>
+                            <td class="amount"><fmt:formatNumber value="${arrears.amount < 0 ? arrears.amount*-1 : 0.0}" pattern="###,###,###,###,##0.00"/></td>
+                            <td class="amount"><fmt:formatNumber value="${arrears.interestAmount}" pattern="###,###,###,###,##0.00"/></td>
                             <td><c:out value="${arrears.payType}" /></td>
-                            <td><span <c:if test="${arrears.interestRate > 0 }">title="此笔费用计算利息" class="label label-default"</c:if>><c:out value="${arrears.amount >=0 ? arrears.amount : 0.0}" /></span></td>
-                            <td><c:out value="${arrears.amount < 0 ? arrears.amount*-1 : 0.0}" /></td>
-                            <td><c:out value="${arrears.interestAmount}" /></td>
                             <td><fmt:formatDate value="${arrears.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${arrears.createUser}" /></td>
                             <td><c:out value="${arrears.description}" /></td>

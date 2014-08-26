@@ -16,7 +16,7 @@
 </div>
 </c:if>
 <div class="panel panel-primary">
-  <div class="panel-heading"><strong>付款科目</strong>（共<c:out value="${rowCount}" />行
+  <div class="panel-heading"><strong>付款科目</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
     <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">

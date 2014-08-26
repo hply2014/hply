@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hhwy.fweb1.mapper.PaymentMapper">
+
+	<insert id="insert" parameterType="Payment">
+		insert into t_payment(id, project_id, ticket_code, pay_type,
+		payment_item_id, amount, bank_account, bank_name, trice, create_time,
+		create_user, update_time, update_user, description) values ( #{id},
+		#{projectId}, #{ticketCode}, #{payType}, #{paymentItemId}, #{amount},
+		#{bankAccount}, #{bankName}, #{trice}, #{createTime}, #{createUser},
+		#{updateTime}, #{updateUser}, #{description} )
+	</insert>
+
+	<update id="update" parameterType="map">
+		update t_payment set project_id = #{projectId}, ticket_code = #{ticketCode},
+		pay_type = #{payType}, payment_item_id = #{paymentItemId}, amount =
+		#{amount}, bank_account = #{bankAccount}, bank_name = #{bankName},
+		trice = #{trice}, create_time = #{createTime}, create_user =
+		#{createUser}, update_time = #{updateTime}, update_user =
+		#{updateUser}, description = #{description}, version = version + 1
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		delete from t_payment where id = #{id}
+	</delete>
+
+	<select id="get" parameterType="string" resultType="Payment">
+		select id as Id, project_id as ProjectId, ticket_code as TicketCode,
+		pay_type as PayType, payment_item_id as PaymentItemId, amount as
+		Amount, bank_account as BankAccount, bank_name as BankName, trice as
+		Trice, create_time as CreateTime, create_user as CreateUser,
+		update_time as UpdateTime, update_user as UpdateUser, description as
+		Description, version as Version from t_payment where id = #{id}
+	</select>
+
+	<select id="getVersion" parameterType="string" resultType="int">
+		select version from t_payment where id = #{id}
+	</select>
+
+	<select id="getAll" resultType="Payment">
+		select id as Id, project_id as ProjectId, ticket_code as TicketCode,
+		pay_type as PayType, payment_item_id as PaymentItemId, amount as
+		Amount, bank_account as BankAccount, bank_name as BankName, trice as
+		Trice, create_time as CreateTime, create_user as CreateUser,
+		update_time as UpdateTime, update_user as UpdateUser, description as
+		Description, version as Version from t_payment
+	</select>
+
+</mapper>
+

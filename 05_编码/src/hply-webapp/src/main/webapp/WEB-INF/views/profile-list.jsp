@@ -43,7 +43,7 @@
 						<th></th>
 						<th>#</th>
 						<th>项目名称</th>
-						<th>预计用量</th>
+						<th class="amount">预计用量</th>
 						<th>型材点</th>
 						<th>登记时间</th>
 						<th>创建用户</th>
@@ -62,7 +62,7 @@
 							<td><%=++i%></td>
 							<td><a href="<s:url value="/profile/detail/{id}"><s:param name="id" value="${profile.id }" /></s:url>"><c:out
 										value="${profile.projectId}" /></a></td>
-							<td><c:out value="${profile.expectedValue}" /></td>
+							<td class="amount"><fmt:formatNumber value="${profile.expectedValue}" pattern="###,###,###,###,##0.00" /></td>
 							<td><c:out value="${profile.profilePoint}" /></td>
 							<td><fmt:formatDate value="${profile.trice}" pattern="yyyy-MM-dd" /></td>
 							<td><c:out value="${profile.createUser}" /></td>

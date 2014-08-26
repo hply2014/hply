@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.mapper.partial.PartialArrearsMapper">
+
+  <insert id="insert" parameterType="Arrears">
+    insert into t_arrears(id, serial_id, arrears_code, project_id, funds_using, arrears_type, pay_type, amount, offset_amount, interest_amount, interest_rate, bank_account, bank_name, trice, create_time, create_user, update_time, update_user, description, status) values ( #{id}, #{serialId}, #{arrearsCode}, #{projectId}, #{fundsUsing}, #{arrearsType}, #{payType}, #{amount}, #{offsetAmount}, #{interestAmount}, #{interestRate}, #{bankAccount}, #{bankName}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_arrears set serial_id = #{serialId}, arrears_code = #{arrearsCode}, project_id = #{projectId}, funds_using = #{fundsUsing}, arrears_type = #{arrearsType}, pay_type = #{payType}, amount = #{amount}, offset_amount = #{offsetAmount}, interest_amount = #{interestAmount}, interest_rate = #{interestRate}, bank_account = #{bankAccount}, bank_name = #{bankName}, trice = #{trice},  update_time = now(), update_user = #{updateUser}, description = #{description}, status = #{status}, version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_arrears where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="Arrears">
+    select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_arrears where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_arrears where id = #{id}
+  </select>
+  
+  <select id="getAll" resultType="Arrears">
+    select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_arrears
+  </select>
+  
+  <select id="getRowCount" resultType="int">
+    select count(*) from t_arrears
+  </select>
+
+  <select id="getAllPaged" parameterType="Arrears" resultType="Arrears">
+    select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_arrears limit #{pageSize} offset #{pageIndex}
+  </select>
+</mapper>
+

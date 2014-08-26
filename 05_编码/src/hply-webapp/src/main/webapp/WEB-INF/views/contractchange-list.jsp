@@ -16,7 +16,7 @@
 </div>
 </c:if>
 <div class="panel panel-primary">
-  <div class="panel-heading"><strong>合同补充协议</strong>（共<c:out value="${rowCount}" />行
+  <div class="panel-heading"><strong>合同补充协议</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
  <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -35,8 +35,8 @@
                         <th>#</th>
                         <th>增补协议编号</th>
                         <th>项目名称</th>
-                        <th>管理费率</th>
-                        <th>增减金额</th>
+                        <th class="amount">管理费率</th>
+                        <th class="amount">增减金额</th>
                         <th>登记人</th>
                         <th>登记时间</th>
                         <th>备注</th>
@@ -55,8 +55,8 @@
                                 href="<s:url value="/contractchange/detail/{id}"><s:param name="id" value="${contractChange.id }" /></s:url>"><c:out
                                         value="${contractChange.csaCode}" /></a></td>
                             <td><c:out value="${contractChange.projectId}" /></td>
-                            <td><c:out value="${contractChange.managementRate}" /></td>
-                            <td><c:out value="${contractChange.changeAmount}" /></td>
+                            <td class="amount"><fmt:formatNumber value="${contractChange.managementRate}" pattern="0.00" />%</td>
+                            <td class="amount"><fmt:formatNumber value="${contractChange.changeAmount}" pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${contractChange.createUser}" /></td>
                             <td><fmt:formatDate value="${contractChange.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${contractChange.description}" /></td>
