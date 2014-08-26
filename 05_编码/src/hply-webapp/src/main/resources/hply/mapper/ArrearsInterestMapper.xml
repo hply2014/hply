@@ -4,29 +4,7 @@
 
 <mapper namespace="hply.mapper.ArrearsInterestMapper">
 
-  <insert id="insert" parameterType="ArrearsInterest">
-    insert into t_arrears_interest(id, serial_id, project_id, trice, amount, interest_amount, pharse, atday, create_time, description) values ( #{id}, #{serialId}, #{projectId}, #{trice}, #{amount}, #{interestAmount}, #{pharse}, #{atday}, now(), #{description} )
-  </insert>
-
-  <update id="update" parameterType="map">
-    update t_arrears_interest set <if test="serialId != null">serial_id = #{serialId},</if> <if test="projectId != ''">project_id = #{projectId},</if> <if test="trice != null">trice = #{trice},</if> <if test="amount != null">amount = #{amount},</if> <if test="interestAmount != null">interest_amount = #{interestAmount},</if> <if test="pharse != ''">pharse = #{pharse},</if> <if test="atday != null">atday = #{atday},</if> <if test="description != ''">description = #{description},</if> version = version + 1 where id = #{id}
-  </update>
-
-  <delete id="delete" parameterType="string">
-    delete from t_arrears_interest where id = #{id}
-  </delete>
-
-  <select id="get" parameterType="string" resultType="ArrearsInterest">
-    select id as id, serial_id as serialId, project_id as projectId, trice as trice, amount as amount, interest_amount as interestAmount, pharse as pharse, atday as atday, create_time as createTime, description as description from t_arrears_interest where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_arrears_interest where id = #{id}
-  </select>
-
-  <select id="getAll" resultType="ArrearsInterest">
-    select id as id, serial_id as serialId, project_id as projectId, trice as trice, amount as amount, interest_amount as interestAmount, pharse as pharse, atday as atday, create_time as createTime, description as description from t_arrears_interest
-  </select>
+    <cache />
 
 </mapper>
 

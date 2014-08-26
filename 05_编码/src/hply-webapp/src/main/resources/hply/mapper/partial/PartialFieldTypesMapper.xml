@@ -4,7 +4,8 @@
 
 <mapper namespace="hply.mapper.partial.PartialFieldTypesMapper">
 
-  <insert id="insert" parameterType="FieldTypes">
+
+  <cache />  <insert id="insert" parameterType="FieldTypes">
     insert into t_field_types(id, field_t01, field_t02, field_t03, field_t04, field_t05, field_t06, field_t07, field_t08, field_t09, status) values ( #{id}, #{fieldT01}, #{fieldT02}, #{fieldT03}, #{fieldT04}, #{fieldT05}, #{fieldT06}, #{fieldT07}, #{fieldT08}, #{fieldT09}, #{status} )
   </insert>
 

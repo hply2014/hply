@@ -15,12 +15,12 @@
   <strong>${fieldTypes.id }</strong> ，${delMessage}
 </div>
 </c:if>
-<div class="panel panel-default">
+<div class="panel panel-primary">
   <div class="panel-heading"><strong>所有数据类型的测试样表</strong>（共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
-  <div class="panel-body">
+ <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
-				<shiro:hasPermission name="`fieldtypes_create`">
+          <shiro:hasPermission name="`fieldtypes_create`">
 					<div class="btn-group">
 						<a href="<c:url value="/fieldtypes/create" />" class="btn btn-info"><span
 							class="glyphicon glyphicon-plus"></span> 新 建 </a>
@@ -42,12 +42,12 @@
 			<th></th>
 			<th></th>
 			<th></th>
-			<th>操作</th>
+			
 		</tr>
 	</thead>
 	<tbody>
 		<%
-			int i = 0;
+			int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
 		%>
 		<c:forEach items="${list}" var="fieldTypes">
 			<tr>

@@ -4,6 +4,7 @@
 
 <mapper namespace="hply.mapper.partial.PartialProjectMapper">
 
+  <cache />
   <insert id="insert" parameterType="Project">
     insert into t_project(id, project_code, project_name, organization_id, party_name, party_address, manager, contract_code, corperation, legal_assignee, is_withholding_offsite, management_rate, tax_rate, contract_amount, settlement_amount, duty_paid_time, duty_paid_amount, duty_paid_code, capital_occupied, project_status, trice, create_time, create_user, update_time, update_user, description, status, management_plan_amount, tax_plan_amount) values ( #{id}, #{projectCode}, #{projectName}, #{organizationId}, #{partyName}, #{partyAddress}, #{manager}, #{contractCode}, #{corperation}, #{legalAssignee}, #{isWithholdingOffsite}, #{managementRate}, #{taxRate}, #{contractAmount}, #{settlementAmount}, #{dutyPaidTime}, #{dutyPaidAmount}, #{dutyPaidCode}, #{capitalOccupied}, #{projectStatus}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status}, #{managementPlanAmount}, #{taxPlanAmount} )
   </insert>

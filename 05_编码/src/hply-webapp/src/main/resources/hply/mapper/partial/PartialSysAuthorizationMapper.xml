@@ -4,6 +4,7 @@
 
 <mapper namespace="hply.mapper.partial.PartialSysAuthorizationMapper">
 
+  <cache />
   <insert id="insert" parameterType="SysAuthorization">
     insert into t_sys_authorization(id, resource_id, user_id, create_time, create_user) values ( #{id}, #{resourceId}, #{userId}, now(), #{createUser} )
   </insert>

@@ -46,7 +46,7 @@
 	</thead>
 	<tbody>
 		<%
-			int i = 0;
+			int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
 		%>
 		<c:forEach items="${list}" var="arrearsInterest">
 			<tr>

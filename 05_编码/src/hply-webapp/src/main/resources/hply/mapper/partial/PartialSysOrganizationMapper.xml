@@ -4,6 +4,7 @@
 
 <mapper namespace="hply.mapper.partial.PartialSysOrganizationMapper">
 
+  <cache />
   <insert id="insert" parameterType="SysOrganization">
     insert into t_sys_organization(id, organization_name, create_time, description) values ( #{id}, #{organizationName}, now(), #{description} )
   </insert>

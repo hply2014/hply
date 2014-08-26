@@ -1,6 +1,5 @@
 ﻿package hply.web;
 
-
 import hply.core.Utility;
 import hply.domain.Chop;
 import hply.domain.SysUser;
@@ -23,13 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping(value = ChopController.URI)
 public class ChopController {
-    
+
 	@Autowired
-    private ChopService service;
+	private ChopService service;
 
 	@Autowired
 	private SysOrganizationService orgService;
@@ -44,15 +42,14 @@ public class ChopController {
 	public static final String JSP_PAGE_LIST = "chop-list";
 	public static final String JSP_PAGE_DETAIL = "chop-detail";
 	public static final String JSP_PAGE_MODIFY = "chop-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value="p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
 		model.addAttribute("page_title", "盖章管理");
-        
+
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
 		int rowCount = service.getRowCount();
@@ -67,9 +64,9 @@ public class ChopController {
 			SysUser user = sysUserService.get(item.getApplyUser());
 			item.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
-		
+
 		model.addAttribute("list", list);
-        
+
 		return JSP_PAGE_LIST;
 	}
 
@@ -101,7 +98,7 @@ public class ChopController {
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
 		model.addAttribute("chop", service.get(id));
-		model.addAttribute("page_title", "修改盖章管理");
+		model.addAttribute("page_title", "修改用章申请");
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -109,7 +106,8 @@ public class ChopController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Chop chop, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Chop chop, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(chop.toString());
 
 		if (result.hasErrors()) {
@@ -148,8 +146,7 @@ public class ChopController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		Chop chop = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -157,4 +154,3 @@ public class ChopController {
 		return "redirect:" + URI;
 	}
 }
-

@@ -1,11 +1,15 @@
 ﻿package hply.web;
 
-
-import java.util.List;
 import hply.core.Utility;
 import hply.domain.ContractChange;
+import hply.domain.Project;
+import hply.domain.SysUser;
 import hply.service.ContractChangeService;
+import hply.service.ProjectService;
 import hply.service.SysParameterService;
+import hply.service.SysUserService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,33 +20,37 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = ContractChangeController.URI)
 public class ContractChangeController {
-    
+
 	@Autowired
-    private ContractChangeService service;
-    
+	private ContractChangeService service;
+
 	@Autowired
 	private SysParameterService paramService;
+
+	@Autowired
+	private ProjectService projectService;
+
+	@Autowired
+	private SysUserService sysUserService;
 
 	public static final String URI = "/contractchange";
 	public static final String JSP_PAGE_LIST = "contractchange-list";
 	public static final String JSP_PAGE_DETAIL = "contractchange-detail";
 	public static final String JSP_PAGE_MODIFY = "contractchange-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value="p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
 		model.addAttribute("page_title", "合同补充协议");
-        
+
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
 		int rowCount = service.getRowCount();
@@ -52,8 +60,17 @@ public class ContractChangeController {
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
 		List<ContractChange> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+
+		for (ContractChange item : list) {
+			Project pjt = projectService.get(item.getProjectId());
+			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
+
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+
 		model.addAttribute("list", list);
-        
+
 		return JSP_PAGE_LIST;
 	}
 
@@ -63,7 +80,15 @@ public class ContractChangeController {
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
 		model.addAttribute("page_title", "合同补充协议的详情信息");
-		model.addAttribute("contractChange", service.get(id));
+
+		ContractChange cc = service.get(id);
+
+		SysUser u1 = sysUserService.get(cc.getCreateUser());
+		cc.setCreateUser(u1 != null ? u1.getRealName() : Utility.EMPTY);
+		SysUser u2 = sysUserService.get(cc.getUpdateUser());
+		cc.setUpdateUser(u2 != null ? u2.getRealName() : Utility.EMPTY);
+
+		model.addAttribute("contractChange", cc);
 		return JSP_PAGE_DETAIL;
 	}
 
@@ -72,7 +97,14 @@ public class ContractChangeController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		model.addAttribute("contractChange", new ContractChange());
+		ContractChange cc = new ContractChange();
+		cc.setCsaCode(paramService.getNextCode("cc_code"));
+		cc.setManagementRate(paramService.getParamDoubleValue("default_manager_rate"));
+
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
+
+		model.addAttribute("contractChange", cc);
 		model.addAttribute("page_title", "新建合同补充协议");
 		return JSP_PAGE_MODIFY;
 	}
@@ -82,7 +114,11 @@ public class ContractChangeController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
-		model.addAttribute("contractChange", service.get(id));
+		ContractChange cc = service.get(id);
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
+		model.addAttribute("contractChange", cc);
+
 		model.addAttribute("page_title", "修改合同补充协议");
 		return JSP_PAGE_MODIFY;
 	}
@@ -91,11 +127,12 @@ public class ContractChangeController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid ContractChange contractChange,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid ContractChange contractChange, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(contractChange.toString());
-		
+
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -110,12 +147,12 @@ public class ContractChangeController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id,
-			@Valid ContractChange contractChange, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid ContractChange contractChange,
+			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(contractChange.toString());
-		
+
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -130,8 +167,7 @@ public class ContractChangeController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		ContractChange contractChange = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -139,4 +175,3 @@ public class ContractChangeController {
 		return "redirect:" + URI;
 	}
 }
-

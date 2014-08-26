@@ -1,11 +1,15 @@
 ﻿package hply.web;
 
-
-import java.util.List;
 import hply.core.Utility;
 import hply.domain.Information;
+import hply.domain.SysOrganization;
+import hply.domain.SysUser;
 import hply.service.InformationService;
+import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
+import hply.service.SysUserService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,33 +20,35 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = InformationController.URI)
 public class InformationController {
-    
+
 	@Autowired
-    private InformationService service;
-    
+	private InformationService service;
+
+	@Autowired
+	private SysOrganizationService orgService;
+
+	@Autowired
+	private SysUserService sysUserService;
 	@Autowired
 	private SysParameterService paramService;
-
 	public static final String URI = "/information";
 	public static final String JSP_PAGE_LIST = "information-list";
 	public static final String JSP_PAGE_DETAIL = "information-detail";
 	public static final String JSP_PAGE_MODIFY = "information-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value="p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
 		model.addAttribute("page_title", "信息登记");
-        
+
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
 		int rowCount = service.getRowCount();
@@ -52,8 +58,15 @@ public class InformationController {
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
 		List<Information> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+		for (Information item : list) {
+			SysOrganization org = orgService.get(item.getOrganizationId());
+			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
 		model.addAttribute("list", list);
-        
+
 		return JSP_PAGE_LIST;
 	}
 
@@ -73,6 +86,7 @@ public class InformationController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		model.addAttribute("information", new Information());
+		model.addAttribute("orglist", orgService.getAll());
 		model.addAttribute("page_title", "新建信息登记");
 		return JSP_PAGE_MODIFY;
 	}
@@ -83,6 +97,7 @@ public class InformationController {
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
 		model.addAttribute("information", service.get(id));
+		model.addAttribute("orglist", orgService.getAll());
 		model.addAttribute("page_title", "修改信息登记");
 		return JSP_PAGE_MODIFY;
 	}
@@ -91,11 +106,12 @@ public class InformationController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Information information,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Information information, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(information.toString());
-		
+
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -110,12 +126,12 @@ public class InformationController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id,
-			@Valid Information information, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid Information information, BindingResult result,
+			Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(information.toString());
-		
+
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -130,8 +146,7 @@ public class InformationController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		Information information = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -139,4 +154,3 @@ public class InformationController {
 		return "redirect:" + URI;
 	}
 }
-

@@ -4,6 +4,8 @@
 
 <mapper namespace="hply.mapper.partial.PartialArrearsInterestMapper">
 
+  <cache />
+
   <insert id="insert" parameterType="ArrearsInterest">
     insert into t_arrears_interest(id, serial_id, project_id, trice, amount, interest_amount, pharse, atday, create_time, description) values ( #{id}, #{serialId}, #{projectId}, #{trice}, #{amount}, #{interestAmount}, #{pharse}, #{atday}, now(), #{description} )
   </insert>

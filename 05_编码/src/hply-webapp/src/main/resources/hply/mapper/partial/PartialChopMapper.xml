@@ -4,7 +4,8 @@
 
 <mapper namespace="hply.mapper.partial.PartialChopMapper">
 
-  <insert id="insert" parameterType="Chop">
+
+  <cache />  <insert id="insert" parameterType="Chop">
     insert into t_chop(id, chop_code, project_id, project_code, project_name, manager, content, apply_user, apply_time, organization_id, step1_idea, step1_user, step1_time, step2_idea, step2_user, step2_time, step3_idea, step3_user, step3_time, step_status, status) values ( #{id}, #{chopCode}, #{projectId}, #{projectCode}, #{projectName}, #{manager}, #{content}, #{applyUser}, #{applyTime}, #{organizationId}, #{step1Idea}, #{step1User}, #{step1Time}, #{step2Idea}, #{step2User}, #{step2Time}, #{step3Idea}, #{step3User}, #{step3Time}, #{stepStatus}, #{status} )
   </insert>
 

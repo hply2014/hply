@@ -4,6 +4,7 @@
 
 <mapper namespace="hply.mapper.partial.PartialSysResourceMapper">
 
+  <cache />
   <insert id="insert" parameterType="SysResource">
     insert into t_sys_resource(id, res_code, res_name, icon, res_url, res_type, order_by, parent_id, enabled, description, allow_access_uri) values ( #{id}, #{resCode}, #{resName}, #{icon}, #{resUrl}, #{resType}, #{orderBy}, #{parentId}, #{enabled}, #{description}, #{allowAccessUri} )
   </insert>

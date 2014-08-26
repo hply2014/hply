@@ -46,7 +46,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = JSP_LOGIN, method = RequestMethod.POST)
-	public String processLoginSubmit(HttpServletRequest request, @RequestParam String loginName, @RequestParam String password, Model model) {
+	public String processLoginSubmit(HttpServletRequest request, @RequestParam String loginName,
+			@RequestParam String password, Model model) {
 		logger.debug("登录验证 ...");
 		SysUser user = service.getByLoginName(loginName);
 		if (user == null) {
@@ -90,7 +91,7 @@ public class HomeController {
 		user.setFails(0);
 		service.update(user);
 
-		//刷新所有业务数据状态
+		// 刷新所有业务数据状态
 		projectService.updateAllStatus();
 		return "redirect:/";
 	}

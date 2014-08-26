@@ -43,8 +43,8 @@ th {
 </head>
 <body>
 	<h4>
-		<strong>${page_title}（ <c:out value="${list.size()}" /> 条数据）
-		</strong>
+		<strong>多项目汇总</strong>（共<c:out value="${rowCount}" />行
+            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）
 	</h4>
 	<table class="table table-hover table-striped table-bordered">
 		<thead>
@@ -85,7 +85,7 @@ th {
 		</thead>
 		<tbody>
 			<%
-				int i = 0;
+				int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
 			%>
 			<c:forEach items="${list}" var="projectSummary">
 				<tr>
@@ -125,4 +125,21 @@ th {
 			</c:forEach>
 		</tbody>
 	</table>
+            <c:if test="${pageCount > 1 }">
+                <div class="row">
+                    <div class="col-sm-2 pager">
+                        <span>共<c:out value="${rowCount}" /> 行，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页
+                        </span>
+                    </div>
+                    <div class="col-sm-8">
+                        <ul class="pager">
+                            <li class="${pageIndex <= 0 ? 'disabled' :'' }"><a
+                                href="<s:url value='/projectsummary/full?p=${pageIndex - 1}' />">上一页</a></li>
+                            <li class="${pageIndex + 1 >= pageCount ? 'disabled' :'' }"><a
+                                href="<s:url value='/projectsummary/full?p=${pageIndex + 1}' />">下一页</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2">&nbsp;</div>
+                </div>
+            </c:if>
 	<%@ include file="bottom.jsp"%>

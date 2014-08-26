@@ -1,11 +1,11 @@
 ﻿package hply.web;
 
-
-import java.util.List;
 import hply.core.Utility;
 import hply.domain.ProjectSummary;
 import hply.service.ProjectSummaryService;
 import hply.service.SysParameterService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,17 +16,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = ProjectSummaryController.URI)
 public class ProjectSummaryController {
-    
+
 	@Autowired
-    private ProjectSummaryService service;
-    
+	private ProjectSummaryService service;
+
 	@Autowired
 	private SysParameterService paramService;
 
@@ -34,15 +33,14 @@ public class ProjectSummaryController {
 	public static final String JSP_PAGE_LIST = "projectsummary-list";
 	public static final String JSP_PAGE_DETAIL = "projectsummary-detail";
 	public static final String JSP_PAGE_MODIFY = "projectsummary-modify";
-    
-    
+
 	/*
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value="p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
 		model.addAttribute("page_title", "多项目汇总");
-        
+
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
 		int rowCount = service.getRowCount();
@@ -53,8 +51,28 @@ public class ProjectSummaryController {
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
 		List<ProjectSummary> list = service.getAllPaged(pageIndex * pageSize, pageSize);
 		model.addAttribute("list", list);
-        
+
 		return JSP_PAGE_LIST;
+	}
+
+	/*
+	 * 列表页面
+	 */
+	@RequestMapping(value = "/full", method = RequestMethod.GET)
+	public String listFull(@RequestParam(value = "p", required = false) Integer p, Model model) {
+		model.addAttribute("page_title", "多项目汇总");
+
+		int pageIndex = p != null ? p.intValue() : 0;
+		int pageSize = paramService.getParamIntValue("page_size", 30);
+		int rowCount = service.getRowCount();
+		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
+		model.addAttribute("rowCount", rowCount);
+		model.addAttribute("pageIndex", pageIndex);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("currentPageStarted", pageIndex * pageSize);
+		List<ProjectSummary> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+		model.addAttribute("list", list);
+		return "projectsummary-list-full";
 	}
 
 	/*
@@ -91,11 +109,12 @@ public class ProjectSummaryController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid ProjectSummary projectSummary,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid ProjectSummary projectSummary, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(projectSummary.toString());
-		
+
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -110,12 +129,12 @@ public class ProjectSummaryController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id,
-			@Valid ProjectSummary projectSummary, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid ProjectSummary projectSummary,
+			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(projectSummary.toString());
-		
+
 		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
 
@@ -130,8 +149,7 @@ public class ProjectSummaryController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id,
-			RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		ProjectSummary projectSummary = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -139,4 +157,3 @@ public class ProjectSummaryController {
 		return "redirect:" + URI;
 	}
 }
-

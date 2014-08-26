@@ -19,52 +19,50 @@
   <div class="panel-heading"><strong>付款情况</strong>（共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
   <div class="panel-body">
-<div class="btn-toolbar" role="toolbar">
-				<shiro:hasPermission name="`payment_create`">
-					<div class="btn-group">
-						<a href="<c:url value="/payment/create" />" class="btn btn-info"><span
-							class="glyphicon glyphicon-plus"></span> 新 建 </a>
-					</div>
-				</shiro:hasPermission>
-</div>
+            <div class="btn-toolbar" role="toolbar">
+                <shiro:hasPermission name="`payment_create`">
+                    <div class="btn-group">
+                        <a href="<c:url value="/payment/create" />" class="btn btn-info"><span
+                            class="glyphicon glyphicon-plus"></span> 新 建 </a>
+                    </div>
+                </shiro:hasPermission>
+            </div>
 
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>#</th>
-			<th></th>
-			<th>项目ID</th>
-			<th>凭证号</th>
-			<th>支付方式</th>
-			<th>付款科目ID</th>
-			<th>付款金额</th>
-			<th>银行账号</th>
-			<th>开户行名称</th>
-			<th>付款时间</th>
-			<th>备注</th>
-			<th>操作</th>
-		</tr>
-	</thead>
-	<tbody>
-		<%
-			int i = 0;
-		%>
-		<c:forEach items="${list}" var="payment">
-			<tr>
-				<td><%=++i%></td>
-                <td><span class="glyphicon <c:out value="${payment.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
-				<td><a
-					href="<s:url value="/payment/detail/{id}"><s:param name="id" value="${payment.id }" /></s:url>"><c:out
-							value="${payment.projectId}" /></a></td>  
-				<td><c:out value="${payment.ticketCode}" /></td>
-				<td><c:out value="${payment.payType}" /></td>
-				<td><c:out value="${payment.paymentItemId}" /></td>
-				<td><c:out value="${payment.amount}" /></td>
-				<td><c:out value="${payment.bankAccount}" /></td>
-				<td><c:out value="${payment.bankName}" /></td>
-				<td><fmt:formatDate value="${payment.trice}"
-						pattern="yyyy-MM-dd" /></td>  
-				<td><c:out value="${payment.description}" /></td>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>#</th>
+                        <th>凭证号</th>
+                        <th>项目名称</th>
+                        <th>付款科目</th>
+                        <th>支付方式</th>
+                        <th>付款金额</th>
+                        <th>付款人</th>
+                        <th>付款时间</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
+                    %>
+                    <c:forEach items="${list}" var="payment">
+                        <tr>
+                            <td><span
+                                class="glyphicon <c:out value="${payment.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
+                            <td><%=++i%></td>
+                            <td><c:out value="${payment.ticketCode}" /></td>
+                            <td><a
+                                href="<s:url value="/payment/detail/{id}"><s:param name="id" value="${payment.id }" /></s:url>"><c:out
+                                        value="${payment.projectId}" /></a></td>
+                            <td><c:out value="${payment.paymentItemId}" /></td>
+                            <td><c:out value="${payment.payType}" /></td>
+                            <td><c:out value="${payment.amount}" /></td>
+                            <td><c:out value="${payment.createUser}" /></td>
+                            <td><fmt:formatDate value="${payment.trice}" pattern="yyyy-MM-dd" /></td>
+                            <td><c:out value="${payment.description}" /></td>
+                            <%--
 				<td><c:if test="${payment.status == 1 }">
 									<shiro:hasPermission name="`payment_modify`">
 										<a
@@ -82,11 +80,11 @@
 										href="<s:url value="/payment/delete/{id}"><s:param name="id" value="${payment.id }" /></s:url>">删除</a>
 								</shiro:hasPermission>
 
-</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
+</td> --%>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
             <c:if test="${pageCount > 1 }">
                 <div class="row">
                     <div class="col-sm-2 pager">

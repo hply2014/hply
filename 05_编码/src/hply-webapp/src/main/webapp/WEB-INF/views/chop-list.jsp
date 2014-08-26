@@ -15,12 +15,12 @@
   <strong>${chop.id }</strong> ，${delMessage}
 </div>
 </c:if>
-<div class="panel panel-default">
+<div class="panel panel-primary">
   <div class="panel-heading"><strong>盖章管理</strong>（共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
-  <div class="panel-body">
+ <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
-				<shiro:hasPermission name="`chop_create`">
+          <shiro:hasPermission name="`chop_create`">
 					<div class="btn-group">
 						<a href="<c:url value="/chop/create" />" class="btn btn-info"><span
 							class="glyphicon glyphicon-plus"></span> 新 建 </a>
@@ -31,8 +31,8 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>#</th>
 			<th></th>
+			<th>#</th>
 			<th>编号</th>
 			<th>项目ID</th>
 			<th>项目编号</th>
@@ -52,18 +52,18 @@
 			<th>经办人</th>
 			<th>经办时间</th>
 			<th>流程状态</th>
-			<th>操作</th>
+			
 		</tr>
 	</thead>
 	<tbody>
 		<%
-			int i = 0;
+			int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
 		%>
 		<c:forEach items="${list}" var="chop">
 			<tr>
+				<td><span class="glyphicon <c:out value="${chop.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
 				<td><%=++i%></td>
-                <td><span class="glyphicon <c:out value="${chop.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
-				<td><a
+                <td><a
 					href="<s:url value="/chop/detail/{id}"><s:param name="id" value="${chop.id }" /></s:url>"><c:out
 							value="${chop.chopCode}" /></a></td>  
 				<td><c:out value="${chop.projectId}" /></td>

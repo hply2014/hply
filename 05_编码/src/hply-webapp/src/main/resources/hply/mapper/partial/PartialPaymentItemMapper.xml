@@ -4,7 +4,8 @@
 
 <mapper namespace="hply.mapper.partial.PartialPaymentItemMapper">
 
-  <insert id="insert" parameterType="PaymentItem">
+
+  <cache />  <insert id="insert" parameterType="PaymentItem">
     insert into t_payment_item(id, item_name, reimbursement_cap, create_time, create_user, update_time, update_user, description) values ( #{id}, #{itemName}, #{reimbursementCap}, now(), #{createUser}, now(), #{createUser}, #{description} )
   </insert>
 

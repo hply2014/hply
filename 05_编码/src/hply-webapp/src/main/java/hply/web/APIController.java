@@ -97,7 +97,8 @@ public class APIController {
 	}
 
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
-	public @ResponseBody String changePassword(@RequestParam String id, @RequestParam String password0, @RequestParam String password) {
+	public @ResponseBody String changePassword(@RequestParam String id, @RequestParam String password0,
+			@RequestParam String password) {
 		SysUser user = sysUserService.get(id);
 		String hashedPassword = new Sha256Hash(password0, user.getId(), 1).toString();
 		if (password0.equals(password)) {
@@ -175,12 +176,12 @@ public class APIController {
 		// 计算的往来欠款总额
 		Double val2 = arrearsService.getTotalByProject(projectId);
 		double d2 = val2 != null ? val2.doubleValue() : 0;
-		
-		//计算工程款结存
+
+		// 计算工程款结存
 		double j0 = collectionsService.getTotalCollectionsAmount(projectId) - paymentService.getToalPayment(projectId);
 
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
-		
+
 		// 工程款剩余（合同款 - 收款）|往来欠款总额|工程款结余（收-付）
 		return dformat.format(d1) + "|" + dformat.format(d2) + "|" + dformat.format(j0);
 	}
@@ -201,7 +202,8 @@ public class APIController {
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
 
 		// 已开票额|报销上限|报销累计|报销剩余
-		return dformat.format(d1) + "|" + dformat.format(limitA) + "|" + dformat.format(d2) + "|" + dformat.format(limitA - d2);
+		return dformat.format(d1) + "|" + dformat.format(limitA) + "|" + dformat.format(d2) + "|"
+				+ dformat.format(limitA - d2);
 	}
 
 }
