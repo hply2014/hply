@@ -4,8 +4,9 @@
 
 <mapper namespace="hply.mapper.partial.PartialPaymentItemMapper">
 
-
-  <cache />  <insert id="insert" parameterType="PaymentItem">
+  <cache />
+  
+  <insert id="insert" parameterType="PaymentItem">
     insert into t_payment_item(id, item_name, reimbursement_cap, create_time, create_user, update_time, update_user, description) values ( #{id}, #{itemName}, #{reimbursementCap}, now(), #{createUser}, now(), #{createUser}, #{description} )
   </insert>
 
@@ -26,15 +27,15 @@
   </select>
   
   <select id="getAll" resultType="PaymentItem">
-    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item
+    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item order by update_time desc
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_payment_item
   </select>
 
-  <select id="getAllPaged" parameterType="PaymentItem" resultType="PaymentItem">
-    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" resultType="PaymentItem">
+    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item order by update_time desc limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

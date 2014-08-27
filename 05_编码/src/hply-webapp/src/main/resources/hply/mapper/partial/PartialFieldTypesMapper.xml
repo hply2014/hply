@@ -4,8 +4,9 @@
 
 <mapper namespace="hply.mapper.partial.PartialFieldTypesMapper">
 
-
-  <cache />  <insert id="insert" parameterType="FieldTypes">
+  <cache />
+  
+  <insert id="insert" parameterType="FieldTypes">
     insert into t_field_types(id, field_t01, field_t02, field_t03, field_t04, field_t05, field_t06, field_t07, field_t08, field_t09, status) values ( #{id}, #{fieldT01}, #{fieldT02}, #{fieldT03}, #{fieldT04}, #{fieldT05}, #{fieldT06}, #{fieldT07}, #{fieldT08}, #{fieldT09}, #{status} )
   </insert>
 
@@ -26,15 +27,15 @@
   </select>
   
   <select id="getAll" resultType="FieldTypes">
-    select id as id, field_t01 as fieldT01, field_t02 as fieldT02, field_t03 as fieldT03, field_t04 as fieldT04, field_t05 as fieldT05, field_t06 as fieldT06, field_t07 as fieldT07, field_t08 as fieldT08, field_t09 as fieldT09, version as version, status as status from t_field_types
+    select id as id, field_t01 as fieldT01, field_t02 as fieldT02, field_t03 as fieldT03, field_t04 as fieldT04, field_t05 as fieldT05, field_t06 as fieldT06, field_t07 as fieldT07, field_t08 as fieldT08, field_t09 as fieldT09, version as version, status as status from t_field_types 
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_field_types
   </select>
 
-  <select id="getAllPaged" parameterType="FieldTypes" resultType="FieldTypes">
-    select id as id, field_t01 as fieldT01, field_t02 as fieldT02, field_t03 as fieldT03, field_t04 as fieldT04, field_t05 as fieldT05, field_t06 as fieldT06, field_t07 as fieldT07, field_t08 as fieldT08, field_t09 as fieldT09, version as version, status as status from t_field_types limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" resultType="FieldTypes">
+    select id as id, field_t01 as fieldT01, field_t02 as fieldT02, field_t03 as fieldT03, field_t04 as fieldT04, field_t05 as fieldT05, field_t06 as fieldT06, field_t07 as fieldT07, field_t08 as fieldT08, field_t09 as fieldT09, version as version, status as status from t_field_types  limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

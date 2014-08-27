@@ -5,6 +5,7 @@
 <mapper namespace="hply.mapper.partial.PartialSysOrganizationMapper">
 
   <cache />
+  
   <insert id="insert" parameterType="SysOrganization">
     insert into t_sys_organization(id, organization_name, create_time, description) values ( #{id}, #{organizationName}, now(), #{description} )
   </insert>
@@ -26,15 +27,15 @@
   </select>
   
   <select id="getAll" resultType="SysOrganization">
-    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization
+    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization order by create_time desc
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_sys_organization
   </select>
 
-  <select id="getAllPaged" parameterType="SysOrganization" resultType="SysOrganization">
-    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" resultType="SysOrganization">
+    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization order by create_time desc limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

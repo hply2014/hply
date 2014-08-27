@@ -4,8 +4,9 @@
 
 <mapper namespace="hply.mapper.partial.PartialPartyBillingMapper">
 
-
-  <cache />  <insert id="insert" parameterType="PartyBilling">
+  <cache />
+  
+  <insert id="insert" parameterType="PartyBilling">
     insert into t_party_billing(id, project_id, invoice_code, amount, trice, tax_rate, tax_amount, step1_idea, step1_user, step1_time, step_status, create_time, create_user, update_time, update_user, description, status) values ( #{id}, #{projectId}, #{invoiceCode}, #{amount}, #{trice}, #{taxRate}, #{taxAmount}, #{step1Idea}, #{step1User}, #{step1Time}, #{stepStatus}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status} )
   </insert>
 
@@ -26,15 +27,15 @@
   </select>
   
   <select id="getAll" resultType="PartyBilling">
-    select id as id, project_id as projectId, invoice_code as invoiceCode, amount as amount, trice as trice, tax_rate as taxRate, tax_amount as taxAmount, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step_status as stepStatus, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_party_billing
+    select id as id, project_id as projectId, invoice_code as invoiceCode, amount as amount, trice as trice, tax_rate as taxRate, tax_amount as taxAmount, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step_status as stepStatus, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_party_billing order by trice desc
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_party_billing
   </select>
 
-  <select id="getAllPaged" parameterType="PartyBilling" resultType="PartyBilling">
-    select id as id, project_id as projectId, invoice_code as invoiceCode, amount as amount, trice as trice, tax_rate as taxRate, tax_amount as taxAmount, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step_status as stepStatus, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_party_billing limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" resultType="PartyBilling">
+    select id as id, project_id as projectId, invoice_code as invoiceCode, amount as amount, trice as trice, tax_rate as taxRate, tax_amount as taxAmount, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step_status as stepStatus, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_party_billing order by trice desc limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

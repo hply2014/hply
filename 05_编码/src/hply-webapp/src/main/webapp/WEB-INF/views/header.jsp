@@ -40,6 +40,13 @@ body {
 	padding-bottom: 20px;
 }
 
+
+th {
+	word-break: keep-all;
+	white-space: nowrap;
+	text-align:center
+}
+
 .bs-docs-nav .navbar-collapse {
 	border-color: #463265;
 }

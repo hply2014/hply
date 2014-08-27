@@ -4,8 +4,9 @@
 
 <mapper namespace="hply.mapper.partial.PartialCollectionsMapper">
 
-
-  <cache />  <insert id="insert" parameterType="Collections">
+  <cache />
+  
+  <insert id="insert" parameterType="Collections">
     insert into t_collections(id, project_id, ticket_code, source_of, payment_type, amount, bank_account, bank_name, trice, create_time, create_user, update_time, update_user, description, status) values ( #{id}, #{projectId}, #{ticketCode}, #{sourceOf}, #{paymentType}, #{amount}, #{bankAccount}, #{bankName}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status} )
   </insert>
 
@@ -26,15 +27,15 @@
   </select>
   
   <select id="getAll" resultType="Collections">
-    select id as id, project_id as projectId, ticket_code as ticketCode, source_of as sourceOf, payment_type as paymentType, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_collections
+    select id as id, project_id as projectId, ticket_code as ticketCode, source_of as sourceOf, payment_type as paymentType, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_collections order by trice desc
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_collections
   </select>
 
-  <select id="getAllPaged" parameterType="Collections" resultType="Collections">
-    select id as id, project_id as projectId, ticket_code as ticketCode, source_of as sourceOf, payment_type as paymentType, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_collections limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" resultType="Collections">
+    select id as id, project_id as projectId, ticket_code as ticketCode, source_of as sourceOf, payment_type as paymentType, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_collections order by trice desc limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 
