@@ -44,7 +44,6 @@ body {
 th {
 	word-break: keep-all;
 	white-space: nowrap;
-	text-align:center
 }
 
 .bs-docs-nav .navbar-collapse {

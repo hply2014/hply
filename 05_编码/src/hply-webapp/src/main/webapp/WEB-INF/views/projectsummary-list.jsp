@@ -51,7 +51,7 @@
                             </a></td>
                             <td><c:out value="${projectSummary.projectCode}" /><br /> <c:out
                                     value="${projectSummary.projectName}" /></td>
-                            <td>金额：<fmt:formatNumber value="${projectSummary.contractAmount}" pattern="###,###,###,###,##0.00" /><c:if
+                            <td class="amount">金额：<fmt:formatNumber value="${projectSummary.contractAmount}" pattern="###,###,###,###,##0.00" /><c:if
                                     test="${projectSummary.changeAmount > 0}">
                                     <br />调增：<fmt:formatNumber value="${projectSummary.changeAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if><c:if
@@ -61,30 +61,30 @@
                                     <br />结算：<fmt:formatNumber value="${projectSummary.settlementAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if>
                             </td>
-                            <td>费率：<fmt:formatNumber value="${projectSummary.managementRate}" pattern="###,###,###,###,##0.00" />%<br /> 应收：<fmt:formatNumber value="${projectSummary.managementPlanAmount}" pattern="###,###,###,###,##0.00" /> <c:if
+                            <td class="amount">费率：<fmt:formatNumber value="${projectSummary.managementRate}" pattern="###,###,###,###,##0.00" />%<br /> 应收：<fmt:formatNumber value="${projectSummary.managementPlanAmount}" pattern="###,###,###,###,##0.00" /> <c:if
                                     test="${projectSummary.managementRealAmount > 0}">
                                     <br /> 实收：<fmt:formatNumber value="${projectSummary.managementRealAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if> <c:if test="${projectSummary.managementTotalAmount > 0 }">
                                     <br /> 累计：<fmt:formatNumber value="${projectSummary.managementTotalAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if> <br /> 尚欠：<fmt:formatNumber value="${projectSummary.managementOweAmount}" pattern="###,###,###,###,##0.00" /></td>
-                            <td><c:if test="${projectSummary.partyBillingAmount > 0}">开票：<fmt:formatNumber value="${projectSummary.partyBillingAmount}" pattern="###,###,###,###,##0.00" />
+                            <td class="amount"><c:if test="${projectSummary.partyBillingAmount > 0}">开票：<fmt:formatNumber value="${projectSummary.partyBillingAmount}" pattern="###,###,###,###,##0.00" />
                                     <br />
                                 </c:if> <c:if test="${projectSummary.partyBillingTotalAmount > 0}">累计：<fmt:formatNumber value="${projectSummary.partyBillingTotalAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if></td>
-                            <td><c:if test="${projectSummary.collectionsAmount > 0}">收款：<fmt:formatNumber value="${projectSummary.collectionsAmount}" pattern="###,###,###,###,##0.00" />
+                            <td class="amount"><c:if test="${projectSummary.collectionsAmount > 0}">收款：<fmt:formatNumber value="${projectSummary.collectionsAmount}" pattern="###,###,###,###,##0.00" />
                                     <br />
                                 </c:if> <c:if test="${projectSummary.collectionsTotalAmount > 0 }">累计：<fmt:formatNumber value="${projectSummary.collectionsTotalAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if> <c:if test="${projectSummary.collectionsRate > 0}">
                                     <br />回款率：<fmt:formatNumber value="${projectSummary.collectionsRate}" pattern="0.00" />%</c:if></td>
-                            <td><c:if test="${projectSummary.customerBillingAmount > 0}">开票：<fmt:formatNumber value="${projectSummary.customerBillingAmount}" pattern="###,###,###,###,##0.00" />
+                            <td class="amount"><c:if test="${projectSummary.customerBillingAmount > 0}">开票：<fmt:formatNumber value="${projectSummary.customerBillingAmount}" pattern="###,###,###,###,##0.00" />
                                     <br />
                                 </c:if> <c:if test="${projectSummary.customerBillingTotalAmount > 0}">累计：<fmt:formatNumber value="${projectSummary.customerBillingTotalAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if></td>
-                            <td><c:if test="${projectSummary.paymentAmount > 0}">支付：<fmt:formatNumber value="${projectSummary.paymentAmount}" pattern="###,###,###,###,##0.00" />
+                            <td class="amount"><c:if test="${projectSummary.paymentAmount > 0}">支付：<fmt:formatNumber value="${projectSummary.paymentAmount}" pattern="###,###,###,###,##0.00" />
                                     <br />
                                 </c:if> <c:if test="${projectSummary.paymentTotalAmount > 0}">累计：<fmt:formatNumber value="${projectSummary.paymentTotalAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if></td>
-                            <td><c:if test="${projectSummary.taxRate > 0}"> 税率：<fmt:formatNumber value="${projectSummary.taxRate}" pattern="0.00" />%
+                            <td class="amount"><c:if test="${projectSummary.taxRate > 0}"> 税率：<fmt:formatNumber value="${projectSummary.taxRate}" pattern="0.00" />%
                                 </c:if> <c:if test="${projectSummary.taxPlanAmount > 0}">
                                     <br /> 应收：<fmt:formatNumber value="${projectSummary.taxPlanAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if> <c:if test="${projectSummary.taxRealAmount > 0}">
@@ -94,7 +94,7 @@
                                 </c:if> <c:if test="${projectSummary.taxOweAmount > 0}">
                                     <br /> 尚欠：<fmt:formatNumber value="${projectSummary.taxOweAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if></td>
-                            <td><c:if test="${projectSummary.arrearsAmount > 0}">
+                            <td class="amount"><c:if test="${projectSummary.arrearsAmount > 0}">
                                     <fmt:formatNumber value="${projectSummary.arrearsAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if></td>
                     </c:forEach>

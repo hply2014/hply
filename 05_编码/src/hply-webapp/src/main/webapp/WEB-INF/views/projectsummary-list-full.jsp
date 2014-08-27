@@ -42,6 +42,7 @@ th {
 	white-space: nowrap;
 	text-align:center
 }
+
 .amount{
     text-align:right;
 }
