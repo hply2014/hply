@@ -1,0 +1,4 @@
+select project_id,count(*),sum(change_amount),contract_amount from t_project_summary where trice between '2014-06-20' and '2014-07-20' group by project_id
+
+
+select * from (select * from t_project_summary where trice between '2014-06-20' and '2014-07-20' order by t_project_summary.serial_id desc) t group by project_id order by trice
