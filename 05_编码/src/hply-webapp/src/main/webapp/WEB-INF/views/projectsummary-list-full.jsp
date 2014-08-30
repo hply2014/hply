@@ -40,21 +40,17 @@ strong, h1, h2, h3, h4 {
 th {
 	word-break: keep-all;
 	white-space: nowrap;
-	text-align:center
+	text-align: center
 }
 
-.amount{
-    text-align:right;
+.amount {
+	text-align: right;
 }
 </style>
 </head>
 <body>
     <h4>
-        <strong>多项目汇总</strong>（ 共
-        <c:out value="${rowCount}" />
-        行
-        <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>
-        ）
+        <strong>多项目汇总</strong>（ 共<c:out value="${list.size()}" />行 ）
     </h4>
     <table class="table table-hover table-striped table-bordered">
         <thead>
@@ -105,7 +101,7 @@ th {
         </thead>
         <tbody>
             <%
-            	int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
+            	int i = 0;
             %>
             <c:forEach items="${list}" var="projectSummary">
                 <tr>
@@ -115,8 +111,10 @@ th {
                     <td><c:out value="${projectSummary.organizationId}" /></td>
                     <td><c:out value="${projectSummary.projectCode}" /></td>
                     <td><c:out value="${projectSummary.projectName}" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.contractAmount}" pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.changeAmount}" pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.contractAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.changeAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.changeTotalAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.settlementAmount}"
@@ -143,36 +141,26 @@ th {
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.customerBillingTotalAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.paymentAmount}" pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.paymentAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.paymentTotalAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.taxRate}" pattern="0.00" />%</td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.taxPlanAmount}" pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.taxRealAmount}" pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.taxTotalAmount}" pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.taxOweAmount}" pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.arrearsAmount}" pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.expectedValue}" pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.taxPlanAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.taxRealAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.taxTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.taxOweAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.arrearsAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.expectedValue}"
+                            pattern="###,###,###,###,##0.00" /></td>
                     <td><c:out value="${projectSummary.profilePoint}" /></td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    <c:if test="${pageCount > 1 }">
-        <div class="row">
-            <div class="col-sm-2 pager">
-                <span>共<c:out value="${rowCount}" /> 行，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页
-                </span>
-            </div>
-            <div class="col-sm-8">
-                <ul class="pager">
-                    <li class="${pageIndex <= 0 ? 'disabled' :'' }"><a
-                        href="<s:url value='/projectsummary/full?p=${pageIndex - 1}' />">上一页</a></li>
-                    <li class="${pageIndex + 1 >= pageCount ? 'disabled' :'' }"><a
-                        href="<s:url value='/projectsummary/full?p=${pageIndex + 1}' />">下一页</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-2">&nbsp;</div>
-        </div>
-    </c:if>
     <%@ include file="bottom.jsp"%>

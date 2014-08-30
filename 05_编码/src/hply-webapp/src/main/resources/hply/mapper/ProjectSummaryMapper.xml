@@ -4,5 +4,54 @@
 
 <mapper namespace="hply.mapper.ProjectSummaryMapper">
 
+	<!-- 按月，根据项目分类汇总 -->
+  <select id="getSummaryByMonth" resultType="ProjectSummary">
+    select 
+	    id,
+	    serial_id as serialId,
+	    trice,
+	    description,
+	    project_id projectId,
+	    organization_id organizationId,
+	    project_code projectCode,
+	    project_name projectName,
+	    contract_amount contractAmount,
+	    sum(change_amount) as changeAmount,
+	    change_total_amount as changeTotalAmount,
+	    settlement_amount as settlementAmount,
+	    management_rate as managementRate,
+	    management_plan_amount as managementPlanAmount,
+	    sum(management_real_amount) as managementRealAmount,
+	    management_total_amount as managementTotalAmount,
+	    management_owe_amount as managementOweAmount,
+	    sum(party_billing_amount) as partyBillingAmount,
+	    party_billing_total_amount as partyBillingTotalAmount,
+	    sum(collections_amount) as collectionsAmount,
+	    collections_total_amount as collectionsTotalAmount,
+	    collections_rate as collectionsRate,
+	    sum(customer_billing_amount) as customerBillingAmount,
+	    customer_billing_total_amount as customerBillingTotalAmount,
+	    sum(payment_amount) as paymentAmount,
+	    payment_total_amount as paymentTotalAmount,
+	    tax_rate as taxRate,
+	    tax_plan_amount as taxPlanAmount,
+	    sum(tax_real_amount) as taxRealAmount,
+	    tax_total_amount as taxTotalAmount,
+	    tax_owe_amount as taxOweAmount,
+	    sum(arrears_amount) as arrearsAmount,
+	    sum(expected_value) as expectedValue,
+	    profile_point as profilePoint,
+	    version,
+	    create_time as createTime,
+	    table_name as tableName
+    from (
+			select * from t_project_summary 
+				where trice between date(concat(#{pharse}, '-20')) + interval + 1 day 
+							and date(concat(#{pharse}, '-20')) + interval + 1 month 
+					and organization_id = #{organizationId}
+			order by t_project_summary.serial_id desc
+		  ) t 
+    group by project_id order by trice
+  </select>
 </mapper>
 

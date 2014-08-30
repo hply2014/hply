@@ -68,20 +68,7 @@ public class ProjectSummaryController {
 	@RequestMapping(value = "/full", method = RequestMethod.GET)
 	public String listFull(@RequestParam(value = "p", required = false) Integer p, Model model) {
 		model.addAttribute("page_title", "多项目汇总");
-
-		int pageIndex = p != null ? p.intValue() : 0;
-		int pageSize = paramService.getParamIntValue("page_size", 30);
-		int rowCount = service.getRowCount();
-		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
-		model.addAttribute("rowCount", rowCount);
-		model.addAttribute("pageIndex", pageIndex);
-		model.addAttribute("pageCount", pageCount);
-		model.addAttribute("currentPageStarted", pageIndex * pageSize);
-		List<ProjectSummary> list = service.getAllPaged(pageIndex * pageSize, pageSize);
-		for (ProjectSummary item : list) {
-			SysOrganization org = orgService.get(item.getOrganizationId());
-			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
-		}
+		List<ProjectSummary> list = service.getSummaryByMonth("2014-06", "0ed44f90-0c3a-11e4-9300-001c42328937");
 		model.addAttribute("list", list);
 		return "projectsummary-list-full";
 	}
