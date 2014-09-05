@@ -12,6 +12,7 @@
 		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/hplydb_new" />
 		<property name="user" value="root" />
 		<property name="password" value="qqwQQW" />
+		<property name="maxIdleTime" value="3600" />
 	</bean>
 
 	<!-- 事务管理器 -->

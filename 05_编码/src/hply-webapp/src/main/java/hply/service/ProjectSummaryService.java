@@ -87,4 +87,8 @@ public class ProjectSummaryService {
 	public List<ProjectSummary> getSummaryByMonth(String pharse, String organizationId) {
 		return mapper.getSummaryByMonth(pharse, organizationId);
 	}
+	
+	public List<String> getMonths(){
+		return mapper.getMonths();
+	}
 }

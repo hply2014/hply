@@ -19,7 +19,7 @@
   <div class="panel-heading"><strong>多项目汇总</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
    <div class="panel-body">
-        <a target="blank" href="<s:url value='/projectsummary/full' />" class="btn btn-link"><span
+        <a target="_blank" href="<s:url value='/projectsummary/full' />" class="btn btn-link"><span
                             class="glyphicon glyphicon-share-alt"></span> 新窗口打开</a>
             <table class="table table-hover">
                 <thead>

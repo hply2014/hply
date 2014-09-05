@@ -2,16 +2,20 @@
 
 import hply.core.Utility;
 import hply.domain.ProjectSummary;
-import hply.domain.SysOrganization;
-import hply.domain.SysUser;
 import hply.service.ProjectSummaryService;
 import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +32,7 @@ public class ProjectSummaryController {
 
 	@Autowired
 	private ProjectSummaryService service;
-	
+
 	@Autowired
 	private SysOrganizationService orgService;
 
@@ -66,10 +70,45 @@ public class ProjectSummaryController {
 	 * 列表页面
 	 */
 	@RequestMapping(value = "/full", method = RequestMethod.GET)
-	public String listFull(@RequestParam(value = "p", required = false) Integer p, Model model) {
+	public String listFull(@RequestParam(value = "pharse", required = false) String pharse,
+			@RequestParam(value = "orgid", required = false) String orgId, Model model) {
 		model.addAttribute("page_title", "多项目汇总");
-		List<ProjectSummary> list = service.getSummaryByMonth("2014-06", "0ed44f90-0c3a-11e4-9300-001c42328937");
+
+		List<String> months = service.getMonths();
+		System.out.print("lst.size()=" + months.size());
+		model.addAttribute("months", months);
+
+		if (StringUtils.isBlank(pharse)) {
+			pharse = months.size() > 0 ? months.get(0) : DateFormatUtils.format(new Date(), "yyyy-mm");
+		}
+
+		Calendar c0 = Calendar.getInstance();
+		Calendar c1 = Calendar.getInstance();
+		try {
+			Date d = DateUtils.parseDate(pharse + "-21", "yyyy-MM-dd");
+			c0.setTime(d);
+			c1.setTime(d);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		c0.add(Calendar.MONTH, -1);
+		c1.add(Calendar.DATE, -1);
+		
+		String dateRange = DateFormatUtils.format(c0, "yyyy年MM月dd日") + " ~ " + DateFormatUtils.format(c1, "yyyy年MM月dd日");
+		model.addAttribute("dateRange", dateRange);
+
+		if (StringUtils.isBlank(orgId)) {
+			// 默认项目部
+			orgId = "0ed44f90-0c3a-11e4-9300-001c42328937";
+		}
+		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("pharse", pharse);
+		model.addAttribute("orgId", orgId);
+		
 		return "projectsummary-list-full";
 	}
 
@@ -127,8 +166,8 @@ public class ProjectSummaryController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid ProjectSummary projectSummary,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid ProjectSummary projectSummary, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(projectSummary.toString());
 
 		if (result.hasErrors()) {

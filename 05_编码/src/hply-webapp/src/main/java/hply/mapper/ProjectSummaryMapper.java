@@ -24,4 +24,5 @@ public interface ProjectSummaryMapper extends PartialProjectSummaryMapper {
 	 */
 	public List<ProjectSummary> getSummaryByMonth(@Param("pharse") String pharse, @Param("organizationId") String organizationId);
 
+	public List<String> getMonths();
 }

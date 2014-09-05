@@ -50,7 +50,12 @@ th {
 </head>
 <body>
     <h4>
-        <strong>多项目汇总</strong>（ 共<c:out value="${list.size()}" />行 ）
+        <strong>项目汇总</strong>（ 共<c:out value="${list.size()}" />行 ）
+        <select id="orgSelect"><option ${orgId == '0ed38235-0c3a-11e4-9300-001c42328937' ? 'selected' : '' } value="0ed38235-0c3a-11e4-9300-001c42328937">事业部</option>
+            <option ${orgId == '0ed44f90-0c3a-11e4-9300-001c42328937' ? 'selected' : '' } value="0ed44f90-0c3a-11e4-9300-001c42328937">项目部</option></select>&nbsp;
+            <select id="monthsSelect">
+            <c:forEach items="${months}" var="str"><option ${pharse == str ? 'selected' : '' } value="${str}">${str }</option></c:forEach>
+            </select>&nbsp;<span id="offsetMonths">${dateRange }</span>
     </h4>
     <table class="table table-hover table-striped table-bordered">
         <thead>
@@ -58,7 +63,7 @@ th {
                 <th rowspan="2">#</th>
                 <th rowspan="2">时间</th>
                 <th rowspan="2">摘要</th>
-                <th colspan="7">项目信息</th>
+                <th colspan="6">项目信息</th>
                 <th colspan="5">管理费情况</th>
                 <th colspan="2">甲方开票情况</th>
                 <th colspan="3">收款情况</th>
@@ -69,7 +74,6 @@ th {
                 <th colspan="2">型材（吨）</th>
             </tr>
             <tr>
-                <th>所在部门</th>
                 <th>项目编号</th>
                 <th>项目名称</th>
                 <th>合同金额</th>
@@ -108,7 +112,6 @@ th {
                     <td><%=++i%></td>
                     <td><fmt:formatDate value="${projectSummary.trice}" pattern="yyyy-MM-dd" /></td>
                     <td><c:out value="${projectSummary.description}" /></td>
-                    <td><c:out value="${projectSummary.organizationId}" /></td>
                     <td><c:out value="${projectSummary.projectCode}" /></td>
                     <td><c:out value="${projectSummary.projectName}" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.contractAmount}"
@@ -163,4 +166,17 @@ th {
             </c:forEach>
         </tbody>
     </table>
+    
+<script type="text/javascript">
+$(function(){
+	$("select").change(function(){
+		//alert($("#orgSelect").val() + "," + $("#monthsSelect").val());
+		self.location = "<s:url value='/projectsummary/full' />" + "?orgid=" + $("#orgSelect").val() + "&pharse=" + $("#monthsSelect").val();
+		
+	});
+	
+	
+});
+</script>
+    
     <%@ include file="bottom.jsp"%>
