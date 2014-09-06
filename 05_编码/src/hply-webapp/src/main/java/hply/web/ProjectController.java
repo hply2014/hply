@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,18 +49,24 @@ public class ProjectController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "q", required = false) String q,
+			Model model) {
 		model.addAttribute("page_title", "合同项目信息");
 
 		int pageIndex = p != null ? p.intValue() : 0;
+		String queryText = StringUtils.isBlank(q) ? "%" : "%" + q.replaceAll(" ", "%") + "%";
+
 		int pageSize = paramService.getParamIntValue("page_size", 30);
-		int rowCount = service.getRowCount();
+		int rowCount = service.getRowCount(queryText);
 		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
 		model.addAttribute("rowCount", rowCount);
 		model.addAttribute("pageIndex", pageIndex);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
-		List<Project> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+		model.addAttribute("queryText", q);
+
+		List<Project> list = service.getAllPaged(queryText, pageIndex * pageSize, pageSize);
+
 		for (Project item : list) {
 			SysOrganization org = orgService.get(item.getOrganizationId());
 			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
@@ -78,8 +85,7 @@ public class ProjectController {
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
 		Project project = service.get(id);
-		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode()
-				+ "）");
+		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
 		SysOrganization org = orgService.get(project.getOrganizationId());
 		project.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
 
@@ -124,8 +130,7 @@ public class ProjectController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Project project, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Project project, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
@@ -145,8 +150,8 @@ public class ProjectController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid Project project, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid Project project, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {

@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -73,15 +74,15 @@ public class ProjectService {
 	/**
 	 * 01_合同项目信息，获取记录总行数
 	 */
-	public int getRowCount() {
-		return mapper.getRowCount();
+	public int getRowCount(String queryText) {
+		return mapper.getRowCount(queryText);
 	}
 
 	/**
 	 * 01_合同项目信息，获取所有对象，分页方式
 	 */
-	public List<Project> getAllPaged(int pageIndex, int pageSize) {
-		return mapper.getAllPaged(pageIndex, pageSize);
+	public List<Project> getAllPaged(String queryText, int pageIndex, int pageSize) {
+		return mapper.getAllPaged(queryText, pageIndex, pageSize);
 	}
 
 	public void updateAllStatus() {
