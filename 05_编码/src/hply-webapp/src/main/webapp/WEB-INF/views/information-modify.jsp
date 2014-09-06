@@ -11,9 +11,10 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="row">
-                            <label for="organizationId" class="col-sm-2 control-label">所在部门</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="organizationId" placeholder="所在部门" />
+                            <sf:label path="organizationId" cssClass="col-sm-2 control-label">所在部门</sf:label>
+                            <div class="col-sm-4">
+                                <sf:select cssClass="form-control selectpicker" path="organizationId"
+                                    items="${orglist }" itemValue="id" itemLabel="organizationName" />
                                 <p class="help-block" />
                             </div>
 

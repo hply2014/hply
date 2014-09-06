@@ -1,10 +1,12 @@
 ﻿package hply.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import hply.domain.Information;
 import hply.mapper.InformationMapper;
 import hply.core.DataVersionConflictException;
@@ -71,15 +73,15 @@ public class InformationService {
 	  /**
      * 10_信息登记，获取记录总行数
      */
-	  public int getRowCount(){
-        return mapper.getRowCount();
+	  public int getRowCount(String queryText){
+        return mapper.getRowCount(queryText);
       }
       
 	  /**
      * 10_信息登记，获取所有对象，分页方式
      */
-	  public List<Information> getAllPaged(int pageIndex, int pageSize){
-        return mapper.getAllPaged(pageIndex, pageSize);
+	  public List<Information> getAllPaged(String queryText, int pageIndex, int pageSize){
+        return mapper.getAllPaged(queryText, pageIndex, pageSize);
       }
 }
 

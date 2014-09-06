@@ -6,8 +6,10 @@
 package hply.mapper.partial;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
 import hply.domain.Information;
 
 
@@ -31,8 +33,8 @@ public interface PartialInformationMapper {
 	  
 	  public List<Information> getAll();
       
-	  public int getRowCount();
+	  public int getRowCount(@Param("queryText") String queryText);
 	  
-	  public List<Information> getAllPaged(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+	  public List<Information> getAllPaged(@Param("queryText") String queryText, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 }
 

@@ -31,11 +31,11 @@
   </select>
   
   <select id="getRowCount" resultType="int">
-    select count(*) from t_information
+    select count(*) from t_information where concat(ifnull(project_name, ''), ifnull(address, ''), ifnull(developer, ''), ifnull(epc_corporation, ''), ifnull(variety, ''), ifnull(real_name, ''), ifnull(identification, ''), ifnull(contact, ''), ifnull(subscriber, ''), ifnull(description, '')) like #{queryText}
   </select>
 
   <select id="getAllPaged" resultType="Information">
-    select id as id, organization_id as organizationId, project_name as projectName, address as address, developer as developer, epc_corporation as epcCorporation, variety as variety, total_area as totalArea, real_name as realName, identification as identification, contact as contact, subscriber as subscriber, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_information order by trice desc limit #{pageSize} offset #{pageIndex}
+    select id as id, organization_id as organizationId, project_name as projectName, address as address, developer as developer, epc_corporation as epcCorporation, variety as variety, total_area as totalArea, real_name as realName, identification as identification, contact as contact, subscriber as subscriber, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_information where concat(ifnull(project_name, ''), ifnull(address, ''), ifnull(developer, ''), ifnull(epc_corporation, ''), ifnull(variety, ''), ifnull(real_name, ''), ifnull(identification, ''), ifnull(contact, ''), ifnull(subscriber, ''), ifnull(description, '')) like #{queryText} order by trice desc limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

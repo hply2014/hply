@@ -79,7 +79,7 @@ public class ProjectSummaryController {
 		model.addAttribute("months", months);
 
 		if (StringUtils.isBlank(pharse)) {
-			pharse = months.size() > 0 ? months.get(0) : DateFormatUtils.format(new Date(), "yyyy-mm");
+			pharse = months.size() > 0 ? months.get(0) : DateFormatUtils.format(new Date(), "yyyy-MM");
 		}
 
 		Calendar c0 = Calendar.getInstance();
@@ -92,10 +92,10 @@ public class ProjectSummaryController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		c0.add(Calendar.MONTH, -1);
 		c1.add(Calendar.DATE, -1);
-		
+
 		String dateRange = DateFormatUtils.format(c0, "yyyy年MM月dd日") + " ~ " + DateFormatUtils.format(c1, "yyyy年MM月dd日");
 		model.addAttribute("dateRange", dateRange);
 
@@ -105,10 +105,10 @@ public class ProjectSummaryController {
 		}
 		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
 		model.addAttribute("list", list);
-		
+
 		model.addAttribute("pharse", pharse);
 		model.addAttribute("orgId", orgId);
-		
+
 		return "projectsummary-list-full";
 	}
 
