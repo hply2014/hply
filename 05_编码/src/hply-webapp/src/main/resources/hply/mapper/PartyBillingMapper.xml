@@ -7,7 +7,7 @@
 	<cache />
 
 	<select id="getCheckedAmount" parameterType="string" resultType="Double">
-		select sum(amount) from t_party_billing where project_id=#{projectId} and step_status=1
+		select sum(amount) from t_party_billing where project_id=#{projectId} and step_status=1 and year(trice)=year(now())
 	</select>
 
 </mapper>

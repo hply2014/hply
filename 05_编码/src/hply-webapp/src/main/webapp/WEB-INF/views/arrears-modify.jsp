@@ -42,7 +42,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-4 col-sm-offset-2 checkbox">
+							<div class="col-sm-3 col-sm-offset-2 checkbox">
 								<sf:checkbox cssClass="icheckbox" path="interestRate" id="interestRate" value="1" />
 								<label for="interestRate">此笔费用计息</label>
 								<p class="help-block" />
@@ -92,9 +92,9 @@
 						<div class="bs-callout bs-callout-danger">
 							<h4>操作提示</h4>
 							<p>
-								<span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span>
+								1、<span class="label label-danger">此信息一经提交，将不可修改，请谨慎操作。</span>
 							</p>
-							<p>2、欠款为正数，还款为负数，其中垫资欠款额自动计息，其他费用不计算利息。</p>
+							<p>2、<span class="label label-info">此笔费用将汇总到付款情况中</span>，供应商（客户）付出去的钱，为正；供应商（客户）收到的钱，为负。</p>
 							<p>
 								3、计息按月利率<span class="label label-default">1.00%</span>标准计算，每月20日系统自动结息。
 							</p>

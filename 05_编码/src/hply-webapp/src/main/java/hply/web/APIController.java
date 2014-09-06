@@ -97,8 +97,7 @@ public class APIController {
 	}
 
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
-	public @ResponseBody String changePassword(@RequestParam String id, @RequestParam String password0,
-			@RequestParam String password) {
+	public @ResponseBody String changePassword(@RequestParam String id, @RequestParam String password0, @RequestParam String password) {
 		SysUser user = sysUserService.get(id);
 		String hashedPassword = new Sha256Hash(password0, user.getId(), 1).toString();
 		if (password0.equals(password)) {
@@ -168,8 +167,8 @@ public class APIController {
 	/*
 	 * 
 	 */
-	@RequestMapping(value = "/suprplusamounts/{projectId}", method = RequestMethod.POST)
-	public @ResponseBody String getSurplusAmounts(@PathVariable String projectId) {
+	@RequestMapping(value = "/camounts/{projectId}", method = RequestMethod.POST)
+	public @ResponseBody String getCollectionsTooltipAmounts(@PathVariable String projectId) {
 		// 计算的工程款剩余
 		double d1 = collectionsService.getSurplusProjectAmount(projectId);
 
@@ -184,6 +183,30 @@ public class APIController {
 
 		// 工程款剩余（合同款 - 收款）|往来欠款总额|工程款结余（收-付）
 		return dformat.format(d1) + "|" + dformat.format(d2) + "|" + dformat.format(j0);
+	}
+
+	/*
+	 * 
+	 */
+	@RequestMapping(value = "/pamounts/{projectId}", method = RequestMethod.POST)
+	public @ResponseBody String getPaymentTooltipAmounts(@PathVariable String projectId) {
+		// 计算的已开发票欠款额：已审核的发票金额 - 收款中的工程款
+		// 已审核通过的开票额
+		double d1 = paryBillingService.getCheckedAmount(projectId);
+		// 收到的工程款总额
+		double g1 = collectionsService.getTotalCollectionsAmount(projectId);
+
+		// 计算的往来欠款总额
+		Double v2 = arrearsService.getTotalByProject(projectId);
+		double d2 = v2 != null ? v2.doubleValue() : 0;
+
+		// 计算工程款结存
+		double j0 = g1 - paymentService.getToalPayment(projectId);
+
+		DecimalFormat dformat = new DecimalFormat("#,##0.00");
+
+		// 已开发票欠款额|往来欠款总额|工程款结余（收-付）
+		return dformat.format(d1 - g1) + "|" + dformat.format(d2) + "|" + dformat.format(j0);
 	}
 
 	@RequestMapping(value = "/alllimitamount/{projectId}/{itemId}", method = RequestMethod.POST)
@@ -202,8 +225,7 @@ public class APIController {
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
 
 		// 已开票额|报销上限|报销累计|报销剩余
-		return dformat.format(d1) + "|" + dformat.format(limitA) + "|" + dformat.format(d2) + "|"
-				+ dformat.format(limitA - d2);
+		return dformat.format(d1) + "|" + dformat.format(limitA) + "|" + dformat.format(d2) + "|" + dformat.format(limitA - d2);
 	}
 
 }

@@ -9,13 +9,13 @@
 	<select id="getToalPayment" parameterType="string" resultType="double">
 		select sum(amount) from t_payment where
 		project_id
-		= #{projectId}
+		= #{projectId} and year(trice)=year(now())
 	</select>
 
 	<select id="getTotalPaymentByItem" resultType="double">
 		select sum(amount) totalAmount from t_payment
 		where
-		project_id=#{projectId} and payment_item_id=#{paymentItemId}
+		project_id=#{projectId} and payment_item_id=#{paymentItemId} and year(trice)=year(now())
 	</select>
 </mapper>
 

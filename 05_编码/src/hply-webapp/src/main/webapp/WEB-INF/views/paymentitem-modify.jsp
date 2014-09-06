@@ -17,7 +17,7 @@
                                 <p class="help-block" />
                             </div>
 
-                            <label for="reimbursementCap" class="col-sm-2 control-label">报销比例上限（%）</label>
+                            <label for="reimbursementCap" class="col-sm-2 control-label">报销上限（%）</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="reimbursementCap" placeholder="报销比例上限" />
                                 <p class="help-block" />

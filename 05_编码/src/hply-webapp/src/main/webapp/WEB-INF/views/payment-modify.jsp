@@ -109,7 +109,7 @@
                             </p>
                             <h4>欠款提示</h4>
                             <p>
-                                工程欠款：<span id="d1">0000.00</span>
+                                已开票欠款：<span id="k1">0000.00</span>
                             </p>
                             <p>
                                 往来欠款：<span id="d2">0000.00</span>
@@ -196,10 +196,10 @@
 
 		function refreshOweAmount() {
 			//获取工程欠款余额，往来欠款总额和工程款结存
-			$.post("<s:url value='/api/suprplusamounts/' />" + jQuery("#projectId").val(), {}, function(result) {
+			$.post("<s:url value='/api/pamounts/' />" + jQuery("#projectId").val(), {}, function(result) {
 				var arr = result.split("|");
 				if (arr.length >= 3) {
-					$("#d1").html(arr[0]);
+					$("#k1").html(arr[0]);
 					$("#d2").html(arr[1]);
 					$("#j0").html(arr[2]);
 				}

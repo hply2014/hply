@@ -56,7 +56,7 @@
                                     <br />调增：<fmt:formatNumber value="${projectSummary.changeAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if><c:if
                                     test="${projectSummary.changeAmount > 0}">
-                                    <br />累计：<fmt:formatNumber value="${projectSummary.changeTotalAmount}" pattern="###,###,###,###,##0.00" />
+                                    <br />累计调增：<fmt:formatNumber value="${projectSummary.changeTotalAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if> <c:if test="${projectSummary.settlementAmount > 0 }">
                                     <br />结算：<fmt:formatNumber value="${projectSummary.settlementAmount}" pattern="###,###,###,###,##0.00" />
                                 </c:if>

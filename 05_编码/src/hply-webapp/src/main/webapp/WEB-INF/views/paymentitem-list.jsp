@@ -39,7 +39,7 @@
                         <th>#</th>
 
                         <th>付款科目名称</th>
-                        <th>报销比例上限</th>
+                        <th class="amount">报销上限</th>
                         <th>创建用户</th>
                         <th>创建时间</th>
                         <th>备注</th>
@@ -54,11 +54,11 @@
                     <c:forEach items="${list}" var="paymentItem">
                         <tr>
                             <td><%=++i%></td>
-
-                            <td><a
+                            <td>${paymentItem.itemName}</td>
+                         <%--   <td><a
                                 href="<s:url value="/paymentitem/detail/{id}"><s:param name="id" value="${paymentItem.id }" /></s:url>"><c:out
-                                        value="${paymentItem.itemName}" /></a></td>
-                            <td><fmt:formatNumber value="${paymentItem.reimbursementCap}" pattern="#.00" /> %</td>
+                                        value="${paymentItem.itemName}" /></a></td> --%>
+                            <td class="amount"><fmt:formatNumber value="${paymentItem.reimbursementCap}" pattern="0.00" /> %</td>
                             <td><c:out value="${paymentItem.createUser}" /></td>
                             <td><fmt:formatDate value="${paymentItem.createTime}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${paymentItem.description}" /></td>
