@@ -49,7 +49,6 @@
                         <th class="amount">发票金额</th>
                         <th>开票人</th>
                         <th>开票时间</th>
-                        <th>审核状态</th>
                         <th>审核情况</th>
                         <th></th>
                     </tr>
@@ -67,12 +66,11 @@
                                 href="<s:url value="/partybilling/detail/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>"><c:out
                                         value="${partyBilling.invoiceCode}" /></a></td>
                             <td>${ partyBilling.projectId}</td>
-                            <td><fmt:formatNumber value="${partyBilling.taxRate}" pattern="0.00" />%</td>
+                            <td class="amount"><fmt:formatNumber value="${partyBilling.taxRate}" pattern="0.00" />%</td>
                             <td class="amount"><fmt:formatNumber value="${partyBilling.amount}" pattern="###,###,###,###,##0.00" /></td>
-                            <td class="amount"><c:out value="${partyBilling.createUser}" /></td>
+                            <td><c:out value="${partyBilling.createUser}" /></td>
                             <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" /></td>
-                            <td>${partyBilling.stepStatus == 1 ? '已' : '未'}审核</td>
-                            <td><c:if test="${not empty partyBilling.step1User}">${partyBilling.step1User}：“${partyBilling.step1Idea}”<br />
+                            <td><c:if test="${empty partyBilling.step1User}">未审核</c:if><c:if test="${not empty partyBilling.step1User}">${partyBilling.step1User}：“${partyBilling.step1Idea}”<br />
                                     <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
                             <td><c:if test="${ partyBilling.stepStatus != 1 }">

@@ -3,6 +3,7 @@ package hply.web;
 import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.PaymentItem;
+import hply.domain.Project;
 import hply.domain.SysAuthorization;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
@@ -13,6 +14,7 @@ import hply.service.PaymentItemService;
 import hply.service.PaymentService;
 import hply.service.ProjectService;
 import hply.service.SysAuthorizationService;
+import hply.service.SysOrganizationService;
 import hply.service.SysResourceService;
 import hply.service.SysUserService;
 
@@ -58,6 +60,9 @@ public class APIController {
 
 	@Autowired
 	private PaymentItemService paymentItemService;
+	
+	@Autowired
+	private SysOrganizationService orgService;
 
 	@RequestMapping(value = "/tree/{userId}")
 	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
@@ -227,5 +232,13 @@ public class APIController {
 		// 已开票额|报销上限|报销累计|报销剩余
 		return dformat.format(d1) + "|" + dformat.format(limitA) + "|" + dformat.format(d2) + "|" + dformat.format(limitA - d2);
 	}
+	
+
+	@RequestMapping(value = "/getprojectmanager/{projectId}", method = RequestMethod.POST)
+	public @ResponseBody String getProjectManager(@PathVariable String projectId) {
+		Project pjt = projectService.get(projectId);
+		return pjt.getManager();
+	}
+
 
 }

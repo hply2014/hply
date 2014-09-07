@@ -85,12 +85,11 @@
                                 <div class="row">
                                     <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
                                     <div class="col-sm-4 required-field-block">
-                                        <b class="required-icon">*</b>
                                         <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
                                         <p class="help-block" />
                                     </div>
-                        </div>
-                        <div class="row">
+                                </div>
+                                <div class="row">
                                     <label for="projectId" class="col-sm-2 control-label">项目名称</label>
                                     <div class="col-sm-8 required-field-block">
                                         <b class="required-icon">*</b>
@@ -109,7 +108,7 @@
                                     </div>
                                     <label for="amount" class="col-sm-2 control-label">发票金额</label>
                                     <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
+                                        <b class="required-icon">*</b>
                                         <sf:input cssClass="form-control" path="amount" placeholder="发票金额" />
                                         <p class="help-block" />
                                     </div>
@@ -183,8 +182,8 @@
 				$("#capitalOccupied").html(result);
 			}, "text");
 		});
-		*/
-		
+		 */
+
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {
@@ -199,7 +198,6 @@
 			rules : {
 				projectId : {},
 				invoiceCode : {
-					required : true
 				},
 				amount : {
 					required : true,
