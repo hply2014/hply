@@ -15,6 +15,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="<s:url value='/assets/favicon.png' />">
 <title>登录 - 工程项目核算系统</title>
 
 <!-- Bootstrap -->
@@ -51,6 +52,11 @@ h3 {
 .login-group {
 	padding-left: 80px;
 }
+
+#footer a{
+    font-size: 12px;
+}
+
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -108,5 +114,9 @@ h3 {
 						}
 					});
 				</script>
+    <div id="footer" class="navbar-fixed-bottom">
+        <div class="pull-right"><a target="_blank" href="<s:url value='/assets/about.html' />" class="btn btn-link">Version 1.2.20140906</a></div>
+    </div>
+
 </body>
 </html>

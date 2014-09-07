@@ -431,6 +431,9 @@ strong, h1, h2, h3, h4 {
 .with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
     color: #fff; /* active text color */
     background-color: #a94442; /* active bg color */
+#footer a{
+    font-size: 12px;
+}
 </style>
 </head>
 <body>

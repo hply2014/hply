@@ -58,10 +58,10 @@ public class InformationServiceTest extends BaseJUnit4TestCase {
 			System.out.println(obj);
 		}
         
-        System.out.println("总行数：" + service.getRowCount());
+        System.out.println("总行数：" + service.getRowCount("%"));
         
-        service.getAllPaged(1, 3);
-        System.out.println("分页：" + service.getAllPaged(1, 3).size());
+        service.getAllPaged("%", 1, 3);
+        System.out.println("分页：" + service.getAllPaged("%", 1, 3).size());
     }
     
     

@@ -4,7 +4,7 @@
 	<groupId>hply.webapp</groupId>
 	<artifactId>hply-webapp</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>HPLY Maven Web Application</name>
 	<url>http://maven.apache.org</url>
 
@@ -154,7 +154,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>fweb1</finalName>
+		<finalName>hply-webapp-${version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
