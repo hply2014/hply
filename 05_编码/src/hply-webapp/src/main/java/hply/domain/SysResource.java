@@ -347,7 +347,7 @@ public class SysResource implements Serializable {
     
 	@Override
 	public String toString() {
-		System.out.println(this.getClass().getName() + ".toString():");
+		Utility.println(this.getClass().getName() + ".toString():");
         
         String str = StringUtils.EMPTY;
         str += MessageFormat.format("Id=\"{0}\",", StringUtils.trimToEmpty(this.getId()));

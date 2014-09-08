@@ -5,10 +5,10 @@
   
 package hply.mapper;
 
-import org.springframework.stereotype.Repository;
-
 import hply.domain.SysUser;
 import hply.mapper.partial.PartialSysUserMapper;
+
+import org.springframework.stereotype.Repository;
 
 
 

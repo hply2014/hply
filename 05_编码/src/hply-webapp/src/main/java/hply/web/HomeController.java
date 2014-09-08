@@ -98,7 +98,7 @@ public class HomeController {
 
 	@RequestMapping(value = JSP_LOGOUT)
 	public String logoutPage() {
-		System.out.println("logoutPage ...");
+		Utility.println("logoutPage ...");
 		Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
 		return JSP_LOGOUT;
@@ -106,7 +106,7 @@ public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(Model model) {
-		System.out.println("welcomePage ...");
+		Utility.println("welcomePage ...");
 		model.addAttribute("page_title", "首页");
 		return "index";
 	}
@@ -114,7 +114,7 @@ public class HomeController {
 	@RequestMapping(value = "password", method = RequestMethod.GET)
 	public String changePassword(Model model) {
 		SysUser currentUser = SessionHelper.getCurrentSysUser();
-		System.out.println("changePassword ...");
+		Utility.println("changePassword ...");
 		model.addAttribute("page_title", "修改" + currentUser.getRealName() + "的密码");
 		model.addAttribute("userId", currentUser.getId());
 		return "change-password";

@@ -5,10 +5,10 @@
   
 package hply.mapper;
 
-import org.springframework.stereotype.Repository;
-
 import hply.domain.SysParameter;
 import hply.mapper.partial.PartialSysParameterMapper;
+
+import org.springframework.stereotype.Repository;
 
 
 

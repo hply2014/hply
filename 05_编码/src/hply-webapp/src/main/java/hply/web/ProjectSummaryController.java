@@ -75,7 +75,7 @@ public class ProjectSummaryController {
 		model.addAttribute("page_title", "多项目汇总");
 
 		List<String> months = service.getMonths();
-		System.out.print("lst.size()=" + months.size());
+		Utility.println("lst.size()=" + months.size());
 		model.addAttribute("months", months);
 
 		if (StringUtils.isBlank(pharse)) {

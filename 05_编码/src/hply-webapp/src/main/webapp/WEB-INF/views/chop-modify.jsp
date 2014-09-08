@@ -10,182 +10,254 @@
             <sf:form modelAttribute="chop" cssClass="form-horizontal" role="form">
                 <div class="row">
                     <div class="col-sm-8">
-                        <c:choose>
-                            <c:when test="${1>1 }">
-
-
-                                <div class="row">
-
-                                    <label for="step1Idea" class="col-sm-2 control-label">事业部/项目部审核意见</label>
-                                    <div class="col-sm-4 ">
-                                        <sf:input cssClass="form-control" path="step1Idea" placeholder="事业部/项目部审核意见" />
-                                        <p class="help-block" />
-                                    </div>
+                        <c:if test="${not (empty step1 and empty step2 and empty step3) }">
+                            <div class="row">
+                                <label for="chopCode" class="col-sm-2 control-label">编号</label>
+                                <div class="col-sm-4">
+                                    <p class="form-control-static">
+                                        <c:out value="${chop.chopCode}" />
+                                    </p>
                                 </div>
-                                <div class="row">
-                                    <label for="step1User" class="col-sm-2 control-label">事业部/项目部审核人</label>
-                                    <div class="col-sm-4 ">
-                                        <sf:input cssClass="form-control" path="step1User" placeholder="事业部/项目部审核人" />
-                                        <p class="help-block" />
-                                    </div>
 
-                                    <label for="step1Time" class="col-sm-2 control-label">事业部/项目部审核时间</label>
-                                    <div class="col-sm-4 ">
-                                        <div class="input-group date">
-                                            <sf:input cssClass="form-control" path="step1Time"
-                                                data-date-format="yyyy-mm-dd" />
-                                            <span class="input-group-addon"><i
-                                                class="glyphicon glyphicon-calendar"></i></span>
-                                        </div>
-                                        <p class="help-block" />
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static">
+                                        <c:out value="${chop.projectId}" />
+                                    </p>
                                 </div>
-                                <div class="row">
-                                    <label for="step2Idea" class="col-sm-2 control-label">财务部审核意见</label>
-                                    <div class="col-sm-4 ">
-                                        <sf:input cssClass="form-control" path="step2Idea" placeholder="财务部审核意见" />
-                                        <p class="help-block" />
-                                    </div>
-
-                                    <label for="step2User" class="col-sm-2 control-label">财务部审核人</label>
-                                    <div class="col-sm-4 ">
-                                        <sf:input cssClass="form-control" path="step2User" placeholder="财务部审核人" />
-                                        <p class="help-block" />
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <label for="organizationId" class="col-sm-2 control-label">所在部门</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static">
+                                        <c:out value="${chop.organizationId}" />
+                                    </p>
                                 </div>
-                                <div class="row">
-                                    <label for="step2Time" class="col-sm-2 control-label">财务部审核时间</label>
-                                    <div class="col-sm-4 ">
-                                        <div class="input-group date">
-                                            <sf:input cssClass="form-control" path="step2Time"
-                                                data-date-format="yyyy-mm-dd" />
-                                            <span class="input-group-addon"><i
-                                                class="glyphicon glyphicon-calendar"></i></span>
-                                        </div>
-                                        <p class="help-block" />
-                                    </div>
-
-                                    <label for="step3Idea" class="col-sm-2 control-label">经办人办理结果</label>
-                                    <div class="col-sm-4 ">
-                                        <sf:input cssClass="form-control" path="step3Idea" placeholder="经办人办理结果" />
-                                        <p class="help-block" />
-                                    </div>
+                                <label for="manager" class="col-sm-2 control-label">项目经理</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static" id="manager">
+                                        <c:out value="${chop.manager}" />
+                                    </p>
                                 </div>
-                                <div class="row">
-                                    <label for="step3User" class="col-sm-2 control-label">经办人</label>
-                                    <div class="col-sm-4 ">
-                                        <sf:input cssClass="form-control" path="step3User" placeholder="经办人" />
-                                        <p class="help-block" />
-                                    </div>
-
-                                    <label for="step3Time" class="col-sm-2 control-label">经办时间</label>
-                                    <div class="col-sm-4 ">
-                                        <div class="input-group date">
-                                            <sf:input cssClass="form-control" path="step3Time"
-                                                data-date-format="yyyy-mm-dd" />
-                                            <span class="input-group-addon"><i
-                                                class="glyphicon glyphicon-calendar"></i></span>
-                                        </div>
-                                        <p class="help-block" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="stepStatus" class="col-sm-2 control-label">流程状态</label>
-                                    <div class="col-sm-4 ">
-                                        <sf:input cssClass="form-control" path="stepStatus" placeholder="流程状态" />
-                                        <p class="help-block" />
-                                    </div>
-                                </div>
-                            </c:when>
-
-                            <c:otherwise>
-                                <div class="row">
-                                    <label for="chopCode" class="col-sm-2 control-label">编号</label>
-                                    <div class="col-sm-4 required-field-block">
-                                        <b class="required-icon">*</b>
-                                        <sf:input cssClass="form-control" path="chopCode" placeholder="编号" />
-                                        <p class="help-block" />
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <label for="projectId" class="col-sm-2 control-label">项目名称</label>
-                                    <div class="col-sm-8 required-field-block">
-                                        <b class="required-icon">*</b>
-                                        <%--    <sf:input cssClass="form-control" path="projectId" placeholder="项目ID" /> --%>
-                                        <sf:select cssClass="form-control select2" path="projectId"
-                                            items="${projectlist }" itemValue="id" itemLabel="projectName" />
-                                        <p class="help-block" />
-                                    </div>
-                                </div>
-                                <%--
-                        <div class="row">
-                            <label for="projectCode" class="col-sm-2 control-label">项目编号</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="projectCode" placeholder="项目编号" />
-                                <p class="help-block" />
                             </div>
 
-                            <label for="projectName" class="col-sm-2 control-label">项目名称</label>
-                            <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="projectName" placeholder="项目名称" />
-                                <p class="help-block" />
+                            <div class="row">
+                                <sf:label path="content" cssClass="col-sm-2 control-label">主要内容</sf:label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static">
+                                        <c:out value="${chop.content}" />
+                                    </p>
+                                </div>
                             </div>
-                        </div> --%>
-                                <div class="row">
-                                    <label for="organizationId" class="col-sm-2 control-label">所在部门</label>
-                                    <div class="col-sm-4 ">
-                                        <p class="form-control-static">
-                                            <c:out value="${chop.organizationId}" />
-                                        </p>
-                                        <p class="help-block" />
-                                    </div>
-                                    <label for="manager" class="col-sm-2 control-label">项目经理</label>
-                                    <div class="col-sm-4 ">
-                                        <p class="form-control-static" id="manager">
-                                            <c:out value="${chop.manager}" />
-                                        </p>
-                                        <p class="help-block" />
-                                    </div>
+                            <div class="row">
+                                <label for="applyUser" class="col-sm-2 control-label">申请人</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static">
+                                        <c:out value="${chop.applyUser}" />
+                                    </p>
                                 </div>
 
-                                <div class="row">
-                                    <sf:label path="content" cssClass="col-sm-2 control-label">主要内容</sf:label>
-                                    <div class="col-sm-10">
-                                        <sf:textarea cssClass="form-control" rows="3" path="content"
-                                            placeholder="主要内容，500字以内" />
-                                        <p class="help-block" />
-                                    </div>
+                                <label for="applyTime" class="col-sm-2 control-label">申请时间</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static">
+                                        <fmt:formatDate value="${chop.applyTime}" pattern="yyyy-MM-dd" />
+                                    </p>
+                                </div>
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty step1 }">
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-6 checkbox">
+                                    <sf:checkbox cssClass="icheckbox" path="stepStatus" id="stepStatus" value="1" />
+                                    <label for="stepStatus">同意</label>
+                                    <p class="help-block" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="step1Idea" class="col-sm-2 control-label">审核意见</label>
+                                <div class="col-sm-6">
+                                    <sf:input id="s1" cssClass="form-control" path="step1Idea" placeholder="部门审核意见" />
+                                    <p class="help-block" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <button id="succ" type="submit" class="btn btn-success" disabled="disabled">
+                                    <span class="glyphicon glyphicon-ok"></span> 同意
+                                </button>
+                                <button id="dang" type="submit" class="btn btn-danger sm-offset-3">
+                                    <span class="glyphicon glyphicon-remove"></span> 拒绝
+                                </button>
+                                <a href='<s:url value="/chop" />' class="btn btn-link"><span
+                                    class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty step2 }">
+                            <div class="row">
+                                <label class="col-sm-2 control-label">部门审核</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static">
+                                        <c:if
+                                    test="${not empty chop.step1User }"><c:out value="${chop.step1User}" />
+                                    <br />
+                                </c:if> <c:if test="${not empty chop.step1Idea }">意见：<c:out value="${chop.step1Idea}" />
+                                    <br />
+                                </c:if> <c:if test="${not empty chop.step1Time }">时间：<fmt:formatDate
+                                        value="${chop.step1Time}" pattern="yyyy-MM-dd" />
+                                </c:if>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-6 checkbox">
+                                    <sf:checkbox cssClass="icheckbox" path="stepStatus" id="stepStatus" value="2" />
+                                    <label for="stepStatus">同意</label>
+                                    <p class="help-block" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="step2Idea" class="col-sm-2 control-label">审核意见</label>
+                                <div class="col-sm-6 ">
+                                    <sf:input id="s1" cssClass="form-control" path="step2Idea" placeholder="财务部审核意见" />
+                                    <p class="help-block" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <button id="succ" type="submit" class="btn btn-success" disabled="disabled">
+                                    <span class="glyphicon glyphicon-ok"></span> 同意
+                                </button>
+                                <button id="dang" type="submit" class="btn btn-danger sm-offset-3">
+                                    <span class="glyphicon glyphicon-remove"></span> 拒绝
+                                </button>
+                                <a href='<s:url value="/chop" />' class="btn btn-link"><span
+                                    class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty step3 }">
+                            <div class="row">
+                                <label class="col-sm-2 control-label">部门审核</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static">
+                                        <c:if
+                                    test="${not empty chop.step1User }"><c:out value="${chop.step1User}" />
+                                    <br />
+                                </c:if> <c:if test="${not empty chop.step1Idea }">意见：<c:out value="${chop.step1Idea}" />
+                                    <br />
+                                </c:if> <c:if test="${not empty chop.step1Time }">时间：<fmt:formatDate
+                                        value="${chop.step1Time}" pattern="yyyy-MM-dd" />
+                                </c:if>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 control-label">财务部审批</label>
+                                <div class="col-sm-10">
+                                    <p class="form-control-static">
+                                       <c:if
+                                    test="${not empty chop.step2User }"><c:out value="${chop.step2User}" />
+                                    <br />
+                                </c:if> <c:if test="${not empty chop.step2Idea }">意见：<c:out value="${chop.step2Idea}" />
+                                    <br />
+                                </c:if> <c:if test="${not empty chop.step2Time }">时间：<fmt:formatDate
+                                        value="${chop.step2Time}" pattern="yyyy-MM-dd" />
+                                </c:if>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="step3Idea" class="col-sm-2 control-label">办理结果</label>
+                                <div class="col-sm-6 ">
+                                    <sf:input cssClass="form-control" path="step3Idea" placeholder="经办人办理结果" />
+                                    <p class="help-block" />
+                                </div>
+                            </div><input type="hidden" name="stepStatus" value="3" />
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <button id="succ" type="submit" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-ok"></span> 办理
+                                </button>
+                                <a href='<s:url value="/chop" />' class="btn btn-link"><span
+                                    class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${empty step1 and empty step2 and empty step3 }">
+                            <div class="row">
+                                <label for="chopCode" class="col-sm-2 control-label">编号</label>
+                                <div class="col-sm-4 required-field-block">
+                                    <b class="required-icon">*</b>
+                                    <sf:input cssClass="form-control" path="chopCode" placeholder="编号" />
+                                    <p class="help-block" />
                                 </div>
 
-
-                                <div class="row">
-                                    <label for="applyUser" class="col-sm-2 control-label">申请人</label>
-                                    <div class="col-sm-4 ">
-                                        <p class="form-control-static">
-                                            <c:out value="${chop.applyUser}" />
-                                        </p>
-                                        <p class="help-block" />
-                                    </div>
-
-                                    <label for="applyTime" class="col-sm-2 control-label">申请时间</label>
-                                    <div class="col-sm-4 ">
-                                        <p class="form-control-static">
-                                            <fmt:formatDate value="${chop.applyTime}" pattern="yyyy-MM-dd" />
-                                        </p>
-                                        <p class="help-block" />
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <label for="projectId" class="col-sm-2 control-label">项目名称</label>
+                                <div class="col-sm-8 required-field-block">
+                                    <b class="required-icon">*</b>
+                                    <sf:select cssClass="form-control select2" path="projectId" items="${projectlist }"
+                                        itemValue="id" itemLabel="projectName" />
+                                    <p class="help-block" />
                                 </div>
-                            </c:otherwise>
+                            </div>
+                            <div class="row">
+                                <label for="organizationId" class="col-sm-2 control-label">所在部门</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static">
+                                        <c:out value="${chop.organizationId}" />
+                                    </p>
+                                    <p class="help-block" />
+                                </div>
+                                <label for="manager" class="col-sm-2 control-label">项目经理</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static" id="manager">
+                                        <c:out value="${chop.organizationId}" />
+                                    </p>
+                                    <sf:hidden path="manager" id="hiddenManager" />
+                                    <p class="help-block" />
+                                </div>
+                            </div>
 
-                        </c:choose>
+                            <div class="row">
+                                <sf:label path="content" cssClass="col-sm-2 control-label">主要内容</sf:label>
+                                <div class="col-sm-10 required-field-block">
+                                    <b class="required-icon">*</b>
+                                    <sf:textarea cssClass="form-control" rows="3" path="content"
+                                        placeholder="主要内容，500字以内" />
+                                    <p class="help-block" />
+                                </div>
+                            </div>
 
-                        <button type="submit" class="btn btn-info pull-right">
-                            <span class="glyphicon glyphicon-ok"></span> 提 交
-                        </button>
-                        <a href='<s:url value="/chop" />' class="btn btn-link"><span
-                            class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 
+                            <div class="row">
+                                <label for="applyUser" class="col-sm-2 control-label">申请人</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static">
+                                        <c:out value="${chop.applyUser}" />
+                                    </p>
+                                    <p class="help-block" />
+                                </div>
+
+                                <label for="applyTime" class="col-sm-2 control-label">申请时间</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static">
+                                        <fmt:formatDate value="${chop.applyTime}" pattern="yyyy-MM-dd" />
+                                    </p>
+                                    <p class="help-block" />
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-info pull-right">
+                                <span class="glyphicon glyphicon-ok"></span> 提 交
+                            </button>
+                            <a href='<s:url value="/chop" />' class="btn btn-link"><span
+                                class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
+                        </c:if>
                     </div>
                 </div>
                 <c:if test="${not empty errors}">
@@ -229,7 +301,8 @@
 				projectCode : {},
 				projectName : {},
 				manager : {},
-				content : {},
+				content : {
+					required : true},
 				applyUser : {},
 				applyTime : {},
 				organizationId : {},
@@ -248,14 +321,29 @@
 
 		//在界面上选择了项目
 		$("#projectId").change(function() {
-			$.post("<s:url value='/api/getprojectmanager/' />" + jQuery("#projectId").val(), {}, function(result) {
-				$("#manager").html(result);
-			}, "text");
+			refreshManager();
 		});
 
-		$.post("<s:url value='/api/getprojectmanager/' />" + jQuery("#projectId").val(), {}, function(result) {
-			$("#manager").html(result);
-		}, "text");
+		function refreshManager() {
+			if(jQuery("#projectId").val() == null ) return;
+			
+			$.post("<s:url value='/api/getprojectmanager/' />" + jQuery("#projectId").val(), {}, function(result) {
+				$("#manager").html(result);
+				$("#hiddenManager").val(result);
+			}, "text");
+		}
+		refreshManager();
+		$("#s1").val('拒绝，请重新修订');
+
+		$('input').on('ifChecked', function(event) {
+			$("#s1").val('同意，审核通过');
+			$(".btn-success").removeAttr("disabled");
+			$(".btn-danger").attr("disabled", "disabled");
+		}).on('ifUnchecked', function(event) {
+			$("#s1").val('拒绝，请重新修订');
+			$(".btn-success").attr("disabled", "disabled");
+			$(".btn-danger").removeAttr("disabled");
+		});
 	});
 </script>
 <%@ include file="bottom.jsp"%>

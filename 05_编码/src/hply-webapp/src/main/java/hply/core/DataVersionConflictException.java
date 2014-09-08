@@ -15,7 +15,7 @@ public class DataVersionConflictException extends RuntimeException {
 	}
 
 	public DataVersionConflictException(String message) {
-		System.out.println(message);
+		Utility.println(message);
 	}
 
 }

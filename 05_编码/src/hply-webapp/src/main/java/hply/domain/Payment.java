@@ -5,12 +5,13 @@
 
 package hply.domain;
 
+import hply.core.Utility;
+
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
-import hply.core.Utility;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -456,7 +457,7 @@ public class Payment implements Serializable {
     
 	@Override
 	public String toString() {
-		System.out.println(this.getClass().getName() + ".toString():");
+		Utility.println(this.getClass().getName() + ".toString():");
         
         String str = StringUtils.EMPTY;
         str += MessageFormat.format("Id=\"{0}\",", StringUtils.trimToEmpty(this.getId()));

@@ -178,7 +178,7 @@ public class SysUserController {
 	 */
 	@RequestMapping(value = "auth/{id}")
 	public String authorization(@PathVariable String id, Model model) {
-		System.out.println("authorization tree ...");
+		Utility.println("authorization tree ...");
 		model.addAttribute("page_title", "业务授权");
 		return "sample-fancytree";
 	}

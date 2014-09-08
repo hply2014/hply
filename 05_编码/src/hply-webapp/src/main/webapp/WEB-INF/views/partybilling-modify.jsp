@@ -12,8 +12,6 @@
                     <div class="col-sm-8">
                         <c:choose>
                             <c:when test="${step1 == 1}">
-
-
                                 <div class="row">
                                     <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
                                     <div class="col-sm-4 ">
@@ -27,7 +25,6 @@
                                             <c:out value="${newProjectName}" />
                                         </p>
                                     </div>
-
                                 </div>
                                 <div class="row">
                                     <label for="taxRate" class="col-sm-2 control-label">税率</label>
@@ -170,6 +167,7 @@
 			$(".btn-success").attr("disabled", "disabled");
 			$(".btn-danger").removeAttr("disabled");
 		});
+		$("#s1").val('不同意，请重新修订');
 
 		/*
 		$("#succ").click(function(){

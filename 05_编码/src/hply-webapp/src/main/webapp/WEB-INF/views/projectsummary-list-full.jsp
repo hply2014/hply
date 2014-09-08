@@ -37,9 +37,13 @@ strong, h1, h2, h3, h4 {
 	font-family: 微软雅黑, 黑体;
 }
 
-th {
+th, .nowrap {
 	word-break: keep-all;
 	white-space: nowrap;
+}
+
+
+th {
 	text-align: center
 }
 
@@ -110,9 +114,9 @@ th {
             <c:forEach items="${list}" var="projectSummary">
                 <tr>
                     <td><%=++i%></td>
-                    <td><fmt:formatDate value="${projectSummary.trice}" pattern="yyyy-MM-dd" /></td>
+                    <td class="nowrap"><fmt:formatDate value="${projectSummary.trice}" pattern="yyyy-MM-dd" /></td>
                     <td><c:out value="${projectSummary.description}" /></td>
-                    <td><c:out value="${projectSummary.projectCode}" /></td>
+                    <td class="nowrap"><c:out value="${projectSummary.projectCode}" /></td>
                     <td><c:out value="${projectSummary.projectName}" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.contractAmount}"
                             pattern="###,###,###,###,##0.00" /></td>

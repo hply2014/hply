@@ -8,7 +8,7 @@
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
             </button>
-            <strong><a href="<s:url value="/chop/detail/${chop.id }" />"> ${chop.id }</a></strong> ，${message}
+            <strong><a href="<s:url value="/chop/detail/${chop.id }" />"> ${chop.chopCode }</a></strong> ，${message}
         </div>
     </c:if>
     <c:if test="${not empty delMessage}">
@@ -16,7 +16,7 @@
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
             </button>
-            <strong>${chop.id }</strong> ，${delMessage}
+            <strong>${chop.chopCode }</strong> ，${delMessage}
         </div>
     </c:if>
     <div class="panel panel-primary">
@@ -77,54 +77,49 @@
                                         value="${chop.step1Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
                             <td><c:if test="${empty chop.step2User }">未审批</c:if> <c:if
-                                    test="${not empty chop.step2Idea }">财务审批：<c:out value="${chop.step2User}" />
+                                    test="${not empty chop.step2User }">财务审批：<c:out value="${chop.step2User}" />
                                     <br />
                                 </c:if> <c:if test="${not empty chop.step2Idea }">意见：<c:out value="${chop.step2Idea}" />
                                     <br />
-                                </c:if> <c:if test="${not empty chop.step2Idea }">时间：<fmt:formatDate
+                                </c:if> <c:if test="${not empty chop.step2Time }">时间：<fmt:formatDate
                                         value="${chop.step2Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
                             <td><c:if test="${empty chop.step3User }">未办理</c:if> <c:if
-                                    test="${not empty chop.step3Idea }">办理人：<c:out value="${chop.step3User}" />
+                                    test="${not empty chop.step3User }">办理人：<c:out value="${chop.step3User}" />
                                     <br />
                                 </c:if> <c:if test="${not empty chop.step3Idea }">结果：<c:out value="${chop.step3Idea}" />
                                     <br />
-                                </c:if> <c:if test="${not empty chop.step3Idea }">时间：<fmt:formatDate
+                                </c:if> <c:if test="${not empty chop.step3Time }">时间：<fmt:formatDate
                                         value="${chop.step3Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
-                            <td><c:out value="${chop.stepStatus}" /></td>
-                            <td><c:choose>
-                                    <c:when test="${ empty chop.stepStatus }">
-                                        <shiro:hasPermission name="`chop_check1`">
-                                            <a
-                                                href="<s:url value="/chop/step1/{id}"><s:param name="id" value="${chop.id }" /></s:url>">部门审核</a>
-                                        </shiro:hasPermission>
-                                        <shiro:hasPermission name="`chop_create`">
-                                            <a
-                                                href="<s:url value="/chop/modify/{id}"><s:param name="id" value="${chop.id }" /></s:url>">修改</a>
-                                            <a class="delete"
-                                                data-confirm-message="用章申请数据：<c:out value="${chop.chopCode}" />，将被永久删除，操作不可撤销，是否确认？"
-                                                href="<s:url value="/chop/delete/{id}"><s:param name="id" value="${chop.id }" /></s:url>">删除</a>
-                                        </shiro:hasPermission>
-                                    </c:when>
-                                    <c:when test="${ chop.stepStatus == 2 }">
-                                        <shiro:hasPermission name="`chop_check2`">
-                                            <a
-                                                href="<s:url value="/chop/step2/{id}"><s:param name="id" value="${chop.id }" /></s:url>">财务审核</a>
-                                        </shiro:hasPermission>
-                                        <shiro:hasPermission name="`chop_check2_1`">
-                                            <a
-                                                href="<s:url value="/chop/step21/{id}"><s:param name="id" value="${chop.id }" /></s:url>">财务审核（代）</a>
-                                        </shiro:hasPermission>
-                                    </c:when>
-                                    <c:when test="${ chop.stepStatus == 3 }">
-                                        <shiro:hasPermission name="`chop_check3`">
-                                            <a
-                                                href="<s:url value="/chop/step3/{id}"><s:param name="id" value="${chop.id }" /></s:url>">办理</a>
-                                        </shiro:hasPermission>
+                            <td><c:if test="${ empty chop.stepStatus }">
+                                    <shiro:hasPermission name="`chop_check1`">
+                                        <a
+                                            href="<s:url value="/chop/step1/{id}"><s:param name="id" value="${chop.id }" /></s:url>">部门审核</a><br/>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`chop_create`">
+                                        <a
+                                            href="<s:url value="/chop/modify/{id}"><s:param name="id" value="${chop.id }" /></s:url>">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="用章申请数据：<c:out value="${chop.chopCode}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/chop/delete/{id}"><s:param name="id" value="${chop.id }" /></s:url>">删除</a>
+                                    </shiro:hasPermission>
+                                </c:if> <c:if test="${ chop.stepStatus == '1' }">
+                                    <shiro:hasPermission name="`chop_check2`">
+                                        <a
+                                            href="<s:url value="/chop/step2/{id}"><s:param name="id" value="${chop.id }" /></s:url>">财务审核</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`chop_check2_1`">
+                                        <a
+                                            href="<s:url value="/chop/step2/{id}"><s:param name="id" value="${chop.id }" /></s:url>">财务审核（代）</a>
+                                    </shiro:hasPermission>
+                                </c:if> <c:if test="${ chop.stepStatus == '2' }">
+                                    <shiro:hasPermission name="`chop_check3`">
+                                        <a
+                                            href="<s:url value="/chop/step3/{id}"><s:param name="id" value="${chop.id }" /></s:url>">办理</a>
+                                    </shiro:hasPermission>
 
-                                    </c:when>
-                                </c:choose></td>
+                                </c:if></td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -5,8 +5,9 @@
   
 package hply.mapper;
 
-import org.springframework.stereotype.Repository;
 import hply.mapper.partial.PartialArrearsInterestMapper;
+
+import org.springframework.stereotype.Repository;
 
 
 

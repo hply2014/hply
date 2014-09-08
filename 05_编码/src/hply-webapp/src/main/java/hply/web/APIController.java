@@ -66,7 +66,7 @@ public class APIController {
 
 	@RequestMapping(value = "/tree/{userId}")
 	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
-		System.out.println("getTreeData ..." + userId);
+		Utility.println("getTreeData ..." + userId);
 		return sysResourceService.getRootTreeNode(userId);
 	}
 

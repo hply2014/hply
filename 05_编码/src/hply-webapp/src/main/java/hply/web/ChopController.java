@@ -132,10 +132,12 @@ public class ChopController {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 		Chop chop = service.get(id);
-		String orgId = SessionHelper.getCurrentSysUser().getOrganizationId();
-		chop.setOrganizationId(orgService.get(orgId).getOrganizationName());
-		chop.setApplyUser(SessionHelper.getCurrentRealName());
-		chop.setApplyTime(new Date());
+
+		SysOrganization org = orgService.get(chop.getOrganizationId());
+		chop.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+		
+		SysUser user = sysUserService.get(chop.getApplyUser());
+		chop.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
 
 		model.addAttribute("chop", chop);
 		model.addAttribute("page_title", "修改用章申请");
@@ -148,8 +150,16 @@ public class ChopController {
 	@RequestMapping(value = "/step1/{id}", method = RequestMethod.GET)
 	public String step1Form(@PathVariable String id, Model model) {
 		Chop chop = service.get(id);
-		List<Project> projectlist = projectService.getAllNames();
-		model.addAttribute("projectlist", projectlist);
+		
+		Project project = projectService.get(chop.getProjectId());
+		chop.setProjectId(project != null ? "[" + project.getProjectCode() + "]" + project.getProjectName() : Utility.EMPTY);
+
+		SysOrganization org = orgService.get(chop.getOrganizationId());
+		chop.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+		
+		SysUser user = sysUserService.get(chop.getApplyUser());
+		chop.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
+		
 		model.addAttribute("chop", chop);
 		model.addAttribute("page_title", "用章申请（部门审核）");
 		model.addAttribute("step1", 1);
@@ -162,10 +172,21 @@ public class ChopController {
 	@RequestMapping(value = "/step2/{id}", method = RequestMethod.GET)
 	public String step2Form(@PathVariable String id, Model model) {
 		Chop chop = service.get(id);
-		List<Project> projectlist = projectService.getAllNames();
-		model.addAttribute("projectlist", projectlist);
+		
+		Project project = projectService.get(chop.getProjectId());
+		chop.setProjectId(project != null ? "[" + project.getProjectCode() + "]" + project.getProjectName() : Utility.EMPTY);
+
+		SysOrganization org = orgService.get(chop.getOrganizationId());
+		chop.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+		
+		SysUser user = sysUserService.get(chop.getApplyUser());
+		chop.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
+		
+		SysUser step1User = sysUserService.get(chop.getStep1User());
+		chop.setStep1User(step1User != null ? step1User.getRealName() : Utility.EMPTY);
+		
 		model.addAttribute("chop", chop);
-		model.addAttribute("page_title", "用章申请（财务部审核）");
+		model.addAttribute("page_title", "用章申请（财务部审批）");
 		model.addAttribute("step2", 1);
 		return JSP_PAGE_MODIFY;
 	}
@@ -176,8 +197,22 @@ public class ChopController {
 	@RequestMapping(value = "/step3/{id}", method = RequestMethod.GET)
 	public String step3Form(@PathVariable String id, Model model) {
 		Chop chop = service.get(id);
-		List<Project> projectlist = projectService.getAllNames();
-		model.addAttribute("projectlist", projectlist);
+		
+		Project project = projectService.get(chop.getProjectId());
+		chop.setProjectId(project != null ? "[" + project.getProjectCode() + "]" + project.getProjectName() : Utility.EMPTY);
+
+		SysOrganization org = orgService.get(chop.getOrganizationId());
+		chop.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+		
+		SysUser user = sysUserService.get(chop.getApplyUser());
+		chop.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
+		
+		SysUser step1User = sysUserService.get(chop.getStep1User());
+		chop.setStep1User(step1User != null ? step1User.getRealName() : Utility.EMPTY);
+
+		SysUser step2User = sysUserService.get(chop.getStep2User());
+		chop.setStep2User(step2User != null ? step2User.getRealName() : Utility.EMPTY);
+		
 		model.addAttribute("chop", chop);
 		model.addAttribute("page_title", "用章申请（办理）");
 		model.addAttribute("step3", 1);
@@ -227,6 +262,95 @@ public class ChopController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("chop", chop);
+		return "redirect:" + URI;
+	}
+	
+
+
+	/*
+	 * 处理部门审核的提交动作
+	 */
+	@RequestMapping(value = "/step1/{id}", method = RequestMethod.POST)
+	public String processStep1Submit(@PathVariable String id, @Valid Chop chop, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
+
+		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
+			return JSP_PAGE_MODIFY;
+		}
+		
+		Chop orginChop = service.get(id);
+		orginChop.setStep1Idea(chop.getStep1Idea());
+		orginChop.setStep1User(SessionHelper.getCurrentUserId());
+		orginChop.setStep1Time(new Date());
+		orginChop.setStepStatus(chop.getStepStatus());
+		
+		orginChop.setStep2Idea(null);
+		orginChop.setStep2Time(null);
+		orginChop.setStep2User(null);
+		
+		orginChop.setStep3Idea(null);
+		orginChop.setStep3Time(null);
+		orginChop.setStep3User(null);
+
+		service.update(orginChop);
+		redirectAttrs.addFlashAttribute("message", "部门审核成功");
+
+		redirectAttrs.addFlashAttribute("chop", orginChop);
+		return "redirect:" + URI;
+	}
+
+	/*
+	 * 处理修改页面的提交动作
+	 */
+	@RequestMapping(value = "/step2/{id}", method = RequestMethod.POST)
+	public String processStep2Submit(@PathVariable String id, @Valid Chop chop, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
+		Utility.println(chop.toString());
+
+		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
+			return JSP_PAGE_MODIFY;
+		}
+		
+		Chop orginChop = service.get(id);
+		orginChop.setStep2Idea(chop.getStep2Idea());
+		orginChop.setStep2User(SessionHelper.getCurrentUserId());
+		orginChop.setStep2Time(new Date());
+		orginChop.setStepStatus(chop.getStepStatus());
+
+		service.update(orginChop);
+		redirectAttrs.addFlashAttribute("message", "财务审批成功");
+
+		redirectAttrs.addFlashAttribute("chop", orginChop);
+		return "redirect:" + URI;
+	}
+	
+
+
+	/*
+	 * 处理修改页面的提交动作
+	 */
+	@RequestMapping(value = "/step3/{id}", method = RequestMethod.POST)
+	public String processStep3Submit(@PathVariable String id, @Valid Chop chop, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
+
+		if (result.hasErrors()) {
+			model.addAttribute("errors", "1");
+			return JSP_PAGE_MODIFY;
+		}
+
+		
+		Chop orginChop = service.get(id);
+		orginChop.setStep3Idea(chop.getStep3Idea());
+		orginChop.setStep3User(SessionHelper.getCurrentUserId());
+		orginChop.setStep3Time(new Date());
+		orginChop.setStepStatus(chop.getStepStatus());
+
+		service.update(orginChop);
+		redirectAttrs.addFlashAttribute("message", "处理成功");
+
+		redirectAttrs.addFlashAttribute("chop", orginChop);
 		return "redirect:" + URI;
 	}
 

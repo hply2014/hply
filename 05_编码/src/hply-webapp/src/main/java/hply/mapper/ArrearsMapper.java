@@ -5,9 +5,9 @@
 
 package hply.mapper;
 
-import org.springframework.stereotype.Repository;
-
 import hply.mapper.partial.PartialArrearsMapper;
+
+import org.springframework.stereotype.Repository;
 
 /**
  * 数据表： [t_arrears] 07_往来欠款

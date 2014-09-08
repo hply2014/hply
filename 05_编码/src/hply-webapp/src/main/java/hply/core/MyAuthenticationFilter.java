@@ -27,7 +27,7 @@ public class MyAuthenticationFilter extends AuthorizationFilter {
 
 		Subject subject = getSubject(request, response);
 		ShiroHttpServletRequest shiroRequest = request instanceof ShiroHttpServletRequest ? (ShiroHttpServletRequest) request : null;
-		System.out.println("shiroRequest.getServletPath()=" + shiroRequest.getServletPath());
+		Utility.println("shiroRequest.getServletPath()=" + shiroRequest.getServletPath());
 		if (subject.isAuthenticated() == false) {
 			return false;
 		}

@@ -260,12 +260,12 @@ public class Utility {
 		return ipAddress;
 	}
 
-	public static void println(String str) {
-		System.out.println(str);
+	public static void println(Object str) {
+		logger.info(str);
 	}
 
 	public static void println(String pattern, Object... args) {
-		System.out.println(MessageFormat.format(pattern, args));
+		Utility.println(MessageFormat.format(pattern, args));
 	}
 
 	public static String getRandomUUID() {

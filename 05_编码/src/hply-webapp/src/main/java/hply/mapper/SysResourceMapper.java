@@ -5,11 +5,12 @@
   
 package hply.mapper;
 
-import java.util.List;
-import org.springframework.stereotype.Repository;
-
 import hply.domain.SysResource;
 import hply.mapper.partial.PartialSysResourceMapper;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
 
 
 

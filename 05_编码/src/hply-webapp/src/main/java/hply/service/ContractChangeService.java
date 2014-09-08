@@ -1,14 +1,16 @@
 ﻿package hply.service;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import hply.domain.ContractChange;
-import hply.mapper.ContractChangeMapper;
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
+import hply.domain.ContractChange;
+import hply.mapper.ContractChangeMapper;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 

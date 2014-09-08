@@ -5,8 +5,9 @@
   
 package hply.mapper;
 
-import org.springframework.stereotype.Repository;
 import hply.mapper.partial.PartialSysOrganizationMapper;
+
+import org.springframework.stereotype.Repository;
 
 
 

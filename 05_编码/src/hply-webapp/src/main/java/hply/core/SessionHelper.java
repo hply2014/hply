@@ -74,7 +74,7 @@ public class SessionHelper {
 
 	public static TreeNode getMenuRoot() {
 		SysUser user = getCurrentSysUser();
-		System.out.println("user=" + user);
+		Utility.println("user=" + user);
 		if (user != null && user.getMustChangePassword() == false && sysResourceService != null) {
 			try {
 				TreeNode root = sysResourceService.getMenuRoot(user.getId());

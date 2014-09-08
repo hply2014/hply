@@ -41,7 +41,7 @@ body {
 }
 
 
-th {
+th, .nowrap {
 	word-break: keep-all;
 	white-space: nowrap;
 }

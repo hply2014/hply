@@ -5,10 +5,12 @@
   
 package hply.mapper.partial;
 
+import hply.domain.SysOrganization;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import hply.domain.SysOrganization;
 
 
 

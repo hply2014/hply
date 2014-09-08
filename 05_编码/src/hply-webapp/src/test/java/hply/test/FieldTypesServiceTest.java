@@ -1,11 +1,14 @@
 ﻿package hply.test;
 
-import java.util.List;
 import hply.BaseJUnit4TestCase;
+import hply.core.Utility;
+import hply.domain.FieldTypes;
+import hply.service.FieldTypesService;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import hply.service.FieldTypesService;
-import hply.domain.FieldTypes;
 
 public class FieldTypesServiceTest extends BaseJUnit4TestCase {
 
@@ -16,7 +19,7 @@ public class FieldTypesServiceTest extends BaseJUnit4TestCase {
     public void insertTest() {
         FieldTypes obj = this.getRandomDomain();
         service.insert(obj);
-        System.out.println("已插入：" + obj);
+        Utility.println("已插入：" + obj);
     }
     
     
@@ -24,15 +27,15 @@ public class FieldTypesServiceTest extends BaseJUnit4TestCase {
     public void updateTest() {
         FieldTypes obj0 = this.getRandomDomain();
         service.insert(obj0);
-        System.out.println("已插入：" + obj0);
+        Utility.println("已插入：" + obj0);
         
 		FieldTypes obj1 = service.get(obj0.getId());
         //获取到的obj对象
-        System.out.println("已获取：" + obj1);
+        Utility.println("已获取：" + obj1);
         
         service.update(obj1);
 		FieldTypes obj2 = service.get(obj1.getId());
-        System.out.println("更新后：" + obj2);
+        Utility.println("更新后：" + obj2);
         
     }
     
@@ -41,7 +44,7 @@ public class FieldTypesServiceTest extends BaseJUnit4TestCase {
     public void deleteTest() {
         FieldTypes obj = this.getRandomDomain();
         service.insert(obj);
-        System.out.println("已插入：" + obj);
+        Utility.println("已插入：" + obj);
 		service.delete(obj.getId());
     }
     
@@ -52,16 +55,16 @@ public class FieldTypesServiceTest extends BaseJUnit4TestCase {
             service.insert(this.getRandomDomain());
         }
         
-        System.out.println("所有：");
+        Utility.println("所有：");
 		List<FieldTypes> list = service.getAll();
 		for (FieldTypes obj : list) {
-			System.out.println(obj);
+			Utility.println(obj);
 		}
         
-        System.out.println("总行数：" + service.getRowCount());
+        Utility.println("总行数：" + service.getRowCount());
         
         service.getAllPaged(1, 3);
-        System.out.println("分页：" + service.getAllPaged(1, 3).size());
+        Utility.println("分页：" + service.getAllPaged(1, 3).size());
     }
     
     
