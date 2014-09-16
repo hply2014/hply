@@ -14,5 +14,21 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ArrearsMapper extends PartialArrearsMapper {
+
+	/*
+	 * 按工程计算往来欠款总额
+	 */
 	public Double getTotalByProject(String projectId);
+	
+	public Double getInterestAmount(String projectId);
+
+	/*
+	 * 归还本金
+	 */
+	public void restorePrincipal(String arrearsId);
+
+	/*
+	 * 归还利息
+	 */
+	public void restoreInterest(String arrearsId);
 }

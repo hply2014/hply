@@ -37,5 +37,6 @@
   <select id="getAllPaged" resultType="Arrears">
     select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_arrears order by trice desc limit #{pageSize} offset #{pageIndex}
   </select>
+  
 </mapper>
 

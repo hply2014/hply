@@ -7,7 +7,19 @@
 	<cache />
 
 	<select id="getTotalByProject" parameterType="string" resultType="Double">
-		select sum(amount) from t_arrears where project_id = #{projectId}
+		select sum(amount) from t_arrears where
+		project_id = #{projectId}
 	</select>
+
+	<select id="getInterestAmount" parameterType="string" resultType="Double">
+		select sum(amount) from t_arrears where
+		project_id = #{projectId} and arrears_type = '利息'
+	</select>
+
+	<!-- 归还本金 -->
+	<update id="restorePrincipal">call proc_restore_principal(#{arrearsId})</update>
+
+	<!-- 归还利息 -->
+	<update id="restoreInterest">call proc_restore_interest(#{arrearsId})</update>
 </mapper>
 

@@ -85,4 +85,14 @@ public class ArrearsInterestService {
 	public List<ArrearsInterest> getDetail(String arrearsId) {
 		return mapper.getDetail(arrearsId);
 	}
+
+	public double getPlanInterest(String projectId) {
+		Double d = mapper.getPlanInterest(projectId);
+		return d != null ? d.doubleValue() : 0.0;
+	}
+
+	public double getRealInterest(String projectId) {
+		Double d = mapper.getRealInterest(projectId);
+		return d != null ? d.doubleValue() : 0.0;
+	}
 }

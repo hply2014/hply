@@ -60,8 +60,10 @@
 			radioClass : 'iradio_minimal',
 			increaseArea : '20%' // optional
 		});
+		//  data-trigger="click hover focus"
+		$("[title]").tooltip();
+		$("[data-content]").data("html", true).data("trigger", "hover").popover();
 		
-		$("[data-toggle]").tooltip();
 		$(".select2").select2();
 		
 		$(".pager .disabled a").click(function() {

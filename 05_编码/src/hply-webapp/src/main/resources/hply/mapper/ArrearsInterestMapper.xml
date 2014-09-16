@@ -9,6 +9,15 @@
 		offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime,
 		description as description from t_arrears_interest where arrears_id=#{arrearsId}
 	</select>
+	
+	<!-- 多余还的利息，没算上 -->
+	<select id="getPlanInterest" resultType="Double">
+		select sum(interest_amount) from t_arrears_interest where project_id=#{projectId}
+	</select>
+	
+	<select id="getRealInterest" resultType="Double">
+		select sum(offset_amount) from t_arrears_interest where project_id=#{projectId}
+	</select>
 
 </mapper>
 

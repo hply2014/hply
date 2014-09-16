@@ -62,10 +62,10 @@ public class APIController {
 
 	@Autowired
 	private PaymentItemService paymentItemService;
-	
+
 	@Autowired
 	private SysOrganizationService orgService;
-	
+
 	@Autowired
 	private ArrearsInterestService arrearsInterestService;
 
@@ -207,8 +207,7 @@ public class APIController {
 		double g1 = collectionsService.getTotalCollectionsAmount(projectId);
 
 		// 计算的往来欠款总额
-		Double v2 = arrearsService.getTotalByProject(projectId);
-		double d2 = v2 != null ? v2.doubleValue() : 0;
+		double d2 = arrearsService.getTotalByProject(projectId);
 
 		// 计算工程款结存
 		double j0 = g1 - paymentService.getToalPayment(projectId);
@@ -237,19 +236,36 @@ public class APIController {
 		// 已开票额|报销上限|报销累计|报销剩余
 		return dformat.format(d1) + "|" + dformat.format(limitA) + "|" + dformat.format(d2) + "|" + dformat.format(limitA - d2);
 	}
-	
 
 	@RequestMapping(value = "/getprojectmanager/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getProjectManager(@PathVariable String projectId) {
 		Project pjt = projectService.get(projectId);
 		return pjt.getManager();
 	}
-	
 
 	@RequestMapping(value = "/getinterestdetail/{arrearsId}", method = RequestMethod.POST)
 	public @ResponseBody List<ArrearsInterest> getInterestDetail(@PathVariable String arrearsId) {
 		return arrearsInterestService.getDetail(arrearsId);
 	}
 
+	@RequestMapping(value = "/getarrearsamount/{projectId}", method = RequestMethod.POST)
+	public @ResponseBody String getArrearsAmount(@PathVariable String projectId) {
+
+		// 计算的往来欠款总额
+		Double val2 = arrearsService.getTotalByProject(projectId);
+		double q1 = val2 != null ? val2.doubleValue() : 0;
+
+		// 应收利息总额
+		Double q2 = arrearsInterestService.getPlanInterest(projectId);
+
+		// 已收利息总额
+		Double q3 = arrearsService.getInterestAmount(projectId);
+
+		DecimalFormat dformat = new DecimalFormat("#,##0.00");
+
+		// 已开票额|报销上限|报销累计|报销剩余
+		return dformat.format(q1) + "|" + dformat.format(q2) + "|" + dformat.format(q3);
+
+	}
 
 }

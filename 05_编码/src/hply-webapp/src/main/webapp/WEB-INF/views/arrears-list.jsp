@@ -65,7 +65,7 @@
                             <td><c:out value="${arrears.payType}" /></td>
                             <td><fmt:formatDate value="${arrears.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${arrears.createUser}" /></td>
-                            <td><c:out value="${arrears.description}" /></td>
+                            <td><c:if test="${not empty arrears.description}"><span data-container="body" data-toggle="popover" data-placement="left" data-content="${arrears.description}" class="glyphicon glyphicon-exclamation-sign"></span></c:if></td>
                             <%--
 				<td><a
 					href="<s:url value="/arrears/modify/{id}"><s:param name="id" value="${arrears.id }" /></s:url>">修改</a>

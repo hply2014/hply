@@ -91,9 +91,11 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="bs-callout bs-callout-danger">
+                            <h4>往来欠款</h4>
+                            <p>累计：<span id="q1">0000.00</span></p>
                             <h4>计息情况</h4>
-                            <p>应收利息：000.00</p>
-                            <p>已收利息：000.00</p>
+                            <p>应收利息：<span id="q2">0000.00</span></p>
+                            <p>已收利息：<span id="q3">0000.00</span></p>
                             <h4>操作提示</h4>
                             <p>
                                 1、<span class="label label-danger">此信息一经提交，将不可修改，请谨慎操作。</span>
@@ -177,6 +179,25 @@
 					$("#interestRate").val(v).removeAttr("readonly");
 				}
 			}
+		});
+		
+
+
+		function refreshAmount(projectId){
+    		$.post("<s:url value='/api/getarrearsamount/' />" + projectId, {}, function(result) {
+    			if(result.indexOf('|') > 0){
+    				var arr = result.split("|");
+    				$("#q1").html(arr[0]);
+    				$("#q2").html(arr[1]);
+    				$("#q3").html(arr[2]);
+    			}
+    		}, "text");
+		}
+		refreshAmount(jQuery("#projectId").val());
+		
+		
+		$("#projectId").change(function(){
+			refreshAmount($(this).val());
 		});
 	});
 </script>
