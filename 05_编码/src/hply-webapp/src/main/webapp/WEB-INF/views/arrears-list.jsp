@@ -34,9 +34,8 @@
                         <th>凭证号</th>
                         <th>项目名称</th>
                         <th>款项分类</th>
-                        <th class="amount">借款金额</th>
-                        <th class="amount">还款金额</th>
-                        <th class="amount">计息</th>
+                        <th class="amount">借出金额</th>
+                        <th class="amount">还入金额</th>
                         <th>支付方式</th>
                         <th>登记时间</th>
                         <th>登记人</th>
@@ -58,9 +57,11 @@
                                         value="${arrears.arrearsCode}" /></a></td>
                             <td><c:out value="${arrears.projectId}" /></td>
                             <td><c:out value="${arrears.arrearsType}" /></td>
-                            <td class="amount"><span <c:if test="${arrears.interestRate > 0 }">title="此笔费用计算利息" class="label label-default"</c:if>><fmt:formatNumber value="${arrears.amount >=0 ? arrears.amount : 0.0}" pattern="###,###,###,###,##0.00"/></span></td>
-                            <td class="amount"><fmt:formatNumber value="${arrears.amount < 0 ? arrears.amount*-1 : 0.0}" pattern="###,###,###,###,##0.00"/></td>
-                            <td class="amount"><fmt:formatNumber value="${arrears.interestAmount}" pattern="###,###,###,###,##0.00"/></td>
+                            <td class="amount"><c:if test="${arrears.amount < 0}">
+                                <span <c:if test="${arrears.interestRate > 0 }">title="此笔费用计息，利率：<fmt:formatNumber value="${arrears.interestRate}" pattern="0.00"/>%，已计息：<fmt:formatNumber value="${arrears.interestAmount}" pattern="###,###,###,###,##0.00"/>" class="label label-default"</c:if>>
+                                    <fmt:formatNumber value="${arrears.amount}" pattern="###,###,###,###,##0.00"/>
+                                </span></c:if></td>
+                            <td class="amount"><c:if test="${arrears.amount > 0}"><fmt:formatNumber value="${arrears.amount}" pattern="###,###,###,###,##0.00"/></c:if></td>
                             <td><c:out value="${arrears.payType}" /></td>
                             <td><fmt:formatDate value="${arrears.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${arrears.createUser}" /></td>
