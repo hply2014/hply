@@ -2,11 +2,13 @@ package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
+import hply.domain.ArrearsInterest;
 import hply.domain.PaymentItem;
 import hply.domain.Project;
 import hply.domain.SysAuthorization;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
+import hply.service.ArrearsInterestService;
 import hply.service.ArrearsService;
 import hply.service.CollectionsService;
 import hply.service.PartyBillingService;
@@ -63,6 +65,9 @@ public class APIController {
 	
 	@Autowired
 	private SysOrganizationService orgService;
+	
+	@Autowired
+	private ArrearsInterestService arrearsInterestService;
 
 	@RequestMapping(value = "/tree/{userId}")
 	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
@@ -238,6 +243,12 @@ public class APIController {
 	public @ResponseBody String getProjectManager(@PathVariable String projectId) {
 		Project pjt = projectService.get(projectId);
 		return pjt.getManager();
+	}
+	
+
+	@RequestMapping(value = "/getinterestdetail/{arrearsId}", method = RequestMethod.POST)
+	public @ResponseBody List<ArrearsInterest> getInterestDetail(@PathVariable String arrearsId) {
+		return arrearsInterestService.getDetail(arrearsId);
 	}
 
 

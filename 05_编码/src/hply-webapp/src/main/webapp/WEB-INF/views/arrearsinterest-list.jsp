@@ -16,7 +16,7 @@
 </div>
 </c:if>
 <div class="panel panel-default">
-  <div class="panel-heading"><strong>往来欠款的利息计算明细</strong>（ 共<c:out value="${rowCount}" />行
+  <div class="panel-heading"><strong>往来欠款的利息计算明细</strong>（共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
   <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
@@ -34,19 +34,19 @@
 			<th>#</th>
 			
 			<th>流水号</th>
+			<th></th>
 			<th>项目ID</th>
 			<th>计息时间</th>
-			<th>计息金额</th>
 			<th>计息基数</th>
-			<th>计息期数：201405期</th>
-			<th>本期的第几天</th>
+			<th>已还的利息，拆分到天的</th>
+			<th>当天的利息</th>
 			<th>摘要</th>
 			<th>操作</th>
 		</tr>
 	</thead>
 	<tbody>
 		<%
-			int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
+			int i = 0;
 		%>
 		<c:forEach items="${list}" var="arrearsInterest">
 			<tr>
@@ -55,13 +55,13 @@
 				<td><a
 					href="<s:url value="/arrearsinterest/detail/{id}"><s:param name="id" value="${arrearsInterest.id }" /></s:url>"><c:out
 							value="${arrearsInterest.serialId}" /></a></td>  
+				<td><c:out value="${arrearsInterest.arrearsId}" /></td>
 				<td><c:out value="${arrearsInterest.projectId}" /></td>
 				<td><fmt:formatDate value="${arrearsInterest.trice}"
 						pattern="yyyy-MM-dd" /></td>  
 				<td><c:out value="${arrearsInterest.amount}" /></td>
+				<td><c:out value="${arrearsInterest.offsetAmount}" /></td>
 				<td><c:out value="${arrearsInterest.interestAmount}" /></td>
-				<td><c:out value="${arrearsInterest.pharse}" /></td>
-				<td><c:out value="${arrearsInterest.atday}" /></td>
 				<td><c:out value="${arrearsInterest.description}" /></td>
 				<td>									<shiro:hasPermission name="`arrearsinterest_modify`">
 										<a

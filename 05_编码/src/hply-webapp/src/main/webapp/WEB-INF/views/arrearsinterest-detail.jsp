@@ -35,6 +35,13 @@
 	</div>
 
 	<div class="form-group">
+		<sf:label path="arrearsId" cssClass="col-sm-2 control-label"></sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><c:out value="${arrearsInterest.arrearsId}" /></p>
+		</div>
+	</div>
+
+	<div class="form-group">
 		<sf:label path="projectId" cssClass="col-sm-2 control-label">项目ID</sf:label>
 		<div class="col-sm-10">
 			<p class="form-control-static"><c:out value="${arrearsInterest.projectId}" /></p>
@@ -49,30 +56,23 @@
 	</div>
 
 	<div class="form-group">
-		<sf:label path="amount" cssClass="col-sm-2 control-label">计息金额</sf:label>
+		<sf:label path="amount" cssClass="col-sm-2 control-label">计息基数</sf:label>
 		<div class="col-sm-10">
 			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${arrearsInterest.amount}" /></p>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="interestAmount" cssClass="col-sm-2 control-label">计息基数</sf:label>
+		<sf:label path="offsetAmount" cssClass="col-sm-2 control-label">已还的利息，拆分到天的</sf:label>
+		<div class="col-sm-10">
+			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${arrearsInterest.offsetAmount}" /></p>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<sf:label path="interestAmount" cssClass="col-sm-2 control-label">当天的利息</sf:label>
 		<div class="col-sm-10">
 			<p class="form-control-static"><fmt:formatNumber pattern="#,##0.00" value="${arrearsInterest.interestAmount}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="pharse" cssClass="col-sm-2 control-label">计息期数：201405期</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${arrearsInterest.pharse}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="atday" cssClass="col-sm-2 control-label">本期的第几天</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${arrearsInterest.atday}" /></p>
 		</div>
 	</div>
 

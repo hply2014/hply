@@ -23,6 +23,19 @@
         
     
         
+							<label for="arrearsId" class="col-sm-2 control-label"></label>
+							<div class="col-sm-4 required-field-block">
+								<b class="required-icon">*</b>
+
+								<sf:input cssClass="form-control" path="arrearsId"
+									placeholder="" />
+								<p class="help-block">&nbsp;</p>
+							</div>
+        
+        </div>
+        
+    
+        <div class="row">
 							<label for="projectId" class="col-sm-2 control-label">项目ID</label>
 							<div class="col-sm-4 required-field-block">
 								<b class="required-icon">*</b>
@@ -32,10 +45,10 @@
 								<p class="help-block">&nbsp;</p>
 							</div>
         
-        </div>
+        
         
     
-        <div class="row">
+        
 							<label for="trice" class="col-sm-2 control-label">计息时间</label>
 							<div class="col-sm-4 required-field-block">
 								<b class="required-icon">*</b>
@@ -48,28 +61,15 @@
 								<p class="help-block">&nbsp;</p>
 							</div>
         
-        
-        
-    
-        
-							<label for="amount" class="col-sm-2 control-label">计息金额</label>
-							<div class="col-sm-4 required-field-block">
-								<b class="required-icon">*</b>
-
-								<sf:input cssClass="form-control" path="amount"
-									placeholder="计息金额" />
-								<p class="help-block">&nbsp;</p>
-							</div>
-        
         </div>
         
     
         <div class="row">
-							<label for="interestAmount" class="col-sm-2 control-label">计息基数</label>
+							<label for="amount" class="col-sm-2 control-label">计息基数</label>
 							<div class="col-sm-4 required-field-block">
 								<b class="required-icon">*</b>
 
-								<sf:input cssClass="form-control" path="interestAmount"
+								<sf:input cssClass="form-control" path="amount"
 									placeholder="计息基数" />
 								<p class="help-block">&nbsp;</p>
 							</div>
@@ -78,12 +78,12 @@
         
     
         
-							<label for="pharse" class="col-sm-2 control-label">计息期数：201405期</label>
+							<label for="offsetAmount" class="col-sm-2 control-label">已还的利息，拆分到天的</label>
 							<div class="col-sm-4 required-field-block">
 								<b class="required-icon">*</b>
 
-								<sf:input cssClass="form-control" path="pharse"
-									placeholder="计息期数：201405期" />
+								<sf:input cssClass="form-control" path="offsetAmount"
+									placeholder="已还的利息，拆分到天的" />
 								<p class="help-block">&nbsp;</p>
 							</div>
         
@@ -91,12 +91,12 @@
         
     
         <div class="row">
-							<label for="atday" class="col-sm-2 control-label">本期的第几天</label>
+							<label for="interestAmount" class="col-sm-2 control-label">当天的利息</label>
 							<div class="col-sm-4 required-field-block">
 								<b class="required-icon">*</b>
 
-								<sf:input cssClass="form-control" path="atday"
-									placeholder="本期的第几天" />
+								<sf:input cssClass="form-control" path="interestAmount"
+									placeholder="当天的利息" />
 								<p class="help-block">&nbsp;</p>
 							</div>
         
@@ -167,17 +167,17 @@
 			rules : { 	
                 serialId : {
                 }, 
+                arrearsId : {
+                }, 
                 projectId : {
                 }, 
                 trice : {
                 }, 
                 amount : {
                 }, 
+                offsetAmount : {
+                }, 
                 interestAmount : {
-                }, 
-                pharse : {
-                }, 
-                atday : {
                 }, 
                 createTime : {
                 }, 

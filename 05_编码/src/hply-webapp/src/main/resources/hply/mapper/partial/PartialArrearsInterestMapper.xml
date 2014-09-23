@@ -4,14 +4,12 @@
 
 <mapper namespace="hply.mapper.partial.PartialArrearsInterestMapper">
 
-  <cache />
-  
   <insert id="insert" parameterType="ArrearsInterest">
-    insert into t_arrears_interest(id, serial_id, project_id, trice, amount, interest_amount, pharse, atday, create_time, description) values ( #{id}, #{serialId}, #{projectId}, #{trice}, #{amount}, #{interestAmount}, #{pharse}, #{atday}, now(), #{description} )
+    insert into t_arrears_interest(id, serial_id, arrears_id, project_id, trice, amount, offset_amount, interest_amount, create_time, description) values ( #{id}, #{serialId}, #{arrearsId}, #{projectId}, #{trice}, #{amount}, #{offsetAmount}, #{interestAmount}, now(), #{description} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_arrears_interest set serial_id = #{serialId}, project_id = #{projectId}, trice = #{trice}, amount = #{amount}, interest_amount = #{interestAmount}, pharse = #{pharse}, atday = #{atday}, description = #{description}, version = version + 1 where id = #{id}
+    update t_arrears_interest set serial_id = #{serialId}, arrears_id = #{arrearsId}, project_id = #{projectId}, trice = #{trice}, amount = #{amount}, offset_amount = #{offsetAmount}, interest_amount = #{interestAmount}, description = #{description}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">
@@ -19,7 +17,7 @@
   </delete>
 
   <select id="get" parameterType="string" resultType="ArrearsInterest">
-    select id as id, serial_id as serialId, project_id as projectId, trice as trice, amount as amount, interest_amount as interestAmount, pharse as pharse, atday as atday, create_time as createTime, description as description from t_arrears_interest where id = #{id}
+    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description from t_arrears_interest where id = #{id}
   </select>
   
   <select id="getVersion" parameterType="string" resultType="int">
@@ -27,15 +25,15 @@
   </select>
   
   <select id="getAll" resultType="ArrearsInterest">
-    select id as id, serial_id as serialId, project_id as projectId, trice as trice, amount as amount, interest_amount as interestAmount, pharse as pharse, atday as atday, create_time as createTime, description as description from t_arrears_interest order by trice desc
+    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description from t_arrears_interest
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_arrears_interest
   </select>
 
-  <select id="getAllPaged" resultType="ArrearsInterest">
-    select id as id, serial_id as serialId, project_id as projectId, trice as trice, amount as amount, interest_amount as interestAmount, pharse as pharse, atday as atday, create_time as createTime, description as description from t_arrears_interest order by trice desc limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" parameterType="ArrearsInterest" resultType="ArrearsInterest">
+    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description from t_arrears_interest limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

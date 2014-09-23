@@ -1,11 +1,11 @@
 ﻿package hply.web;
 
+
+import java.util.List;
 import hply.core.Utility;
 import hply.domain.ArrearsInterest;
 import hply.service.ArrearsInterestService;
 import hply.service.SysParameterService;
-
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,16 +16,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping(value = ArrearsInterestController.URI)
 public class ArrearsInterestController {
-
+    
 	@Autowired
-	private ArrearsInterestService service;
-
+    private ArrearsInterestService service;
+    
 	@Autowired
 	private SysParameterService paramService;
 
@@ -33,14 +34,15 @@ public class ArrearsInterestController {
 	public static final String JSP_PAGE_LIST = "arrearsinterest-list";
 	public static final String JSP_PAGE_DETAIL = "arrearsinterest-detail";
 	public static final String JSP_PAGE_MODIFY = "arrearsinterest-modify";
-
+    
+    
 	/*
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value="p", required = false) Integer p, Model model) {
 		model.addAttribute("page_title", "往来欠款的利息计算明细");
-
+        
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
 		int rowCount = service.getRowCount();
@@ -51,7 +53,7 @@ public class ArrearsInterestController {
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
 		List<ArrearsInterest> list = service.getAllPaged(pageIndex * pageSize, pageSize);
 		model.addAttribute("list", list);
-
+        
 		return JSP_PAGE_LIST;
 	}
 
@@ -89,10 +91,10 @@ public class ArrearsInterestController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid ArrearsInterest arrearsInterest, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid ArrearsInterest arrearsInterest,
+			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(arrearsInterest.toString());
-
+		
 		if (result.hasErrors()) {
 			return JSP_PAGE_MODIFY;
 		}
@@ -108,10 +110,11 @@ public class ArrearsInterestController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid ArrearsInterest arrearsInterest,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id,
+			@Valid ArrearsInterest arrearsInterest, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(arrearsInterest.toString());
-
+		
 		if (result.hasErrors()) {
 			return JSP_PAGE_MODIFY;
 		}
@@ -127,7 +130,8 @@ public class ArrearsInterestController {
 	 * 删除页面
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+	public String processDeleteSubmit(@PathVariable String id,
+			RedirectAttributes redirectAttrs) {
 		ArrearsInterest arrearsInterest = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
@@ -135,3 +139,4 @@ public class ArrearsInterestController {
 		return "redirect:" + URI;
 	}
 }
+

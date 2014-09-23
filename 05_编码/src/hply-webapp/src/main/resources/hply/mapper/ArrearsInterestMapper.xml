@@ -4,7 +4,11 @@
 
 <mapper namespace="hply.mapper.ArrearsInterestMapper">
 
-    <cache />
+	<select id="getDetail" resultType="ArrearsInterest">
+		select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount,
+		offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime,
+		description as description from t_arrears_interest where arrears_id=#{arrearsId}
+	</select>
 
 </mapper>
 

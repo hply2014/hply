@@ -59,7 +59,7 @@
                             <td><c:out value="${arrears.arrearsType}" /></td>
                             <td class="amount"><c:if test="${arrears.amount < 0}">
                                 <span <c:if test="${arrears.interestRate > 0 }">title="此笔费用计息，利率：<fmt:formatNumber value="${arrears.interestRate}" pattern="0.00"/>%，已计息：<fmt:formatNumber value="${arrears.interestAmount}" pattern="###,###,###,###,##0.00"/>" class="label label-default"</c:if>>
-                                    <fmt:formatNumber value="${arrears.amount}" pattern="###,###,###,###,##0.00"/>
+                                    <c:if test="${arrears.interestRate > 0 }"><a style="color:#fff" href="javascript:showDialog('${arrears.id}')"></c:if><fmt:formatNumber value="${arrears.amount}" pattern="###,###,###,###,##0.00"/><c:if test="${arrears.interestRate > 0 }"></a></c:if>
                                 </span></c:if></td>
                             <td class="amount"><c:if test="${arrears.amount > 0}"><fmt:formatNumber value="${arrears.amount}" pattern="###,###,###,###,##0.00"/></c:if></td>
                             <td><c:out value="${arrears.payType}" /></td>
@@ -94,4 +94,22 @@
             </c:if>
   </div>
 </div></div>
+<script type="text/javascript">
+<!--
+	function showDialog(arrearsId){
+		var rows = "";
+		$.post("<s:url value='/api/getinterestdetail/' />" + arrearsId, {}, function(result) {
+			for(var i=0; i<result.length; i++){
+				rows += "<tr title=\"" + result[i].description + "\"><td>" + (i+1) + "</td><td>" + new Date(result[i].trice).toLocaleDateString() + "</td><td class=\"amount\">" + result[i].amount + "</td><td class=\"amount\">" + result[i].interestAmount + "</td></tr>\r\n";
+			}
+
+			$("#myModal .modal-title").html("利息计算明细");
+			var str = "<table width=\"70%\"border=\"0\"><tr><th>#</th><th>日期</th><th class=\"amount\">计息基数</th><th class=\"amount\">当日计息</th></tr>" + rows + "</table>";
+			$("#myModalContent").html(str);
+			$('#myModal').modal('show');
+		}, "json");
+		
+	}
+//-->
+</script>
 <%@ include file="bottom.jsp"%>
