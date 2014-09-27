@@ -69,8 +69,22 @@
             <strong>合同项目信息</strong>（ 共
             <c:out value="${rowCount}" />
             行
-            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>
+            <c:if test="${pageCount > 1 }">，
+<div class="btn-group">
+   <button class="btn btn-success btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+    第${pageIndex+1 }页 <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu pager" role="menu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div> &nbsp;/&nbsp;共${pageCount }页</c:if>
             ）
+
+
         </div>
         <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -177,6 +191,14 @@ $(function(){
     		self.location = "<s:url value='/project' />?q=" + $("#searchInput").val();
     	}
     });
+    
+    var p = '';
+    for(var i=1; i<<c:out value="${pageCount}" />; i++){
+    	p = p + '<li><a href="#">' + i + '</a></li>';
+    }
+    
+    $("ul.pager").html(p);
+    
 });
 
 //-->
