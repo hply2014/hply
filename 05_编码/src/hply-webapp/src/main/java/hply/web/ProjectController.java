@@ -9,11 +9,23 @@ import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
+import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,8 +61,8 @@ public class ProjectController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "q", required = false) String q,
-			Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p,
+			@RequestParam(value = "q", required = false) String q, Model model) {
 		model.addAttribute("page_title", "合同项目信息");
 
 		int pageIndex = p != null ? p.intValue() : 0;
@@ -85,7 +97,8 @@ public class ProjectController {
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
 		Project project = service.get(id);
-		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
+		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode()
+				+ "）");
 		SysOrganization org = orgService.get(project.getOrganizationId());
 		project.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
 
@@ -130,7 +143,8 @@ public class ProjectController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Project project, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Project project, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
@@ -150,8 +164,8 @@ public class ProjectController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid Project project, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid Project project, BindingResult result,
+			Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
@@ -177,5 +191,30 @@ public class ProjectController {
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("project", project);
 		return "redirect:" + URI;
+	}
+
+	@RequestMapping(value = "/export")
+	public void exportExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		String fileName = URLEncoder.encode("合同项目信息一览表", "UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+
+		Workbook wb = new XSSFWorkbook();
+		CreationHelper createHelper = wb.getCreationHelper();
+
+		Sheet sheet1 = wb.createSheet("合同项目信息");
+		
+		
+		
+		Row r = sheet1.createRow(0);
+		r.createCell(0).setCellValue("=now()");
+		CellStyle cellStyle = wb.createCellStyle();
+		cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-mm-dd"));
+		Cell c1 = r.createCell(1);
+		c1.setCellStyle(cellStyle);
+		c1.setCellFormula("now()");
+		wb.write(response.getOutputStream());
+
 	}
 }
