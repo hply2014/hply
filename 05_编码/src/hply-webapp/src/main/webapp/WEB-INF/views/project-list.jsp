@@ -74,7 +74,7 @@
    <button class="btn btn-success btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
     第${pageIndex+1 }页 <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu pager" role="menu">
+  <ul class="dropdown-menu pagelist" role="menu">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -119,7 +119,6 @@
                         <th class="amount">税金比率</th>
                         <th class="amount">合同金额</th>
                         <th class="amount">印花税上交金额</th>
-                        <th>登记人</th>
                         <th>登记时间</th>
                         <th></th>
                     </tr>
@@ -150,9 +149,8 @@
                             <td class="amount"><span data-toggle="tooltip"
                                 title="<c:if test='${not empty project.dutyPaidTime }'>时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' /></c:if><c:if test="${not empty project.dutyPaidCode}">，收据编号：${project.dutyPaidCode}</c:if>">
                                     <fmt:formatNumber value="${project.dutyPaidAmount}" pattern="###,###,###,###,##0.00" /><span></td>
-                            <td><c:out value="${project.createUser}" /></td>
-                            <td title="<c:out value="${project.createUser}" />"><fmt:formatDate
-                                    value="${project.trice}" pattern="yyyy-MM-dd" /></td>
+                            <td><span title="<c:out value="登记人：${project.createUser}" />"><fmt:formatDate
+                                    value="${project.trice}" pattern="yyyy-MM-dd" /></span></td>
                             <td><shiro:hasPermission name="`project_modify`">
                                     <a href="<s:url value="/project/modify/${project.id }" />">修改</a>
                                 </shiro:hasPermission></td>
@@ -193,11 +191,11 @@ $(function(){
     });
     
     var p = '';
-    for(var i=1; i<<c:out value="${pageCount}" />; i++){
-    	p = p + '<li><a href="#">' + i + '</a></li>';
+    for(var i=0; i<<c:out value="${pageCount}" />; i++){
+    	p = p + '<li><a href="<s:url value="/project"/>?q=${queryText}&p=' + i + '">' + (i+1) + '</a></li>';
     }
     
-    $("ul.pager").html(p);
+    $("ul.pagelist").html(p);
     
 });
 
