@@ -70,7 +70,7 @@
                             <td class="amount"><fmt:formatNumber value="${partyBilling.amount}" pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${partyBilling.createUser}" /></td>
                             <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" /></td>
-                            <td><c:if test="${empty partyBilling.step1User}">未审核</c:if><c:if test="${not empty partyBilling.step1User}">${partyBilling.step1User}：“${partyBilling.step1Idea}”<br />
+                            <td><c:if test="${empty partyBilling.step1Time}">未审核</c:if><c:if test="${not empty partyBilling.step1Time}">${partyBilling.step1User}：${partyBilling.step1Idea}，
                                     <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
                             <td><c:if test="${ partyBilling.stepStatus != 1 }">
