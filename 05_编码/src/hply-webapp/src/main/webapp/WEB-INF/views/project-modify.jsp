@@ -13,7 +13,6 @@
                         <div class="row">
                             <label for="projectCode" class="col-sm-2 control-label">项目编号</label>
                             <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="projectCode" placeholder="项目编号" />
                                 <p class="help-block" />
                             </div>
@@ -260,7 +259,6 @@
 			},
 			rules : {
 				projectCode : {
-					required : true
 				},
 				projectName : {
 					required : true
