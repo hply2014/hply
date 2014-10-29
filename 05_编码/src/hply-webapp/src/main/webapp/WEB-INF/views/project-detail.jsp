@@ -54,7 +54,6 @@
                                 </p>
                             </div>
                         </div>
-
                         <div class="row">
                             <sf:label path="partyAddress" cssClass="col-sm-2 control-label">甲方地址</sf:label>
                             <div class="col-sm-4">
@@ -130,7 +129,6 @@
                                 </p>
                             </div>
                         </div>
-
                         <div class="row">
                             <sf:label path="dutyPaidTime" cssClass="col-sm-2 control-label">印花税上交时间</sf:label>
                             <div class="col-sm-4">
@@ -145,7 +143,6 @@
                                 </p>
                             </div>
                         </div>
-
                         <div class="row">
                             <sf:label path="dutyPaidCode" cssClass="col-sm-2 control-label">印花税收据编号</sf:label>
                             <div class="col-sm-4">
