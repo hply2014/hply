@@ -2,203 +2,192 @@
 <%@ include file="header.jsp"%>
 <style type="text/css">
 #custom-search-form {
-    margin: 0;
-    margin-top: 5px;
-    padding: 0;
+	margin: 0;
+	margin-top: 5px;
+	padding: 0;
 }
 
 #custom-search-form .search-query {
-    padding-right: 3px;
-    padding-right: 4px \9;
-    padding-left: 3px;
-    padding-left: 4px \9;
-    /* IE7-8 doesn't have border-radius, so don't indent the padding */
-    margin-bottom: 0;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-transition: width 0.2s ease-in-out;
-    -moz-transition: width 0.2s ease-in-out;
-    -o-transition: width 0.2s ease-in-out;
-    transition: width 0.2s ease-in-out;
+	padding-right: 3px;
+	padding-right: 4px \9;
+	padding-left: 3px;
+	padding-left: 4px \9;
+	/* IE7-8 doesn't have border-radius, so don't indent the padding */
+	margin-bottom: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-transition: width 0.2s ease-in-out;
+	-moz-transition: width 0.2s ease-in-out;
+	-o-transition: width 0.2s ease-in-out;
+	transition: width 0.2s ease-in-out;
 }
 
 #custom-search-form button {
-    border: 0;
-    background: none;
-    /** belows styles are working good */
-    padding: 2px 5px;
-    margin-top: 2px;
-    position: relative;
-    left: -28px;
-    /* IE7-8 doesn't have border-radius, so don't indent the padding */
-    margin-bottom: 0;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+	border: 0;
+	background: none;
+	/** belows styles are working good */
+	padding: 2px 5px;
+	margin-top: 2px;
+	position: relative;
+	left: -28px;
+	/* IE7-8 doesn't have border-radius, so don't indent the padding */
+	margin-bottom: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 
 .search-query:focus+button {
-    z-index: 3;
+	z-index: 3;
 }
 
 .search-query:focus {
-    width: 260px;
+	width: 260px;
 }
 </style>
 <div class="container main">
-    <c:if test="${not empty message}">
-        <div></div>
-        <div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
-            <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-            </button>
-            <strong><a href="<s:url value="/project/detail/${project.id }" />"> ${project.id }</a></strong> ，${message}
-        </div>
-    </c:if>
-    <c:if test="${not empty delMessage}">
-        <div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
-            <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-            </button>
-            <strong>${project.id }</strong> ，${delMessage}
-        </div>
-    </c:if>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <strong>合同项目信息</strong>（ 共
-            <c:out value="${rowCount}" />
-            行
-            <c:if test="${pageCount > 1 }">，
+	<c:if test="${not empty message}">
+		<div></div>
+		<div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+			<button type="button" class="close" data-dismiss="alert">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			</button>
+			<strong><a href="<s:url value="/project/detail/${project.id }" />"> ${project.id }</a></strong> ，${message}
+		</div>
+	</c:if>
+	<c:if test="${not empty delMessage}">
+		<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+			<button type="button" class="close" data-dismiss="alert">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			</button>
+			<strong>${project.id }</strong> ，${delMessage}
+		</div>
+	</c:if>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<strong>合同项目信息</strong>（ 共
+			<c:out value="${rowCount}" />
+			行
+			<c:if test="${pageCount > 1 }">，
 <div class="btn-group">
-   <button class="btn btn-success btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
-    第${pageIndex+1 }页 <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu pagelist" role="menu">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div> &nbsp;/&nbsp;共${pageCount }页</c:if>
-            ）
+					<button class="btn btn-info btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+						第${pageIndex+1 }页&nbsp;/&nbsp;共${pageCount }页 <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu pagelist" role="menu"></ul>
+				</div>
+			</c:if>
+			）
 
-
-        </div>
-        <div class="panel-body">
-            <div class="btn-toolbar" role="toolbar">
-                <shiro:hasPermission name="`project_create`">
-                    <div class="btn-group">
-                        <a href="<c:url value="/project/create" />" class="btn btn-info"><span
-                            class="glyphicon glyphicon-plus"></span> 新 建 </a>
-                    </div>
-                </shiro:hasPermission>
-                <div class="span12">
-                    <div id="custom-search-form" class="form-search form-horizontal pull-right">
-                        <div class="input-append span12">
-                            <input id="searchInput" type="text" class="search-query mac-style" value="${queryText }" placeholder="搜索 。。。">
-                            <button type="button" class="btn" id="searchButton">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>#</th>
-                        <th>项目编号</th>
-                        <th>项目名称</th>
-                        <th>所在部门</th>
-                        <th>项目经理</th>
-                        <th class="amount">管理费率</th>
-                        <th class="amount">税金比率</th>
-                        <th class="amount">合同金额</th>
-                        <th class="amount">印花税上交金额</th>
-                        <th>登记时间</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%
-                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
-                    %>
-                    <c:forEach items="${list}" var="project">
-                        <tr>
-                            <td><span
-                                class="glyphicon <c:out value="${project.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
-                            <td><%=++i%></td>
-                            <td><a
-                                href="<s:url value="/project/detail/{id}"><s:param name="id" value="${project.id }" /></s:url>"><c:out
-                                        value="${project.projectCode}" /></a></td>
-                            <td><c:out value="${project.projectName}" /></td>
-                            <td><c:out value="${project.organizationId}" /></td>
-                            <td><c:out value='${project.manager}' /></td>
-                            <td class="amount"><fmt:formatNumber value="${project.managementRate}" pattern="#0.00" />%</td>
-                            <td class="amount"><fmt:formatNumber value="${project.taxRate}" pattern="#0.00" />%</td>
-                            <td class="amount"><fmt:formatNumber value="${project.contractAmount}"
-                                    pattern="###,###,###,###,##0.00" /> <c:if
-                                    test="${not empty project.settlementAmount && project.settlementAmount > 0 }">
-                                    <br />结算：<fmt:formatNumber value="${project.settlementAmount}"
-                                        pattern="###,###,###,###,##0.00" />
-                                </c:if></td>
-                            <td class="amount"><span data-toggle="tooltip"
-                                title="<c:if test='${not empty project.dutyPaidTime }'>时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' /></c:if><c:if test="${not empty project.dutyPaidCode}">，收据编号：${project.dutyPaidCode}</c:if>">
-                                    <fmt:formatNumber value="${project.dutyPaidAmount}" pattern="###,###,###,###,##0.00" /><span></td>
-                            <td><span title="<c:out value="登记人：${project.createUser}" />"><fmt:formatDate
-                                    value="${project.trice}" pattern="yyyy-MM-dd" /></span></td>
-                            <td><shiro:hasPermission name="`project_modify`">
-                                    <a href="<s:url value="/project/modify/${project.id }" />">修改</a>
-                                </shiro:hasPermission></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <c:if test="${pageCount > 1 }">
-                <div class="row">
-                    <div class="col-sm-2 pager">
-                        <span>共<c:out value="${rowCount}" /> 行，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页
-                        </span>
-                    </div>
-                    <div class="col-sm-8">
-                        <ul class="pager">
-                            <li class="${pageIndex <= 0 ? 'disabled' :'' }"><a
-                                href="<s:url value='/project'><s:param name='q' value='${queryText}'/><s:param name='p' value='${pageIndex - 1}'/></s:url>">上一页</a></li>
-                            <li class="${pageIndex + 1 >= pageCount ? 'disabled' :'' }"><a
-                                href="<s:url value='/project'><s:param name='q' value='${queryText}'/><s:param name='p' value='${pageIndex + 1}'/></s:url>">下一页</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2">&nbsp;</div>
-                </div>
-            </c:if>
-        </div>
-    </div>
+		</div>
+		<div class="panel-body">
+			<div class="btn-toolbar" role="toolbar">
+				<shiro:hasPermission name="`project_create`">
+					<div class="btn-group">
+						<a href="<c:url value="/project/create" />" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
+							新 建 </a>
+					</div>
+				</shiro:hasPermission>
+				<div class="span12">
+					<div id="custom-search-form" class="form-search form-horizontal pull-right">
+						<div class="input-append span12">
+							<input id="searchInput" type="text" class="search-query mac-style" value="${queryText }" placeholder="搜索 。。。">
+							<button type="button" class="btn" id="searchButton">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th></th>
+						<th>#</th>
+						<th>项目编号</th>
+						<th>项目名称</th>
+						<th>所在部门</th>
+						<th>项目经理</th>
+						<th class="amount">管理费率</th>
+						<th class="amount">税金比率</th>
+						<th class="amount">合同金额</th>
+						<th class="amount">印花税上交金额</th>
+						<th>登记时间</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						int i = Integer.parseInt(request.getAttribute("currentPageStarted")
+								.toString());
+					%>
+					<c:forEach items="${list}" var="project">
+						<tr>
+							<td><span class="glyphicon <c:out value="${project.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
+							<td><%=++i%></td>
+							<td><a href="<s:url value="/project/detail/{id}"><s:param name="id" value="${project.id }" /></s:url>"><c:out
+										value="${project.projectCode}" /></a></td>
+							<td><c:out value="${project.projectName}" /></td>
+							<td><c:out value="${project.organizationId}" /></td>
+							<td><c:out value='${project.manager}' /></td>
+							<td class="amount"><fmt:formatNumber value="${project.managementRate}" pattern="#0.00" />%</td>
+							<td class="amount"><fmt:formatNumber value="${project.taxRate}" pattern="#0.00" />%</td>
+							<td class="amount"><fmt:formatNumber value="${project.contractAmount}" pattern="###,###,###,###,##0.00" />
+								<c:if test="${not empty project.settlementAmount && project.settlementAmount > 0 }">
+									<br />结算：<fmt:formatNumber value="${project.settlementAmount}" pattern="###,###,###,###,##0.00" />
+								</c:if></td>
+							<td class="amount"><span data-toggle="tooltip"
+								title="<c:if test='${not empty project.dutyPaidTime }'>时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' /></c:if><c:if test="${not empty project.dutyPaidCode}">，收据编号：${project.dutyPaidCode}</c:if>">
+									<fmt:formatNumber value="${project.dutyPaidAmount}" pattern="###,###,###,###,##0.00" /><span></td>
+							<td><span title="<c:out value="登记人：${project.createUser}" />"><fmt:formatDate
+										value="${project.trice}" pattern="yyyy-MM-dd" /></span></td>
+							<td><shiro:hasPermission name="`project_modify`">
+									<a href="<s:url value="/project/modify/${project.id }" />">修改</a>
+								</shiro:hasPermission></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<c:if test="${pageCount > 1 }">
+				<div class="row">
+					<div class="col-sm-2 pager">
+						<span>共<c:out value="${rowCount}" /> 行，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页
+						</span>
+					</div>
+					<div class="col-sm-8">
+						<ul class="pager">
+							<li class="${pageIndex <= 0 ? 'disabled' :'' }"><a
+								href="<s:url value='/project'><s:param name='q' value='${queryText}'/><s:param name='p' value='${pageIndex - 1}'/></s:url>">上一页</a></li>
+							<li class="${pageIndex + 1 >= pageCount ? 'disabled' :'' }"><a
+								href="<s:url value='/project'><s:param name='q' value='${queryText}'/><s:param name='p' value='${pageIndex + 1}'/></s:url>">下一页</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-2">&nbsp;</div>
+				</div>
+			</c:if>
+		</div>
+	</div>
 </div>
 <script type="text/javascript">
 <!--
-$(function(){
-    $("#searchButton").click(function(){
-        self.location = "<s:url value='/project' />?q=" + $("#searchInput").val();
-    });
-    $('#searchInput').keydown(function(e){
-    	if(e.keyCode==13){
-    		self.location = "<s:url value='/project' />?q=" + $("#searchInput").val();
-    	}
-    });
-    
-    var p = '';
-    for(var i=0; i<<c:out value="${pageCount}" />; i++){
-    	p = p + '<li><a href="<s:url value="/project"/>?q=${queryText}&p=' + i + '">' + (i+1) + '</a></li>';
-    }
-    
-    $("ul.pagelist").html(p);
-    
-});
+	$(function() {
+		$("#searchButton").click(function() {
+			self.location = "<s:url value='/project' />?q=" + $("#searchInput").val();
+		});
+		$('#searchInput').keydown(function(e) {
+			if (e.keyCode == 13) {
+				self.location = "<s:url value='/project' />?q=" + $("#searchInput").val();
+			}
+		});
 
+		var p = '';
+		for (var i = 0; i < <c:out value="${pageCount}" />; i++) {
+			p = p + '<li><a href="<s:url value="/project"/>?q=${queryText}&p=' + i + '">第' + (i + 1) + '页</a></li>';
+		}
+
+		$("ul.pagelist").html(p);
+
+	});
 //-->
 </script>
 <%@ include file="bottom.jsp"%>
