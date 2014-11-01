@@ -25,13 +25,15 @@
 			<strong>多项目汇总</strong>（ 共
 			<c:out value="${rowCount}" />
 			行
-			<c:if test="${pageCount > 1 }">，
+			<c:if test="${pageCount > 1 }">，<!-- 
 <div class="btn-group">
 					<button class="btn btn-info btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
 						第${pageIndex+1 }页&nbsp;/&nbsp;共${pageCount }页 <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu pagelist" role="menu"></ul>
-				</div>
+				</div> -->
+                <select class="selectpicker" data-size="10" data-style="btn-info btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页 
+                
 			</c:if>
 			）
 		</div>
@@ -160,10 +162,12 @@
 
 		var p = '';
 		for (var i = 0; i < <c:out value="${pageCount}" />; i++) {
-			p = p + '<li><a href="<s:url value="/projectsummary"/>?q=${queryText}&p=' + i + '">第' + (i + 1) + '页</a></li>';
+			p = p + '<option ' + (i== ${pageIndex} ? 'selected': '') + ' value="' + i + '">第' + (i + 1) + '页</option>';
 		}
 
-		$("ul.pagelist").html(p);
+		$(".selectpicker").append(p).change(function(){
+			self.location = '<s:url value="/projectsummary"/>?q=${queryText}&p=' + $(this).val();
+		});
 
 	});
 //-->
