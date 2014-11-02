@@ -434,6 +434,9 @@ strong, h1, h2, h3, h4 {
 #footer a{
     font-size: 12px;
 }
+.page{
+    margin: 0px;
+}
 </style>
 </head>
 <body>

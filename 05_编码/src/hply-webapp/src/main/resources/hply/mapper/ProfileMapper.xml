@@ -4,5 +4,8 @@
 
 <mapper namespace="hply.mapper.ProfileMapper">
 
+  <select id="getAllByProject" resultType="Profile">
+    select id as id, project_id as projectId, expected_value as expectedValue, profile_point as profilePoint, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_profile where project_id=#{projectId} order by trice desc
+  </select>
 </mapper>
 

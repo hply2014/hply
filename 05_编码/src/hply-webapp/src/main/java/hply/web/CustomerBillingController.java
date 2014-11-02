@@ -86,12 +86,15 @@ public class CustomerBillingController {
 	 * 新建页面
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String createForm(Model model) {
+	public String createForm(@RequestParam(value = "projectid", required = false) String projectId, Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 		String types = paramService.getByEnName("billing_types").getParamValue();
 		model.addAttribute("typelist", types.split("/"));
-		model.addAttribute("customerBilling", new CustomerBilling());
+		CustomerBilling item = new CustomerBilling();
+		
+		item.setProjectId(projectId);
+		model.addAttribute("customerBilling", item);
 		model.addAttribute("page_title", "新建客户开票情况");
 		return JSP_PAGE_MODIFY;
 	}

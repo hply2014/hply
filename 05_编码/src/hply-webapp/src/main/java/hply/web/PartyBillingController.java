@@ -91,12 +91,13 @@ public class PartyBillingController {
 	 * 新建页面
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String createForm(Model model) {
+	public String createForm(@RequestParam(value = "projectid", required = false) String projectId, Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 		PartyBilling paryBilling = new PartyBilling();
 		paryBilling.setTaxRate(paramService.getParamDoubleValue("default_tax_rate"));
 
+		paryBilling.setProjectId(projectId);
 		model.addAttribute("partyBilling", paryBilling);
 		model.addAttribute("page_title", "新建甲方开票情况");
 		return JSP_PAGE_MODIFY;

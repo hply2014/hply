@@ -5,7 +5,10 @@
 
 package hply.mapper;
 
+import hply.domain.Arrears;
 import hply.mapper.partial.PartialArrearsMapper;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -31,4 +34,6 @@ public interface ArrearsMapper extends PartialArrearsMapper {
 	 * 归还利息
 	 */
 	public void restoreInterest(String arrearsId);
+	
+	public List<Arrears> getAllByProject(String projectId);
 }

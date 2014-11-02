@@ -1,16 +1,32 @@
 ﻿package hply.web;
 
 import hply.core.Utility;
+import hply.domain.Arrears;
+import hply.domain.Collections;
+import hply.domain.ContractChange;
+import hply.domain.CustomerBilling;
+import hply.domain.PartyBilling;
+import hply.domain.Payment;
+import hply.domain.PaymentItem;
+import hply.domain.Profile;
 import hply.domain.Project;
+import hply.domain.ProjectSummary;
 import hply.domain.SysOrganization;
 import hply.domain.SysUser;
+import hply.service.ArrearsService;
+import hply.service.CollectionsService;
+import hply.service.ContractChangeService;
+import hply.service.CustomerBillingService;
+import hply.service.PartyBillingService;
+import hply.service.PaymentItemService;
+import hply.service.PaymentService;
+import hply.service.ProfileService;
 import hply.service.ProjectService;
+import hply.service.ProjectSummaryService;
 import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
-import java.io.FileOutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -52,6 +68,33 @@ public class ProjectController {
 	@Autowired
 	private SysUserService sysUserService;
 
+	@Autowired
+	private ProjectSummaryService summaryService;
+
+	@Autowired
+	private ArrearsService arrearsService;
+
+	@Autowired
+	private CollectionsService collectionService;
+
+	@Autowired
+	private ContractChangeService contractChangeService;
+
+	@Autowired
+	private CustomerBillingService customerBillingService;
+
+	@Autowired
+	private PartyBillingService partyBillingService;
+
+	@Autowired
+	private PaymentService paymentService;
+
+	@Autowired
+	private ProfileService profileService;
+
+	@Autowired
+	private PaymentItemService paymentItemService;
+
 	public static final String URI = "/project";
 	public static final String JSP_PAGE_LIST = "project-list";
 	public static final String JSP_PAGE_DETAIL = "project-detail";
@@ -61,8 +104,8 @@ public class ProjectController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p,
-			@RequestParam(value = "q", required = false) String q, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "q", required = false) String q,
+			Model model) {
 		model.addAttribute("page_title", "合同项目信息");
 
 		int pageIndex = p != null ? p.intValue() : 0;
@@ -95,10 +138,76 @@ public class ProjectController {
 	 * 详情页面
 	 */
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-	public String detail(@PathVariable String id, Model model) {
+	public String detail(@RequestParam(value = "target", required = false) String target, @PathVariable String id, Model model) {
+		if (StringUtils.isEmpty(target)) {
+			target = Utility.EMPTY;
+		} else {
+			model.addAttribute("target", target);
+		}
+		switch (target) {
+		case "summary":
+			break;
+		case "project":
+			// model.addAttribute("target", target);
+			break;
+		case "contractchange":
+			// model.addAttribute("target", target);
+			ContractChange cc = contractChangeService.get(id);
+			if (cc != null) {
+				id = cc.getProjectId();
+			}
+			break;
+		case "partybilling":
+			// model.addAttribute("target", target);
+			PartyBilling pb = partyBillingService.get(id);
+			if (pb != null) {
+				id = pb.getProjectId();
+			}
+			break;
+		case "customerbilling":
+			// model.addAttribute("target", target);
+			CustomerBilling cb = customerBillingService.get(id);
+			if (cb != null) {
+				id = cb.getProjectId();
+			}
+			break;
+		case "collections":
+			// model.addAttribute("target", target);
+			Collections c = collectionService.get(id);
+			if (c != null) {
+				id = c.getProjectId();
+			}
+			break;
+		case "payment":
+			// model.addAttribute("target", target);
+			Payment p = paymentService.get(id);
+			if (p != null) {
+				id = p.getProjectId();
+			}
+			break;
+		case "arrears":
+			// model.addAttribute("target", target);
+			Arrears a = arrearsService.get(id);
+			if (a != null) {
+				id = a.getProjectId();
+			}
+			break;
+		case "profile":
+			// model.addAttribute("target", target);
+			Profile pr = profileService.get(id);
+			if (pr != null) {
+				id = pr.getProjectId();
+			}
+			break;
+		default:
+			model.addAttribute("target", "summary");
+
+		}
+		
+		model.addAttribute("projectId", id);
+		
 		Project project = service.get(id);
-		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode()
-				+ "）");
+		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
 		SysOrganization org = orgService.get(project.getOrganizationId());
 		project.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
 
@@ -108,7 +217,71 @@ public class ProjectController {
 		SysUser u2 = sysUserService.get(project.getUpdateUser());
 		project.setUpdateUser(u2 != null ? u2.getRealName() : Utility.EMPTY);
 
+		ProjectSummary ps = summaryService.getSummaryByProject(id);
+		model.addAttribute("projectSummary", ps);
+
 		model.addAttribute("project", project);
+
+		List<Arrears> lArrears = arrearsService.getAllByProject(id);
+		for (Arrears item : lArrears) {
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("lArrears", lArrears);
+
+		List<Collections> lCollections = collectionService.getAllByProject(id);
+		for (Collections item : lCollections) {
+
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("lCollections", lCollections);
+
+		List<ContractChange> lContractChange = contractChangeService.getAllByProject(id);
+
+		for (ContractChange item : lContractChange) {
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("lContractChange", lContractChange);
+
+		List<CustomerBilling> lCustomerBilling = customerBillingService.getAllByProject(id);
+
+		for (CustomerBilling item : lCustomerBilling) {
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("lCustomerBilling", lCustomerBilling);
+
+		List<PartyBilling> lPartyBilling = partyBillingService.getAllByProject(id);
+		for (PartyBilling item : lPartyBilling) {
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+
+			SysUser user1 = sysUserService.get(item.getStep1User());
+			item.setStep1User(user1 != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("lPartyBilling", lPartyBilling);
+
+		List<Payment> lPayment = paymentService.getAllByProject(id);
+		for (Payment item : lPayment) {
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+
+			PaymentItem pi = paymentItemService.get(item.getPaymentItemId());
+			item.setPaymentItemId(pi != null ? pi.getItemName() : Utility.EMPTY);
+
+		}
+
+		model.addAttribute("lPayment", lPayment);
+
+		List<Profile> lProfile = profileService.getAllByProject(id);
+		for (Profile item : lProfile) {
+			SysUser user = sysUserService.get(item.getCreateUser());
+			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("lProfile", lProfile);
+
 		return JSP_PAGE_DETAIL;
 	}
 
@@ -143,8 +316,7 @@ public class ProjectController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Project project, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Project project, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
@@ -164,8 +336,8 @@ public class ProjectController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid Project project, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid Project project, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
@@ -204,9 +376,7 @@ public class ProjectController {
 		CreationHelper createHelper = wb.getCreationHelper();
 
 		Sheet sheet1 = wb.createSheet("合同项目信息");
-		
-		
-		
+
 		Row r = sheet1.createRow(0);
 		r.createCell(0).setCellValue("=now()");
 		CellStyle cellStyle = wb.createCellStyle();

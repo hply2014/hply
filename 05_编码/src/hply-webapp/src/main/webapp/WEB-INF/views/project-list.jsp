@@ -76,7 +76,7 @@
 					</button>
 					<ul class="dropdown-menu pagelist" role="menu"></ul>
 				</div> -->
-                <select class="selectpicker" data-size="10" data-style="btn-info btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页 
+                <select class="selectpicker page" data-size="10" data-style="btn-info btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页
 			</c:if>
 			）
 

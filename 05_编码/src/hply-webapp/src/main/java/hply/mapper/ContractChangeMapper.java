@@ -5,7 +5,10 @@
   
 package hply.mapper;
 
+import hply.domain.ContractChange;
 import hply.mapper.partial.PartialContractChangeMapper;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +21,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContractChangeMapper extends PartialContractChangeMapper {
 
+	public List<ContractChange> getAllByProject(String projectId);
 }
 

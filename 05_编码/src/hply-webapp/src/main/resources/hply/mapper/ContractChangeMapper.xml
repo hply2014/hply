@@ -6,5 +6,8 @@
 
   <cache />
 
+  <select id="getAllByProject" resultType="ContractChange">
+    select id as id, project_id as projectId, csa_code as csaCode, management_rate as managementRate, change_amount as changeAmount, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_contract_change where project_id=#{projectId} order by trice desc
+  </select>
 </mapper>
 

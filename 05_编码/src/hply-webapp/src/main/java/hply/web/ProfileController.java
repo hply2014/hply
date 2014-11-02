@@ -87,10 +87,13 @@ public class ProfileController {
 	 * 新建页面
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String createForm(Model model) {
+	public String createForm(@RequestParam(value = "projectid", required = false) String projectId, Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
-		model.addAttribute("profile", new Profile());
+		Profile item = new Profile();
+
+		item.setProjectId(projectId);
+		model.addAttribute("profile", item);
 		model.addAttribute("page_title", "新建型材");
 		return JSP_PAGE_MODIFY;
 	}
@@ -111,8 +114,7 @@ public class ProfileController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Profile profile, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Profile profile, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(profile.toString());
 
 		if (result.hasErrors()) {
@@ -131,8 +133,8 @@ public class ProfileController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid Profile profile, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid Profile profile, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(profile.toString());
 
 		if (result.hasErrors()) {

@@ -33,8 +33,8 @@
                     <tr>
                         <th></th>
                         <th>#</th>
-                        <th>凭证号</th>
                         <th>项目名称</th>
+                        <th>凭证号</th>
                         <th>款项来源</th>
                         <th>收款方式</th>
                         <th class="amount">收款金额</th>
@@ -52,10 +52,10 @@
                             <td><span
                                 class="glyphicon <c:out value="${collections.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                             <td><%=++i%></td>
-                            <td><c:out value="${collections.ticketCode}" /></td>
                             <td><a
-                                href="<s:url value="/collections/detail/{id}"><s:param name="id" value="${collections.id }" /></s:url>"><c:out
+                                href="<s:url value="/project/detail/{id}?target=collections"><s:param name="id" value="${collections.id }" /></s:url>"><c:out
                                         value="${collections.projectId}" /></a></td>
+                            <td><c:out value="${collections.ticketCode}" /></td>
                             <td><c:out value="${collections.sourceOf}" /></td>
                             <td><c:out value="${collections.paymentType}" /></td>
                             <td class="amount"><fmt:formatNumber value="${collections.amount}" pattern="###,###,###,###,##0.00" /></td>

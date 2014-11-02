@@ -5,7 +5,10 @@
   
 package hply.mapper;
 
+import hply.domain.Collections;
 import hply.mapper.partial.PartialCollectionsMapper;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +23,6 @@ public interface CollectionsMapper extends PartialCollectionsMapper {
 
 	//实际已经收的工程款
 	public Double getTotalCollectionsAmount(String projectId);
+	public List<Collections> getAllByProject(String projectId);
 }
 

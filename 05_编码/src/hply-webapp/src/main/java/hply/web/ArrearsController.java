@@ -87,7 +87,7 @@ public class ArrearsController {
 	 * 新建页面
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String createForm(Model model) {
+	public String createForm(@RequestParam(value = "projectid", required = false) String projectId, Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 		String arrearsTypes = paramService.getByEnName("arrears_type").getParamValue();
@@ -98,6 +98,7 @@ public class ArrearsController {
 		Arrears item = new Arrears();
 		item.setInterestRate(paramService.getParamDoubleValue("interest_rate"));
 		item.setArrearsCode(paramService.getNextCode("arrears_code"));
+		item.setProjectId(projectId);
 		model.addAttribute("arrears", item);
 		model.addAttribute("page_title", "新建往来欠款");
 		return JSP_PAGE_MODIFY;
@@ -117,8 +118,7 @@ public class ArrearsController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Arrears arrears, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Arrears arrears, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(arrears.toString());
 
 		if (result.hasErrors()) {
@@ -137,8 +137,8 @@ public class ArrearsController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid Arrears arrears, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid Arrears arrears, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(arrears.toString());
 
 		if (result.hasErrors()) {

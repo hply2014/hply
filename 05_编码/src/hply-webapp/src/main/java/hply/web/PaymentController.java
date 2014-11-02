@@ -95,7 +95,7 @@ public class PaymentController {
 	 * 新建页面
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String createForm(Model model) {
+	public String createForm(@RequestParam(value = "projectid", required = false) String projectId, Model model) {
 
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
@@ -108,6 +108,7 @@ public class PaymentController {
 		List<PaymentItem> pi = paymentItemService.getAll();
 		model.addAttribute("paymentitemlist", pi);
 
+		payment.setProjectId(projectId);
 		model.addAttribute("payment", payment);
 		model.addAttribute("page_title", "新建付款情况");
 		return JSP_PAGE_MODIFY;

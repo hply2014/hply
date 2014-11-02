@@ -17,5 +17,10 @@
 		where
 		project_id=#{projectId} and payment_item_id=#{paymentItemId} and year(trice)=year(now())
 	</select>
+	
+	
+  <select id="getAllByProject" resultType="Payment">
+    select id as id, project_id as projectId, ticket_code as ticketCode, pay_type as payType, payment_item_id as paymentItemId, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_payment where project_id=#{projectId} order by trice desc
+  </select>
 </mapper>
 

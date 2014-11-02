@@ -5,5 +5,10 @@
 <mapper namespace="hply.mapper.CustomerBillingMapper">
 
   <cache />
+  
+  
+  <select id="getAllByProject" resultType="CustomerBilling">
+    select id as id, project_id as projectId, invoice_code as invoiceCode, invoice_type as invoiceType, amount as amount, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_customer_billing where project_id=#{projectId} order by trice desc
+  </select>
 </mapper>
 

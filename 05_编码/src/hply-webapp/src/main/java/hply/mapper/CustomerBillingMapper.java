@@ -5,7 +5,10 @@
   
 package hply.mapper;
 
+import hply.domain.CustomerBilling;
 import hply.mapper.partial.PartialCustomerBillingMapper;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +21,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerBillingMapper extends PartialCustomerBillingMapper {
 
+	public List<CustomerBilling> getAllByProject(String projectId);
 }
 

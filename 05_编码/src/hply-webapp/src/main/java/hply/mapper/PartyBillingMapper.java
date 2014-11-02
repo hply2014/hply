@@ -5,7 +5,10 @@
   
 package hply.mapper;
 
+import hply.domain.PartyBilling;
 import hply.mapper.partial.PartialPartyBillingMapper;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +25,9 @@ public interface PartyBillingMapper extends PartialPartyBillingMapper {
 	 * 获取指定项目的已审核的开票额度
 	 */
 	public Double getCheckedAmount(String projectId);
+	
+
+	public List<PartyBilling> getAllByProject(String projectId);
 }
 
 

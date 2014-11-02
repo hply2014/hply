@@ -2,23 +2,33 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
-<c:if test="${not empty message}">
-	<div></div>
-<div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
-  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <strong><a href="<s:url value="/customerbilling/detail/${customerBilling.id }" />"> ${customerBilling.id }</a></strong> ，${message}
-</div>
-</c:if>
-<c:if test="${not empty delMessage}">
-<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
-  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <strong>${customerBilling.id }</strong> ，${delMessage}
-</div>
-</c:if>
-<div class="panel panel-primary">
-  <div class="panel-heading"><strong>客户开票情况</strong>（ 共<c:out value="${rowCount}" />行
-            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
-  <div class="panel-body">
+    <c:if test="${not empty message}">
+        <div></div>
+        <div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <strong><a href="<s:url value="/customerbilling/detail/${customerBilling.id }" />">
+                    ${customerBilling.id }</a></strong> ，${message}
+        </div>
+    </c:if>
+    <c:if test="${not empty delMessage}">
+        <div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <strong>${customerBilling.id }</strong> ，${delMessage}
+        </div>
+    </c:if>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <strong>客户开票情况</strong>（ 共
+            <c:out value="${rowCount}" />
+            行
+            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>
+            ）
+        </div>
+        <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
                 <shiro:hasPermission name="`customerbilling_create`">
                     <div class="btn-group">
@@ -40,7 +50,7 @@
                         <th>开票时间</th>
                         <th>创建用户</th>
                         <th>备注</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -49,15 +59,16 @@
                     %>
                     <c:forEach items="${list}" var="customerBilling">
                         <tr>
-                           <td><span
+                            <td><span
                                 class="glyphicon <c:out value="${customerBilling.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                             <td><%=++i%></td>
-                             <td><a
-                                href="<s:url value="/customerbilling/detail/{id}"><s:param name="id" value="${customerBilling.id }" /></s:url>"><c:out
+                            <td><a
+                                href="<s:url value="/project/detail/{id}?target=customerbilling"><s:param name="id" value="${customerBilling.id }" /></s:url>"><c:out
                                         value="${customerBilling.projectId}" /></a></td>
                             <td><c:out value="${customerBilling.invoiceCode}" /></td>
                             <td><c:out value="${customerBilling.invoiceType}" /></td>
-                            <td class="amount"><fmt:formatNumber value="${customerBilling.amount}" pattern="###,###,###,###,##0.00" /></td>
+                            <td class="amount"><fmt:formatNumber value="${customerBilling.amount}"
+                                    pattern="###,###,###,###,##0.00" /></td>
                             <td><fmt:formatDate value="${customerBilling.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${customerBilling.createUser}" /></td>
                             <td><c:out value="${customerBilling.description}" /></td>
@@ -82,6 +93,7 @@
                     <div class="col-sm-2">&nbsp;</div>
                 </div>
             </c:if>
-  </div>
-</div></div>
+        </div>
+    </div>
+</div>
 <%@ include file="bottom.jsp"%>

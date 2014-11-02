@@ -104,4 +104,8 @@ public class ArrearsService {
 		Double d = mapper.getInterestAmount(projectId);
 		return d != null ? d.doubleValue() : 0.0;
 	}
+	
+	public List<Arrears> getAllByProject(String projectId){
+		return mapper.getAllByProject(projectId);
+	}
 }

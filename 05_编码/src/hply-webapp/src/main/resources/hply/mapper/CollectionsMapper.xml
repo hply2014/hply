@@ -10,5 +10,10 @@
 		select sum(ifnull(amount, 0)) from t_collections where
 		project_id=#{projectId} and source_of='工程款'
 	</select>
+	
+	
+  <select id="getAllByProject" resultType="Collections">
+    select id as id, project_id as projectId, ticket_code as ticketCode, source_of as sourceOf, payment_type as paymentType, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_collections where project_id=#{projectId} order by trice desc
+  </select>
 </mapper>
 

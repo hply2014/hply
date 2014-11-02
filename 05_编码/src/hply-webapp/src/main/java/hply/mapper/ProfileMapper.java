@@ -5,7 +5,10 @@
   
 package hply.mapper;
 
+import hply.domain.Profile;
 import hply.mapper.partial.PartialProfileMapper;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +21,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProfileMapper extends PartialProfileMapper {
 
+	public List<Profile> getAllByProject(String projectId);
 }
 

@@ -60,7 +60,7 @@
 						<tr>
 							<td><span class="glyphicon <c:out value="${profile.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
 							<td><%=++i%></td>
-							<td><a href="<s:url value="/profile/detail/{id}"><s:param name="id" value="${profile.id }" /></s:url>"><c:out
+							<td><a href="<s:url value="/project/detail/{id}?target=profile"><s:param name="id" value="${profile.id }" /></s:url>"><c:out
 										value="${profile.projectId}" /></a></td>
 							<td class="amount"><fmt:formatNumber value="${profile.expectedValue}" pattern="###,###,###,###,##0.00" /></td>
 							<td><c:out value="${profile.profilePoint}" /></td>

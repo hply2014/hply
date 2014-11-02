@@ -96,7 +96,7 @@ public class ContractChangeController {
 	 * 新建页面
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String createForm(Model model) {
+	public String createForm(@RequestParam(value = "projectid", required = false) String projectId, Model model) {
 		ContractChange cc = new ContractChange();
 		cc.setCsaCode(paramService.getNextCode("cc_code"));
 		cc.setManagementRate(paramService.getParamDoubleValue("default_manager_rate"));
@@ -104,6 +104,7 @@ public class ContractChangeController {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 
+		cc.setProjectId(projectId);
 		model.addAttribute("contractChange", cc);
 		model.addAttribute("page_title", "新建合同补充协议");
 		return JSP_PAGE_MODIFY;

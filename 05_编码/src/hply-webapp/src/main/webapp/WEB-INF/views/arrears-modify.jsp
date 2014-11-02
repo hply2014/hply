@@ -180,8 +180,6 @@
 				}
 			}
 		});
-		
-
 
 		function refreshAmount(projectId){
     		$.post("<s:url value='/api/getarrearsamount/' />" + projectId, {}, function(result) {
@@ -193,7 +191,7 @@
     			}
     		}, "text");
 		}
-		refreshAmount(jQuery("#projectId").val());
+		refreshAmount($("#projectId").val());
 		
 		
 		$("#projectId").change(function(){

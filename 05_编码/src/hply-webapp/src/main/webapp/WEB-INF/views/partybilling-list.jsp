@@ -43,8 +43,8 @@
                     <tr>
                         <th></th>
                         <th>#</th>
-                        <th>发票票号</th>
                         <th>项目名称</th>
+                        <th>发票票号</th>
                         <th class="amount">税率</th>
                         <th class="amount">发票金额</th>
                         <th>开票人</th>
@@ -63,9 +63,9 @@
                                 class="glyphicon <c:out value="${partyBilling.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                             <td><%=++i%></td>
                             <td><a
-                                href="<s:url value="/partybilling/detail/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>"><c:out
-                                        value="${partyBilling.invoiceCode}" /></a></td>
-                            <td>${ partyBilling.projectId}</td>
+                                href="<s:url value="/project/detail/{id}?target=partybilling"><s:param name="id" value="${partyBilling.id }" /></s:url>">${ partyBilling.projectId}</a></td>
+                            <td><c:out
+                                        value="${partyBilling.invoiceCode}" /></td>
                             <td class="amount"><fmt:formatNumber value="${partyBilling.taxRate}" pattern="0.00" />%</td>
                             <td class="amount"><fmt:formatNumber value="${partyBilling.amount}" pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${partyBilling.createUser}" /></td>

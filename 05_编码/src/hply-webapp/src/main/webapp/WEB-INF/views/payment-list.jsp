@@ -15,7 +15,7 @@
   <strong>${payment.id }</strong> ，${delMessage}
 </div>
 </c:if>
-<div class="panel panel-default">
+<div class="panel panel-primary">
   <div class="panel-heading"><strong>付款情况</strong>（ 共<c:out value="${rowCount}" />行
             <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
   <div class="panel-body">
@@ -33,8 +33,8 @@
                     <tr>
                         <th></th>
                         <th>#</th>
-                        <th>凭证号</th>
                         <th>项目名称</th>
+                        <th>凭证号</th>
                         <th>付款科目</th>
                         <th>支付方式</th>
                         <th class="amount">付款金额</th>
@@ -52,10 +52,10 @@
                             <td><span
                                 class="glyphicon <c:out value="${payment.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                             <td><%=++i%></td>
-                            <td><c:out value="${payment.ticketCode}" /></td>
                             <td><a
-                                href="<s:url value="/payment/detail/{id}"><s:param name="id" value="${payment.id }" /></s:url>"><c:out
+                                href="<s:url value="/project/detail/{id}?target=payment"><s:param name="id" value="${payment.id }" /></s:url>"><c:out
                                         value="${payment.projectId}" /></a></td>
+                            <td><c:out value="${payment.ticketCode}" /></td>
                             <td><c:out value="${payment.paymentItemId}" /></td>
                             <td><c:out value="${payment.payType}" /></td>
                             <td class="amount"><fmt:formatNumber value="${payment.amount}" pattern="###,###,###,###,##0.00" /></td>

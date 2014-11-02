@@ -5,7 +5,10 @@
   
 package hply.mapper;
 
+import hply.domain.Payment;
 import hply.mapper.partial.PartialPaymentMapper;
+
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,4 +25,7 @@ public interface PaymentMapper extends PartialPaymentMapper {
 	public Double getToalPayment(String projectId);
 
 	public Double getTotalPaymentByItem(@Param("projectId") String projectId, @Param("paymentItemId") String paymentItemId);
+	
+
+	public List<Payment> getAllByProject(String projectId);
 }
