@@ -6,7 +6,7 @@
   <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
   <div class="btn-group">
-  <a href="<s:url value="/arrears" />" class="btn btn-info"><span class="glyphicon glyphicon-share-alt"></span> 返 回  </a>
+  <a href="<s:url value="/arrears" />" onclick="return goback();" class="btn btn-info"><span class="glyphicon glyphicon-share-alt"></span> 返 回  </a>
 </div>
   <div class="btn-group">
   <a href="<s:url value="/arrears/modify/{id}"><s:param name="id" value="${arrears.id }" /></s:url>" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> 修 改  </a>

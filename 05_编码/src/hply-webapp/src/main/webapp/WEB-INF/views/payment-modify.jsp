@@ -40,7 +40,7 @@
                             </div>
                             <shiro:hasPermission name="`payment-item`">
                                 <div class="col-sm-4">
-                                    <a href='<s:url value="/paymentitem" />' class="btn btn-link"><span
+                                    <a href='<s:url value="/paymentitem" />' onclick="return goback();" class="btn btn-link"><span
                                         class="glyphicon glyphicon-cog"></span> 付款科目设置 </a>
                                 </div>
                             </shiro:hasPermission>
@@ -84,7 +84,7 @@
                         <button type="submit" class="btn btn-info pull-right">
                             <span class="glyphicon glyphicon-ok"></span> 提 交
                         </button>
-                        <a href='<s:url value="/payment" />' class="btn btn-link"><span
+                        <a href='<s:url value="/payment" />' onclick="return goback();" class="btn btn-link"><span
                             class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 
                     </div>

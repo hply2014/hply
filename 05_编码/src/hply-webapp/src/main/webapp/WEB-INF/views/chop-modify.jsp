@@ -91,7 +91,7 @@
                                 <button id="dang" type="submit" class="btn btn-danger sm-offset-3">
                                     <span class="glyphicon glyphicon-remove"></span> 拒绝
                                 </button>
-                                <a href='<s:url value="/chop" />' class="btn btn-link"><span
+                                <a href='<s:url value="/chop" />' onclick="return goback();" class="btn btn-link"><span
                                     class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                             </div>
                         </c:if>
@@ -134,7 +134,7 @@
                                 <button id="dang" type="submit" class="btn btn-danger sm-offset-3">
                                     <span class="glyphicon glyphicon-remove"></span> 拒绝
                                 </button>
-                                <a href='<s:url value="/chop" />' class="btn btn-link"><span
+                                <a href='<s:url value="/chop" />' onclick="return goback();" class="btn btn-link"><span
                                     class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                             </div>
                         </c:if>
@@ -181,7 +181,7 @@
                                 <button id="succ" type="submit" class="btn btn-success">
                                     <span class="glyphicon glyphicon-ok"></span> 办理
                                 </button>
-                                <a href='<s:url value="/chop" />' class="btn btn-link"><span
+                                <a href='<s:url value="/chop" />' onclick="return goback();" class="btn btn-link"><span
                                     class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                             </div>
                         </c:if>
@@ -255,7 +255,7 @@
                             <button type="submit" class="btn btn-info pull-right">
                                 <span class="glyphicon glyphicon-ok"></span> 提 交
                             </button>
-                            <a href='<s:url value="/chop" />' class="btn btn-link"><span
+                            <a href='<s:url value="/chop" />' onclick="return goback();" class="btn btn-link"><span
                                 class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                         </c:if>
                     </div>

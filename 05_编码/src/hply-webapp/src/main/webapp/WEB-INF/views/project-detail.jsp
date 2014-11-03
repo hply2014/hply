@@ -9,7 +9,7 @@
         <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group">
-                    <a href="<s:url value="/project" />" class="btn btn-default"><span
+                    <a href="<s:url value="/project" />" onclick="return goback();" class="btn btn-default"><span
                         class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                 </div>
 

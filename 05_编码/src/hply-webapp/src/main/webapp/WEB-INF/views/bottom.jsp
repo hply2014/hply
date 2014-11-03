@@ -35,6 +35,11 @@
 <script src="<s:url value="/assets/bootstrap-icheck/icheck.min.js" />"></script>
 
 <script type="text/javascript">
+    function goback(){
+    	history.go(-1);
+    	return false;
+    }
+
 	$(function() {
 	<%--	$(":text[value='0.0']").val(null); --%>
 		

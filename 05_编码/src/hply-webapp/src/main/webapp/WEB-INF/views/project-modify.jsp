@@ -185,7 +185,7 @@
                         <button type="submit" class="btn btn-info pull-right">
                             <span class="glyphicon glyphicon-ok"></span> 提 交
                         </button>
-                        <a href='<s:url value="/project" />' class="btn btn-link"><span
+                        <a href='<s:url value="/project" />' onclick="return goback();" class="btn btn-link"><span
                             class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
 
                     </div>

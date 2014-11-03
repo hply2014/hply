@@ -6,7 +6,7 @@
   <div class="panel-body">
 <div class="btn-toolbar" role="toolbar">
   <div class="btn-group">
-  <a href="<s:url value="/arrearsinterest" />" class="btn btn-info"><span class="glyphicon glyphicon-share-alt"></span> 返 回  </a>
+  <a href="<s:url value="/arrearsinterest" />" onclick="return goback();" class="btn btn-info"><span class="glyphicon glyphicon-share-alt"></span> 返 回  </a>
 </div>
 <shiro:hasPermission name="`arrearsinterest_modify`">
 				<div class="btn-group">
