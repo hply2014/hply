@@ -81,7 +81,7 @@
                         <div class="bs-callout bs-callout-danger">
                             <h4>欠款提示</h4>
                             <p>　　工程欠款：<span id="d1">0000.00</span></p>
-                            <p>　　往来欠款：<span id="d2">0000.00</span></p>
+                            <p>　　往来欠款（本金）：<span id="d2">0000.00</span></p>
                             <h4>操作提示</h4>
                             <p><span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span></p>
                         </div>

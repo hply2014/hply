@@ -108,7 +108,7 @@
 		
 
 		function refreshAmount(projectId){
-    		$.post("<s:url value='/api/suprplusamounts/' />" + projectId, {}, function(result) {
+    		$.post("<s:url value='/api/camounts/' />" + projectId, {}, function(result) {
     			if(result.indexOf('|') > 0){
     				var arr = result.split("|");
     				$("#d1").html(arr[0]);

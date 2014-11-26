@@ -263,7 +263,7 @@ public class APIController {
 
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
 
-		// 已开票额|报销上限|报销累计|报销剩余
+		// 往来欠款总额|应收利息总额|已收利息总额
 		return dformat.format(q1) + "|" + dformat.format(q2) + "|" + dformat.format(q3);
 
 	}
