@@ -46,7 +46,9 @@
                             </div>
                             <label for="contractAmount" class="col-sm-2 control-label">合同金额</label>
                             <div class="col-sm-4 required-field-block">
-                                <sf:input cssClass="form-control" path="contractAmount" placeholder="合同金额" />
+                                <input type="text" class="form-control" name="contractAmount" placeholder="合同金额"
+                                    value="<fmt:formatNumber value="${project.contractAmount}"
+                                                pattern="0.00" />" />
                                 <p class="help-block" />
                             </div>
                         </div>
@@ -83,7 +85,8 @@
                             <div class="col-sm-4 col-sm-offset-2 checkbox">
                                 <sf:checkbox cssClass="icheckbox" path="capitalOccupied" id="capitalOccupied" value="1" />
                                 <label for="capitalOccupied">占用资金情况</label>
-                                <p class="help-block" /><input type="hidden" name="capitalOccupied" value="0" />
+                                <p class="help-block" />
+                                <input type="hidden" name="capitalOccupied" value="0" />
                             </div>
                         </div>
                         <div class="panel with-nav-tabs panel-default">
@@ -110,7 +113,7 @@
                                                 <sf:input cssClass="form-control" path="partyName" placeholder="甲方名称" />
                                                 <p class="help-block" />
                                             </div>
-                                            <label for="partyAddress" class="col-sm-2 control-label">甲方地址</label>
+                                            <label for="partyAddress" class="col-sm-2 control-label">工程地址</label>
                                             <div class="col-sm-4 ">
                                                 <sf:input cssClass="form-control" path="partyAddress" placeholder="甲方地址" />
                                                 <p class="help-block" />
@@ -258,8 +261,7 @@
 				element.next().html('<b class="glyphicon glyphicon-remove text-danger"></b><i>' + error.html() + "</i>");
 			},
 			rules : {
-				projectCode : {
-				},
+				projectCode : {},
 				projectName : {
 					required : true
 				},

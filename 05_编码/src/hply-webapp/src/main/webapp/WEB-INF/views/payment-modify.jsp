@@ -40,7 +40,7 @@
                             </div>
                             <shiro:hasPermission name="`payment-item`">
                                 <div class="col-sm-4">
-                                    <a href='<s:url value="/paymentitem" />' onclick="return goback();" class="btn btn-link"><span
+                                    <a href='<s:url value="/paymentitem" />' class="btn btn-link"><span
                                         class="glyphicon glyphicon-cog"></span> 付款科目设置 </a>
                                 </div>
                             </shiro:hasPermission>

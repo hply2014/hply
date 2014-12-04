@@ -82,7 +82,7 @@ strong, h1, h2, h3, h4 {
 }
 
 .main {
-	width: 100%;
+	width: 98%;
 	padding: 10px;
 }
 

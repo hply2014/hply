@@ -238,7 +238,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <sf:label path="partyAddress" cssClass="col-sm-2 control-label">甲方地址</sf:label>
+                                                <sf:label path="partyAddress" cssClass="col-sm-2 control-label">工程地址</sf:label>
                                                 <div class="col-sm-4">
                                                     <p class="form-control-static">
                                                         <c:out value="${project.partyAddress}" />
