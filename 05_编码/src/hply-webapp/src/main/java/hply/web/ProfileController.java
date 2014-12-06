@@ -1,11 +1,14 @@
 ﻿package hply.web;
 
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.Profile;
 import hply.domain.Project;
+import hply.domain.SysOrganization;
 import hply.domain.SysUser;
 import hply.service.ProfileService;
 import hply.service.ProjectService;
+import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
@@ -13,6 +16,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +42,8 @@ public class ProfileController {
 
 	@Autowired
 	private SysParameterService paramService;
+	@Autowired
+	private SysOrganizationService orgService;
 
 	public static final String URI = "/profile";
 	public static final String JSP_PAGE_LIST = "profile-list";
@@ -48,18 +54,29 @@ public class ProfileController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
 		model.addAttribute("page_title", "型材");
+		List<SysOrganization> orglist = orgService.getAllBusiness();
+		if (SessionHelper.IsBusinessDepartment()) {
+			// 如果是业务部门，并且未指定按单位的过滤条件
+			oid = SessionHelper.getCurrentSysUser().getOrganizationId();
+		} else {
+			model.addAttribute("orglist", orglist);
+			if (StringUtils.isBlank(oid)) {
+				oid = orglist.get(0).getId();
+			}
+		}
+		model.addAttribute("oid", oid);
 
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
-		int rowCount = service.getRowCount();
+		int rowCount = service.getRowCount(oid);
 		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
 		model.addAttribute("rowCount", rowCount);
 		model.addAttribute("pageIndex", pageIndex);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
-		List<Profile> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+		List<Profile> list = service.getAllPagedByOrganization(oid, pageIndex * pageSize, pageSize);
 
 		for (Profile item : list) {
 			Project pjt = projectService.get(item.getProjectId());

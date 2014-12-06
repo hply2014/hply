@@ -1,5 +1,6 @@
 ﻿package hply.web;
 
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.Arrears;
 import hply.domain.Collections;
@@ -28,6 +29,7 @@ import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -104,15 +106,27 @@ public class ProjectController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "q", required = false) String q,
-			Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid,
+			@RequestParam(value = "q", required = false) String q, Model model) {
 		model.addAttribute("page_title", "合同项目信息");
+
+		List<SysOrganization> orglist = orgService.getAllBusiness();
+		if (SessionHelper.IsBusinessDepartment()) {
+			// 如果是业务部门，并且未指定按单位的过滤条件
+			oid = SessionHelper.getCurrentSysUser().getOrganizationId();
+		} else {
+			model.addAttribute("orglist", orglist);
+			if (StringUtils.isBlank(oid)) {
+				oid = orglist.get(0).getId();
+			}
+		}
+		model.addAttribute("oid", oid);
 
 		int pageIndex = p != null ? p.intValue() : 0;
 		String queryText = StringUtils.isBlank(q) ? "%" : "%" + q.replaceAll(" ", "%") + "%";
 
 		int pageSize = paramService.getParamIntValue("page_size", 30);
-		int rowCount = service.getRowCount(queryText);
+		int rowCount = service.getRowCount(queryText, oid);
 		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
 		model.addAttribute("rowCount", rowCount);
 		model.addAttribute("pageIndex", pageIndex);
@@ -120,11 +134,12 @@ public class ProjectController {
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
 		model.addAttribute("queryText", q);
 
-		List<Project> list = service.getAllPaged(queryText, pageIndex * pageSize, pageSize);
+		List<Project> list = service.getAllPagedByOrganization(queryText, oid, pageIndex * pageSize, pageSize);
 
 		for (Project item : list) {
-			SysOrganization org = orgService.get(item.getOrganizationId());
-			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+			// SysOrganization org = orgService.get(item.getOrganizationId());
+			// item.setOrganizationId(org != null ? org.getOrganizationName() :
+			// Utility.EMPTY);
 
 			SysUser user = sysUserService.get(item.getCreateUser());
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
@@ -203,9 +218,9 @@ public class ProjectController {
 			model.addAttribute("target", "summary");
 
 		}
-		
+
 		model.addAttribute("projectId", id);
-		
+
 		Project project = service.get(id);
 		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
 		SysOrganization org = orgService.get(project.getOrganizationId());
@@ -293,7 +308,7 @@ public class ProjectController {
 		Project project = new Project();
 		project.setProjectCode(paramService.getNextCode("project_code"));
 		model.addAttribute("project", project);
-		model.addAttribute("orglist", orgService.getAll());
+		model.addAttribute("orglist", getOrgList());
 		project.setManagementRate(paramService.getParamDoubleValue("default_manager_rate"));
 		project.setTaxRate(paramService.getParamDoubleValue("default_tax_rate"));
 		model.addAttribute("page_title", "新建合同项目信息");
@@ -308,8 +323,17 @@ public class ProjectController {
 		Project project = service.get(id);
 		model.addAttribute("page_title", "修改合同项目信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
 		model.addAttribute("project", project);
-		model.addAttribute("orglist", orgService.getAll());
+		model.addAttribute("orglist", getOrgList());
 		return JSP_PAGE_MODIFY;
+	}
+
+	private List<SysOrganization> getOrgList() {
+		if (SessionHelper.IsBusinessDepartment()) {
+			List<SysOrganization> ol = new ArrayList<SysOrganization>();
+			ol.add((SysOrganization) SessionHelper.getAttribute(SessionHelper.CURRENT_ORGANIZATION));
+			return ol;
+		}
+		return orgService.getAllBusiness();
 	}
 
 	/*
@@ -320,7 +344,7 @@ public class ProjectController {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
-			model.addAttribute("orglist", orgService.getAll());
+			model.addAttribute("orglist", getOrgList());
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
@@ -341,7 +365,7 @@ public class ProjectController {
 		Utility.println(project.toString());
 
 		if (result.hasErrors()) {
-			model.addAttribute("orglist", orgService.getAll());
+			model.addAttribute("orglist", getOrgList());
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}

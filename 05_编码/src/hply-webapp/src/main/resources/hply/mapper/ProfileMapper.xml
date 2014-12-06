@@ -7,5 +7,13 @@
   <select id="getAllByProject" resultType="Profile">
     select id as id, project_id as projectId, expected_value as expectedValue, profile_point as profilePoint, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_profile where project_id=#{projectId} order by trice desc
   </select>
+  
+  <select id="getRowCountByOrganization" resultType="int">
+    select count(*) from t_profile t where exists (select 0 from t_project p where t.project_id=p.id and p.organization_id=#{organizationId})
+  </select>
+
+  <select id="getAllPagedByOrganization" resultType="Profile">
+    select id as id, project_id as projectId, expected_value as expectedValue, profile_point as profilePoint, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_profile t where exists (select 0 from t_project p where t.project_id=p.id and p.organization_id=#{organizationId}) order by trice desc limit #{pageSize} offset #{pageIndex}
+  </select>
 </mapper>
 

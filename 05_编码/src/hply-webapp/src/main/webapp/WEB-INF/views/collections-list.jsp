@@ -2,23 +2,41 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
-<c:if test="${not empty message}">
-	<div></div>
-<div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
-  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <strong><a href="<s:url value="/collections/detail/${collections.id }" />"> ${collections.id }</a></strong> ，${message}
-</div>
-</c:if>
-<c:if test="${not empty delMessage}">
-<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
-  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <strong>${collections.id }</strong> ，${delMessage}
-</div>
-</c:if>
-<div class="panel panel-primary">
-  <div class="panel-heading"><strong>收款情况</strong>（ 共<c:out value="${rowCount}" />行
-            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
- <div class="panel-body">
+    <c:if test="${not empty message}">
+        <div></div>
+        <div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <strong><a href="<s:url value="/collections/detail/${collections.id }" />"> ${collections.id }</a></strong>
+            ，${message}
+        </div>
+    </c:if>
+    <c:if test="${not empty delMessage}">
+        <div class="alert alert-warning alert-dismissible col-md-offset-4 affix" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <strong>${collections.id }</strong> ，${delMessage}
+        </div>
+    </c:if>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <strong>收款情况</strong>（ 共
+            <c:out value="${rowCount}" />
+            行， <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页
+            ）
+            <c:if test='${not empty orglist}'>
+                <div class="pull-right">
+                    <select class="selectpicker org" data-size="10" data-style="btn-danger btn-sm" data-width="120px">
+                        <c:forEach items="${orglist}" var="org">
+                            <option ${org.id == oid ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:if>
+        </div>
+        <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
                 <shiro:hasPermission name="`collections_create`">
                     <div class="btn-group">
@@ -45,7 +63,8 @@
                 </thead>
                 <tbody>
                     <%
-                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
+                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted")
+                    			.toString());
                     %>
                     <c:forEach items="${list}" var="collections">
                         <tr>
@@ -58,7 +77,8 @@
                             <td><c:out value="${collections.ticketCode}" /></td>
                             <td><c:out value="${collections.sourceOf}" /></td>
                             <td><c:out value="${collections.paymentType}" /></td>
-                            <td class="amount"><fmt:formatNumber value="${collections.amount}" pattern="###,###,###,###,##0.00" /></td>
+                            <td class="amount"><fmt:formatNumber value="${collections.amount}"
+                                    pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${collections.createUser}" /></td>
                             <td><fmt:formatDate value="${collections.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${collections.description}" /></td>
@@ -91,14 +111,36 @@
                     <div class="col-sm-8">
                         <ul class="pager">
                             <li class="${pageIndex <= 0 ? 'disabled' :'' }"><a
-                                href="<s:url value='/collections?p=${pageIndex - 1}' />">上一页</a></li>
+                                href="<s:url value='/collections?oid=${oid}&p=${pageIndex - 1}' />">上一页</a></li>
                             <li class="${pageIndex + 1 >= pageCount ? 'disabled' :'' }"><a
-                                href="<s:url value='/collections?p=${pageIndex + 1}' />">下一页</a></li>
+                                href="<s:url value='/collections?oid=${oid}&p=${pageIndex + 1}' />">下一页</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-2">&nbsp;</div>
                 </div>
             </c:if>
-  </div>
-</div></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+<!--
+$(function() {
+    var p = '';
+    for (var i = 0; i < <c:out value="${pageCount}" />; i++) {
+        p = p + '<option ' + (i== ${pageIndex} ? 'selected': '') + ' value="' + i + '">第' + (i + 1) + '页</option>';
+    }
+
+    $(".page").append(p).change(function(){
+        self.location = '<s:url value="/collections"/>?oid=${oid}&p=' + $(this).val();
+    });
+    
+
+    $(".org").change(function(){
+        self.location = '<s:url value="/collections"/>?oid=' + $(this).val();
+    });
+
+});
+//-->
+</script>
 <%@ include file="bottom.jsp"%>

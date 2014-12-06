@@ -28,4 +28,10 @@ public interface PaymentMapper extends PartialPaymentMapper {
 	
 
 	public List<Payment> getAllByProject(String projectId);
+	
+
+	public List<Payment> getAllPagedByOrganization(@Param("organizationId") String orgId, @Param("pageIndex") int pageIndex,
+			@Param("pageSize") int pageSize);
+
+	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
 }

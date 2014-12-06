@@ -94,4 +94,12 @@ public class ProjectSummaryService {
 	public ProjectSummary getSummaryByProject(String projectId){
 		return mapper.getSummaryByProject(projectId);
 	}
+	public List<ProjectSummary> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
+	}
+
+
+	public int getRowCount(String orgId) {
+		return mapper.getRowCountByOrganization(orgId);
+	}
 }

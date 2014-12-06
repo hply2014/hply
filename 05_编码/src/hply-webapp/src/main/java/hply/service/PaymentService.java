@@ -2,7 +2,6 @@
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
-import hply.domain.Arrears;
 import hply.domain.Payment;
 import hply.mapper.PaymentMapper;
 
@@ -100,5 +99,13 @@ public class PaymentService {
 
 	public List<Payment> getAllByProject(String projectId) {
 		return mapper.getAllByProject(projectId);
+	}
+	public List<Payment> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
+	}
+
+
+	public int getRowCount(String orgId) {
+		return mapper.getRowCountByOrganization(orgId);
 	}
 }

@@ -2,7 +2,6 @@
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
-import hply.domain.Arrears;
 import hply.domain.CustomerBilling;
 import hply.mapper.CustomerBillingMapper;
 
@@ -87,5 +86,13 @@ public class CustomerBillingService {
 
 	public List<CustomerBilling> getAllByProject(String projectId) {
 		return mapper.getAllByProject(projectId);
+	}
+	public List<CustomerBilling> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
+	}
+
+
+	public int getRowCount(String orgId) {
+		return mapper.getRowCountByOrganization(orgId);
 	}
 }

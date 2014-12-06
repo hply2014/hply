@@ -76,12 +76,26 @@ public class ProjectService {
 	public int getRowCount(String queryText) {
 		return mapper.getRowCount(queryText);
 	}
+	
+	/**
+	 * 01_合同项目信息，获取记录总行数
+	 */
+	public int getRowCount(String queryText, String organizationId) {
+		return mapper.getRowCountByOrganization(queryText, organizationId);
+	}
 
 	/**
 	 * 01_合同项目信息，获取所有对象，分页方式
 	 */
 	public List<Project> getAllPaged(String queryText, int pageIndex, int pageSize) {
 		return mapper.getAllPaged(queryText, pageIndex, pageSize);
+	}
+	
+	/**
+	 * 01_合同项目信息，获取所有对象，分页方式
+	 */
+	public List<Project> getAllPagedByOrganization(String queryText, String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(queryText, orgId, pageIndex, pageSize);
 	}
 
 	public void updateAllStatus() {

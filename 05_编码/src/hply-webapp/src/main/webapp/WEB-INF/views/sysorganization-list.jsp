@@ -10,7 +10,7 @@
 </div>
 </c:if>
 <c:if test="${not empty delMessage}">
-<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+<div class="alert alert-warning alert-dismissible col-md-offset-4 affix" role="alert">
   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
   <strong>${sysOrganization.id }</strong> ，${delMessage}
 </div>

@@ -2,7 +2,6 @@
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
-import hply.domain.Arrears;
 import hply.domain.PartyBilling;
 import hply.mapper.PartyBillingMapper;
 
@@ -95,5 +94,13 @@ public class PartyBillingService {
 
 	public List<PartyBilling> getAllByProject(String projectId) {
 		return mapper.getAllByProject(projectId);
+	}
+	public List<PartyBilling> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
+	}
+
+
+	public int getRowCount(String orgId) {
+		return mapper.getRowCountByOrganization(orgId);
 	}
 }

@@ -5,6 +5,9 @@
   
 package hply.mapper;
 
+import java.util.List;
+
+import hply.domain.SysOrganization;
 import hply.mapper.partial.PartialSysOrganizationMapper;
 
 import org.springframework.stereotype.Repository;
@@ -18,5 +21,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysOrganizationMapper extends PartialSysOrganizationMapper {
 
+
+	  public List<SysOrganization> getAllBusiness(); 
 }
 

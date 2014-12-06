@@ -10,6 +10,7 @@ import hply.mapper.partial.PartialArrearsMapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -36,4 +37,9 @@ public interface ArrearsMapper extends PartialArrearsMapper {
 	public void restoreInterest(String arrearsId);
 	
 	public List<Arrears> getAllByProject(String projectId);
+
+	public List<Arrears> getAllPagedByOrganization(@Param("organizationId") String orgId,
+			@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+
+	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
 }

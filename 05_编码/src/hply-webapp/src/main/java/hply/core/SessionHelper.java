@@ -1,5 +1,6 @@
 package hply.core;
 
+import hply.domain.SysOrganization;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
 import hply.service.SysResourceService;
@@ -18,6 +19,7 @@ public class SessionHelper {
 	public static final String CURRENT_SYS_USER = "__CURRENT_SYS_USER";
 	public static final String CURRENT_LOGIN_TIME = "__CURRENT_LOGIN_TIME";
 	public static final String CURRENT_ROOT_TREE_NODE = "__CURRENT_PERMISSION";
+	public static final String CURRENT_ORGANIZATION = "__CURRENT_ORGANIZATION";
 
 	public static SysResourceService sysResourceService;
 	
@@ -57,6 +59,11 @@ public class SessionHelper {
 		}
 
 		return Utility.EMPTY;
+	}
+	
+	public static boolean IsBusinessDepartment(){
+		SysOrganization org = (SysOrganization) getAttribute(CURRENT_ORGANIZATION);
+		return org != null && org.getDescription() != null && org.getDescription().indexOf("业务") >= 0;
 	}
 
 	public static void setAttribute(Object key, Object value) {

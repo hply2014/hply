@@ -12,5 +12,15 @@
 		select id as id,concat('[',project_code,']',project_name) as projectName
 		from t_project order by create_time desc
 	</select>
+	
+	
+  <select id="getAllPagedByOrganization" resultType="Project">
+    select id as id, ifnull(project_code, '[无]') as projectCode, project_name as projectName, organization_id as organizationId, party_name as partyName, party_address as partyAddress, manager as manager, contract_code as contractCode, corperation as corperation, legal_assignee as legalAssignee, is_withholding_offsite as isWithholdingOffsite, management_rate as managementRate, tax_rate as taxRate, contract_amount as contractAmount, settlement_amount as settlementAmount, duty_paid_time as dutyPaidTime, duty_paid_amount as dutyPaidAmount, duty_paid_code as dutyPaidCode, capital_occupied as capitalOccupied, project_status as projectStatus, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, management_plan_amount as managementPlanAmount, tax_plan_amount as taxPlanAmount from t_project where concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, '')) like #{queryText} and organization_id=#{organizationId} order by trice desc limit #{pageSize} offset #{pageIndex}
+  </select>
+  
+  
+  <select id="getRowCountByOrganization" resultType="int">
+    select count(*) from t_project where concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, '')) like #{queryText} and organization_id=#{organizationId}
+  </select>
 </mapper>
 

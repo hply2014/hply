@@ -25,9 +25,14 @@ public interface ProjectSummaryMapper extends PartialProjectSummaryMapper {
 	public List<ProjectSummary> getSummaryByMonth(@Param("pharse") String pharse, @Param("organizationId") String organizationId);
 
 	public List<String> getMonths();
-	
+
 	/*
 	 * 获取指定项目的所有汇总信息
 	 */
 	public ProjectSummary getSummaryByProject(String projectId);
+
+	public List<ProjectSummary> getAllPagedByOrganization(@Param("organizationId") String orgId, @Param("pageIndex") int pageIndex,
+			@Param("pageSize") int pageSize);
+
+	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
 }

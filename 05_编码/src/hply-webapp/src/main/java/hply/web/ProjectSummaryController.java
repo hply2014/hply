@@ -1,7 +1,9 @@
 ﻿package hply.web;
 
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.ProjectSummary;
+import hply.domain.SysOrganization;
 import hply.service.ProjectSummaryService;
 import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
@@ -48,18 +50,31 @@ public class ProjectSummaryController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
 		model.addAttribute("page_title", "多项目汇总");
 
+
+		List<SysOrganization> orglist = orgService.getAllBusiness();
+		if (SessionHelper.IsBusinessDepartment()) {
+			// 如果是业务部门，并且未指定按单位的过滤条件
+			oid = SessionHelper.getCurrentSysUser().getOrganizationId();
+		} else {
+			model.addAttribute("orglist", orglist);
+			if (StringUtils.isBlank(oid)) {
+				oid = orglist.get(0).getId();
+			}
+		}
+		model.addAttribute("oid", oid);
+		
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
-		int rowCount = service.getRowCount();
+		int rowCount = service.getRowCount(oid);
 		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
 		model.addAttribute("rowCount", rowCount);
 		model.addAttribute("pageIndex", pageIndex);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
-		List<ProjectSummary> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+		List<ProjectSummary> list = service.getAllPagedByOrganization(oid, pageIndex * pageSize, pageSize);
 
 		model.addAttribute("list", list);
 
@@ -99,9 +114,18 @@ public class ProjectSummaryController {
 		String dateRange = DateFormatUtils.format(c0, "yyyy年MM月dd日") + " ~ " + DateFormatUtils.format(c1, "yyyy年MM月dd日");
 		model.addAttribute("dateRange", dateRange);
 
-		if (StringUtils.isBlank(orgId)) {
-			// 默认项目部
-			orgId = "0ed44f90-0c3a-11e4-9300-001c42328937";
+		if (SessionHelper.IsBusinessDepartment()) {
+			// 如果是业务部门，并且未指定按单位的过滤条件
+			orgId = SessionHelper.getCurrentSysUser().getOrganizationId();
+
+		} else {
+			List<SysOrganization> orglist = orgService.getAllBusiness();
+			model.addAttribute("orglist", orglist);
+
+			if (StringUtils.isBlank(orgId)) {
+				// 默认项目部
+				orgId = orglist.get(0).getId();
+			}
 		}
 		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
 		model.addAttribute("list", list);

@@ -10,14 +10,14 @@
 </div>
 </c:if>
 <c:if test="${not empty delMessage}">
-<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+<div class="alert alert-warning alert-dismissible col-md-offset-4 affix" role="alert">
   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
   <strong>${paymentItem.id }</strong> ，${delMessage}
 </div>
 </c:if>
 <div class="panel panel-primary">
   <div class="panel-heading"><strong>付款科目</strong>（ 共<c:out value="${rowCount}" />行
-            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
+            ，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页）</div>
     <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
                 <shiro:hasPermission name="`payment-item`">

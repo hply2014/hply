@@ -72,6 +72,7 @@ public class ContractChangeService {
 
 	/**
 	 * 02_合同补充协议，获取记录总行数
+	 * @param oid 
 	 */
 	public int getRowCount() {
 		return mapper.getRowCount();
@@ -87,4 +88,12 @@ public class ContractChangeService {
 	public List<ContractChange> getAllByProject(String projectId) {
 		return mapper.getAllByProject(projectId);
 	}
+	public List<ContractChange> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
+	}
+
+	public int getRowCount(String oid) {
+		return mapper.getRowCountByOrganization(oid);
+	}
+
 }

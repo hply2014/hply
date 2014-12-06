@@ -108,4 +108,14 @@ public class ArrearsService {
 	public List<Arrears> getAllByProject(String projectId){
 		return mapper.getAllByProject(projectId);
 	}
+
+
+	public List<Arrears> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
+	}
+
+
+	public int getRowCount(String orgId) {
+		return mapper.getRowCountByOrganization(orgId);
+	}
 }

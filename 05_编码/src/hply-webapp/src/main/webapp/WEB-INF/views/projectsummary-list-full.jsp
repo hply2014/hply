@@ -42,7 +42,6 @@ th, .nowrap {
 	white-space: nowrap;
 }
 
-
 th {
 	text-align: center
 }
@@ -54,12 +53,17 @@ th {
 </head>
 <body>
     <h4>
-        <strong>项目汇总</strong>（ 共<c:out value="${list.size()}" />行 ）
-        <select id="orgSelect"><option ${orgId == '0ed38235-0c3a-11e4-9300-001c42328937' ? 'selected' : '' } value="0ed38235-0c3a-11e4-9300-001c42328937">事业部</option>
-            <option ${orgId == '0ed44f90-0c3a-11e4-9300-001c42328937' ? 'selected' : '' } value="0ed44f90-0c3a-11e4-9300-001c42328937">项目部</option></select>&nbsp;
-            <select id="monthsSelect">
-            <c:forEach items="${months}" var="str"><option ${pharse == str ? 'selected' : '' } value="${str}">${str }</option></c:forEach>
-            </select>&nbsp;<span id="offsetMonths">${dateRange }</span>
+        <strong>项目汇总</strong>（ 共
+        <c:out value="${list.size()}" />
+        行 ） <c:if test='${not empty orglist}'><select id="orgSelect">
+            <c:forEach items="${orglist}" var="org">
+                <option ${org.id == orgId ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
+            </c:forEach>
+        </select>&nbsp; </c:if><select id="monthsSelect">
+            <c:forEach items="${months}" var="str">
+                <option ${pharse == str ? 'selected' : '' } value="${str}">${str }</option>
+            </c:forEach>
+        </select>&nbsp;<span id="offsetMonths">${dateRange }</span>
     </h4>
     <table class="table table-hover table-striped table-bordered">
         <thead>
@@ -170,17 +174,18 @@ th {
             </c:forEach>
         </tbody>
     </table>
-    
-<script type="text/javascript">
-$(function(){
-	$("select").change(function(){
-		//alert($("#orgSelect").val() + "," + $("#monthsSelect").val());
-		self.location = "<s:url value='/projectsummary/full' />" + "?orgid=" + $("#orgSelect").val() + "&pharse=" + $("#monthsSelect").val();
-		
-	});
-	
-	
-});
-</script>
-    
+
+    <script type="text/javascript">
+					$(function() {
+						$("select").change(
+								function() {
+									//alert($("#orgSelect").val() + "," + $("#monthsSelect").val());
+									self.location = "<s:url value='/projectsummary/full' />" + "?orgid=" + $("#orgSelect").val()
+											+ "&pharse=" + $("#monthsSelect").val();
+
+								});
+
+					});
+				</script>
+
     <%@ include file="bottom.jsp"%>

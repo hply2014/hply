@@ -21,7 +21,11 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
   */
 public class ArrearsInterest implements Serializable {
     
-    	/*
+    	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1867759227030561730L;
+		/*
     	 * uuid序号
     	 */
         public static final String FIELD_ID = "id";

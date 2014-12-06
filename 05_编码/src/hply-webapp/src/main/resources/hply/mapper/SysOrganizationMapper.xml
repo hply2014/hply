@@ -4,6 +4,13 @@
 
 <mapper namespace="hply.mapper.SysOrganizationMapper">
 
-  <cache />
+	<cache />
+
+
+
+	<select id="getAllBusiness" resultType="SysOrganization">
+		select id as id, organization_name as organizationName, create_time as createTime, description as description, version as
+		version from t_sys_organization where description like '%业务%' order by create_time desc
+	</select>
 </mapper>
 

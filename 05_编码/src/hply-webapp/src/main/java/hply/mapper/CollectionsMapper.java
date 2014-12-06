@@ -10,6 +10,7 @@ import hply.mapper.partial.PartialCollectionsMapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -24,5 +25,10 @@ public interface CollectionsMapper extends PartialCollectionsMapper {
 	//实际已经收的工程款
 	public Double getTotalCollectionsAmount(String projectId);
 	public List<Collections> getAllByProject(String projectId);
+	
+	public List<Collections> getAllPagedByOrganization(@Param("organizationId") String orgId,
+			@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+
+	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
 }
 

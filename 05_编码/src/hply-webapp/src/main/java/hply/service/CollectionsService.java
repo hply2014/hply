@@ -2,7 +2,6 @@
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
-import hply.domain.Arrears;
 import hply.domain.Collections;
 import hply.mapper.CollectionsMapper;
 
@@ -115,5 +114,15 @@ public class CollectionsService {
 
 	public List<Collections> getAllByProject(String projectId) {
 		return mapper.getAllByProject(projectId);
+	}
+
+
+	public List<Collections> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
+	}
+
+
+	public int getRowCount(String orgId) {
+		return mapper.getRowCountByOrganization(orgId);
 	}
 }

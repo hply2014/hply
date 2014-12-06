@@ -2,8 +2,10 @@ package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
+import hply.domain.SysOrganization;
 import hply.domain.SysUser;
 import hply.service.ProjectService;
+import hply.service.SysOrganizationService;
 import hply.service.SysResourceService;
 import hply.service.SysUserService;
 
@@ -35,6 +37,9 @@ public class HomeController {
 
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private SysOrganizationService sysOrganizationService;
 
 	public static final String JSP_LOGIN = "login";
 	public static final String JSP_LOGOUT = "logout";
@@ -82,6 +87,7 @@ public class HomeController {
 			return "change-password";
 		}
 
+		// 登录成功
 		// SessionHelper.setAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE,
 		// sysResourceService.getMenuRoot(user.getId()));
 		user.setLastLoginIp(Utility.getClientIpAddress(request));
@@ -90,6 +96,11 @@ public class HomeController {
 		user.setLogined(logined + 1);
 		user.setFails(0);
 		service.update(user);
+		
+		//将当前登录用户的所在部门存到Session中，用于业务部门的数据过滤，比如事业部只显示事业部的数据
+		SysOrganization currentOrg = sysOrganizationService.get(user.getOrganizationId());
+		SessionHelper.setAttribute(SessionHelper.CURRENT_ORGANIZATION, currentOrg);
+		
 
 		// 刷新所有业务数据状态
 		projectService.updateAllStatus();

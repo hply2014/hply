@@ -10,14 +10,25 @@
 </div>
 </c:if>
 <c:if test="${not empty delMessage}">
-<div class="alert alert-warning alert-dismissible col-md-offset-2 affix" role="alert">
+<div class="alert alert-warning alert-dismissible col-md-offset-4 affix" role="alert">
   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
   <strong>${payment.id }</strong> ，${delMessage}
 </div>
 </c:if>
 <div class="panel panel-primary">
-  <div class="panel-heading"><strong>付款情况</strong>（ 共<c:out value="${rowCount}" />行
-            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>）</div>
+  <div class="panel-heading"><strong>付款情况</strong>（ 共<c:out value="${rowCount}" />行，
+                <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页 
+            ）
+            <c:if test='${not empty orglist}'>
+                <div class="pull-right">
+                    <select class="selectpicker org" data-size="10" data-style="btn-danger btn-sm" data-width="120px">
+                        <c:forEach items="${orglist}" var="org">
+                            <option ${org.id == oid ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:if>
+        </div>
   <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
                 <shiro:hasPermission name="`payment_create`">
@@ -94,9 +105,9 @@
                     <div class="col-sm-8">
                         <ul class="pager">
                             <li class="${pageIndex <= 0 ? 'disabled' :'' }"><a
-                                href="<s:url value='/payment?p=${pageIndex - 1}' />">上一页</a></li>
+                                href="<s:url value='/payment?oid=${oid}&p=${pageIndex - 1}' />">上一页</a></li>
                             <li class="${pageIndex + 1 >= pageCount ? 'disabled' :'' }"><a
-                                href="<s:url value='/payment?p=${pageIndex + 1}' />">下一页</a></li>
+                                href="<s:url value='/payment?oid=${oid}&p=${pageIndex + 1}' />">下一页</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-2">&nbsp;</div>
@@ -104,4 +115,24 @@
             </c:if>
   </div>
 </div></div>
+<script type="text/javascript">
+<!--
+$(function() {
+    var p = '';
+    for (var i = 0; i < <c:out value="${pageCount}" />; i++) {
+        p = p + '<option ' + (i== ${pageIndex} ? 'selected': '') + ' value="' + i + '">第' + (i + 1) + '页</option>';
+    }
+
+    $(".page").append(p).change(function(){
+        self.location = '<s:url value="/payment"/>?oid=${oid}&p=' + $(this).val();
+    });
+    
+
+    $(".org").change(function(){
+        self.location = '<s:url value="/payment"/>?oid=' + $(this).val();
+    });
+
+});
+//-->
+</script>
 <%@ include file="bottom.jsp"%>

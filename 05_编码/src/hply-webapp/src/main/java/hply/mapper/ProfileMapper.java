@@ -10,6 +10,7 @@ import hply.mapper.partial.PartialProfileMapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -22,5 +23,10 @@ import org.springframework.stereotype.Repository;
 public interface ProfileMapper extends PartialProfileMapper {
 
 	public List<Profile> getAllByProject(String projectId);
+	
+	public List<Profile> getAllPagedByOrganization(@Param("organizationId") String orgId, @Param("pageIndex") int pageIndex,
+			@Param("pageSize") int pageSize);
+
+	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
 }
 

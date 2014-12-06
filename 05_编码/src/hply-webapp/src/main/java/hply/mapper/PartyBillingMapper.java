@@ -10,6 +10,7 @@ import hply.mapper.partial.PartialPartyBillingMapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -28,6 +29,12 @@ public interface PartyBillingMapper extends PartialPartyBillingMapper {
 	
 
 	public List<PartyBilling> getAllByProject(String projectId);
+	
+
+	public List<PartyBilling> getAllPagedByOrganization(@Param("organizationId") String orgId, @Param("pageIndex") int pageIndex,
+			@Param("pageSize") int pageSize);
+
+	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
 }
 
 
