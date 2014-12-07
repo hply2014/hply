@@ -103,4 +103,9 @@ public class PartyBillingService {
 	public int getRowCount(String orgId) {
 		return mapper.getRowCountByOrganization(orgId);
 	}
+	
+	public List<PartyBilling> getAllTodo() {
+		//TODO 根据流程状态过滤
+		return mapper.getAllTodo();
+	}
 }

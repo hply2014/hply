@@ -103,7 +103,15 @@ public class ProjectService {
 	}
 
 	public List<Project> getAllNames() {
+		if(SessionHelper.IsBusinessDepartment()){
+			String orgId = SessionHelper.getCurrentSysUser().getOrganizationId();
+			return getAllNamesByOrganization(orgId);
+		}
 		return mapper.getAllNames();
+	}
+	
+	public List<Project> getAllNamesByOrganization(String orgId){
+		return mapper.getAllNamesByOrganization(orgId);
 	}
 
 	public double getTotalAmount(String projectId) {
