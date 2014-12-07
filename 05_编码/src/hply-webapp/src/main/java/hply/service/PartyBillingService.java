@@ -106,6 +106,7 @@ public class PartyBillingService {
 	
 	public List<PartyBilling> getAllTodo() {
 		//TODO 根据流程状态过滤
-		return mapper.getAllTodo();
+		String orgId = "";
+		return mapper.getAllTodo(orgId);
 	}
 }

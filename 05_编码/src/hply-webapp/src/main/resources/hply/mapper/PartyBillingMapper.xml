@@ -21,5 +21,9 @@
   <select id="getAllPagedByOrganization" resultType="PartyBilling">
     select id as id, project_id as projectId, invoice_code as invoiceCode, amount as amount, trice as trice, tax_rate as taxRate, tax_amount as taxAmount, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step_status as stepStatus, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_party_billing t where exists (select 0 from t_project p where t.project_id=p.id and p.organization_id=#{organizationId}) order by trice desc limit #{pageSize} offset #{pageIndex}
   </select>
+  
+  <select id="getAllTodo" resultType="PartyBilling">
+    select id as id, project_id as projectId, invoice_code as invoiceCode, amount as amount, trice as trice, tax_rate as taxRate, tax_amount as taxAmount, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step_status as stepStatus, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_party_billing t where exists (select 0 from t_project p where t.project_id=p.id and p.organization_id=#{organizationId}) order by trice desc
+  </select>
 </mapper>
 

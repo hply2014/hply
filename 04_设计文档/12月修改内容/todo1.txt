@@ -1,0 +1,136 @@
+修改的地方
+
+
+1、右上角的选择部门下拉框
+<c:if test="${pageCount > 1 }">，
+                <select class="selectpicker" data-size="10" data-style="btn-info btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页 
+			</c:if>
+            ）
+            <c:if test='${not empty orglist}'>
+                <div class="pull-right">
+                    <select class="selectpicker org" data-size="10" data-style="btn-danger btn-sm" data-width="120px">
+                        <c:forEach items="${orglist}" var="org">
+                            <option ${org.id == oid ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:if>
+        </div>
+
+2、翻页下拉框
+			
+
+<script type="text/javascript">
+<!--
+$(function() {
+	var p = '';
+	for (var i = 0; i < <c:out value="${pageCount}" />; i++) {
+		p = p + '<option ' + (i== ${pageIndex} ? 'selected': '') + ' value="' + i + '">第' + (i + 1) + '页</option>';
+	}
+
+	$(".page").append(p).change(function(){
+		self.location = '<s:url value="/rrears"/>?oid=${oid}&p=' + $(this).val();
+	});
+	
+
+	$(".org").change(function(){
+		self.location = '<s:url value="/rrears"/>?oid=' + $(this).val();
+	});
+
+});
+//-->
+</script>
+		
+		
+			
+2、上下翻页
+<s:param name='oid' value='${oid}'/>
+oid=${oid}&
+
+3、部门下拉框事件脚本
+
+		$(".org").change(function(){
+			self.location = '<s:url value="/project"/>?' + "oid=" + $(this).val();
+		});
+		
+		
+		
+4、controller
+
+	@Autowired
+	private SysOrganizationService orgService;
+	
+, @RequestParam(value = "oid", required = false) String oid
+
+------------------------------------------
+	
+		List<SysOrganization> orglist = orgService.getAllBusiness();
+		if (SessionHelper.IsBusinessDepartment()) {
+			// 如果是业务部门，并且未指定按单位的过滤条件
+			oid = SessionHelper.getCurrentSysUser().getOrganizationId();
+		} else {
+			model.addAttribute("orglist", orglist);
+			if (StringUtils.isBlank(oid)) {
+				oid = orglist.get(0).getId();
+			}
+		}
+		model.addAttribute("oid", oid);
+------------------------------------------
+		
+		service.getRowCount(oid);
+------------------------------------------
+
+
+		List<Project> list = service.getAllPagedByOrganization(oid, pageIndex * pageSize, pageSize);
+
+------------------------------------------
+
+		
+5、service
+get，row
+
+
+	/**
+	 * 01_合同项目信息，获取所有对象，分页方式
+	 */
+	public List<Project> getAllPagedByOrganization(String queryText, String orgId, int pageIndex, int pageSize) {
+		return mapper.getAllPagedByOrganization(queryText, orgId, pageIndex, pageSize);
+	}
+
+
+------------------------------------------
+
+
+	/**
+	 * 01_合同项目信息，获取记录总行数
+	 */
+	public int getRowCount(String queryText, String organizationId) {
+		return mapper.getRowCountByOrganization(queryText, organizationId);
+	}
+	
+	
+
+6、mapper interface
+get，row
+
+
+	public List<Project> getAllPagedByOrganization(@Param("organizationId") String orgId,
+			@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+
+	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+
+
+7、mapper xml
+get， row
+
+
+  <select id="getAllPagedByOrganization" resultType="Project">
+  </select>
+  
+  
+  <select id="getRowCountByOrganization" resultType="int">
+  </select>
+
+
+
+

@@ -69,8 +69,8 @@ public class ChopController {
 		List<Chop> list = service.getAllPaged(pageIndex * pageSize, pageSize);
 
 		for (Chop item : list) {
-			Project pjt = projectService.get(item.getProjectId());
-			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
+//			Project pjt = projectService.get(item.getProjectId());
+//			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
 
 			SysOrganization org = orgService.get(item.getOrganizationId());
 			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);

@@ -35,6 +35,8 @@ public interface PartyBillingMapper extends PartialPartyBillingMapper {
 			@Param("pageSize") int pageSize);
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+
+	public List<PartyBilling> getAllTodo(@Param("organizationId") String organizationId);
 }
 
 

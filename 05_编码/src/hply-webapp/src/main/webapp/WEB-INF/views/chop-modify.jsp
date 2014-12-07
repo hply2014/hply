@@ -100,14 +100,17 @@
                                 <label class="col-sm-2 control-label">部门审核</label>
                                 <div class="col-sm-10">
                                     <p class="form-control-static">
-                                        <c:if
-                                    test="${not empty chop.step1User }"><c:out value="${chop.step1User}" />
-                                    <br />
-                                </c:if> <c:if test="${not empty chop.step1Idea }">意见：<c:out value="${chop.step1Idea}" />
-                                    <br />
-                                </c:if> <c:if test="${not empty chop.step1Time }">时间：<fmt:formatDate
-                                        value="${chop.step1Time}" pattern="yyyy-MM-dd" />
-                                </c:if>
+                                        <c:if test="${not empty chop.step1User }">
+                                            <c:out value="${chop.step1User}" />
+                                            <br />
+                                        </c:if>
+                                        <c:if test="${not empty chop.step1Idea }">意见：<c:out
+                                                value="${chop.step1Idea}" />
+                                            <br />
+                                        </c:if>
+                                        <c:if test="${not empty chop.step1Time }">时间：<fmt:formatDate
+                                                value="${chop.step1Time}" pattern="yyyy-MM-dd" />
+                                        </c:if>
                                     </p>
                                 </div>
                             </div>
@@ -143,14 +146,17 @@
                                 <label class="col-sm-2 control-label">部门审核</label>
                                 <div class="col-sm-10">
                                     <p class="form-control-static">
-                                        <c:if
-                                    test="${not empty chop.step1User }"><c:out value="${chop.step1User}" />
-                                    <br />
-                                </c:if> <c:if test="${not empty chop.step1Idea }">意见：<c:out value="${chop.step1Idea}" />
-                                    <br />
-                                </c:if> <c:if test="${not empty chop.step1Time }">时间：<fmt:formatDate
-                                        value="${chop.step1Time}" pattern="yyyy-MM-dd" />
-                                </c:if>
+                                        <c:if test="${not empty chop.step1User }">
+                                            <c:out value="${chop.step1User}" />
+                                            <br />
+                                        </c:if>
+                                        <c:if test="${not empty chop.step1Idea }">意见：<c:out
+                                                value="${chop.step1Idea}" />
+                                            <br />
+                                        </c:if>
+                                        <c:if test="${not empty chop.step1Time }">时间：<fmt:formatDate
+                                                value="${chop.step1Time}" pattern="yyyy-MM-dd" />
+                                        </c:if>
                                     </p>
                                 </div>
                             </div>
@@ -158,14 +164,17 @@
                                 <label class="col-sm-2 control-label">财务部审批</label>
                                 <div class="col-sm-10">
                                     <p class="form-control-static">
-                                       <c:if
-                                    test="${not empty chop.step2User }"><c:out value="${chop.step2User}" />
-                                    <br />
-                                </c:if> <c:if test="${not empty chop.step2Idea }">意见：<c:out value="${chop.step2Idea}" />
-                                    <br />
-                                </c:if> <c:if test="${not empty chop.step2Time }">时间：<fmt:formatDate
-                                        value="${chop.step2Time}" pattern="yyyy-MM-dd" />
-                                </c:if>
+                                        <c:if test="${not empty chop.step2User }">
+                                            <c:out value="${chop.step2User}" />
+                                            <br />
+                                        </c:if>
+                                        <c:if test="${not empty chop.step2Idea }">意见：<c:out
+                                                value="${chop.step2Idea}" />
+                                            <br />
+                                        </c:if>
+                                        <c:if test="${not empty chop.step2Time }">时间：<fmt:formatDate
+                                                value="${chop.step2Time}" pattern="yyyy-MM-dd" />
+                                        </c:if>
                                     </p>
                                 </div>
                             </div>
@@ -175,7 +184,8 @@
                                     <sf:input cssClass="form-control" path="step3Idea" placeholder="经办人办理结果" />
                                     <p class="help-block" />
                                 </div>
-                            </div><input type="hidden" name="stepStatus" value="3" />
+                            </div>
+                            <input type="hidden" name="stepStatus" value="3" />
                             <div class="row">
                                 <div class="col-sm-2"></div>
                                 <button id="succ" type="submit" class="btn btn-success">
@@ -198,10 +208,9 @@
                             </div>
                             <div class="row">
                                 <label for="projectId" class="col-sm-2 control-label">项目名称</label>
-                                <div class="col-sm-8 required-field-block">
+                                <div class="col-sm-10 required-field-block">
                                     <b class="required-icon">*</b>
-                                    <sf:select cssClass="form-control select2" path="projectId" items="${projectlist }"
-                                        itemValue="id" itemLabel="projectName" />
+                                    <sf:input cssClass="form-control" path="projectName" placeholder="项目名称" />
                                     <p class="help-block" />
                                 </div>
                             </div>
@@ -215,11 +224,7 @@
                                 </div>
                                 <label for="manager" class="col-sm-2 control-label">项目经理</label>
                                 <div class="col-sm-4 ">
-                                    <p class="form-control-static" id="manager">
-                                        <c:out value="${chop.organizationId}" />
-                                    </p>
-                                    <sf:hidden path="manager" id="hiddenManager" />
-                                    <p class="help-block" />
+                                    <sf:input cssClass="form-control" path="manager" placeholder="项目经理" />
                                 </div>
                             </div>
 
@@ -302,7 +307,8 @@
 				projectName : {},
 				manager : {},
 				content : {
-					required : true},
+					required : true
+				},
 				applyUser : {},
 				applyTime : {},
 				organizationId : {},
@@ -318,21 +324,7 @@
 				stepStatus : {},
 			}
 		});
-
-		//在界面上选择了项目
-		$("#projectId").change(function() {
-			refreshManager();
-		});
-
-		function refreshManager() {
-			if(jQuery("#projectId").val() == null ) return;
-			
-			$.post("<s:url value='/api/getprojectmanager/' />" + jQuery("#projectId").val(), {}, function(result) {
-				$("#manager").html(result);
-				$("#hiddenManager").val(result);
-			}, "text");
-		}
-		refreshManager();
+		
 		$("#s1").val('拒绝，请重新修订');
 
 		$('input').on('ifChecked', function(event) {

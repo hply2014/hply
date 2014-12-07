@@ -63,7 +63,7 @@
                             <td><a
                                 href="<s:url value="/chop/detail/{id}"><s:param name="id" value="${chop.id }" /></s:url>"><c:out
                                         value="${chop.chopCode}" /></a></td>
-                            <td><c:out value="${chop.projectId}" /></td>
+                            <td><c:out value="${chop.projectName}" /></td>
                             <td><c:out value="${chop.content}" /></td>
                             <td><c:out value="${chop.applyUser}" /><br />所在部门：<c:out
                                     value="${chop.organizationId}" /><br />申请时间：<fmt:formatDate
