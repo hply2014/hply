@@ -4,14 +4,12 @@
 
 <mapper namespace="hply.mapper.partial.PartialSysOrganizationMapper">
 
-  <cache />
-  
   <insert id="insert" parameterType="SysOrganization">
-    insert into t_sys_organization(id, organization_name, create_time, description) values ( #{id}, #{organizationName}, now(), #{description} )
+    insert into t_sys_organization(id, organization_name, create_time, description, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{organizationName}, now(), #{description}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_sys_organization set organization_name = #{organizationName}, description = #{description}, version = version + 1 where id = #{id}
+    update t_sys_organization set organization_name = #{organizationName}, description = #{description}, field_01 = #{field01}, field_02 = #{field02}, field_03 = #{field03}, field_04 = #{field04}, field_05 = #{field05}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">
@@ -19,7 +17,7 @@
   </delete>
 
   <select id="get" parameterType="string" resultType="SysOrganization">
-    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization where id = #{id}
+    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_organization where id = #{id}
   </select>
   
   <select id="getVersion" parameterType="string" resultType="int">
@@ -27,15 +25,15 @@
   </select>
   
   <select id="getAll" resultType="SysOrganization">
-    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization order by create_time desc
+    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_organization
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_sys_organization
   </select>
 
-  <select id="getAllPaged" resultType="SysOrganization">
-    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version from t_sys_organization order by create_time desc limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" parameterType="SysOrganization" resultType="SysOrganization">
+    select id as id, organization_name as organizationName, create_time as createTime, description as description, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_organization limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

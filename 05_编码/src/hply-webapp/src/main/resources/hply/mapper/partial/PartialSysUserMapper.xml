@@ -4,14 +4,12 @@
 
 <mapper namespace="hply.mapper.partial.PartialSysUserMapper">
 
-  <cache />
-  
   <insert id="insert" parameterType="SysUser">
-    insert into t_sys_user(id, login_name, real_name, organization_id, password, last_login_ip, last_login_time, fails, logined, position, enabled, order_by, create_time, create_user, update_time, update_user, description, must_change_password) values ( #{id}, #{loginName}, #{realName}, #{organizationId}, #{password}, #{lastLoginIp}, #{lastLoginTime}, #{fails}, #{logined}, #{position}, #{enabled}, #{orderBy}, now(), #{createUser}, now(), #{createUser}, #{description}, #{mustChangePassword} )
+    insert into t_sys_user(id, login_name, real_name, organization_id, password, last_login_ip, last_login_time, fails, logined, position, enabled, order_by, create_time, create_user, update_time, update_user, description, must_change_password, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{loginName}, #{realName}, #{organizationId}, #{password}, #{lastLoginIp}, #{lastLoginTime}, #{fails}, #{logined}, #{position}, #{enabled}, #{orderBy}, now(), #{createUser}, now(), #{createUser}, #{description}, #{mustChangePassword}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_sys_user set login_name = #{loginName}, real_name = #{realName}, organization_id = #{organizationId}, password = #{password}, last_login_ip = #{lastLoginIp}, last_login_time = #{lastLoginTime}, fails = #{fails}, logined = #{logined}, position = #{position}, enabled = #{enabled}, order_by = #{orderBy},  update_time = now(), update_user = #{updateUser}, description = #{description}, must_change_password = #{mustChangePassword}, version = version + 1 where id = #{id}
+    update t_sys_user set login_name = #{loginName}, real_name = #{realName}, organization_id = #{organizationId}, password = #{password}, last_login_ip = #{lastLoginIp}, last_login_time = #{lastLoginTime}, fails = #{fails}, logined = #{logined}, position = #{position}, enabled = #{enabled}, order_by = #{orderBy},  update_time = now(), update_user = #{updateUser}, description = #{description}, must_change_password = #{mustChangePassword}, field_01 = #{field01}, field_02 = #{field02}, field_03 = #{field03}, field_04 = #{field04}, field_05 = #{field05}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">
@@ -19,7 +17,7 @@
   </delete>
 
   <select id="get" parameterType="string" resultType="SysUser">
-    select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword from t_sys_user where id = #{id}
+    select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_user where id = #{id}
   </select>
   
   <select id="getVersion" parameterType="string" resultType="int">
@@ -27,15 +25,15 @@
   </select>
   
   <select id="getAll" resultType="SysUser">
-    select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword from t_sys_user order by update_time desc
+    select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_user
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_sys_user
   </select>
 
-  <select id="getAllPaged" resultType="SysUser">
-    select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword from t_sys_user order by update_time desc limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" parameterType="SysUser" resultType="SysUser">
+    select id as id, login_name as loginName, real_name as realName, organization_id as organizationId, password as password, last_login_ip as lastLoginIp, last_login_time as lastLoginTime, fails as fails, logined as logined, position as position, enabled as enabled, order_by as orderBy, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, must_change_password as mustChangePassword, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_user limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

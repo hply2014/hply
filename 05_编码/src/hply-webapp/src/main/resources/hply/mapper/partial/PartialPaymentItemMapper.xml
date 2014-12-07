@@ -4,14 +4,12 @@
 
 <mapper namespace="hply.mapper.partial.PartialPaymentItemMapper">
 
-  <cache />
-  
   <insert id="insert" parameterType="PaymentItem">
-    insert into t_payment_item(id, item_name, reimbursement_cap, create_time, create_user, update_time, update_user, description) values ( #{id}, #{itemName}, #{reimbursementCap}, now(), #{createUser}, now(), #{createUser}, #{description} )
+    insert into t_payment_item(id, item_name, reimbursement_cap, create_time, create_user, update_time, update_user, description, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{itemName}, #{reimbursementCap}, now(), #{createUser}, now(), #{createUser}, #{description}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_payment_item set item_name = #{itemName}, reimbursement_cap = #{reimbursementCap},  update_time = now(), update_user = #{updateUser}, description = #{description}, version = version + 1 where id = #{id}
+    update t_payment_item set item_name = #{itemName}, reimbursement_cap = #{reimbursementCap},  update_time = now(), update_user = #{updateUser}, description = #{description}, field_01 = #{field01}, field_02 = #{field02}, field_03 = #{field03}, field_04 = #{field04}, field_05 = #{field05}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">
@@ -19,7 +17,7 @@
   </delete>
 
   <select id="get" parameterType="string" resultType="PaymentItem">
-    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item where id = #{id}
+    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_payment_item where id = #{id}
   </select>
   
   <select id="getVersion" parameterType="string" resultType="int">
@@ -27,15 +25,15 @@
   </select>
   
   <select id="getAll" resultType="PaymentItem">
-    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item order by update_time desc
+    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_payment_item
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_payment_item
   </select>
 
-  <select id="getAllPaged" resultType="PaymentItem">
-    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version from t_payment_item order by update_time desc limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" parameterType="PaymentItem" resultType="PaymentItem">
+    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_payment_item limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

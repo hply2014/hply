@@ -15,31 +15,35 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
-  * 数据表： [t_sys_organization]
-  * 11+A_组织机构
+  * 数据表： [t_sys_exec_log]
+  * 存储过程执行日志表
   */
-public class SysOrganization implements Serializable {
+public class SysExecLog implements Serializable {
     
-    	/*
-    	 * ID
-    	 */
-        public static final String FIELD_ID = "id";
-    	/*
-    	 * 机构名称
-    	 */
-        public static final String FIELD_ORGANIZATION_NAME = "organization_name";
-    	/*
-    	 * 创建时间
-    	 */
-        public static final String FIELD_CREATE_TIME = "create_time";
-    	/*
-    	 * 备注
-    	 */
-        public static final String FIELD_DESCRIPTION = "description";
     	/*
     	 * 
     	 */
-        public static final String FIELD_VERSION = "version";
+        public static final String FIELD_SERIAL_ID = "serial_id";
+    	/*
+    	 * 每次在同一批次中执行
+    	 */
+        public static final String FIELD_EXEC_NO = "exec_no";
+    	/*
+    	 * 
+    	 */
+        public static final String FIELD_PROC_NAME = "proc_name";
+    	/*
+    	 * 
+    	 */
+        public static final String FIELD_TRICE = "trice";
+    	/*
+    	 * 
+    	 */
+        public static final String FIELD_EXEC_LOG = "exec_log";
+    	/*
+    	 * 
+    	 */
+        public static final String FIELD_CREATE_TIME = "create_time";
     	/*
     	 * 预留字段01
     	 */
@@ -64,46 +68,52 @@ public class SysOrganization implements Serializable {
 	/*
 	 * 默认构造函数
 	 */
-	public SysOrganization() {
-		this.id = Utility.getRandomUUID(); 
+	public SysExecLog() {
+        this.trice = new Date(); 
         this.createTime = new Date(); 
-        this.version = -1; 
 	}
 
     /**
-      * [id]，
-      * ID
-      */
-      
-      private String id;
-      
-    /**
-      * [organization_name]，
-      * 机构名称
-      */
-      
-      private String organizationName;
-      
-    /**
-      * [create_time]，
-      * 创建时间
-      */
-      @DateTimeFormat(iso=ISO.DATE)
-      private Date createTime;
-      
-    /**
-      * [description]，
-      * 备注
-      */
-      
-      private String description;
-      
-    /**
-      * [version]，
+      * [serial_id]，
       * 
       */
       
-      private Integer version;
+      private Integer serialId;
+      
+    /**
+      * [exec_no]，
+      * 每次在同一批次中执行
+      */
+      
+      private String execNo;
+      
+    /**
+      * [proc_name]，
+      * 
+      */
+      
+      private String procName;
+      
+    /**
+      * [trice]，
+      * 
+      */
+      @DateTimeFormat(iso=ISO.DATE)
+      private Date trice;
+      
+    /**
+      * [exec_log]，
+      * 
+      */
+      
+      private String execLog;
+      
+    /**
+      * [create_time]，
+      * 
+      */
+      @DateTimeFormat(iso=ISO.DATE)
+      private Date createTime;
       
     /**
       * [field_01]，
@@ -142,38 +152,83 @@ public class SysOrganization implements Serializable {
       
     
     /**
-      * [id] getter，
-      * ID
+      * [serial_id] getter，
+      * 
       */
-    	public String getId () {
-    		return this.id;
+    	public Integer getSerialId () {
+    		return this.serialId;
     	}
 
     /**
-      * [id] setter，
-      * ID
+      * [serial_id] setter，
+      * 
       */
-    	public void setId(String id) {
-    		this.id = id;
+    	public void setSerialId(Integer serialId) {
+    		this.serialId = serialId;
     	}
     /**
-      * [organization_name] getter，
-      * 机构名称
+      * [exec_no] getter，
+      * 每次在同一批次中执行
       */
-    	public String getOrganizationName () {
-    		return this.organizationName;
+    	public String getExecNo () {
+    		return this.execNo;
     	}
 
     /**
-      * [organization_name] setter，
-      * 机构名称
+      * [exec_no] setter，
+      * 每次在同一批次中执行
       */
-    	public void setOrganizationName(String organizationName) {
-    		this.organizationName = organizationName;
+    	public void setExecNo(String execNo) {
+    		this.execNo = execNo;
+    	}
+    /**
+      * [proc_name] getter，
+      * 
+      */
+    	public String getProcName () {
+    		return this.procName;
+    	}
+
+    /**
+      * [proc_name] setter，
+      * 
+      */
+    	public void setProcName(String procName) {
+    		this.procName = procName;
+    	}
+    /**
+      * [trice] getter，
+      * 
+      */
+    	public Date getTrice () {
+    		return this.trice;
+    	}
+
+    /**
+      * [trice] setter，
+      * 
+      */
+    	public void setTrice(Date trice) {
+    		this.trice = trice;
+    	}
+    /**
+      * [exec_log] getter，
+      * 
+      */
+    	public String getExecLog () {
+    		return this.execLog;
+    	}
+
+    /**
+      * [exec_log] setter，
+      * 
+      */
+    	public void setExecLog(String execLog) {
+    		this.execLog = execLog;
     	}
     /**
       * [create_time] getter，
-      * 创建时间
+      * 
       */
     	public Date getCreateTime () {
     		return this.createTime;
@@ -181,40 +236,10 @@ public class SysOrganization implements Serializable {
 
     /**
       * [create_time] setter，
-      * 创建时间
+      * 
       */
     	public void setCreateTime(Date createTime) {
     		this.createTime = createTime;
-    	}
-    /**
-      * [description] getter，
-      * 备注
-      */
-    	public String getDescription () {
-    		return this.description;
-    	}
-
-    /**
-      * [description] setter，
-      * 备注
-      */
-    	public void setDescription(String description) {
-    		this.description = description;
-    	}
-    /**
-      * [version] getter，
-      * 
-      */
-    	public Integer getVersion () {
-    		return this.version;
-    	}
-
-    /**
-      * [version] setter，
-      * 
-      */
-    	public void setVersion(Integer version) {
-    		this.version = version;
     	}
     /**
       * [field_01] getter，
@@ -297,11 +322,12 @@ public class SysOrganization implements Serializable {
 		System.out.println(this.getClass().getName() + ".toString():");
         
         String str = StringUtils.EMPTY;
-        str += MessageFormat.format("Id=\"{0}\",", StringUtils.trimToEmpty(this.getId()));
-        str += MessageFormat.format("OrganizationName=\"{0}\",", StringUtils.trimToEmpty(this.getOrganizationName()));
+        str += MessageFormat.format("SerialId=\"{0}\",", this.getSerialId());
+        str += MessageFormat.format("ExecNo=\"{0}\",", StringUtils.trimToEmpty(this.getExecNo()));
+        str += MessageFormat.format("ProcName=\"{0}\",", StringUtils.trimToEmpty(this.getProcName()));
+        str += MessageFormat.format("Trice=\"{0}\",", this.getTrice());
+        str += MessageFormat.format("ExecLog=\"{0}\",", StringUtils.trimToEmpty(this.getExecLog()));
         str += MessageFormat.format("CreateTime=\"{0}\",", this.getCreateTime());
-        str += MessageFormat.format("Description=\"{0}\",", StringUtils.trimToEmpty(this.getDescription()));
-        str += MessageFormat.format("Version=\"{0}\",", this.getVersion());
         str += MessageFormat.format("Field01=\"{0}\",", StringUtils.trimToEmpty(this.getField01()));
         str += MessageFormat.format("Field02=\"{0}\",", StringUtils.trimToEmpty(this.getField02()));
         str += MessageFormat.format("Field03=\"{0}\",", StringUtils.trimToEmpty(this.getField03()));

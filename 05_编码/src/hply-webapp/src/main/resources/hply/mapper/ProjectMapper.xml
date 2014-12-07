@@ -4,27 +4,29 @@
 
 <mapper namespace="hply.mapper.ProjectMapper">
 
-	<update id="updateAllStatus">call proc_update_all_status()</update>
-	
-	<select id="getTotalAmount" resultType="Double">select get_total_amount(#{projectId})</select>
+  <insert id="insert" parameterType="Project">
+    insert into t_project(id, project_code, project_name, organization_id, party_name, party_address, manager, contract_code, corperation, legal_assignee, is_withholding_offsite, management_rate, tax_rate, contract_amount, settlement_amount, duty_paid_time, duty_paid_amount, duty_paid_code, capital_occupied, project_status, trice, create_time, create_user, update_time, update_user, description, status, management_plan_amount, tax_plan_amount, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{projectCode}, #{projectName}, #{organizationId}, #{partyName}, #{partyAddress}, #{manager}, #{contractCode}, #{corperation}, #{legalAssignee}, #{isWithholdingOffsite}, #{managementRate}, #{taxRate}, #{contractAmount}, #{settlementAmount}, #{dutyPaidTime}, #{dutyPaidAmount}, #{dutyPaidCode}, #{capitalOccupied}, #{projectStatus}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status}, #{managementPlanAmount}, #{taxPlanAmount}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
+  </insert>
 
-	<select id="getAllNames" resultType="Project">
-		select id as id,concat('[',project_code,']',project_name) as projectName
-		from t_project order by create_time desc
-	</select>
-	
-	<select id="getAllNamesByOrganization" resultType="Project">
-		select id as id,concat('[',project_code,']',project_name) as projectName
-		from t_project where organization_id = #{organizationId} order by create_time desc
-	</select>
-	
-  <select id="getAllPagedByOrganization" resultType="Project">
-    select id as id, ifnull(project_code, '[无]') as projectCode, project_name as projectName, organization_id as organizationId, party_name as partyName, party_address as partyAddress, manager as manager, contract_code as contractCode, corperation as corperation, legal_assignee as legalAssignee, is_withholding_offsite as isWithholdingOffsite, management_rate as managementRate, tax_rate as taxRate, contract_amount as contractAmount, settlement_amount as settlementAmount, duty_paid_time as dutyPaidTime, duty_paid_amount as dutyPaidAmount, duty_paid_code as dutyPaidCode, capital_occupied as capitalOccupied, project_status as projectStatus, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, management_plan_amount as managementPlanAmount, tax_plan_amount as taxPlanAmount from t_project where concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, '')) like #{queryText} and organization_id=#{organizationId} order by trice desc limit #{pageSize} offset #{pageIndex}
+  <update id="update" parameterType="map">
+    update t_project set <if test="projectCode != ''">project_code = #{projectCode},</if> <if test="projectName != ''">project_name = #{projectName},</if> <if test="organizationId != ''">organization_id = #{organizationId},</if> <if test="partyName != ''">party_name = #{partyName},</if> <if test="partyAddress != ''">party_address = #{partyAddress},</if> <if test="manager != ''">manager = #{manager},</if> <if test="contractCode != ''">contract_code = #{contractCode},</if> <if test="corperation != ''">corperation = #{corperation},</if> <if test="legalAssignee != ''">legal_assignee = #{legalAssignee},</if> <if test="isWithholdingOffsite != null">is_withholding_offsite = #{isWithholdingOffsite},</if> <if test="managementRate != null">management_rate = #{managementRate},</if> <if test="taxRate != null">tax_rate = #{taxRate},</if> <if test="contractAmount != null">contract_amount = #{contractAmount},</if> <if test="settlementAmount != null">settlement_amount = #{settlementAmount},</if> <if test="dutyPaidTime != null">duty_paid_time = #{dutyPaidTime},</if> <if test="dutyPaidAmount != null">duty_paid_amount = #{dutyPaidAmount},</if> <if test="dutyPaidCode != ''">duty_paid_code = #{dutyPaidCode},</if> <if test="capitalOccupied != null">capital_occupied = #{capitalOccupied},</if> <if test="projectStatus != ''">project_status = #{projectStatus},</if> <if test="trice != null">trice = #{trice},</if>  update_time = now(), <if test="updateUser != ''">update_user = #{updateUser},</if> <if test="description != ''">description = #{description},</if> <if test="status != null">status = #{status},</if> <if test="managementPlanAmount != null">management_plan_amount = #{managementPlanAmount},</if> <if test="taxPlanAmount != null">tax_plan_amount = #{taxPlanAmount},</if> <if test="field01 != ''">field_01 = #{field01},</if> <if test="field02 != ''">field_02 = #{field02},</if> <if test="field03 != ''">field_03 = #{field03},</if> <if test="field04 != ''">field_04 = #{field04},</if> <if test="field05 != ''">field_05 = #{field05},</if> version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_project where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="Project">
+    select id as id, project_code as projectCode, project_name as projectName, organization_id as organizationId, party_name as partyName, party_address as partyAddress, manager as manager, contract_code as contractCode, corperation as corperation, legal_assignee as legalAssignee, is_withholding_offsite as isWithholdingOffsite, management_rate as managementRate, tax_rate as taxRate, contract_amount as contractAmount, settlement_amount as settlementAmount, duty_paid_time as dutyPaidTime, duty_paid_amount as dutyPaidAmount, duty_paid_code as dutyPaidCode, capital_occupied as capitalOccupied, project_status as projectStatus, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, management_plan_amount as managementPlanAmount, tax_plan_amount as taxPlanAmount, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_project where id = #{id}
   </select>
   
-  
-  <select id="getRowCountByOrganization" resultType="int">
-    select count(*) from t_project where concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, '')) like #{queryText} and organization_id=#{organizationId}
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_project where id = #{id}
   </select>
+
+  <select id="getAll" resultType="Project">
+    select id as id, project_code as projectCode, project_name as projectName, organization_id as organizationId, party_name as partyName, party_address as partyAddress, manager as manager, contract_code as contractCode, corperation as corperation, legal_assignee as legalAssignee, is_withholding_offsite as isWithholdingOffsite, management_rate as managementRate, tax_rate as taxRate, contract_amount as contractAmount, settlement_amount as settlementAmount, duty_paid_time as dutyPaidTime, duty_paid_amount as dutyPaidAmount, duty_paid_code as dutyPaidCode, capital_occupied as capitalOccupied, project_status as projectStatus, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, management_plan_amount as managementPlanAmount, tax_plan_amount as taxPlanAmount, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_project
+  </select>
+
 </mapper>
 

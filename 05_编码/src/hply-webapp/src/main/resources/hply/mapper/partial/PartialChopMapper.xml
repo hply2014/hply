@@ -4,14 +4,12 @@
 
 <mapper namespace="hply.mapper.partial.PartialChopMapper">
 
-  <cache />
-  
   <insert id="insert" parameterType="Chop">
-    insert into t_chop(id, chop_code, project_id, project_code, project_name, manager, content, apply_user, apply_time, organization_id, step1_idea, step1_user, step1_time, step2_idea, step2_user, step2_time, step3_idea, step3_user, step3_time, step_status, status) values ( #{id}, #{chopCode}, #{projectId}, #{projectCode}, #{projectName}, #{manager}, #{content}, #{applyUser}, #{applyTime}, #{organizationId}, #{step1Idea}, #{step1User}, #{step1Time}, #{step2Idea}, #{step2User}, #{step2Time}, #{step3Idea}, #{step3User}, #{step3Time}, #{stepStatus}, #{status} )
+    insert into t_chop(id, chop_code, project_id, project_code, project_name, manager, content, apply_user, apply_time, organization_id, step1_idea, step1_user, step1_time, step2_idea, step2_user, step2_time, step3_idea, step3_user, step3_time, step_status, status, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{chopCode}, #{projectId}, #{projectCode}, #{projectName}, #{manager}, #{content}, #{applyUser}, #{applyTime}, #{organizationId}, #{step1Idea}, #{step1User}, #{step1Time}, #{step2Idea}, #{step2User}, #{step2Time}, #{step3Idea}, #{step3User}, #{step3Time}, #{stepStatus}, #{status}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_chop set chop_code = #{chopCode}, project_id = #{projectId}, project_code = #{projectCode}, project_name = #{projectName}, manager = #{manager}, content = #{content}, apply_user = #{applyUser}, apply_time = #{applyTime}, organization_id = #{organizationId}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step2_idea = #{step2Idea}, step2_user = #{step2User}, step2_time = #{step2Time}, step3_idea = #{step3Idea}, step3_user = #{step3User}, step3_time = #{step3Time}, step_status = #{stepStatus}, status = #{status}, version = version + 1 where id = #{id}
+    update t_chop set chop_code = #{chopCode}, project_id = #{projectId}, project_code = #{projectCode}, project_name = #{projectName}, manager = #{manager}, content = #{content}, apply_user = #{applyUser}, apply_time = #{applyTime}, organization_id = #{organizationId}, step1_idea = #{step1Idea}, step1_user = #{step1User}, step1_time = #{step1Time}, step2_idea = #{step2Idea}, step2_user = #{step2User}, step2_time = #{step2Time}, step3_idea = #{step3Idea}, step3_user = #{step3User}, step3_time = #{step3Time}, step_status = #{stepStatus}, status = #{status}, field_01 = #{field01}, field_02 = #{field02}, field_03 = #{field03}, field_04 = #{field04}, field_05 = #{field05}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">
@@ -19,7 +17,7 @@
   </delete>
 
   <select id="get" parameterType="string" resultType="Chop">
-    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status from t_chop where id = #{id}
+    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_chop where id = #{id}
   </select>
   
   <select id="getVersion" parameterType="string" resultType="int">
@@ -27,15 +25,15 @@
   </select>
   
   <select id="getAll" resultType="Chop">
-    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status from t_chop 
+    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_chop
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_chop
   </select>
 
-  <select id="getAllPaged" resultType="Chop">
-    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status from t_chop order by apply_time desc  limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" parameterType="Chop" resultType="Chop">
+    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_chop limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

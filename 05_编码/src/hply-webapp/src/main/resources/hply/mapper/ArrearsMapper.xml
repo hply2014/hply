@@ -4,35 +4,29 @@
 
 <mapper namespace="hply.mapper.ArrearsMapper">
 
-	<cache />
+  <insert id="insert" parameterType="Arrears">
+    insert into t_arrears(id, serial_id, arrears_code, project_id, funds_using, arrears_type, pay_type, amount, offset_amount, interest_amount, interest_rate, bank_account, bank_name, trice, create_time, create_user, update_time, update_user, description, status, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{serialId}, #{arrearsCode}, #{projectId}, #{fundsUsing}, #{arrearsType}, #{payType}, #{amount}, #{offsetAmount}, #{interestAmount}, #{interestRate}, #{bankAccount}, #{bankName}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
+  </insert>
 
-	<select id="getTotalByProject" parameterType="string" resultType="Double">
-		select sum(amount) from t_arrears where
-		project_id = #{projectId}
-	</select>
+  <update id="update" parameterType="map">
+    update t_arrears set <if test="serialId != null">serial_id = #{serialId},</if> <if test="arrearsCode != ''">arrears_code = #{arrearsCode},</if> <if test="projectId != ''">project_id = #{projectId},</if> <if test="fundsUsing != ''">funds_using = #{fundsUsing},</if> <if test="arrearsType != ''">arrears_type = #{arrearsType},</if> <if test="payType != ''">pay_type = #{payType},</if> <if test="amount != null">amount = #{amount},</if> <if test="offsetAmount != null">offset_amount = #{offsetAmount},</if> <if test="interestAmount != null">interest_amount = #{interestAmount},</if> <if test="interestRate != null">interest_rate = #{interestRate},</if> <if test="bankAccount != ''">bank_account = #{bankAccount},</if> <if test="bankName != ''">bank_name = #{bankName},</if> <if test="trice != null">trice = #{trice},</if>  update_time = now(), <if test="updateUser != ''">update_user = #{updateUser},</if> <if test="description != ''">description = #{description},</if> <if test="status != null">status = #{status},</if> <if test="field01 != ''">field_01 = #{field01},</if> <if test="field02 != ''">field_02 = #{field02},</if> <if test="field03 != ''">field_03 = #{field03},</if> <if test="field04 != ''">field_04 = #{field04},</if> <if test="field05 != ''">field_05 = #{field05},</if> version = version + 1 where id = #{id}
+  </update>
 
-	<select id="getInterestAmount" parameterType="string" resultType="Double">
-		select sum(amount) from t_arrears where
-		project_id = #{projectId} and arrears_type = '利息'
-	</select>
+  <delete id="delete" parameterType="string">
+    delete from t_arrears where id = #{id}
+  </delete>
 
-	<!-- 归还本金 -->
-	<update id="restorePrincipal">call proc_restore_principal(#{arrearsId})</update>
-
-	<!-- 归还利息 -->
-	<update id="restoreInterest">call proc_restore_interest(#{arrearsId})</update>
-	
-	
-  <select id="getAllByProject" resultType="Arrears">
-    select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_arrears where project_id=#{projectId} order by trice desc
+  <select id="get" parameterType="string" resultType="Arrears">
+    select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_arrears where id = #{id}
   </select>
   
-  <select id="getRowCountByOrganization" resultType="int">
-    select count(*) from t_arrears t where exists (select 0 from t_project p where t.project_id=p.id and p.organization_id=#{organizationId})
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_arrears where id = #{id}
   </select>
 
-  <select id="getAllPagedByOrganization" resultType="Arrears">
-    select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_arrears t where exists (select 0 from t_project p where t.project_id=p.id and p.organization_id=#{organizationId}) order by trice desc limit #{pageSize} offset #{pageIndex}
+  <select id="getAll" resultType="Arrears">
+    select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_arrears
   </select>
+
 </mapper>
 

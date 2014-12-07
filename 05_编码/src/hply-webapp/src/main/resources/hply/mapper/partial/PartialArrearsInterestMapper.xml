@@ -5,11 +5,11 @@
 <mapper namespace="hply.mapper.partial.PartialArrearsInterestMapper">
 
   <insert id="insert" parameterType="ArrearsInterest">
-    insert into t_arrears_interest(id, serial_id, arrears_id, project_id, trice, amount, offset_amount, interest_amount, create_time, description) values ( #{id}, #{serialId}, #{arrearsId}, #{projectId}, #{trice}, #{amount}, #{offsetAmount}, #{interestAmount}, now(), #{description} )
+    insert into t_arrears_interest(id, serial_id, arrears_id, project_id, trice, amount, offset_amount, interest_amount, create_time, description, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{serialId}, #{arrearsId}, #{projectId}, #{trice}, #{amount}, #{offsetAmount}, #{interestAmount}, now(), #{description}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_arrears_interest set serial_id = #{serialId}, arrears_id = #{arrearsId}, project_id = #{projectId}, trice = #{trice}, amount = #{amount}, offset_amount = #{offsetAmount}, interest_amount = #{interestAmount}, description = #{description}, version = version + 1 where id = #{id}
+    update t_arrears_interest set serial_id = #{serialId}, arrears_id = #{arrearsId}, project_id = #{projectId}, trice = #{trice}, amount = #{amount}, offset_amount = #{offsetAmount}, interest_amount = #{interestAmount}, description = #{description}, field_01 = #{field01}, field_02 = #{field02}, field_03 = #{field03}, field_04 = #{field04}, field_05 = #{field05}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">
@@ -17,7 +17,7 @@
   </delete>
 
   <select id="get" parameterType="string" resultType="ArrearsInterest">
-    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description from t_arrears_interest where id = #{id}
+    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_arrears_interest where id = #{id}
   </select>
   
   <select id="getVersion" parameterType="string" resultType="int">
@@ -25,7 +25,7 @@
   </select>
   
   <select id="getAll" resultType="ArrearsInterest">
-    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description from t_arrears_interest
+    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_arrears_interest
   </select>
   
   <select id="getRowCount" resultType="int">
@@ -33,7 +33,7 @@
   </select>
 
   <select id="getAllPaged" parameterType="ArrearsInterest" resultType="ArrearsInterest">
-    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description from t_arrears_interest limit #{pageSize} offset #{pageIndex}
+    select id as id, serial_id as serialId, arrears_id as arrearsId, project_id as projectId, trice as trice, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, version as version, create_time as createTime, description as description, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_arrears_interest limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

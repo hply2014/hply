@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.mapper.partial.PartialSysExecLogMapper">
+
+  <insert id="insert" parameterType="SysExecLog">
+    insert into t_sys_exec_log(serial_id, exec_no, proc_name, trice, exec_log, create_time, field_01, field_02, field_03, field_04, field_05) values ( #{serialId}, #{execNo}, #{procName}, #{trice}, #{execLog}, now(), #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_sys_exec_log set serial_id = #{serialId}, exec_no = #{execNo}, proc_name = #{procName}, trice = #{trice}, exec_log = #{execLog}, field_01 = #{field01}, field_02 = #{field02}, field_03 = #{field03}, field_04 = #{field04}, field_05 = #{field05}, version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_sys_exec_log where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="SysExecLog">
+    select serial_id as serialId, exec_no as execNo, proc_name as procName, trice as trice, exec_log as execLog, create_time as createTime, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_exec_log where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_sys_exec_log where id = #{id}
+  </select>
+  
+  <select id="getAll" resultType="SysExecLog">
+    select serial_id as serialId, exec_no as execNo, proc_name as procName, trice as trice, exec_log as execLog, create_time as createTime, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_exec_log
+  </select>
+  
+  <select id="getRowCount" resultType="int">
+    select count(*) from t_sys_exec_log
+  </select>
+
+  <select id="getAllPaged" parameterType="SysExecLog" resultType="SysExecLog">
+    select serial_id as serialId, exec_no as execNo, proc_name as procName, trice as trice, exec_log as execLog, create_time as createTime, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_exec_log limit #{pageSize} offset #{pageIndex}
+  </select>
+</mapper>
+

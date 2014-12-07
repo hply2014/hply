@@ -4,14 +4,12 @@
 
 <mapper namespace="hply.mapper.partial.PartialCustomerBillingMapper">
 
-  <cache />
-  
   <insert id="insert" parameterType="CustomerBilling">
-    insert into t_customer_billing(id, project_id, invoice_code, invoice_type, amount, trice, create_time, create_user, update_time, update_user, description, status) values ( #{id}, #{projectId}, #{invoiceCode}, #{invoiceType}, #{amount}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status} )
+    insert into t_customer_billing(id, project_id, invoice_code, invoice_type, amount, trice, create_time, create_user, update_time, update_user, description, status, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{projectId}, #{invoiceCode}, #{invoiceType}, #{amount}, #{trice}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
   </insert>
 
   <update id="update" parameterType="map">
-    update t_customer_billing set project_id = #{projectId}, invoice_code = #{invoiceCode}, invoice_type = #{invoiceType}, amount = #{amount}, trice = #{trice},  update_time = now(), update_user = #{updateUser}, description = #{description}, status = #{status}, version = version + 1 where id = #{id}
+    update t_customer_billing set project_id = #{projectId}, invoice_code = #{invoiceCode}, invoice_type = #{invoiceType}, amount = #{amount}, trice = #{trice},  update_time = now(), update_user = #{updateUser}, description = #{description}, status = #{status}, field_01 = #{field01}, field_02 = #{field02}, field_03 = #{field03}, field_04 = #{field04}, field_05 = #{field05}, version = version + 1 where id = #{id}
   </update>
 
   <delete id="delete" parameterType="string">
@@ -19,7 +17,7 @@
   </delete>
 
   <select id="get" parameterType="string" resultType="CustomerBilling">
-    select id as id, project_id as projectId, invoice_code as invoiceCode, invoice_type as invoiceType, amount as amount, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_customer_billing where id = #{id}
+    select id as id, project_id as projectId, invoice_code as invoiceCode, invoice_type as invoiceType, amount as amount, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_customer_billing where id = #{id}
   </select>
   
   <select id="getVersion" parameterType="string" resultType="int">
@@ -27,15 +25,15 @@
   </select>
   
   <select id="getAll" resultType="CustomerBilling">
-    select id as id, project_id as projectId, invoice_code as invoiceCode, invoice_type as invoiceType, amount as amount, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_customer_billing order by trice desc
+    select id as id, project_id as projectId, invoice_code as invoiceCode, invoice_type as invoiceType, amount as amount, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_customer_billing
   </select>
   
   <select id="getRowCount" resultType="int">
     select count(*) from t_customer_billing
   </select>
 
-  <select id="getAllPaged" resultType="CustomerBilling">
-    select id as id, project_id as projectId, invoice_code as invoiceCode, invoice_type as invoiceType, amount as amount, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status from t_customer_billing order by trice desc limit #{pageSize} offset #{pageIndex}
+  <select id="getAllPaged" parameterType="CustomerBilling" resultType="CustomerBilling">
+    select id as id, project_id as projectId, invoice_code as invoiceCode, invoice_type as invoiceType, amount as amount, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_customer_billing limit #{pageSize} offset #{pageIndex}
   </select>
 </mapper>
 

@@ -15,159 +15,203 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
-  * 数据表： [t_project_summary]
-  * 00_多项目汇总
+  * 数据表： [t_project_init]
+  * 数据初始化表
   */
-public class ProjectSummary implements Serializable {
+public class ProjectInit implements Serializable {
     
     	/*
-    	 * ID
-    	 */
-        public static final String FIELD_ID = "id";
-    	/*
-    	 * 记录流程号
+    	 * 
     	 */
         public static final String FIELD_SERIAL_ID = "serial_id";
     	/*
-    	 * 时间
+    	 * 摘要信息/时间
     	 */
         public static final String FIELD_TRICE = "trice";
     	/*
-    	 * 摘要
+    	 * 摘要信息/摘要
     	 */
         public static final String FIELD_DESCRIPTION = "description";
     	/*
-    	 * 项目ID
-    	 */
-        public static final String FIELD_PROJECT_ID = "project_id";
-    	/*
-    	 * 所在部门
-    	 */
-        public static final String FIELD_ORGANIZATION_ID = "organization_id";
-    	/*
-    	 * 项目编号
+    	 * 合同项目信息/项目编号
     	 */
         public static final String FIELD_PROJECT_CODE = "project_code";
     	/*
-    	 * 项目名称
+    	 * 合同项目信息/项目名称
     	 */
         public static final String FIELD_PROJECT_NAME = "project_name";
     	/*
-    	 * 合同金额
+    	 * 合同项目信息/所在部门
+    	 */
+        public static final String FIELD_ORGANIZATION_NAME = "organization_name";
+    	/*
+    	 * 合同项目信息/甲方名称
+    	 */
+        public static final String FIELD_PARTY_NAME = "party_name";
+    	/*
+    	 * 合同项目信息/甲方地址
+    	 */
+        public static final String FIELD_PARTY_ADDRESS = "party_address";
+    	/*
+    	 * 合同项目信息/项目经理
+    	 */
+        public static final String FIELD_MANAGER = "manager";
+    	/*
+    	 * 合同项目信息/合作单位
+    	 */
+        public static final String FIELD_CORPERATION = "corperation";
+    	/*
+    	 * 合同项目信息/法人代表
+    	 */
+        public static final String FIELD_LEGAL_ASSIGNEE = "legal_assignee";
+    	/*
+    	 * 合同项目信息/异地代扣代缴
+    	 */
+        public static final String FIELD_IS_WITHHOLDING_OFFSITE = "is_withholding_offsite";
+    	/*
+    	 * 合同项目信息/合同号
+    	 */
+        public static final String FIELD_CONTRACT_CODE = "contract_code";
+    	/*
+    	 * 合同项目信息/合同金额
     	 */
         public static final String FIELD_CONTRACT_AMOUNT = "contract_amount";
     	/*
-    	 * 合同调增额
+    	 * 合同项目信息/合同调增额
     	 */
         public static final String FIELD_CHANGE_AMOUNT = "change_amount";
     	/*
-    	 * 累计调增额
+    	 * 合同项目信息/累计调增额
     	 */
         public static final String FIELD_CHANGE_TOTAL_AMOUNT = "change_total_amount";
     	/*
-    	 * 合同结算额
+    	 * 合同项目信息/合同结算额
     	 */
         public static final String FIELD_SETTLEMENT_AMOUNT = "settlement_amount";
     	/*
-    	 * 比率
+    	 * 合同项目信息/印花税收据编号
+    	 */
+        public static final String FIELD_DUTY_PAID_CODE = "duty_paid_code";
+    	/*
+    	 * 合同项目信息/印花税上交时间
+    	 */
+        public static final String FIELD_DUTY_PAID_TIME = "duty_paid_time";
+    	/*
+    	 * 合同项目信息/印花税上交金额
+    	 */
+        public static final String FIELD_DUTY_PAID_AMOUNT = "duty_paid_amount";
+    	/*
+    	 * 合同项目信息/占用资金情况
+    	 */
+        public static final String FIELD_CAPITAL_OCCUPIED = "capital_occupied";
+    	/*
+    	 * 合同项目信息/项目状态
+    	 */
+        public static final String FIELD_PROJECT_STATUS = "project_status";
+    	/*
+    	 * 管理费情况/比率
     	 */
         public static final String FIELD_MANAGEMENT_RATE = "management_rate";
     	/*
-    	 * 应收管理费
+    	 * 管理费情况/应收管理费
     	 */
         public static final String FIELD_MANAGEMENT_PLAN_AMOUNT = "management_plan_amount";
     	/*
-    	 * 实收管理费
+    	 * 管理费情况/实收管理费
     	 */
         public static final String FIELD_MANAGEMENT_REAL_AMOUNT = "management_real_amount";
     	/*
-    	 * 累计收管理费
+    	 * 管理费情况/累计收管理费
     	 */
         public static final String FIELD_MANAGEMENT_TOTAL_AMOUNT = "management_total_amount";
     	/*
-    	 * 尚欠管理费
+    	 * 管理费情况/尚欠管理费
     	 */
         public static final String FIELD_MANAGEMENT_OWE_AMOUNT = "management_owe_amount";
     	/*
-    	 * 发票金额
+    	 * 甲方开票情况/发票金额
     	 */
         public static final String FIELD_PARTY_BILLING_AMOUNT = "party_billing_amount";
     	/*
-    	 * 累计开票
+    	 * 甲方开票情况/累计开票
     	 */
         public static final String FIELD_PARTY_BILLING_TOTAL_AMOUNT = "party_billing_total_amount";
     	/*
-    	 * 收款金额
+    	 * 从甲方收款情况/收款金额
     	 */
         public static final String FIELD_COLLECTIONS_AMOUNT = "collections_amount";
     	/*
-    	 * 累计收款
+    	 * 从甲方收款情况/累计收款
     	 */
         public static final String FIELD_COLLECTIONS_TOTAL_AMOUNT = "collections_total_amount";
     	/*
-    	 * 回收率
+    	 * 从甲方收款情况/回收率
     	 */
         public static final String FIELD_COLLECTIONS_RATE = "collections_rate";
     	/*
-    	 * 发票金额
+    	 * 客户开票情况/发票金额
     	 */
         public static final String FIELD_CUSTOMER_BILLING_AMOUNT = "customer_billing_amount";
     	/*
-    	 * 累计开票
+    	 * 客户开票情况/累计开票
     	 */
         public static final String FIELD_CUSTOMER_BILLING_TOTAL_AMOUNT = "customer_billing_total_amount";
     	/*
-    	 * 支付金额
+    	 * 支付工程款情况/支付金额
     	 */
         public static final String FIELD_PAYMENT_AMOUNT = "payment_amount";
     	/*
-    	 * 累计
+    	 * 支付工程款情况/差旅费
+    	 */
+        public static final String FIELD_PAYMENT_AMOUNT_CLV = "payment_amount_clv";
+    	/*
+    	 * 支付工程款情况/车辆费用
+    	 */
+        public static final String FIELD_PAYMENT_AMOUNT_CLIANG = "payment_amount_cliang";
+    	/*
+    	 * 支付工程款情况/业务招待费
+    	 */
+        public static final String FIELD_PAYMENT_AMOUNT_ZDAI = "payment_amount_zdai";
+    	/*
+    	 * 支付工程款情况/累计支付
     	 */
         public static final String FIELD_PAYMENT_TOTAL_AMOUNT = "payment_total_amount";
     	/*
-    	 * 比率
+    	 * 税金情况/比率
     	 */
         public static final String FIELD_TAX_RATE = "tax_rate";
     	/*
-    	 * 应缴税金
+    	 * 税金情况/应缴税金
     	 */
         public static final String FIELD_TAX_PLAN_AMOUNT = "tax_plan_amount";
     	/*
-    	 * 已缴税金
+    	 * 税金情况/已缴税金
     	 */
         public static final String FIELD_TAX_REAL_AMOUNT = "tax_real_amount";
     	/*
-    	 * 累计已缴税金
+    	 * 税金情况/累计已缴税金
     	 */
         public static final String FIELD_TAX_TOTAL_AMOUNT = "tax_total_amount";
     	/*
-    	 * 尚欠税金
+    	 * 税金情况/尚欠税金
     	 */
         public static final String FIELD_TAX_OWE_AMOUNT = "tax_owe_amount";
     	/*
-    	 * 金额
+    	 * 垫付资金情况/金额
     	 */
         public static final String FIELD_ARREARS_AMOUNT = "arrears_amount";
     	/*
-    	 * 预计用量
+    	 * 型材（吨）/预计用量
     	 */
         public static final String FIELD_EXPECTED_VALUE = "expected_value";
     	/*
-    	 * 型材点
+    	 * 型材（吨）/型材点
     	 */
         public static final String FIELD_PROFILE_POINT = "profile_point";
     	/*
     	 * 
     	 */
-        public static final String FIELD_VERSION = "version";
-    	/*
-    	 * 创建时间，数据生成时间
-    	 */
         public static final String FIELD_CREATE_TIME = "create_time";
-    	/*
-    	 * 
-    	 */
-        public static final String FIELD_TABLE_NAME = "table_name";
     	/*
     	 * 预留字段01
     	 */
@@ -192,271 +236,346 @@ public class ProjectSummary implements Serializable {
 	/*
 	 * 默认构造函数
 	 */
-	public ProjectSummary() {
-		this.id = Utility.getRandomUUID(); 
+	public ProjectInit() {
         this.trice = new Date(); 
-        this.version = -1; 
         this.createTime = new Date(); 
 	}
 
     /**
-      * [id]，
-      * ID
-      */
-      
-      private String id;
-      
-    /**
       * [serial_id]，
-      * 记录流程号
+      * 
       */
       
       private Integer serialId;
       
     /**
       * [trice]，
-      * 时间
+      * 摘要信息/时间
       */
       @DateTimeFormat(iso=ISO.DATE)
       private Date trice;
       
     /**
       * [description]，
-      * 摘要
+      * 摘要信息/摘要
       */
       
       private String description;
       
     /**
-      * [project_id]，
-      * 项目ID
-      */
-      
-      private String projectId;
-      
-    /**
-      * [organization_id]，
-      * 所在部门
-      */
-      
-      private String organizationId;
-      
-    /**
       * [project_code]，
-      * 项目编号
+      * 合同项目信息/项目编号
       */
       
       private String projectCode;
       
     /**
       * [project_name]，
-      * 项目名称
+      * 合同项目信息/项目名称
       */
       
       private String projectName;
       
     /**
+      * [organization_name]，
+      * 合同项目信息/所在部门
+      */
+      
+      private String organizationName;
+      
+    /**
+      * [party_name]，
+      * 合同项目信息/甲方名称
+      */
+      
+      private String partyName;
+      
+    /**
+      * [party_address]，
+      * 合同项目信息/甲方地址
+      */
+      
+      private String partyAddress;
+      
+    /**
+      * [manager]，
+      * 合同项目信息/项目经理
+      */
+      
+      private String manager;
+      
+    /**
+      * [corperation]，
+      * 合同项目信息/合作单位
+      */
+      
+      private String corperation;
+      
+    /**
+      * [legal_assignee]，
+      * 合同项目信息/法人代表
+      */
+      
+      private String legalAssignee;
+      
+    /**
+      * [is_withholding_offsite]，
+      * 合同项目信息/异地代扣代缴
+      */
+      
+      private String isWithholdingOffsite;
+      
+    /**
+      * [contract_code]，
+      * 合同项目信息/合同号
+      */
+      
+      private String contractCode;
+      
+    /**
       * [contract_amount]，
-      * 合同金额
+      * 合同项目信息/合同金额
       */
       
       private double contractAmount;
       
     /**
       * [change_amount]，
-      * 合同调增额
+      * 合同项目信息/合同调增额
       */
       
       private double changeAmount;
       
     /**
       * [change_total_amount]，
-      * 累计调增额
+      * 合同项目信息/累计调增额
       */
       
       private double changeTotalAmount;
       
     /**
       * [settlement_amount]，
-      * 合同结算额
+      * 合同项目信息/合同结算额
       */
       
       private double settlementAmount;
       
     /**
+      * [duty_paid_code]，
+      * 合同项目信息/印花税收据编号
+      */
+      
+      private String dutyPaidCode;
+      
+    /**
+      * [duty_paid_time]，
+      * 合同项目信息/印花税上交时间
+      */
+      @DateTimeFormat(iso=ISO.DATE)
+      private Date dutyPaidTime;
+      
+    /**
+      * [duty_paid_amount]，
+      * 合同项目信息/印花税上交金额
+      */
+      
+      private double dutyPaidAmount;
+      
+    /**
+      * [capital_occupied]，
+      * 合同项目信息/占用资金情况
+      */
+      
+      private String capitalOccupied;
+      
+    /**
+      * [project_status]，
+      * 合同项目信息/项目状态
+      */
+      
+      private String projectStatus;
+      
+    /**
       * [management_rate]，
-      * 比率
+      * 管理费情况/比率
       */
       
       private double managementRate;
       
     /**
       * [management_plan_amount]，
-      * 应收管理费
+      * 管理费情况/应收管理费
       */
       
       private double managementPlanAmount;
       
     /**
       * [management_real_amount]，
-      * 实收管理费
+      * 管理费情况/实收管理费
       */
       
       private double managementRealAmount;
       
     /**
       * [management_total_amount]，
-      * 累计收管理费
+      * 管理费情况/累计收管理费
       */
       
       private double managementTotalAmount;
       
     /**
       * [management_owe_amount]，
-      * 尚欠管理费
+      * 管理费情况/尚欠管理费
       */
       
       private double managementOweAmount;
       
     /**
       * [party_billing_amount]，
-      * 发票金额
+      * 甲方开票情况/发票金额
       */
       
       private double partyBillingAmount;
       
     /**
       * [party_billing_total_amount]，
-      * 累计开票
+      * 甲方开票情况/累计开票
       */
       
       private double partyBillingTotalAmount;
       
     /**
       * [collections_amount]，
-      * 收款金额
+      * 从甲方收款情况/收款金额
       */
       
       private double collectionsAmount;
       
     /**
       * [collections_total_amount]，
-      * 累计收款
+      * 从甲方收款情况/累计收款
       */
       
       private double collectionsTotalAmount;
       
     /**
       * [collections_rate]，
-      * 回收率
+      * 从甲方收款情况/回收率
       */
       
       private double collectionsRate;
       
     /**
       * [customer_billing_amount]，
-      * 发票金额
+      * 客户开票情况/发票金额
       */
       
       private double customerBillingAmount;
       
     /**
       * [customer_billing_total_amount]，
-      * 累计开票
+      * 客户开票情况/累计开票
       */
       
       private double customerBillingTotalAmount;
       
     /**
       * [payment_amount]，
-      * 支付金额
+      * 支付工程款情况/支付金额
       */
       
       private double paymentAmount;
       
     /**
+      * [payment_amount_clv]，
+      * 支付工程款情况/差旅费
+      */
+      
+      private double paymentAmountClv;
+      
+    /**
+      * [payment_amount_cliang]，
+      * 支付工程款情况/车辆费用
+      */
+      
+      private double paymentAmountCliang;
+      
+    /**
+      * [payment_amount_zdai]，
+      * 支付工程款情况/业务招待费
+      */
+      
+      private double paymentAmountZdai;
+      
+    /**
       * [payment_total_amount]，
-      * 累计
+      * 支付工程款情况/累计支付
       */
       
       private double paymentTotalAmount;
       
     /**
       * [tax_rate]，
-      * 比率
+      * 税金情况/比率
       */
       
       private double taxRate;
       
     /**
       * [tax_plan_amount]，
-      * 应缴税金
+      * 税金情况/应缴税金
       */
       
       private double taxPlanAmount;
       
     /**
       * [tax_real_amount]，
-      * 已缴税金
+      * 税金情况/已缴税金
       */
       
       private double taxRealAmount;
       
     /**
       * [tax_total_amount]，
-      * 累计已缴税金
+      * 税金情况/累计已缴税金
       */
       
       private double taxTotalAmount;
       
     /**
       * [tax_owe_amount]，
-      * 尚欠税金
+      * 税金情况/尚欠税金
       */
       
       private double taxOweAmount;
       
     /**
       * [arrears_amount]，
-      * 金额
+      * 垫付资金情况/金额
       */
       
       private double arrearsAmount;
       
     /**
       * [expected_value]，
-      * 预计用量
+      * 型材（吨）/预计用量
       */
       
       private double expectedValue;
       
     /**
       * [profile_point]，
-      * 型材点
+      * 型材（吨）/型材点
       */
       
       private String profilePoint;
       
     /**
-      * [version]，
-      * 
-      */
-      
-      private Integer version;
-      
-    /**
       * [create_time]，
-      * 创建时间，数据生成时间
+      * 
       */
       @DateTimeFormat(iso=ISO.DATE)
       private Date createTime;
-      
-    /**
-      * [table_name]，
-      * 
-      */
-      
-      private String tableName;
       
     /**
       * [field_01]，
@@ -495,23 +614,8 @@ public class ProjectSummary implements Serializable {
       
     
     /**
-      * [id] getter，
-      * ID
-      */
-    	public String getId () {
-    		return this.id;
-    	}
-
-    /**
-      * [id] setter，
-      * ID
-      */
-    	public void setId(String id) {
-    		this.id = id;
-    	}
-    /**
       * [serial_id] getter，
-      * 记录流程号
+      * 
       */
     	public Integer getSerialId () {
     		return this.serialId;
@@ -519,14 +623,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [serial_id] setter，
-      * 记录流程号
+      * 
       */
     	public void setSerialId(Integer serialId) {
     		this.serialId = serialId;
     	}
     /**
       * [trice] getter，
-      * 时间
+      * 摘要信息/时间
       */
     	public Date getTrice () {
     		return this.trice;
@@ -534,14 +638,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [trice] setter，
-      * 时间
+      * 摘要信息/时间
       */
     	public void setTrice(Date trice) {
     		this.trice = trice;
     	}
     /**
       * [description] getter，
-      * 摘要
+      * 摘要信息/摘要
       */
     	public String getDescription () {
     		return this.description;
@@ -549,44 +653,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [description] setter，
-      * 摘要
+      * 摘要信息/摘要
       */
     	public void setDescription(String description) {
     		this.description = description;
     	}
     /**
-      * [project_id] getter，
-      * 项目ID
-      */
-    	public String getProjectId () {
-    		return this.projectId;
-    	}
-
-    /**
-      * [project_id] setter，
-      * 项目ID
-      */
-    	public void setProjectId(String projectId) {
-    		this.projectId = projectId;
-    	}
-    /**
-      * [organization_id] getter，
-      * 所在部门
-      */
-    	public String getOrganizationId () {
-    		return this.organizationId;
-    	}
-
-    /**
-      * [organization_id] setter，
-      * 所在部门
-      */
-    	public void setOrganizationId(String organizationId) {
-    		this.organizationId = organizationId;
-    	}
-    /**
       * [project_code] getter，
-      * 项目编号
+      * 合同项目信息/项目编号
       */
     	public String getProjectCode () {
     		return this.projectCode;
@@ -594,14 +668,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [project_code] setter，
-      * 项目编号
+      * 合同项目信息/项目编号
       */
     	public void setProjectCode(String projectCode) {
     		this.projectCode = projectCode;
     	}
     /**
       * [project_name] getter，
-      * 项目名称
+      * 合同项目信息/项目名称
       */
     	public String getProjectName () {
     		return this.projectName;
@@ -609,14 +683,134 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [project_name] setter，
-      * 项目名称
+      * 合同项目信息/项目名称
       */
     	public void setProjectName(String projectName) {
     		this.projectName = projectName;
     	}
     /**
+      * [organization_name] getter，
+      * 合同项目信息/所在部门
+      */
+    	public String getOrganizationName () {
+    		return this.organizationName;
+    	}
+
+    /**
+      * [organization_name] setter，
+      * 合同项目信息/所在部门
+      */
+    	public void setOrganizationName(String organizationName) {
+    		this.organizationName = organizationName;
+    	}
+    /**
+      * [party_name] getter，
+      * 合同项目信息/甲方名称
+      */
+    	public String getPartyName () {
+    		return this.partyName;
+    	}
+
+    /**
+      * [party_name] setter，
+      * 合同项目信息/甲方名称
+      */
+    	public void setPartyName(String partyName) {
+    		this.partyName = partyName;
+    	}
+    /**
+      * [party_address] getter，
+      * 合同项目信息/甲方地址
+      */
+    	public String getPartyAddress () {
+    		return this.partyAddress;
+    	}
+
+    /**
+      * [party_address] setter，
+      * 合同项目信息/甲方地址
+      */
+    	public void setPartyAddress(String partyAddress) {
+    		this.partyAddress = partyAddress;
+    	}
+    /**
+      * [manager] getter，
+      * 合同项目信息/项目经理
+      */
+    	public String getManager () {
+    		return this.manager;
+    	}
+
+    /**
+      * [manager] setter，
+      * 合同项目信息/项目经理
+      */
+    	public void setManager(String manager) {
+    		this.manager = manager;
+    	}
+    /**
+      * [corperation] getter，
+      * 合同项目信息/合作单位
+      */
+    	public String getCorperation () {
+    		return this.corperation;
+    	}
+
+    /**
+      * [corperation] setter，
+      * 合同项目信息/合作单位
+      */
+    	public void setCorperation(String corperation) {
+    		this.corperation = corperation;
+    	}
+    /**
+      * [legal_assignee] getter，
+      * 合同项目信息/法人代表
+      */
+    	public String getLegalAssignee () {
+    		return this.legalAssignee;
+    	}
+
+    /**
+      * [legal_assignee] setter，
+      * 合同项目信息/法人代表
+      */
+    	public void setLegalAssignee(String legalAssignee) {
+    		this.legalAssignee = legalAssignee;
+    	}
+    /**
+      * [is_withholding_offsite] getter，
+      * 合同项目信息/异地代扣代缴
+      */
+    	public String getIsWithholdingOffsite () {
+    		return this.isWithholdingOffsite;
+    	}
+
+    /**
+      * [is_withholding_offsite] setter，
+      * 合同项目信息/异地代扣代缴
+      */
+    	public void setIsWithholdingOffsite(String isWithholdingOffsite) {
+    		this.isWithholdingOffsite = isWithholdingOffsite;
+    	}
+    /**
+      * [contract_code] getter，
+      * 合同项目信息/合同号
+      */
+    	public String getContractCode () {
+    		return this.contractCode;
+    	}
+
+    /**
+      * [contract_code] setter，
+      * 合同项目信息/合同号
+      */
+    	public void setContractCode(String contractCode) {
+    		this.contractCode = contractCode;
+    	}
+    /**
       * [contract_amount] getter，
-      * 合同金额
+      * 合同项目信息/合同金额
       */
     	public double getContractAmount () {
     		return this.contractAmount;
@@ -624,14 +818,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [contract_amount] setter，
-      * 合同金额
+      * 合同项目信息/合同金额
       */
     	public void setContractAmount(double contractAmount) {
     		this.contractAmount = contractAmount;
     	}
     /**
       * [change_amount] getter，
-      * 合同调增额
+      * 合同项目信息/合同调增额
       */
     	public double getChangeAmount () {
     		return this.changeAmount;
@@ -639,14 +833,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [change_amount] setter，
-      * 合同调增额
+      * 合同项目信息/合同调增额
       */
     	public void setChangeAmount(double changeAmount) {
     		this.changeAmount = changeAmount;
     	}
     /**
       * [change_total_amount] getter，
-      * 累计调增额
+      * 合同项目信息/累计调增额
       */
     	public double getChangeTotalAmount () {
     		return this.changeTotalAmount;
@@ -654,14 +848,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [change_total_amount] setter，
-      * 累计调增额
+      * 合同项目信息/累计调增额
       */
     	public void setChangeTotalAmount(double changeTotalAmount) {
     		this.changeTotalAmount = changeTotalAmount;
     	}
     /**
       * [settlement_amount] getter，
-      * 合同结算额
+      * 合同项目信息/合同结算额
       */
     	public double getSettlementAmount () {
     		return this.settlementAmount;
@@ -669,14 +863,89 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [settlement_amount] setter，
-      * 合同结算额
+      * 合同项目信息/合同结算额
       */
     	public void setSettlementAmount(double settlementAmount) {
     		this.settlementAmount = settlementAmount;
     	}
     /**
+      * [duty_paid_code] getter，
+      * 合同项目信息/印花税收据编号
+      */
+    	public String getDutyPaidCode () {
+    		return this.dutyPaidCode;
+    	}
+
+    /**
+      * [duty_paid_code] setter，
+      * 合同项目信息/印花税收据编号
+      */
+    	public void setDutyPaidCode(String dutyPaidCode) {
+    		this.dutyPaidCode = dutyPaidCode;
+    	}
+    /**
+      * [duty_paid_time] getter，
+      * 合同项目信息/印花税上交时间
+      */
+    	public Date getDutyPaidTime () {
+    		return this.dutyPaidTime;
+    	}
+
+    /**
+      * [duty_paid_time] setter，
+      * 合同项目信息/印花税上交时间
+      */
+    	public void setDutyPaidTime(Date dutyPaidTime) {
+    		this.dutyPaidTime = dutyPaidTime;
+    	}
+    /**
+      * [duty_paid_amount] getter，
+      * 合同项目信息/印花税上交金额
+      */
+    	public double getDutyPaidAmount () {
+    		return this.dutyPaidAmount;
+    	}
+
+    /**
+      * [duty_paid_amount] setter，
+      * 合同项目信息/印花税上交金额
+      */
+    	public void setDutyPaidAmount(double dutyPaidAmount) {
+    		this.dutyPaidAmount = dutyPaidAmount;
+    	}
+    /**
+      * [capital_occupied] getter，
+      * 合同项目信息/占用资金情况
+      */
+    	public String getCapitalOccupied () {
+    		return this.capitalOccupied;
+    	}
+
+    /**
+      * [capital_occupied] setter，
+      * 合同项目信息/占用资金情况
+      */
+    	public void setCapitalOccupied(String capitalOccupied) {
+    		this.capitalOccupied = capitalOccupied;
+    	}
+    /**
+      * [project_status] getter，
+      * 合同项目信息/项目状态
+      */
+    	public String getProjectStatus () {
+    		return this.projectStatus;
+    	}
+
+    /**
+      * [project_status] setter，
+      * 合同项目信息/项目状态
+      */
+    	public void setProjectStatus(String projectStatus) {
+    		this.projectStatus = projectStatus;
+    	}
+    /**
       * [management_rate] getter，
-      * 比率
+      * 管理费情况/比率
       */
     	public double getManagementRate () {
     		return this.managementRate;
@@ -684,14 +953,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [management_rate] setter，
-      * 比率
+      * 管理费情况/比率
       */
     	public void setManagementRate(double managementRate) {
     		this.managementRate = managementRate;
     	}
     /**
       * [management_plan_amount] getter，
-      * 应收管理费
+      * 管理费情况/应收管理费
       */
     	public double getManagementPlanAmount () {
     		return this.managementPlanAmount;
@@ -699,14 +968,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [management_plan_amount] setter，
-      * 应收管理费
+      * 管理费情况/应收管理费
       */
     	public void setManagementPlanAmount(double managementPlanAmount) {
     		this.managementPlanAmount = managementPlanAmount;
     	}
     /**
       * [management_real_amount] getter，
-      * 实收管理费
+      * 管理费情况/实收管理费
       */
     	public double getManagementRealAmount () {
     		return this.managementRealAmount;
@@ -714,14 +983,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [management_real_amount] setter，
-      * 实收管理费
+      * 管理费情况/实收管理费
       */
     	public void setManagementRealAmount(double managementRealAmount) {
     		this.managementRealAmount = managementRealAmount;
     	}
     /**
       * [management_total_amount] getter，
-      * 累计收管理费
+      * 管理费情况/累计收管理费
       */
     	public double getManagementTotalAmount () {
     		return this.managementTotalAmount;
@@ -729,14 +998,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [management_total_amount] setter，
-      * 累计收管理费
+      * 管理费情况/累计收管理费
       */
     	public void setManagementTotalAmount(double managementTotalAmount) {
     		this.managementTotalAmount = managementTotalAmount;
     	}
     /**
       * [management_owe_amount] getter，
-      * 尚欠管理费
+      * 管理费情况/尚欠管理费
       */
     	public double getManagementOweAmount () {
     		return this.managementOweAmount;
@@ -744,14 +1013,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [management_owe_amount] setter，
-      * 尚欠管理费
+      * 管理费情况/尚欠管理费
       */
     	public void setManagementOweAmount(double managementOweAmount) {
     		this.managementOweAmount = managementOweAmount;
     	}
     /**
       * [party_billing_amount] getter，
-      * 发票金额
+      * 甲方开票情况/发票金额
       */
     	public double getPartyBillingAmount () {
     		return this.partyBillingAmount;
@@ -759,14 +1028,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [party_billing_amount] setter，
-      * 发票金额
+      * 甲方开票情况/发票金额
       */
     	public void setPartyBillingAmount(double partyBillingAmount) {
     		this.partyBillingAmount = partyBillingAmount;
     	}
     /**
       * [party_billing_total_amount] getter，
-      * 累计开票
+      * 甲方开票情况/累计开票
       */
     	public double getPartyBillingTotalAmount () {
     		return this.partyBillingTotalAmount;
@@ -774,14 +1043,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [party_billing_total_amount] setter，
-      * 累计开票
+      * 甲方开票情况/累计开票
       */
     	public void setPartyBillingTotalAmount(double partyBillingTotalAmount) {
     		this.partyBillingTotalAmount = partyBillingTotalAmount;
     	}
     /**
       * [collections_amount] getter，
-      * 收款金额
+      * 从甲方收款情况/收款金额
       */
     	public double getCollectionsAmount () {
     		return this.collectionsAmount;
@@ -789,14 +1058,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [collections_amount] setter，
-      * 收款金额
+      * 从甲方收款情况/收款金额
       */
     	public void setCollectionsAmount(double collectionsAmount) {
     		this.collectionsAmount = collectionsAmount;
     	}
     /**
       * [collections_total_amount] getter，
-      * 累计收款
+      * 从甲方收款情况/累计收款
       */
     	public double getCollectionsTotalAmount () {
     		return this.collectionsTotalAmount;
@@ -804,14 +1073,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [collections_total_amount] setter，
-      * 累计收款
+      * 从甲方收款情况/累计收款
       */
     	public void setCollectionsTotalAmount(double collectionsTotalAmount) {
     		this.collectionsTotalAmount = collectionsTotalAmount;
     	}
     /**
       * [collections_rate] getter，
-      * 回收率
+      * 从甲方收款情况/回收率
       */
     	public double getCollectionsRate () {
     		return this.collectionsRate;
@@ -819,14 +1088,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [collections_rate] setter，
-      * 回收率
+      * 从甲方收款情况/回收率
       */
     	public void setCollectionsRate(double collectionsRate) {
     		this.collectionsRate = collectionsRate;
     	}
     /**
       * [customer_billing_amount] getter，
-      * 发票金额
+      * 客户开票情况/发票金额
       */
     	public double getCustomerBillingAmount () {
     		return this.customerBillingAmount;
@@ -834,14 +1103,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [customer_billing_amount] setter，
-      * 发票金额
+      * 客户开票情况/发票金额
       */
     	public void setCustomerBillingAmount(double customerBillingAmount) {
     		this.customerBillingAmount = customerBillingAmount;
     	}
     /**
       * [customer_billing_total_amount] getter，
-      * 累计开票
+      * 客户开票情况/累计开票
       */
     	public double getCustomerBillingTotalAmount () {
     		return this.customerBillingTotalAmount;
@@ -849,14 +1118,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [customer_billing_total_amount] setter，
-      * 累计开票
+      * 客户开票情况/累计开票
       */
     	public void setCustomerBillingTotalAmount(double customerBillingTotalAmount) {
     		this.customerBillingTotalAmount = customerBillingTotalAmount;
     	}
     /**
       * [payment_amount] getter，
-      * 支付金额
+      * 支付工程款情况/支付金额
       */
     	public double getPaymentAmount () {
     		return this.paymentAmount;
@@ -864,14 +1133,59 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [payment_amount] setter，
-      * 支付金额
+      * 支付工程款情况/支付金额
       */
     	public void setPaymentAmount(double paymentAmount) {
     		this.paymentAmount = paymentAmount;
     	}
     /**
+      * [payment_amount_clv] getter，
+      * 支付工程款情况/差旅费
+      */
+    	public double getPaymentAmountClv () {
+    		return this.paymentAmountClv;
+    	}
+
+    /**
+      * [payment_amount_clv] setter，
+      * 支付工程款情况/差旅费
+      */
+    	public void setPaymentAmountClv(double paymentAmountClv) {
+    		this.paymentAmountClv = paymentAmountClv;
+    	}
+    /**
+      * [payment_amount_cliang] getter，
+      * 支付工程款情况/车辆费用
+      */
+    	public double getPaymentAmountCliang () {
+    		return this.paymentAmountCliang;
+    	}
+
+    /**
+      * [payment_amount_cliang] setter，
+      * 支付工程款情况/车辆费用
+      */
+    	public void setPaymentAmountCliang(double paymentAmountCliang) {
+    		this.paymentAmountCliang = paymentAmountCliang;
+    	}
+    /**
+      * [payment_amount_zdai] getter，
+      * 支付工程款情况/业务招待费
+      */
+    	public double getPaymentAmountZdai () {
+    		return this.paymentAmountZdai;
+    	}
+
+    /**
+      * [payment_amount_zdai] setter，
+      * 支付工程款情况/业务招待费
+      */
+    	public void setPaymentAmountZdai(double paymentAmountZdai) {
+    		this.paymentAmountZdai = paymentAmountZdai;
+    	}
+    /**
       * [payment_total_amount] getter，
-      * 累计
+      * 支付工程款情况/累计支付
       */
     	public double getPaymentTotalAmount () {
     		return this.paymentTotalAmount;
@@ -879,14 +1193,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [payment_total_amount] setter，
-      * 累计
+      * 支付工程款情况/累计支付
       */
     	public void setPaymentTotalAmount(double paymentTotalAmount) {
     		this.paymentTotalAmount = paymentTotalAmount;
     	}
     /**
       * [tax_rate] getter，
-      * 比率
+      * 税金情况/比率
       */
     	public double getTaxRate () {
     		return this.taxRate;
@@ -894,14 +1208,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [tax_rate] setter，
-      * 比率
+      * 税金情况/比率
       */
     	public void setTaxRate(double taxRate) {
     		this.taxRate = taxRate;
     	}
     /**
       * [tax_plan_amount] getter，
-      * 应缴税金
+      * 税金情况/应缴税金
       */
     	public double getTaxPlanAmount () {
     		return this.taxPlanAmount;
@@ -909,14 +1223,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [tax_plan_amount] setter，
-      * 应缴税金
+      * 税金情况/应缴税金
       */
     	public void setTaxPlanAmount(double taxPlanAmount) {
     		this.taxPlanAmount = taxPlanAmount;
     	}
     /**
       * [tax_real_amount] getter，
-      * 已缴税金
+      * 税金情况/已缴税金
       */
     	public double getTaxRealAmount () {
     		return this.taxRealAmount;
@@ -924,14 +1238,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [tax_real_amount] setter，
-      * 已缴税金
+      * 税金情况/已缴税金
       */
     	public void setTaxRealAmount(double taxRealAmount) {
     		this.taxRealAmount = taxRealAmount;
     	}
     /**
       * [tax_total_amount] getter，
-      * 累计已缴税金
+      * 税金情况/累计已缴税金
       */
     	public double getTaxTotalAmount () {
     		return this.taxTotalAmount;
@@ -939,14 +1253,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [tax_total_amount] setter，
-      * 累计已缴税金
+      * 税金情况/累计已缴税金
       */
     	public void setTaxTotalAmount(double taxTotalAmount) {
     		this.taxTotalAmount = taxTotalAmount;
     	}
     /**
       * [tax_owe_amount] getter，
-      * 尚欠税金
+      * 税金情况/尚欠税金
       */
     	public double getTaxOweAmount () {
     		return this.taxOweAmount;
@@ -954,14 +1268,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [tax_owe_amount] setter，
-      * 尚欠税金
+      * 税金情况/尚欠税金
       */
     	public void setTaxOweAmount(double taxOweAmount) {
     		this.taxOweAmount = taxOweAmount;
     	}
     /**
       * [arrears_amount] getter，
-      * 金额
+      * 垫付资金情况/金额
       */
     	public double getArrearsAmount () {
     		return this.arrearsAmount;
@@ -969,14 +1283,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [arrears_amount] setter，
-      * 金额
+      * 垫付资金情况/金额
       */
     	public void setArrearsAmount(double arrearsAmount) {
     		this.arrearsAmount = arrearsAmount;
     	}
     /**
       * [expected_value] getter，
-      * 预计用量
+      * 型材（吨）/预计用量
       */
     	public double getExpectedValue () {
     		return this.expectedValue;
@@ -984,14 +1298,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [expected_value] setter，
-      * 预计用量
+      * 型材（吨）/预计用量
       */
     	public void setExpectedValue(double expectedValue) {
     		this.expectedValue = expectedValue;
     	}
     /**
       * [profile_point] getter，
-      * 型材点
+      * 型材（吨）/型材点
       */
     	public String getProfilePoint () {
     		return this.profilePoint;
@@ -999,29 +1313,14 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [profile_point] setter，
-      * 型材点
+      * 型材（吨）/型材点
       */
     	public void setProfilePoint(String profilePoint) {
     		this.profilePoint = profilePoint;
     	}
     /**
-      * [version] getter，
-      * 
-      */
-    	public Integer getVersion () {
-    		return this.version;
-    	}
-
-    /**
-      * [version] setter，
-      * 
-      */
-    	public void setVersion(Integer version) {
-    		this.version = version;
-    	}
-    /**
       * [create_time] getter，
-      * 创建时间，数据生成时间
+      * 
       */
     	public Date getCreateTime () {
     		return this.createTime;
@@ -1029,25 +1328,10 @@ public class ProjectSummary implements Serializable {
 
     /**
       * [create_time] setter，
-      * 创建时间，数据生成时间
+      * 
       */
     	public void setCreateTime(Date createTime) {
     		this.createTime = createTime;
-    	}
-    /**
-      * [table_name] getter，
-      * 
-      */
-    	public String getTableName () {
-    		return this.tableName;
-    	}
-
-    /**
-      * [table_name] setter，
-      * 
-      */
-    	public void setTableName(String tableName) {
-    		this.tableName = tableName;
     	}
     /**
       * [field_01] getter，
@@ -1130,18 +1414,28 @@ public class ProjectSummary implements Serializable {
 		System.out.println(this.getClass().getName() + ".toString():");
         
         String str = StringUtils.EMPTY;
-        str += MessageFormat.format("Id=\"{0}\",", StringUtils.trimToEmpty(this.getId()));
         str += MessageFormat.format("SerialId=\"{0}\",", this.getSerialId());
         str += MessageFormat.format("Trice=\"{0}\",", this.getTrice());
         str += MessageFormat.format("Description=\"{0}\",", StringUtils.trimToEmpty(this.getDescription()));
-        str += MessageFormat.format("ProjectId=\"{0}\",", StringUtils.trimToEmpty(this.getProjectId()));
-        str += MessageFormat.format("OrganizationId=\"{0}\",", StringUtils.trimToEmpty(this.getOrganizationId()));
         str += MessageFormat.format("ProjectCode=\"{0}\",", StringUtils.trimToEmpty(this.getProjectCode()));
         str += MessageFormat.format("ProjectName=\"{0}\",", StringUtils.trimToEmpty(this.getProjectName()));
+        str += MessageFormat.format("OrganizationName=\"{0}\",", StringUtils.trimToEmpty(this.getOrganizationName()));
+        str += MessageFormat.format("PartyName=\"{0}\",", StringUtils.trimToEmpty(this.getPartyName()));
+        str += MessageFormat.format("PartyAddress=\"{0}\",", StringUtils.trimToEmpty(this.getPartyAddress()));
+        str += MessageFormat.format("Manager=\"{0}\",", StringUtils.trimToEmpty(this.getManager()));
+        str += MessageFormat.format("Corperation=\"{0}\",", StringUtils.trimToEmpty(this.getCorperation()));
+        str += MessageFormat.format("LegalAssignee=\"{0}\",", StringUtils.trimToEmpty(this.getLegalAssignee()));
+        str += MessageFormat.format("IsWithholdingOffsite=\"{0}\",", StringUtils.trimToEmpty(this.getIsWithholdingOffsite()));
+        str += MessageFormat.format("ContractCode=\"{0}\",", StringUtils.trimToEmpty(this.getContractCode()));
         str += MessageFormat.format("ContractAmount=\"{0}\",", this.getContractAmount());
         str += MessageFormat.format("ChangeAmount=\"{0}\",", this.getChangeAmount());
         str += MessageFormat.format("ChangeTotalAmount=\"{0}\",", this.getChangeTotalAmount());
         str += MessageFormat.format("SettlementAmount=\"{0}\",", this.getSettlementAmount());
+        str += MessageFormat.format("DutyPaidCode=\"{0}\",", StringUtils.trimToEmpty(this.getDutyPaidCode()));
+        str += MessageFormat.format("DutyPaidTime=\"{0}\",", this.getDutyPaidTime());
+        str += MessageFormat.format("DutyPaidAmount=\"{0}\",", this.getDutyPaidAmount());
+        str += MessageFormat.format("CapitalOccupied=\"{0}\",", StringUtils.trimToEmpty(this.getCapitalOccupied()));
+        str += MessageFormat.format("ProjectStatus=\"{0}\",", StringUtils.trimToEmpty(this.getProjectStatus()));
         str += MessageFormat.format("ManagementRate=\"{0}\",", this.getManagementRate());
         str += MessageFormat.format("ManagementPlanAmount=\"{0}\",", this.getManagementPlanAmount());
         str += MessageFormat.format("ManagementRealAmount=\"{0}\",", this.getManagementRealAmount());
@@ -1155,6 +1449,9 @@ public class ProjectSummary implements Serializable {
         str += MessageFormat.format("CustomerBillingAmount=\"{0}\",", this.getCustomerBillingAmount());
         str += MessageFormat.format("CustomerBillingTotalAmount=\"{0}\",", this.getCustomerBillingTotalAmount());
         str += MessageFormat.format("PaymentAmount=\"{0}\",", this.getPaymentAmount());
+        str += MessageFormat.format("PaymentAmountClv=\"{0}\",", this.getPaymentAmountClv());
+        str += MessageFormat.format("PaymentAmountCliang=\"{0}\",", this.getPaymentAmountCliang());
+        str += MessageFormat.format("PaymentAmountZdai=\"{0}\",", this.getPaymentAmountZdai());
         str += MessageFormat.format("PaymentTotalAmount=\"{0}\",", this.getPaymentTotalAmount());
         str += MessageFormat.format("TaxRate=\"{0}\",", this.getTaxRate());
         str += MessageFormat.format("TaxPlanAmount=\"{0}\",", this.getTaxPlanAmount());
@@ -1164,9 +1461,7 @@ public class ProjectSummary implements Serializable {
         str += MessageFormat.format("ArrearsAmount=\"{0}\",", this.getArrearsAmount());
         str += MessageFormat.format("ExpectedValue=\"{0}\",", this.getExpectedValue());
         str += MessageFormat.format("ProfilePoint=\"{0}\",", StringUtils.trimToEmpty(this.getProfilePoint()));
-        str += MessageFormat.format("Version=\"{0}\",", this.getVersion());
         str += MessageFormat.format("CreateTime=\"{0}\",", this.getCreateTime());
-        str += MessageFormat.format("TableName=\"{0}\",", StringUtils.trimToEmpty(this.getTableName()));
         str += MessageFormat.format("Field01=\"{0}\",", StringUtils.trimToEmpty(this.getField01()));
         str += MessageFormat.format("Field02=\"{0}\",", StringUtils.trimToEmpty(this.getField02()));
         str += MessageFormat.format("Field03=\"{0}\",", StringUtils.trimToEmpty(this.getField03()));
