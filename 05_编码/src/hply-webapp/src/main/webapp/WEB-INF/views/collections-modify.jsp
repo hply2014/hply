@@ -16,6 +16,11 @@
                                 <sf:input cssClass="form-control" path="ticketCode" placeholder="凭证号" />
                                 <p class="help-block" />
                             </div>
+                        <label for="field01" class="col-sm-2 control-label">付款单位</label>
+                            <div class="col-sm-4 ">
+                                <sf:input cssClass="form-control" path="field01" placeholder="付款单位" />
+                                <p class="help-block" />
+                            </div>
                         </div>
                         <div class="row">
                             <label for="projectId" class="col-sm-2 control-label">项目名称</label>

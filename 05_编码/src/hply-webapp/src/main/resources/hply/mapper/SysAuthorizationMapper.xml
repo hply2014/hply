@@ -3,30 +3,28 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="hply.mapper.SysAuthorizationMapper">
+	<cache />
 
-  <insert id="insert" parameterType="SysAuthorization">
-    insert into t_sys_authorization(id, resource_id, user_id, create_time, create_user, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{resourceId}, #{userId}, now(), #{createUser}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
-  </insert>
+	<select id="getAuthorizationByUserId" resultType="SysAuthorization">
+		select id as id, resource_id as resourceId, user_id as userId,
+		create_time as createTime, create_user as createUser, version
+		as version, field_01 as field01, field_02 as field02,
+		field_03 as field03, field_04 as field04, field_05 as field05
+		from
+		t_sys_authorization where user_id =
+		#{userId}
+	</select>
 
-  <update id="update" parameterType="map">
-    update t_sys_authorization set <if test="resourceId != ''">resource_id = #{resourceId},</if> <if test="userId != ''">user_id = #{userId},</if> <if test="field01 != ''">field_01 = #{field01},</if> <if test="field02 != ''">field_02 = #{field02},</if> <if test="field03 != ''">field_03 = #{field03},</if> <if test="field04 != ''">field_04 = #{field04},</if> <if test="field05 != ''">field_05 = #{field05},</if> version = version + 1 where id = #{id}
-  </update>
-
-  <delete id="delete" parameterType="string">
-    delete from t_sys_authorization where id = #{id}
-  </delete>
-
-  <select id="get" parameterType="string" resultType="SysAuthorization">
-    select id as id, resource_id as resourceId, user_id as userId, create_time as createTime, create_user as createUser, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_authorization where id = #{id}
-  </select>
-  
-  <select id="getVersion" parameterType="string" resultType="int">
-    select version from t_sys_authorization where id = #{id}
-  </select>
-
-  <select id="getAll" resultType="SysAuthorization">
-    select id as id, resource_id as resourceId, user_id as userId, create_time as createTime, create_user as createUser, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_sys_authorization
-  </select>
-
+	<select id="getByUserIdAndResource" resultType="SysAuthorization">
+		select id as id, resource_id as resourceId, user_id as userId,
+		create_time as createTime, create_user as createUser, version
+		as version, field_01 as field01, field_02 as field02,
+		field_03 as field03, field_04 as field04, field_05 as field05
+		from
+		t_sys_authorization
+		where user_id =
+		#{userId} and
+		resource_id = #{resourceId}
+	</select>
 </mapper>
 

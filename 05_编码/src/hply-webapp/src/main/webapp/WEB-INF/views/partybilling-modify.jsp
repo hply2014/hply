@@ -19,6 +19,14 @@
                                             <c:out value="${partyBilling.invoiceCode}" />
                                         </p>
                                     </div>
+                                    <label for=field01 class="col-sm-2 control-label">付款单位</label>
+                                    <div class="col-sm-4 required-field-block">
+                                        <p class="form-control-static">
+                                            <c:out value="${partyBilling.field01}" />
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <label for="projectId" class="col-sm-2 control-label">项目名称</label>
                                     <div class="col-sm-4 required-field-block">
                                         <p class="form-control-static">
@@ -83,6 +91,11 @@
                                     <label for="invoiceCode" class="col-sm-2 control-label">发票票号</label>
                                     <div class="col-sm-4 required-field-block">
                                         <sf:input cssClass="form-control" path="invoiceCode" placeholder="发票票号" />
+                                        <p class="help-block" />
+                                    </div>
+                                    <label for="field01" class="col-sm-2 control-label">付款单位</label>
+                                    <div class="col-sm-4 required-field-block">
+                                        <sf:input cssClass="form-control" path="field01" placeholder="付款单位" />
                                         <p class="help-block" />
                                     </div>
                                 </div>

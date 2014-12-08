@@ -3,8 +3,7 @@
 
 <div class="container main">
     <c:if test="${not empty message}">
-        <div></div>
-        <div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+        <div class="alert alert-success alert-dismissible col-md-offset-4 affix" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
             </button>
@@ -53,6 +52,7 @@
                         <th>#</th>
                         <th>项目名称</th>
                         <th>凭证号</th>
+                        <th>付款单位</th>
                         <th>款项来源</th>
                         <th>收款方式</th>
                         <th class="amount">收款金额</th>
@@ -75,6 +75,7 @@
                                 href="<s:url value="/project/detail/{id}?target=collections"><s:param name="id" value="${collections.id }" /></s:url>"><c:out
                                         value="${collections.projectId}" /></a></td>
                             <td><c:out value="${collections.ticketCode}" /></td>
+                            <td><c:out value="${collections.field01}" /></td>
                             <td><c:out value="${collections.sourceOf}" /></td>
                             <td><c:out value="${collections.paymentType}" /></td>
                             <td class="amount"><fmt:formatNumber value="${collections.amount}"

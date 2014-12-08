@@ -3,8 +3,8 @@
 
 <div class="container main">
     <c:if test="${not empty message}">
-        <div></div>
-        <div class="alert alert-success alert-dismissible col-md-offset-2 affix" role="alert">
+        
+        <div class="alert alert-success alert-dismissible col-md-offset-4 affix" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
             </button>
@@ -24,8 +24,7 @@
         <div class="panel-heading">
             <strong>甲方开票情况</strong>（ 共
             <c:out value="${rowCount}" />
-            行，
-                <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页 
+            行， <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页
             ）
             <c:if test='${not empty orglist}'>
                 <div class="pull-right">
@@ -54,6 +53,7 @@
                         <th>#</th>
                         <th>项目名称</th>
                         <th>发票票号</th>
+                        <th>付款单位</th>
                         <th class="amount">税率</th>
                         <th class="amount">发票金额</th>
                         <th>开票人</th>
@@ -64,7 +64,8 @@
                 </thead>
                 <tbody>
                     <%
-                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
+                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted")
+                    			.toString());
                     %>
                     <c:forEach items="${list}" var="partyBilling">
                         <tr>
@@ -73,13 +74,15 @@
                             <td><%=++i%></td>
                             <td><a
                                 href="<s:url value="/project/detail/{id}?target=partybilling"><s:param name="id" value="${partyBilling.id }" /></s:url>">${ partyBilling.projectId}</a></td>
-                            <td><c:out
-                                        value="${partyBilling.invoiceCode}" /></td>
+                            <td><c:out value="${partyBilling.invoiceCode}" /></td>
+                            <td><c:out value="${partyBilling.field01}" /></td>
                             <td class="amount"><fmt:formatNumber value="${partyBilling.taxRate}" pattern="0.00" />%</td>
-                            <td class="amount"><fmt:formatNumber value="${partyBilling.amount}" pattern="###,###,###,###,##0.00" /></td>
+                            <td class="amount"><fmt:formatNumber value="${partyBilling.amount}"
+                                    pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${partyBilling.createUser}" /></td>
                             <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" /></td>
-                            <td><c:if test="${empty partyBilling.step1Time}">未审核</c:if><c:if test="${not empty partyBilling.step1Time}">${partyBilling.step1User}：${partyBilling.step1Idea}，
+                            <td><c:if test="${empty partyBilling.step1Time}">未审核</c:if> <c:if
+                                    test="${not empty partyBilling.step1Time}">${partyBilling.step1User}：${partyBilling.step1Idea}，
                                     <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
                             <td><c:if test="${ partyBilling.stepStatus != 1 }">

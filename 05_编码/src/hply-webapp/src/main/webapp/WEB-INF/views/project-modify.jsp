@@ -46,7 +46,7 @@
                             </div>
                             <label for="contractAmount" class="col-sm-2 control-label">合同金额</label>
                             <div class="col-sm-4 required-field-block">
-                                <input type="text" class="form-control" name="contractAmount" placeholder="合同金额"
+                                <input type="text" class="form-control" id="contractAmount" name="contractAmount" placeholder="合同金额"
                                     value="<fmt:formatNumber value="${project.contractAmount}"
                                                 pattern="0.00" />" />
                                 <p class="help-block" />
@@ -60,7 +60,9 @@
                             </div>
                             <label for="managementPlanAmount" class="col-sm-2 control-label">应收管理费</label>
                             <div class="col-sm-4 required-field-block">
-                                <sf:input cssClass="form-control" path="managementPlanAmount" placeholder="应收管理费" />
+                                <input type="text" class="form-control" id="managementPlanAmount" name="managementPlanAmount" placeholder="应收管理费"
+                                    value="<fmt:formatNumber value="${project.managementPlanAmount}"
+                                                pattern="0.00" />" />
                                 <p class="help-block" />
                             </div>
                         </div>
@@ -72,14 +74,18 @@
                             </div>
                             <label for="taxPlanAmount" class="col-sm-2 control-label">应缴税金</label>
                             <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="taxPlanAmount" placeholder="应缴税金" />
+                                <input type="text" class="form-control" id="taxPlanAmount" name="taxPlanAmount" placeholder="应缴税金"
+                                    value="<fmt:formatNumber value="${project.taxPlanAmount}"
+                                                pattern="0.00" />" />
                                 <p class="help-block" />
                             </div>
                         </div>
                         <div class="row">
                             <label for="settlementAmount" class="col-sm-2 control-label">结算金额</label>
                             <div class="col-sm-4 ">
-                                <sf:input cssClass="form-control" path="settlementAmount" placeholder="结算金额" />
+                                <input type="text" class="form-control" id="settlementAmount" name="settlementAmount" placeholder="结算金额"
+                                    value="<fmt:formatNumber value="${project.settlementAmount}"
+                                                pattern="0.00" />" />
                                 <p class="help-block" />
                             </div>
                             <div class="col-sm-4 col-sm-offset-2 checkbox">
