@@ -103,7 +103,7 @@ public class CollectionsService {
 	 */
 	public double getSurplusProjectAmount(String projectId) {
 
-		// 工程款总额
+		// 工程款总额，结算额>0，则用结算额，否则是合同额+累计调增额
 		double d1 = projectService.getTotalAmount(projectId);
 
 		// 已收到的工程款总额

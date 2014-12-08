@@ -179,7 +179,7 @@ public class APIController {
 	 */
 	@RequestMapping(value = "/camounts/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getCollectionsTooltipAmounts(@PathVariable String projectId) {
-		// 计算的工程款剩余
+		// 工程款剩余
 		double d1 = collectionsService.getSurplusProjectAmount(projectId);
 
 		// 计算的往来欠款总额
@@ -191,7 +191,7 @@ public class APIController {
 
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
 
-		// 工程款剩余（合同款 - 收款）|往来欠款总额|工程款结余（收-付）
+		// 工程款剩余（合同款 - 收款）|往来欠款总额|工程款结存（收-付）
 		return dformat.format(d1) + "|" + dformat.format(d2) + "|" + dformat.format(j0);
 	}
 
@@ -214,7 +214,7 @@ public class APIController {
 
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
 
-		// 已开发票欠款额|往来欠款总额|工程款结余（收-付）
+		// 已开发票欠款额|往来欠款总额|工程款结存（收-付）
 		return dformat.format(d1 - g1) + "|" + dformat.format(d2) + "|" + dformat.format(j0);
 	}
 
@@ -265,6 +265,42 @@ public class APIController {
 
 		// 往来欠款总额|应收利息总额|已收利息总额
 		return dformat.format(q1) + "|" + dformat.format(q2) + "|" + dformat.format(q3);
+
+	}
+
+	@RequestMapping(value = "/projectdetail/{projectId}", method = RequestMethod.POST)
+	public @ResponseBody String getProjectdetail(@PathVariable String projectId) {
+		// 工程欠款=IF（结算额>0，结算额，合同额+累计调增）-已收工程款
+		double q1 = collectionsService.getSurplusProjectAmount(projectId);
+
+		Double val2 = arrearsService.getTotalByProject(projectId);
+
+		// 往来欠款（本金）=
+		double q2 = val2 != null ? val2.doubleValue() : 0;
+
+		// 应收利息总额
+		Double j1 = arrearsInterestService.getPlanInterest(projectId);
+
+		// 已收利息总额
+		Double j2 = arrearsService.getInterestAmount(projectId);
+
+		// 已审核通过的开票额
+		double k1 = paryBillingService.getCheckedAmount(projectId);
+
+		// 收到的工程款总额
+		double g1 = collectionsService.getTotalCollectionsAmount(projectId);
+
+		// 计算的已开发票欠款额：已审核的发票金额 - 收款中的工程款
+		double k2 = k1 - g1;
+
+		// 计算工程款结存
+		double k3 = g1 - paymentService.getToalPayment(projectId);
+
+		DecimalFormat dformat = new DecimalFormat("#,##0.00");
+
+		// 工程欠款|应收利息总额|已收利息总额
+		return dformat.format(q1) + "|" + dformat.format(q2) + "|" + dformat.format(j1) + "|" + dformat.format(j2) + "|"
+				+ dformat.format(k1) + "|" + dformat.format(k2) + "|" + dformat.format(k3);
 
 	}
 
