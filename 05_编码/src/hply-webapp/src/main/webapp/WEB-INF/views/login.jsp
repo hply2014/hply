@@ -115,7 +115,7 @@ h3 {
 					});
 				</script>
     <div id="footer" class="navbar-fixed-bottom">
-        <div class="pull-right"><a target="_blank" href="<s:url value='/assets/about.html' />" class="btn btn-link">Version 1.5.20141102</a></div>
+        <div class="pull-right"><a target="_blank" href="<s:url value='/assets/about.html' />" class="btn btn-link">Version 2.0.20141213</a></div>
     </div>
 <div style="display:none">
 <script>

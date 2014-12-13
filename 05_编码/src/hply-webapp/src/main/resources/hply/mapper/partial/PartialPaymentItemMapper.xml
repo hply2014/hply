@@ -25,7 +25,7 @@
   </select>
   
   <select id="getAll" resultType="PaymentItem">
-    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_payment_item
+    select id as id, item_name as itemName, reimbursement_cap as reimbursementCap, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_payment_item order by field_01
   </select>
   
   <select id="getRowCount" resultType="int">
