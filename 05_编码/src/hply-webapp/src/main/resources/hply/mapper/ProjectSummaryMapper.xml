@@ -148,5 +148,44 @@
 		organization_id=#{organizationId} order by serial_id desc limit #{pageSize}
 		offset #{pageIndex}
 	</select>
+
+
+	<select id="getHistoryByProject" resultType="ProjectSummary">
+		select id as id, serial_id as serialId, trice as
+		trice,
+		description as description, project_id as projectId, organization_id
+		as organizationId, project_code as
+		projectCode,
+		project_name as projectName, contract_amount as contractAmount,
+		change_amount as changeAmount,
+		change_total_amount as
+		changeTotalAmount, settlement_amount as settlementAmount,
+		management_rate as managementRate,
+		management_plan_amount as
+		managementPlanAmount, management_real_amount as
+		managementRealAmount, management_total_amount
+		as managementTotalAmount,
+		management_owe_amount as managementOweAmount,
+		party_billing_amount as partyBillingAmount,
+		party_billing_total_amount as
+		partyBillingTotalAmount, collections_amount
+		as collectionsAmount, collections_total_amount
+		as collectionsTotalAmount,
+		collections_rate as collectionsRate,
+		customer_billing_amount as customerBillingAmount,
+		customer_billing_total_amount as
+		customerBillingTotalAmount,
+		payment_amount as paymentAmount, payment_total_amount as
+		paymentTotalAmount, tax_rate as
+		taxRate, tax_plan_amount as
+		taxPlanAmount, tax_real_amount as taxRealAmount,
+		tax_total_amount as taxTotalAmount,
+		tax_owe_amount as taxOweAmount,
+		arrears_amount as arrearsAmount, expected_value as
+		expectedValue, profile_point as
+		profilePoint, version as version,
+		create_time as createTime, table_name as tableName, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05
+		from t_project_summary where project_id=#{projectId} order by serial_id desc
+	</select>
 </mapper>
 

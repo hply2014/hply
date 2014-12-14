@@ -214,6 +214,8 @@ public class ProjectController {
 				id = pr.getProjectId();
 			}
 			break;
+		case "history":
+			break;
 		default:
 			model.addAttribute("target", "summary");
 
@@ -296,6 +298,14 @@ public class ProjectController {
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("lProfile", lProfile);
+		
+		List<ProjectSummary> lHistory = summaryService.getHistoryByProject(id);
+		for (ProjectSummary item : lHistory) {
+			SysUser user = sysUserService.get(item.getField01());
+			item.setField01(user != null ? user.getRealName() : Utility.EMPTY);
+		}
+		model.addAttribute("lHistory", lHistory);
+		
 
 		return JSP_PAGE_DETAIL;
 	}

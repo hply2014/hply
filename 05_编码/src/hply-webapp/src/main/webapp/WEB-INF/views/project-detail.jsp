@@ -26,6 +26,7 @@
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
                             <li ${target=='summary'?'class="active"':'' }><a href="#tab0default" data-toggle="tab">总览信息</a></li>
+                            <li ${target=='history'?'class="active"':'' }><a href="#tab8default" data-toggle="tab">变更记录</a></li>
                             <li ${target=='project'?'class="active"':'' }><a href="#tab1default" data-toggle="tab">合同项目信息</a></li>
                             <li ${target=='contractchange'?'class="active"':'' }><a href="#tab1xdefault"
                                 data-toggle="tab">补充协议</a></li>
@@ -221,27 +222,33 @@
                                         <div class="bs-callout bs-callout-danger">
                                             <h4>欠款情况</h4>
                                             <p>
-                                                工程欠款：<span id="q1">0000.00</span><br/>IF（结算额>0，结算额，合同额+累计调增）-已收工程款
-                                            </p><hr/>
+                                                工程欠款：<span id="q1">0000.00</span><br />IF（结算额>0，结算额，合同额+累计调增）-已收工程款
+                                            </p>
+                                            <hr />
                                             <p>
                                                 往来欠款（本金）：<span id="q2">0000.00</span>
-                                            </p><hr/>
+                                            </p>
+                                            <hr />
                                             <h4>计息情况</h4>
                                             <p>
                                                 应收利息：<span id="j1">0000.00</span>
-                                            </p><hr/>
+                                            </p>
+                                            <hr />
                                             <p>
                                                 已收利息：<span id="j2">0000.00</span>
-                                            </p><hr/>
+                                            </p>
+                                            <hr />
                                             <h4>开票情况</h4>
                                             <p>
                                                 已审开票额：<span id="k1">0000.00</span>
-                                            </p><hr/>
+                                            </p>
+                                            <hr />
                                             <p>
-                                                已开票欠款：<span id="k2">0000.00</span><br/>已审开票额 - 已收工程款
-                                            </p><hr/>
+                                                已开票欠款：<span id="k2">0000.00</span><br />已审开票额 - 已收工程款
+                                            </p>
+                                            <hr />
                                             <p>
-                                                工程款结存：<span id="k3">0000.00</span><br/>已收工程款-累计付款
+                                                工程款结存：<span id="k3">0000.00</span><br />已收工程款-累计付款
                                             </p>
                                         </div>
                                     </div>
@@ -883,6 +890,120 @@
                                     </table>
                                 </div>
                             </div>
+
+                            <div class="tab-pane fade${target=='history'?' in active':'' }" id="tab8default">
+                                <!-- 变更记录 -->
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>时间</th>
+                                                <th>操作人</th>
+                                                <th>摘要</th>
+                                                <th>内容</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${lHistory}" var="history">
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td><fmt:formatDate value="${history.trice}"
+                                                            pattern="yyyy/MM/dd HH:mm" /></td>
+                                                    <td>${history.field01}</td>
+                                                    <td>${history.description}</td>
+                                                    <td><c:if
+                                                            test="${fn:startsWith(history.tableName, '/project/')}">
+合同额：<fmt:formatNumber value="${history.contractAmount}" pattern="###,###,###,###,##0.00" />
+                                                            <c:if test="${history.changeAmount > 0}">
+                                                                <br />调增：<fmt:formatNumber
+                                                                    value="${history.changeAmount}"
+                                                                    pattern="###,###,###,###,##0.00" />
+                                                            </c:if>
+                                                            <c:if test="${history.changeAmount > 0}">
+                                                                <br />累计调增：<fmt:formatNumber
+                                                                    value="${history.changeTotalAmount}"
+                                                                    pattern="###,###,###,###,##0.00" />
+                                                            </c:if>
+                                                            <c:if test="${history.settlementAmount > 0 }">
+                                                                <br />结算：<fmt:formatNumber
+                                                                    value="${history.settlementAmount}"
+                                                                    pattern="###,###,###,###,##0.00" />
+                                                            </c:if><br />管理费率：<fmt:formatNumber
+                                                                    value="${history.managementRate}"
+                                                                    pattern="###,###,###,###,##0.00" />%<br /> 应收管理费：<fmt:formatNumber
+                                                                value="${history.managementPlanAmount}"
+                                                                pattern="###,###,###,###,##0.00" /><br />税率：<fmt:formatNumber
+                                                                    value="${history.managementRate}"
+                                                                    pattern="###,###,###,###,##0.00" />% <br /> 应收税金：<fmt:formatNumber
+                                                                value="${history.taxPlanAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                        </c:if> <c:if test="${history.managementRealAmount > 0}">
+                                                        管理费率：<fmt:formatNumber value="${history.managementRate}"
+                                                                pattern="###,###,###,###,##0.00" />%<br /> 应收管理费：<fmt:formatNumber
+                                                                value="${history.managementPlanAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br /> 实收管理费：<fmt:formatNumber
+                                                                value="${history.managementRealAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br /> 累计管理费：<fmt:formatNumber
+                                                                value="${history.managementTotalAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br /> 尚欠管理费：<fmt:formatNumber
+                                                                value="${history.managementOweAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                        </c:if> <c:if test="${history.partyBillingAmount > 0}">开票：<fmt:formatNumber
+                                                                value="${history.partyBillingAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br />累计：<fmt:formatNumber
+                                                                value="${history.partyBillingTotalAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                        </c:if> <c:if test="${history.collectionsAmount > 0}">收款：<fmt:formatNumber
+                                                                value="${history.collectionsAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br />累计：<fmt:formatNumber
+                                                                value="${history.collectionsTotalAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br />回款率：<fmt:formatNumber
+                                                                value="${history.collectionsRate}" pattern="0.00" />%</c:if> <c:if
+                                                            test="${history.customerBillingAmount > 0}">开票：<fmt:formatNumber
+                                                                value="${history.customerBillingAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br />累计：<fmt:formatNumber
+                                                                value="${history.customerBillingTotalAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                        </c:if> <c:if test="${history.paymentAmount > 0}">支付：<fmt:formatNumber
+                                                                value="${history.paymentAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br />累计：<fmt:formatNumber
+                                                                value="${history.paymentTotalAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                        </c:if> <c:if test="${history.taxRealAmount > 0}">税率：<fmt:formatNumber
+                                                                value="${history.taxRate}" pattern="0.00" />%
+                                                            <br /> 应收税金：<fmt:formatNumber
+                                                                value="${history.taxPlanAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br /> 已缴税金：<fmt:formatNumber
+                                                                value="${history.taxRealAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br /> 累计缴税金：<fmt:formatNumber
+                                                                value="${history.taxTotalAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br /> 尚欠税金：<fmt:formatNumber
+                                                                value="${history.taxOweAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                        </c:if> <c:if test="${history.arrearsAmount > 0}">
+                                                            <fmt:formatNumber value="${history.arrearsAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                        </c:if></td>
+                                                    <td><a href="<s:url value='${history.tableName}'/>" target="_balnk">详情</a></td>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -899,10 +1020,9 @@
 			$("#capitalOccupied").html(
 					"${project.capitalOccupied == 1 ? '是' : '否'}，<span class=\"label label-info\">往来欠款累计：" + result + "</span>");
 		}, "text");
-		
 
 		$.post("<s:url value='/api/projectdetail/${project.id}' />", {}, function(result) {
-			if(result.indexOf('|') > 0){
+			if (result.indexOf('|') > 0) {
 				var arr = result.split("|");
 				$("#q1").html(arr[0]);
 				$("#q2").html(arr[1]);
@@ -913,7 +1033,7 @@
 				$("#k1").html(arr[4]);
 				$("#k2").html(arr[5]);
 				$("#k3").html(arr[6]);
-				
+
 			}
 		}, "text");
 	});

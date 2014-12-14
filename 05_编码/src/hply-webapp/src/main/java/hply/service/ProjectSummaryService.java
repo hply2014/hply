@@ -6,6 +6,7 @@ import hply.mapper.ProjectSummaryMapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,9 @@ public class ProjectSummaryService {
 	
 	public ProjectSummary getSummaryByProject(String projectId){
 		return mapper.getSummaryByProject(projectId);
+	}
+	public List<ProjectSummary> getHistoryByProject(@Param("projectId") String projectId){
+		return mapper.getHistoryByProject(projectId);
 	}
 	public List<ProjectSummary> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
 		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);

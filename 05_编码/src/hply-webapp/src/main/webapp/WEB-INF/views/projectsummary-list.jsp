@@ -39,7 +39,7 @@
         </div>
         <div class="panel-body">
             <a target="_blank" href="<s:url value='/projectsummary/full' />" class="btn btn-link"><span
-                class="glyphicon glyphicon-share-alt"></span> 新窗口打开</a>
+                class="glyphicon glyphicon-share-alt"></span>【项目汇总表】</a>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -66,7 +66,7 @@
                             <td><%=++i%></td>
                             <td><a data-toggle="tooltip"
                                 title="<fmt:formatDate value='${projectSummary.trice}' pattern='yyyy年MM月dd日' />，${projectSummary.description}"
-                                href="<s:url value="/project/detail/{id}"><s:param name="id" value="${projectSummary.projectId }" /></s:url>">
+                                href="<s:url value="/project/detail/{id}?target=history"><s:param name="id" value="${projectSummary.projectId }" /></s:url>">
                                     <fmt:formatDate value="${projectSummary.trice}" pattern="MM/dd" />
                             </a></td>
                             <td><c:out value="${projectSummary.projectName}" /><br /> <c:out
