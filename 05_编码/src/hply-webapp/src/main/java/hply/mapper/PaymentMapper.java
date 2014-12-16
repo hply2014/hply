@@ -22,7 +22,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PaymentMapper extends PartialPaymentMapper {
 
+	/*
+	 * 不包含税金，今年的
+	 */
 	public Double getToalPayment(String projectId);
+	
+	/*
+	 * 不包含税金，所有的
+	 */
+	public Double getAllToalPayment(String projectId);
 
 	public Double getTotalPaymentByItem(@Param("projectId") String projectId, @Param("paymentItemId") String paymentItemId);
 	

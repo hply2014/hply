@@ -23,9 +23,14 @@ import org.springframework.stereotype.Repository;
 public interface PartyBillingMapper extends PartialPartyBillingMapper {
 
 	/*
-	 * 获取指定项目的已审核的开票额度
+	 * 获取指定项目的已审核的开票额度，今年的
 	 */
 	public Double getCheckedAmount(String projectId);
+	
+	/*
+	 * 获取指定项目的已审核的开票额度，所有的
+	 */
+	public Double getAllCheckedAmount(String projectId);
 	
 
 	public List<PartyBilling> getAllByProject(String projectId);

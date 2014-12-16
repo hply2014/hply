@@ -176,11 +176,11 @@
 <!--
 	$(function() {
 		$("#searchButton").click(function() {
-			self.location = "<s:url value='/project' />?q=" + $("#searchInput").val();
+			self.location = "<s:url value='/project' />?q=" + $("#searchInput").val() + "&oid=${oid}";
 		});
 		$('#searchInput').keydown(function(e) {
 			if (e.keyCode == 13) {
-				self.location = "<s:url value='/project' />?q=" + $("#searchInput").val();
+				self.location = "<s:url value='/project' />?q=" + $("#searchInput").val() + "&oid=${oid}";
 			}
 		});
 

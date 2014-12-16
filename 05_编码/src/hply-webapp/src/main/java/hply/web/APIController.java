@@ -201,8 +201,8 @@ public class APIController {
 	@RequestMapping(value = "/pamounts/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getPaymentTooltipAmounts(@PathVariable String projectId) {
 		// 计算的已开发票欠款额：已审核的发票金额 - 收款中的工程款
-		// 已审核通过的开票额
-		double d1 = paryBillingService.getCheckedAmount(projectId);
+		// 已审核通过的开票额，所有的
+		double d1 = paryBillingService.getAllCheckedAmount(projectId);
 		// 收到的工程款总额
 		double g1 = collectionsService.getTotalCollectionsAmount(projectId);
 
@@ -221,7 +221,7 @@ public class APIController {
 	@RequestMapping(value = "/alllimitamount/{projectId}/{itemId}", method = RequestMethod.POST)
 	public @ResponseBody String getAllLimitAmount(@PathVariable String projectId, @PathVariable String itemId) {
 
-		// 已审核通过的开票额
+		// 已审核通过的开票额，今年的
 		double d1 = paryBillingService.getCheckedAmount(projectId);
 
 		// 该期间费用的累计报销额
@@ -285,7 +285,7 @@ public class APIController {
 		Double j2 = arrearsService.getInterestAmount(projectId);
 
 		// 已审核通过的开票额
-		double k1 = paryBillingService.getCheckedAmount(projectId);
+		double k1 = paryBillingService.getAllCheckedAmount(projectId);
 
 		// 收到的工程款总额
 		double g1 = collectionsService.getTotalCollectionsAmount(projectId);
@@ -294,7 +294,7 @@ public class APIController {
 		double k2 = k1 - g1;
 
 		// 计算工程款结存
-		double k3 = g1 - paymentService.getToalPayment(projectId);
+		double k3 = g1 - paymentService.getAllToalPayment(projectId);
 
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
 

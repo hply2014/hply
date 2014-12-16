@@ -140,7 +140,7 @@
                                             </tr>
                                             <tr>
 
-                                                <th>回收率</th>
+                                                <th colspan="2">回收率</th>
                                                 <td><fmt:formatNumber value="${projectSummary.collectionsRate}"
                                                         pattern="0.00" />%</td>
                                             </tr>

@@ -85,10 +85,18 @@ public class PartyBillingService {
 	}
 
 	/*
-	 * 获取指定项目的已审核的开票额度
+	 * 获取指定项目的已审核的开票额度，今年的
 	 */
 	public double getCheckedAmount(String projectId) {
 		Double d = mapper.getCheckedAmount(projectId);
+		return d != null ? d.doubleValue() : 0.0;
+	}
+
+	/*
+	 * 获取指定项目的已审核的开票额度，所有的
+	 */
+	public double getAllCheckedAmount(String projectId) {
+		Double d = mapper.getAllCheckedAmount(projectId);
 		return d != null ? d.doubleValue() : 0.0;
 	}
 

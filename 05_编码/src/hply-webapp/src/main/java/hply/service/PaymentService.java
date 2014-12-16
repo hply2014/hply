@@ -88,8 +88,13 @@ public class PaymentService {
 	 * 付款总额
 	 */
 	public double getToalPayment(String projectId) {
-		// TODO 计算付款总额
-		return 0;
+		return mapper.getToalPayment(projectId);
+	}
+	/*
+	 * 付款总额
+	 */
+	public double getAllToalPayment(String projectId) {
+		return mapper.getAllToalPayment(projectId);
 	}
 
 	public double getTotalPaymentByItem(String projectId, String paymentItemId) {
