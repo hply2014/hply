@@ -13,7 +13,6 @@
                         <div class="row">
                             <label for="ticketCode" class="col-sm-2 control-label">凭证号</label>
                             <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="ticketCode" placeholder="凭证号" />
                                 <p class="help-block" />
                             </div>
@@ -160,7 +159,6 @@
 			rules : {
 				projectId : {},
 				ticketCode : {
-					required : true
 				},
 				payType : {},
 				paymentItemId : {},

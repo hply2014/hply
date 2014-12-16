@@ -55,11 +55,14 @@ th {
     <h4>
         <strong>项目汇总</strong>（ 共
         <c:out value="${list.size()}" />
-        行 ） <c:if test='${not empty orglist}'><select id="orgSelect">
-            <c:forEach items="${orglist}" var="org">
-                <option ${org.id == orgId ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
-            </c:forEach>
-        </select>&nbsp; </c:if><select id="monthsSelect">
+        行 ）
+        <c:if test='${not empty orglist}'>
+            <select id="orgSelect">
+                <c:forEach items="${orglist}" var="org">
+                    <option ${org.id == orgId ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
+                </c:forEach>
+            </select>&nbsp; </c:if>
+        <select id="monthsSelect">
             <c:forEach items="${months}" var="str">
                 <option ${pharse == str ? 'selected' : '' } value="${str}">${str }</option>
             </c:forEach>
@@ -77,6 +80,7 @@ th {
                 <th colspan="3">收款情况</th>
                 <th colspan="2">客户开票情况</th>
                 <th colspan="2">支付工程款情况</th>
+                <th rowspan="2">工程余额</th>
                 <th colspan="5">税金情况</th>
                 <th rowspan="2">垫付资金</th>
                 <th colspan="2">型材（吨）</th>
@@ -88,7 +92,7 @@ th {
                 <th>合同调增额</th>
                 <th>累计调增额</th>
                 <th>合同结算额</th>
-                <th>比率</th>
+                <th data-alias="管理费率">比率</th>
                 <th>应收管理费</th>
                 <th>实收管理费</th>
                 <th>累计收管理费</th>
@@ -100,9 +104,9 @@ th {
                 <th>回收率</th>
                 <th>发票金额</th>
                 <th>累计开票</th>
-                <th>支付金额</th>
-                <th>累计</th>
-                <th>比率</th>
+                <th data-alias="工程款">支付金额</th>
+                <th data-alias="累计支付工程款">累计</th>
+                <th data-alias="税率">比率</th>
                 <th>应缴税金</th>
                 <th>已缴税金</th>
                 <th>累计已缴税金</th>
@@ -119,9 +123,12 @@ th {
                 <tr>
                     <td><%=++i%></td>
                     <td class="nowrap"><fmt:formatDate value="${projectSummary.trice}" pattern="yyyy-MM-dd" /></td>
-                    <td><c:out value="${projectSummary.description}" /></td>
+                    <td><c:if test="${not empty projectSummary.description}">
+                            <span data-toggle="tooltip" title="${projectSummary.description}"
+                                class="glyphicon glyphicon-comment"></span>
+                        </c:if></td>
                     <td class="nowrap"><c:out value="${projectSummary.projectCode}" /></td>
-                    <td><c:out value="${projectSummary.projectName}" /></td>
+                    <td class="nowrap"><c:out value="${projectSummary.projectName}" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.contractAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.changeAmount}"
@@ -156,6 +163,9 @@ th {
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.paymentTotalAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber
+                            value="${projectSummary.collectionsTotalAmount - projectSummary.paymentTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.taxRate}" pattern="0.00" />%</td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.taxPlanAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
@@ -174,7 +184,6 @@ th {
             </c:forEach>
         </tbody>
     </table>
-
     <script type="text/javascript">
 					$(function() {
 						$("select").change(
@@ -186,6 +195,18 @@ th {
 								});
 
 					});
+					
+					$("td.amount").hover(
+							  function () {
+								    var tds = $(this).parents("tr").children("td");
+									var title = "[" + tds.eq(3).html() + "]" + tds.eq(4).html();
+							    	$(this).wrapInner("<span title='" + title + "'></span>");
+							    	$(this).children().popover('show');
+							  },
+							  function () {
+								  	$(this).children().popover('hide')
+							  }
+							);
 				</script>
 
     <%@ include file="bottom.jsp"%>

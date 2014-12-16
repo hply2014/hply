@@ -13,7 +13,6 @@
                         <div class="row">
                             <label for="csaCode" class="col-sm-2 control-label">增补协议编号</label>
                             <div class="col-sm-4 required-field-block">
-                                <b class="required-icon">*</b>
                                 <sf:input cssClass="form-control" path="csaCode" placeholder="增补协议编号" />
                                 <p class="help-block" />
                             </div>
@@ -112,7 +111,6 @@
 			rules : {
 				projectId : {},
 				csaCode : {
-					required : true
 				},
 				managementRate : {
 					number : true,
