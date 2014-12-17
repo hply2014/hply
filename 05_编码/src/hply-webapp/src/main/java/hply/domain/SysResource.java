@@ -7,12 +7,8 @@ package hply.domain;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.Date;
-
 import org.apache.commons.lang3.StringUtils;
 import hply.core.Utility;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
   * 数据表： [t_sys_resource]
@@ -20,7 +16,11 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
   */
 public class SysResource implements Serializable {
     
-    	/*
+    	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8263750260123508831L;
+		/*
     	 * ID
     	 */
         public static final String FIELD_ID = "id";

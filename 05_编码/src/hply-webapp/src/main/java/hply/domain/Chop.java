@@ -20,7 +20,11 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
   */
 public class Chop implements Serializable {
     
-    	/*
+    	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 645878592433525078L;
+		/*
     	 * ID
     	 */
         public static final String FIELD_ID = "id";

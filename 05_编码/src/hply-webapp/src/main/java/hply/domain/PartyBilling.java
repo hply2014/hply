@@ -20,7 +20,11 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
   */
 public class PartyBilling implements Serializable {
     
-    	/*
+    	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8525006959072249604L;
+		/*
     	 * ID
     	 */
         public static final String FIELD_ID = "id";
