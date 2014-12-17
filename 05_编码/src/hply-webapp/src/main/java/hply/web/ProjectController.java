@@ -419,6 +419,21 @@ public class ProjectController {
 		c1.setCellStyle(cellStyle);
 		c1.setCellFormula("now()");
 		wb.write(response.getOutputStream());
+		
+		/* 合并单元格
+		 *    sheet.addMergedRegion(new CellRangeAddress(
+            1, //first row (0-based)
+            1, //last row  (0-based)
+            1, //first column (0-based)
+            2  //last column  (0-based)
+    ));
+		 */
+		
+		/* 自动调整行的宽度
+		 *    Sheet sheet = workbook.getSheetAt(0);
+    sheet.autoSizeColumn(0); //adjust width of the first column
+    sheet.autoSizeColumn(1); //adjust width of the second column
+		 */
 
 	}
 }
