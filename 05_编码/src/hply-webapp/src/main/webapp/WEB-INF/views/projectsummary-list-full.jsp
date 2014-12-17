@@ -67,6 +67,9 @@ th {
                 <option ${pharse == str ? 'selected' : '' } value="${str}">${str }</option>
             </c:forEach>
         </select>&nbsp;<span id="offsetMonths">${dateRange }</span>
+        
+        <a href="<c:url value="/projectsummary/export?orgId=${orgId}&pharse=${pharse}" />" class="btn btn-info"><span
+                        class="glyphicon glyphicon-floppy-save"></span>导出到Excel . . . </a>
     </h4>
     <table class="table table-hover table-striped table-bordered">
         <thead>

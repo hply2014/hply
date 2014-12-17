@@ -296,6 +296,8 @@ public class ProjectSummaryController {
 			c1.setCellValue(headers[i]);
 			c1.setCellStyle(styleHeader);
 		}
+		
+		
 
 		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
 		for (int i = 0; i < list.size(); i++) {
