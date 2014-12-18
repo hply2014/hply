@@ -82,8 +82,7 @@ th {
                 <th colspan="2">甲方开票情况</th>
                 <th colspan="3">收款情况</th>
                 <th colspan="2">客户开票情况</th>
-                <th colspan="2">支付工程款情况</th>
-                <th rowspan="2">工程余额</th>
+                <th colspan="3">支付工程款情况</th>
                 <th colspan="5">税金情况</th>
                 <th rowspan="2">垫付资金</th>
                 <th colspan="2">型材（吨）</th>
@@ -109,6 +108,7 @@ th {
                 <th>累计开票</th>
                 <th data-alias="工程款">支付金额</th>
                 <th data-alias="累计支付工程款">累计</th>
+                <th>工程余额</th>
                 <th data-alias="税率">比率</th>
                 <th>应缴税金</th>
                 <th>已缴税金</th>

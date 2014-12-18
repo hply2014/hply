@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -243,6 +244,9 @@ public class ProjectSummaryController {
 				orgId = SessionHelper.getCurrentSysUser().getOrganizationId();
 			} 
 		}
+		
+		SysOrganization org = orgService.get(orgId);
+		String sheetName = org.getOrganizationName() + "合同项目汇总（" + pharse + "）";
 			
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		String fileName = URLEncoder.encode("TotalData-" + pharse + ".xlsx", "UTF-8");
@@ -253,7 +257,7 @@ public class ProjectSummaryController {
 		Workbook wb = new XSSFWorkbook();
 		CreationHelper createHelper = wb.getCreationHelper();
 
-		Sheet sheet1 = wb.createSheet("合同项目信息汇总");
+		Sheet sheet1 = wb.createSheet(sheetName);
 
 
 		CellStyle styleDefault = wb.createCellStyle();
@@ -268,9 +272,11 @@ public class ProjectSummaryController {
 
 		CellStyle styleHeader = wb.createCellStyle();
 		styleHeader.cloneStyleFrom(styleDefault);
+		styleHeader.setAlignment(CellStyle.ALIGN_CENTER);
+		styleHeader.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
 		styleHeader.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-        styleHeader.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        
+		styleHeader.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
 		CellStyle stylePercent = wb.createCellStyle();
 		stylePercent.cloneStyleFrom(styleDefault);
 		stylePercent.setDataFormat(createHelper.createDataFormat().getFormat("0.00%"));
@@ -282,8 +288,6 @@ public class ProjectSummaryController {
 		CellStyle styleDate = wb.createCellStyle();
 		styleDate.cloneStyleFrom(styleDefault);
 		styleDate.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-mm-dd"));
-		
-		
 
 		Row r0 = sheet1.createRow(rowIndex++);
 		Row r1 = sheet1.createRow(rowIndex++);
@@ -296,6 +300,32 @@ public class ProjectSummaryController {
 			c1.setCellValue(headers[i]);
 			c1.setCellStyle(styleHeader);
 		}
+		r0.getCell(3).setCellValue("项目信息");
+		r0.getCell(9).setCellValue("管理费情况");
+		r0.getCell(14).setCellValue("甲方开票情况");
+		r0.getCell(16).setCellValue("收款情况");
+		r0.getCell(19).setCellValue("客户开票情况");
+		r0.getCell(21).setCellValue("支付工程款情况");
+		r0.getCell(24).setCellValue("税金情况");
+		r0.getCell(30).setCellValue("型材（吨）");
+
+		r0.getCell(0).setCellValue(headers[0]);
+		r0.getCell(1).setCellValue(headers[1]);
+		r0.getCell(2).setCellValue(headers[2]);
+		r0.getCell(29).setCellValue(headers[29]);
+
+		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 0, 0));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 1, 1));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 2, 2));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 3, 8));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 9, 13));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 14, 15));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 16, 18));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 19, 20));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 21, 23));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 24, 28));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 30, 31));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 29, 29));
 		
 		
 
