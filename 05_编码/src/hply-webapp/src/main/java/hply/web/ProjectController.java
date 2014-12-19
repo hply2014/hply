@@ -29,7 +29,9 @@ import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +42,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -298,14 +302,13 @@ public class ProjectController {
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("lProfile", lProfile);
-		
+
 		List<ProjectSummary> lHistory = summaryService.getHistoryByProject(id);
 		for (ProjectSummary item : lHistory) {
 			SysUser user = sysUserService.get(item.getField01());
 			item.setField01(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("lHistory", lHistory);
-		
 
 		return JSP_PAGE_DETAIL;
 	}
@@ -399,41 +402,115 @@ public class ProjectController {
 		return "redirect:" + URI;
 	}
 
+	private final static String EXCEL_HEADERS = "序号,项目编号,项目名称,项目经理,管理费率,税金比率,合同金额,印花税上缴金额,登记时间";
+
 	@RequestMapping(value = "/export")
 	public void exportExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		String fileName = URLEncoder.encode("合同项目信息一览表", "UTF-8");
+		String fileName = URLEncoder.encode("PROJECT-" + new SimpleDateFormat("yyyyMMdd-ss").format(new Date()) + ".xlsx", "UTF-8");
 		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+
+		int rowIndex = 0;
 
 		Workbook wb = new XSSFWorkbook();
 		CreationHelper createHelper = wb.getCreationHelper();
 
 		Sheet sheet1 = wb.createSheet("合同项目信息");
 
-		Row r = sheet1.createRow(0);
-		r.createCell(0).setCellValue("=now()");
-		CellStyle cellStyle = wb.createCellStyle();
-		cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-mm-dd"));
-		Cell c1 = r.createCell(1);
-		c1.setCellStyle(cellStyle);
-		c1.setCellFormula("now()");
-		wb.write(response.getOutputStream());
-		
-		/* 合并单元格
-		 *    sheet.addMergedRegion(new CellRangeAddress(
-            1, //first row (0-based)
-            1, //last row  (0-based)
-            1, //first column (0-based)
-            2  //last column  (0-based)
-    ));
-		 */
-		
-		/* 自动调整行的宽度
-		 *    Sheet sheet = workbook.getSheetAt(0);
-    sheet.autoSizeColumn(0); //adjust width of the first column
-    sheet.autoSizeColumn(1); //adjust width of the second column
-		 */
 
+		CellStyle styleDefault = wb.createCellStyle();
+		styleDefault.setBorderTop(CellStyle.BORDER_THIN);
+		styleDefault.setTopBorderColor(IndexedColors.BLACK.getIndex());
+		styleDefault.setBorderRight(CellStyle.BORDER_THIN);
+		styleDefault.setRightBorderColor(IndexedColors.BLACK.getIndex());
+		styleDefault.setBorderBottom(CellStyle.BORDER_THIN);
+		styleDefault.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+		styleDefault.setBorderLeft(CellStyle.BORDER_THIN);
+		styleDefault.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+
+		CellStyle stylePercent = wb.createCellStyle();
+		stylePercent.cloneStyleFrom(styleDefault);
+		stylePercent.setDataFormat(createHelper.createDataFormat().getFormat("0.00%"));
+
+		CellStyle styleRMB = wb.createCellStyle();
+		styleRMB.cloneStyleFrom(styleDefault);
+		styleRMB.setDataFormat(createHelper.createDataFormat().getFormat("#,##0.00"));
+
+		CellStyle styleDate = wb.createCellStyle();
+		styleDate.cloneStyleFrom(styleDefault);
+		styleDate.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-mm-dd"));
+		
+		CellStyle styleHeader = wb.createCellStyle();
+		styleHeader.cloneStyleFrom(styleDefault);
+		styleHeader.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        styleHeader.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		
+
+		Row r = sheet1.createRow(rowIndex++);
+		String[] headers = EXCEL_HEADERS.split(",");
+		for (int i = 0; i < headers.length; i++) {
+			Cell c = r.createCell(i);
+			c.setCellValue(headers[i]);
+			c.setCellStyle(styleHeader);
+		}
+
+		List<Project> list = service.getAll();
+		for (int i = 0; i < list.size(); i++) {
+			int j = 0;
+			Project p = list.get(i);
+			r = sheet1.createRow(rowIndex++);
+			Cell c0 = r.createCell(j++);
+			c0.setCellValue(i);
+			c0.setCellStyle(styleDefault);
+			
+			Cell c1 = r.createCell(j++);
+			c1.setCellValue(p.getProjectCode());
+			c1.setCellStyle(styleDefault);
+			
+			Cell c2 = r.createCell(j++);
+			c2.setCellValue(p.getProjectName());
+			c2.setCellStyle(styleDefault);
+			
+			Cell c3 = r.createCell(j++);
+			c3.setCellValue(p.getManager());
+			c3.setCellStyle(styleDefault);
+			
+			Cell c4 = r.createCell(j++);
+			c4.setCellValue(p.getManagementRate()/100);
+			c4.setCellStyle(stylePercent);
+			
+			Cell c5 = r.createCell(j++);
+			c5.setCellValue(p.getTaxRate()/100);
+			c5.setCellStyle(stylePercent);
+			
+			Cell c6 = r.createCell(j++);
+			c6.setCellValue(p.getContractAmount());
+			c6.setCellStyle(styleRMB);
+			
+			Cell c7 = r.createCell(j++);
+			c7.setCellValue(p.getDutyPaidAmount());
+			c7.setCellStyle(styleRMB);
+			
+			Cell c8 = r.createCell(j++);
+			c8.setCellValue(p.getTrice());
+			c8.setCellStyle(styleDate);
+		}
+
+//		sheet1.setColumnWidth(0, 45*256);
+//		sheet1.setColumnWidth(1, 100*256);
+//		sheet1.setColumnWidth(2, 300*256);
+//		sheet1.setColumnWidth(3, 100*256);
+//		sheet1.setColumnWidth(4, 72*256);
+//		sheet1.setColumnWidth(5, 72*256);
+//		sheet1.setColumnWidth(6, 150*256);
+//		sheet1.setColumnWidth(7, 150*256);
+//		sheet1.setColumnWidth(8, 100*256);
+
+		for (int i = 0; i < headers.length; i++) {
+			sheet1.autoSizeColumn(i, true);
+		}
+		wb.write(response.getOutputStream());
 	}
+	
 }
