@@ -141,10 +141,6 @@
 <!--/container main -->
 <script type="text/javascript">
 	$(function() {
-		jQuery.validator.addMethod("allowLimit", function(value, element) {
-			return false;
-		}, "请正确填写您的邮政编码");
-
 		$("form").validate({
 			errorElement : "i",
 			success : function(label, element) {
@@ -175,18 +171,24 @@
 		});
 
 		function refreshLimitAmount() {
+			var la = ["业务招待费", "车辆费", "差旅费"];
+			var sv = $("#paymentItemId option[value='" + $("#paymentItemId").val() + "']").html();
 			//刷新了上限额度，4个值
 			$.post("<s:url value='/api/alllimitamount/' />" + jQuery("#projectId").val() + "/" + jQuery("#paymentItemId").val(), {},
 					function(result) {
 						var arr = result.split("|");
 						if (arr.length >= 4) {
 							$("#checkedAmount").html(arr[0]);
-							$("#limitAmount").html(arr[1]);
 							$("#totalAmount").html(arr[2]);
 							$("#oweAmount").html(arr[3]);
-							$("#amount").rules("add", {
-								max : parseFloat(arr[3].replace(/,/g, ''))
-							});
+							if(jQuery.inArray(sv, la) >= 0 ){
+								$("#limitAmount").html(arr[1]);
+								$("#amount").rules("add", {
+									max : parseFloat(arr[3].replace(/,/g, ''))
+								});
+							}else{
+								$("#limitAmount").html("不限");
+							}
 						}
 					}, "text");
 
