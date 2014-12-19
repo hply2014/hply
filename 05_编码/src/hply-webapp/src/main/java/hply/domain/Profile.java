@@ -20,7 +20,11 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
   */
 public class Profile implements Serializable {
     
-    	/*
+    	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6790332639655836811L;
+		/*
     	 * ID
     	 */
         public static final String FIELD_ID = "id";

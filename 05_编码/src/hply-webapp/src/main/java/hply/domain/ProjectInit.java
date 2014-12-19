@@ -10,7 +10,6 @@ import java.text.MessageFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
-import hply.core.Utility;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -20,7 +19,11 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
   */
 public class ProjectInit implements Serializable {
     
-    	/*
+    	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9189948018407409222L;
+		/*
     	 * 
     	 */
         public static final String FIELD_SERIAL_ID = "serial_id";
