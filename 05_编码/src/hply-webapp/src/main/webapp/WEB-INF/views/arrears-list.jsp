@@ -101,17 +101,17 @@
                                 </c:if></td>
                             <td><c:if test="${arrears.status != 1 }">
                                     <shiro:hasPermission name="`arrears_check`">
-                                        <a class="check" data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/arrears/check/${arrears.id }" />">审核</a>
+                                        <a class="check"
+                                            data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，审核后所有数据将不能被修改，是否确认？"
+                                            href="<s:url value="/arrears/check/${arrears.id }" />">审核</a>
                                     </shiro:hasPermission>
-                 <shiro:hasPermission name="`arrears_create`">
+                                    <shiro:hasPermission name="`arrears_create`">
                                         <a href="<s:url value="/arrears/modify/${arrears.id }" />">修改</a>
                                         <a class="delete"
                                             data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，将被永久删除，操作不可撤销，是否确认？"
                                             href="<s:url value="/arrears/delete/${arrears.id }" />">删除</a>
                                     </shiro:hasPermission>
-								</c:if>
-
-</td>
+                                </c:if></td>
                         </tr>
                     </c:forEach>
                 </tbody>

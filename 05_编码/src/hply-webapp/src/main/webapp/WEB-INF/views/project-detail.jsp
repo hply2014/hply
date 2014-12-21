@@ -2,6 +2,14 @@
 <%@ include file="header.jsp"%>
 
 <div class="container main">
+    <c:if test="${not empty delMessage}">
+        <div class="alert alert-warning alert-dismissible col-md-offset-4 affix" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            ${delMessage}
+        </div>
+    </c:if>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <strong>${page_title}</strong>
@@ -484,6 +492,7 @@
                                                 <th>登记人</th>
                                                 <th>登记时间</th>
                                                 <th>备注</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -502,7 +511,17 @@
                                                     <td><fmt:formatDate value="${contractChange.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${contractChange.description}" /></td>
-                                                </tr>
+                                               <td><c:if test="${contractChange.status !=1 }">
+                                    <shiro:hasPermission name="`contractchange_check`">
+                                        <a class="check" data-confirm-message="合同补充协议：<c:out value="${contractChange.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/contractchange/check/${contractChange.id }" />">审核</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`contractchange_create`">
+                                        <a href="<s:url value="/contractchange/modify/${contractChange.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="合同补充协议：<c:out value="${contractChange.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/contractchange/delete/${contractChange.id }" />">删除</a>
+                                    </shiro:hasPermission>
+                                </c:if></td> </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -596,7 +615,7 @@
                                                 <th>创建用户</th>
                                                 <th>开票时间</th>
                                                 <th>备注</th>
-
+<th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -614,7 +633,19 @@
                                                     <td><fmt:formatDate value="${customerBilling.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${customerBilling.description}" /></td>
-                                                </tr>
+                                                <td><c:if test="${customerBilling.status != 1 }">
+                                    <shiro:hasPermission name="`customerbilling_check`">
+                                        <a class="check"
+                                            data-confirm-message="客户开票情况：<c:out value="${customerBilling.id}" />，审核后所有数据将不能被修改，是否确认？"
+                                            href="<s:url value="/customerbilling/check/${customerBilling.id }" />">审核</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`customerbilling_create`">
+                                        <a href="<s:url value="/customerbilling/modify/${customerBilling.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="客户开票情况数据：<c:out value="${customerBilling.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/customerbilling/delete/${customerBilling.id }" />">删除</a>
+                                    </shiro:hasPermission>
+                                </c:if></td> </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -645,6 +676,7 @@
                                                 <th>收款人</th>
                                                 <th>收款时间</th>
                                                 <th>备注</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -663,22 +695,17 @@
                                                     <td><fmt:formatDate value="${collections.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${collections.description}" /></td>
-                                                    <%--
-                            <td><c:if test="${collections.status == 1 }">
-                                    <shiro:hasPermission name="`collections_modify`">
-                                        <a
-                                            href="<s:url value="/collections/modify/{id}"><s:param name="id" value="${collections.id }" /></s:url>">修改</a>
+                                                     <td><c:if test="${collections.status != 1 }">
+                                    <shiro:hasPermission name="`collections_check`">
+                                        <a class="check" data-confirm-message="收款情况：<c:out value="${collections.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/collections/check/${collections.id }" />">审核</a>
                                     </shiro:hasPermission>
-                                </c:if> <c:if test="${collections.status != 1 }">
                                     <shiro:hasPermission name="`collections_create`">
-                                        <a
-                                            href="<s:url value="/collections/modify/{id}"><s:param name="id" value="${collections.id }" /></s:url>">修改</a>
+                                        <a href="<s:url value="/collections/modify/${collections.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="收款情况：<c:out value="${collections.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/collections/delete/${collections.id }" />">删除</a>
                                     </shiro:hasPermission>
-                                </c:if> <shiro:hasPermission name="`collections_delete`">
-                                    <a class="delete"
-                                        data-confirm-message="收款情况数据：<c:out value="${collections.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                        href="<s:url value="/collections/delete/{id}"><s:param name="id" value="${collections.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td> --%>
+                                </c:if></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -710,6 +737,7 @@
                                                 <th>付款人</th>
                                                 <th>付款时间</th>
                                                 <th>备注</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -727,25 +755,17 @@
                                                     <td><fmt:formatDate value="${payment.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${payment.description}" /></td>
-                                                    <%--
-				<td><c:if test="${payment.status == 1 }">
-									<shiro:hasPermission name="`payment_modify`">
-										<a
-											href="<s:url value="/payment/modify/{id}"><s:param name="id" value="${payment.id }" /></s:url>">修改</a>
-									</shiro:hasPermission>
-								</c:if>
-								<c:if test="${payment.status != 1 }">
-									<shiro:hasPermission name="`payment_create`">
-										<a
-											href="<s:url value="/payment/modify/{id}"><s:param name="id" value="${payment.id }" /></s:url>">修改</a>
-									</shiro:hasPermission>
-								</c:if> <shiro:hasPermission name="`payment_delete`">
-									<a class="delete"
-										data-confirm-message="付款情况数据：<c:out value="${payment.id}" />，将被永久删除，操作不可撤销，是否确认？"
-										href="<s:url value="/payment/delete/{id}"><s:param name="id" value="${payment.id }" /></s:url>">删除</a>
-								</shiro:hasPermission>
-
-</td> --%>
+                                                   <td><c:if test="${payment.status != 1 }">
+                                    <shiro:hasPermission name="`payment_check`">
+                                        <a class="check" data-confirm-message="付款情况：<c:out value="${payment.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/payment/check/${payment.id }" />">审核</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`payment_create`">
+                                        <a href="<s:url value="/payment/modify/${payment.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="付款情况：<c:out value="${payment.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/payment/delete/${payment.id }" />">删除</a>
+                                    </shiro:hasPermission>
+                                </c:if></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -776,7 +796,7 @@
                                                 <th>登记人</th>
                                                 <th>登记时间</th>
                                                 <th>备注</th>
-
+<th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -814,12 +834,19 @@
                                                                 data-content="${arrears.description}"
                                                                 class="glyphicon glyphicon-exclamation-sign"></span>
                                                         </c:if></td>
-                                                    <%--
-				<td><a
-					href="<s:url value="/arrears/modify/{id}"><s:param name="id" value="${arrears.id }" /></s:url>">修改</a>
-					| <a class="delete" data-confirm-message="删除后不可恢复，您确认要删除【<c:out value="${arrears.id}" />】么？"
-					href="<s:url value="/arrears/delete/{id}"><s:param name="id" value="${arrears.id }" /></s:url>">删除</a></td> --%>
-                                                </tr>
+                                                    <td><c:if test="${arrears.status != 1 }">
+                                    <shiro:hasPermission name="`arrears_check`">
+                                        <a class="check"
+                                            data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，审核后所有数据将不能被修改，是否确认？"
+                                            href="<s:url value="/arrears/check/${arrears.id }" />">审核</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`arrears_create`">
+                                        <a href="<s:url value="/arrears/modify/${arrears.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/arrears/delete/${arrears.id }" />">删除</a>
+                                    </shiro:hasPermission>
+                                </c:if></td> </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -866,21 +893,17 @@
                                                     <td><fmt:formatDate value="${profile.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${profile.description}" /></td>
-                                                    <%--      <td><c:if test="${profile.status == 1 }">
-                                    <shiro:hasPermission name="`profile_modify`">
-                                        <a
-                                            href="<s:url value="/profile/modify/{id}"><s:param name="id" value="${profile.id }" /></s:url>">修改</a>
+                                                   <td><c:if test="${profile.status != 1 }">
+                                    <shiro:hasPermission name="`profile_check`">
+                                        <a class="check" data-confirm-message="型材：<c:out value="${profile.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/profile/check/${profile.id }" />">审核</a>
                                     </shiro:hasPermission>
-                                </c:if> <c:if test="${profile.status != 1 }">
                                     <shiro:hasPermission name="`profile_create`">
-                                        <a
-                                            href="<s:url value="/profile/modify/{id}"><s:param name="id" value="${profile.id }" /></s:url>">修改</a>
+                                        <a href="<s:url value="/profile/modify/${profile.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="型材数据：<c:out value="${profile.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/profile/delete/${profile.id }" />">删除</a>
                                     </shiro:hasPermission>
-                                </c:if> <shiro:hasPermission name="`profile_delete`">
-                                    <a class="delete"
-                                        data-confirm-message="型材数据：<c:out value="${profile.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                        href="<s:url value="/profile/delete/{id}"><s:param name="id" value="${profile.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td> --%>
+                                </c:if></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
