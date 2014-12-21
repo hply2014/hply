@@ -3,7 +3,7 @@
 
 <div class="container main">
     <c:if test="${not empty message}">
-        
+
         <div class="alert alert-success alert-dismissible col-md-offset-4 affix" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -54,7 +54,7 @@
                         <th class="amount">预计用量</th>
                         <th>型材点</th>
                         <th>登记时间</th>
-                        <th>创建用户</th>
+                        <th>登记人</th>
                         <th>备注</th>
                         <th></th>
 
@@ -79,21 +79,17 @@
                             <td><fmt:formatDate value="${profile.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${profile.createUser}" /></td>
                             <td><c:out value="${profile.description}" /></td>
-                            <%--      <td><c:if test="${profile.status == 1 }">
-                                    <shiro:hasPermission name="`profile_modify`">
-                                        <a
-                                            href="<s:url value="/profile/modify/{id}"><s:param name="id" value="${profile.id }" /></s:url>">修改</a>
+                            <td><c:if test="${profile.status != 1 }">
+                                    <shiro:hasPermission name="`profile_check`">
+                                        <a class="check" data-confirm-message="型材：<c:out value="${profile.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/profile/check/${profile.id }" />">审核</a>
                                     </shiro:hasPermission>
-                                </c:if> <c:if test="${profile.status != 1 }">
                                     <shiro:hasPermission name="`profile_create`">
-                                        <a
-                                            href="<s:url value="/profile/modify/{id}"><s:param name="id" value="${profile.id }" /></s:url>">修改</a>
+                                        <a href="<s:url value="/profile/modify/${profile.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="型材数据：<c:out value="${profile.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/profile/delete/${profile.id }" />">删除</a>
                                     </shiro:hasPermission>
-                                </c:if> <shiro:hasPermission name="`profile_delete`">
-                                    <a class="delete"
-                                        data-confirm-message="型材数据：<c:out value="${profile.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                        href="<s:url value="/profile/delete/{id}"><s:param name="id" value="${profile.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td> --%>
+                                </c:if></td>
                         </tr>
                     </c:forEach>
                 </tbody>

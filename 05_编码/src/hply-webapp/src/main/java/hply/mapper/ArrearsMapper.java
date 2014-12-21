@@ -42,4 +42,5 @@ public interface ArrearsMapper extends PartialArrearsMapper {
 			@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+
 }

@@ -54,7 +54,6 @@
                         <th>项目名称</th>
                         <th>发票票号</th>
                         <th>付款单位</th>
-                        <th class="amount">税率</th>
                         <th class="amount">发票金额</th>
                         <th>开票人</th>
                         <th>开票时间</th>
@@ -76,7 +75,6 @@
                                 href="<s:url value="/project/detail/{id}?target=partybilling"><s:param name="id" value="${partyBilling.id }" /></s:url>">${ partyBilling.projectId}</a></td>
                             <td><c:out value="${partyBilling.invoiceCode}" /></td>
                             <td><c:out value="${partyBilling.field01}" /></td>
-                            <td class="amount"><fmt:formatNumber value="${partyBilling.taxRate}" pattern="0.00" />%</td>
                             <td class="amount"><fmt:formatNumber value="${partyBilling.amount}"
                                     pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${partyBilling.createUser}" /></td>

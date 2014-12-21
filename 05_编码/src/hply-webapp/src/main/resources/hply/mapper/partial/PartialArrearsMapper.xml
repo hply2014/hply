@@ -16,6 +16,10 @@
     delete from t_arrears where id = #{id}
   </delete>
 
+  <update id="check" parameterType="string">
+    update t_arrears set status=1 where id = #{id}
+  </update>
+  
   <select id="get" parameterType="string" resultType="Arrears">
     select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing, arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_arrears where id = #{id}
   </select>

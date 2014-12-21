@@ -479,7 +479,7 @@
                                                 <th></th>
                                                 <th>#</th>
                                                 <th>增补协议编号</th>
-                                                <th class="amount">管理费率</th>
+                                                <%--  <th class="amount">管理费率</th> --%>
                                                 <th class="amount">增减金额</th>
                                                 <th>登记人</th>
                                                 <th>登记时间</th>
@@ -493,8 +493,8 @@
                                                         class="glyphicon <c:out value="${contractChange.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                                                     <td>&nbsp;</td>
                                                     <td><c:out value="${contractChange.csaCode}" /></td>
-                                                    <td class="amount"><fmt:formatNumber
-                                                            value="${contractChange.managementRate}" pattern="0.00" />%</td>
+                                                    <%--      <td class="amount"><fmt:formatNumber
+                                                            value="${contractChange.managementRate}" pattern="0.00" />%</td> --%>
                                                     <td class="amount"><fmt:formatNumber
                                                             value="${contractChange.changeAmount}"
                                                             pattern="###,###,###,###,##0.00" /></td>
@@ -528,7 +528,6 @@
                                                 <th></th>
                                                 <th>#</th>
                                                 <th>发票票号</th>
-                                                <th class="amount">税率</th>
                                                 <th class="amount">发票金额</th>
                                                 <th>开票人</th>
                                                 <th>开票时间</th>
@@ -543,8 +542,6 @@
                                                         class="glyphicon <c:out value="${partyBilling.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                                                     <td>&nbsp;</td>
                                                     <td><c:out value="${partyBilling.invoiceCode}" /></td>
-                                                    <td class="amount"><fmt:formatNumber
-                                                            value="${partyBilling.taxRate}" pattern="0.00" />%</td>
                                                     <td class="amount"><fmt:formatNumber
                                                             value="${partyBilling.amount}"
                                                             pattern="###,###,###,###,##0.00" /></td>
@@ -902,7 +899,6 @@
                                                 <th>操作人</th>
                                                 <th>摘要</th>
                                                 <th>内容</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -916,28 +912,26 @@
                                                     <td><c:if
                                                             test="${fn:startsWith(history.tableName, '/project/')}">
 合同额：<fmt:formatNumber value="${history.contractAmount}" pattern="###,###,###,###,##0.00" />
-                                                            <c:if test="${history.changeAmount > 0}">
-                                                                <br />调增：<fmt:formatNumber
-                                                                    value="${history.changeAmount}"
-                                                                    pattern="###,###,###,###,##0.00" />
-                                                            </c:if>
-                                                            <c:if test="${history.changeAmount > 0}">
-                                                                <br />累计调增：<fmt:formatNumber
-                                                                    value="${history.changeTotalAmount}"
-                                                                    pattern="###,###,###,###,##0.00" />
-                                                            </c:if>
                                                             <c:if test="${history.settlementAmount > 0 }">
                                                                 <br />结算：<fmt:formatNumber
                                                                     value="${history.settlementAmount}"
                                                                     pattern="###,###,###,###,##0.00" />
-                                                            </c:if><br />管理费率：<fmt:formatNumber
-                                                                    value="${history.managementRate}"
-                                                                    pattern="###,###,###,###,##0.00" />%<br /> 应收管理费：<fmt:formatNumber
+                                                            </c:if>
+                                                            <br />管理费率：<fmt:formatNumber
+                                                                value="${history.managementRate}"
+                                                                pattern="###,###,###,###,##0.00" />%<br /> 应收管理费：<fmt:formatNumber
                                                                 value="${history.managementPlanAmount}"
-                                                                pattern="###,###,###,###,##0.00" /><br />税率：<fmt:formatNumber
-                                                                    value="${history.managementRate}"
-                                                                    pattern="###,###,###,###,##0.00" />% <br /> 应收税金：<fmt:formatNumber
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br />税率：<fmt:formatNumber
+                                                                value="${history.managementRate}"
+                                                                pattern="###,###,###,###,##0.00" />% <br /> 应收税金：<fmt:formatNumber
                                                                 value="${history.taxPlanAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                        </c:if> <c:if test="${history.changeAmount > 0}">
+                                                            调增：<fmt:formatNumber value="${history.changeAmount}"
+                                                                pattern="###,###,###,###,##0.00" />
+                                                            <br />累计调增：<fmt:formatNumber
+                                                                value="${history.changeTotalAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
                                                         </c:if> <c:if test="${history.managementRealAmount > 0}">
                                                         管理费率：<fmt:formatNumber value="${history.managementRate}"
@@ -997,7 +991,6 @@
                                                             <fmt:formatNumber value="${history.arrearsAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
                                                         </c:if></td>
-                                                    <td><a href="<s:url value='${history.tableName}'/>" target="_balnk">详情</a></td>
                                             </c:forEach>
                                         </tbody>
                                     </table>

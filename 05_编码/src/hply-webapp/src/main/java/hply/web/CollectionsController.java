@@ -128,6 +128,11 @@ public class CollectionsController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
+		String sourceOfs = paramService.getByEnName("source_of").getParamValue();
+		String payTypes = paramService.getByEnName("pay_types").getParamValue();
+		model.addAttribute("sourceoflist", sourceOfs.split("/"));
+		model.addAttribute("paymenttypelist", payTypes.split("/"));
+		
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 		model.addAttribute("collections", service.get(id));
@@ -167,8 +172,8 @@ public class CollectionsController {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
-
-		service.update(collections);
+		service.delete(id);
+		service.insert(collections);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("collections", collections);
@@ -183,6 +188,17 @@ public class CollectionsController {
 		Collections collections = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
+		redirectAttrs.addFlashAttribute("collections", collections);
+		return "redirect:" + URI;
+	}
+	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String processCheckSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+		Collections collections = service.get(id);
+		service.check(id);
+		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("collections", collections);
 		return "redirect:" + URI;
 	}

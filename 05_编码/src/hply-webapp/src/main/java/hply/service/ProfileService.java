@@ -56,6 +56,13 @@ public class ProfileService {
 		mapper.delete(id);
 	}
 
+	/*
+	 * 审核操作，将status修改为1
+	 */
+	public void check(String id){
+		//TODO 审核操作，将status修改为1
+		mapper.check(id);
+	}
 	/**
 	 * 08_型材，根据主键获取一个对象
 	 */

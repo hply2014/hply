@@ -41,7 +41,7 @@ public class ArrearsController {
 
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@Autowired
 	private SysOrganizationService orgService;
 
@@ -54,7 +54,8 @@ public class ArrearsController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid,
+			Model model) {
 		model.addAttribute("page_title", "往来欠款");
 
 		List<SysOrganization> orglist = orgService.getAllBusiness();
@@ -68,7 +69,7 @@ public class ArrearsController {
 			}
 		}
 		model.addAttribute("oid", oid);
-		
+
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
 		int rowCount = service.getRowCount(oid);
@@ -128,6 +129,14 @@ public class ArrearsController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
+		List<Project> projectlist = projectService.getAllNames();
+		model.addAttribute("projectlist", projectlist);
+
+		String arrearsTypes = paramService.getByEnName("arrears_type").getParamValue();
+		String payTypes = paramService.getByEnName("pay_types").getParamValue();
+		model.addAttribute("arrearsTypes", arrearsTypes.split("/"));
+		model.addAttribute("payTypes", payTypes.split("/"));
+
 		model.addAttribute("arrears", service.get(id));
 		model.addAttribute("page_title", "修改往来欠款");
 		return JSP_PAGE_MODIFY;
@@ -164,8 +173,8 @@ public class ArrearsController {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
-
-		service.update(arrears);
+		service.delete(id);
+		service.insert(arrears);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("arrears", arrears);
@@ -180,6 +189,18 @@ public class ArrearsController {
 		Arrears arrears = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
+		redirectAttrs.addFlashAttribute("arrears", arrears);
+		return "redirect:" + URI;
+	}
+
+	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String processCheckSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+		Arrears arrears = service.get(id);
+		service.check(id);
+		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("arrears", arrears);
 		return "redirect:" + URI;
 	}

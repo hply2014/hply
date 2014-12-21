@@ -59,7 +59,7 @@
                             </p>
                             <h4>操作提示</h4>
                             <p>
-                                <span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span>
+                                <span class="label label-danger">1、此信息一经审核，将不可修改，请谨慎操作。</span>
                             </p>
                         </div>
                     </div>

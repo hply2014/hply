@@ -401,6 +401,19 @@ public class ProjectController {
 		redirectAttrs.addFlashAttribute("project", project);
 		return "redirect:" + URI;
 	}
+	
+
+	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String processCheckSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+		Project project = service.get(id);
+		service.check(id);
+		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
+		redirectAttrs.addFlashAttribute("project", project);
+		return "redirect:" + URI;
+	}
 
 	private final static String EXCEL_HEADERS = "序号,项目编号,项目名称,项目经理,管理费率,税金比率,合同金额,印花税上缴金额,登记时间";
 

@@ -59,7 +59,8 @@ public class PaymentController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid,
+			Model model) {
 		model.addAttribute("page_title", "付款情况");
 
 		List<SysOrganization> orglist = orgService.getAllBusiness();
@@ -140,6 +141,13 @@ public class PaymentController {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 		model.addAttribute("payment", service.get(id));
+
+		String payTypes = paramService.getByEnName("pay_types").getParamValue();
+		model.addAttribute("paymenttypelist", payTypes.split("/"));
+
+		List<PaymentItem> pi = paymentItemService.getAll();
+		model.addAttribute("paymentitemlist", pi);
+
 		model.addAttribute("page_title", "修改付款情况");
 		return JSP_PAGE_MODIFY;
 	}
@@ -148,8 +156,7 @@ public class PaymentController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid Payment payment, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid Payment payment, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(payment.toString());
 
 		if (result.hasErrors()) {
@@ -168,8 +175,8 @@ public class PaymentController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid Payment payment, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid Payment payment, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(payment.toString());
 
 		if (result.hasErrors()) {
@@ -177,7 +184,8 @@ public class PaymentController {
 			return JSP_PAGE_MODIFY;
 		}
 
-		service.update(payment);
+		service.delete(id);
+		service.insert(payment);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("payment", payment);
@@ -192,6 +200,18 @@ public class PaymentController {
 		Payment payment = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
+		redirectAttrs.addFlashAttribute("payment", payment);
+		return "redirect:" + URI;
+	}
+
+	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String processCheckSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+		Payment payment = service.get(id);
+		service.check(id);
+		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("payment", payment);
 		return "redirect:" + URI;
 	}

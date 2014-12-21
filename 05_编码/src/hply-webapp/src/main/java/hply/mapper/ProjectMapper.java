@@ -30,4 +30,5 @@ public interface ProjectMapper extends PartialProjectMapper {
 	public int getRowCountByOrganization(@Param("queryText") String queryText, @Param("organizationId") String organizationId);
 
 	public List<Project> getAllNamesByOrganization(String organizationId);
+
 }

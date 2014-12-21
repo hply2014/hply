@@ -42,4 +42,5 @@ public interface PaymentMapper extends PartialPaymentMapper {
 			@Param("pageSize") int pageSize);
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+
 }

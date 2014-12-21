@@ -41,9 +41,7 @@
     }
 
 	$(function() {
-	<%--	$(":text[value='0.0']").val(null); --%>
-		
-		$(".delete").click(function() {
+		$(".delete, .check").click(function() {
 			$("#myModalContent").html($(this).attr("data-confirm-message"));
 			$('#myModal').data("href", $(this).attr("href")).modal("show");
 			return false;
