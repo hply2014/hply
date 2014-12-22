@@ -9,12 +9,12 @@
 	<select id="getToalPayment" parameterType="string" resultType="double">
 		select sum(amount) from t_payment where
 		project_id
-		= #{projectId} and year(trice)=year(now()) and payment_item_id!='6cc29dc8-0cf4-4cf4-9ccd-98b076b41e24'
+		= #{projectId} and year(trice)=year(now())
 	</select>
 	<select id="getAllToalPayment" parameterType="string" resultType="double">
 		select sum(amount) from t_payment where
 		project_id
-		= #{projectId} and payment_item_id!='6cc29dc8-0cf4-4cf4-9ccd-98b076b41e24'
+		= #{projectId}
 	</select>
 
 	<select id="getTotalPaymentByItem" resultType="double">
@@ -22,19 +22,29 @@
 		where
 		project_id=#{projectId} and payment_item_id=#{paymentItemId} and year(trice)=year(now())
 	</select>
-	
-	
-  <select id="getAllByProject" resultType="Payment">
-    select id as id, project_id as projectId, ticket_code as ticketCode, pay_type as payType, payment_item_id as paymentItemId, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_payment where project_id=#{projectId} order by trice desc
-  </select>
-  
-  <select id="getRowCountByOrganization" resultType="int">
-    select count(*) from t_payment t where exists (select 0 from t_project p where t.project_id=p.id and p.organization_id=#{organizationId})
-  </select>
 
-  <select id="getAllPagedByOrganization" resultType="Payment">
-    select id as id, project_id as projectId, ticket_code as ticketCode, pay_type as payType, payment_item_id as paymentItemId, amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_payment t where exists (select 0 from t_project p where t.project_id=p.id and p.organization_id=#{organizationId}) order by trice desc limit #{pageSize} offset #{pageIndex}
-  </select>
-  
+
+	<select id="getAllByProject" resultType="Payment">
+		select id as id, project_id as projectId, ticket_code as ticketCode, pay_type as payType, payment_item_id as paymentItemId,
+		amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime,
+		create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version
+		as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04,
+		field_05 as field05 from t_payment where project_id=#{projectId} order by trice desc
+	</select>
+
+	<select id="getRowCountByOrganization" resultType="int">
+		select count(*) from t_payment t where exists (select 0 from t_project p where t.project_id=p.id and
+		p.organization_id=#{organizationId})
+	</select>
+
+	<select id="getAllPagedByOrganization" resultType="Payment">
+		select id as id, project_id as projectId, ticket_code as ticketCode, pay_type as payType, payment_item_id as paymentItemId,
+		amount as amount, bank_account as bankAccount, bank_name as bankName, trice as trice, create_time as createTime,
+		create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version
+		as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04,
+		field_05 as field05 from t_payment t where exists (select 0 from t_project p where t.project_id=p.id and
+		p.organization_id=#{organizationId}) order by trice desc limit #{pageSize} offset #{pageIndex}
+	</select>
+
 </mapper>
 

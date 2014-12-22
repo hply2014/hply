@@ -33,14 +33,13 @@
 <script src="<s:url value="/assets/bootstrap-select/js/bootstrap-select.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-select/js/i18n/defaults-zh_CN.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-icheck/icheck.min.js" />"></script>
-
 <script type="text/javascript">
     function goback(){
     	history.go(-1);
     	return false;
     }
 
-	$(function() {
+	$(function() {   
 		$(".delete, .check").click(function() {
 			$("#myModalContent").html($(this).attr("data-confirm-message"));
 			$('#myModal').data("href", $(this).attr("href")).modal("show");

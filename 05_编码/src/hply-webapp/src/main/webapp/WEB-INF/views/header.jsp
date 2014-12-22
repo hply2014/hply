@@ -23,7 +23,6 @@
 <link rel="stylesheet" href="<s:url value="/assets/bootstrap-icheck/skins/all.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/select2/3.5.1/select2.css" />">
 <link rel="stylesheet" href="<s:url value="/assets/select2/3.5.1/select2-bootstrap.css" />">
-
 <script src="<s:url value="/assets/jquery.min.js" />"></script>
 <script src="<s:url value="/assets/jquery-ui.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>

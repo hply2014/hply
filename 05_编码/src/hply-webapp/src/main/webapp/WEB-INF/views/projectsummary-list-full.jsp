@@ -68,7 +68,7 @@ th {
             </c:forEach>
         </select>&nbsp;<span id="offsetMonths">${dateRange }</span>
         
-        <a href="<c:url value="/projectsummary/export?orgId=${orgId}&pharse=${pharse}" />" class="btn btn-info"><span
+        <a href="<c:url value="/projectsummary/export?orgid=${orgId}&pharse=${pharse}" />" class="btn btn-info"><span
                         class="glyphicon glyphicon-floppy-save"></span>导出到Excel . . . </a>
     </h4>
     <table class="table table-hover table-striped table-bordered">
