@@ -71,6 +71,14 @@
 		$(".pager .disabled a").click(function() {
 			return false;
 		});
+		
+		var tabHeight = $(window).height() - $('table tbody').offset().top - $('div.row').outerHeight(true);
+		alert(tabHeight);
+		$('table').dataTable( {
+	        "scrollY":        tabHeight + "px",
+	        "scrollCollapse": true,
+	        "paging":         false
+	    } );
 	});
 </script>
 
