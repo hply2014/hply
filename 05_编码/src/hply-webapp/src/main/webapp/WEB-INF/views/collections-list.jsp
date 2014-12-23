@@ -83,22 +83,17 @@
                             <td><c:out value="${collections.createUser}" /></td>
                             <td><fmt:formatDate value="${collections.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${collections.description}" /></td>
-                            <%--
-                            <td><c:if test="${collections.status == 1 }">
-                                    <shiro:hasPermission name="`collections_modify`">
-                                        <a
-                                            href="<s:url value="/collections/modify/{id}"><s:param name="id" value="${collections.id }" /></s:url>">修改</a>
+                            <td><c:if test="${collections.status != 1 }">
+                                    <shiro:hasPermission name="`collections_check`">
+                                        <a class="check" data-confirm-message="收款情况：<c:out value="${collections.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/collections/check/${collections.id }" />">审核</a>
                                     </shiro:hasPermission>
-                                </c:if> <c:if test="${collections.status != 1 }">
                                     <shiro:hasPermission name="`collections_create`">
-                                        <a
-                                            href="<s:url value="/collections/modify/{id}"><s:param name="id" value="${collections.id }" /></s:url>">修改</a>
+                                        <a href="<s:url value="/collections/modify/${collections.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="收款情况：<c:out value="${collections.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/collections/delete/${collections.id }" />">删除</a>
                                     </shiro:hasPermission>
-                                </c:if> <shiro:hasPermission name="`collections_delete`">
-                                    <a class="delete"
-                                        data-confirm-message="收款情况数据：<c:out value="${collections.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                        href="<s:url value="/collections/delete/{id}"><s:param name="id" value="${collections.id }" /></s:url>">删除</a>
-                                </shiro:hasPermission></td> --%>
+                                </c:if></td>
                         </tr>
                     </c:forEach>
                 </tbody>

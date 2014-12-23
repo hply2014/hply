@@ -175,8 +175,8 @@ public class ContractChangeController {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
-
-		service.update(contractChange);
+		service.delete(id);
+		service.insert(contractChange);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("contractChange", contractChange);
@@ -191,6 +191,17 @@ public class ContractChangeController {
 		ContractChange contractChange = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
+		redirectAttrs.addFlashAttribute("contractChange", contractChange);
+		return "redirect:" + URI;
+	}
+	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String processCheckSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+		ContractChange contractChange = service.get(id);
+		service.check(id);
+		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("contractChange", contractChange);
 		return "redirect:" + URI;
 	}

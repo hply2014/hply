@@ -55,6 +55,14 @@ public class ProjectService {
 	public void delete(String id) {
 		mapper.delete(id);
 	}
+	
+	/*
+	 * 审核操作，将status修改为1
+	 */
+	public void check(String id){
+		//TODO 审核操作，将status修改为1
+		mapper.check(id);
+	}
 
 	/**
 	 * 01_合同项目信息，根据主键获取一个对象

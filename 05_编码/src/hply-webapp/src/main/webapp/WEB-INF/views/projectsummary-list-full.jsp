@@ -68,7 +68,7 @@ th {
             </c:forEach>
         </select>&nbsp;<span id="offsetMonths">${dateRange }</span>
         
-        <a href="<c:url value="/projectsummary/export?orgId=${orgId}&pharse=${pharse}" />" class="btn btn-info"><span
+        <a href="<c:url value="/projectsummary/export?orgid=${orgId}&pharse=${pharse}" />" class="btn btn-info"><span
                         class="glyphicon glyphicon-floppy-save"></span>导出到Excel . . . </a>
     </h4>
     <table class="table table-hover table-striped table-bordered">
@@ -189,27 +189,24 @@ th {
     </table>
     <script type="text/javascript">
 					$(function() {
-						$("select").change(
-								function() {
+						$("select").change(function() {
 									//alert($("#orgSelect").val() + "," + $("#monthsSelect").val());
 									self.location = "<s:url value='/projectsummary/full' />" + "?orgid=" + $("#orgSelect").val()
 											+ "&pharse=" + $("#monthsSelect").val();
 
-								});
+						});
+
+						$("td.amount").hover(
+								  function () {
+									    var tds = $(this).parents("tr").children("td");
+										var title = "[" + tds.eq(3).html() + "]" + tds.eq(4).html();
+								    	$(this).wrapInner("<span title='" + title + "'></span>");
+								    	$(this).children().popover('show');
+								  },function () {
+									  	$(this).children().popover('hide')
+						});
 
 					});
-					
-					$("td.amount").hover(
-							  function () {
-								    var tds = $(this).parents("tr").children("td");
-									var title = "[" + tds.eq(3).html() + "]" + tds.eq(4).html();
-							    	$(this).wrapInner("<span title='" + title + "'></span>");
-							    	$(this).children().popover('show');
-							  },
-							  function () {
-								  	$(this).children().popover('hide')
-							  }
-							);
 				</script>
 
     <%@ include file="bottom.jsp"%>

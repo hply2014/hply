@@ -3,7 +3,7 @@
 
 <div class="container main">
     <c:if test="${not empty message}">
-        
+
         <div class="alert alert-success alert-dismissible col-md-offset-4 affix" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -24,8 +24,7 @@
         <div class="panel-heading">
             <strong>合同补充协议</strong>（ 共
             <c:out value="${rowCount}" />
-            行，
-                <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页 
+            行， <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页
             ）
             <c:if test='${not empty orglist}'>
                 <div class="pull-right">
@@ -54,7 +53,7 @@
                         <th>#</th>
                         <th>项目名称</th>
                         <th>增补协议编号</th>
-                        <th class="amount">管理费率</th>
+                       <%--<th class="amount">管理费率</th> --%> 
                         <th class="amount">增减金额</th>
                         <th>登记人</th>
                         <th>登记时间</th>
@@ -63,7 +62,8 @@
                 </thead>
                 <tbody>
                     <%
-                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
+                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted")
+                    			.toString());
                     %>
                     <c:forEach items="${list}" var="contractChange">
                         <tr>
@@ -74,13 +74,24 @@
                                 href="<s:url value="/project/detail/{id}?target=contractchange"><s:param name="id" value="${contractChange.id }" /></s:url>"><c:out
                                         value="${contractChange.projectId}" /></a></td>
                             <td><c:out value="${contractChange.csaCode}" /></td>
-                            <td class="amount"><fmt:formatNumber value="${contractChange.managementRate}"
-                                    pattern="0.00" />%</td>
+                         <%-- <td class="amount"><fmt:formatNumber value="${contractChange.managementRate}"
+                                    pattern="0.00" />%</td> --%>  
                             <td class="amount"><fmt:formatNumber value="${contractChange.changeAmount}"
                                     pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${contractChange.createUser}" /></td>
                             <td><fmt:formatDate value="${contractChange.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${contractChange.description}" /></td>
+                            <td><c:if test="${contractChange.status !=1 }">
+                                    <shiro:hasPermission name="`contractchange_check`">
+                                        <a class="check" data-confirm-message="合同补充协议：<c:out value="${contractChange.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/contractchange/check/${contractChange.id }" />">审核</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`contractchange_create`">
+                                        <a href="<s:url value="/contractchange/modify/${contractChange.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="合同补充协议：<c:out value="${contractChange.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/contractchange/delete/${contractChange.id }" />">删除</a>
+                                    </shiro:hasPermission>
+                                </c:if></td>
                         </tr>
                     </c:forEach>
                 </tbody>

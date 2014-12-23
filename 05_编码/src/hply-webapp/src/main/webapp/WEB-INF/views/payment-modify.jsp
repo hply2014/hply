@@ -91,7 +91,7 @@
                         <div class="bs-callout bs-callout-danger">
                             <h4>操作提示</h4>
                             <p>
-                                <span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span>
+                                <span class="label label-danger">1、此信息一经审核，将不可修改，请谨慎操作。</span>
                             </p>
                             <h4>报销提示</h4>
                             <p>
@@ -161,7 +161,6 @@
 				amount : {
 					required : true,
 					number : true,
-					max : 0
 				},
 				bankAccount : {},
 				bankName : {},
@@ -183,9 +182,12 @@
 							$("#oweAmount").html(arr[3]);
 							if(jQuery.inArray(sv, la) >= 0 ){
 								$("#limitAmount").html(arr[1]);
+<<<<<<< HEAD
 								$("#amount").rules("add", {
 									max : parseFloat(arr[3].replace(/,/g, ''))
 								});
+=======
+>>>>>>> new-working
 							}else{
 								$("#limitAmount").html("不限");
 							}

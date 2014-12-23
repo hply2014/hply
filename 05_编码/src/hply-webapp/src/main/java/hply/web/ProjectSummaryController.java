@@ -246,10 +246,11 @@ public class ProjectSummaryController {
 		}
 		
 		SysOrganization org = orgService.get(orgId);
-		String sheetName = org.getOrganizationName() + "合同项目汇总（" + pharse + "）";
+		String orgName = org != null ? org.getOrganizationName() : Utility.EMPTY;
+		String sheetName = orgName + "合同项目汇总（" + pharse + "）";
 			
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		String fileName = URLEncoder.encode("TotalData-" + pharse + ".xlsx", "UTF-8");
+		String fileName = URLEncoder.encode("totaldata-" + pharse + ".xlsx", "UTF-8");
 		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
 
 		int rowIndex = 0;

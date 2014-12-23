@@ -55,9 +55,9 @@ public class PartyBillingController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid,
+			Model model) {
 		model.addAttribute("page_title", "甲方开票情况");
-		
 
 		List<SysOrganization> orglist = orgService.getAllBusiness();
 		if (SessionHelper.IsBusinessDepartment()) {
@@ -158,8 +158,7 @@ public class PartyBillingController {
 	 * 处理新建页面的提交动作
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreateSubmit(@Valid PartyBilling partyBilling, BindingResult result, Model model,
-			RedirectAttributes redirectAttrs) {
+	public String processCreateSubmit(@Valid PartyBilling partyBilling, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(partyBilling.toString());
 
 		if (result.hasErrors()) {
@@ -178,16 +177,16 @@ public class PartyBillingController {
 	 * 处理修改页面的提交动作
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String id, @Valid PartyBilling partyBilling, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String processUpdateSubmit(@PathVariable String id, @Valid PartyBilling partyBilling, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(partyBilling.toString());
 
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
-
-		service.update(partyBilling);
+		service.delete(id);
+		service.insert(partyBilling);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("partyBilling", partyBilling);
@@ -198,8 +197,8 @@ public class PartyBillingController {
 	 * 处理审核页面的提交动作
 	 */
 	@RequestMapping(value = "/step1/{id}", method = RequestMethod.POST)
-	public String processCheckSubmit(@PathVariable String id, @Valid PartyBilling partyBilling, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String processCheckSubmit(@PathVariable String id, @Valid PartyBilling partyBilling, BindingResult result, Model model,
+			RedirectAttributes redirectAttrs) {
 		Utility.println(partyBilling.toString());
 
 		if (result.hasErrors()) {
@@ -213,7 +212,7 @@ public class PartyBillingController {
 		pb.setStep1User(SessionHelper.getCurrentUserId());
 		pb.setStep1Time(new Date());
 		pb.setDescription(partyBilling.getDescription());
-
+		pb.setStatus(1);
 		service.update(pb);
 		redirectAttrs.addFlashAttribute("message", "审核成功");
 
@@ -229,6 +228,17 @@ public class PartyBillingController {
 		PartyBilling partyBilling = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
+		redirectAttrs.addFlashAttribute("partyBilling", partyBilling);
+		return "redirect:" + URI;
+	}
+	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String processCheckSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+		PartyBilling partyBilling = service.get(id);
+		service.check(id);
+		redirectAttrs.addFlashAttribute("delMessage", "审核成功");
 		redirectAttrs.addFlashAttribute("partyBilling", partyBilling);
 		return "redirect:" + URI;
 	}

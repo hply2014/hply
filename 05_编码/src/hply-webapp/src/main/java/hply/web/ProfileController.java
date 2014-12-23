@@ -54,7 +54,8 @@ public class ProfileController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid,
+			Model model) {
 		model.addAttribute("page_title", "型材");
 		List<SysOrganization> orglist = orgService.getAllBusiness();
 		if (SessionHelper.IsBusinessDepartment()) {
@@ -158,8 +159,8 @@ public class ProfileController {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
-
-		service.update(profile);
+		service.delete(id);
+		service.insert(profile);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("profile", profile);
@@ -174,6 +175,17 @@ public class ProfileController {
 		Profile profile = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
+		redirectAttrs.addFlashAttribute("profile", profile);
+		return "redirect:" + URI;
+	}
+	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String processCheckSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+		Profile profile = service.get(id);
+		service.check(id);
+		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("profile", profile);
 		return "redirect:" + URI;
 	}

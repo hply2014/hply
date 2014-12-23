@@ -28,12 +28,13 @@
                             </div>
                         </div>
                         <div class="row">
+                        <%--
                             <label for="managementRate" class="col-sm-2 control-label">管理费率（%）</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="managementRate" placeholder="管理费率" />
                                 <p class="help-block" />
                             </div>
-
+ --%>
                             <label for="changeAmount" class="col-sm-2 control-label">增减金额</label>
                             <div class="col-sm-4 required-field-block">
                                 <b class="required-icon">*</b>
@@ -70,7 +71,7 @@
                     <div class="col-sm-4">
                         <div class="bs-callout bs-callout-danger">
                             <h4>操作提示</h4>
-                            <p><span class="label label-danger">1、此信息一经提交，将不可修改，请谨慎操作。</span></p>
+                            <p><span class="label label-danger">1、此信息一经审核，将不可修改，请谨慎操作。</span></p>
                             <p>2、管理费率默认为本项目最近一次使用的费率。</p>
                         </div>
                     </div>

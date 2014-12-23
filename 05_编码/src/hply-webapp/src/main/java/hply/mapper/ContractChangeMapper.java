@@ -25,4 +25,5 @@ public interface ContractChangeMapper extends PartialContractChangeMapper {
 			@Param("pageSize") int pageSize);
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+
 }

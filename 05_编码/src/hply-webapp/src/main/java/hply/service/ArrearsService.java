@@ -66,6 +66,13 @@ public class ArrearsService {
 		mapper.delete(id);
 	}
 
+	/*
+	 * 审核操作，将status修改为1
+	 */
+	public void check(String id){
+		//TODO 审核操作，将status修改为1
+		mapper.check(id);
+	}
 	/**
 	 * 07_往来欠款，根据主键获取一个对象
 	 */

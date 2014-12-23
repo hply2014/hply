@@ -48,7 +48,7 @@
 </style>
 <div class="container main">
     <c:if test="${not empty message}">
-        
+
         <div class="alert alert-success alert-dismissible col-md-offset-4 affix" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -68,8 +68,7 @@
         <div class="panel-heading">
             <strong>合同项目信息</strong>（ 共
             <c:out value="${rowCount}" />
-            行，
-                <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页
+            行， <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页
             ）
             <c:if test='${not empty orglist}'>
                 <div class="pull-right">
@@ -145,9 +144,17 @@
                                     <fmt:formatNumber value="${project.dutyPaidAmount}" pattern="###,###,###,###,##0.00" /><span></td>
                             <td><span title="<c:out value="登记人：${project.createUser}" />"><fmt:formatDate
                                         value="${project.trice}" pattern="yyyy-MM-dd" /></span></td>
-                            <td><shiro:hasPermission name="`project_modify`">
-                                    <a href="<s:url value="/project/modify/${project.id }" />">修改</a>
-                                </shiro:hasPermission></td>
+                            <td><c:if test="${project.status !=1 }">
+                                    <shiro:hasPermission name="`project_check`">
+                                        <a class="check" data-confirm-message="合同项目信息：<c:out value="${project.projectName}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/project/check/${project.id }" />">审核</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`project_create`">
+                                        <a href="<s:url value="/project/modify/${project.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="合同项目信息：<c:out value="${project.projectName}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/project/delete/${project.id }" />">删除</a>
+                                    </shiro:hasPermission>
+                                </c:if></td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -28,5 +28,6 @@ public interface ProfileMapper extends PartialProfileMapper {
 			@Param("pageSize") int pageSize);
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+
 }
 

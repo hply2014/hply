@@ -35,14 +35,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label for="taxRate" class="col-sm-2 control-label">税率</label>
-                                    <div class="col-sm-4 ">
-                                        <p class="form-control-static">
-                                            <c:out value="${partyBilling.taxRate}" />
-                                            %
-                                        </p>
-
-                                    </div>
                                     <label for="amount" class="col-sm-2 control-label">发票金额</label>
                                     <div class="col-sm-4 ">
                                         <p class="form-control-static">
@@ -111,11 +103,6 @@
 
                                 </div>
                                 <div class="row">
-                                    <label for="taxRate" class="col-sm-2 control-label">税率（%）</label>
-                                    <div class="col-sm-4 ">
-                                        <sf:input cssClass="form-control" path="taxRate" placeholder="税率" />
-                                        <p class="help-block" />
-                                    </div>
                                     <label for="amount" class="col-sm-2 control-label">发票金额</label>
                                     <div class="col-sm-4 required-field-block">
                                         <b class="required-icon">*</b>

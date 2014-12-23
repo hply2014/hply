@@ -164,7 +164,8 @@ public class CustomerBillingController {
 			return JSP_PAGE_MODIFY;
 		}
 
-		service.update(customerBilling);
+		service.delete(id);
+		service.insert(customerBilling);
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
@@ -179,6 +180,17 @@ public class CustomerBillingController {
 		CustomerBilling customerBilling = service.get(id);
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
+		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
+		return "redirect:" + URI;
+	}
+	/*
+	 * 审核页面
+	 */
+	@RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+	public String processCheckSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
+		CustomerBilling customerBilling = service.get(id);
+		service.check(id);
+		redirectAttrs.addFlashAttribute("delMessage", "审核成功");
 		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
 		return "redirect:" + URI;
 	}

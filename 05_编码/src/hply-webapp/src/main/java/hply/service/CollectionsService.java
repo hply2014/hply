@@ -62,6 +62,13 @@ public class CollectionsService {
 		mapper.delete(id);
 	}
 
+	/*
+	 * 审核操作，将status修改为1
+	 */
+	public void check(String id){
+		//TODO 审核操作，将status修改为1
+		mapper.check(id);
+	}
 	/**
 	 * 05_收款情况，根据主键获取一个对象
 	 */

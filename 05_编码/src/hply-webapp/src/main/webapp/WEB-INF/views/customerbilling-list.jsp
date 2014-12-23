@@ -80,7 +80,19 @@
                                     pattern="###,###,###,###,##0.00" /></td>
                             <td><fmt:formatDate value="${customerBilling.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${customerBilling.createUser}" /></td>
-                            <td><c:out value="${customerBilling.description}" /></td>
+                            <td><c:if test="${customerBilling.status != 1 }">
+                                    <shiro:hasPermission name="`customerbilling_check`">
+                                        <a class="check"
+                                            data-confirm-message="客户开票情况：<c:out value="${customerBilling.id}" />，审核后所有数据将不能被修改，是否确认？"
+                                            href="<s:url value="/customerbilling/check/${customerBilling.id }" />">审核</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="`customerbilling_create`">
+                                        <a href="<s:url value="/customerbilling/modify/${customerBilling.id }" />">修改</a>
+                                        <a class="delete"
+                                            data-confirm-message="客户开票情况数据：<c:out value="${customerBilling.id}" />，将被永久删除，操作不可撤销，是否确认？"
+                                            href="<s:url value="/customerbilling/delete/${customerBilling.id }" />">删除</a>
+                                    </shiro:hasPermission>
+                                </c:if></td>
                         </tr>
                     </c:forEach>
                 </tbody>

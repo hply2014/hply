@@ -26,4 +26,5 @@ public interface CustomerBillingMapper extends PartialCustomerBillingMapper {
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
 
+
 }

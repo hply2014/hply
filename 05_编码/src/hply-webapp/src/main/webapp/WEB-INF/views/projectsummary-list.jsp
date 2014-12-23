@@ -42,7 +42,7 @@
                 class="glyphicon glyphicon-share-alt"></span>【项目汇总表】</a>
             <table class="table table-hover">
                 <thead>
-                    <tr>
+                    <tr id="header">
                         <th>#</th>
                         <th>时间</th>
                         <th>项目名称</th>

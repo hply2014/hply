@@ -98,7 +98,7 @@
                             <p>已收利息：<span id="q3">0000.00</span></p>
                             <h4>操作提示</h4>
                             <p>
-                                1、<span class="label label-danger">此信息一经提交，将不可修改，请谨慎操作。</span>
+                                1、<span class="label label-danger">此信息一经审核，将不可修改，请谨慎操作。</span>
                             </p>
                             <p>
                                 2、<span class="label label-info">此笔费用将汇总到付款情况中</span>，供应商（客户）付出去的钱，为正；供应商（客户）收到的钱，为负。

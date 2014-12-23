@@ -48,6 +48,7 @@ public class ChopController {
 
 	public static final String URI = "/chop";
 	public static final String JSP_PAGE_LIST = "chop-list";
+	public static final String JSP_PAGE_SUMMARY = "chop-summary";
 	public static final String JSP_PAGE_DETAIL = "chop-detail";
 	public static final String JSP_PAGE_MODIFY = "chop-modify";
 
@@ -91,6 +92,49 @@ public class ChopController {
 		model.addAttribute("list", list);
 
 		return JSP_PAGE_LIST;
+	}
+	
+
+	/*
+	 * 列表页面
+	 */
+	@RequestMapping(value = "/summary", method = RequestMethod.GET)
+	public String summary(@RequestParam(value = "p", required = false) Integer p, Model model) {
+		model.addAttribute("page_title", "用章统计");
+
+		int pageIndex = p != null ? p.intValue() : 0;
+		int pageSize = paramService.getParamIntValue("page_size", 30);
+		int rowCount = service.getRowCount();
+		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
+		model.addAttribute("rowCount", rowCount);
+		model.addAttribute("pageIndex", pageIndex);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("currentPageStarted", pageIndex * pageSize);
+		List<Chop> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+
+		for (Chop item : list) {
+//			Project pjt = projectService.get(item.getProjectId());
+//			item.setProjectId(pjt != null ? "[" + pjt.getProjectCode() + "]" + pjt.getProjectName() : Utility.EMPTY);
+
+			SysOrganization org = orgService.get(item.getOrganizationId());
+			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+
+			SysUser user = sysUserService.get(item.getApplyUser());
+			item.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
+
+			SysUser step1User = sysUserService.get(item.getStep1User());
+			item.setStep1User(step1User != null ? step1User.getRealName() : Utility.EMPTY);
+
+			SysUser step2User = sysUserService.get(item.getStep2User());
+			item.setStep2User(step2User != null ? step2User.getRealName() : Utility.EMPTY);
+
+			SysUser step3User = sysUserService.get(item.getStep3User());
+			item.setStep3User(step3User != null ? step3User.getRealName() : Utility.EMPTY);
+		}
+
+		model.addAttribute("list", list);
+
+		return JSP_PAGE_SUMMARY;
 	}
 
 	/*
