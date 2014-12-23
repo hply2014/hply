@@ -64,9 +64,9 @@ public class ProjectSummaryController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid,
+			Model model) {
 		model.addAttribute("page_title", "多项目汇总");
-
 
 		List<SysOrganization> orglist = orgService.getAllBusiness();
 		if (SessionHelper.IsBusinessDepartment()) {
@@ -79,7 +79,7 @@ public class ProjectSummaryController {
 			}
 		}
 		model.addAttribute("oid", oid);
-		
+
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
 		int rowCount = service.getRowCount(oid);
@@ -232,23 +232,23 @@ public class ProjectSummaryController {
 		return "redirect:" + URI;
 	}
 
-	final String EXCEL_HEADERS = "序号,时间,摘要,项目编号,项目名称,合同金额,合同调增额,累计调增额,合同结算额,比率,应收管理费,实收管理费,累计收管理费,尚欠管理费,发票金额,累计开票,收款金额,累计收款,回收率,发票金额,累计开票,支付金额,累计,工程余额,比率,应缴税金,已缴税金,累计已缴税金,尚欠税金,垫付资金,预计用量,型材点";
+	final String EXCEL_HEADERS = "序号,时间,摘要,项目编号,项目名称,合同金额,合同调增额,累计调增额,合同结算额,发票金额,累计开票,收款金额,累计收款,回收率,发票金额,累计开票,支付金额,累计,工程余额,比率,应缴税金,已缴税金,累计已缴税金,尚欠税金,比率,应收管理费,实收管理费,累计收管理费,尚欠管理费,垫付资金,预计用量,型材点";
 
 	@RequestMapping(value = "/export")
 	public void exportExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "pharse") String pharse,
 			@RequestParam(value = "orgid", required = false) String orgId) throws Exception {
-		
-		if(StringUtils.isBlank(orgId)){
+
+		if (StringUtils.isBlank(orgId)) {
 			if (SessionHelper.IsBusinessDepartment()) {
 				// 如果是业务部门，并且未指定按单位的过滤条件
 				orgId = SessionHelper.getCurrentSysUser().getOrganizationId();
-			} 
+			}
 		}
-		
+
 		SysOrganization org = orgService.get(orgId);
 		String orgName = org != null ? org.getOrganizationName() : Utility.EMPTY;
 		String sheetName = orgName + "合同项目汇总（" + pharse + "）";
-			
+
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		String fileName = URLEncoder.encode("totaldata-" + pharse + ".xlsx", "UTF-8");
 		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
@@ -259,7 +259,6 @@ public class ProjectSummaryController {
 		CreationHelper createHelper = wb.getCreationHelper();
 
 		Sheet sheet1 = wb.createSheet(sheetName);
-
 
 		CellStyle styleDefault = wb.createCellStyle();
 		styleDefault.setBorderTop(CellStyle.BORDER_THIN);
@@ -302,12 +301,12 @@ public class ProjectSummaryController {
 			c1.setCellStyle(styleHeader);
 		}
 		r0.getCell(3).setCellValue("项目信息");
-		r0.getCell(9).setCellValue("管理费情况");
-		r0.getCell(14).setCellValue("甲方开票情况");
-		r0.getCell(16).setCellValue("收款情况");
-		r0.getCell(19).setCellValue("客户开票情况");
-		r0.getCell(21).setCellValue("支付工程款情况");
-		r0.getCell(24).setCellValue("税金情况");
+		r0.getCell(9).setCellValue("甲方开票情况");
+		r0.getCell(11).setCellValue("收款情况");
+		r0.getCell(14).setCellValue("客户开票情况");
+		r0.getCell(16).setCellValue("支付工程款情况");
+		r0.getCell(19).setCellValue("税金情况");
+		r0.getCell(24).setCellValue("管理费情况");
 		r0.getCell(30).setCellValue("型材（吨）");
 
 		r0.getCell(0).setCellValue(headers[0]);
@@ -319,16 +318,14 @@ public class ProjectSummaryController {
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 1, 1));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 2, 2));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 3, 8));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 9, 13));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 9, 10));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 11, 13));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 14, 15));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 16, 18));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 19, 20));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 21, 23));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 19, 23));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 24, 28));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 30, 31));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 29, 29));
-		
-		
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 30, 31));
 
 		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
 		for (int i = 0; i < list.size(); i++) {
@@ -338,58 +335,38 @@ public class ProjectSummaryController {
 			Cell c0 = r.createCell(j++);
 			c0.setCellValue(i);
 			c0.setCellStyle(styleDefault);
-			
+
 			Cell c1 = r.createCell(j++);
 			c1.setCellValue(p.getTrice());
 			c1.setCellStyle(styleDate);
-			
+
 			Cell c2 = r.createCell(j++);
 			c2.setCellValue(p.getDescription());
 			c2.setCellStyle(styleDefault);
-			
+
 			Cell c3 = r.createCell(j++);
 			c3.setCellValue(p.getProjectCode());
 			c3.setCellStyle(styleDefault);
-			
+
 			Cell c4 = r.createCell(j++);
 			c4.setCellValue(p.getProjectName());
 			c4.setCellStyle(styleDefault);
-			
+
 			Cell c5 = r.createCell(j++);
 			c5.setCellValue(p.getContractAmount());
 			c5.setCellStyle(styleRMB);
-			
+
 			Cell c6 = r.createCell(j++);
 			c6.setCellValue(p.getChangeAmount());
 			c6.setCellStyle(styleRMB);
-			
+
 			Cell c7 = r.createCell(j++);
 			c7.setCellValue(p.getChangeTotalAmount());
 			c7.setCellStyle(styleRMB);
-			
+
 			Cell c8 = r.createCell(j++);
 			c8.setCellValue(p.getSettlementAmount());
 			c8.setCellStyle(styleRMB);
-			
-			Cell c9 = r.createCell(j++);
-			c9.setCellValue(p.getManagementRate() / 100);
-			c9.setCellStyle(styleRMB);
-
-			Cell c10 = r.createCell(j++);
-			c10.setCellValue(p.getManagementPlanAmount());
-			c10.setCellStyle(styleRMB);
-
-			Cell c11 = r.createCell(j++);
-			c11.setCellValue(p.getManagementRealAmount());
-			c11.setCellStyle(styleRMB);
-
-			Cell c12 = r.createCell(j++);
-			c12.setCellValue(p.getManagementTotalAmount());
-			c12.setCellStyle(styleRMB);
-
-			Cell c13 = r.createCell(j++);
-			c13.setCellValue(p.getManagementOweAmount());
-			c13.setCellStyle(styleRMB);
 
 			Cell c14 = r.createCell(j++);
 			c14.setCellValue(p.getPartyBillingAmount());
@@ -409,7 +386,7 @@ public class ProjectSummaryController {
 
 			Cell c18 = r.createCell(j++);
 			c18.setCellValue(p.getCollectionsRate() / 100);
-			c18.setCellStyle(styleRMB);
+			c18.setCellStyle(stylePercent);
 
 			Cell c19 = r.createCell(j++);
 			c19.setCellValue(p.getCustomerBillingAmount());
@@ -427,7 +404,7 @@ public class ProjectSummaryController {
 			c22.setCellValue(p.getPaymentTotalAmount());
 			c22.setCellStyle(styleRMB);
 
-			/////////////
+			// ///////////
 			Cell c23 = r.createCell(j++);
 			c23.setCellValue(p.getCollectionsTotalAmount() - p.getPaymentTotalAmount());
 			c23.setCellStyle(styleRMB);
@@ -452,6 +429,26 @@ public class ProjectSummaryController {
 			c28.setCellValue(p.getTaxOweAmount());
 			c28.setCellStyle(styleRMB);
 
+			Cell c9 = r.createCell(j++);
+			c9.setCellValue(p.getManagementRate() / 100);
+			c9.setCellStyle(stylePercent);
+
+			Cell c10 = r.createCell(j++);
+			c10.setCellValue(p.getManagementPlanAmount());
+			c10.setCellStyle(styleRMB);
+
+			Cell c11 = r.createCell(j++);
+			c11.setCellValue(p.getManagementRealAmount());
+			c11.setCellStyle(styleRMB);
+
+			Cell c12 = r.createCell(j++);
+			c12.setCellValue(p.getManagementTotalAmount());
+			c12.setCellStyle(styleRMB);
+
+			Cell c13 = r.createCell(j++);
+			c13.setCellValue(p.getManagementOweAmount());
+			c13.setCellStyle(styleRMB);
+
 			Cell c29 = r.createCell(j++);
 			c29.setCellValue(p.getArrearsAmount());
 			c29.setCellStyle(styleRMB);
@@ -470,5 +467,5 @@ public class ProjectSummaryController {
 		}
 		wb.write(response.getOutputStream());
 	}
-	
+
 }
