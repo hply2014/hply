@@ -107,7 +107,7 @@
                         <th>品种</th>
                         <th>总面积</th>
                         <th>联系信息</th>
-                        <th>登记信息</th>
+                        <th>最后修改</th>
                         <th>备注</th>
                         <th></th>
 
@@ -142,7 +142,7 @@
                                 <c:if test="${not empty information.contact }">联系方式：<c:out
                                         value="${information.contact}" />
                                 </c:if></td>
-                            <td><c:out value="${information.createUser}" /><br />
+                            <td><c:out value="${information.updateUser}" /><br />
                             <fmt:formatDate value="${information.trice}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${information.description}" /></td>
                             <td><c:if test="${information.status == 1 }">

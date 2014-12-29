@@ -105,14 +105,13 @@
                     <tr>
                         <th></th>
                         <th>#</th>
-                        <th>项目编号</th>
-                        <th>项目名称</th>
+                        <th>项目名称/编号</th>
                         <th>项目经理</th>
                         <th class="amount">管理费率</th>
                         <th class="amount">税金比率</th>
                         <th class="amount">合同金额</th>
-                        <th class="amount">印花税上缴金额</th>
-                        <th>登记时间</th>
+                        <th class="amount">印花税上缴额</th>
+                        <th class="amount">工程余额</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -126,10 +125,9 @@
                             <td><span
                                 class="glyphicon <c:out value="${project.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                             <td><%=++i%></td>
-                            <td><a
+                            <td><c:out value="${project.projectName}" /><br/><a
                                 href="<s:url value="/project/detail/{id}"><s:param name="id" value="${project.id }" /></s:url>"><c:out
                                         value="${project.projectCode}" /></a></td>
-                            <td><c:out value="${project.projectName}" /></td>
                             <td><c:out value='${project.manager}' /></td>
                             <td class="amount"><fmt:formatNumber value="${project.managementRate}" pattern="#0.00" />%</td>
                             <td class="amount"><fmt:formatNumber value="${project.taxRate}" pattern="#0.00" />%</td>
@@ -142,8 +140,7 @@
                             <td class="amount"><span data-toggle="tooltip"
                                 title="<c:if test='${not empty project.dutyPaidTime }'>时间：<fmt:formatDate value='${project.dutyPaidTime}' pattern='yyyy-MM-dd' /></c:if><c:if test="${not empty project.dutyPaidCode}">，收据编号：${project.dutyPaidCode}</c:if>">
                                     <fmt:formatNumber value="${project.dutyPaidAmount}" pattern="###,###,###,###,##0.00" /><span></td>
-                            <td><span title="<c:out value="登记人：${project.createUser}" />"><fmt:formatDate
-                                        value="${project.trice}" pattern="yyyy-MM-dd" /></span></td>
+                            <td class="amount">${project.field01}</td>
                             <td><c:if test="${project.status !=1 }">
                                     <shiro:hasPermission name="`project_check`">
                                         <a class="check" data-confirm-message="合同项目信息：<c:out value="${project.projectName}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/project/check/${project.id }" />">审核</a>
