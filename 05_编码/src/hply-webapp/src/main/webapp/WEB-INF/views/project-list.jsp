@@ -154,7 +154,13 @@
                                             data-confirm-message="合同项目信息：<c:out value="${project.projectName}" />，将被永久删除，操作不可撤销，是否确认？"
                                             href="<s:url value="/project/delete/${project.id }" />">删除</a>
                                     </shiro:hasPermission>
-                                </c:if></td>
+                                </c:if>
+                                <c:if test="${project.status ==1}">
+                                    <shiro:hasPermission name="`project_modify`">
+                                        <a href="<s:url value="/project/modify/${project.id }" />">修改</a>
+                                    </shiro:hasPermission>
+                                </c:if>
+                                </td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -228,6 +228,10 @@ public class ProjectController {
 		model.addAttribute("projectId", id);
 
 		Project project = service.get(id);
+		if(project == null){
+			model.addAttribute("page_title", "此合同项目信息不存在。");
+			return JSP_PAGE_DETAIL;
+		}
 		model.addAttribute("page_title", "合同项目信息的详情信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
 		SysOrganization org = orgService.get(project.getOrganizationId());
 		project.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);

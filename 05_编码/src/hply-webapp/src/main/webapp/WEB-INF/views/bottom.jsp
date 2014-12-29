@@ -26,6 +26,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" />" charset="UTF-8"></script>
 <script src="<s:url value="/assets/jquery-validation/jquery.validate.min.js" />"></script>
@@ -33,6 +34,33 @@
 <script src="<s:url value="/assets/bootstrap-select/js/bootstrap-select.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-select/js/i18n/defaults-zh_CN.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-icheck/icheck.min.js" />"></script>
+<script type="text/javascript">
+$(function() {
+	$("#footer").hide();
+    $("td").hover(
+    	function() {
+    		var rIndex = 2;
+    		var cIndex = $(this).prevAll().length;
+    		if(self.location.href.indexOf("/full") > 0){
+    			rIndex = 4;
+    		}
+    		
+    		var rTitle = $(this).parent().find("td:eq(" + rIndex + ")").text();
+    		var cTitle = $(this).parents("table").find("thead tr:last th:eq(" + cIndex + ")").html();
+    		var title = "当前：" + cTitle + " ， " + rTitle;
+    		$("#footer span").html(title).parents("div").clearQueue().slideDown();
+    	},function() {
+    		//$("#footer").slideUp();
+    	}
+    );
+    $("table").hover(
+    		function() {
+    		},function() {
+    			$("#footer").slideUp();
+    		}
+    );
+});
+</script>
 <script type="text/javascript">
     function goback(){
     	history.go(-1);
@@ -71,18 +99,12 @@
 		$(".pager .disabled a").click(function() {
 			return false;
 		});
-		
-		var tabHeight = $(window).height() - $('table tbody').offset().top - $('div.row').outerHeight(true);
-		alert(tabHeight);
-		$('table').dataTable( {
-	        "scrollY":        tabHeight + "px",
-	        "scrollCollapse": true,
-	        "paging":         false
-	    } );
 	});
 </script>
 
-
+<div id="footer" class="navbar-fixed-bottom">
+        <h4 class="pull-right"><span id="ftitle" class="label label-default">行：***，列：***</span></h4>
+    </div>
 <div style="display:none">
 <script>
 var _hmt = _hmt || [];
