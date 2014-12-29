@@ -47,7 +47,7 @@ $(function() {
     		
     		var rTitle = $(this).parent().find("td:eq(" + rIndex + ")").text();
     		var cTitle = $(this).parents("table").find("thead tr:last th:eq(" + cIndex + ")").html();
-    		var title = "当前：" + cTitle + " ， " + rTitle;
+    		var title = "当前：" + (cTitle == '' ? '' : cTitle + " ， ") + rTitle;
     		$("#footer span").html(title).parents("div").clearQueue().slideDown();
     	},function() {
     		//$("#footer").slideUp();
