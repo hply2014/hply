@@ -5,6 +5,7 @@ import hply.core.SessionHelper;
 import hply.domain.Project;
 import hply.mapper.ProjectMapper;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,6 +22,12 @@ public class ProjectService {
 
 	@Autowired
 	private ProjectMapper mapper;
+
+	@Autowired
+	private PaymentService paymentService;
+
+	@Autowired
+	private CollectionsService collectionsService;
 
 	/**
 	 * 01_合同项目信息，插入对象
@@ -55,12 +62,12 @@ public class ProjectService {
 	public void delete(String id) {
 		mapper.delete(id);
 	}
-	
+
 	/*
 	 * 审核操作，将status修改为1
 	 */
-	public void check(String id){
-		//TODO 审核操作，将status修改为1
+	public void check(String id) {
+		// TODO 审核操作，将status修改为1
 		mapper.check(id);
 	}
 
@@ -84,7 +91,7 @@ public class ProjectService {
 	public int getRowCount(String queryText) {
 		return mapper.getRowCount(queryText);
 	}
-	
+
 	/**
 	 * 01_合同项目信息，获取记录总行数
 	 */
@@ -98,12 +105,26 @@ public class ProjectService {
 	public List<Project> getAllPaged(String queryText, int pageIndex, int pageSize) {
 		return mapper.getAllPaged(queryText, pageIndex, pageSize);
 	}
-	
+
 	/**
 	 * 01_合同项目信息，获取所有对象，分页方式
 	 */
 	public List<Project> getAllPagedByOrganization(String queryText, String orgId, int pageIndex, int pageSize) {
-		return mapper.getAllPagedByOrganization(queryText, orgId, pageIndex, pageSize);
+		List<Project> list = mapper.getAllPagedByOrganization(queryText, orgId, pageIndex, pageSize);
+		// projectSummary.collectionsTotalAmount -
+		// projectSummary.paymentTotalAmount
+
+		for (Project p : list) {
+			// 收到的工程款总额
+			double g1 = collectionsService.getTotalCollectionsAmount(p.getId());
+
+			// 计算工程款结存
+			double k3 = g1 - paymentService.getAllToalPayment(p.getId());
+			DecimalFormat dformat = new DecimalFormat("#,##0.00");
+			p.setField01(dformat.format(k3));
+		}
+
+		return list;
 	}
 
 	public void updateAllStatus() {
@@ -111,14 +132,14 @@ public class ProjectService {
 	}
 
 	public List<Project> getAllNames() {
-		if(SessionHelper.IsBusinessDepartment()){
+		if (SessionHelper.IsBusinessDepartment()) {
 			String orgId = SessionHelper.getCurrentSysUser().getOrganizationId();
 			return getAllNamesByOrganization(orgId);
 		}
 		return mapper.getAllNames();
 	}
-	
-	public List<Project> getAllNamesByOrganization(String orgId){
+
+	public List<Project> getAllNamesByOrganization(String orgId) {
 		return mapper.getAllNamesByOrganization(orgId);
 	}
 

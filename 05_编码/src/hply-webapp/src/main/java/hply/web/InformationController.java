@@ -66,8 +66,8 @@ public class InformationController {
 			SysOrganization org = orgService.get(item.getOrganizationId());
 			item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
 
-			SysUser user = sysUserService.get(item.getCreateUser());
-			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
+			SysUser user = sysUserService.get(item.getUpdateUser());
+			item.setUpdateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("list", list);
 

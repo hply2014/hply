@@ -182,6 +182,12 @@
 							$("#oweAmount").html(arr[3]);
 							if(jQuery.inArray(sv, la) >= 0 ){
 								$("#limitAmount").html(arr[1]);
+<<<<<<< HEAD
+								$("#amount").rules("add", {
+									max : parseFloat(arr[3].replace(/,/g, ''))
+								});
+=======
+>>>>>>> new-working
 							}else{
 								$("#limitAmount").html("不限");
 							}
