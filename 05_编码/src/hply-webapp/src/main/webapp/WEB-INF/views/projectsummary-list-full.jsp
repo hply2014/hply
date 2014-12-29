@@ -78,12 +78,12 @@ th {
                 <th rowspan="2">时间</th>
                 <th rowspan="2">摘要</th>
                 <th colspan="6">项目信息</th>
-                <th colspan="5">管理费情况</th>
                 <th colspan="2">甲方开票情况</th>
                 <th colspan="3">收款情况</th>
                 <th colspan="2">客户开票情况</th>
                 <th colspan="3">支付工程款情况</th>
                 <th colspan="5">税金情况</th>
+                <th colspan="5">管理费情况</th>
                 <th rowspan="2">垫付资金</th>
                 <th colspan="2">型材（吨）</th>
             </tr>
@@ -94,11 +94,6 @@ th {
                 <th>合同调增额</th>
                 <th>累计调增额</th>
                 <th>合同结算额</th>
-                <th data-alias="管理费率">比率</th>
-                <th>应收管理费</th>
-                <th>实收管理费</th>
-                <th>累计收管理费</th>
-                <th>尚欠管理费</th>
                 <th>发票金额</th>
                 <th>累计开票</th>
                 <th>收款金额</th>
@@ -106,14 +101,53 @@ th {
                 <th>回收率</th>
                 <th>发票金额</th>
                 <th>累计开票</th>
-                <th data-alias="工程款">支付金额</th>
-                <th data-alias="累计支付工程款">累计</th>
+                <th>支付金额</th>
+                <th>累计</th>
                 <th>工程余额</th>
-                <th data-alias="税率">比率</th>
+                <th>比率</th>
                 <th>应缴税金</th>
                 <th>已缴税金</th>
                 <th>累计已缴税金</th>
                 <th>尚欠税金</th>
+                <th>比率</th>
+                <th>应收管理费</th>
+                <th>实收管理费</th>
+                <th>累计收管理费</th>
+                <th>尚欠管理费</th>
+                <th>预计用量</th>
+                <th>型材点</th>
+            </tr>
+            <tr class="hidden">
+                <th>序号</th>
+                <th>时间</th>
+                <th>摘要</th>
+                <th>项目编号</th>
+                <th>项目名称</th>
+                <th>合同金额</th>
+                <th>合同调增额</th>
+                <th>累计调增额</th>
+                <th>合同结算额</th>
+                <th>发票金额</th>
+                <th>累计开票</th>
+                <th>收款金额</th>
+                <th>累计收款</th>
+                <th>回收率</th>
+                <th>发票金额</th>
+                <th>累计开票</th>
+                <th>支付金额</th>
+                <th>累计</th>
+                <th>工程余额</th>
+                <th>比率</th>
+                <th>应缴税金</th>
+                <th>已缴税金</th>
+                <th>累计已缴税金</th>
+                <th>比率</th>
+                <th>应收管理费</th>
+                <th>实收管理费</th>
+                <th>累计收管理费</th>
+                <th>尚欠管理费</th>
+                <th>尚欠税金</th>
+                <th>垫付资金</th>
                 <th>预计用量</th>
                 <th>型材点</th>
             </tr>
@@ -139,15 +173,6 @@ th {
                     <td class="amount"><fmt:formatNumber value="${projectSummary.changeTotalAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.settlementAmount}"
-                            pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementRate}" pattern="0.00" />%</td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementPlanAmount}"
-                            pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementRealAmount}"
-                            pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementTotalAmount}"
-                            pattern="###,###,###,###,##0.00" /></td>
-                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementOweAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.partyBillingAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
@@ -178,6 +203,15 @@ th {
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.taxOweAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementRate}" pattern="0.00" />%</td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementPlanAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementRealAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.managementOweAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.arrearsAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.expectedValue}"
@@ -190,23 +224,12 @@ th {
     <script type="text/javascript">
 					$(function() {
 						$("select").change(function() {
-									//alert($("#orgSelect").val() + "," + $("#monthsSelect").val());
-									self.location = "<s:url value='/projectsummary/full' />" + "?orgid=" + $("#orgSelect").val()
-											+ "&pharse=" + $("#monthsSelect").val();
+							var orgid = $("#orgSelect").val() || "${orgId}";
+							///alert(orgid + "," + $("#monthsSelect").val());
+							self.location = "<s:url value='/projectsummary/full' />" + "?orgid=" + orgid + "&pharse=" + $("#monthsSelect").val();
 
 						});
-
-						$("td.amount").hover(
-								  function () {
-									    var tds = $(this).parents("tr").children("td");
-										var title = "[" + tds.eq(3).html() + "]" + tds.eq(4).html();
-								    	$(this).wrapInner("<span title='" + title + "'></span>");
-								    	$(this).children().popover('show');
-								  },function () {
-									  	$(this).children().popover('hide')
-						});
-
 					});
-				</script>
+	</script>
 
     <%@ include file="bottom.jsp"%>
