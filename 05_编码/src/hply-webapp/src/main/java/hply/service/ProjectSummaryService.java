@@ -1,6 +1,7 @@
 ﻿package hply.service;
 
 import hply.core.DataVersionConflictException;
+import hply.core.Utility;
 import hply.domain.ProjectSummary;
 import hply.mapper.ProjectSummaryMapper;
 
@@ -91,6 +92,37 @@ public class ProjectSummaryService {
 	public List<String> getMonths(){
 		return mapper.getMonths();
 	}
+	
+	public ProjectSummary getTotal(List<ProjectSummary> list){
+		ProjectSummary total = new ProjectSummary();
+		total.setProjectName("总计：");
+		for(ProjectSummary item : list){
+			total.setContractAmount(total.getContractAmount() + item.getContractAmount());
+			total.setChangeAmount(total.getChangeAmount() + item.getChangeAmount());
+			total.setChangeTotalAmount(total.getChangeTotalAmount() + item.getChangeTotalAmount());
+			total.setSettlementAmount(total.getSettlementAmount() + item.getSettlementAmount());
+			total.setPartyBillingAmount(total.getPartyBillingAmount() + item.getPartyBillingAmount());
+			total.setPartyBillingTotalAmount(total.getPartyBillingTotalAmount() + item.getPartyBillingTotalAmount());
+			total.setCustomerBillingAmount(total.getCustomerBillingAmount() + item.getCustomerBillingAmount());
+			total.setCustomerBillingTotalAmount(total.getCustomerBillingTotalAmount() + item.getCustomerBillingTotalAmount());
+			total.setCollectionsAmount(total.getCollectionsAmount() + item.getCollectionsAmount());
+			total.setCollectionsTotalAmount(total.getCollectionsTotalAmount() + item.getCollectionsTotalAmount());
+			total.setArrearsAmount(total.getArrearsAmount() + item.getArrearsAmount());
+			total.setTaxPlanAmount(total.getTaxPlanAmount() + item.getTaxPlanAmount());
+			total.setTaxRealAmount(total.getTaxRealAmount() + item.getTaxRealAmount());
+			total.setTaxTotalAmount(total.getTaxTotalAmount() + item.getTaxTotalAmount());
+			total.setTaxOweAmount(total.getTaxOweAmount() + item.getTaxOweAmount());
+			total.setManagementPlanAmount(total.getManagementPlanAmount() + item.getManagementPlanAmount());
+			total.setManagementRealAmount(total.getManagementRealAmount() + item.getManagementRealAmount());
+			total.setManagementTotalAmount(total.getManagementTotalAmount() + item.getManagementTotalAmount());
+			total.setManagementOweAmount(total.getManagementOweAmount() + item.getManagementOweAmount());
+			total.setField01(String.valueOf(Utility.parseInt(total.getField01()) + Utility.parseInt(item.getField01())));
+			total.setField02(String.valueOf(Utility.parseInt(total.getField02()) + Utility.parseInt(item.getField02())));
+			total.setExpectedValue(total.getExpectedValue() + item.getExpectedValue());
+		}
+		return total;
+	}
+	
 	
 	public ProjectSummary getSummaryByProject(String projectId){
 		return mapper.getSummaryByProject(projectId);

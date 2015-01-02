@@ -279,4 +279,12 @@ public class Utility {
 		return user == null ? null : user.getId();
 	}
 
+	public static int parseInt(String str) {
+		try {
+			return StringUtils.isEmpty(str) ? 0 : Integer.parseInt(str);
+		} catch (Exception ex) {
+			return 0;
+		}
+	}
+
 }

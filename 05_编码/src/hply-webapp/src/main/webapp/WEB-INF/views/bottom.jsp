@@ -44,6 +44,10 @@ $(function() {
     		if(self.location.href.indexOf("/full") > 0){
     			rIndex = 4;
     		}
+    		if($(this).parent().attr("class") == "total"){
+    			rIndex = 0;
+    			cIndex = cIndex + 4;
+    		}
     		
     		var rTitle = $(this).parent().find("td:eq(" + rIndex + ")").text();
     		var cTitle = $(this).parents("table").find("thead tr:last th:eq(" + cIndex + ")").html();

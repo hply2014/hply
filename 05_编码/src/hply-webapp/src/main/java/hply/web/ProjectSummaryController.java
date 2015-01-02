@@ -2,7 +2,6 @@
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
-import hply.domain.Project;
 import hply.domain.ProjectSummary;
 import hply.domain.SysOrganization;
 import hply.service.ProjectSummaryService;
@@ -11,7 +10,6 @@ import hply.service.SysParameterService;
 
 import java.net.URLEncoder;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -142,6 +140,7 @@ public class ProjectSummaryController {
 			}
 		}
 		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
+		model.addAttribute("projectSummaryTotal", service.getTotal(list));
 		model.addAttribute("list", list);
 
 		model.addAttribute("pharse", pharse);
@@ -289,6 +288,10 @@ public class ProjectSummaryController {
 		styleDate.cloneStyleFrom(styleDefault);
 		styleDate.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-mm-dd"));
 
+		CellStyle styleFooter = wb.createCellStyle();
+		styleFooter.cloneStyleFrom(styleDefault);
+		styleFooter.setAlignment(CellStyle.ALIGN_RIGHT);
+
 		Row r0 = sheet1.createRow(rowIndex++);
 		Row r1 = sheet1.createRow(rowIndex++);
 		String[] headers = EXCEL_HEADERS.split(",");
@@ -333,7 +336,7 @@ public class ProjectSummaryController {
 			ProjectSummary p = list.get(i);
 			Row r = sheet1.createRow(rowIndex++);
 			Cell c0 = r.createCell(j++);
-			c0.setCellValue(i);
+			c0.setCellValue(i+1);
 			c0.setCellStyle(styleDefault);
 
 			Cell c1 = r.createCell(j++);
@@ -461,10 +464,146 @@ public class ProjectSummaryController {
 			c31.setCellValue(p.getProfilePoint());
 			c31.setCellStyle(styleDefault);
 		}
+		
+		ProjectSummary p = service.getTotal(list);
+		int j = 0;
+		Row r = sheet1.createRow(rowIndex++);
+
+		Cell c0 = r.createCell(j++);
+		c0.setCellValue(p.getProjectName());
+		c0.setCellStyle(styleFooter);
+
+		Cell c1 = r.createCell(j++);
+		c1.setCellValue(p.getProjectName());
+		c1.setCellStyle(styleFooter);
+
+		Cell c2 = r.createCell(j++);
+		c2.setCellValue(p.getProjectName());
+		c2.setCellStyle(styleFooter);
+
+		Cell c3 = r.createCell(j++);
+		c3.setCellValue(p.getProjectName());
+		c3.setCellStyle(styleFooter);
+
+		Cell c4 = r.createCell(j++);
+		c4.setCellValue(p.getProjectName());
+		c4.setCellStyle(styleFooter);
+
+		Cell c5 = r.createCell(j++);
+		c5.setCellValue(p.getContractAmount());
+		c5.setCellStyle(styleRMB);
+
+		Cell c6 = r.createCell(j++);
+		c6.setCellValue(p.getChangeAmount());
+		c6.setCellStyle(styleRMB);
+
+		Cell c7 = r.createCell(j++);
+		c7.setCellValue(p.getChangeTotalAmount());
+		c7.setCellStyle(styleRMB);
+
+		Cell c8 = r.createCell(j++);
+		c8.setCellValue(p.getSettlementAmount());
+		c8.setCellStyle(styleRMB);
+
+		Cell c14 = r.createCell(j++);
+		c14.setCellValue(p.getPartyBillingAmount());
+		c14.setCellStyle(styleRMB);
+
+		Cell c15 = r.createCell(j++);
+		c15.setCellValue(p.getPartyBillingTotalAmount());
+		c15.setCellStyle(styleRMB);
+
+		Cell c16 = r.createCell(j++);
+		c16.setCellValue(p.getCollectionsAmount());
+		c16.setCellStyle(styleRMB);
+
+		Cell c17 = r.createCell(j++);
+		c17.setCellValue(p.getCollectionsTotalAmount());
+		c17.setCellStyle(styleRMB);
+
+		Cell c18 = r.createCell(j++);
+//		c18.setCellValue(p.getCollectionsRate() / 100);
+//		c18.setCellStyle(stylePercent);
+
+		Cell c19 = r.createCell(j++);
+		c19.setCellValue(p.getCustomerBillingAmount());
+		c19.setCellStyle(styleRMB);
+
+		Cell c20 = r.createCell(j++);
+		c20.setCellValue(p.getCustomerBillingTotalAmount());
+		c20.setCellStyle(styleRMB);
+
+		Cell c21 = r.createCell(j++);
+		c21.setCellValue(p.getPaymentAmount());
+		c21.setCellStyle(styleRMB);
+
+		Cell c22 = r.createCell(j++);
+		c22.setCellValue(p.getPaymentTotalAmount());
+		c22.setCellStyle(styleRMB);
+
+		// ///////////
+		Cell c23 = r.createCell(j++);
+		c23.setCellValue(p.getCollectionsTotalAmount() - p.getPaymentTotalAmount());
+		c23.setCellStyle(styleRMB);
+
+		Cell c24 = r.createCell(j++);
+//		c24.setCellValue(p.getTaxRate() / 100);
+		c24.setCellStyle(styleDefault);
+
+		Cell c25 = r.createCell(j++);
+		c25.setCellValue(p.getTaxPlanAmount());
+		c25.setCellStyle(styleRMB);
+
+		Cell c26 = r.createCell(j++);
+		c26.setCellValue(p.getTaxRealAmount());
+		c26.setCellStyle(styleRMB);
+
+		Cell c27 = r.createCell(j++);
+		c27.setCellValue(p.getTaxTotalAmount());
+		c27.setCellStyle(styleRMB);
+
+		Cell c28 = r.createCell(j++);
+		c28.setCellValue(p.getTaxOweAmount());
+		c28.setCellStyle(styleRMB);
+
+		Cell c9 = r.createCell(j++);
+//		c9.setCellValue(p.getManagementRate() / 100);
+		c9.setCellStyle(styleDefault);
+
+		Cell c10 = r.createCell(j++);
+		c10.setCellValue(p.getManagementPlanAmount());
+		c10.setCellStyle(styleRMB);
+
+		Cell c11 = r.createCell(j++);
+		c11.setCellValue(p.getManagementRealAmount());
+		c11.setCellStyle(styleRMB);
+
+		Cell c12 = r.createCell(j++);
+		c12.setCellValue(p.getManagementTotalAmount());
+		c12.setCellStyle(styleRMB);
+
+		Cell c13 = r.createCell(j++);
+		c13.setCellValue(p.getManagementOweAmount());
+		c13.setCellStyle(styleRMB);
+
+		Cell c29 = r.createCell(j++);
+		c29.setCellValue(p.getArrearsAmount());
+		c29.setCellStyle(styleRMB);
+
+		Cell c30 = r.createCell(j++);
+		c30.setCellValue(p.getExpectedValue());
+		c30.setCellStyle(styleRMB);
+
+		Cell c31 = r.createCell(j++);
+//		c31.setCellValue(p.getProfilePoint());
+		c31.setCellStyle(styleDefault);
 
 		for (int i = 0; i < headers.length; i++) {
 			sheet1.autoSizeColumn(i, true);
 		}
+		
+		sheet1.addMergedRegion(new CellRangeAddress(rowIndex-1, rowIndex-1, 0, 4));
+		
 		wb.write(response.getOutputStream());
 	}
 

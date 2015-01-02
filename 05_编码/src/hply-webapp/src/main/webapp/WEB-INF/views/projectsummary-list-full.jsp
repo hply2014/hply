@@ -83,7 +83,7 @@ th {
                 <th colspan="2">客户开票情况</th>
                 <th colspan="3">支付工程款情况</th>
                 <th colspan="5">税金情况</th>
-                <th colspan="5">管理费情况</th>
+                <th colspan="7">管理费及其他收入情况</th>
                 <th rowspan="2">垫付资金</th>
                 <th colspan="2">型材（吨）</th>
             </tr>
@@ -114,6 +114,8 @@ th {
                 <th>实收管理费</th>
                 <th>累计收管理费</th>
                 <th>尚欠管理费</th>
+                <th>其他收入</th>
+                <th>总计</th>
                 <th>预计用量</th>
                 <th>型材点</th>
             </tr>
@@ -134,19 +136,21 @@ th {
                 <th>回收率</th>
                 <th>发票金额</th>
                 <th>累计开票</th>
-                <th>支付金额</th>
-                <th>累计</th>
+                <th>工程款支付金额</th>
+                <th>工程款累计支付</th>
                 <th>工程余额</th>
                 <th>比率</th>
                 <th>应缴税金</th>
                 <th>已缴税金</th>
                 <th>累计已缴税金</th>
+                <th>尚欠税金</th>
                 <th>比率</th>
                 <th>应收管理费</th>
                 <th>实收管理费</th>
                 <th>累计收管理费</th>
                 <th>尚欠管理费</th>
-                <th>尚欠税金</th>
+                <th>其他收入</th>
+                <th>管理费及其他收入累计</th>
                 <th>垫付资金</th>
                 <th>预计用量</th>
                 <th>型材点</th>
@@ -212,13 +216,74 @@ th {
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.managementOweAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.field01}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummary.field02}"
+                            pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.arrearsAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.expectedValue}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td><c:out value="${projectSummary.profilePoint}" /></td>
                 </tr>
-            </c:forEach>
+            </c:forEach><tr class="total">
+                    <td colspan="5" style="text-align: right"><c:out value="${projectSummaryTotal.projectName}" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.contractAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.changeAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.changeTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.settlementAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.partyBillingAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.partyBillingTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.collectionsAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.collectionsTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.customerBillingAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.customerBillingTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.paymentAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.paymentTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber
+                            value="${projectSummaryTotal.collectionsTotalAmount - projectSummaryTotal.paymentTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.taxPlanAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.taxRealAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.taxTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.taxOweAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.managementPlanAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.managementRealAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.managementTotalAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.managementOweAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.field01}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.field02}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.arrearsAmount}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.expectedValue}"
+                            pattern="###,###,###,###,##0.00" /></td>
+                    <td><c:out value="${projectSummaryTotal.profilePoint}" /></td>
+                </tr>
         </tbody>
     </table>
     <script type="text/javascript">
