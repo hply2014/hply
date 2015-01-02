@@ -231,7 +231,7 @@ public class ProjectSummaryController {
 		return "redirect:" + URI;
 	}
 
-	final String EXCEL_HEADERS = "序号,时间,摘要,项目编号,项目名称,合同金额,合同调增额,累计调增额,合同结算额,发票金额,累计开票,收款金额,累计收款,回收率,发票金额,累计开票,支付金额,累计,工程余额,比率,应缴税金,已缴税金,累计已缴税金,尚欠税金,比率,应收管理费,实收管理费,累计收管理费,尚欠管理费,垫付资金,预计用量,型材点";
+	final String EXCEL_HEADERS = "序号,时间,摘要,项目编号,项目名称,合同金额,合同调增额,累计调增额,合同结算额,发票金额,累计开票,收款金额,累计收款,回收率,发票金额,累计开票,支付金额,累计,工程余额,比率,应缴税金,已缴税金,累计已缴税金,尚欠税金,比率,应收管理费,实收管理费,累计收管理费,尚欠管理费,其他收入,管理费及其他收入累计,垫付资金,预计用量,型材点";
 
 	@RequestMapping(value = "/export")
 	public void exportExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "pharse") String pharse,
@@ -309,13 +309,13 @@ public class ProjectSummaryController {
 		r0.getCell(14).setCellValue("客户开票情况");
 		r0.getCell(16).setCellValue("支付工程款情况");
 		r0.getCell(19).setCellValue("税金情况");
-		r0.getCell(24).setCellValue("管理费情况");
-		r0.getCell(30).setCellValue("型材（吨）");
+		r0.getCell(24).setCellValue("管理费及其他收入情况");
+		r0.getCell(32).setCellValue("型材（吨）");
 
 		r0.getCell(0).setCellValue(headers[0]);
 		r0.getCell(1).setCellValue(headers[1]);
 		r0.getCell(2).setCellValue(headers[2]);
-		r0.getCell(29).setCellValue(headers[29]);
+		r0.getCell(31).setCellValue(headers[31]);
 
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 0, 0));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 1, 1));
@@ -326,9 +326,9 @@ public class ProjectSummaryController {
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 14, 15));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 16, 18));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 19, 23));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 24, 28));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 29, 29));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 30, 31));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 24, 30));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 31, 31));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 32, 33));
 
 		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
 		for (int i = 0; i < list.size(); i++) {
@@ -452,6 +452,14 @@ public class ProjectSummaryController {
 			c13.setCellValue(p.getManagementOweAmount());
 			c13.setCellStyle(styleRMB);
 
+			Cell c32 = r.createCell(j++);
+			c32.setCellValue(Utility.parseDouble(p.getField01()));
+			c32.setCellStyle(styleRMB);
+
+			Cell c33 = r.createCell(j++);
+			c33.setCellValue(Utility.parseDouble(p.getField02()));
+			c33.setCellStyle(styleRMB);
+
 			Cell c29 = r.createCell(j++);
 			c29.setCellValue(p.getArrearsAmount());
 			c29.setCellStyle(styleRMB);
@@ -523,7 +531,7 @@ public class ProjectSummaryController {
 
 		Cell c18 = r.createCell(j++);
 //		c18.setCellValue(p.getCollectionsRate() / 100);
-//		c18.setCellStyle(stylePercent);
+		c18.setCellStyle(stylePercent);
 
 		Cell c19 = r.createCell(j++);
 		c19.setCellValue(p.getCustomerBillingAmount());
@@ -586,6 +594,14 @@ public class ProjectSummaryController {
 		c13.setCellValue(p.getManagementOweAmount());
 		c13.setCellStyle(styleRMB);
 
+		Cell c32 = r.createCell(j++);
+		c32.setCellValue(Utility.parseDouble(p.getField01()));
+		c32.setCellStyle(styleRMB);
+
+		Cell c33 = r.createCell(j++);
+		c33.setCellValue(Utility.parseDouble(p.getField02()));
+		c33.setCellStyle(styleRMB);
+		
 		Cell c29 = r.createCell(j++);
 		c29.setCellValue(p.getArrearsAmount());
 		c29.setCellStyle(styleRMB);

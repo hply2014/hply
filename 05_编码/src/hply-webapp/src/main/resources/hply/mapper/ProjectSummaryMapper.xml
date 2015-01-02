@@ -44,8 +44,8 @@
 		sum(arrears_amount) as arrearsAmount,
 		sum(expected_value) as expectedValue,
 		profile_point as profilePoint,
-		total_others_amount field01,
-		management_total_amount + total_others_amount field02,
+		ifnull(total_others_amount, 0) field01,
+		management_total_amount + ifnull(total_others_amount, 0) field02,
 		version,
 		create_time as createTime,
 		table_name as tableName

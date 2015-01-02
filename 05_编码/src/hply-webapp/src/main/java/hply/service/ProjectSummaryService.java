@@ -116,8 +116,8 @@ public class ProjectSummaryService {
 			total.setManagementRealAmount(total.getManagementRealAmount() + item.getManagementRealAmount());
 			total.setManagementTotalAmount(total.getManagementTotalAmount() + item.getManagementTotalAmount());
 			total.setManagementOweAmount(total.getManagementOweAmount() + item.getManagementOweAmount());
-			total.setField01(String.valueOf(Utility.parseInt(total.getField01()) + Utility.parseInt(item.getField01())));
-			total.setField02(String.valueOf(Utility.parseInt(total.getField02()) + Utility.parseInt(item.getField02())));
+			total.setField01(String.valueOf(Utility.parseDouble(total.getField01()) + Utility.parseDouble(item.getField01())));
+			total.setField02(String.valueOf(Utility.parseDouble(total.getField02()) + Utility.parseDouble(item.getField02())));
 			total.setExpectedValue(total.getExpectedValue() + item.getExpectedValue());
 		}
 		return total;
