@@ -49,6 +49,10 @@ $(function() {
     			cIndex = cIndex + 4;
     		}
     		
+    		if(self.location.href.indexOf("/year") > 0){
+    			rIndex = 0;
+    		}
+    		
     		var rTitle = $(this).parent().find("td:eq(" + rIndex + ")").text();
     		var cTitle = $(this).parents("table").find("thead tr:last th:eq(" + cIndex + ")").html();
     		var title = "当前：" + (cTitle == '' ? '' : cTitle + " ， ") + rTitle;

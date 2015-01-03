@@ -45,7 +45,7 @@
 		sum(expected_value) as expectedValue,
 		profile_point as profilePoint,
 		ifnull(total_others_amount, 0) field01,
-		management_total_amount + ifnull(total_others_amount, 0) field02,
+		sum(management_real_amount) + ifnull(total_others_amount, 0) field02,
 		version,
 		create_time as createTime,
 		table_name as tableName
@@ -64,7 +64,7 @@
 
 
 	<select id="getMonths" resultType="string">
-		select distinct date_format(trice, '%Y-%m') from t_project_summary order by
+		select distinct date_format(date(trice) + interval + 11 day, '%Y-%m') from t_project_summary order by
 		trice desc
 	</select>
 
@@ -214,8 +214,8 @@
 		   sum(tax_owe_amount) taxOweAmount, 
 		   sum(arrears_amount) arrearsAmount, 
 		   sum(expected_value) expectedValue, 
-		   sum(others_amount) field02, 
-		   sum(management_total_amount) + sum(others_amount) field03,
+		   ifnull(sum(others_amount), 0) field02, 
+		   sum(management_real_amount) + ifnull(sum(others_amount), 0) field03,
 		   count(*) field04 
 		from (select t.year_name, 
 			       t.project_id,
@@ -273,8 +273,8 @@
 			   sum(tax_owe_amount) taxOweAmount, 
 			   sum(arrears_amount) arrearsAmount, 
 			   sum(expected_value) expectedValue, 
-			   sum(others_amount) field02, 
-			   sum(management_total_amount) + sum(others_amount) field03,
+		   	   ifnull(sum(others_amount), 0) field02, 
+		       sum(management_real_amount) + ifnull(sum(others_amount), 0) field03,
 			   (select count(*) from t_project c where get_year(c.trice)=x.year_name) field04
 		from (	select   t.year_name,  
 				       t.project_id,

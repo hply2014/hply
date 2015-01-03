@@ -287,5 +287,15 @@ public class Utility {
 			return 0;
 		}
 	}
+	
+	public static int parseInt(String str){
+		try {
+			return StringUtils.isEmpty(str) ? 0 : Integer.parseInt(str);
+		} catch (Exception ex) {
+			System.out.println("str=" + str + ", Exception is:" + ex.getMessage());
+			return 0;
+		}
+		
+	}
 
 }

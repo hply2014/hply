@@ -38,6 +38,13 @@ public interface ProjectSummaryMapper extends PartialProjectSummaryMapper {
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
 	
+	/*
+	 * 方式1：按费用发生所在的年份统计合同额、结算额及工程数，其中：field01:年份，field02：其他收入， field03：管理费+其他收入， field04：本年度发生变化的工程数
+	 */
 	public List<ProjectSummary> getProjectSummaryByYears1(@Param("organizationId") String organizationId);
+	
+	/*
+	 * 方式2：按创建工程所在的年份统计合同额、结算额及工程数，其中：field01:年份，field02：其他收入， field03：管理费+其他收入， field04：本年度创建的工程数
+	 */
 	public List<ProjectSummary> getProjectSummaryByYears2(@Param("organizationId") String organizationId);
 }
