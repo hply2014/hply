@@ -37,4 +37,7 @@ public interface ProjectSummaryMapper extends PartialProjectSummaryMapper {
 	public List<ProjectSummary> getHistoryByProject(@Param("projectId") String projectId);
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+	
+	public List<ProjectSummary> getProjectSummaryByYears1(@Param("organizationId") String organizationId);
+	public List<ProjectSummary> getProjectSummaryByYears2(@Param("organizationId") String organizationId);
 }
