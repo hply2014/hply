@@ -33,8 +33,8 @@
 		sum(customer_billing_amount) as customerBillingAmount,
 		customer_billing_total_amount as
 		customerBillingTotalAmount,
-		sum(payment_amount) as paymentAmount,
-		payment_total_amount as paymentTotalAmount,
+		sum(payment_amount) + sum(tax_real_amount) as paymentAmount,
+		payment_total_amount + tax_total_amount as paymentTotalAmount,
 		tax_rate as
 		taxRate,
 		tax_plan_amount as taxPlanAmount,
@@ -98,9 +98,8 @@
 		sum(customer_billing_amount) as
 		customerBillingAmount,
 		customer_billing_total_amount as customerBillingTotalAmount,
-		sum(payment_amount) as
-		paymentAmount,
-		payment_total_amount as paymentTotalAmount,
+		sum(payment_amount) + sum(tax_real_amount) as paymentAmount,
+		payment_total_amount + tax_total_amount as paymentTotalAmount,
 		tax_rate as taxRate,
 		tax_plan_amount as taxPlanAmount,
 		sum(tax_real_amount) as taxRealAmount,
@@ -140,7 +139,7 @@
 		collections_rate as collectionsRate,
 		customer_billing_amount as customerBillingAmount, customer_billing_total_amount as
 		customerBillingTotalAmount,
-		payment_amount as paymentAmount, payment_total_amount as paymentTotalAmount, tax_rate as
+		payment_amount + tax_real_amount as paymentAmount, payment_total_amount + tax_total_amount as paymentTotalAmount, tax_rate as
 		taxRate, tax_plan_amount as
 		taxPlanAmount, tax_real_amount as taxRealAmount, tax_total_amount as taxTotalAmount,
 		tax_owe_amount as taxOweAmount,
@@ -177,8 +176,8 @@
 		customer_billing_amount as customerBillingAmount,
 		customer_billing_total_amount as
 		customerBillingTotalAmount,
-		payment_amount as paymentAmount, payment_total_amount as
-		paymentTotalAmount, tax_rate as
+		sum(payment_amount) + sum(tax_real_amount) as paymentAmount,
+		payment_total_amount + tax_total_amount as paymentTotalAmount, tax_rate as
 		taxRate, tax_plan_amount as
 		taxPlanAmount, tax_real_amount as taxRealAmount,
 		tax_total_amount as taxTotalAmount,
