@@ -279,4 +279,23 @@ public class Utility {
 		return user == null ? null : user.getId();
 	}
 
+	public static double parseDouble(String str) {
+		try {
+			return StringUtils.isEmpty(str) ? 0.0 : Double.parseDouble(str);
+		} catch (Exception ex) {
+			System.out.println("str=" + str + ", Exception is:" + ex.getMessage());
+			return 0;
+		}
+	}
+	
+	public static int parseInt(String str){
+		try {
+			return StringUtils.isEmpty(str) ? 0 : Integer.parseInt(str);
+		} catch (Exception ex) {
+			System.out.println("str=" + str + ", Exception is:" + ex.getMessage());
+			return 0;
+		}
+		
+	}
+
 }

@@ -9,12 +9,11 @@
 	<select id="getToalPayment" parameterType="string" resultType="double">
 		select sum(amount) from t_payment where
 		project_id
-		= #{projectId} and year(trice)=year(now()) and payment_item_id!='6cc29dc8-0cf4-4cf4-9ccd-98b076b41e24'
+		= #{projectId} and year(trice)=year(now())
 	</select>
 	<select id="getAllToalPayment" parameterType="string" resultType="double">
 		select sum(amount) from t_payment where
-		project_id
-		= #{projectId} and payment_item_id!='6cc29dc8-0cf4-4cf4-9ccd-98b076b41e24'
+		project_id = #{projectId}
 	</select>
 
 	<select id="getTotalPaymentByItem" resultType="double">

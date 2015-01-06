@@ -39,7 +39,9 @@
         </div>
         <div class="panel-body">
             <a target="_blank" href="<s:url value='/projectsummary/full' />" class="btn btn-link"><span
-                class="glyphicon glyphicon-share-alt"></span>【项目汇总表】</a>
+                class="glyphicon glyphicon-share-alt"></span>【项目汇总报表】</a>  | 
+            <a target="_blank" href="<s:url value='/projectsummary/year' />" class="btn btn-link"><span
+                class="glyphicon glyphicon-share-alt"></span>【年度统计报表】</a>
             <table class="table table-hover">
                 <thead>
                     <tr id="header">

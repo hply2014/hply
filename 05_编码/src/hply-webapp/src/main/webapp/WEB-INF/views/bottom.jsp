@@ -44,10 +44,18 @@ $(function() {
     		if(self.location.href.indexOf("/full") > 0){
     			rIndex = 4;
     		}
+    		if($(this).parent().attr("class") == "total"){
+    			rIndex = 0;
+    			cIndex = cIndex + 4;
+    		}
+    		
+    		if(self.location.href.indexOf("/year") > 0){
+    			rIndex = 0;
+    		}
     		
     		var rTitle = $(this).parent().find("td:eq(" + rIndex + ")").text();
     		var cTitle = $(this).parents("table").find("thead tr:last th:eq(" + cIndex + ")").html();
-    		var title = "当前：" + cTitle + " ， " + rTitle;
+    		var title = "当前：" + (cTitle == '' ? '' : cTitle + " ， ") + rTitle;
     		$("#footer span").html(title).parents("div").clearQueue().slideDown();
     	},function() {
     		//$("#footer").slideUp();
