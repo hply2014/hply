@@ -33,8 +33,8 @@
 		sum(customer_billing_amount) as customerBillingAmount,
 		customer_billing_total_amount as
 		customerBillingTotalAmount,
-		sum(payment_amount) + sum(tax_real_amount) as paymentAmount,
-		payment_total_amount + tax_total_amount as paymentTotalAmount,
+		sum(payment_amount) as paymentAmount,
+		payment_total_amount as paymentTotalAmount,
 		tax_rate as
 		taxRate,
 		tax_plan_amount as taxPlanAmount,
@@ -52,8 +52,8 @@
 		from (
 		select s.*,(select sum(amount) from t_collections where source_of='其他' and project_id=s.project_id) total_others_amount from
 		t_project_summary s
-		where trice between date(concat(#{pharse}, '-21')) - interval + 1 month
-		and date(concat(#{pharse},
+		where trice between date(concat(#{p1}, '-21')) - interval + 1 month
+		and date(concat(#{p2},
 		'-21')) - interval + 1 day
 		and organization_id = #{organizationId} and project_id in (select id from t_project)
 		order by s.serial_id desc
@@ -98,8 +98,8 @@
 		sum(customer_billing_amount) as
 		customerBillingAmount,
 		customer_billing_total_amount as customerBillingTotalAmount,
-		sum(payment_amount) + sum(tax_real_amount) as paymentAmount,
-		payment_total_amount + tax_total_amount as paymentTotalAmount,
+		sum(payment_amount) as paymentAmount,
+		payment_total_amount as paymentTotalAmount,
 		tax_rate as taxRate,
 		tax_plan_amount as taxPlanAmount,
 		sum(tax_real_amount) as taxRealAmount,
@@ -139,7 +139,7 @@
 		collections_rate as collectionsRate,
 		customer_billing_amount as customerBillingAmount, customer_billing_total_amount as
 		customerBillingTotalAmount,
-		payment_amount + tax_real_amount as paymentAmount, payment_total_amount + tax_total_amount as paymentTotalAmount, tax_rate as
+		payment_amount as paymentAmount, payment_total_amount as paymentTotalAmount, tax_rate as
 		taxRate, tax_plan_amount as
 		taxPlanAmount, tax_real_amount as taxRealAmount, tax_total_amount as taxTotalAmount,
 		tax_owe_amount as taxOweAmount,
@@ -176,8 +176,8 @@
 		customer_billing_amount as customerBillingAmount,
 		customer_billing_total_amount as
 		customerBillingTotalAmount,
-		sum(payment_amount) + sum(tax_real_amount) as paymentAmount,
-		payment_total_amount + tax_total_amount as paymentTotalAmount, tax_rate as
+		payment_amount as paymentAmount,
+		payment_total_amount as paymentTotalAmount, tax_rate as
 		taxRate, tax_plan_amount as
 		taxPlanAmount, tax_real_amount as taxRealAmount,
 		tax_total_amount as taxTotalAmount,

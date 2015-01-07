@@ -97,24 +97,27 @@ public class ProjectSummaryController {
 	 * 列表页面
 	 */
 	@RequestMapping(value = "/full", method = RequestMethod.GET)
-	public String listFull(@RequestParam(value = "pharse", required = false) String pharse,
-			@RequestParam(value = "orgid", required = false) String orgId, Model model) {
+	public String listFull(@RequestParam(value = "p1", required = false) String p1,
+			@RequestParam(value = "p2", required = false) String p2, @RequestParam(value = "orgid", required = false) String orgId,
+			Model model) {
 		model.addAttribute("page_title", "项目汇总报表");
 
 		List<String> months = service.getMonths();
 		Utility.println("lst.size()=" + months.size());
 		model.addAttribute("months", months);
 
-		if (StringUtils.isBlank(pharse)) {
-			pharse = months.size() > 0 ? months.get(0) : DateFormatUtils.format(new Date(), "yyyy-MM");
+		if (StringUtils.isBlank(p1)) {
+			p1 = months.size() > 0 ? months.get(0) : DateFormatUtils.format(new Date(), "yyyy-MM");
+			p2 = p1;
 		}
 
 		Calendar c0 = Calendar.getInstance();
 		Calendar c1 = Calendar.getInstance();
 		try {
-			Date d = DateUtils.parseDate(pharse + "-21", "yyyy-MM-dd");
-			c0.setTime(d);
-			c1.setTime(d);
+			Date d1 = DateUtils.parseDate(p1 + "-21", "yyyy-MM-dd");
+			Date d2 = DateUtils.parseDate(p2 + "-21", "yyyy-MM-dd");
+			c0.setTime(d1);
+			c1.setTime(d2);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,11 +142,12 @@ public class ProjectSummaryController {
 				orgId = orglist.get(0).getId();
 			}
 		}
-		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
+		List<ProjectSummary> list = service.getSummaryByMonth(p1, p2, orgId);
 		model.addAttribute("projectSummaryTotal", service.getTotal(list));
 		model.addAttribute("list", list);
 
-		model.addAttribute("pharse", pharse);
+		model.addAttribute("p1", p1);
+		model.addAttribute("p2", p2);
 		model.addAttribute("orgId", orgId);
 
 		return "projectsummary-list-full";
@@ -260,7 +264,8 @@ public class ProjectSummaryController {
 	}
 
 	@RequestMapping(value = "/export")
-	public void exportExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "pharse") String pharse,
+	public void exportExcel(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "p1", required = false) String p1, @RequestParam(value = "p2", required = false) String p2,
 			@RequestParam(value = "orgid", required = false) String orgId) throws Exception {
 
 		final String EXCEL_HEADERS = "序号,时间,摘要,项目编号,项目名称,合同金额,合同调增额,累计调增额,合同结算额,发票金额,累计开票,收款金额,累计收款,回收率,发票金额,累计开票,支付金额,累计,工程余额,比率,应缴税金,已缴税金,累计已缴税金,尚欠税金,比率,应收管理费,实收管理费,累计收管理费,尚欠管理费,其他收入,管理费及其他收入累计,垫付资金,预计用量,型材点";
@@ -274,10 +279,10 @@ public class ProjectSummaryController {
 
 		SysOrganization org = orgService.get(orgId);
 		String orgName = org != null ? org.getOrganizationName() : Utility.EMPTY;
-		String sheetName = orgName + "合同项目汇总（" + pharse + "）";
+		String sheetName = orgName + "合同项目汇总（" + p1 + "至" + p2 + "）";
 
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		String fileName = URLEncoder.encode("totaldata-" + pharse + ".xlsx", "UTF-8");
+		String fileName = URLEncoder.encode("totaldata-" + p1 + "至" + p2 + ".xlsx", "UTF-8");
 		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
 
 		int rowIndex = 0;
@@ -358,7 +363,7 @@ public class ProjectSummaryController {
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 31, 31));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 32, 33));
 
-		List<ProjectSummary> list = service.getSummaryByMonth(pharse, orgId);
+		List<ProjectSummary> list = service.getSummaryByMonth(p1, p2, orgId);
 		for (int i = 0; i < list.size(); i++) {
 			int j = 0;
 			ProjectSummary p = list.get(i);

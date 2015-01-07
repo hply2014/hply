@@ -62,13 +62,17 @@ th {
                     <option ${org.id == orgId ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
                 </c:forEach>
             </select>&nbsp; </c:if>
-        <select id="monthsSelect">
+        <select id="monthsSelect1">
             <c:forEach items="${months}" var="str">
-                <option ${pharse == str ? 'selected' : '' } value="${str}">${str }</option>
+                <option ${p1 == str ? 'selected' : '' } value="${str}">${str }</option>
             </c:forEach>
-        </select>&nbsp;<span id="offsetMonths">${dateRange }</span>
-        
-        <a href="<c:url value="/projectsummary/export?orgid=${orgId}&pharse=${pharse}" />" class="btn btn-info"><span
+        </select> 至 <select id="monthsSelect2">
+            <c:forEach items="${months}" var="str">
+                <option ${p2 == str ? 'selected' : '' } value="${str}">${str }</option>
+            </c:forEach>
+        </select>&nbsp;&nbsp;<span id="offsetMonths">${dateRange }</span>
+        &nbsp;&nbsp;
+        <a href="<c:url value="/projectsummary/export?orgid=${orgId}&p1=${p1}&p2=${p2}" />" class="btn btn-danger"><span
                         class="glyphicon glyphicon-floppy-save"></span>导出到Excel . . . </a>
     </h4>
     <table class="table table-hover table-striped table-bordered">
@@ -291,7 +295,7 @@ th {
 						$("select").change(function() {
 							var orgid = $("#orgSelect").val() || "${orgId}";
 							///alert(orgid + "," + $("#monthsSelect").val());
-							self.location = "<s:url value='/projectsummary/full' />" + "?orgid=" + orgid + "&pharse=" + $("#monthsSelect").val();
+							self.location = "<s:url value='/projectsummary/full' />" + "?orgid=" + orgid + "&p1=" + $("#monthsSelect1").val() + "&p2=" + $("#monthsSelect2").val();
 
 						});
 					});

@@ -85,8 +85,8 @@ public class ProjectSummaryService {
 	/*
 	 * pharse : 传入格式 '2014-05'，将查询2014-5-21到2014-6-20的项目汇总信息
 	 */
-	public List<ProjectSummary> getSummaryByMonth(String pharse, String organizationId) {
-		return mapper.getSummaryByMonth(pharse, organizationId);
+	public List<ProjectSummary> getSummaryByMonth(String p1, String p2, String organizationId) {
+		return mapper.getSummaryByMonth(p1, p2, organizationId);
 	}
 	
 	public List<ProjectSummary> getSummaryByYear(String organizationId){

@@ -22,7 +22,7 @@ public interface ProjectSummaryMapper extends PartialProjectSummaryMapper {
 	/*
 	 * pharse : 传入格式 '2014-05'，将查询2014-5-21到2014-6-20的项目汇总信息
 	 */
-	public List<ProjectSummary> getSummaryByMonth(@Param("pharse") String pharse, @Param("organizationId") String organizationId);
+	public List<ProjectSummary> getSummaryByMonth(@Param("p1") String p1, @Param("p2") String p2, @Param("organizationId") String organizationId);
 
 	public List<String> getMonths();
 
