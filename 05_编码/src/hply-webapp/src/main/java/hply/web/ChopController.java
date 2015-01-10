@@ -12,11 +12,13 @@ import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,18 +58,30 @@ public class ChopController {
 	 * 列表页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(@RequestParam(value = "p", required = false) Integer p, Model model) {
+	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
 		model.addAttribute("page_title", "盖章管理");
 
+		List<SysOrganization> orglist = orgService.getAllBusiness();
+		if (SessionHelper.IsBusinessDepartment()) {
+			// 如果是业务部门，并且未指定按单位的过滤条件
+			oid = SessionHelper.getCurrentSysUser().getOrganizationId();
+		} else {
+			model.addAttribute("orglist", orglist);
+			if (StringUtils.isBlank(oid)) {
+				oid = orglist.get(0).getId();
+			}
+		}
+		model.addAttribute("oid", oid);
+		
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
-		int rowCount = service.getRowCount();
+		int rowCount = service.getRowCountByOrganization(oid);
 		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
 		model.addAttribute("rowCount", rowCount);
 		model.addAttribute("pageIndex", pageIndex);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
-		List<Chop> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+		List<Chop> list = service.getAllPaged(oid, pageIndex * pageSize, pageSize);
 
 		for (Chop item : list) {
 //			Project pjt = projectService.get(item.getProjectId());
@@ -99,9 +113,22 @@ public class ChopController {
 	 * 列表页面
 	 */
 	@RequestMapping(value = "/summary", method = RequestMethod.GET)
-	public String summary(@RequestParam(value = "p", required = false) Integer p, Model model) {
+	public String summary(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid, Model model) {
 		model.addAttribute("page_title", "用章统计");
 
+
+		List<SysOrganization> orglist = orgService.getAllBusiness();
+		if (SessionHelper.IsBusinessDepartment()) {
+			// 如果是业务部门，并且未指定按单位的过滤条件
+			oid = SessionHelper.getCurrentSysUser().getOrganizationId();
+		} else {
+			model.addAttribute("orglist", orglist);
+			if (StringUtils.isBlank(oid)) {
+				oid = orglist.get(0).getId();
+			}
+		}
+		model.addAttribute("oid", oid);
+		
 		int pageIndex = p != null ? p.intValue() : 0;
 		int pageSize = paramService.getParamIntValue("page_size", 30);
 		int rowCount = service.getRowCount();
@@ -110,7 +137,7 @@ public class ChopController {
 		model.addAttribute("pageIndex", pageIndex);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
-		List<Chop> list = service.getAllPaged(pageIndex * pageSize, pageSize);
+		List<Chop> list = service.getAllPaged(oid, pageIndex * pageSize, pageSize);
 
 		for (Chop item : list) {
 //			Project pjt = projectService.get(item.getProjectId());
@@ -152,6 +179,9 @@ public class ChopController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
+
+		model.addAttribute("orglist", getOrgList());
+		
 		Chop chop = new Chop();
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
@@ -173,12 +203,15 @@ public class ChopController {
 	 */
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable String id, Model model) {
+
+		model.addAttribute("orglist", getOrgList());
+		
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 		Chop chop = service.get(id);
 
-		SysOrganization org = orgService.get(chop.getOrganizationId());
-		chop.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+//		SysOrganization org = orgService.get(chop.getOrganizationId());
+//		chop.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
 		
 		SysUser user = sysUserService.get(chop.getApplyUser());
 		chop.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
@@ -188,6 +221,15 @@ public class ChopController {
 		return JSP_PAGE_MODIFY;
 	}
 
+	private List<SysOrganization> getOrgList() {
+		if (SessionHelper.IsBusinessDepartment()) {
+			List<SysOrganization> ol = new ArrayList<SysOrganization>();
+			ol.add((SysOrganization) SessionHelper.getAttribute(SessionHelper.CURRENT_ORGANIZATION));
+			return ol;
+		}
+		return orgService.getAllBusiness();
+	}
+	
 	/*
 	 * 审核页面
 	 */
@@ -276,7 +318,7 @@ public class ChopController {
 		}
 		chop.setApplyUser(SessionHelper.getCurrentUserId());
 		chop.setApplyTime(new Date());
-		chop.setOrganizationId(SessionHelper.getCurrentSysUser().getOrganizationId());
+//		chop.setOrganizationId(SessionHelper.getCurrentSysUser().getOrganizationId());
 
 		service.insert(chop);
 		redirectAttrs.addFlashAttribute("message", "申请成功");

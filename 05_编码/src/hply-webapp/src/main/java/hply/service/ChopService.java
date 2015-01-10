@@ -73,11 +73,19 @@ public class ChopService {
         return mapper.getRowCount();
       }
       
+
+	  /**
+     * 09_盖章管理，按部门获取记录总行数
+     */
+	  public int getRowCountByOrganization(String organizationId){
+        return mapper.getRowCountByOrganization(organizationId);
+      }
+	  
 	  /**
      * 09_盖章管理，获取所有对象，分页方式
      */
-	  public List<Chop> getAllPaged(int pageIndex, int pageSize){
-        return mapper.getAllPaged(pageIndex, pageSize);
+	  public List<Chop> getAllPaged(String orgId, int pageIndex, int pageSize){
+        return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
       }
 }
 

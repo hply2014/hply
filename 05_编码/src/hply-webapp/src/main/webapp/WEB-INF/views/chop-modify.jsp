@@ -181,7 +181,7 @@
                             <div class="row">
                                 <label for="step3Idea" class="col-sm-2 control-label">办理结果</label>
                                 <div class="col-sm-6 ">
-                                    <sf:input cssClass="form-control" path="step3Idea" placeholder="经办人办理结果" />
+                                    <sf:input cssClass="form-control" path="step3Idea" value="已办理" />
                                     <p class="help-block" />
                                 </div>
                             </div>
@@ -217,9 +217,8 @@
                             <div class="row">
                                 <label for="organizationId" class="col-sm-2 control-label">所在部门</label>
                                 <div class="col-sm-4 ">
-                                    <p class="form-control-static">
-                                        <c:out value="${chop.organizationId}" />
-                                    </p>
+                                    <sf:select cssClass="form-control selectpicker" path="organizationId"
+                                        items="${orglist }" itemValue="id" itemLabel="organizationName" />
                                     <p class="help-block" />
                                 </div>
                                 <label for="manager" class="col-sm-2 control-label">项目经理</label>
@@ -324,7 +323,7 @@
 				stepStatus : {},
 			}
 		});
-		
+
 		$("#s1").val('拒绝，请重新修订');
 
 		$('input').on('ifChecked', function(event) {

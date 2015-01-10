@@ -23,9 +23,17 @@
         <div class="panel-heading">
             <strong>盖章管理</strong>（ 共
             <c:out value="${rowCount}" />
-            行
-            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>
+            行， <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页
             ）
+            <c:if test='${not empty orglist}'>
+                <div class="pull-right">
+                    <select class="selectpicker org" data-size="10" data-style="btn-danger btn-sm" data-width="120px">
+                        <c:forEach items="${orglist}" var="org">
+                            <option ${org.id == oid ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:if>
         </div>
         <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -144,4 +152,24 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+<!--
+$(function() {
+    var p = '';
+    for (var i = 0; i < <c:out value="${pageCount}" />; i++) {
+        p = p + '<option ' + (i== ${pageIndex} ? 'selected': '') + ' value="' + i + '">第' + (i + 1) + '页</option>';
+    }
+
+    $(".page").append(p).change(function(){
+        self.location = '<s:url value="/chop"/>?oid=${oid}&p=' + $(this).val();
+    });
+    
+
+    $(".org").change(function(){
+        self.location = '<s:url value="/chop"/>?oid=' + $(this).val();
+    });
+
+});
+//-->
+</script>
 <%@ include file="bottom.jsp"%>
