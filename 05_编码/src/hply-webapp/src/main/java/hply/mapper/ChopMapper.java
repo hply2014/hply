@@ -23,4 +23,8 @@ public interface ChopMapper extends PartialChopMapper {
 			@Param("pageSize") int pageSize);
 
 	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+
+	public List<String> getMonths();
+	
+	public List<Chop> getChopReport(@Param("p1") String p1, @Param("p2") String p2, @Param("organizationId") String organizationId);
 }

@@ -26,5 +26,20 @@
 		field_03 as field03, field_04 as field04, field_05
 		as field05 from t_chop where organization_id=#{organizationId} limit #{pageSize} offset #{pageIndex}
 	</select>
+
+	<select id="getMonths" resultType="string">
+		select distinct date_format(date(apply_time) + interval + 11 day, '%Y-%m')
+		from t_chop order by
+		apply_time desc
+	</select>
+
+	<select id="getChopReport" resultType="Chop">
+		select apply_user applyUser, apply_time applyTime, project_name projectName, content,
+		step3_user step3User, manager
+		from t_chop where step3_user is not null and apply_time between date(concat(#{p1}, '-21')) -
+		interval + 1 month and
+		date(concat(#{p2}, '-21')) - interval + 1 day and organization_id = #{organizationId} order by
+		apply_time
+	</select>
 </mapper>
 

@@ -3,7 +3,7 @@
 
 <div class="container main">
     <c:if test="${not empty message}">
-        
+
         <div class="alert alert-success alert-dismissible col-md-offset-4 affix" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -61,7 +61,8 @@
                 </thead>
                 <tbody>
                     <%
-                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
+                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted")
+                    			.toString());
                     %>
                     <c:forEach items="${list}" var="chop">
                         <tr>
@@ -103,7 +104,8 @@
                             <td><c:if test="${ empty chop.stepStatus }">
                                     <shiro:hasPermission name="`chop_check1`">
                                         <a
-                                            href="<s:url value="/chop/step1/{id}"><s:param name="id" value="${chop.id }" /></s:url>">部门审核</a><br/>
+                                            href="<s:url value="/chop/step1/{id}"><s:param name="id" value="${chop.id }" /></s:url>">部门审核</a>
+                                        <br />
                                     </shiro:hasPermission>
                                     <shiro:hasPermission name="`chop_create`">
                                         <a
