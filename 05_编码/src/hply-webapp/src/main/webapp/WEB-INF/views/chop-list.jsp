@@ -3,7 +3,7 @@
 
 <div class="container main">
     <c:if test="${not empty message}">
-        
+
         <div class="alert alert-success alert-dismissible col-md-offset-4 affix" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -23,9 +23,17 @@
         <div class="panel-heading">
             <strong>盖章管理</strong>（ 共
             <c:out value="${rowCount}" />
-            行
-            <c:if test="${pageCount > 1 }">，第${pageIndex+1 }页 &nbsp;/&nbsp;共${pageCount }页</c:if>
+            行， <select class="selectpicker page" data-size="10" data-style="btn-warning btn-sm" data-width="120px"></select>&nbsp;/&nbsp;共${pageCount }页
             ）
+            <c:if test='${not empty orglist}'>
+                <div class="pull-right">
+                    <select class="selectpicker org" data-size="10" data-style="btn-danger btn-sm" data-width="120px">
+                        <c:forEach items="${orglist}" var="org">
+                            <option ${org.id == oid ? 'selected' : '' } value="${org.id}">${org.organizationName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:if>
         </div>
         <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
@@ -53,7 +61,8 @@
                 </thead>
                 <tbody>
                     <%
-                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted").toString());
+                    	int i = Integer.parseInt(request.getAttribute("currentPageStarted")
+                    			.toString());
                     %>
                     <c:forEach items="${list}" var="chop">
                         <tr>
@@ -95,7 +104,8 @@
                             <td><c:if test="${ empty chop.stepStatus }">
                                     <shiro:hasPermission name="`chop_check1`">
                                         <a
-                                            href="<s:url value="/chop/step1/{id}"><s:param name="id" value="${chop.id }" /></s:url>">部门审核</a><br/>
+                                            href="<s:url value="/chop/step1/{id}"><s:param name="id" value="${chop.id }" /></s:url>">部门审核</a>
+                                        <br />
                                     </shiro:hasPermission>
                                     <shiro:hasPermission name="`chop_create`">
                                         <a
@@ -144,4 +154,24 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+<!--
+$(function() {
+    var p = '';
+    for (var i = 0; i < <c:out value="${pageCount}" />; i++) {
+        p = p + '<option ' + (i== ${pageIndex} ? 'selected': '') + ' value="' + i + '">第' + (i + 1) + '页</option>';
+    }
+
+    $(".page").append(p).change(function(){
+        self.location = '<s:url value="/chop"/>?oid=${oid}&p=' + $(this).val();
+    });
+    
+
+    $(".org").change(function(){
+        self.location = '<s:url value="/chop"/>?oid=' + $(this).val();
+    });
+
+});
+//-->
+</script>
 <%@ include file="bottom.jsp"%>

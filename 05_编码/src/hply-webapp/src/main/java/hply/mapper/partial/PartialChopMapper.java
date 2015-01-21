@@ -35,6 +35,5 @@ public interface PartialChopMapper {
       
 	  public int getRowCount();
 	  
-	  public List<Chop> getAllPaged(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
-}
+	 }
 

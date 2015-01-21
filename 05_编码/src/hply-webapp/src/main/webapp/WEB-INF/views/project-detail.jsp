@@ -996,7 +996,7 @@
                                                             <br />累计：<fmt:formatNumber
                                                                 value="${history.paymentTotalAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
-                                                        </c:if> <c:if test="${history.taxRealAmount > 0}">税率：<fmt:formatNumber
+                                                        </c:if> <c:if test="${history.taxRealAmount > 0}"><br />税率：<fmt:formatNumber
                                                                 value="${history.taxRate}" pattern="0.00" />%
                                                             <br /> 应收税金：<fmt:formatNumber
                                                                 value="${history.taxPlanAmount}"
