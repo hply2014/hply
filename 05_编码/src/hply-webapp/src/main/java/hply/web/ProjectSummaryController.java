@@ -144,7 +144,7 @@ public class ProjectSummaryController {
 		}
 		List<ProjectSummary> list = service.getSummaryByMonth(p1, p2, orgId);
 		model.addAttribute("projectSummaryTotal", service.getTotal(list));
-		model.addAttribute("list", list);
+		model.addAttribute("list", service.getSummaryByMonth(p1, p2, orgId));
 
 		model.addAttribute("p1", p1);
 		model.addAttribute("p2", p2);

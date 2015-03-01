@@ -33,9 +33,10 @@
 		sum(customer_billing_amount) as customerBillingAmount,
 		customer_billing_total_amount as
 		customerBillingTotalAmount,
-		sum(payment_amount) - sum(tax_real_amount) as paymentAmount,
-		payment_total_amount - tax_total_amount as paymentTotalAmount,
-		tax_rate as taxRate,
+		sum(payment_amount) as paymentAmount,
+		payment_total_amount as paymentTotalAmount,
+		tax_rate as
+		taxRate,
 		tax_plan_amount as taxPlanAmount,
 		sum(tax_real_amount) as taxRealAmount,
 		tax_total_amount as taxTotalAmount,
@@ -57,8 +58,7 @@
 		and organization_id = #{organizationId} and project_id in (select id from t_project)
 		order by s.serial_id desc
 		) t
-		group by
-		project_id order by trice
+		group by project_id order by get_project_order(projectCode)
 	</select>
 
 
@@ -97,8 +97,8 @@
 		sum(customer_billing_amount) as
 		customerBillingAmount,
 		customer_billing_total_amount as customerBillingTotalAmount,
-		sum(payment_amount) - sum(tax_real_amount) as paymentAmount,
-		payment_total_amount - tax_total_amount as paymentTotalAmount,
+		sum(payment_amount) as paymentAmount,
+		payment_total_amount as paymentTotalAmount,
 		tax_rate as taxRate,
 		tax_plan_amount as taxPlanAmount,
 		sum(tax_real_amount) as taxRealAmount,
@@ -231,8 +231,8 @@
 			       t.collections_total_amount, 
 			       sum(t.customer_billing_amount) customer_billing_amount, 
 			       t.customer_billing_total_amount, 
-			       sum(t.payment_amount) - sum(t.tax_real_amount) payment_amount, 
-			       t.payment_total_amount - t.tax_total_amount payment_total_amount, 
+			       sum(t.payment_amount) payment_amount, 
+			       t.payment_total_amount, 
 			       t.tax_plan_amount, 
 			       sum(t.tax_real_amount) tax_real_amount,
 			       t.tax_owe_amount, 
@@ -288,8 +288,8 @@
 				       t.collections_total_amount, 
 				       sum(t.customer_billing_amount) customer_billing_amount, 
 				       t.customer_billing_total_amount, 
-				       sum(t.payment_amount) - sum(t.tax_real_amount) payment_amount, 
-				       t.payment_total_amount - t.tax_total_amount payment_total_amount, 
+				       sum(t.payment_amount) payment_amount, 
+				       t.payment_total_amount, 
 				       t.tax_plan_amount, 
 				       sum(t.tax_real_amount) tax_real_amount,
 				       t.tax_owe_amount, 

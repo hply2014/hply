@@ -98,6 +98,8 @@ public class ProjectSummaryService {
 	}
 	
 	public ProjectSummary getTotal(List<ProjectSummary> list){
+//		List<ProjectSummary> l = new ArrayList<ProjectSummary>();
+//		l.addAll(list);
 		ProjectSummary total = new ProjectSummary();
 		total.setProjectName("总计：");
 		for(ProjectSummary item : list){
