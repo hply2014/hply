@@ -52,15 +52,70 @@
 		from (
 		select s.*,(select sum(amount) from t_collections where source_of='其他' and project_id=s.project_id) total_others_amount from
 		t_project_summary s
-		where trice between date(concat(#{p1}, '-21')) - interval + 1 month
-		and date(concat(#{p2},
-		'-21')) - interval + 1 day
+		where trice &gt; date(concat(#{p1}, '-21')) - interval + 1 month
+		and trice &lt; date(concat(#{p2}, '-21'))
 		and organization_id = #{organizationId} and project_id in (select id from t_project)
 		order by s.serial_id desc
 		) t
 		group by project_id order by get_project_order(projectCode)
 	</select>
+	
 
+	<select id="getSummaryByCurrentMonth" resultType="ProjectSummary">
+		select
+		id,
+		serial_id as serialId,
+		trice,
+		description,
+		project_id projectId,
+		organization_id organizationId,
+		project_code projectCode,
+		project_name projectName,
+		contract_amount contractAmount,
+		sum(change_amount) as changeAmount,
+		change_total_amount as changeTotalAmount,
+		settlement_amount as settlementAmount,
+		management_rate as managementRate,
+		management_plan_amount as managementPlanAmount,
+		sum(management_real_amount) as
+		managementRealAmount,
+		management_total_amount as managementTotalAmount,
+		management_owe_amount as managementOweAmount,
+		sum(party_billing_amount) as partyBillingAmount,
+		party_billing_total_amount as partyBillingTotalAmount,
+		sum(collections_amount) as collectionsAmount,
+		collections_total_amount as collectionsTotalAmount,
+		collections_rate as
+		collectionsRate,
+		sum(customer_billing_amount) as customerBillingAmount,
+		customer_billing_total_amount as
+		customerBillingTotalAmount,
+		sum(payment_amount) as paymentAmount,
+		payment_total_amount as paymentTotalAmount,
+		tax_rate as
+		taxRate,
+		tax_plan_amount as taxPlanAmount,
+		sum(tax_real_amount) as taxRealAmount,
+		tax_total_amount as taxTotalAmount,
+		tax_owe_amount as taxOweAmount,
+		sum(arrears_amount) as arrearsAmount,
+		sum(expected_value) as expectedValue,
+		profile_point as profilePoint,
+		ifnull(total_others_amount, 0) field01,
+		sum(management_real_amount) + ifnull(total_others_amount, 0) field02,
+		version,
+		create_time as createTime,
+		table_name as tableName
+		from (
+		select s.*,(select sum(amount) from t_collections where source_of='其他' and project_id=s.project_id) total_others_amount from
+		t_project_summary s
+		where trice &gt; date(concat(#{p1}, '-21')) - interval + 1 month
+		and trice &lt; date(concat(#{p1}, '-21'))
+		and organization_id = #{organizationId} and project_id in (select id from t_project)
+		order by s.serial_id desc
+		) t where get_this_month(project_id, #{p1}) = 1
+		group by project_id order by serial_id
+	</select>
 
 	<select id="getMonths" resultType="string">
 		select distinct date_format(date(trice) + interval + 11 day, '%Y-%m') from t_project_summary order by

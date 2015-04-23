@@ -24,6 +24,12 @@ public interface ProjectSummaryMapper extends PartialProjectSummaryMapper {
 	 */
 	public List<ProjectSummary> getSummaryByMonth(@Param("p1") String p1, @Param("p2") String p2, @Param("organizationId") String organizationId);
 
+	/*
+	 * 获取当月新建或调整项目的列表
+	 */
+	public List<ProjectSummary> getSummaryByCurrentMonth(@Param("p1") String p1, @Param("organizationId") String organizationId);
+
+	
 	public List<String> getMonths();
 
 	/*
@@ -31,6 +37,7 @@ public interface ProjectSummaryMapper extends PartialProjectSummaryMapper {
 	 */
 	public ProjectSummary getSummaryByProject(@Param("projectId") String projectId);
 
+	
 	public List<ProjectSummary> getAllPagedByOrganization(@Param("organizationId") String orgId, @Param("pageIndex") int pageIndex,
 			@Param("pageSize") int pageSize);
 	
