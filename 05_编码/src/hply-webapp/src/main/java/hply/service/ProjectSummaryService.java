@@ -95,21 +95,21 @@ public class ProjectSummaryService {
 	public List<ProjectSummary> getSummaryByCurrentMonth(String p1, String organizationId) {
 		return mapper.getSummaryByCurrentMonth(p1, organizationId);
 	}
-	
-	public List<ProjectSummary> getSummaryByYear(String organizationId){
+
+	public List<ProjectSummary> getSummaryByYear(String organizationId) {
 		return mapper.getProjectSummaryByYears2(organizationId);
 	}
-	
-	public List<String> getMonths(){
+
+	public List<String> getMonths() {
 		return mapper.getMonths();
 	}
-	
-	public ProjectSummary getTotal(List<ProjectSummary> list){
-//		List<ProjectSummary> l = new ArrayList<ProjectSummary>();
-//		l.addAll(list);
+
+	public ProjectSummary getTotal(List<ProjectSummary> list) {
+		// List<ProjectSummary> l = new ArrayList<ProjectSummary>();
+		// l.addAll(list);
 		ProjectSummary total = new ProjectSummary();
 		total.setProjectName("总计：");
-		for(ProjectSummary item : list){
+		for (ProjectSummary item : list) {
 			total.setContractAmount(total.getContractAmount() + item.getContractAmount());
 			total.setChangeAmount(total.getChangeAmount() + item.getChangeAmount());
 			total.setChangeTotalAmount(total.getChangeTotalAmount() + item.getChangeTotalAmount());
@@ -135,20 +135,24 @@ public class ProjectSummaryService {
 		}
 		return total;
 	}
-	
-	
-	public ProjectSummary getSummaryByProject(String projectId){
+
+	public ProjectSummary getSummaryByProject(String projectId) {
 		return mapper.getSummaryByProject(projectId);
 	}
-	public List<ProjectSummary> getHistoryByProject(@Param("projectId") String projectId){
+
+	public List<ProjectSummary> getHistoryByProject(@Param("projectId") String projectId) {
 		return mapper.getHistoryByProject(projectId);
 	}
+
 	public List<ProjectSummary> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
 		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
 	}
 
-
 	public int getRowCount(String orgId) {
 		return mapper.getRowCountByOrganization(orgId);
+	}
+
+	public List<ProjectSummary> getProjectSummaryByMonth(@Param("organizationId") String organizationId, @Param("theMonth") String theMonth) {
+		return mapper.getProjectSummaryByMonth(organizationId, theMonth);
 	}
 }

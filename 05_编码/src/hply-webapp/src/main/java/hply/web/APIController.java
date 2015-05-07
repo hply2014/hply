@@ -210,7 +210,8 @@ public class APIController {
 		double d2 = arrearsService.getTotalByProject(projectId);
 
 		// 计算工程款结存
-		double j0 = g1 - paymentService.getToalPayment(projectId);
+//		double j0 = g1 - paymentService.getToalPayment(projectId);
+		double j0 = g1 - paymentService.getAllToalPayment(projectId);
 
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
 

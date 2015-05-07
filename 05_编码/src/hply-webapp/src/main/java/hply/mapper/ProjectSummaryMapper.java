@@ -54,4 +54,7 @@ public interface ProjectSummaryMapper extends PartialProjectSummaryMapper {
 	 * 方式2：按创建工程所在的年份统计合同额、结算额及工程数，其中：field01:年份，field02：其他收入， field03：管理费+其他收入， field04：本年度创建的工程数
 	 */
 	public List<ProjectSummary> getProjectSummaryByYears2(@Param("organizationId") String organizationId);
+	
+	
+	public List<ProjectSummary> getProjectSummaryByMonth(@Param("organizationId") String organizationId, @Param("theMonth") String theMonth);
 }
