@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.mapper.ProjectSummaryMapper">
+	<!-- 按月，根据项目分类汇总 -->
+	<select id="getSummaryByMonth" resultType="ProjectSummary">
+		select
+		id,
+		serial_id as serialId,
+		trice,
+		description,
+		project_id projectId,
+		organization_id organizationId,
+		project_code projectCode,
+		project_name projectName,
+		contract_amount contractAmount,
+		sum(change_amount) as changeAmount,
+		change_total_amount as changeTotalAmount,
+		settlement_amount as settlementAmount,
+		management_rate as managementRate,
+		management_plan_amount as managementPlanAmount,
+		sum(management_real_amount) as
+		managementRealAmount,
+		management_total_amount as managementTotalAmount,
+		management_owe_amount as managementOweAmount,
+		sum(party_billing_amount) as partyBillingAmount,
+		party_billing_total_amount as partyBillingTotalAmount,
+		sum(collections_amount) as collectionsAmount,
+		collections_total_amount as collectionsTotalAmount,
+		collections_rate as
+		collectionsRate,
+		sum(customer_billing_amount) as customerBillingAmount,
+		customer_billing_total_amount as
+		customerBillingTotalAmount,
+		sum(payment_amount) as paymentAmount,
+		payment_total_amount as paymentTotalAmount,
+		tax_rate as
+		taxRate,
+		tax_plan_amount as taxPlanAmount,
+		sum(tax_real_amount) as taxRealAmount,
+		tax_total_amount as taxTotalAmount,
+		tax_owe_amount as taxOweAmount,
+		sum(arrears_amount) as arrearsAmount,
+		sum(expected_value) as expectedValue,
+		profile_point as profilePoint,
+		ifnull(total_others_amount, 0) field01,
+		sum(management_real_amount) + ifnull(total_others_amount, 0) field02,
+		version,
+		create_time as createTime,
+		table_name as tableName
+		from (
+		select s.*,(select sum(amount) from t_collections where source_of='其他' and project_id=s.project_id) total_others_amount from
+		t_project_summary s
+		where trice &gt; date(concat(#{p1}, '-21')) - interval + 1 month
+		and trice &lt; date(concat(#{p2}, '-21'))
+		and organization_id = #{organizationId} and project_id in (select id from t_project)
+		order by s.serial_id desc
+		) t
+		group by project_id order by get_project_order(projectCode)
+	</select>
+
+
+	<select id="getMonths" resultType="string">
+		select distinct date_format(date(trice) + interval + 11 day, '%Y-%m') from t_project_summary order by
+		trice desc
+	</select>
+
+	<select id="getSummaryByProject" resultType="ProjectSummary">
+		select
+		id,
+		serial_id as serialId,
+		trice,
+		description,
+		project_id
+		projectId,
+		organization_id organizationId,
+		project_code projectCode,
+		project_name projectName,
+		contract_amount
+		contractAmount,
+		sum(change_amount) as changeAmount,
+		change_total_amount as changeTotalAmount,
+		settlement_amount as
+		settlementAmount,
+		management_rate as managementRate,
+		management_plan_amount as managementPlanAmount,
+		sum(management_real_amount) as managementRealAmount,
+		management_total_amount as managementTotalAmount,
+		management_owe_amount as managementOweAmount,
+		sum(party_billing_amount) as partyBillingAmount,
+		party_billing_total_amount as partyBillingTotalAmount,
+		sum(collections_amount) as collectionsAmount,
+		collections_total_amount as collectionsTotalAmount,
+		collections_rate as collectionsRate,
+		sum(customer_billing_amount) as
+		customerBillingAmount,
+		customer_billing_total_amount as customerBillingTotalAmount,
+		sum(payment_amount) as paymentAmount,
+		payment_total_amount as paymentTotalAmount,
+		tax_rate as taxRate,
+		tax_plan_amount as taxPlanAmount,
+		sum(tax_real_amount) as taxRealAmount,
+		tax_total_amount as taxTotalAmount,
+		tax_owe_amount as taxOweAmount,
+		sum(arrears_amount) as arrearsAmount,
+		sum(expected_value) as expectedValue,
+		profile_point as profilePoint,
+		version,
+		create_time as createTime,
+		table_name as tableName
+		from (
+		select * from t_project_summary where project_id=#{projectId}
+		order by t_project_summary.serial_id desc
+		) t
+	</select>
+
+	<select id="getRowCountByOrganization" resultType="int">
+		select count(*) from t_project_summary where
+		organization_id=#{organizationId}
+	</select>
+
+	<select id="getAllPagedByOrganization" resultType="ProjectSummary">
+		select id as id, serial_id as serialId, trice as trice,
+		description as description, project_id as projectId, organization_id
+		as organizationId, project_code as projectCode,
+		project_name as projectName, contract_amount as contractAmount,
+		change_amount as changeAmount, change_total_amount as
+		changeTotalAmount, settlement_amount as settlementAmount,
+		management_rate as managementRate, management_plan_amount as
+		managementPlanAmount, management_real_amount as
+		managementRealAmount, management_total_amount as managementTotalAmount,
+		management_owe_amount as managementOweAmount,
+		party_billing_amount as partyBillingAmount, party_billing_total_amount as
+		partyBillingTotalAmount, collections_amount
+		as collectionsAmount, collections_total_amount as collectionsTotalAmount,
+		collections_rate as collectionsRate,
+		customer_billing_amount as customerBillingAmount, customer_billing_total_amount as
+		customerBillingTotalAmount,
+		payment_amount as paymentAmount, payment_total_amount as paymentTotalAmount, tax_rate as
+		taxRate, tax_plan_amount as
+		taxPlanAmount, tax_real_amount as taxRealAmount, tax_total_amount as taxTotalAmount,
+		tax_owe_amount as taxOweAmount,
+		arrears_amount as arrearsAmount, expected_value as expectedValue, profile_point as
+		profilePoint, version as version,
+		create_time as createTime, table_name as tableName from t_project_summary where
+		organization_id=#{organizationId} and project_id in (select id from t_project) order by serial_id desc limit #{pageSize}
+		offset #{pageIndex}
+	</select>
+
+
+	<select id="getHistoryByProject" resultType="ProjectSummary">
+		select id as id, serial_id as serialId, trice as
+		trice,
+		description as description, project_id as projectId, organization_id
+		as organizationId, project_code as
+		projectCode,
+		project_name as projectName, contract_amount as contractAmount,
+		change_amount as changeAmount,
+		change_total_amount as
+		changeTotalAmount, settlement_amount as settlementAmount,
+		management_rate as managementRate,
+		management_plan_amount as
+		managementPlanAmount, management_real_amount as
+		managementRealAmount, management_total_amount
+		as managementTotalAmount,
+		management_owe_amount as managementOweAmount,
+		party_billing_amount as partyBillingAmount,
+		party_billing_total_amount as
+		partyBillingTotalAmount, collections_amount
+		as collectionsAmount, collections_total_amount
+		as collectionsTotalAmount,
+		collections_rate as collectionsRate,
+		customer_billing_amount as customerBillingAmount,
+		customer_billing_total_amount as
+		customerBillingTotalAmount,
+		payment_amount as paymentAmount,
+		payment_total_amount as paymentTotalAmount, tax_rate as
+		taxRate, tax_plan_amount as
+		taxPlanAmount, tax_real_amount as taxRealAmount,
+		tax_total_amount as taxTotalAmount,
+		tax_owe_amount as taxOweAmount,
+		arrears_amount as arrearsAmount, expected_value as
+		expectedValue, profile_point as
+		profilePoint, version as version,
+		create_time as createTime, table_name as tableName, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05
+		from t_project_summary where project_id=#{projectId} order by serial_id desc
+	</select>
+	
+	<!-- 方式1：按费用发生所在的年份统计合同额、结算额及工程数，其中：field01:年份，field02：其他收入， field03：管理费+其他收入， field04：本年度发生变化的工程数-->
+	<select id="getProjectSummaryByYears1" resultType="ProjectSummary">
+		select x.year_name field01, 
+	       sum(contract_amount) contractAmount, 
+		   sum(change_amount) changeAmount, 
+		   sum(change_total_amount) changeTotalAmount, 
+		   sum(settlement_amount) settlementAmount, 
+		   sum(management_plan_amount) managementPlanAmount, 
+		   sum(management_real_amount) managementRealAmount, 
+		   sum(management_total_amount) managementTotalAmount, 
+		   sum(management_owe_amount) managementOweAmount, 
+		   sum(party_billing_amount) partyBillingAmount, 
+		   sum(party_billing_total_amount) partyBillingTotalAmount, 
+		   sum(collections_amount) collectionsAmount, 
+		   sum(collections_total_amount) collectionsTotalAmount, 
+		   sum(customer_billing_amount) customerBillingAmount, 
+		   sum(customer_billing_total_amount) customerBillingTotalAmount, 
+		   sum(payment_amount) paymentAmount, 
+		   sum(payment_total_amount) paymentTotalAmount, 
+		   sum(tax_plan_amount) taxPlanAmount, 
+		   sum(tax_real_amount) taxRealAmount, 
+		   sum(tax_owe_amount) taxOweAmount, 
+		   sum(arrears_amount) arrearsAmount, 
+		   sum(expected_value) expectedValue, 
+		   ifnull(sum(others_amount), 0) field02, 
+		   sum(management_real_amount) + ifnull(sum(others_amount), 0) field03,
+		   count(*) field04 
+		from (select t.year_name, 
+			       t.project_id,
+			       t.contract_amount,
+			       sum(t.change_amount) change_amount, 
+			       t.change_total_amount, 
+			       t.settlement_amount, 
+			       t.management_plan_amount, 
+			       sum(t.management_real_amount) management_real_amount, 
+			       t.management_total_amount, 
+			       t.management_owe_amount, 
+			       sum(t.party_billing_amount) party_billing_amount, 
+			       t.party_billing_total_amount, 
+			       sum(t.collections_amount) collections_amount,
+			       t.collections_total_amount, 
+			       sum(t.customer_billing_amount) customer_billing_amount, 
+			       t.customer_billing_total_amount, 
+			       sum(t.payment_amount) payment_amount, 
+			       t.payment_total_amount, 
+			       t.tax_plan_amount, 
+			       sum(t.tax_real_amount) tax_real_amount,
+			       t.tax_owe_amount, 
+			       sum(t.arrears_amount) arrears_amount, 
+			       sum(t.expected_value) expected_value,
+			       (select sum(amount) from t_collections where source_of='其他' and project_id=t.project_id and get_year(trice)=t.year_name) others_amount 
+			from (select get_year(s.trice) year_name, s.*
+				  from t_project_summary s
+				  where organization_id = #{organizationId} and project_id in (select id from t_project)
+				  order by s .serial_id desc) t 
+			group by t.year_name, t.project_id
+		) x group by x.year_name
+	</select>
+	
+	<!-- 方式2：按创建工程所在的年份统计合同额、结算额及工程数，其中：field01:年份，field02：其他收入， field03：管理费+其他收入， field04：本年度创建的工程数-->
+	<select id="getProjectSummaryByYears2" resultType="ProjectSummary">
+		select x.year_name field01,
+			   (select sum(contract_amount) from t_project c where get_year(c.trice)=x.year_name) contractAmount,
+			   (select sum(settlement_amount) from t_project c where get_year(c.trice)=x.year_name) settlementAmount, 
+			   sum(change_amount) changeAmount, 
+			   sum(change_total_amount) changeTotalAmount, 
+			   sum(management_plan_amount) managementPlanAmount, 
+			   sum(management_real_amount) managementRealAmount, 
+			   sum(management_total_amount) managementTotalAmount, 
+			   sum(management_owe_amount) managementOweAmount, 
+			   sum(party_billing_amount) partyBillingAmount, 
+			   sum(party_billing_total_amount) partyBillingTotalAmount, 
+			   sum(collections_amount) collectionsAmount, 
+			   sum(collections_total_amount) collectionsTotalAmount, 
+			   sum(customer_billing_amount) customerBillingAmount, 
+			   sum(customer_billing_total_amount) customerBillingTotalAmount, 
+			   sum(payment_amount) paymentAmount, 
+			   sum(payment_total_amount) paymentTotalAmount, 
+			   sum(tax_plan_amount) taxPlanAmount, 
+			   sum(tax_real_amount) taxRealAmount, 
+			   sum(tax_owe_amount) taxOweAmount, 
+			   sum(arrears_amount) arrearsAmount, 
+			   sum(expected_value) expectedValue, 
+		   	   ifnull(sum(others_amount), 0) field02, 
+		       sum(management_real_amount) + ifnull(sum(others_amount), 0) field03,
+			   (select count(*) from t_project c where get_year(c.trice)=x.year_name) field04
+		from (	select   t.year_name,  
+				       t.project_id,
+				       sum(t.change_amount) change_amount, 
+				       t.change_total_amount, 
+				       t.management_plan_amount, 
+				       sum(t.management_real_amount) management_real_amount, 
+				       t.management_total_amount, 
+				       t.management_owe_amount, 
+				       sum(t.party_billing_amount) party_billing_amount, 
+				       t.party_billing_total_amount, 
+				       sum(t.collections_amount) collections_amount,
+				       t.collections_total_amount, 
+				       sum(t.customer_billing_amount) customer_billing_amount, 
+				       t.customer_billing_total_amount, 
+				       sum(t.payment_amount) payment_amount, 
+				       t.payment_total_amount, 
+				       t.tax_plan_amount, 
+				       sum(t.tax_real_amount) tax_real_amount,
+				       t.tax_owe_amount, 
+				       sum(t.arrears_amount) arrears_amount, 
+				       sum(t.expected_value) expected_value,
+				       (select sum(amount) from t_collections where source_of='其他' and project_id=t.project_id and get_year(trice)=t.year_name) others_amount
+				from (select get_year(s.trice) year_name, s.*
+					  from t_project_summary s
+					  where organization_id = #{organizationId} and project_id in (select id from t_project)
+					  order by s .serial_id desc) t 
+				group by t.year_name, t.project_id
+		) x group by x.year_name
+	</select>
+</mapper>
+

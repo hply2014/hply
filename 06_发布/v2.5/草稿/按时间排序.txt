@@ -1,0 +1,27 @@
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_project_order`(`in_project_id` VARCHAR(50))
+	RETURNS datetime
+	LANGUAGE SQL
+	NOT DETERMINISTIC
+	CONTAINS SQL
+	SQL SECURITY DEFINER
+	COMMENT ''
+BEGIN
+     	declare _v datetime;
+		declare _t varchar(10);
+     	DECLARE CONTINUE HANDLER FOR 1366 SET _v = 0; 
+		set _t = date_format(current_date, '%Y-%m');
+		
+     	select max(trice) into _v from t_project_summary where project_id = in_project_id and trice > date(concat(_t, '-21')) - interval + 1 month and trice < date(concat(_t, '-21'));
+		if isnull(_v) = 0 then
+				-- 时间不为空
+				return _v;
+		end if;
+
+		select create_time into _v from t_project where id = in_project_id and create_time > date(concat(_t, '-21')) - interval + 1 month and create_time < date(concat(_t, '-21'));
+		if isnull(_v) = 0 then
+				-- 时间不为空
+				return _v;
+		end if;
+		
+		return now();
+END

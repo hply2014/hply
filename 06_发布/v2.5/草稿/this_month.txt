@@ -1,0 +1,53 @@
+select
+		id,
+		serial_id as serialId,
+		trice,
+		description,
+		project_id projectId,
+		organization_id organizationId,
+		project_code projectCode,
+		project_name projectName,
+		contract_amount contractAmount,
+		sum(change_amount) as changeAmount,
+		change_total_amount as changeTotalAmount,
+		settlement_amount as settlementAmount,
+		management_rate as managementRate,
+		management_plan_amount as managementPlanAmount,
+		sum(management_real_amount) as
+		managementRealAmount,
+		management_total_amount as managementTotalAmount,
+		management_owe_amount as managementOweAmount,
+		sum(party_billing_amount) as partyBillingAmount,
+		party_billing_total_amount as partyBillingTotalAmount,
+		sum(collections_amount) as collectionsAmount,
+		collections_total_amount as collectionsTotalAmount,
+		collections_rate as
+		collectionsRate,
+		sum(customer_billing_amount) as customerBillingAmount,
+		customer_billing_total_amount as
+		customerBillingTotalAmount,
+		sum(payment_amount) as paymentAmount,
+		payment_total_amount as paymentTotalAmount,
+		tax_rate as
+		taxRate,
+		tax_plan_amount as taxPlanAmount,
+		sum(tax_real_amount) as taxRealAmount,
+		tax_total_amount as taxTotalAmount,
+		tax_owe_amount as taxOweAmount,
+		sum(arrears_amount) as arrearsAmount,
+		sum(expected_value) as expectedValue,
+		profile_point as profilePoint,
+		ifnull(total_others_amount, 0) field01,
+		sum(management_real_amount) + ifnull(total_others_amount, 0) field02,
+		version,
+		create_time as createTime,
+		table_name as tableName
+		from (
+		select s.*,(select sum(amount) from t_collections where source_of='ÆäËû' and project_id=s.project_id) total_others_amount from
+		t_project_summary s
+		where trice > date(concat('2015-04', '-21')) - interval + 1 month
+		and trice < date(concat('2015-04', '-21'))
+		and organization_id = '0ed44f90-0c3a-11e4-9300-001c42328937' and get_this_month(project_id) = 1
+		order by s.serial_id desc
+		) t
+		group by project_id order by serial_id

@@ -40,6 +40,8 @@
         <div class="panel-body">
             <a target="_blank" href="<s:url value='/projectsummary/full' />" class="btn btn-link"><span
                 class="glyphicon glyphicon-share-alt"></span>【项目汇总报表】</a>  | 
+            <a target="_blank" href="<s:url value='/projectsummary/month' />" class="btn btn-link"><span
+                class="glyphicon glyphicon-share-alt"></span>【新建工程月度汇总报表】</a>  | 
             <a target="_blank" href="<s:url value='/projectsummary/year' />" class="btn btn-link"><span
                 class="glyphicon glyphicon-share-alt"></span>【年度统计报表】</a>
             <table class="table table-hover">
@@ -176,12 +178,12 @@
 		}
 
 		$(".page").append(p).change(function(){
-			self.location = '<s:url value="/projectsummary"/>?q=${queryText}&oid=${oid}&p=' + $(this).val();
+			self.location = '<s:url value="/projectsummary/month"/>?q=${queryText}&oid=${oid}&p=' + $(this).val();
 		});
 		
 
 		$(".org").change(function(){
-			self.location = '<s:url value="/projectsummary"/>?oid=' + $(this).val();
+			self.location = '<s:url value="/projectsummary/month"/>?oid=' + $(this).val();
 		});
 
 	});
