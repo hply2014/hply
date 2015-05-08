@@ -178,12 +178,12 @@
 		}
 
 		$(".page").append(p).change(function(){
-			self.location = '<s:url value="/projectsummary/month"/>?q=${queryText}&oid=${oid}&p=' + $(this).val();
+			self.location = '<s:url value="/projectsummary"/>?q=${queryText}&oid=${oid}&p=' + $(this).val();
 		});
 		
 
 		$(".org").change(function(){
-			self.location = '<s:url value="/projectsummary/month"/>?oid=' + $(this).val();
+			self.location = '<s:url value="/projectsummary"/>?oid=' + $(this).val();
 		});
 
 	});
