@@ -120,6 +120,8 @@ public class ProjectSummaryService {
 			total.setCustomerBillingTotalAmount(total.getCustomerBillingTotalAmount() + item.getCustomerBillingTotalAmount());
 			total.setCollectionsAmount(total.getCollectionsAmount() + item.getCollectionsAmount());
 			total.setCollectionsTotalAmount(total.getCollectionsTotalAmount() + item.getCollectionsTotalAmount());
+			total.setPaymentAmount(total.getPaymentAmount() + item.getPaymentAmount());
+			total.setPaymentTotalAmount(total.getPaymentTotalAmount() + item.getPaymentTotalAmount());
 			total.setArrearsAmount(total.getArrearsAmount() + item.getArrearsAmount());
 			total.setTaxPlanAmount(total.getTaxPlanAmount() + item.getTaxPlanAmount());
 			total.setTaxRealAmount(total.getTaxRealAmount() + item.getTaxRealAmount());

@@ -499,6 +499,8 @@ public class ProjectSummaryController {
 
 			// ///////////
 			Cell c23 = r.createCell(j++);
+			
+			//TODO 还是不对
 			c23.setCellValue(p.getCollectionsTotalAmount() - p.getPaymentTotalAmount());
 			c23.setCellStyle(styleRMB);
 
@@ -1036,6 +1038,8 @@ public class ProjectSummaryController {
 
 		// ///////////
 		Cell c23 = r.createCell(j++);
+		
+		// TODO 还是不对
 		c23.setCellValue(p.getCollectionsTotalAmount() - p.getPaymentTotalAmount());
 		c23.setCellStyle(styleRMB);
 
