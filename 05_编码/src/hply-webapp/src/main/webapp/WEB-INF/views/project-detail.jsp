@@ -479,6 +479,12 @@
                                                     新 建 </a>
                                             </div>
                                         </shiro:hasPermission>
+                                         <shiro:hasPermission name="`contractchange_check`">
+                                            <div class="btn-group">
+                                                <a href="javascript:void();" onclick="batchCheck('contract_change', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
+                                                    批量审核 </a>
+                                            </div>
+                                        </shiro:hasPermission>
                                     </div>
 
                                     <table class="table table-hover">
@@ -537,6 +543,12 @@
                                                 <a href="<c:url value="/partybilling/create?projectid=${projectId}" />"
                                                     class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
                                                     新 建 </a>
+                                            </div>
+                                        </shiro:hasPermission>
+                                                                                 <shiro:hasPermission name="`partybilling_check`">
+                                            <div class="btn-group">
+                                                <a href="javascript:void();" onclick="batchCheck('party_billing', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
+                                                    批量审核 </a>
                                             </div>
                                         </shiro:hasPermission>
                                     </div>
@@ -601,6 +613,11 @@
                                                     class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
                                                     新 建 </a>
                                             </div>
+                                        </shiro:hasPermission> <shiro:hasPermission name="`customerbilling_check`">
+                                            <div class="btn-group">
+                                                <a href="javascript:void();" onclick="batchCheck('customer_billing', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
+                                                    批量审核 </a>
+                                            </div>
                                         </shiro:hasPermission>
                                     </div>
 
@@ -660,6 +677,11 @@
                                                 <a href="<c:url value="/collections/create?projectid=${projectId}" />"
                                                     class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
                                                     新 建 </a>
+                                            </div>
+                                        </shiro:hasPermission><shiro:hasPermission name="`collections_check`">
+                                            <div class="btn-group">
+                                                <a href="javascript:void();" onclick="batchCheck('collections', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
+                                                    批量审核 </a>
                                             </div>
                                         </shiro:hasPermission>
                                     </div>
@@ -722,6 +744,11 @@
                                                     class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
                                                     新 建 </a>
                                             </div>
+                                        </shiro:hasPermission><shiro:hasPermission name="`payment_check`">
+                                            <div class="btn-group">
+                                                <a href="javascript:void();" onclick="batchCheck('payment', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
+                                                    批量审核 </a>
+                                            </div>
                                         </shiro:hasPermission>
                                     </div>
 
@@ -775,12 +802,17 @@
                             <div class="tab-pane fade${target=='arrears'?' in active':'' }" id="tab6default">
                                 <!-- 往来欠款 -->
                                 <div class="panel-body">
-                                    <div class="btn-toolbar" role="toolbar">
+                                    <div class="btn-toolbar" role="toolbar"><shiro:hasPermission name="`arrears_create`">
                                         <div class="btn-group">
                                             <a href="<c:url value="/arrears/create?projectid=${projectId}" />"
                                                 class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
                                                 新 建 </a>
-                                        </div>
+                                        </div> </shiro:hasPermission><shiro:hasPermission name="`arrears_check`">
+                                            <div class="btn-group">
+                                                <a href="javascript:void();" onclick="batchCheck('arrears', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
+                                                    批量审核 </a>
+                                            </div>
+                                        </shiro:hasPermission>
                                     </div>
 
                                     <table class="table table-hover">
@@ -867,6 +899,11 @@
                                                 <a href="<c:url value="/profile/create?projectid=${projectId}" />"
                                                     class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
                                                     新 建 </a>
+                                            </div>
+                                        </shiro:hasPermission><shiro:hasPermission name="`profile_check`">
+                                            <div class="btn-group">
+                                                <a href="javascript:void();" onclick="batchCheck('profile', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
+                                                    批量审核 </a>
                                             </div>
                                         </shiro:hasPermission>
                                     </div>
@@ -1037,6 +1074,22 @@
 
 
 <script type="text/javascript">
+function batchCheck(mid, pid){
+	if(!confirm("此操作无法撤销，确定要批量审核吗？"))
+	{
+		return;
+	}
+	$.post("<s:url value='/api/batchcheck/'/>", {projectId: pid, modelId: mid}, 
+    	function(r){
+    		var ret = r.split('|');
+    		if(ret[0] == "OK"){
+    			self.location.href = ret[1];
+    		}else{
+    			alert("批量审核错误");
+    		}
+    	}, "text");
+}
+
 function repay(id, aa, ia){
 	$("#myModal .modal-title").html("归还本金及利息");
 	var str = "<div class=\"row\"><label class=\"col-sm-2 control-label\">本金</label><div class=\"col-sm-4\"><input id=\"repay_amount0\" class=\"form-control\" type=\"text\" value=\"" 

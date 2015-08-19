@@ -31,4 +31,5 @@ public interface ProjectMapper extends PartialProjectMapper {
 
 	public List<Project> getAllNamesByOrganization(String organizationId);
 
+	public void batchCheck(@Param("projectId") String projectId, @Param("modelId") String modelId);
 }

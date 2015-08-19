@@ -160,4 +160,8 @@ public class ProjectService {
 		p.setTaxPlanAmount(amount);
 		this.update(p);
 	}
+	
+	public void batchCheck(String projectId, String modelId){
+		mapper.batchCheck(projectId, "t_" + modelId);
+	}
 }

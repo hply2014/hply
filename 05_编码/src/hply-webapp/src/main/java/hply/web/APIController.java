@@ -210,7 +210,7 @@ public class APIController {
 		double d2 = arrearsService.getTotalByProject(projectId);
 
 		// 计算工程款结存
-//		double j0 = g1 - paymentService.getToalPayment(projectId);
+		// double j0 = g1 - paymentService.getToalPayment(projectId);
 		double j0 = g1 - paymentService.getAllToalPayment(projectId);
 
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
@@ -249,24 +249,23 @@ public class APIController {
 		return arrearsInterestService.getDetail(arrearsId);
 	}
 
-//"<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val()
+	// "<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() +
+	// "/" + $("#repay_amount1").val()
 	@RequestMapping(value = "/repay/{arrearsId}/{amount}/{interest}", method = RequestMethod.POST)
 	public @ResponseBody String repay(@PathVariable String arrearsId, @PathVariable Double amount, @PathVariable Double interest) {
-		//TODO 还款，
+		// TODO 还款，
 		System.out.println(arrearsId + "," + amount + "," + interest);
 		arrearsService.repay(arrearsId, amount, interest);
 		return "{\"message\":\"OK\"}";
 	}
-	
+
 	@RequestMapping(value = "/setlasturl", method = RequestMethod.POST)
 	public @ResponseBody String setLastUrl(@RequestParam String url) {
 		System.out.println("Last URL=" + url);
 		SessionHelper.setLastUrl(url);
 		return "{\"message\":\"OK\"}";
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/getarrearsamount/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getArrearsAmount(@PathVariable String projectId) {
 
@@ -321,6 +320,13 @@ public class APIController {
 		return dformat.format(q1) + "|" + dformat.format(q2) + "|" + dformat.format(j1) + "|" + dformat.format(j2) + "|"
 				+ dformat.format(k1) + "|" + dformat.format(k2) + "|" + dformat.format(k3);
 
+	}
+
+	@RequestMapping(value = "/batchcheck", method = RequestMethod.POST)
+	public @ResponseBody String batchCheck(@RequestParam String projectId, @RequestParam String modelId) {
+		System.out.println(projectId + "," + modelId);
+		projectService.batchCheck(projectId, modelId);
+		return "OK|" + SessionHelper.getLastUrl(null);
 	}
 
 }
