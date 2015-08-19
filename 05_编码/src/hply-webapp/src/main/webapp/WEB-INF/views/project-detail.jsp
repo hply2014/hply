@@ -33,20 +33,20 @@
                 <div class="panel with-nav-tabs panel-default">
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li ${target=='summary'?'class="active"':'' }><a href="#tab0default" data-toggle="tab">总览信息</a></li>
-                            <li ${target=='history'?'class="active"':'' }><a href="#tab8default" data-toggle="tab">变更记录</a></li>
-                            <li ${target=='project'?'class="active"':'' }><a href="#tab1default" data-toggle="tab">合同项目信息</a></li>
-                            <li ${target=='contractchange'?'class="active"':'' }><a href="#tab1xdefault"
+                            <li target="summary" ${target=='summary'?'class="active"':'' }><a href="#tab0default" data-toggle="tab">总览信息</a></li>
+                            <li target="history" ${target=='history'?'class="active"':'' }><a href="#tab8default" data-toggle="tab">变更记录</a></li>
+                            <li target="project" ${target=='project'?'class="active"':'' }><a href="#tab1default" data-toggle="tab">合同项目信息</a></li>
+                            <li target="contractchange" ${target=='contractchange'?'class="active"':'' }><a href="#tab1xdefault"
                                 data-toggle="tab">补充协议</a></li>
-                            <li ${target=='partybilling'?'class="active"':'' }><a href="#tab2default"
+                            <li target="partybilling" ${target=='partybilling'?'class="active"':'' }><a href="#tab2default"
                                 data-toggle="tab">甲方开票情况</a></li>
-                            <li ${target=='customerbilling'?'class="active"':'' }><a href="#tab3default"
+                            <li target="customerbilling" ${target=='customerbilling'?'class="active"':'' }><a href="#tab3default"
                                 data-toggle="tab">客户开票情况</a></li>
-                            <li ${target=='collections'?'class="active"':'' }><a href="#tab4default"
+                            <li target="collections" ${target=='collections'?'class="active"':'' }><a href="#tab4default"
                                 data-toggle="tab">收款情况</a></li>
-                            <li ${target=='payment'?'class="active"':'' }><a href="#tab5default" data-toggle="tab">付款情况</a></li>
-                            <li ${target=='arrears'?'class="active"':'' }><a href="#tab6default" data-toggle="tab">往来欠款</a></li>
-                            <li ${target=='profile'?'class="active"':'' }><a href="#tab7default" data-toggle="tab">型材</a></li>
+                            <li target="payment" ${target=='payment'?'class="active"':'' }><a href="#tab5default" data-toggle="tab">付款情况</a></li>
+                            <li target="arrears" ${target=='arrears'?'class="active"':'' }><a href="#tab6default" data-toggle="tab">往来欠款</a></li>
+                            <li target="profile" ${target=='profile'?'class="active"':'' }><a href="#tab7default" data-toggle="tab">型材</a></li>
                         </ul>
                     </div>
 
@@ -846,7 +846,13 @@
                                             data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，将被永久删除，操作不可撤销，是否确认？"
                                             href="<s:url value="/arrears/delete/${arrears.id }" />">删除</a>
                                     </shiro:hasPermission>
-                                </c:if></td> </tr>
+                                </c:if>
+                                <c:if test="${arrears.status == 1 && arrears.amount + arrears.offsetAmount < 0}">
+<shiro:hasPermission name="`arrears_check`">
+                                        <a href="javascript:void()" onclick="repay('${arrears.id }', ${arrears.amount + arrears.offsetAmount}, ${arrears.interestAmount})">还款</a>
+                                    </shiro:hasPermission>
+</c:if>
+                                </td> </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -1031,6 +1037,44 @@
 
 
 <script type="text/javascript">
+function repay(id, aa, ia){
+	$("#myModal .modal-title").html("归还本金及利息");
+	var str = "<div class=\"row\"><label class=\"col-sm-2 control-label\">本金</label><div class=\"col-sm-4\"><input id=\"repay_amount0\" class=\"form-control\" type=\"text\" value=\"" 
+	+ -1*aa +"\"/><p class=\"help-block\" /></div></div> <div class=\"row\"><label class=\"col-sm-2 control-label\">利息</label><div class=\"col-sm-4 \"><input id=\"repay_amount1\" class=\"form-control\" type=\"text\" value=\"" 
+	+ -1*ia + "\"/><p class=\"help-block\" /></div></div>";
+	$("#myModalContent").html(str);
+	$('#myModal').data("arrears-id", id).modal('show');
+}
+function showDialog(arrearsId) {
+	var rows = "";
+	$.post("<s:url value='/api/getinterestdetail/'/>" + arrearsId, {},
+			function(result) {
+				var ic = 1;
+				for (var i = 0; i < result.length -1; i++) {
+					if(i == result.length - 2){
+						// 最后一行
+						rows += "<tr><td>"
+							+ result[i+1].description + " = " + result[i+1].interestAmount
+							+ "</td><td class=\"amount\">" + (ic+1) + "</td></tr>\r\n";
+					}
+					else if(result[i].interestAmount != result[i+1].interestAmount){
+						rows += "<tr><td>"
+								+ result[i].description + " = " + result[i].interestAmount
+								+ "</td><td class=\"amount\">" + ic + "</td></tr>\r\n";
+						ic = 1;
+					}else{
+						ic++;
+					}
+				}
+
+				$("#myModal .modal-title").html("利息计算明细");
+				var str = "<table width=\"70%\"border=\"0\"><tr><th>日息</th><th class=\"amount\">天数</th></tr>"
+						+ rows + "</table>";
+				$("#myModalContent").html(str);
+				$('#myModal').modal('show');
+			}, "json");
+
+}
 	$(function() {
 		$.post("<s:url value='/api/capitaloccupied/${project.id}' />", {}, function(result) {
 			$("#capitalOccupied").html(
@@ -1052,6 +1096,12 @@
 
 			}
 		}, "text");
+		
+		$(".nav-tabs li").click(function(){
+			var selfurl = self.location.href;
+			var url = selfurl.split('?')[0] + "?target=" + $(this).attr("target");
+			$.post("<s:url value='/api/setlasturl'/>", {url: url});
+		});
 	});
 </script>
 

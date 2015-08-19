@@ -1,5 +1,6 @@
 ﻿package hply.web;
 
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.FieldTypes;
 import hply.service.FieldTypesService;
@@ -105,7 +106,7 @@ public class FieldTypesController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("fieldTypes", fieldTypes);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -125,7 +126,7 @@ public class FieldTypesController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("fieldTypes", fieldTypes);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -137,6 +138,6 @@ public class FieldTypesController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("fieldTypes", fieldTypes);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }

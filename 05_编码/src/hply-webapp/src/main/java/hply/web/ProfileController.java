@@ -144,7 +144,7 @@ public class ProfileController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("profile", profile);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -164,7 +164,7 @@ public class ProfileController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("profile", profile);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -176,7 +176,7 @@ public class ProfileController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("profile", profile);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 	/*
 	 * 审核页面
@@ -187,6 +187,6 @@ public class ProfileController {
 		service.check(id);
 		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("profile", profile);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }

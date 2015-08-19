@@ -37,6 +37,7 @@
 body {
 	padding-top: 50px;
 	padding-bottom: 20px;
+    font-size: 12px;
 }
 
 th, .nowrap {

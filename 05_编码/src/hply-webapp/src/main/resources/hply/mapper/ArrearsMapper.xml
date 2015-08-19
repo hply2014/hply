@@ -16,35 +16,46 @@
 		project_id = #{projectId} and arrears_type = '利息'
 	</select>
 
-	<!-- 归还本金 -->
-	<update id="restorePrincipal">call proc_restore_principal(#{arrearsId})</update>
-
-	<!-- 归还利息 -->
-	<update id="restoreInterest">call proc_restore_interest(#{arrearsId})</update>
-
+	<!-- 归还本金及利息 -->
+	<update id="restorePrincipal">{call proc_restore_principal(#{in_arrears_id}, #{in_amount}, #{in_interest}, #{in_create_user}) }
+	</update>
 
 	<select id="getAllByProject" resultType="Arrears">
-		select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing,
-		arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as
-		interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice,
-		create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser,
-		description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03
-		as field03, field_04 as field04, field_05 as field05 from t_arrears where project_id=#{projectId} order by trice desc
+		select id as id, serial_id as serialId, arrears_code as arrearsCode,
+		project_id as projectId, funds_using as fundsUsing,
+		arrears_type as arrearsType, pay_type as payType, amount as amount,
+		offset_amount as offsetAmount, interest_amount as
+		interestAmount, interest_rate as interestRate, bank_account as
+		bankAccount, bank_name as bankName, trice as trice,
+		create_time as createTime, create_user as createUser, update_time
+		as updateTime, update_user as updateUser,
+		description as description, version as version, status as status, field_01 as
+		field01, field_02 as field02, field_03
+		as field03, field_04 as field04, field_05 as field05 from t_arrears where
+		project_id=#{projectId} order by trice desc
 	</select>
 
 	<select id="getRowCountByOrganization" resultType="int">
-		select count(*) from t_arrears t where exists (select 0 from t_project p where t.project_id=p.id and
+		select count(*) from t_arrears t where exists (select 0 from
+		t_project p where t.project_id=p.id and
 		p.organization_id=#{organizationId})
 	</select>
 
 	<select id="getAllPagedByOrganization" resultType="Arrears">
-		select id as id, serial_id as serialId, arrears_code as arrearsCode, project_id as projectId, funds_using as fundsUsing,
-		arrears_type as arrearsType, pay_type as payType, amount as amount, offset_amount as offsetAmount, interest_amount as
-		interestAmount, interest_rate as interestRate, bank_account as bankAccount, bank_name as bankName, trice as trice,
-		create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser,
-		description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03
-		as field03, field_04 as field04, field_05 as field05 from t_arrears t where exists (select 0 from t_project p where
-		t.project_id=p.id and p.organization_id=#{organizationId}) order by trice desc limit #{pageSize} offset #{pageIndex}
+		select id as id, serial_id as serialId, arrears_code as
+		arrearsCode, project_id as projectId, funds_using as fundsUsing,
+		arrears_type as arrearsType, pay_type as payType,
+		amount as amount, offset_amount as offsetAmount, interest_amount as
+		interestAmount, interest_rate as interestRate,
+		bank_account as bankAccount, bank_name as bankName, trice as trice,
+		create_time as createTime, create_user as
+		createUser, update_time as updateTime, update_user as updateUser,
+		description as description, version as version,
+		status as status, field_01 as field01, field_02 as field02, field_03
+		as field03, field_04 as field04, field_05 as
+		field05 from t_arrears t where exists (select 0 from t_project p where
+		t.project_id=p.id and
+		p.organization_id=#{organizationId}) order by trice desc limit #{pageSize} offset #{pageIndex}
 	</select>
 </mapper>
 

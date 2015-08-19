@@ -99,19 +99,23 @@
                                         data-content="${arrears.description}"
                                         class="glyphicon glyphicon-exclamation-sign"></span>
                                 </c:if></td>
-                            <td><c:if test="${arrears.status != 1 }">
+                           <td><c:if test="${arrears.status != 1 }">
                                     <shiro:hasPermission name="`arrears_check`">
-                                        <a class="check"
-                                            data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，审核后所有数据将不能被修改，是否确认？"
-                                            href="<s:url value="/arrears/check/${arrears.id }" />">审核</a>
+                                        <a class="check" data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/arrears/check/${arrears.id }" />">审核</a>
                                     </shiro:hasPermission>
-                                    <shiro:hasPermission name="`arrears_create`">
+                 <shiro:hasPermission name="`arrears_create`">
                                         <a href="<s:url value="/arrears/modify/${arrears.id }" />">修改</a>
                                         <a class="delete"
                                             data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，将被永久删除，操作不可撤销，是否确认？"
                                             href="<s:url value="/arrears/delete/${arrears.id }" />">删除</a>
                                     </shiro:hasPermission>
-                                </c:if></td>
+								</c:if>
+<c:if test="${arrears.status == 1 && arrears.amount + arrears.offsetAmount < 0}">
+<shiro:hasPermission name="`arrears_check`">
+                                        <a href="javascript:void()" onclick="repay('${arrears.id }', ${arrears.amount + arrears.offsetAmount}, ${arrears.interestAmount})">还款</a>
+                                    </shiro:hasPermission>
+</c:if>
+</td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -137,26 +141,42 @@
     </div>
 </div>
 <script type="text/javascript">
-<!--
+	function repay(id, aa, ia){
+		$("#myModal .modal-title").html("归还本金及利息");
+		var str = "<div class=\"row\"><label class=\"col-sm-2 control-label\">本金</label><div class=\"col-sm-4\"><input id=\"repay_amount0\" class=\"form-control\" type=\"text\" value=\"" 
+		+ -1*aa +"\"/><p class=\"help-block\" /></div></div> <div class=\"row\"><label class=\"col-sm-2 control-label\">利息</label><div class=\"col-sm-4 \"><input id=\"repay_amount1\" class=\"form-control\" type=\"text\" value=\"" 
+		+ -1*ia + "\"/><p class=\"help-block\" /></div></div>";
+		$("#myModalContent").html(str);
+		$('#myModal').data("arrears-id", id).modal('show');
+	}
 	function showDialog(arrearsId) {
-		var rows = "";
-		$
-				.post(
-						"<s:url value='/api/getinterestdetail/' />" + arrearsId,
-						{},
-						function(result) {
-							for (var i = 0; i < result.length; i++) {
-								rows += "<tr title=\"" + result[i].description + "\"><td>" + (i + 1) + "</td><td>"
-										+ new Date(result[i].trice).toLocaleDateString() + "</td><td class=\"amount\">" + result[i].amount
-										+ "</td><td class=\"amount\">" + result[i].interestAmount + "</td></tr>\r\n";
-							}
-
-							$("#myModal .modal-title").html("利息计算明细");
-							var str = "<table width=\"70%\"border=\"0\"><tr><th>#</th><th>日期</th><th class=\"amount\">计息基数</th><th class=\"amount\">当日计息</th></tr>"
-									+ rows + "</table>";
-							$("#myModalContent").html(str);
-							$('#myModal').modal('show');
-						}, "json");
+    	var rows = "";
+    	$.post("<s:url value='/api/getinterestdetail/'/>" + arrearsId, {},
+    			function(result) {
+    				var ic = 1;
+    				for (var i = 0; i < result.length -1; i++) {
+    					if(i == result.length - 2){
+    						// 最后一行
+    						rows += "<tr><td>"
+    							+ result[i+1].description + " = " + result[i+1].interestAmount
+    							+ "</td><td class=\"amount\">" + (ic+1) + "</td></tr>\r\n";
+    					}
+    					else if(result[i].interestAmount != result[i+1].interestAmount){
+    						rows += "<tr><td>"
+    								+ result[i].description + " = " + result[i].interestAmount
+    								+ "</td><td class=\"amount\">" + ic + "</td></tr>\r\n";
+    						ic = 1;
+    					}else{
+    						ic++;
+    					}
+    				}
+    
+    				$("#myModal .modal-title").html("利息计算明细");
+    				var str = "<table width=\"70%\"border=\"0\"><tr><th>日息</th><th class=\"amount\">天数</th></tr>"
+    						+ rows + "</table>";
+    				$("#myModalContent").html(str);
+    				$('#myModal').modal('show');
+    			}, "json");
 
 	}
 $(function() {
@@ -173,8 +193,6 @@ $(function() {
 	$(".org").change(function(){
 		self.location = '<s:url value="/arrears"/>?oid=' + $(this).val();
 	});
-
 });
-//-->
 </script>
 <%@ include file="bottom.jsp"%>

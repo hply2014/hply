@@ -1,5 +1,6 @@
 ﻿package hply.web;
 
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.Information;
 import hply.domain.SysOrganization;
@@ -123,7 +124,7 @@ public class InformationController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("information", information);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -143,7 +144,7 @@ public class InformationController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("information", information);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -155,6 +156,6 @@ public class InformationController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("information", information);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }

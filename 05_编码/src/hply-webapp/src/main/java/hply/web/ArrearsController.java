@@ -158,7 +158,7 @@ public class ArrearsController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("arrears", arrears);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -178,7 +178,7 @@ public class ArrearsController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("arrears", arrears);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -190,7 +190,7 @@ public class ArrearsController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("arrears", arrears);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -202,6 +202,6 @@ public class ArrearsController {
 		service.check(id);
 		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("arrears", arrears);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }

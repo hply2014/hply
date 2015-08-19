@@ -168,7 +168,7 @@ public class PaymentController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("payment", payment);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -189,7 +189,7 @@ public class PaymentController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("payment", payment);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -201,7 +201,7 @@ public class PaymentController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("payment", payment);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -213,6 +213,6 @@ public class PaymentController {
 		service.check(id);
 		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("payment", payment);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }

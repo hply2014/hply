@@ -249,6 +249,24 @@ public class APIController {
 		return arrearsInterestService.getDetail(arrearsId);
 	}
 
+//"<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val()
+	@RequestMapping(value = "/repay/{arrearsId}/{amount}/{interest}", method = RequestMethod.POST)
+	public @ResponseBody String repay(@PathVariable String arrearsId, @PathVariable Double amount, @PathVariable Double interest) {
+		//TODO 还款，
+		System.out.println(arrearsId + "," + amount + "," + interest);
+		arrearsService.repay(arrearsId, amount, interest);
+		return "{\"message\":\"OK\"}";
+	}
+	
+	@RequestMapping(value = "/setlasturl", method = RequestMethod.POST)
+	public @ResponseBody String setLastUrl(@RequestParam String url) {
+		System.out.println("Last URL=" + url);
+		SessionHelper.setLastUrl(url);
+		return "{\"message\":\"OK\"}";
+	}
+	
+	
+	
 	@RequestMapping(value = "/getarrearsamount/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getArrearsAmount(@PathVariable String projectId) {
 

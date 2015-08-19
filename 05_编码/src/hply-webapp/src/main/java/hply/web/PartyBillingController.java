@@ -88,7 +88,7 @@ public class PartyBillingController {
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 
 			SysUser user1 = sysUserService.get(item.getStep1User());
-			item.setStep1User(user1 != null ? user.getRealName() : Utility.EMPTY);
+			item.setStep1User(user1 != null ? user1.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("list", list);
 
@@ -170,7 +170,7 @@ public class PartyBillingController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("partyBilling", partyBilling);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -190,7 +190,7 @@ public class PartyBillingController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("partyBilling", partyBilling);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -217,7 +217,7 @@ public class PartyBillingController {
 		redirectAttrs.addFlashAttribute("message", "审核成功");
 
 		redirectAttrs.addFlashAttribute("partyBilling", pb);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -229,7 +229,7 @@ public class PartyBillingController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("partyBilling", partyBilling);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 	/*
 	 * 审核页面
@@ -240,6 +240,6 @@ public class PartyBillingController {
 		service.check(id);
 		redirectAttrs.addFlashAttribute("delMessage", "审核成功");
 		redirectAttrs.addFlashAttribute("partyBilling", partyBilling);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }

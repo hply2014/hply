@@ -2,10 +2,13 @@
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
+import hply.core.Utility;
 import hply.domain.Arrears;
 import hply.mapper.ArrearsMapper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,20 +28,37 @@ public class ArrearsService {
 	/**
 	 * 07_往来欠款，插入对象
 	 */
+	// @Transactional(rollbackFor = SQLException.class)
 	public void insert(Arrears arrears) {
 		arrears.setCreateUser(SessionHelper.getCurrentUserId());
 		mapper.insert(arrears);
+//		try {
+//			
+//			
+//			
+//			Map<String, Object> param = new HashMap<String, Object>();
+//			if (arrears.getAmount() > 0 && "垫资".equals(arrears.getArrearsType())) {
+//				// 归还本金
+//				mapper.restorePrincipal(arrears.getId());
+//			}
+//
+//			if (arrears.getAmount() > 0 && "利息".equals(arrears.getArrearsType())) {
+//				// 归还利息
+//				param.put("arrears_id", arrears.getId());
+//				mapper.restoreInterest(param);
+//			}
+//		} catch (Exception ex) {
+//			mapper.delete(arrears.getId());
+//			throw ex;
+//		}
 
-		if (arrears.getAmount() > 0 && "垫资".equals(arrears.getArrearsType())) {
-			// 归还本金
-			mapper.restorePrincipal(arrears.getId());
-		}
-
-		if (arrears.getAmount() > 0 && "利息".equals(arrears.getArrearsType())) {
-			// 归还利息
-			mapper.restoreInterest(arrears.getId());
-		}
 	}
+	
+	public void repay(String arrearsId, Double amount, Double interest){
+		mapper.restorePrincipal(arrearsId, amount, interest, SessionHelper.getCurrentUserId());
+	}
+	
+	
 
 	/**
 	 * 07_往来欠款，不进行冲突检测的更新
@@ -69,10 +89,11 @@ public class ArrearsService {
 	/*
 	 * 审核操作，将status修改为1
 	 */
-	public void check(String id){
-		//TODO 审核操作，将status修改为1
+	public void check(String id) {
+		// TODO 审核操作，将status修改为1
 		mapper.check(id);
 	}
+
 	/**
 	 * 07_往来欠款，根据主键获取一个对象
 	 */
@@ -105,22 +126,19 @@ public class ArrearsService {
 		Double d = mapper.getTotalByProject(projectId);
 		return d != null ? d.doubleValue() : 0.0;
 	}
-	
 
-	public double getInterestAmount(String projectId){
+	public double getInterestAmount(String projectId) {
 		Double d = mapper.getInterestAmount(projectId);
 		return d != null ? d.doubleValue() : 0.0;
 	}
-	
-	public List<Arrears> getAllByProject(String projectId){
+
+	public List<Arrears> getAllByProject(String projectId) {
 		return mapper.getAllByProject(projectId);
 	}
-
 
 	public List<Arrears> getAllPagedByOrganization(String orgId, int pageIndex, int pageSize) {
 		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
 	}
-
 
 	public int getRowCount(String orgId) {
 		return mapper.getRowCountByOrganization(orgId);

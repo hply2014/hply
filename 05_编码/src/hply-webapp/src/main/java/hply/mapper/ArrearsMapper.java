@@ -9,6 +9,7 @@ import hply.domain.Arrears;
 import hply.mapper.partial.PartialArrearsMapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -29,12 +30,12 @@ public interface ArrearsMapper extends PartialArrearsMapper {
 	/*
 	 * 归还本金
 	 */
-	public void restorePrincipal(String arrearsId);
+	public void restorePrincipal(@Param("in_arrears_id") String arrearsId, @Param("in_amount") Double amount, @Param("in_interest") Double interest, @Param("in_create_user") String createUserId);
 
 	/*
 	 * 归还利息
 	 */
-	public void restoreInterest(String arrearsId);
+	public void restoreInterest(Map<String, Object> param);
 	
 	public List<Arrears> getAllByProject(String projectId);
 

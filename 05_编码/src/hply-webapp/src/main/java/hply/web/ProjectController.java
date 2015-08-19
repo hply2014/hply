@@ -283,7 +283,7 @@ public class ProjectController {
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 
 			SysUser user1 = sysUserService.get(item.getStep1User());
-			item.setStep1User(user1 != null ? user.getRealName() : Utility.EMPTY);
+			item.setStep1User(user1 != null ? user1.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("lPartyBilling", lPartyBilling);
 
@@ -369,7 +369,7 @@ public class ProjectController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("project", project);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -390,7 +390,7 @@ public class ProjectController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("project", project);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -402,7 +402,7 @@ public class ProjectController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("project", project);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 	
 
@@ -415,7 +415,7 @@ public class ProjectController {
 		service.check(id);
 		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("project", project);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	private final static String EXCEL_HEADERS = "序号,项目编号,项目名称,项目经理,管理费率,税金比率,合同金额,印花税上缴金额,登记时间";

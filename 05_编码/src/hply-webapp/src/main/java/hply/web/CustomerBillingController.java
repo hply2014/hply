@@ -148,7 +148,7 @@ public class CustomerBillingController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -169,7 +169,7 @@ public class CustomerBillingController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -181,7 +181,7 @@ public class CustomerBillingController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 	/*
 	 * 审核页面
@@ -192,6 +192,6 @@ public class CustomerBillingController {
 		service.check(id);
 		redirectAttrs.addFlashAttribute("delMessage", "审核成功");
 		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }

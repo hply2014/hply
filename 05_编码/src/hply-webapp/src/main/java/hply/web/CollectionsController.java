@@ -157,7 +157,7 @@ public class CollectionsController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("collections", collections);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -177,7 +177,7 @@ public class CollectionsController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("collections", collections);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -189,7 +189,7 @@ public class CollectionsController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("collections", collections);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 	/*
 	 * 审核页面
@@ -200,6 +200,6 @@ public class CollectionsController {
 		service.check(id);
 		redirectAttrs.addFlashAttribute("delMessage", "审核通过");
 		redirectAttrs.addFlashAttribute("collections", collections);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }

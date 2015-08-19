@@ -83,8 +83,24 @@ $(function() {
 		});
 
 		$("#myModal .btn-danger").click(function() {
+			var aid = $('#myModal').data("arrears-id");
+			if(aid != null){
+		    	$.post("<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val(), {},
+		    			function(result) {
+		    				//未提交成功，提示错误
+		    				if(result.message != "OK"){
+		    					alert(result.message);
+		    					return;
+		    				}
+		    				self.location.reload();
+		    				return;
+		    			}, "json");
+			}
 			$('#myModal').modal("hide");
-			self.location.replace($("#myModal").data("href"));
+			var href = $("#myModal").data("href");
+			if(href != null){
+				self.location.replace(href);
+			}
 		});
 
 		$(".input-group.date").datepicker({
@@ -107,9 +123,14 @@ $(function() {
 		$(".pager .disabled a").click(function() {
 			return false;
 		});
+
+		var selfurl = self.location.href;
+		if(selfurl.indexOf('/create') < 0 && selfurl.indexOf('/modify') < 0 && selfurl.indexOf('/step') < 0){
+			// alert(selfurl);
+			$.post("<s:url value='/api/setlasturl'/>", {url: selfurl});
+		}
 	});
 </script>
-
 <div id="footer" class="navbar-fixed-bottom">
         <h4 class="pull-right"><span id="ftitle" class="label label-default">行：***，列：***</span></h4>
     </div>

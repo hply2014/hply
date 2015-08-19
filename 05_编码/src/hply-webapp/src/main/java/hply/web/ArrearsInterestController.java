@@ -2,6 +2,8 @@
 
 
 import java.util.List;
+
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.ArrearsInterest;
 import hply.service.ArrearsInterestService;
@@ -103,7 +105,7 @@ public class ArrearsInterestController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("arrearsInterest", arrearsInterest);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -123,7 +125,7 @@ public class ArrearsInterestController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("arrearsInterest", arrearsInterest);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -136,7 +138,7 @@ public class ArrearsInterestController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("arrearsInterest", arrearsInterest);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 }
 

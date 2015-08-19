@@ -355,7 +355,7 @@ public class ChopController {
 		redirectAttrs.addFlashAttribute("message", "申请成功");
 
 		redirectAttrs.addFlashAttribute("chop", chop);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -379,7 +379,7 @@ public class ChopController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("chop", chop);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -412,7 +412,7 @@ public class ChopController {
 		redirectAttrs.addFlashAttribute("message", "部门审核成功");
 
 		redirectAttrs.addFlashAttribute("chop", orginChop);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -438,7 +438,7 @@ public class ChopController {
 		redirectAttrs.addFlashAttribute("message", "财务审批成功");
 
 		redirectAttrs.addFlashAttribute("chop", orginChop);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -463,7 +463,7 @@ public class ChopController {
 		redirectAttrs.addFlashAttribute("message", "处理成功");
 
 		redirectAttrs.addFlashAttribute("chop", orginChop);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	/*
@@ -475,7 +475,7 @@ public class ChopController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("chop", chop);
-		return "redirect:" + URI;
+		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
 
 	@RequestMapping(value = "/export")

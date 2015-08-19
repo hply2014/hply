@@ -20,6 +20,7 @@ public class SessionHelper {
 	public static final String CURRENT_LOGIN_TIME = "__CURRENT_LOGIN_TIME";
 	public static final String CURRENT_ROOT_TREE_NODE = "__CURRENT_PERMISSION";
 	public static final String CURRENT_ORGANIZATION = "__CURRENT_ORGANIZATION";
+	public static final String CURRENT_LAST_URL = "__CURRENT_LAST_URL";
 
 	public static SysResourceService sysResourceService;
 	
@@ -94,6 +95,14 @@ public class SessionHelper {
 		TreeNode root = new TreeNode();
 		root.setChildren(new ArrayList<TreeNode>());
 		return root;
+	}
+	
+	public static String getLastUrl(String refUrl){
+		return getAttribute(CURRENT_LAST_URL) + Utility.EMPTY;
+	}
+	
+	public static void setLastUrl(String str){
+		setAttribute(CURRENT_LAST_URL, str);
 	}
 
 }
