@@ -200,7 +200,24 @@ public class ChopController {
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
 		model.addAttribute("page_title", "盖章管理的详情信息");
-		model.addAttribute("chop", service.get(id));
+		Chop item = service.get(id);
+
+		SysOrganization org = orgService.get(item.getOrganizationId());
+		item.setOrganizationId(org != null ? org.getOrganizationName() : Utility.EMPTY);
+
+		SysUser user = sysUserService.get(item.getApplyUser());
+		item.setApplyUser(user != null ? user.getRealName() : Utility.EMPTY);
+
+		SysUser step1User = sysUserService.get(item.getStep1User());
+		item.setStep1User(step1User != null ? step1User.getRealName() : Utility.EMPTY);
+
+		SysUser step2User = sysUserService.get(item.getStep2User());
+		item.setStep2User(step2User != null ? step2User.getRealName() : Utility.EMPTY);
+
+		SysUser step3User = sysUserService.get(item.getStep3User());
+		item.setStep3User(step3User != null ? step3User.getRealName() : Utility.EMPTY);
+
+		model.addAttribute("chop", item);
 		return JSP_PAGE_DETAIL;
 	}
 
@@ -483,7 +500,7 @@ public class ChopController {
 			@RequestParam(value = "p1", required = false) String p1, @RequestParam(value = "p2", required = false) String p2,
 			@RequestParam(value = "oid", required = false) String oid) throws Exception {
 
-		final String EXCEL_HEADERS = "序号,名称,日期,项目名称,盖章内容,经办人,项目经理";
+		final String EXCEL_HEADERS = "序号,编号,名称,日期,项目名称,盖章内容,经办人,项目经理";
 
 		if (StringUtils.isBlank(oid)) {
 			if (SessionHelper.IsBusinessDepartment()) {
@@ -577,8 +594,12 @@ public class ChopController {
 			_c0.setCellValue(i + 1);
 			_c0.setCellStyle(styleDefault);
 
+			Cell c01 = r.createCell(j++);
+			c01.setCellValue(p.getChopCode());
+			c01.setCellStyle(styleDefault);
+
 			Cell c2 = r.createCell(j++);
-			c2.setCellValue(p.getApplyUser());
+			c2.setCellValue(p.getField01());
 			c2.setCellStyle(styleDefault);
 
 			Cell _c1 = r.createCell(j++);

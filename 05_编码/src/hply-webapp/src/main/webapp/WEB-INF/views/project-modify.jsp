@@ -31,7 +31,7 @@
                                     items="${orglist }" itemValue="id" itemLabel="organizationName" />
                                 <p class="help-block" />
                             </div>
-                            <label for="manager" class="col-sm-2 control-label">项目经理</label>
+                            <label for="manager" class="col-sm-2 control-label">项目实施人</label>
                             <div class="col-sm-4 ">
                                 <sf:input cssClass="form-control" path="manager" placeholder="项目经理" />
                                 <p class="help-block" />

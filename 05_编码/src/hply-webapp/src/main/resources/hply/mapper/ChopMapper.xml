@@ -34,7 +34,7 @@
 	</select>
 
 	<select id="getChopReport" resultType="Chop">
-		select apply_user applyUser, apply_time applyTime, project_name projectName, content,
+		select chop_code chopCode, field_01 field01, field_02 field02, apply_user applyUser, apply_time applyTime, project_name projectName, content,
 		step3_user step3User, manager
 		from t_chop where step3_user is not null and apply_time between date(concat(#{p1}, '-21')) -
 		interval + 1 month and

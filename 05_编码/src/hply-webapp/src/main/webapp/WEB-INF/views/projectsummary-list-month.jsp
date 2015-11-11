@@ -77,7 +77,7 @@ th {
                 <th rowspan="2">#</th>
                 <th rowspan="2">时间</th>
                 <th rowspan="2">摘要</th>
-                <th colspan="6">项目信息</th>
+                <th colspan="7">项目信息</th>
                 <th colspan="2">甲方开票情况</th>
                 <th colspan="3">收款情况</th>
                 <th colspan="2">客户开票情况</th>
@@ -90,6 +90,7 @@ th {
             <tr>
                 <th>项目编号</th>
                 <th>项目名称</th>
+                <th>项目实施人</th>
                 <th>合同金额</th>
                 <th>合同调增额</th>
                 <th>累计调增额</th>
@@ -125,6 +126,7 @@ th {
                 <th>摘要</th>
                 <th>项目编号</th>
                 <th>项目名称</th>
+                <th>项目实施人</th>
                 <th>合同金额</th>
                 <th>合同调增额</th>
                 <th>累计调增额</th>
@@ -170,6 +172,7 @@ th {
                         </c:if></td>
                     <td class="nowrap"><c:out value="${projectSummary.projectCode}" /></td>
                     <td class="nowrap"><c:out value="${projectSummary.projectName}" /></td>
+                    <td class="nowrap"><c:out value="${projectSummary.field03}" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.contractAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummary.changeAmount}"
@@ -227,7 +230,7 @@ th {
                     <td><c:out value="${projectSummary.profilePoint}" /></td>
                 </tr>
             </c:forEach><tr class="total">
-                    <td colspan="5" style="text-align: right"><c:out value="${projectSummaryTotal.projectName}" /></td>
+                    <td colspan="6" style="text-align: right"><c:out value="${projectSummaryTotal.projectName}" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.contractAmount}"
                             pattern="###,###,###,###,##0.00" /></td>
                     <td class="amount"><fmt:formatNumber value="${projectSummaryTotal.changeAmount}"

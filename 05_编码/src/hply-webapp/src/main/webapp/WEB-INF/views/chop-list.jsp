@@ -51,12 +51,11 @@
                         <th></th>
                         <th>#</th>
                         <th>用章编号</th>
-                        <th>项目名称</th>
-                        <th>主要内容</th>
+                        <th>项目名称 &nbsp;/&nbsp;主要内容</th>
                         <th>申请信息</th>
                         <th>部门审核</th>
                         <th>财务部审批</th>
-                        <th>经办人处理</th>
+                        <th>盖章受理</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,33 +71,29 @@
                             <td><a
                                 href="<s:url value="/chop/detail/{id}"><s:param name="id" value="${chop.id }" /></s:url>"><c:out
                                         value="${chop.chopCode}" /></a></td>
-                            <td><c:out value="${chop.projectName}" /></td>
-                            <td><c:out value="${chop.content}" /></td>
-                            <td><c:out value="${chop.applyUser}" /><br />所在部门：<c:out
-                                    value="${chop.organizationId}" /><br />申请时间：<fmt:formatDate
+                            <td><c:out value="${chop.projectName}" /><br/><c:out value="${chop.content}" /></td>
+                            <td><c:out value="${chop.applyUser}" /><br /><fmt:formatDate
                                     value="${chop.applyTime}" pattern="yyyy-MM-dd" /></td>
                             <td><c:if test="${empty chop.step1User }">未审核</c:if> <c:if
-                                    test="${not empty chop.step1User }">部门审核：<c:out value="${chop.step1User}" />
+                                    test="${not empty chop.step1User }"><c:out value="${chop.step1User}" />
                                     <br />
-                                </c:if> <c:if test="${not empty chop.step1Idea }">意见：<c:out value="${chop.step1Idea}" />
-                                    <br />
-                                </c:if> <c:if test="${not empty chop.step1Time }">时间：<fmt:formatDate
+                                </c:if><c:if test="${not empty chop.step1Time }"><fmt:formatDate
                                         value="${chop.step1Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
-                            <td><c:if test="${empty chop.step2User }">未审批</c:if> <c:if
-                                    test="${not empty chop.step2User }">财务审批：<c:out value="${chop.step2User}" />
+                            <td><c:if test="${empty chop.step2User }">未审批</c:if> <c:if test="${not empty chop.step2Idea }"><c:out value="${chop.step2Idea}" />
                                     <br />
-                                </c:if> <c:if test="${not empty chop.step2Idea }">意见：<c:out value="${chop.step2Idea}" />
+                                </c:if> <c:if
+                                    test="${not empty chop.step2User }"><c:out value="${chop.step2User}" />
                                     <br />
-                                </c:if> <c:if test="${not empty chop.step2Time }">时间：<fmt:formatDate
+                                </c:if> <c:if test="${not empty chop.step2Time }"><fmt:formatDate
                                         value="${chop.step2Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
-                            <td><c:if test="${empty chop.step3User }">未办理</c:if> <c:if
-                                    test="${not empty chop.step3User }">办理人：<c:out value="${chop.step3User}" />
+                            <td><c:if test="${empty chop.step3User }">未办理</c:if> <c:if test="${not empty chop.step3Idea }"><c:out value="${chop.step3Idea}" />
                                     <br />
-                                </c:if> <c:if test="${not empty chop.step3Idea }">结果：<c:out value="${chop.step3Idea}" />
+                                </c:if> <c:if
+                                    test="${not empty chop.step3User }"><c:out value="${chop.step3User}" />
                                     <br />
-                                </c:if> <c:if test="${not empty chop.step3Time }">时间：<fmt:formatDate
+                                </c:if> <c:if test="${not empty chop.step3Time }"><fmt:formatDate
                                         value="${chop.step3Time}" pattern="yyyy-MM-dd" />
                                 </c:if></td>
                             <td><c:if test="${ empty chop.stepStatus }">

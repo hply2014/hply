@@ -34,20 +34,13 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		<sf:label path="projectId" cssClass="col-sm-2 control-label">项目ID</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${chop.projectId}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="projectCode" cssClass="col-sm-2 control-label">项目编号</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${chop.projectCode}" /></p>
-		</div>
-	</div>
-
+    <div class="form-group">
+        <sf:label path="field01" cssClass="col-sm-2 control-label">名称</sf:label>
+        <div class="col-sm-10">
+            <p class="form-control-static"><c:out value="${chop.field01}" /></p>
+        </div>
+    </div>
+    
 	<div class="form-group">
 		<sf:label path="projectName" cssClass="col-sm-2 control-label">项目名称</sf:label>
 		<div class="col-sm-10">
@@ -69,6 +62,12 @@
 		</div>
 	</div>
 
+    <div class="form-group">
+        <sf:label path="field02" cssClass="col-sm-2 control-label">经办人</sf:label>
+        <div class="col-sm-10">
+            <p class="form-control-static"><c:out value="${chop.field02}" /></p>
+        </div>
+    </div>
 	<div class="form-group">
 		<sf:label path="applyUser" cssClass="col-sm-2 control-label">申请人</sf:label>
 		<div class="col-sm-10">
@@ -133,37 +132,23 @@
 	</div>
 
 	<div class="form-group">
-		<sf:label path="step3Idea" cssClass="col-sm-2 control-label">经办人办理结果</sf:label>
+		<sf:label path="step3Idea" cssClass="col-sm-2 control-label">受理结果</sf:label>
 		<div class="col-sm-10">
 			<p class="form-control-static"><c:out value="${chop.step3Idea}" /></p>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="step3User" cssClass="col-sm-2 control-label">经办人</sf:label>
+		<sf:label path="step3User" cssClass="col-sm-2 control-label">受理人</sf:label>
 		<div class="col-sm-10">
 			<p class="form-control-static"><c:out value="${chop.step3User}" /></p>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<sf:label path="step3Time" cssClass="col-sm-2 control-label">经办时间</sf:label>
+		<sf:label path="step3Time" cssClass="col-sm-2 control-label">受理时间</sf:label>
 		<div class="col-sm-10">
 			<p class="form-control-static"><fmt:formatDate value="${chop.step3Time}" pattern="yyyy-MM-dd" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="stepStatus" cssClass="col-sm-2 control-label">流程状态</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${chop.stepStatus}" /></p>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<sf:label path="status" cssClass="col-sm-2 control-label">数据状态，0：草稿/1：正式</sf:label>
-		<div class="col-sm-10">
-			<p class="form-control-static"><c:out value="${chop.status}" /></p>
 		</div>
 	</div>
 </sf:form>

@@ -106,7 +106,7 @@
                         <th></th>
                         <th>#</th>
                         <th>项目名称/编号</th>
-                        <th>项目经理</th>
+                        <th>项目实施人</th>
                         <th class="amount">管理费率</th>
                         <th class="amount">税金比率</th>
                         <th class="amount">合同金额</th>

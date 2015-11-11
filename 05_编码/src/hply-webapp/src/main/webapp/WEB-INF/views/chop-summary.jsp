@@ -49,6 +49,7 @@
                 <thead>
                     <tr>
                         <th>序号</th>
+                        <th>用章编号</th>
                         <th>名称</th>
                         <th>日期</th>
                         <th>项目名称</th>
@@ -64,11 +65,12 @@
                     <c:forEach items="${list}" var="chop">
                         <tr>
                             <td><%=++i%></td>
-                            <td><c:out value="${chop.applyUser}" /></td>
+                            <td><c:out value="${chop.chopCode}" /></td>
+                            <td><c:out value="${chop.field01}" /></td>
                             <td><fmt:formatDate value="${chop.applyTime}" pattern="yyyy-MM-dd" /></td>
                             <td><c:out value="${chop.projectName}" /></td>
                             <td><c:out value="${chop.content}" /></td>
-                            <td><c:out value="${chop.step3User}" /></td>
+                            <td><c:out value="${chop.field02}" /></td>
                             <td><c:out value="${chop.manager}" /></td>
                         </tr>
                     </c:forEach>

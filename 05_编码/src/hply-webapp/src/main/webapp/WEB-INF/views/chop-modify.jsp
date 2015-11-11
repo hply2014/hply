@@ -18,13 +18,18 @@
                                         <c:out value="${chop.chopCode}" />
                                     </p>
                                 </div>
-
+                                <label for="field01" class="col-sm-2 control-label">名称</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static" id="field01">
+                                        <c:out value="${chop.field01}" />
+                                    </p>
+                                </div>
                             </div>
                             <div class="row">
                                 <label for="projectId" class="col-sm-2 control-label">项目名称</label>
                                 <div class="col-sm-8">
                                     <p class="form-control-static">
-                                        <c:out value="${chop.projectId}" />
+                                        <c:out value="${chop.projectName}" />
                                     </p>
                                 </div>
                             </div>
@@ -48,6 +53,14 @@
                                 <div class="col-sm-10">
                                     <p class="form-control-static">
                                         <c:out value="${chop.content}" />
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="field02" class="col-sm-2 control-label">经办人</label>
+                                <div class="col-sm-4 ">
+                                    <p class="form-control-static">
+                                        <c:out value="${chop.field02}" />
                                     </p>
                                 </div>
                             </div>
@@ -204,7 +217,12 @@
                                     <sf:input cssClass="form-control" path="chopCode" placeholder="编号" />
                                     <p class="help-block" />
                                 </div>
-
+                                <label for="field01" class="col-sm-2 control-label">名称</label>
+                                <div class="col-sm-4 required-field-block">
+                                    <b class="required-icon">*</b>
+                                    <sf:input cssClass="form-control" path="field01" placeholder="名称" />
+                                    <p class="help-block" />
+                                </div>
                             </div>
                             <div class="row">
                                 <label for="projectId" class="col-sm-2 control-label">项目名称</label>
@@ -237,6 +255,12 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <label for="field02" class="col-sm-2 control-label">经办人</label>
+                                <div class="col-sm-4 ">
+                                    <sf:input cssClass="form-control" path="field02" placeholder="经办人" />
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <label for="applyUser" class="col-sm-2 control-label">申请人</label>

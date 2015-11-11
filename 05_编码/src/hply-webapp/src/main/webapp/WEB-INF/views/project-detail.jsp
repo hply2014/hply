@@ -303,7 +303,7 @@
                                                         <c:out value="${project.partyAddress}" />
                                                     </p>
                                                 </div>
-                                                <sf:label path="manager" cssClass="col-sm-2 control-label">项目经理</sf:label>
+                                                <sf:label path="manager" cssClass="col-sm-2 control-label">项目实施人</sf:label>
                                                 <div class="col-sm-4">
                                                     <p class="form-control-static">
                                                         <c:out value="${project.manager}" />

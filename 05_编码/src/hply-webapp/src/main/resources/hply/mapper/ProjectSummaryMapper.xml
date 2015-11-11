@@ -13,7 +13,7 @@
 		project_id projectId,
 		organization_id organizationId,
 		project_code projectCode,
-		project_name projectName,
+		project_name projectName,(select manager from t_project where id=t.project_id)  field03,
 		contract_amount contractAmount,
 		sum(change_amount) as changeAmount,
 		change_total_amount as changeTotalAmount,
@@ -75,7 +75,7 @@
 		projectId,
 		organization_id organizationId,
 		project_code projectCode,
-		project_name projectName,
+		project_name projectName,(select manager from t_project where id=t.project_id)  field03,
 		contract_amount
 		contractAmount,
 		sum(change_amount) as changeAmount,
