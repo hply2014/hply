@@ -24,7 +24,7 @@
 		step3Time, step_status as stepStatus, version as
 		version, status as status, field_01 as field01, field_02 as field02,
 		field_03 as field03, field_04 as field04, field_05
-		as field05 from t_chop where organization_id=#{organizationId} limit #{pageSize} offset #{pageIndex}
+		as field05 from t_chop where organization_id=#{organizationId} order by apply_time desc limit #{pageSize} offset #{pageIndex}
 	</select>
 
 	<select id="getMonths" resultType="string">

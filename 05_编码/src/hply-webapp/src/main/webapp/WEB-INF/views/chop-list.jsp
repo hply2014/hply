@@ -138,9 +138,9 @@
                     <div class="col-sm-8">
                         <ul class="pager">
                             <li class="${pageIndex <= 0 ? 'disabled' :'' }"><a
-                                href="<s:url value='/chop?p=${pageIndex - 1}' />">上一页</a></li>
+                                href="<s:url value='/chop?p=${pageIndex - 1}' />&oid=${oid}">上一页</a></li>
                             <li class="${pageIndex + 1 >= pageCount ? 'disabled' :'' }"><a
-                                href="<s:url value='/chop?p=${pageIndex + 1}' />">下一页</a></li>
+                                href="<s:url value='/chop?p=${pageIndex + 1}' />&oid=${oid}">下一页</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-2">&nbsp;</div>

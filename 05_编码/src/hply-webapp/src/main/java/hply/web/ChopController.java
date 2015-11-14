@@ -500,7 +500,7 @@ public class ChopController {
 			@RequestParam(value = "p1", required = false) String p1, @RequestParam(value = "p2", required = false) String p2,
 			@RequestParam(value = "oid", required = false) String oid) throws Exception {
 
-		final String EXCEL_HEADERS = "序号,编号,名称,日期,项目名称,盖章内容,经办人,项目经理";
+		final String EXCEL_HEADERS = "序号,编号,项目实施人,日期,项目名称,盖章内容,经办人,项目经理";
 
 		if (StringUtils.isBlank(oid)) {
 			if (SessionHelper.IsBusinessDepartment()) {

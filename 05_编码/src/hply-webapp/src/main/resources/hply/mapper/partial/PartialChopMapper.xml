@@ -25,7 +25,7 @@
   </select>
   
   <select id="getAll" resultType="Chop">
-    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_chop
+    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_chop order by apply_time desc
   </select>
   
   <select id="getRowCount" resultType="int">
@@ -33,7 +33,7 @@
   </select>
 
   <select id="getAllPaged" parameterType="Chop" resultType="Chop">
-    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_chop limit #{pageSize} offset #{pageIndex}
+    select id as id, chop_code as chopCode, project_id as projectId, project_code as projectCode, project_name as projectName, manager as manager, content as content, apply_user as applyUser, apply_time as applyTime, organization_id as organizationId, step1_idea as step1Idea, step1_user as step1User, step1_time as step1Time, step2_idea as step2Idea, step2_user as step2User, step2_time as step2Time, step3_idea as step3Idea, step3_user as step3User, step3_time as step3Time, step_status as stepStatus, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_chop limit #{pageSize} offset #{pageIndex} order by apply_time desc
   </select>
 </mapper>
 

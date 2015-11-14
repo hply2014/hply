@@ -35,7 +35,7 @@
 	</div>
 
     <div class="form-group">
-        <sf:label path="field01" cssClass="col-sm-2 control-label">名称</sf:label>
+        <sf:label path="field01" cssClass="col-sm-2 control-label">项目实施人</sf:label>
         <div class="col-sm-10">
             <p class="form-control-static"><c:out value="${chop.field01}" /></p>
         </div>

@@ -18,7 +18,7 @@
                                         <c:out value="${chop.chopCode}" />
                                     </p>
                                 </div>
-                                <label for="field01" class="col-sm-2 control-label">名称</label>
+                                <label for="field01" class="col-sm-2 control-label">项目实施人</label>
                                 <div class="col-sm-4 ">
                                     <p class="form-control-static" id="field01">
                                         <c:out value="${chop.field01}" />
@@ -217,10 +217,10 @@
                                     <sf:input cssClass="form-control" path="chopCode" placeholder="编号" />
                                     <p class="help-block" />
                                 </div>
-                                <label for="field01" class="col-sm-2 control-label">名称</label>
+                                <label for="field01" class="col-sm-2 control-label">项目实施人</label>
                                 <div class="col-sm-4 required-field-block">
                                     <b class="required-icon">*</b>
-                                    <sf:input cssClass="form-control" path="field01" placeholder="名称" />
+                                    <sf:input cssClass="form-control" path="field01" placeholder="项目实施人" />
                                     <p class="help-block" />
                                 </div>
                             </div>
