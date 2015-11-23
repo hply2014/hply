@@ -19,10 +19,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChopMapper extends PartialChopMapper {
 
-	public List<Chop> getAllPagedByOrganization(@Param("organizationId") String organizationId, @Param("pageIndex") int pageIndex,
+	public List<Chop> getAllPagedByOrganization(@Param("queryText") String queryText, @Param("organizationId") String organizationId, @Param("pageIndex") int pageIndex,
 			@Param("pageSize") int pageSize);
 
-	public int getRowCountByOrganization(@Param("organizationId") String organizationId);
+	public int getRowCountByOrganization(@Param("queryText") String queryText, @Param("organizationId") String organizationId);
 
 	public List<String> getMonths();
 	

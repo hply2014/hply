@@ -1,6 +1,51 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%>
+<style type="text/css">
+#custom-search-form {
+    margin: 0;
+    margin-top: 5px;
+    padding: 0;
+}
 
+#custom-search-form .search-query {
+    padding-right: 3px;
+    padding-right: 4px \9;
+    padding-left: 3px;
+    padding-left: 4px \9;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: width 0.2s ease-in-out;
+    -moz-transition: width 0.2s ease-in-out;
+    -o-transition: width 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out;
+}
+
+#custom-search-form button {
+    border: 0;
+    background: none;
+    /** belows styles are working good */
+    padding: 2px 5px;
+    margin-top: 2px;
+    position: relative;
+    left: -28px;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.search-query:focus+button {
+    z-index: 3;
+}
+
+.search-query:focus {
+    width: 260px;
+}
+</style>
 <div class="container main">
     <c:if test="${not empty message}">
 
@@ -43,6 +88,17 @@
                             class="glyphicon glyphicon-plus"></span> 新 建 </a>
                     </div>
                 </shiro:hasPermission>
+                <div class="span12">
+                    <div id="custom-search-form" class="form-search form-horizontal pull-right">
+                        <div class="input-append span12">
+                            <input id="searchInput" type="text" class="search-query mac-style" value="${queryText }"
+                                placeholder="搜索 。。。">
+                            <button type="button" class="btn" id="searchButton">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <table class="table table-hover">
@@ -152,6 +208,15 @@
 <script type="text/javascript">
 <!--
 $(function() {
+	$("#searchButton").click(function() {
+		self.location = "<s:url value='/chop' />?q=" + $("#searchInput").val() + "&oid=${oid}";
+	});
+	$('#searchInput').keydown(function(e) {
+		if (e.keyCode == 13) {
+			self.location = "<s:url value='/chop' />?q=" + $("#searchInput").val() + "&oid=${oid}";
+		}
+	});
+	
     var p = '';
     for (var i = 0; i < <c:out value="${pageCount}" />; i++) {
         p = p + '<option ' + (i== ${pageIndex} ? 'selected': '') + ' value="' + i + '">第' + (i + 1) + '页</option>';

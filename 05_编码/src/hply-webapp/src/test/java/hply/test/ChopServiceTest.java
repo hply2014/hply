@@ -63,8 +63,8 @@ public class ChopServiceTest extends BaseJUnit4TestCase {
         
         Utility.println("总行数：" + service.getRowCount());
         
-        service.getAllPaged("", 1, 3);
-        Utility.println("分页：" + service.getAllPaged("", 1, 3).size());
+        service.getAllPaged("", "", 1, 3);
+        Utility.println("分页：" + service.getAllPaged("", "", 1, 3).size());
     }
     
     

@@ -76,7 +76,7 @@ public class ChopController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid,
-			Model model) {
+			@RequestParam(value = "q", required = false) String q, Model model) {
 		model.addAttribute("page_title", "盖章管理");
 
 		List<SysOrganization> orglist = orgService.getAllBusiness();
@@ -92,14 +92,19 @@ public class ChopController {
 		model.addAttribute("oid", oid);
 
 		int pageIndex = p != null ? p.intValue() : 0;
+		String queryText = StringUtils.isBlank(q) ? "%" : "%" + q.replaceAll(" ", "%") + "%";
+
 		int pageSize = paramService.getParamIntValue("page_size", 30);
-		int rowCount = service.getRowCountByOrganization(oid);
+		int rowCount = service.getRowCountByOrganization(queryText, oid);
+
 		int pageCount = rowCount / pageSize + (rowCount % pageSize == 0 ? 0 : 1);
 		model.addAttribute("rowCount", rowCount);
 		model.addAttribute("pageIndex", pageIndex);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("currentPageStarted", pageIndex * pageSize);
-		List<Chop> list = service.getAllPaged(oid, pageIndex * pageSize, pageSize);
+		model.addAttribute("queryText", q);
+
+		List<Chop> list = service.getAllPaged(queryText, oid, pageIndex * pageSize, pageSize);
 
 		for (Chop item : list) {
 			// Project pjt = projectService.get(item.getProjectId());
@@ -615,7 +620,7 @@ public class ChopController {
 			c5.setCellStyle(styleDefault);
 
 			Cell c6 = r.createCell(j++);
-			c6.setCellValue(p.getStep3User());
+			c6.setCellValue(p.getField02());
 			c6.setCellStyle(styleDefault);
 
 			Cell c7 = r.createCell(j++);
