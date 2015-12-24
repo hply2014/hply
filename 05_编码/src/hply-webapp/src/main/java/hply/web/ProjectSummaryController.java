@@ -181,12 +181,12 @@ public class ProjectSummaryController {
 		return "projectsummary-list-year";
 	}
 
-
 	/*
 	 * 列表页面
 	 */
 	@RequestMapping(value = "/month", method = RequestMethod.GET)
-	public String listMonth(@RequestParam(value = "orgid", required = false) String orgId, @RequestParam(value = "p1", required = false) String p1, Model model) {
+	public String listMonth(@RequestParam(value = "orgid", required = false) String orgId,
+			@RequestParam(value = "p1", required = false) String p1, Model model) {
 		model.addAttribute("page_title", "新建工程月度汇总报表");
 
 		List<String> months = service.getMonths();
@@ -237,7 +237,7 @@ public class ProjectSummaryController {
 
 		return "projectsummary-list-month";
 	}
-	
+
 	/*
 	 * 详情页面
 	 */
@@ -325,7 +325,7 @@ public class ProjectSummaryController {
 			@RequestParam(value = "p1", required = false) String p1, @RequestParam(value = "p2", required = false) String p2,
 			@RequestParam(value = "orgid", required = false) String orgId) throws Exception {
 
-		final String EXCEL_HEADERS = "序号,时间,摘要,项目编号,项目名称,合同金额,合同调增额,累计调增额,合同结算额,发票金额,累计开票,收款金额,累计收款,回收率,发票金额,累计开票,支付金额,累计,工程余额,比率,应缴税金,已缴税金,累计已缴税金,尚欠税金,比率,应收管理费,实收管理费,累计收管理费,尚欠管理费,其他收入,管理费及其他收入累计,垫付资金,预计用量,型材点";
+		final String EXCEL_HEADERS = "序号,时间,摘要,项目编号,项目名称,项目实施人,合同金额,合同调增额,累计调增额,合同结算额,发票金额,累计开票,收款金额,累计收款,回收率,发票金额,累计开票,支付金额,累计,工程余额,比率,应缴税金,已缴税金,累计已缴税金,尚欠税金,比率,应收管理费,实收管理费,累计收管理费,尚欠管理费,其他收入,管理费及其他收入累计,垫付资金,预计用量,型材点";
 
 		if (StringUtils.isBlank(orgId)) {
 			if (SessionHelper.IsBusinessDepartment()) {
@@ -394,31 +394,34 @@ public class ProjectSummaryController {
 			c1.setCellStyle(styleHeader);
 		}
 		r0.getCell(3).setCellValue("项目信息");
-		r0.getCell(9).setCellValue("甲方开票情况");
-		r0.getCell(11).setCellValue("收款情况");
-		r0.getCell(14).setCellValue("客户开票情况");
-		r0.getCell(16).setCellValue("支付工程款情况");
-		r0.getCell(19).setCellValue("税金情况");
-		r0.getCell(24).setCellValue("管理费及其他收入情况");
-		r0.getCell(32).setCellValue("型材（吨）");
+		r0.getCell(10).setCellValue("甲方开票情况");
+		r0.getCell(12).setCellValue("收款情况");
+		r0.getCell(15).setCellValue("客户开票情况");
+		r0.getCell(17).setCellValue("支付工程款情况");
+		r0.getCell(20).setCellValue("税金情况");
+		r0.getCell(25).setCellValue("管理费及其他收入情况");
+		r0.getCell(33).setCellValue("型材（吨）");
 
 		r0.getCell(0).setCellValue(headers[0]);
 		r0.getCell(1).setCellValue(headers[1]);
 		r0.getCell(2).setCellValue(headers[2]);
-		r0.getCell(31).setCellValue(headers[31]);
+		r0.getCell(32).setCellValue(headers[32]);
 
+		// 垂直合并
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 0, 0));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 1, 1));
 		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 2, 2));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 3, 8));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 9, 10));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 11, 13));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 14, 15));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 16, 18));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 19, 23));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 24, 30));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 31, 31));
-		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 32, 33));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 1, 32, 32));
+
+		// 合并表头第一行，水平合并
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 3, 9));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 10, 11));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 12, 14));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 15, 16));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 17, 19));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 20, 24));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 25, 31));
+		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 33, 34));
 
 		List<ProjectSummary> list = service.getSummaryByMonth(p1, p2, orgId);
 		for (int i = 0; i < list.size(); i++) {
@@ -444,6 +447,10 @@ public class ProjectSummaryController {
 			Cell c4 = r.createCell(j++);
 			c4.setCellValue(p.getProjectName());
 			c4.setCellStyle(styleDefault);
+
+			Cell c4_1 = r.createCell(j++);
+			c4_1.setCellValue(p.getField03());
+			c4_1.setCellStyle(styleDefault);
 
 			Cell c5 = r.createCell(j++);
 			c5.setCellValue(p.getContractAmount());
@@ -499,8 +506,8 @@ public class ProjectSummaryController {
 
 			// ///////////
 			Cell c23 = r.createCell(j++);
-			
-			//TODO 还是不对
+
+			// TODO 还是不对
 			c23.setCellValue(p.getCollectionsTotalAmount() - p.getPaymentTotalAmount());
 			c23.setCellStyle(styleRMB);
 
@@ -715,11 +722,10 @@ public class ProjectSummaryController {
 		wb.write(response.getOutputStream());
 	}
 
-
 	@RequestMapping(value = "/export-month")
 	public void exportMonthExcel(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "p1", required = false) String p1,
-			@RequestParam(value = "orgid", required = false) String orgId) throws Exception {
+			@RequestParam(value = "p1", required = false) String p1, @RequestParam(value = "orgid", required = false) String orgId)
+			throws Exception {
 
 		final String EXCEL_HEADERS = "序号,时间,摘要,项目编号,项目名称,合同金额,合同调增额,累计调增额,合同结算额,发票金额,累计开票,收款金额,累计收款,回收率,发票金额,累计开票,支付金额,累计,工程余额,比率,应缴税金,已缴税金,累计已缴税金,尚欠税金,比率,应收管理费,实收管理费,累计收管理费,尚欠管理费,其他收入,管理费及其他收入累计,垫付资金,预计用量,型材点";
 
@@ -732,10 +738,10 @@ public class ProjectSummaryController {
 
 		SysOrganization org = orgService.get(orgId);
 		String orgName = org != null ? org.getOrganizationName() : Utility.EMPTY;
-		String sheetName = orgName + "合同项目汇总（" + p1 +  "）";
+		String sheetName = orgName + "合同项目汇总（" + p1 + "）";
 
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		String fileName = URLEncoder.encode("totaldata-" + p1  + ".xlsx", "UTF-8");
+		String fileName = URLEncoder.encode("totaldata-" + p1 + ".xlsx", "UTF-8");
 		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
 
 		int rowIndex = 0;
@@ -817,7 +823,7 @@ public class ProjectSummaryController {
 		sheet1.addMergedRegion(new CellRangeAddress(0, 0, 32, 33));
 
 		List<ProjectSummary> list = service.getSummaryByCurrentMonth(p1, orgId);
-		
+
 		for (int i = 0; i < list.size(); i++) {
 			int j = 0;
 			ProjectSummary p = list.get(i);
@@ -1038,7 +1044,7 @@ public class ProjectSummaryController {
 
 		// ///////////
 		Cell c23 = r.createCell(j++);
-		
+
 		// TODO 还是不对
 		c23.setCellValue(p.getCollectionsTotalAmount() - p.getPaymentTotalAmount());
 		c23.setCellStyle(styleRMB);
@@ -1107,11 +1113,11 @@ public class ProjectSummaryController {
 			sheet1.autoSizeColumn(i, true);
 		}
 
-		sheet1.addMergedRegion(new CellRangeAddress(rowIndex - 1, rowIndex - 1, 0, 4));
+		sheet1.addMergedRegion(new CellRangeAddress(rowIndex - 1, rowIndex - 1, 0, 5));
 
 		wb.write(response.getOutputStream());
 	}
-	
+
 	@RequestMapping(value = "/export-year")
 	public void exportYearExcel(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "orgid", required = false) String orgId) throws Exception {

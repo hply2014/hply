@@ -9,6 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.springframework.version>3.2.10.RELEASE</org.springframework.version>
 		<org.springframework.security-version>3.2.4.RELEASE</org.springframework.security-version>
 		<shiro.version>1.2.4</shiro.version>
@@ -177,6 +178,7 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
