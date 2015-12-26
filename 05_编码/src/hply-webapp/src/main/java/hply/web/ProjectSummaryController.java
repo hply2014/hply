@@ -596,6 +596,10 @@ public class ProjectSummaryController {
 		c4.setCellValue(p.getProjectName());
 		c4.setCellStyle(styleFooter);
 
+		Cell c4_1 = r.createCell(j++);
+		c4_1.setCellValue(p.getProjectName());
+		c4_1.setCellStyle(styleFooter);
+
 		Cell c5 = r.createCell(j++);
 		c5.setCellValue(p.getContractAmount());
 		c5.setCellStyle(styleRMB);
@@ -717,7 +721,7 @@ public class ProjectSummaryController {
 			sheet1.autoSizeColumn(i, true);
 		}
 
-		sheet1.addMergedRegion(new CellRangeAddress(rowIndex - 1, rowIndex - 1, 0, 4));
+		sheet1.addMergedRegion(new CellRangeAddress(rowIndex - 1, rowIndex - 1, 0, 5));
 
 		wb.write(response.getOutputStream());
 	}
