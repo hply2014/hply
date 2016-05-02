@@ -43,7 +43,7 @@
 		tax_owe_amount as taxOweAmount,
 		sum(arrears_amount) as arrearsAmount,
 		sum(expected_value) as expectedValue,
-		profile_point as profilePoint,
+		(select profile_point from t_profile where project_id=t.project_id and get_year(trice) = get_year(now())) as profilePoint,
 		ifnull(total_others_amount, 0) field01,
 		sum(management_real_amount) +
 		ifnull(total_others_amount, 0) field02,
@@ -109,7 +109,7 @@
 		tax_owe_amount as taxOweAmount,
 		sum(arrears_amount) as arrearsAmount,
 		sum(expected_value) as expectedValue,
-		profile_point as profilePoint,
+		(select profile_point from t_profile where project_id=t.project_id and get_year(trice) = get_year(now())) as profilePoint,
 		ifnull(total_others_amount, 0) field01,
 		sum(management_real_amount) + ifnull(total_others_amount, 0) field02,
 		version,
@@ -175,7 +175,7 @@
 		tax_owe_amount as taxOweAmount,
 		sum(arrears_amount) as arrearsAmount,
 		sum(expected_value) as expectedValue,
-		profile_point as profilePoint,
+		(select profile_point from t_profile where project_id=t.project_id and get_year(trice) = get_year(now())) as profilePoint,
 		version,
 		create_time as createTime,
 		table_name as tableName
@@ -441,7 +441,7 @@
 		tax_owe_amount as taxOweAmount,
 		sum(arrears_amount) as arrearsAmount,
 		sum(expected_value) as expectedValue,
-		profile_point as profilePoint,
+		(select profile_point from t_profile where project_id=t.project_id and get_year(trice) = get_year(now())) as profilePoint,
 		ifnull(total_others_amount, 0) field01,
 		sum(management_real_amount) +
 		ifnull(total_others_amount, 0) field02,
