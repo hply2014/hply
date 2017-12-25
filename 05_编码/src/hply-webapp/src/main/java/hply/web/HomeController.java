@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -129,5 +130,61 @@ public class HomeController {
 		model.addAttribute("page_title", "修改" + currentUser.getRealName() + "的密码");
 		model.addAttribute("userId", currentUser.getId());
 		return "change-password";
+	}
+	
+	// 单点登录
+	@RequestMapping(value = "sso/{loginName}", method = RequestMethod.GET)
+	public String singleSignOn(HttpServletRequest request, @PathVariable String loginName, Model model) {
+		SessionHelper.sysResourceService = sysResourceService;
+		SysUser user = service.getByLoginName(loginName);
+		if (user == null) {
+			model.addAttribute("loginName", loginName);
+			model.addAttribute("message", "该用户不存在。");
+			return JSP_LOGIN;
+		}
+		try {
+			SessionHelper.setAttribute(SessionHelper.CURRENT_SYS_USER, user);
+			 SessionHelper.login(user.getId(), null, SessionHelper.SSO);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.addAttribute("loginName", loginName);
+			model.addAttribute("message", "登录验证失败，用户或密码错误。");
+			return JSP_LOGIN;
+		}
+
+		// No problems, show authenticated view…
+
+		// 如果账号被禁用
+		if (user.getEnabled() == false) {
+			model.addAttribute("loginName", loginName);
+			model.addAttribute("message", "该用户已被禁用，请联系管理员。");
+			return JSP_LOGIN;
+
+		}
+
+		if (user.getMustChangePassword()) {
+			model.addAttribute("page_title", "修改" + user.getRealName() + "的密码");
+			model.addAttribute("userId", user.getId());
+			return "change-password";
+		}
+
+		// 登录成功
+		// SessionHelper.setAttribute(SessionHelper.CURRENT_ROOT_TREE_NODE,
+		// sysResourceService.getMenuRoot(user.getId()));
+		user.setLastLoginIp(Utility.getClientIpAddress(request));
+		user.setLastLoginTime(new Date());
+		int logined = user.getLogined() == null ? 0 : user.getLogined().intValue();
+		user.setLogined(logined + 1);
+		user.setFails(0);
+		service.update(user);
+		
+		//将当前登录用户的所在部门存到Session中，用于业务部门的数据过滤，比如事业部只显示事业部的数据
+		SysOrganization currentOrg = sysOrganizationService.get(user.getOrganizationId());
+		SessionHelper.setAttribute(SessionHelper.CURRENT_ORGANIZATION, currentOrg);
+		
+
+		// 刷新所有业务数据状态
+		projectService.updateAllStatus();
+		return "redirect:/";
 	}
 }

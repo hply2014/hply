@@ -20,14 +20,6 @@
                     <a href="<s:url value="/project" />" onclick="return goback();" class="btn btn-default"><span
                         class="glyphicon glyphicon-share-alt"></span> 返 回 </a>
                 </div>
-
-                <shiro:hasPermission name="`project_modify`">
-                    <div class="btn-group">
-                        <a
-                            href="<s:url value="/project/modify/{id}"><s:param name="id" value="${project.id }" /></s:url>"
-                            class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修 改 </a>
-                    </div>
-                </shiro:hasPermission>
             </div>
             <div class="panel-body">
                 <div class="panel with-nav-tabs panel-default">
@@ -470,23 +462,6 @@
                             <div class="tab-pane fade${target=='contractchange'?' in active':'' }" id="tab1xdefault">
                                 <!-- 补充协议 -->
                                 <div class="panel-body">
-                                    <div class="btn-toolbar" role="toolbar">
-                                        <shiro:hasPermission name="`contractchange_create`">
-                                            <div class="btn-group">
-                                                <a
-                                                    href="<c:url value="/contractchange/create?projectid=${projectId}" />"
-                                                    class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
-                                                    新 建 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                         <shiro:hasPermission name="`contractchange_check`">
-                                            <div class="btn-group">
-                                                <a href="javascript:void();" onclick="batchCheck('contract_change', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
-                                                    批量审核 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                    </div>
-
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -498,7 +473,6 @@
                                                 <th>登记人</th>
                                                 <th>登记时间</th>
                                                 <th>备注</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -517,17 +491,7 @@
                                                     <td><fmt:formatDate value="${contractChange.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${contractChange.description}" /></td>
-                                               <td><c:if test="${contractChange.status !=1 }">
-                                    <shiro:hasPermission name="`contractchange_check`">
-                                        <a class="check" data-confirm-message="合同补充协议：<c:out value="${contractChange.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/contractchange/check/${contractChange.id }" />">审核</a>
-                                    </shiro:hasPermission>
-                                    <shiro:hasPermission name="`contractchange_create`">
-                                        <a href="<s:url value="/contractchange/modify/${contractChange.id }" />">修改</a>
-                                        <a class="delete"
-                                            data-confirm-message="合同补充协议：<c:out value="${contractChange.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                            href="<s:url value="/contractchange/delete/${contractChange.id }" />">删除</a>
-                                    </shiro:hasPermission>
-                                </c:if></td> </tr>
+                                            	</tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -537,22 +501,6 @@
                                 <!-- 甲方开票情况 -->
 
                                 <div class="panel-body">
-                                    <div class="btn-toolbar" role="toolbar">
-                                        <shiro:hasPermission name="`partybilling_create`">
-                                            <div class="btn-group">
-                                                <a href="<c:url value="/partybilling/create?projectid=${projectId}" />"
-                                                    class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
-                                                    新 建 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                                                                 <shiro:hasPermission name="`partybilling_check`">
-                                            <div class="btn-group">
-                                                <a href="javascript:void();" onclick="batchCheck('party_billing', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
-                                                    批量审核 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                    </div>
-
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -563,7 +511,6 @@
                                                 <th>开票人</th>
                                                 <th>开票时间</th>
                                                 <th>审核情况</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -583,19 +530,6 @@
                                                             test="${not empty partyBilling.step1Time}">${partyBilling.step1User}：${partyBilling.step1Idea}，
                                     <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
                                                         </c:if></td>
-                                                    <td><c:if test="${ partyBilling.stepStatus != 1 }">
-                                                            <shiro:hasPermission name="`partybilling_step1`">
-                                                                <a
-                                                                    href="<s:url value="/partybilling/step1/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">审核</a>
-                                                            </shiro:hasPermission>
-                                                            <shiro:hasPermission name="`partybilling_create`">
-                                                                <a
-                                                                    href="<s:url value="/partybilling/modify/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">修改</a>
-                                                                <a class="delete"
-                                                                    data-confirm-message="甲方开票情况数据：<c:out value="${partyBilling.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                                                    href="<s:url value="/partybilling/delete/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">删除</a>
-                                                            </shiro:hasPermission>
-                                                        </c:if></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -605,22 +539,6 @@
                             <div class="tab-pane fade${target=='customerbilling'?' in active':'' }" id="tab3default">
                                 <!-- 客户开票情况 -->
                                 <div class="panel-body">
-                                    <div class="btn-toolbar" role="toolbar">
-                                        <shiro:hasPermission name="`customerbilling_create`">
-                                            <div class="btn-group">
-                                                <a
-                                                    href="<c:url value="/customerbilling/create?projectid=${projectId}" />"
-                                                    class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
-                                                    新 建 </a>
-                                            </div>
-                                        </shiro:hasPermission> <shiro:hasPermission name="`customerbilling_check`">
-                                            <div class="btn-group">
-                                                <a href="javascript:void();" onclick="batchCheck('customer_billing', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
-                                                    批量审核 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                    </div>
-
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -632,7 +550,6 @@
                                                 <th>创建用户</th>
                                                 <th>开票时间</th>
                                                 <th>备注</th>
-<th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -650,19 +567,7 @@
                                                     <td><fmt:formatDate value="${customerBilling.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${customerBilling.description}" /></td>
-                                                <td><c:if test="${customerBilling.status != 1 }">
-                                    <shiro:hasPermission name="`customerbilling_check`">
-                                        <a class="check"
-                                            data-confirm-message="客户开票情况：<c:out value="${customerBilling.id}" />，审核后所有数据将不能被修改，是否确认？"
-                                            href="<s:url value="/customerbilling/check/${customerBilling.id }" />">审核</a>
-                                    </shiro:hasPermission>
-                                    <shiro:hasPermission name="`customerbilling_create`">
-                                        <a href="<s:url value="/customerbilling/modify/${customerBilling.id }" />">修改</a>
-                                        <a class="delete"
-                                            data-confirm-message="客户开票情况数据：<c:out value="${customerBilling.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                            href="<s:url value="/customerbilling/delete/${customerBilling.id }" />">删除</a>
-                                    </shiro:hasPermission>
-                                </c:if></td> </tr>
+                                                </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -671,21 +576,6 @@
                             <div class="tab-pane fade${target=='collections'?' in active':'' }" id="tab4default">
                                 <!-- 收款情况 -->
                                 <div class="panel-body">
-                                    <div class="btn-toolbar" role="toolbar">
-                                        <shiro:hasPermission name="`collections_create`">
-                                            <div class="btn-group">
-                                                <a href="<c:url value="/collections/create?projectid=${projectId}" />"
-                                                    class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
-                                                    新 建 </a>
-                                            </div>
-                                        </shiro:hasPermission><shiro:hasPermission name="`collections_check`">
-                                            <div class="btn-group">
-                                                <a href="javascript:void();" onclick="batchCheck('collections', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
-                                                    批量审核 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                    </div>
-
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -698,7 +588,6 @@
                                                 <th>收款人</th>
                                                 <th>收款时间</th>
                                                 <th>备注</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -717,17 +606,6 @@
                                                     <td><fmt:formatDate value="${collections.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${collections.description}" /></td>
-                                                     <td><c:if test="${collections.status != 1 }">
-                                    <shiro:hasPermission name="`collections_check`">
-                                        <a class="check" data-confirm-message="收款情况：<c:out value="${collections.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/collections/check/${collections.id }" />">审核</a>
-                                    </shiro:hasPermission>
-                                    <shiro:hasPermission name="`collections_create`">
-                                        <a href="<s:url value="/collections/modify/${collections.id }" />">修改</a>
-                                        <a class="delete"
-                                            data-confirm-message="收款情况：<c:out value="${collections.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                            href="<s:url value="/collections/delete/${collections.id }" />">删除</a>
-                                    </shiro:hasPermission>
-                                </c:if></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -737,21 +615,6 @@
                             <div class="tab-pane fade${target=='payment'?' in active':'' }" id="tab5default">
                                 <!-- 付款情况 -->
                                 <div class="panel-body">
-                                    <div class="btn-toolbar" role="toolbar">
-                                        <shiro:hasPermission name="`payment_create`">
-                                            <div class="btn-group">
-                                                <a href="<c:url value="/payment/create?projectid=${projectId}" />"
-                                                    class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
-                                                    新 建 </a>
-                                            </div>
-                                        </shiro:hasPermission><shiro:hasPermission name="`payment_check`">
-                                            <div class="btn-group">
-                                                <a href="javascript:void();" onclick="batchCheck('payment', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
-                                                    批量审核 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                    </div>
-
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -764,7 +627,6 @@
                                                 <th>付款人</th>
                                                 <th>付款时间</th>
                                                 <th>备注</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -782,17 +644,6 @@
                                                     <td><fmt:formatDate value="${payment.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${payment.description}" /></td>
-                                                   <td><c:if test="${payment.status != 1 }">
-                                    <shiro:hasPermission name="`payment_check`">
-                                        <a class="check" data-confirm-message="付款情况：<c:out value="${payment.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/payment/check/${payment.id }" />">审核</a>
-                                    </shiro:hasPermission>
-                                    <shiro:hasPermission name="`payment_create`">
-                                        <a href="<s:url value="/payment/modify/${payment.id }" />">修改</a>
-                                        <a class="delete"
-                                            data-confirm-message="付款情况：<c:out value="${payment.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                            href="<s:url value="/payment/delete/${payment.id }" />">删除</a>
-                                    </shiro:hasPermission>
-                                </c:if></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -802,19 +653,6 @@
                             <div class="tab-pane fade${target=='arrears'?' in active':'' }" id="tab6default">
                                 <!-- 往来欠款 -->
                                 <div class="panel-body">
-                                    <div class="btn-toolbar" role="toolbar"><shiro:hasPermission name="`arrears_create`">
-                                        <div class="btn-group">
-                                            <a href="<c:url value="/arrears/create?projectid=${projectId}" />"
-                                                class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
-                                                新 建 </a>
-                                        </div> </shiro:hasPermission><shiro:hasPermission name="`arrears_check`">
-                                            <div class="btn-group">
-                                                <a href="javascript:void();" onclick="batchCheck('arrears', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
-                                                    批量审核 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                    </div>
-
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -828,7 +666,6 @@
                                                 <th>登记人</th>
                                                 <th>登记时间</th>
                                                 <th>备注</th>
-<th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -866,25 +703,7 @@
                                                                 data-content="${arrears.description}"
                                                                 class="glyphicon glyphicon-exclamation-sign"></span>
                                                         </c:if></td>
-                                                    <td><c:if test="${arrears.status != 1 }">
-                                    <shiro:hasPermission name="`arrears_check`">
-                                        <a class="check"
-                                            data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，审核后所有数据将不能被修改，是否确认？"
-                                            href="<s:url value="/arrears/check/${arrears.id }" />">审核</a>
-                                    </shiro:hasPermission>
-                                    <shiro:hasPermission name="`arrears_create`">
-                                        <a href="<s:url value="/arrears/modify/${arrears.id }" />">修改</a>
-                                        <a class="delete"
-                                            data-confirm-message="往来欠款数据：<c:out value="${arrears.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                            href="<s:url value="/arrears/delete/${arrears.id }" />">删除</a>
-                                    </shiro:hasPermission>
-                                </c:if>
-                                <c:if test="${arrears.status == 1 && arrears.amount + arrears.offsetAmount < 0}">
-<shiro:hasPermission name="`arrears_check`">
-                                        <a href="javascript:void()" onclick="repay('${arrears.id }', ${arrears.amount + arrears.offsetAmount}, ${arrears.interestAmount})">还款</a>
-                                    </shiro:hasPermission>
-</c:if>
-                                </td> </tr>
+                                                </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -893,21 +712,6 @@
                             <div class="tab-pane fade${target=='profile'?' in active':'' }" id="tab7default">
                                 <!-- 型材 -->
                                 <div class="panel-body">
-                                    <div class="btn-toolbar" role="toolbar">
-                                        <shiro:hasPermission name="`profile_create`">
-                                            <div class="btn-group">
-                                                <a href="<c:url value="/profile/create?projectid=${projectId}" />"
-                                                    class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>
-                                                    新 建 </a>
-                                            </div>
-                                        </shiro:hasPermission><shiro:hasPermission name="`profile_check`">
-                                            <div class="btn-group">
-                                                <a href="javascript:void();" onclick="batchCheck('profile', '${projectId}');" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span>
-                                                    批量审核 </a>
-                                            </div>
-                                        </shiro:hasPermission>
-                                    </div>
-
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -918,8 +722,6 @@
                                                 <th>创建用户</th>
                                                 <th>登记时间</th>
                                                 <th>备注</th>
-                                                <th></th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -936,17 +738,6 @@
                                                     <td><fmt:formatDate value="${profile.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
                                                     <td><c:out value="${profile.description}" /></td>
-                                                   <td><c:if test="${profile.status != 1 }">
-                                    <shiro:hasPermission name="`profile_check`">
-                                        <a class="check" data-confirm-message="型材：<c:out value="${profile.id}" />，审核后所有数据将不能被修改，是否确认？" href="<s:url value="/profile/check/${profile.id }" />">审核</a>
-                                    </shiro:hasPermission>
-                                    <shiro:hasPermission name="`profile_create`">
-                                        <a href="<s:url value="/profile/modify/${profile.id }" />">修改</a>
-                                        <a class="delete"
-                                            data-confirm-message="型材数据：<c:out value="${profile.id}" />，将被永久删除，操作不可撤销，是否确认？"
-                                            href="<s:url value="/profile/delete/${profile.id }" />">删除</a>
-                                    </shiro:hasPermission>
-                                </c:if></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

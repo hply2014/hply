@@ -16,7 +16,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="<s:url value='/assets/favicon.png' />">
-<title>登录 - 工程项目核算系统</title>
+<title>登录 - 历史数据查询系统</title>
 
 <!-- Bootstrap -->
 <link href="<s:url value="/assets/bootstrap/css/bootstrap.min.css" />" rel="stylesheet" media="screen">
@@ -79,7 +79,7 @@ h3 {
         <!-- /example -->
     </c:if>
     <div class="container">
-        <h3>工程项目核算系统</h3>
+        <h3>历史数据查询系统</h3>
         <div class="jumbotron form-horizontal">
             <sf:form>
                 <div class="form-group">
@@ -115,7 +115,7 @@ h3 {
 					});
 				</script>
     <div id="footer" class="navbar-fixed-bottom">
-        <div class="pull-right"><a target="_blank" href="<s:url value='/assets/about.html' />" class="btn btn-link">Version 3.0.20151224</a></div>
+        <div class="pull-right"><a target="_blank" href="<s:url value='/assets/about.html' />" class="btn btn-link">Version 4.0.20170929</a></div>
     </div>
 <div style="display:none">
 <script>

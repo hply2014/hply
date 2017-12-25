@@ -12,6 +12,8 @@ import java.util.Date;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 public class SessionHelper {
@@ -21,6 +23,7 @@ public class SessionHelper {
 	public static final String CURRENT_ROOT_TREE_NODE = "__CURRENT_PERMISSION";
 	public static final String CURRENT_ORGANIZATION = "__CURRENT_ORGANIZATION";
 	public static final String CURRENT_LAST_URL = "__CURRENT_LAST_URL";
+	public static final String SSO = "__SSO";
 
 	public static SysResourceService sysResourceService;
 	
@@ -28,6 +31,16 @@ public class SessionHelper {
 		Subject currentUser = SecurityUtils.getSubject();
 		setAttribute(CURRENT_LOGIN_TIME, new Date());
 		UsernamePasswordToken token = new UsernamePasswordToken(userId, password);
+		// ”Remember Me” built-in, just do this:
+		token.setRememberMe(false);
+		
+		currentUser.login(token);
+	}
+	
+	public static void login(String userId, String password, String flag) {
+		Subject currentUser = SecurityUtils.getSubject();
+		setAttribute(CURRENT_LOGIN_TIME, new Date());
+		UsernamePasswordToken token = new UsernamePasswordToken(userId, password, flag);
 		// ”Remember Me” built-in, just do this:
 		token.setRememberMe(false);
 

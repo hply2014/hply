@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.Utility;
 import hply.domain.SysAuthorization;

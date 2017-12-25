@@ -82,12 +82,6 @@
         </div>
         <div class="panel-body">
             <div class="btn-toolbar" role="toolbar">
-                <shiro:hasPermission name="`chop_create`">
-                    <div class="btn-group">
-                        <a href="<c:url value="/chop/create" />" class="btn btn-info"><span
-                            class="glyphicon glyphicon-plus"></span> 新 建 </a>
-                    </div>
-                </shiro:hasPermission>
                 <div class="span12">
                     <div id="custom-search-form" class="form-search form-horizontal pull-right">
                         <div class="input-append span12">
@@ -151,35 +145,6 @@
                                     <br />
                                 </c:if> <c:if test="${not empty chop.step3Time }"><fmt:formatDate
                                         value="${chop.step3Time}" pattern="yyyy-MM-dd" />
-                                </c:if></td>
-                            <td><c:if test="${ empty chop.stepStatus }">
-                                    <shiro:hasPermission name="`chop_check1`">
-                                        <a
-                                            href="<s:url value="/chop/step1/{id}"><s:param name="id" value="${chop.id }" /></s:url>">部门审核</a>
-                                        <br />
-                                    </shiro:hasPermission>
-                                    <shiro:hasPermission name="`chop_create`">
-                                        <a
-                                            href="<s:url value="/chop/modify/{id}"><s:param name="id" value="${chop.id }" /></s:url>">修改</a>
-                                        <a class="delete"
-                                            data-confirm-message="用章申请数据：<c:out value="${chop.chopCode}" />，将被永久删除，操作不可撤销，是否确认？"
-                                            href="<s:url value="/chop/delete/{id}"><s:param name="id" value="${chop.id }" /></s:url>">删除</a>
-                                    </shiro:hasPermission>
-                                </c:if> <c:if test="${ chop.stepStatus == '1' }">
-                                    <shiro:hasPermission name="`chop_check2`">
-                                        <a
-                                            href="<s:url value="/chop/step2/{id}"><s:param name="id" value="${chop.id }" /></s:url>">财务审核</a>
-                                    </shiro:hasPermission>
-                                    <shiro:hasPermission name="`chop_check2_1`">
-                                        <a
-                                            href="<s:url value="/chop/step2/{id}"><s:param name="id" value="${chop.id }" /></s:url>">财务审核（代）</a>
-                                    </shiro:hasPermission>
-                                </c:if> <c:if test="${ chop.stepStatus == '2' }">
-                                    <shiro:hasPermission name="`chop_check3`">
-                                        <a
-                                            href="<s:url value="/chop/step3/{id}"><s:param name="id" value="${chop.id }" /></s:url>">办理</a>
-                                    </shiro:hasPermission>
-
                                 </c:if></td>
                         </tr>
                     </c:forEach>

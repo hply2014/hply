@@ -4,7 +4,7 @@
 	<groupId>hply.webapp</groupId>
 	<artifactId>hply-webapp</artifactId>
 	<packaging>war</packaging>
-	<version>2.9</version>
+	<version>4.0</version>
 	<name>HPLY Maven Web Application</name>
 	<url>http://maven.apache.org</url>
 
@@ -55,12 +55,18 @@
 			<version>4.9</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-servlet-api</artifactId>
 			<version>7.0.54</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
+		<dependency>  
+		    <groupId>javax.servlet</groupId>  
+		    <artifactId>servlet-api</artifactId>  
+		    <version>2.5</version>  
+		    <scope>provided</scope>  
+		</dependency> 
 		<dependency>
 			<groupId>org.jboss.spec.javax.el</groupId>
 			<artifactId>jboss-el-api_3.0_spec</artifactId>

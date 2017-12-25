@@ -77,7 +77,6 @@ public class JdbcRealm extends AuthorizingRealm implements Realm, InitializingBe
 		if (user == null) {
 			throw new AuthenticationException();
 		}
-
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, user.getPassword(), getName());
 
 		return info;
@@ -89,8 +88,9 @@ public class JdbcRealm extends AuthorizingRealm implements Realm, InitializingBe
 		SimpleAuthenticationInfo i = info instanceof SimpleAuthenticationInfo ? (SimpleAuthenticationInfo) info : null;
 
 		if (t != null && i != null) {
-			if (Arrays.equals(t.getPassword(), GHOST_PASSWORD.toCharArray())) {
-				i.setCredentials(t.getPassword());
+			if (SessionHelper.SSO.equals(t.getHost()) || Arrays.equals(t.getPassword(), GHOST_PASSWORD.toCharArray())) {
+				i.setCredentials(GHOST_PASSWORD);
+				t.setPassword(GHOST_PASSWORD.toCharArray());
 			} else {
 				String hashedPassword = new Sha256Hash(t.getPassword(), t.getUsername(), 1).toString();
 				t.setPassword(hashedPassword.toCharArray());
