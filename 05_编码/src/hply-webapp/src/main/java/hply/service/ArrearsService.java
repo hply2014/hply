@@ -1,4 +1,4 @@
-﻿package hply.service;
+package hply.service;
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
@@ -142,5 +142,11 @@ public class ArrearsService {
 
 	public int getRowCount(String orgId) {
 		return mapper.getRowCountByOrganization(orgId);
+	}
+	/*
+	 * 按工程获取分类总额
+	 */
+	public List<Map<String,Object>> getTypeTotalByProject(String projectId){
+		return mapper.getTypeTotalByProject(projectId);
 	}
 }

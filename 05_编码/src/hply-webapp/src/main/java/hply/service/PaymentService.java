@@ -1,8 +1,9 @@
-﻿package hply.service;
+package hply.service;
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
 import hply.domain.Payment;
+import hply.domain.Where;
 import hply.mapper.PaymentMapper;
 
 import java.util.List;
@@ -21,6 +22,10 @@ public class PaymentService {
 
 	@Autowired
 	private PaymentMapper mapper;
+	
+	public Payment getBy(Where where){
+		return mapper.getBy(where);
+	};
 
 	/**
 	 * 06_付款情况，插入对象

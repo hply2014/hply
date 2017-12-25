@@ -1,4 +1,4 @@
-﻿package hply.test;
+package hply.test;
 
 import java.util.List;
 import hply.BaseJUnit4TestCase;

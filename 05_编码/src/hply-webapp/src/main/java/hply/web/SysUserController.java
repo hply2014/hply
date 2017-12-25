@@ -1,5 +1,6 @@
-﻿package hply.web;
+package hply.web;
 
+import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.SysOrganization;
 import hply.domain.SysUser;
@@ -19,7 +20,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 @Controller
 @RequestMapping(value = SysUserController.URI)
@@ -181,5 +186,29 @@ public class SysUserController {
 		Utility.println("authorization tree ...");
 		model.addAttribute("page_title", "业务授权");
 		return "sample-fancytree";
+	}
+
+	/*
+	 * 设置导出Excel配置
+	 */
+	@ResponseBody
+	@RequestMapping(value = "setting/{type}", method = RequestMethod.POST)
+	public String exportExcelSetting(@PathVariable String type,@RequestParam(required = false) String setting, Model model) {
+		Utility.println("setting export excel ...");
+		try {
+			SysUser sysUser = SessionHelper.getCurrentSysUser();
+			sysUser = service.get(sysUser.getId());
+			JSONObject exportExcelSetting = JSON.parseObject(sysUser.getExportExcelSetting());
+			if(exportExcelSetting==null){
+				exportExcelSetting = new JSONObject();
+			}
+			exportExcelSetting.put(type, setting);
+			sysUser.setExportExcelSetting(exportExcelSetting.toJSONString());
+			service.update(sysUser);
+			return "{\"message\":\"OK\"}";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "{\"message\":\"设置列失败\"}";
+		}
 	}
 }

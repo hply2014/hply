@@ -1,4 +1,4 @@
-﻿package hply.service;
+package hply.service;
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
@@ -6,6 +6,7 @@ import hply.domain.Collections;
 import hply.mapper.CollectionsMapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,6 @@ public class CollectionsService {
 
 	@Autowired
 	private CollectionsMapper mapper;
-
-	@Autowired
-	private PaymentService paymentService;
 
 	@Autowired
 	private ProjectService projectService;
@@ -97,6 +95,14 @@ public class CollectionsService {
 		return mapper.getAllPaged(pageIndex, pageSize);
 	}
 
+	/*
+	 * 收的工程款总额
+	 */
+	public double getTotalProjectCollectionsAmount(String projectId) {
+		Double d = mapper.getTotalProjectCollectionsAmount(projectId);
+		return d != null ? d.doubleValue() : 0.0;
+	}
+	
 	/*
 	 * 收的工程款总额
 	 */

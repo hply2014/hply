@@ -1,4 +1,4 @@
-﻿package hply.service;
+package hply.service;
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
@@ -6,6 +6,7 @@ import hply.domain.CustomerBilling;
 import hply.mapper.CustomerBillingMapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,4 +103,8 @@ public class CustomerBillingService {
 	public int getRowCount(String orgId) {
 		return mapper.getRowCountByOrganization(orgId);
 	}
+	
+	public List<Map<String, Object>> getGroupByProject(String projectId){
+		return mapper.getGroupByProject(projectId);
+	};
 }

@@ -51,7 +51,7 @@
                         <th></th>
                         <th>#</th>
                         <th>项目名称</th>
-                        <th>凭证号</th>
+                        <!-- <th>凭证号</th> -->
                         <th>款项分类</th>
                         <th class="amount">借出金额</th>
                         <th class="amount">还入金额</th>
@@ -75,7 +75,7 @@
                             <td><a
                                 href="<s:url value="/project/detail/{id}?target=arrears"><s:param name="id" value="${arrears.id }" /></s:url>"><c:out
                                         value="${arrears.projectId}" /></a></td>
-                            <td><c:out value="${arrears.arrearsCode}" /></td>
+                            <%-- <td><c:out value="${arrears.arrearsCode}" /></td> --%>
                             <td><c:out value="${arrears.arrearsType}" /></td>
                             <td class="amount"><c:if test="${arrears.amount < 0}">
                                     <span
@@ -193,6 +193,28 @@ $(function() {
 	$(".org").change(function(){
 		self.location = '<s:url value="/arrears"/>?oid=' + $(this).val();
 	});
+/* 
+	$("#myModal .btn-danger").off("click").on("click",function() {
+		console.log("22222222222222")
+		var aid = $('#myModal').data("arrears-id");
+		if(aid != null){
+	    	$.post("<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val(), {},
+	    			function(result) {
+	    				//未提交成功，提示错误
+	    				if(result.message != "OK"){
+	    					alert(result.message);
+	    					return;
+	    				}
+	    				self.location.reload();
+	    				return;
+	    			}, "json");
+		}
+		$('#myModal').modal("hide");
+		var href = $("#myModal").data("href");
+		if(href != null){
+			self.location.replace(href);
+		}
+	}); */
 });
 </script>
 <%@ include file="bottom.jsp"%>

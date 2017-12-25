@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
@@ -26,7 +26,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.alibaba.fastjson.JSON;
 
 @Controller
 @RequestMapping(value = PartyBillingController.URI)
@@ -113,7 +116,7 @@ public class PartyBillingController {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 		PartyBilling paryBilling = new PartyBilling();
-		paryBilling.setTaxRate(paramService.getParamDoubleValue("default_tax_rate"));
+		paryBilling.setTaxRate(3);
 
 		paryBilling.setProjectId(projectId);
 		model.addAttribute("partyBilling", paryBilling);
@@ -241,5 +244,11 @@ public class PartyBillingController {
 		redirectAttrs.addFlashAttribute("delMessage", "审核成功");
 		redirectAttrs.addFlashAttribute("partyBilling", partyBilling);
 		return "redirect:" + SessionHelper.getLastUrl(URI);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getorglist.json", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+	public String getOrgNameByProjectId(@RequestParam String projectId){
+		return JSON.toJSONString(service.getOrgNameByProjectId(projectId), Utility.JSON_FEATURES);
 	}
 }

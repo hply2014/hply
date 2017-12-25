@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
@@ -112,7 +112,7 @@ public class PaymentItemController {
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("paymentItem", paymentItem);
-		return "redirect:" + SessionHelper.getLastUrl(URI);
+		return "redirect:" + URI;
 	}
 
 	/*
@@ -132,7 +132,7 @@ public class PaymentItemController {
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("paymentItem", paymentItem);
-		return "redirect:" + SessionHelper.getLastUrl(URI);
+		return "redirect:" + URI;
 	}
 
 	/*
@@ -144,6 +144,6 @@ public class PaymentItemController {
 		service.delete(id);
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("paymentItem", paymentItem);
-		return "redirect:" + SessionHelper.getLastUrl(URI);
+		return "redirect:" + URI;
 	}
 }

@@ -1,9 +1,13 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="hply.mapper.ProjectMapper">
 
+    <select id="getBy" parameterType="map" resultType="Project">
+    	select id as id, project_code as projectCode, project_name as projectName, organization_id as organizationId, party_name as partyName, party_address as partyAddress, manager as manager, contract_code as contractCode, corperation as corperation, legal_assignee as legalAssignee, is_withholding_offsite as isWithholdingOffsite, management_rate as managementRate, tax_rate as taxRate, contract_amount as contractAmount, settlement_amount as settlementAmount, duty_paid_time as dutyPaidTime, duty_paid_amount as dutyPaidAmount, duty_paid_code as dutyPaidCode, capital_occupied as capitalOccupied, project_status as projectStatus, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, management_plan_amount as managementPlanAmount, contract_date as contractDate, tax_bearing_rate as taxBearingRate, contract_type as contractType, contract_tax_rate as contractTaxRate, tax_plan_amount as taxPlanAmount, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05, vat_additional_coefficient as vatAdditionalCoefficient from t_project where (${where}) 
+    </select>
+    
 	<update id="updateAllStatus">call proc_update_all_status()</update>
 
 	<select id="getTotalAmount" resultType="Double">select get_total_amount(#{projectId})</select>
@@ -35,9 +39,13 @@
 		createUser, update_time as updateTime, update_user as
 		updateUser, description as description, version as version,
 		status as status, management_plan_amount as
-		managementPlanAmount, tax_plan_amount as taxPlanAmount, field_01 as
+		managementPlanAmount, contract_date as contractDate, 
+		tax_bearing_rate as taxBearingRate, contract_type as contractType, 
+		contract_tax_rate as contractTaxRate, 
+		tax_plan_amount as taxPlanAmount, field_01 as
 		field01, field_02 as field02, field_03 as field03,
-		field_04 as field04, field_05 as field05 from t_project
+		field_04 as field04, field_05 as field05, 
+		vat_additional_coefficient as vatAdditionalCoefficient from t_project
 		where concat(ifnull(project_code, ''), ifnull(project_name,
 		''), ifnull(manager, '')) like #{queryText} and
 		organization_id=#{organizationId} order by trice desc limit #{pageSize}
@@ -53,5 +61,20 @@
 	</select>
 
 	<update id="batchCheck">update ${modelId} set status=1 where project_id=#{projectId} and ifnull(status, 0)!=1</update>
+	
+	
+	<select id="getTotalByOrganization" resultType="map">
+		select ifnull(sum(contract_amount),0) as contractTotalAmount,ifnull(sum(settlement_amount),0) as settlementTotalAmount,
+		ifnull(sum(projectTotalBalance),0) as projectTotalBalance,
+		ifnull(sum(if(taxPlanTotalAmount > 0,projectTotalBalance - taxPlanTotalAmount,projectTotalBalance)),0) as availableTotalBalance
+		from (
+		select tp.contract_amount, tp.settlement_amount,
+		((select ifnull(sum(amount),0) from t_collections where project_id = tp.id and source_of in ('工程款','自入款'))
+		-(select ifnull(sum(amount),0) from t_payment where project_id = tp.id)) as projectTotalBalance,
+		(select ifnull(tax_plan_amount,0) from t_project_summary where project_id=tp.id AND VERSION >= 0 order by serial_id desc limit 1) as taxPlanTotalAmount
+		from t_project as tp
+		where concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, '')) like #{queryText} 
+		and organization_id=#{organizationId}) t
+	</select>
 </mapper>
 

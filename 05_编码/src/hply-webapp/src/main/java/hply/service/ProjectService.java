@@ -1,12 +1,15 @@
-﻿package hply.service;
+package hply.service;
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
 import hply.domain.Project;
+import hply.domain.ProjectSummary;
+import hply.domain.Where;
 import hply.mapper.ProjectMapper;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +28,12 @@ public class ProjectService {
 
 	@Autowired
 	private PaymentService paymentService;
-
+	
 	@Autowired
 	private CollectionsService collectionsService;
+
+	@Autowired
+	private ProjectSummaryService projectSummaryService;
 
 	/**
 	 * 01_合同项目信息，插入对象
@@ -79,6 +85,13 @@ public class ProjectService {
 	}
 
 	/**
+	 * 01_合同项目信息，根据条件获取一个对象
+	 */
+	public Project getBy(Where where) {
+		return mapper.getBy(where);
+	}
+
+	/**
 	 * 01_合同项目信息，获取所有对象
 	 */
 	public List<Project> getAll() {
@@ -115,16 +128,32 @@ public class ProjectService {
 		// projectSummary.paymentTotalAmount
 
 		for (Project p : list) {
-			// 收到的工程款总额
-			double g1 = collectionsService.getTotalCollectionsAmount(p.getId());
-
+			// 收到的工程款总额+自入款总额
+			double g2 = collectionsService.getTotalCollectionsAmount(p.getId());
+			
 			// 计算工程款结存
-			double k3 = g1 - paymentService.getAllToalPayment(p.getId());
+			double k3 = g2 - paymentService.getAllToalPayment(p.getId());
+			
+			//计算可用余额
+			ProjectSummary projectSummary = projectSummaryService.getSummaryByProject(p.getId());
+			double k4 = 0;
+			if(projectSummary != null){
+				k4 = projectSummary.getTaxPlanAmount() > 0? (k3 - projectSummary.getTaxPlanAmount()) : k3;
+			}
 			DecimalFormat dformat = new DecimalFormat("#,##0.00");
 			p.setField01(dformat.format(k3));
+			p.setField02(dformat.format(k4));
 		}
 
 		return list;
+	}
+
+
+	/**
+	 * 01_合同项目信息，获取合计
+	 */
+	public Map<String, Object> getTotalByOrganization(String queryText, String orgId){
+		return mapper.getTotalByOrganization(queryText, orgId);
 	}
 
 	public void updateAllStatus() {

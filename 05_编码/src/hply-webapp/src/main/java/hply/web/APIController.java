@@ -5,6 +5,7 @@ import hply.core.Utility;
 import hply.domain.ArrearsInterest;
 import hply.domain.PaymentItem;
 import hply.domain.Project;
+import hply.domain.ProjectSummary;
 import hply.domain.SysAuthorization;
 import hply.domain.SysUser;
 import hply.domain.TreeNode;
@@ -15,6 +16,7 @@ import hply.service.PartyBillingService;
 import hply.service.PaymentItemService;
 import hply.service.PaymentService;
 import hply.service.ProjectService;
+import hply.service.ProjectSummaryService;
 import hply.service.SysAuthorizationService;
 import hply.service.SysOrganizationService;
 import hply.service.SysResourceService;
@@ -65,9 +67,12 @@ public class APIController {
 
 	@Autowired
 	private SysOrganizationService orgService;
-
+	
 	@Autowired
 	private ArrearsInterestService arrearsInterestService;
+
+	@Autowired
+	private ProjectSummaryService projectSummaryService;
 
 	@RequestMapping(value = "/tree/{userId}")
 	public @ResponseBody TreeNode getTreeNode(@PathVariable String userId) {
@@ -266,6 +271,11 @@ public class APIController {
 		return "{\"message\":\"OK\"}";
 	}
 
+	@RequestMapping(value = "/jumplasturl", method = RequestMethod.GET)
+	public String jumpLastUrl() {
+		return "redirect:" + SessionHelper.getLastUrl("");
+	}
+
 	@RequestMapping(value = "/getarrearsamount/{projectId}", method = RequestMethod.POST)
 	public @ResponseBody String getArrearsAmount(@PathVariable String projectId) {
 
@@ -306,19 +316,28 @@ public class APIController {
 		double k1 = paryBillingService.getAllCheckedAmount(projectId);
 
 		// 收到的工程款总额
-		double g1 = collectionsService.getTotalCollectionsAmount(projectId);
+		double g1 = collectionsService.getTotalProjectCollectionsAmount(projectId);
 
 		// 计算的已开发票欠款额：已审核的发票金额 - 收款中的工程款
 		double k2 = k1 - g1;
 
+		// 收到的工程款总额+自入款总额
+		double g2 = collectionsService.getTotalCollectionsAmount(projectId);
 		// 计算工程款结存
-		double k3 = g1 - paymentService.getAllToalPayment(projectId);
-
+		double k3 = g2 - paymentService.getAllToalPayment(projectId);
+		
+		//计算可用余额
+		ProjectSummary projectSummary = projectSummaryService.getSummaryByProject(projectId);
+		double k4 = 0;
+		if(projectSummary != null){
+			k4 = projectSummary.getTaxPlanAmount() > 0? (k3 - projectSummary.getTaxPlanAmount()) : k3;
+		}
+		
 		DecimalFormat dformat = new DecimalFormat("#,##0.00");
 
 		// 工程欠款|应收利息总额|已收利息总额
 		return dformat.format(q1) + "|" + dformat.format(q2) + "|" + dformat.format(j1) + "|" + dformat.format(j2) + "|"
-				+ dformat.format(k1) + "|" + dformat.format(k2) + "|" + dformat.format(k3);
+				+ dformat.format(k1) + "|" + dformat.format(k2) + "|" + dformat.format(k3) + "|" + dformat.format(k4);
 
 	}
 

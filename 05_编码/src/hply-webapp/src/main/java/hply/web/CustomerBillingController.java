@@ -1,17 +1,24 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.CustomerBilling;
+import hply.domain.Payment;
+import hply.domain.PaymentItem;
 import hply.domain.Project;
 import hply.domain.SysOrganization;
+import hply.domain.SysParameter;
 import hply.domain.SysUser;
+import hply.domain.Where;
 import hply.service.CustomerBillingService;
+import hply.service.PaymentItemService;
+import hply.service.PaymentService;
 import hply.service.ProjectService;
 import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -40,9 +47,15 @@ public class CustomerBillingController {
 
 	@Autowired
 	private SysParameterService paramService;
-
+	
 	@Autowired
 	private SysOrganizationService orgService;
+	
+	@Autowired
+	private PaymentService paymentService;
+
+	@Autowired
+	private PaymentItemService paymentItemService;
 	
 	public static final String URI = "/customerbilling";
 	public static final String JSP_PAGE_LIST = "customerbilling-list";
@@ -109,10 +122,17 @@ public class CustomerBillingController {
 	public String createForm(@RequestParam(value = "projectid", required = false) String projectId, Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
-		String types = paramService.getByEnName("billing_types").getParamValue();
-		model.addAttribute("typelist", types.split("/"));
-		CustomerBilling item = new CustomerBilling();
+		SysParameter billingTypes = paramService.getByEnName("billing_types");
+		model.addAttribute("billingTypes", billingTypes.getParamValue().split("/"));
+		model.addAttribute("billingTypesId", billingTypes.getId());
+
+		String payTypes = paramService.getByEnName("pay_types").getParamValue();
+		model.addAttribute("paymenttypelist", payTypes.split("/"));
+
+		List<PaymentItem> pi = paymentItemService.getAll();
+		model.addAttribute("paymentitemlist", pi);
 		
+		CustomerBilling item = new CustomerBilling();
 		item.setProjectId(projectId);
 		model.addAttribute("customerBilling", item);
 		model.addAttribute("page_title", "新建客户开票情况");
@@ -126,8 +146,25 @@ public class CustomerBillingController {
 	public String updateForm(@PathVariable String id, Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
-		model.addAttribute("customerBilling", service.get(id));
+		CustomerBilling customerBilling = service.get(id);
+		if("1".equals(customerBilling.getIsAutoCreatePayment())){
+			Payment payment = paymentService.getBy(Where.byColumnName("customer_billing_id", id));
+			if(payment!=null){
+				customerBilling.setPaymentItemId(payment.getPaymentItemId());
+				customerBilling.setPayType(payment.getPayType());
+			}
+		}
+		model.addAttribute("customerBilling", customerBilling);
 		model.addAttribute("page_title", "修改客户开票情况");
+		SysParameter billingTypes = paramService.getByEnName("billing_types");
+		model.addAttribute("billingTypes", billingTypes.getParamValue().split("/"));
+		model.addAttribute("billingTypesId", billingTypes.getId());
+
+		String payTypes = paramService.getByEnName("pay_types").getParamValue();
+		model.addAttribute("paymenttypelist", payTypes.split("/"));
+
+		List<PaymentItem> pi = paymentItemService.getAll();
+		model.addAttribute("paymentitemlist", pi);
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -144,7 +181,14 @@ public class CustomerBillingController {
 			return JSP_PAGE_MODIFY;
 		}
 
+		if(customerBilling.getIsAutoCreatePayment() == null){
+			customerBilling.setIsAutoCreatePayment(0);
+		}
 		service.insert(customerBilling);
+		
+		// 自动生成付款记录
+		createPament(customerBilling);
+		
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
@@ -165,11 +209,50 @@ public class CustomerBillingController {
 		}
 
 		service.delete(id);
+		if(customerBilling.getIsAutoCreatePayment() == null){
+			customerBilling.setIsAutoCreatePayment(0);
+		}
 		service.insert(customerBilling);
+		
+		// 自动生成付款记录
+		createPament(customerBilling);
+		
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("customerBilling", customerBilling);
 		return "redirect:" + SessionHelper.getLastUrl(URI);
+	}
+	
+	private void createPament(CustomerBilling customerBilling){
+		Payment payment = paymentService.getBy(Where.byColumnName("customer_billing_id", customerBilling.getId()));
+		if(new Integer(1).equals(customerBilling.getIsAutoCreatePayment())){
+			if(payment==null){
+				// 生成付款记录
+				payment = new Payment();
+				payment.setTrice(new Date());
+				payment.setProjectId(customerBilling.getProjectId());
+				payment.setAmount(customerBilling.getInvoiceAmount());
+				payment.setPaymentItemId(customerBilling.getPaymentItemId());
+				payment.setPayType(customerBilling.getPayType());
+				payment.setCustomerBillingId(customerBilling.getId());
+				payment.setStatus(0);
+				payment.setDescription(customerBilling.getDescription());
+				paymentService.insert(payment);
+			}else{
+				// 已生成修改
+				payment.setProjectId(customerBilling.getProjectId());
+				payment.setAmount(customerBilling.getInvoiceAmount());
+				payment.setPaymentItemId(customerBilling.getPaymentItemId());
+				payment.setPayType(customerBilling.getPayType());
+				payment.setDescription(customerBilling.getDescription());
+				paymentService.update(payment);
+			}
+		}else{
+			// 取消自动生成付款记录勾选删除
+			if(payment!=null){
+				paymentService.delete(payment.getId());
+			}
+		}
 	}
 
 	/*

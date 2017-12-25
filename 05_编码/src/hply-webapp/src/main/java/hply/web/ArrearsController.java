@@ -1,10 +1,11 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
 import hply.domain.Arrears;
 import hply.domain.Project;
 import hply.domain.SysOrganization;
+import hply.domain.SysParameter;
 import hply.domain.SysUser;
 import hply.service.ArrearsService;
 import hply.service.ProjectService;
@@ -110,9 +111,10 @@ public class ArrearsController {
 	public String createForm(@RequestParam(value = "projectid", required = false) String projectId, Model model) {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
-		String arrearsTypes = paramService.getByEnName("arrears_type").getParamValue();
+		SysParameter arrearsTypes = paramService.getByEnName("arrears_type");
+		model.addAttribute("arrearsTypesId", arrearsTypes.getId());
+		model.addAttribute("arrearsTypes", arrearsTypes.getParamValue().split("/"));
 		String payTypes = paramService.getByEnName("pay_types").getParamValue();
-		model.addAttribute("arrearsTypes", arrearsTypes.split("/"));
 		model.addAttribute("payTypes", payTypes.split("/"));
 
 		Arrears item = new Arrears();
@@ -132,9 +134,10 @@ public class ArrearsController {
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
 
-		String arrearsTypes = paramService.getByEnName("arrears_type").getParamValue();
+		SysParameter arrearsTypes = paramService.getByEnName("arrears_type");
+		model.addAttribute("arrearsTypesId", arrearsTypes.getId());
+		model.addAttribute("arrearsTypes", arrearsTypes.getParamValue().split("/"));
 		String payTypes = paramService.getByEnName("pay_types").getParamValue();
-		model.addAttribute("arrearsTypes", arrearsTypes.split("/"));
 		model.addAttribute("payTypes", payTypes.split("/"));
 
 		model.addAttribute("arrears", service.get(id));

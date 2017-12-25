@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
@@ -12,8 +12,11 @@ import hply.domain.PaymentItem;
 import hply.domain.Profile;
 import hply.domain.Project;
 import hply.domain.ProjectSummary;
+import hply.domain.ProjectTaxRate;
 import hply.domain.SysOrganization;
+import hply.domain.SysParameter;
 import hply.domain.SysUser;
+import hply.domain.Where;
 import hply.service.ArrearsService;
 import hply.service.CollectionsService;
 import hply.service.ContractChangeService;
@@ -24,6 +27,7 @@ import hply.service.PaymentService;
 import hply.service.ProfileService;
 import hply.service.ProjectService;
 import hply.service.ProjectSummaryService;
+import hply.service.ProjectTaxRateService;
 import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
@@ -32,7 +36,9 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,6 +61,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -99,6 +106,9 @@ public class ProjectController {
 
 	@Autowired
 	private PaymentItemService paymentItemService;
+
+	@Autowired
+	private ProjectTaxRateService projectTaxRateService;
 
 	public static final String URI = "/project";
 	public static final String JSP_PAGE_LIST = "project-list";
@@ -148,10 +158,37 @@ public class ProjectController {
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("list", list);
+		
+		// 获取工程余额合计、合同金额合计、合同结算额合计
+		Map<String, Object> total = null;
+		if(list != null && list.size() > 0){
+			total = service.getTotalByOrganization(queryText, oid);
+		}
+		model.addAttribute("total", total);
 
 		return JSP_PAGE_LIST;
 	}
 
+	/*
+	 * 根据项目编号获取项目ID
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/get/{code}.json", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+	public String getByCode(@PathVariable String code, Model model) {
+		String message = "";
+		try {
+			Project project = service.getBy(Where.byColumnName("project_code", code));
+			if(project != null){
+				message = String.format("{\"message\":\"0\",\"id\":\"%s\"}", project.getId());
+			}else{
+				message = String.format("{\"message\":\"没有找到对应项目\"}");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = String.format("{\"message\":\"没有找到对应项目\"}");
+		}
+		return message;
+	}
 	/*
 	 * 详情页面
 	 */
@@ -245,6 +282,17 @@ public class ProjectController {
 		model.addAttribute("projectSummary", ps);
 
 		model.addAttribute("project", project);
+		
+		if("混合税率".equals(project.getContractTaxRate())){
+			List<Map<String, Object>> lProjectTaxRateGroup = projectTaxRateService.getGroupByTaxTate(Where.byColumnName("project_id", project.getId()));
+			model.addAttribute("lProjectTaxRateGroup", lProjectTaxRateGroup);
+			
+			List<ProjectTaxRate> lProjectTaxRate = projectTaxRateService.getAllBy(Where.byColumnName("project_id", project.getId()));
+			model.addAttribute("lProjectTaxRate", lProjectTaxRate);
+		}
+		
+		List<Map<String, Object>> lProjectCustomerBilling = customerBillingService.getGroupByProject(project.getId());
+		model.addAttribute("lProjectCustomerBilling", lProjectCustomerBilling);
 
 		List<Arrears> lArrears = arrearsService.getAllByProject(id);
 		for (Arrears item : lArrears) {
@@ -252,6 +300,9 @@ public class ProjectController {
 			item.setCreateUser(user != null ? user.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("lArrears", lArrears);
+		
+		List<Map<String,Object>> lArrearsType = arrearsService.getTypeTotalByProject(id);
+		model.addAttribute("lArrearsType", lArrearsType);
 
 		List<Collections> lCollections = collectionService.getAllByProject(id);
 		for (Collections item : lCollections) {
@@ -323,11 +374,22 @@ public class ProjectController {
 	public String createForm(Model model) {
 		Project project = new Project();
 		project.setProjectCode(paramService.getNextCode("project_code"));
+		project.setTaxBearingRate(Double.valueOf(paramService.getByEnName("tax_bearing_rate").getParamValue()));
 		model.addAttribute("project", project);
 		model.addAttribute("orglist", getOrgList());
 		project.setManagementRate(paramService.getParamDoubleValue("default_manager_rate"));
 		project.setTaxRate(paramService.getParamDoubleValue("default_tax_rate"));
 		model.addAttribute("page_title", "新建合同项目信息");
+
+		// 获取下拉
+		SysParameter  contractType = paramService.getByEnName("contract_type");
+		model.addAttribute("contractTypeId", contractType.getId());
+		model.addAttribute("contractType", contractType.getParamValue().split("/"));
+		SysParameter contractTaxRate = paramService.getByEnName("contract_tax_rate");
+		model.addAttribute("contractTaxRate", contractTaxRate.getParamValue().split("/"));
+		
+		// 获取混合税率
+		model.addAttribute("lProjectTaxRate", new ArrayList<>());
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -340,6 +402,16 @@ public class ProjectController {
 		model.addAttribute("page_title", "修改合同项目信息：" + project.getProjectName() + "（" + project.getProjectCode() + "）");
 		model.addAttribute("project", project);
 		model.addAttribute("orglist", getOrgList());
+
+		// 获取下拉
+		SysParameter  contractType = paramService.getByEnName("contract_type");
+		model.addAttribute("contractTypeId", contractType.getId());
+		model.addAttribute("contractType", contractType.getParamValue().split("/"));
+		SysParameter contractTaxRate = paramService.getByEnName("contract_tax_rate");
+		model.addAttribute("contractTaxRate", contractTaxRate.getParamValue().split("/"));
+		
+		// 获取混合税率
+		model.addAttribute("lProjectTaxRate", projectTaxRateService.getAllBy(Where.byColumnName("project_id", id)));
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -366,6 +438,10 @@ public class ProjectController {
 		}
 
 		service.insert(project);
+		
+		// 保存混合税率
+		projectTaxRateService.batchOper(project);
+		
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("project", project);
@@ -387,8 +463,11 @@ public class ProjectController {
 		}
 
 		service.update(project);
+		
+		// 保存混合税率
+		projectTaxRateService.batchOper(project);
+		
 		redirectAttrs.addFlashAttribute("message", "修改成功");
-
 		redirectAttrs.addFlashAttribute("project", project);
 		return "redirect:" + SessionHelper.getLastUrl(URI);
 	}
@@ -400,6 +479,10 @@ public class ProjectController {
 	public String processDeleteSubmit(@PathVariable String id, RedirectAttributes redirectAttrs) {
 		Project project = service.get(id);
 		service.delete(id);
+		
+		// 根据合同ID删除混合税率
+		projectTaxRateService.deleteBy(Where.byColumnName("project_id", id));
+		
 		redirectAttrs.addFlashAttribute("delMessage", "删除成功");
 		redirectAttrs.addFlashAttribute("project", project);
 		return "redirect:" + SessionHelper.getLastUrl(URI);

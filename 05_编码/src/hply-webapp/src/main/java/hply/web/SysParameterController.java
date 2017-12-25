@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.Utility;
 import hply.domain.SysParameter;
@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.alibaba.fastjson.JSON;
 
 @Controller
 @RequestMapping(value = SysParameterController.URI)
@@ -61,6 +64,15 @@ public class SysParameterController {
 		model.addAttribute("list", list);
 
 		return JSP_PAGE_LIST;
+	}
+	
+	/*
+	 * 根据ID获取参数对象
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/get/{id}.json", produces = "application/json;charset=UTF-8", method = RequestMethod.GET)
+	public String getJSONById(@PathVariable String id, Model model) {
+		return JSON.toJSONString(service.get(id), Utility.JSON_FEATURES);
 	}
 
 	/*
@@ -131,6 +143,22 @@ public class SysParameterController {
 
 		redirectAttrs.addFlashAttribute("sysParameter", sysParameter);
 		return "redirect:" + URI;
+	}
+
+	/*
+	 * 处理修改页面的提交动作
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/modify.json", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
+	public String modifyJson(@Valid SysParameter sysParameter, BindingResult result) {
+		Utility.println(sysParameter.toString());
+		if (result.hasErrors()) {
+			return "{\"message\":\"error\"}";
+		}
+		SysParameter sysParameterOld = service.get(sysParameter.getId());
+		sysParameterOld.setParamValue(sysParameter.getParamValue());
+		service.update(sysParameterOld);
+		return "{\"message\":\"OK\"}";
 	}
 
 	/*

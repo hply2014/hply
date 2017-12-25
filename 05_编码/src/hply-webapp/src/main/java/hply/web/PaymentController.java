@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
@@ -7,6 +7,8 @@ import hply.domain.PaymentItem;
 import hply.domain.Project;
 import hply.domain.SysOrganization;
 import hply.domain.SysUser;
+import hply.domain.Where;
+import hply.service.PaymentDifferentTaxAmountService;
 import hply.service.PaymentItemService;
 import hply.service.PaymentService;
 import hply.service.ProjectService;
@@ -14,6 +16,7 @@ import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -47,8 +50,12 @@ public class PaymentController {
 
 	@Autowired
 	private PaymentItemService paymentItemService;
+	
 	@Autowired
 	private SysOrganizationService orgService;
+
+	@Autowired
+	private PaymentDifferentTaxAmountService paymentDifferentTaxAmountService;
 
 	public static final String URI = "/payment";
 	public static final String JSP_PAGE_LIST = "payment-list";
@@ -130,6 +137,9 @@ public class PaymentController {
 		payment.setProjectId(projectId);
 		model.addAttribute("payment", payment);
 		model.addAttribute("page_title", "新建付款情况");
+		
+		// 获取异地税金
+		model.addAttribute("lPaymentDifferentTaxAmount", new ArrayList<>());
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -149,6 +159,8 @@ public class PaymentController {
 		model.addAttribute("paymentitemlist", pi);
 
 		model.addAttribute("page_title", "修改付款情况");
+		// 获取异地税金
+		model.addAttribute("lPaymentDifferentTaxAmount", paymentDifferentTaxAmountService.getAllBy(Where.byColumnName("payment_id", id)));
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -163,8 +175,12 @@ public class PaymentController {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
 		}
-
+		
+		// 保存异地税金
+		paymentDifferentTaxAmountService.batchOper(payment);
 		service.insert(payment);
+		
+		
 		redirectAttrs.addFlashAttribute("message", "插入成功");
 
 		redirectAttrs.addFlashAttribute("payment", payment);
@@ -185,7 +201,12 @@ public class PaymentController {
 		}
 
 		service.delete(id);
+
+		// 保存异地税金
+		paymentDifferentTaxAmountService.batchOper(payment);
+		
 		service.insert(payment);
+		
 		redirectAttrs.addFlashAttribute("message", "修改成功");
 
 		redirectAttrs.addFlashAttribute("payment", payment);

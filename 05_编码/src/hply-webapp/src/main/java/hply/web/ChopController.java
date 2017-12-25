@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
@@ -162,8 +162,8 @@ public class ChopController {
 		Calendar c0 = Calendar.getInstance();
 		Calendar c1 = Calendar.getInstance();
 		try {
-			Date d1 = DateUtils.parseDate(p1 + "-21", "yyyy-MM-dd");
-			Date d2 = DateUtils.parseDate(p2 + "-21", "yyyy-MM-dd");
+			Date d1 = DateUtils.parseDate(p1 + "-01", "yyyy-MM-dd");
+			Date d2 = DateUtils.parseDate(p2 + "-01", "yyyy-MM-dd");
 			c0.setTime(d1);
 			c1.setTime(d2);
 		} catch (ParseException e) {
@@ -171,7 +171,7 @@ public class ChopController {
 			e.printStackTrace();
 		}
 
-		c0.add(Calendar.MONTH, -1);
+		c1.add(Calendar.MONTH, 1);
 		c1.add(Calendar.DATE, -1);
 
 		String dateRange = DateFormatUtils.format(c0, "yyyy年MM月dd日") + " ~ " + DateFormatUtils.format(c1, "yyyy年MM月dd日");

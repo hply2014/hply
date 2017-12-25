@@ -1,4 +1,4 @@
-﻿package hply.test;
+package hply.test;
 
 import hply.BaseJUnit4TestCase;
 import hply.core.Utility;

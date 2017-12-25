@@ -1,4 +1,4 @@
-﻿package hply.service;
+package hply.service;
 
 import hply.core.DataVersionConflictException;
 import hply.core.Utility;
@@ -99,6 +99,12 @@ public class ProjectSummaryService {
 	public List<ProjectSummary> getSummaryByYear(String organizationId) {
 		return mapper.getProjectSummaryByYears2(organizationId);
 	}
+	/*
+	 * 获取年度汇总报表明细，p1 : 传入格式 '2014年',将查询2014年的项目汇总信息
+	 */
+	public List<ProjectSummary> getSummaryByYearDetail(String p1, String organizationId){
+		return mapper.getSummaryByYearDetail(p1, organizationId);
+	};
 
 	public List<String> getMonths() {
 		return mapper.getMonths();
@@ -114,15 +120,24 @@ public class ProjectSummaryService {
 			total.setChangeAmount(total.getChangeAmount() + item.getChangeAmount());
 			total.setChangeTotalAmount(total.getChangeTotalAmount() + item.getChangeTotalAmount());
 			total.setSettlementAmount(total.getSettlementAmount() + item.getSettlementAmount());
+			total.setPartyBillingOutputTaxAmount(total.getPartyBillingOutputTaxAmount() + item.getPartyBillingOutputTaxAmount());
 			total.setPartyBillingAmount(total.getPartyBillingAmount() + item.getPartyBillingAmount());
 			total.setPartyBillingTotalAmount(total.getPartyBillingTotalAmount() + item.getPartyBillingTotalAmount());
 			total.setCustomerBillingAmount(total.getCustomerBillingAmount() + item.getCustomerBillingAmount());
+			total.setCustomerBillingInputTaxAmount(total.getCustomerBillingInputTaxAmount() + item.getCustomerBillingInputTaxAmount());
 			total.setCustomerBillingTotalAmount(total.getCustomerBillingTotalAmount() + item.getCustomerBillingTotalAmount());
 			total.setCollectionsAmount(total.getCollectionsAmount() + item.getCollectionsAmount());
 			total.setCollectionsTotalAmount(total.getCollectionsTotalAmount() + item.getCollectionsTotalAmount());
+			total.setCollectionsTotalProjectAmount(total.getCollectionsTotalProjectAmount() + item.getCollectionsTotalProjectAmount());
+			total.setCollectionsTotalIncomeAmount(total.getCollectionsTotalIncomeAmount() + item.getCollectionsTotalIncomeAmount());
 			total.setPaymentAmount(total.getPaymentAmount() + item.getPaymentAmount());
 			total.setPaymentTotalAmount(total.getPaymentTotalAmount() + item.getPaymentTotalAmount());
+			total.setPaymentDifferentTaxAmount(total.getPaymentDifferentTaxAmount() + item.getPaymentDifferentTaxAmount());
+			total.setPaymentTotalDifferentTaxAmount(total.getPaymentTotalDifferentTaxAmount() + item.getPaymentTotalDifferentTaxAmount());
 			total.setArrearsAmount(total.getArrearsAmount() + item.getArrearsAmount());
+			total.setTaxBearingAmount(total.getTaxBearingAmount() + item.getTaxBearingAmount());
+			total.setTaxBearingRealAmount(total.getTaxBearingRealAmount() + item.getTaxBearingRealAmount());
+			total.setTaxBearingTotalRealAmount(total.getTaxBearingTotalRealAmount() + item.getTaxBearingTotalRealAmount());
 			total.setTaxPlanAmount(total.getTaxPlanAmount() + item.getTaxPlanAmount());
 			total.setTaxRealAmount(total.getTaxRealAmount() + item.getTaxRealAmount());
 			total.setTaxTotalAmount(total.getTaxTotalAmount() + item.getTaxTotalAmount());
@@ -133,7 +148,8 @@ public class ProjectSummaryService {
 			total.setManagementOweAmount(total.getManagementOweAmount() + item.getManagementOweAmount());
 			total.setField01(String.valueOf(Utility.parseDouble(total.getField01()) + Utility.parseDouble(item.getField01())));
 			total.setField02(String.valueOf(Utility.parseDouble(total.getField02()) + Utility.parseDouble(item.getField02())));
-			total.setExpectedValue(total.getExpectedValue() + item.getExpectedValue());
+			total.setExpectedValueTon(total.getExpectedValueTon() + item.getExpectedValueTon());
+			total.setExpectedValueSquareMeter(total.getExpectedValueSquareMeter() + item.getExpectedValueSquareMeter());
 		}
 		return total;
 	}

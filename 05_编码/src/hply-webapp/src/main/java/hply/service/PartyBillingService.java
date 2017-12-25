@@ -1,4 +1,4 @@
-﻿package hply.service;
+package hply.service;
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
@@ -6,6 +6,7 @@ import hply.domain.PartyBilling;
 import hply.mapper.PartyBillingMapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -124,4 +125,8 @@ public class PartyBillingService {
 		String orgId = "";
 		return mapper.getAllTodo(orgId);
 	}
+	
+	public List<Map<String,Object>> getOrgNameByProjectId(String projectId){
+		return mapper.getOrgNameByProjectId(projectId);
+	};
 }

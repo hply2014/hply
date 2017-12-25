@@ -28,11 +28,25 @@
 <script src="<s:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
 <script src="<s:url value="/assets/select2/3.5.1/select2.min.js" />"></script>
 <script src="<s:url value="/assets/select2/3.5.1/select2_locale_zh-CN.js" />"></script>
+<script src="<s:url value="/assets/doT.min.js" />"></script>
+<script src="<s:url value="/assets/utils.js" />"></script>
+<script src="<s:url value="/assets/layer/layer.js" />"></script>
 <!--[if lt IE 9]>
       <script src="<s:url value="/assets/html5shiv.js" />"></script>
       <script src="<s:url value="/assets/respond.min.js" />"></script>
     <![endif]-->
-
+<script type="text/javascript" >
+	$(function(){
+		$("body").delegate("[id^='btn_submit']","click",function(){
+			var bol = $(this).parents("form:first").valid();
+			loading();
+			if(!bol){
+				endload();
+			}
+			return true;
+		})
+	})
+</script>
 <style type="text/css">
 body {
 	padding-top: 50px;
@@ -500,12 +514,16 @@ strong, h1, h2, h3, h4 {
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
+                    <%
+                    	request.setAttribute("loginName", SessionHelper.getCurrentSysUser().getLoginName());
+                    %>
+                    <li title="跳转历史查询系统"><a href="http://localhost:8090/hply-webapp-history-2.9/sso/${loginName }" target="_blank">历史查询</a></li>
                 </ul>
-                <div class="navbar-form navbar-left hidden">
+                <div class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="输入项目信息">
+                        <input type="text" id="search-project" class="form-control" placeholder="输入项目编号">
                     </div>
-                    <button type="button" class="btn btn-warning">
+                    <button type="button" class="btn btn-warning" id="btn-search-project">
                         <span class="glyphicon glyphicon-search"></span>搜索
                     </button>
                 </div>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.mapper.PaymentDifferentTaxAmountMapper">
+	<!-- <cache /> -->
+
+    <delete id="deleteBy" parameterType="map">
+        delete from t_payment_different_tax_amount where (${where})
+    </delete>
+  
+    <select id="getAllBy" parameterType="map" resultType="PaymentDifferentTaxAmount">
+    	select id as id, payment_id as paymentId, name as name, amount as amount, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_payment_different_tax_amount where (${where}) order by create_time  
+    </select>
+</mapper>
+

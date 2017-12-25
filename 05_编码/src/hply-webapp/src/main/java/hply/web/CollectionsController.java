@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
@@ -12,7 +12,9 @@ import hply.service.SysOrganizationService;
 import hply.service.SysParameterService;
 import hply.service.SysUserService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -42,6 +44,7 @@ public class CollectionsController {
 
 	@Autowired
 	private SysUserService sysUserService;
+	
 	@Autowired
 	private SysOrganizationService orgService;
 
@@ -135,7 +138,9 @@ public class CollectionsController {
 		
 		List<Project> projectlist = projectService.getAllNames();
 		model.addAttribute("projectlist", projectlist);
-		model.addAttribute("collections", service.get(id));
+		Collections collections = service.get(id);
+		model.addAttribute("collections", collections);
+		
 		model.addAttribute("page_title", "修改收款情况");
 		return JSP_PAGE_MODIFY;
 	}

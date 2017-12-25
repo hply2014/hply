@@ -1,8 +1,9 @@
-﻿package hply.service;
+package hply.service;
 
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
 import hply.domain.PaymentItem;
+import hply.domain.Where;
 import hply.mapper.PaymentItemMapper;
 
 import java.util.List;
@@ -61,6 +62,12 @@ public class PaymentItemService {
      */
 	  public PaymentItem get(String id){
         return mapper.get(id);
+      }
+	  /**
+     * 06+A_付款科目，根据条件获取一个对象
+     */
+	  public PaymentItem getBy(Where where){
+        return mapper.getBy(where);
       }
       
 	  /**

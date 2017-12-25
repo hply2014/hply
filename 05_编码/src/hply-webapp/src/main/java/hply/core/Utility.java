@@ -28,6 +28,8 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
+
 /**
  * @author cqiyi
  * 
@@ -37,6 +39,14 @@ public class Utility {
 	public static Log logger = LogFactory.getLog(Utility.class);
 
 	public static final String EMPTY = StringUtils.EMPTY;
+	
+	// 设置fastjson的默认转换格式
+	public final static SerializerFeature[] JSON_FEATURES = {
+		SerializerFeature.WriteDateUseDateFormat,
+		SerializerFeature.WriteMapNullValue,
+		SerializerFeature.WriteNonStringValueAsString,
+		SerializerFeature.WriteNullListAsEmpty,
+		SerializerFeature.WriteNullNumberAsZero };
 
 	public static boolean isNull(Object arg) {
 		if (arg instanceof String) {
@@ -297,5 +307,11 @@ public class Utility {
 		}
 		
 	}
+	//首字母大写
+    public static String captureName(String name) {
+        char[] cs=name.toCharArray();
+        cs[0]-=32;
+        return String.valueOf(cs);
+    }
 
 }

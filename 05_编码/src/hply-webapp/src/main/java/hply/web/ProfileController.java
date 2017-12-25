@@ -1,4 +1,4 @@
-﻿package hply.web;
+package hply.web;
 
 import hply.core.SessionHelper;
 import hply.core.Utility;
@@ -56,6 +56,7 @@ public class ProfileController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "p", required = false) Integer p, @RequestParam(value = "oid", required = false) String oid,
 			Model model) {
+		System.out.println("==========型材=============");
 		model.addAttribute("page_title", "型材");
 		List<SysOrganization> orglist = orgService.getAllBusiness();
 		if (SessionHelper.IsBusinessDepartment()) {
@@ -113,6 +114,8 @@ public class ProfileController {
 		item.setProjectId(projectId);
 		model.addAttribute("profile", item);
 		model.addAttribute("page_title", "新建型材");
+		String profileUnit = paramService.getByEnName("profile_unit").getParamValue();
+		model.addAttribute("profileUnit", profileUnit.split("/"));
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -125,6 +128,8 @@ public class ProfileController {
 		model.addAttribute("projectlist", projectlist);
 		model.addAttribute("profile", service.get(id));
 		model.addAttribute("page_title", "修改型材");
+		String profileUnit = paramService.getByEnName("profile_unit").getParamValue();
+		model.addAttribute("profileUnit", profileUnit.split("/"));
 		return JSP_PAGE_MODIFY;
 	}
 
@@ -134,7 +139,6 @@ public class ProfileController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String processCreateSubmit(@Valid Profile profile, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		Utility.println(profile.toString());
-
 		if (result.hasErrors()) {
 			model.addAttribute("errors", "1");
 			return JSP_PAGE_MODIFY;
