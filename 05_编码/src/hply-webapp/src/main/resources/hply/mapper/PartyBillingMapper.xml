@@ -12,7 +12,7 @@
 	
 	
 	<select id="getAllCheckedAmount" parameterType="string" resultType="Double">
-		select ifnull(sum(amount),0) from t_party_billing where project_id=#{projectId} and step_status=1
+		select ifnull(sum(invoice_amount),0) from t_party_billing where project_id=#{projectId} and step_status=1
 	</select>
 
   <select id="getAllByProject" resultType="PartyBilling">
@@ -35,5 +35,8 @@
     select field_01 as orgName from t_party_billing where project_id=#{projectId} and ifnull(field_01,'') != '' group by field_01
   </select>
   
+  <select id="getGroupByTaxTate" parameterType="map" resultType="map">
+    select tax_rate as taxRate,sum(invoice_amount) as amount from t_party_billing where (${where}) group by tax_rate
+  </select>
 </mapper>
 

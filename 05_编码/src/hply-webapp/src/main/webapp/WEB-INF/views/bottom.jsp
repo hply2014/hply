@@ -40,6 +40,9 @@ $(function() {
 	$("#footer").hide();
     $("td").hover(
     	function() {
+			if($(this).parents("table").hasClass("notFooter")){
+				return false;
+			}
     		var rIndex = 2;
     		var cIndex = $(this).prevAll().length;
     		
@@ -74,6 +77,9 @@ $(function() {
     $("table").hover(
     		function() {
     		},function() {
+    			if($(this).hasClass("notFooter")){
+    				return false;
+    			}
     			$("#footer").slideUp();
     		}
     );
@@ -95,6 +101,9 @@ $(function() {
 					}else{
 						$("#myModal .modal-title").html("操作提示");
 						$("#myModalContent").html(ret.message);
+						$("#myModal .btn-danger").off("click").on("click",function() {
+							$('#myModal').modal("hide");
+						});
 						$('#myModal').modal("show");
 					}
 				});
@@ -104,29 +113,16 @@ $(function() {
 		$("body").delegate(".delete, .check","click",function() {
 			$("#myModal .modal-title").html("操作提示");
 			$("#myModalContent").html($(this).attr("data-confirm-message"));
-			$('#myModal').data("href", $(this).attr("href")).modal("show");
+			$('#myModal').data("href", $(this).attr("href"));
+			$("#myModal .btn-danger").off("click").on("click",function() {
+				var href = $("#myModal").data("href");
+				if(href != null){
+					self.location.replace(href);
+				}
+				$('#myModal').modal("hide");
+			});
+			$('#myModal').modal("show");
 			return false;
-		});
-
-		$("#myModal .btn-danger").off("click").on("click",function() {
-			var aid = $('#myModal').data("arrears-id");
-			if(aid != null){
-		    	$.post("<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val(), {},
-		    			function(result) {
-		    				//未提交成功，提示错误
-		    				if(result.message != "OK"){
-		    					alert(result.message);
-		    					return;
-		    				}
-		    				self.location.reload();
-		    				return;
-		    			}, "json");
-			}
-			$('#myModal').modal("hide");
-			var href = $("#myModal").data("href");
-			if(href != null){
-				self.location.replace(href);
-			}
 		});
 
 		$(".input-group.date").datepicker({

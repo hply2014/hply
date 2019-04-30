@@ -1,6 +1,49 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="header.jsp"%>
 
+<style type="text/css">
+#custom-search-form {
+	margin: 0;
+	margin-top: 5px;
+	padding: 0;
+}
+
+#custom-search-form .search-query {
+	padding-right: 3px;
+	padding-right: 4px \9;
+	padding-left: 3px;
+	padding-left: 4px \9;
+	/* IE7-8 doesn't have border-radius, so don't indent the padding */
+	margin-bottom: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-transition: width 0.2s ease-in-out;
+	-moz-transition: width 0.2s ease-in-out;
+	-o-transition: width 0.2s ease-in-out;
+	transition: width 0.2s ease-in-out;
+}
+
+#custom-search-form button {
+	border: 0;
+	background: none;
+	/** belows styles are working good */
+	padding: 2px 5px;
+	margin-top: 2px;
+	position: relative;
+	left: -28px;
+	/* IE7-8 doesn't have border-radius, so don't indent the padding */
+	margin-bottom: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.search-query:focus+button {
+	z-index: 3;
+}
+</style>
+
 <div class="container main">
     <c:if test="${not empty delMessage}">
         <div class="alert alert-warning alert-dismissible col-md-offset-4 affix" role="alert">
@@ -63,7 +106,7 @@
                                                         pattern="yyyy-MM-dd" /></td>
                                             </tr>
                                             <tr>
-                                                <th rowspan="8" width="150px">项目信息</th>
+                                                <th rowspan="5" width="150px">项目信息</th>
                                                 <th width="150px">项目编号</th>
                                                 <td><c:out value="${projectSummary.projectCode}" /></td>
                                             </tr>
@@ -76,6 +119,37 @@
                                                 <td><c:out value="${projectSummary.contractType}" /></td>
                                             </tr>
                                             <tr>
+                                            	<th>合同总额</th>
+                                            	<td style="padding: 0px;">
+										    		<table class="table notFooter" style="padding: 0px;margin: 0px;">
+										    			<tr>
+										    				<th></th>
+										    				<th>合同税率</th>
+										    				<th>合同金额</th>
+										    				<th>合同调增额</th>
+										    				<th>合计</th>
+										    			</tr>
+										    			<c:forEach items="${lProjectTotalAmount}" var="projectTotalAmount">
+			                                            <tr>
+										    				<th></th>
+			                                                <td><fmt:formatNumber value="${projectTotalAmount.taxRate}" />%</td>
+			                                                <td><fmt:formatNumber value="${projectTotalAmount.amount}" pattern="###,###,###,###,##0.00" /></td>
+			                                                <td><fmt:formatNumber value="${projectTotalAmount.changeAmount}" pattern="###,###,###,###,##0.00" /></td>
+			                                                <td><fmt:formatNumber value="${projectTotalAmount.amount + projectTotalAmount.changeAmount}" pattern="###,###,###,###,##0.00" /></td>
+			                                            </tr>
+			                                            </c:forEach>
+			                                            <tr>
+			                                                <th>合计</th>
+			                                                <td><c:out value="${projectSummary.contractTaxRate}" /></td>
+			                                                <td><fmt:formatNumber value="${projectSummary.contractAmount}" pattern="###,###,###,###,##0.00" /></td>
+			                                                <td><fmt:formatNumber value="${projectSummary.changeTotalAmount}" pattern="###,###,###,###,##0.00" /></td>
+			                                                <td><fmt:formatNumber value="${projectSummary.contractAmount + projectSummary.changeTotalAmount}" pattern="###,###,###,###,##0.00" /></td>
+			                                            </tr>
+			                                        </table>
+												</td>
+                                            </tr>
+                                            
+                                            <%-- <tr>
                                                 <th>合同金额</th>
                                                 <td><fmt:formatNumber value="${projectSummary.contractAmount}"
                                                         pattern="###,###,###,###,##0.00" /></td>
@@ -89,10 +163,10 @@
 		                                            <tr>
 		                                            	<th></th>
 		                                            	<td style="padding: 0px;">
-												    		<table class="table" style="padding: 0px;margin: 0px;">
+												    		<table class="table notFooter" style="padding: 0px;margin: 0px;">
 												    			<c:forEach items="${lProjectTaxRateGroup}" var="projectTaxRate">
 					                                            <tr>
-					                                                <th><fmt:formatNumber value="${projectTaxRate.taxRate}" pattern="0.00" />%</th>
+					                                                <th><fmt:formatNumber value="${projectTaxRate.taxRate}" />%</th>
 					                                                <td><fmt:formatNumber value="${projectTaxRate.amount}" pattern="###,###,###,###,##0.00" /></td>
 					                                            </tr>
 					                                            </c:forEach>
@@ -106,23 +180,23 @@
 		                                            </tr>
 												</c:otherwise>
 											</c:choose>
-                                            <%-- <tr>
+                                            <tr>
                                                 <th>合同调增额</th>
                                                 <td><fmt:formatNumber value="${projectSummary.changeAmount}"
                                                         pattern="###,###,###,###,##0.00" /></td>
-                                            </tr> --%>
+                                            </tr>
                                             <tr>
                                                 <th>合同调增额</th>
                                                 <td><fmt:formatNumber value="${projectSummary.changeTotalAmount}"
                                                         pattern="###,###,###,###,##0.00" /></td>
-                                            </tr>
+                                            </tr> --%>
                                             <tr>
                                                 <th>合同结算额</th>
                                                 <td><fmt:formatNumber value="${projectSummary.settlementAmount}"
                                                         pattern="###,###,###,###,##0.00" /></td>
                                             </tr>
                                             <tr>
-                                                <th rowspan="3">甲方开票情况</th>
+                                                <th rowspan="4">甲方开票情况</th>
                                                 <th>金额</th>
                                                 <td><fmt:formatNumber value="${projectSummary.partyBillingAmount}"
                                                         pattern="###,###,###,###,##0.00" /></td>
@@ -139,6 +213,29 @@
                                                         value="${projectSummary.partyBillingTotalAmount}"
                                                         pattern="###,###,###,###,##0.00" /></td>
                                             </tr>
+                                            <c:choose>
+										    	<c:when test="${lPartyBillingGroup!=null && fn:length(lPartyBillingGroup) > 0}">
+                                            		<tr>
+		                                            	<th></th>
+		                                            	<td style="padding: 0px;">
+												    		<table class="table notFooter" style="padding: 0px;margin: 0px;">
+												    			<c:forEach items="${lPartyBillingGroup}" var="partyBillingGroup" varStatus="status">
+						                                            <tr>
+						                                                <th><fmt:formatNumber value="${partyBillingGroup.taxRate}" pattern="#,##0.00" />%</th>
+						                                                <td><fmt:formatNumber value="${partyBillingGroup.amount}" pattern="###,###,###,###,##0.00" /></td>
+						                                            </tr>
+						                                        </c:forEach>
+					                                        </table>
+														</td>
+		                                            </tr>
+												</c:when>
+												<c:otherwise>
+                                            		<tr>
+		                                            	<td colspan="2" style="padding: 0px;border:none;"></td>
+		                                            </tr>
+												</c:otherwise>
+											</c:choose>
+                                            
                                             <tr>
                                                 <th rowspan="2">收款情况</th>
                                                 <%-- <th>收款金额</th>
@@ -157,7 +254,7 @@
 		                                            <tr>
 		                                            	<th></th>
 		                                            	<td style="padding: 0px;">
-												    		<table class="table" style="padding: 0px;margin: 0px;">
+												    		<table class="table notFooter" style="padding: 0px;margin: 0px;">
 					                                            <c:if test="${projectSummary.collectionsTotalProjectAmount > 0}">
 						                                            <tr>
 						                                                <th>工程款</th>
@@ -223,7 +320,7 @@
 		                                            <tr>
 		                                            	<th></th>
 		                                            	<td style="padding: 0px;">
-												    		<table class="table" style="padding: 0px;margin: 0px;">
+												    		<table class="table notFooter" style="padding: 0px;margin: 0px;">
 												    			<c:forEach items="${lProjectCustomerBilling}" var="projectCustomerBilling">
 					                                            <tr>
 					                                                <th><c:out value="${projectCustomerBilling.invoiceType}" /></th>
@@ -606,7 +703,7 @@
 						                                                    	<c:out value="${projectTaxRate.name}" />
 						                                                    </td>
 						                                                    <td>
-																				<fmt:formatNumber value="${projectTaxRate.taxRate}" pattern="##0.00" />%
+																				<fmt:formatNumber value="${projectTaxRate.taxRate}"/>%
 						                                                    </td>
 						                                                    <td>
 							                                                    <fmt:formatNumber value="${projectTaxRate.amount}" pattern="##0.00" />
@@ -733,6 +830,7 @@
                                                 <th>#</th>
                                                 <th>增补协议编号</th>
                                                 <%--  <th class="amount">管理费率</th> --%>
+                        						<th class="amount">税率</th>
                                                 <th class="amount">增减金额</th>
                                                 <th>登记人</th>
                                                 <th>登记时间</th>
@@ -751,6 +849,8 @@
                                                     <td><c:out value="${contractChange.csaCode}" /></td>
                                                     <%--      <td class="amount"><fmt:formatNumber
                                                             value="${contractChange.managementRate}" pattern="0.00" />%</td> --%>
+                                                    <td class="amount"><fmt:formatNumber
+                                                            value="${contractChange.taxRate}" />%</td>
                                                     <td class="amount"><fmt:formatNumber
                                                             value="${contractChange.changeAmount}"
                                                             pattern="###,###,###,###,##0.00" /></td>
@@ -792,24 +892,36 @@
                                                     批量审核 </a>
                                             </div>
                                         </shiro:hasPermission>
+                                        <div class="btn-group">
+	                                        <div id="custom-search-form" class="form-search form-horizontal pull-right">
+						                        <div class="input-append span12">
+						                            <input id="searchPartyBillingInput" type="text" class="search-query mac-style" placeholder="搜索 。。。">
+						                            <button type="button" class="btn" id="searchPartyBillingButton">
+						                                <span class="glyphicon glyphicon-search"></span>
+						                            </button>
+						                        </div>
+						                    </div>
+					                    </div>
                                         <div style="float:right;">
-                                        	<h4>总笔数：<span>${fn:length(lPartyBilling) }</span>；金额合计：<span id="partyBillingTotalAmount">0.00</span>；销项税金合计：<span id="partyBillingTotalOutputTaxAmount">0.00</span>；发票金额合计：<span id="partyBillingTotalInvoiceAmount">0.00</span></h4>
+                                        	<h4>总笔数：<span id="lPartyBilling">${fn:length(lPartyBilling) }</span>；金额合计：<span id="partyBillingTotalAmount">0.00</span>；销项税金合计：<span id="partyBillingTotalOutputTaxAmount">0.00</span>；发票金额合计：<span id="partyBillingTotalInvoiceAmount">0.00</span></h4>
                                         </div>
                                     </div>
 
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id="partyBillingTable">
                                         <thead>
                                             <tr>
                                                 <th></th>
                                                 <th>#</th>
                                                 <!-- <th>发票票号</th> -->
+                        						<th>付款单位</th>
                                                 <th class="amount">金额</th>
                                                 <th class="amount">税率</th>
                                                 <th class="amount">销项税金</th>
                                                 <th class="amount">发票金额</th>
                                                 <th>开票人</th>
                                                 <th>开票时间</th>
-                                                <th>审核情况</th>
+                                                <th>备注</th>
+                                                <!-- <th>审核情况</th> -->
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -826,12 +938,12 @@
                                                         class="glyphicon <c:out value="${partyBilling.status != 1 ? 'glyphicon-file' : ''}" />"></span></td>
                                                     <td>${status.count}</td>
                                                     <%-- <td><c:out value="${partyBilling.invoiceCode}" /></td> --%>
+                            						<td><c:out value="${partyBilling.field01}" /></td>
                                                     <td class="amount"><fmt:formatNumber
                                                             value="${partyBilling.amount}"
                                                             pattern="###,###,###,###,##0.00" /></td>
                                                     <td class="amount"><fmt:formatNumber
-                                                            value="${partyBilling.taxRate}"
-                                                            pattern="0.00" />%</td>
+                                                            value="${partyBilling.taxRate}" />%</td>
                                                     <td class="amount"><fmt:formatNumber
                                                             value="${partyBilling.outputTaxAmount}"
                                                             pattern="###,###,###,###,##0.00" /></td>
@@ -841,14 +953,18 @@
                                                     <td><c:out value="${partyBilling.createUser}" /></td>
                                                     <td><fmt:formatDate value="${partyBilling.trice}"
                                                             pattern="yyyy-MM-dd" /></td>
-                                                    <td><c:if test="${empty partyBilling.step1Time}">未审核</c:if> <c:if
+                                                    <td><c:out value="${partyBilling.description}" /></td>
+                                                    <%-- <td><c:if test="${empty partyBilling.step1Time}">未审核</c:if> <c:if
                                                             test="${not empty partyBilling.step1Time}">${partyBilling.step1User}：${partyBilling.step1Idea}，
                                     <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
-                                                        </c:if></td>
+                                                        </c:if></td> --%>
                                                     <td><c:if test="${ partyBilling.stepStatus != 1 }">
                                                             <shiro:hasPermission name="`partybilling_step1`">
-                                                                <a
-                                                                    href="<s:url value="/partybilling/step1/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">审核</a>
+                                                                <a class="check"
+                                                                	data-confirm-message="甲方开票情况数据：<c:out value="${partyBilling.id}" />，审核后所有数据将不能被修改，是否确认？"
+                                                                    href="<s:url value="/partybilling/check/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">审核</a>
+                                                                <%-- <a
+                                                                    href="<s:url value="/partybilling/step1/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">审核</a> --%>
                                                             </shiro:hasPermission>
                                                             <shiro:hasPermission name="`partybilling_create`">
                                                                 <a
@@ -881,12 +997,23 @@
                                                     批量审核 </a>
                                             </div>
                                         </shiro:hasPermission>
+                                        <div class="btn-group">
+	                                        <div id="custom-search-form" class="form-search form-horizontal pull-right">
+						                        <div class="input-append span12">
+						                            <input id="searchCustomerBillingInput" type="text" class="search-query mac-style" placeholder="搜索 。。。">
+						                            <button type="button" class="btn" id="searchCustomerBillingButton">
+						                                <span class="glyphicon glyphicon-search"></span>
+						                            </button>
+						                        </div>
+						                    </div>
+					                    </div>
+					                    
                                         <div style="float:right;">
-                                        	<h4>总笔数：<span>${fn:length(lCustomerBilling) }</span>；金额合计：<span id="customerBillingTotalAmount">0.00</span>；进项税金合计：<span id="customerBillingTotalInputTaxAmount">0.00</span>；发票金额合计：<span id="customerBillingTotalInvoiceAmount">0.00</span></h4>
+                                        	<h4>总笔数：<span id="lCustomerBilling">${fn:length(lCustomerBilling) }</span>；金额合计：<span id="customerBillingTotalAmount">0.00</span>；进项税金合计：<span id="customerBillingTotalInputTaxAmount">0.00</span>；发票金额合计：<span id="customerBillingTotalInvoiceAmount">0.00</span></h4>
                                         </div>
                                     </div>
 
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id="customerBillingTable">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -921,8 +1048,7 @@
                                                             value="${customerBilling.amount}"
                                                             pattern="###,###,###,###,##0.00" /></td>
                                                     <td class="amount"><fmt:formatNumber
-                                                            value="${customerBilling.taxRate}"
-                                                            pattern="0.00" /></td>
+                                                            value="${customerBilling.taxRate}" />%</td>
                                                     <td class="amount"><fmt:formatNumber
                                                             value="${customerBilling.inputTaxAmount}"
                                                             pattern="###,###,###,###,##0.00" /></td>
@@ -968,7 +1094,7 @@
                                             </div>
                                         </shiro:hasPermission>
                                         <div style="float:right;">
-                                        	<h4>总笔数：<span>${fn:length(lCollections) }</span>；工程款合计：<span id="collectionsTotalProjectAmount">0.00</span>；管理费合计：<span id="collectionsTotalManagementAmount">0.00</span>；自入款合计：<span id="collectionsTotalIncomeAmount">0.00</span>；其他合计：<span id="collectionsTotalManagementAmount">0.00</span></h4>
+                                        	<h4>总笔数：<span>${fn:length(lCollections) }</span>；工程款合计：<span id="collectionsTotalProjectAmount">0.00</span>；管理费合计：<span id="collectionsTotalManagementAmount">0.00</span>；自入款合计：<span id="collectionsTotalIncomeAmount">0.00</span>；其他合计：<span id="collectionsTotalOtherAmount">0.00</span></h4>
                                         </div>
                                     </div>
 
@@ -1058,12 +1184,23 @@
                                                     批量审核 </a>
                                             </div>
                                         </shiro:hasPermission>
+                                        <div class="btn-group">
+	                                        <div id="custom-search-form" class="form-search form-horizontal pull-right">
+						                        <div class="input-append span12">
+						                            <input id="searchPaymentInput" type="text" class="search-query mac-style" placeholder="搜索 。。。">
+						                            <button type="button" class="btn" id="searchPaymentButton">
+						                                <span class="glyphicon glyphicon-search"></span>
+						                            </button>
+						                        </div>
+						                    </div>
+					                    </div>
+                                        
                                         <div style="float:right;">
-                                        	<h4>总笔数：<span>${fn:length(lPayment) }</span>；付款金额合计：<span id="paymentTotalAmount">0.00</span></h4>
+                                        	<h4>总笔数：<span id="lPayment">${fn:length(lPayment) }</span>；付款金额合计：<span id="paymentTotalAmount">0.00</span></h4>
                                         </div>
                                     </div>
 
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id="paymentTable">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -1314,29 +1451,28 @@
 														<c:if test="${fn:startsWith(history.tableName, '/project/')}">
 															合同额：<fmt:formatNumber value="${history.contractAmount}" pattern="###,###,###,###,##0.00" />
                                                             <c:if test="${history.settlementAmount > 0 }">
-                                                                <br />结算：<fmt:formatNumber
+                                                                <br />结算额：<fmt:formatNumber
                                                                     value="${history.settlementAmount}"
                                                                     pattern="###,###,###,###,##0.00" />
-                                                            </c:if>
-                                                            <br />管理费率：<fmt:formatNumber
+                                                            </c:if><br />
+                                                            	<%-- 管理费率：<fmt:formatNumber
                                                                 value="${history.managementRate}"
                                                                 pattern="###,###,###,###,##0.00" />%<br /> 应收管理费：<fmt:formatNumber
                                                                 value="${history.managementPlanAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
                                                             <br />税率：<fmt:formatNumber
-                                                                value="${history.managementRate}"
-                                                                pattern="###,###,###,###,##0.00" />% <br /> 应缴税金：<fmt:formatNumber
+                                                                value="${history.taxRate}" />% <br /> 应缴税金：<fmt:formatNumber
                                                                 value="${history.taxPlanAmount}"
-                                                                pattern="###,###,###,###,##0.00" /><br />
+                                                                pattern="###,###,###,###,##0.00" /><br /> --%>
                                                         </c:if>
-														<c:if test="${history.changeTotalAmount > 0}">
+														<c:if test="${fn:startsWith(history.tableName, '/contractchange/')}"><!-- ${history.changeTotalAmount > 0} -->
                                                             <%-- 调增：<fmt:formatNumber value="${history.changeAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
-                                                            <br /> --%>调增：<fmt:formatNumber
+                                                            <br /> --%>累计调增额：<fmt:formatNumber
                                                                 value="${history.changeTotalAmount}"
                                                                 pattern="###,###,###,###,##0.00" /><br />
                                                         </c:if>
-														<c:if test="${history.managementRealAmount > 0}">
+														<c:if test="${fn:startsWith(history.tableName, '/project/') || fn:startsWith(history.tableName, '/contractchange/') || fn:startsWith(history.tableName, '/collections/')}"><!-- ${history.managementRealAmount > 0} -->
 															管理费率：<fmt:formatNumber value="${history.managementRate}"
                                                                 pattern="###,###,###,###,##0.00" />%<br /> 应收管理费：<fmt:formatNumber
                                                                 value="${history.managementPlanAmount}"
@@ -1351,67 +1487,54 @@
                                                                 value="${history.managementOweAmount}"
                                                                 pattern="###,###,###,###,##0.00" /><br />
                                                         </c:if>
-														<c:if test="${history.partyBillingAmount > 0}">
+														<c:if test="${fn:startsWith(history.tableName, '/partybilling/')}"><!-- ${history.partyBillingAmount > 0} -->
 															开票：<fmt:formatNumber
                                                                 value="${history.partyBillingAmount}"
-                                                                pattern="###,###,###,###,##0.00" />
-                                                            <br />销项税金：<fmt:formatNumber
+                                                                pattern="###,###,###,###,##0.00" /><br />销项税金：<fmt:formatNumber
                                                                 value="${history.partyBillingOutputTaxAmount}"
-                                                                pattern="###,###,###,###,##0.00" />
-                                                            <br />累计：<fmt:formatNumber
+                                                                pattern="###,###,###,###,##0.00" /><br />累计甲方开票：<fmt:formatNumber
                                                                 value="${history.partyBillingTotalAmount}"
                                                                 pattern="###,###,###,###,##0.00" /><br />
                                                         </c:if>
-														<c:if test="${history.collectionsTotalAmount > 0}">
+														<c:if test="${fn:startsWith(history.tableName, '/collections/')}"><!-- ${history.collectionsTotalAmount > 0} -->
 															<%-- 收款：<fmt:formatNumber
                                                                 value="${history.collectionsAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
                                                             <br /> --%>累计收款：<fmt:formatNumber
                                                                 value="${history.collectionsTotalAmount}"
-                                                                pattern="###,###,###,###,##0.00" />
-                                                            <br />回款率：<fmt:formatNumber
+                                                                pattern="###,###,###,###,##0.00" /><br />回款率：<fmt:formatNumber
                                                                 value="${history.collectionsRate}" pattern="0.00" />%<br />
 														</c:if>
-														<c:if
-                                                            test="${history.customerBillingAmount > 0}">开票：<fmt:formatNumber
+														<c:if test="${fn:startsWith(history.tableName, '/customerbilling/')}"><!-- ${history.customerBillingAmount > 0} -->
+                                                            	开票：<fmt:formatNumber
                                                                 value="${history.customerBillingAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
                                                             <br />进项税金：<fmt:formatNumber
                                                                 value="${history.customerBillingInputTaxAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
-                                                            <br />累计：<fmt:formatNumber
+                                                            <br />累计客户开票：<fmt:formatNumber
                                                                 value="${history.customerBillingTotalAmount}"
                                                                 pattern="###,###,###,###,##0.00" /><br />
                                                         </c:if>
-														<c:if test="${history.paymentAmount > 0}">
+														<c:if test="${fn:startsWith(history.tableName, '/payment/')}"><!-- ${history.paymentAmount > 0} -->
 															<%-- 支付：<fmt:formatNumber
                                                                 value="${history.paymentAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
-                                                            <br /> --%>累计支付：<fmt:formatNumber
-                                                                value="${history.paymentTotalAmount}"
-                                                                pattern="###,###,###,###,##0.00" /><br />
+                                                            <br /> --%>累计支付：<fmt:formatNumber value="${history.paymentTotalAmount}" pattern="###,###,###,###,##0.00" /><br />
                                                         </c:if>
-														<c:if test="${history.taxRealAmount > 0}"><br />
-															税率：<fmt:formatNumber
-                                                                value="${history.taxRate}" pattern="0.00" />%
-                                                            <br /> 应缴税金：<fmt:formatNumber
-                                                                value="${history.taxPlanAmount}"
-                                                                pattern="###,###,###,###,##0.00" />
+														<c:if test="${fn:startsWith(history.tableName, '/project/') || fn:startsWith(history.tableName, '/contractchange/') || fn:startsWith(history.tableName, '/payment/')}"><!-- ${history.taxRealAmount > 0} -->
+															税率：<fmt:formatNumber value="${history.taxRate}" />%<br />
+															应缴税金：<fmt:formatNumber value="${history.taxPlanAmount}" pattern="###,###,###,###,##0.00" /><br />
                                                             <%-- <br /> 已缴税金：<fmt:formatNumber
                                                                 value="${history.taxRealAmount}"
-                                                                pattern="###,###,###,###,##0.00" /> --%>
-                                                            <br /> 累计缴税金：<fmt:formatNumber
-                                                                value="${history.taxTotalAmount}"
-                                                                pattern="###,###,###,###,##0.00" />
+                                                                pattern="###,###,###,###,##0.00" /> --%>累计缴税金：<fmt:formatNumber value="${history.taxTotalAmount}" pattern="###,###,###,###,##0.00" /><br />
                                                             <%-- <br /> 尚欠税金：<fmt:formatNumber
                                                                 value="${history.taxOweAmount}"
                                                                 pattern="###,###,###,###,##0.00" /> --%>
-                                                                <br />
                                                         </c:if>
-														<c:if test="${history.arrearsAmount > 0}">
+														<c:if test="${fn:startsWith(history.tableName, '/arrears/')}"><!-- ${history.arrearsAmount > 0} -->
 															往来欠款：<fmt:formatNumber value="${history.arrearsAmount}"
                                                                 pattern="###,###,###,###,##0.00" />
-                                                                <br />
                                                         </c:if>
 													</td>
 												<tr>
@@ -1452,7 +1575,28 @@ function repay(id, aa, ia){
 	+ -1*aa +"\"/><p class=\"help-block\" /></div></div> <div class=\"row\"><label class=\"col-sm-2 control-label\">利息</label><div class=\"col-sm-4 \"><input id=\"repay_amount1\" class=\"form-control\" type=\"text\" value=\"" 
 	+ -1*ia + "\"/><p class=\"help-block\" /></div></div>";
 	$("#myModalContent").html(str);
-	$('#myModal').data("arrears-id", id).modal('show');
+	$('#myModal').data("arrears-id", id);
+	$("#myModal .btn-danger").off("click").on("click",function() {
+		var aid = $('#myModal').data("arrears-id");
+		if(aid != null){
+	    	$.post("<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val(), {},
+	    			function(result) {
+	    				//未提交成功，提示错误
+	    				if(result.message != "OK"){
+	    					alert(result.message);
+	    					return;
+	    				}
+	    				self.location.reload();
+	    				return;
+	    			}, "json");
+		}
+		$('#myModal').modal("hide");
+		var href = $("#myModal").data("href");
+		if(href != null){
+			self.location.replace(href);
+		}
+	});
+	$('#myModal').modal('show');
 }
 function showDialog(arrearsId) {
 	var rows = "";
@@ -1480,23 +1624,34 @@ function showDialog(arrearsId) {
 				var str = "<table width=\"70%\"border=\"0\"><tr><th>日息</th><th class=\"amount\">天数</th></tr>"
 						+ rows + "</table>";
 				$("#myModalContent").html(str);
+				$("#myModal .btn-danger").off("click").on("click",function() {
+					$('#myModal').modal("hide");
+				});
 				$('#myModal').modal('show');
 			}, "json");
 
 }
 	$(function() {
 		$("#contractChangeTotalAmount").text("<fmt:formatNumber value='${contractChangeTotalAmount}' pattern='###,###,###,###,##0.00' />");
-		$("#partyBillingTotalAmount").text("<fmt:formatNumber value='${partyBillingTotalAmount}' pattern='###,###,###,###,##0.00' />");
-		$("#partyBillingTotalOutputTaxAmount").text("<fmt:formatNumber value='${partyBillingTotalOutputTaxAmount}' pattern='###,###,###,###,##0.00' />");
-		$("#partyBillingTotalInvoiceAmount").text("<fmt:formatNumber value='${partyBillingTotalInvoiceAmount}' pattern='###,###,###,###,##0.00' />");
-		$("#customerBillingTotalAmount").text("<fmt:formatNumber value='${customerBillingTotalAmount}' pattern='###,###,###,###,##0.00' />");
-		$("#customerBillingTotalInputTaxAmount").text("<fmt:formatNumber value='${customerBillingTotalInputTaxAmount}' pattern='###,###,###,###,##0.00' />");
-		$("#customerBillingTotalInvoiceAmount").text("<fmt:formatNumber value='${customerBillingTotalInvoiceAmount}' pattern='###,###,###,###,##0.00' />");
+		var partyBillingTotalAmount = "<fmt:formatNumber value='${partyBillingTotalAmount}' pattern='###,###,###,###,##0.00' />";
+		var partyBillingTotalOutputTaxAmount = "<fmt:formatNumber value='${partyBillingTotalOutputTaxAmount}' pattern='###,###,###,###,##0.00' />";
+		var partyBillingTotalInvoiceAmount = "<fmt:formatNumber value='${partyBillingTotalInvoiceAmount}' pattern='###,###,###,###,##0.00' />";
+		var customerBillingTotalAmount = "<fmt:formatNumber value='${customerBillingTotalAmount}' pattern='###,###,###,###,##0.00' />";
+		var customerBillingTotalInputTaxAmount = "<fmt:formatNumber value='${customerBillingTotalInputTaxAmount}' pattern='###,###,###,###,##0.00' />";
+		var customerBillingTotalInvoiceAmount = "<fmt:formatNumber value='${customerBillingTotalInvoiceAmount}' pattern='###,###,###,###,##0.00' />";
+		$("#partyBillingTotalAmount").text(partyBillingTotalAmount);
+		$("#partyBillingTotalOutputTaxAmount").text(partyBillingTotalOutputTaxAmount);
+		$("#partyBillingTotalInvoiceAmount").text(partyBillingTotalInvoiceAmount);
+		$("#customerBillingTotalAmount").text(customerBillingTotalAmount);
+		$("#customerBillingTotalInputTaxAmount").text(customerBillingTotalInputTaxAmount);
+		$("#customerBillingTotalInvoiceAmount").text(customerBillingTotalInvoiceAmount);
+		
 		$("#collectionsTotalProjectAmount").text("<fmt:formatNumber value='${collectionsTotalProjectAmount}' pattern='###,###,###,###,##0.00' />");
 		$("#collectionsTotalManagementAmount").text("<fmt:formatNumber value='${collectionsTotalManagementAmount}' pattern='###,###,###,###,##0.00' />");
 		$("#collectionsTotalOtherAmount").text("<fmt:formatNumber value='${collectionsTotalOtherAmount}' pattern='###,###,###,###,##0.00' />");
 		$("#collectionsTotalIncomeAmount").text("<fmt:formatNumber value='${collectionsTotalIncomeAmount}' pattern='###,###,###,###,##0.00' />");
-		$("#paymentTotalAmount").text("<fmt:formatNumber value='${paymentTotalAmount}' pattern='###,###,###,###,##0.00' />");
+		var paymentTotalAmount = "<fmt:formatNumber value='${paymentTotalAmount}' pattern='###,###,###,###,##0.00' />";
+		$("#paymentTotalAmount").text(paymentTotalAmount);
 		$("#arrearsOutputTotalAmount").text("<fmt:formatNumber value='${arrearsOutputTotalAmount}' pattern='###,###,###,###,##0.00' />");
 		$("#arrearsInputTotalAmount").text("<fmt:formatNumber value='${arrearsInputTotalAmount}' pattern='###,###,###,###,##0.00' />");
 		$("#profileTotalExpectedValueT").text("<fmt:formatNumber value='${profileTotalExpectedValueT}' pattern='###,###,###,###,##0.00' />");
@@ -1527,6 +1682,121 @@ function showDialog(arrearsId) {
 			var selfurl = self.location.href;
 			var url = selfurl.split('?')[0] + "?target=" + $(this).attr("target");
 			$.post("<s:url value='/api/setlasturl'/>", {url: url});
+		});
+
+		
+		$("#searchPartyBillingButton").click(function(){
+			var searchText = $("#searchPartyBillingInput").val().trim();
+			var totalAmount = 0;
+			var totalOutputTaxAmount = 0;
+			var totalInvoiceAmount = 0;
+			var totalCount = 0;
+			if(searchText){
+				$("#partyBillingTable tbody tr").each(function(){
+					var that = this;
+					var text = $(that).find("td").eq(4).html();
+					if(text){
+						if(text.indexOf(searchText)>-1){
+							$(that).show();
+							totalCount++;
+							var amount = $(that).find("td").eq(3).html().replace(/\,/g,"");
+							var outputTaxamount = $(that).find("td").eq(5).html().replace(/\,/g,"");
+							var invoiceamount = $(that).find("td").eq(6).html().replace(/\,/g,"");
+							totalAmount= Number(totalAmount)+Number(amount);
+							totalOutputTaxAmount= Number(totalOutputTaxAmount)+Number(outputTaxamount);
+							totalInvoiceAmount= Number(totalInvoiceAmount)+Number(invoiceamount);
+						}else{
+							$(that).hide();
+						}
+					}else{
+						$(that).hide();
+					}
+				});
+				totalAmount = totalAmount.toFixed(2).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+				totalOutputTaxAmount = totalOutputTaxAmount.toFixed(2).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+				totalInvoiceAmount = totalInvoiceAmount.toFixed(2).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+			}else{
+				$("#partyBillingTable tbody tr").show();
+				totalAmount = paymentTotalAmount;
+				totalCount = $("#partyBillingTable tbody tr").length;
+			}
+			$("#lPartyBilling").text(totalCount);
+			$("#partyBillingTotalAmount").text(totalAmount);
+			$("#partyBillingTotalOutputTaxAmount").text(totalOutputTaxAmount);
+			$("#partyBillingTotalInvoiceAmount").text(totalInvoiceAmount);
+		});
+
+		
+		$("#searchCustomerBillingButton").click(function(){
+			var searchText = $("#searchCustomerBillingInput").val().trim();
+			var totalAmount = 0;
+			var totalInputTaxAmount = 0;
+			var totalInvoiceAmount = 0;
+			var totalCount = 0;
+			if(searchText){
+				$("#customerBillingTable tbody tr").each(function(){
+					var that = this;
+					var text = $(that).find("td").eq(4).html();
+					if(text){
+						if(text.indexOf(searchText)>-1){
+							$(that).show();
+							totalCount++;
+							var amount = $(that).find("td").eq(3).html().replace(/\,/g,"");
+							var inputTaxamount = $(that).find("td").eq(5).html().replace(/\,/g,"");
+							var invoiceamount = $(that).find("td").eq(6).html().replace(/\,/g,"");
+							totalAmount= Number(totalAmount)+Number(amount);
+							totalInputTaxAmount= Number(totalInputTaxAmount)+Number(inputTaxamount);
+							totalInvoiceAmount= Number(totalInvoiceAmount)+Number(invoiceamount);
+						}else{
+							$(that).hide();
+						}
+					}else{
+						$(that).hide();
+					}
+				});
+				totalAmount = totalAmount.toFixed(2).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+				totalInputTaxAmount = totalInputTaxAmount.toFixed(2).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+				totalInvoiceAmount = totalInvoiceAmount.toFixed(2).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+			}else{
+				$("#customerBillingTable tbody tr").show();
+				totalAmount = paymentTotalAmount;
+				totalCount = $("#customerBillingTable tbody tr").length;
+			}
+			$("#lCustomerBilling").text(totalCount);
+			$("#customerBillingTotalAmount").text(totalAmount);
+			$("#customerBillingTotalInputTaxAmount").text(totalInputTaxAmount);
+			$("#customerBillingTotalInvoiceAmount").text(totalInvoiceAmount);
+		});
+		
+		$("#searchPaymentButton").click(function(){
+			var searchText = $("#searchPaymentInput").val().trim();
+			var totalAmount = 0;
+			var totalCount = 0;
+			if(searchText){
+				$("#paymentTable tbody tr").each(function(){
+					var that = this;
+					var text = $(that).find("td").eq(7).html();
+					if(text){
+						if(text.indexOf(searchText)>-1){
+							$(that).show();
+							totalCount++;
+							var amount = $(that).find("td").eq(4).html().replace(/\,/g,"");
+							totalAmount= Number(totalAmount)+Number(amount);
+						}else{
+							$(that).hide();
+						}
+					}else{
+						$(that).hide();
+					}
+				});
+				totalAmount = totalAmount.toFixed(2).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+			}else{
+				$("#paymentTable tbody tr").show();
+				totalAmount = paymentTotalAmount;
+				totalCount = $("#paymentTable tbody tr").length;
+			}
+			$("#lPayment").text(totalCount);
+			$("#paymentTotalAmount").text(totalAmount);
 		});
 	});
 </script>

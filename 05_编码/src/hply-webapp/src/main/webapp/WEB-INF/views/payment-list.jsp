@@ -43,6 +43,17 @@
                             class="glyphicon glyphicon-plus"></span> 新 建 </a>
                     </div>
                 </shiro:hasPermission>
+                <div class="span12">
+                    <div id="custom-search-form" class="form-search form-horizontal pull-right">
+                        <div class="input-append span12">
+                            <input id="searchInput" type="text" class="search-query mac-style" value="${queryText }"
+                                placeholder="搜索 。。。">
+                            <button type="button" class="btn" id="searchButton">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <table class="table table-hover">

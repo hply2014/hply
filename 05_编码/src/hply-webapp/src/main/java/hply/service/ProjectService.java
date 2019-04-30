@@ -193,4 +193,12 @@ public class ProjectService {
 	public void batchCheck(String projectId, String modelId){
 		mapper.batchCheck(projectId, "t_" + modelId);
 	}
+	
+	public List<Map<String, Object>> getTotalAmountByTaxTateCompound(Where where){
+		return mapper.getTotalAmountByTaxTateCompound(where);
+	};
+
+	public List<Map<String, Object>> getTotalAmountByTaxTateUncompound(String id){
+		return mapper.getTotalAmountByTaxTateUncompound(id, id);
+	};
 }

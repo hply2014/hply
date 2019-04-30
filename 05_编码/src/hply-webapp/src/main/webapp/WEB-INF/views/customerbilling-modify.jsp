@@ -222,28 +222,6 @@
 				$('#invoiceTypeForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
 			}
 		});
-		$("#myModal .btn-danger").off("click").on("click",function() {
-			var data = {
-				id: $('#invoiceTypeForm').find("#id").val(),
-				paramValue: $('#invoiceTypeForm').find("#paramValue").val(),
-			};
-			if(data.paramValue){
-				$('#invoiceTypeForm').find(".help-block").html("参数值以“/”分隔，前后不需要“/”。");
-		    	$.post("<s:url value='/sysparameter/modify.json'/>", data,
-	    			function(result) {
-	    				//未提交成功，提示错误
-	    				if(result.message != "OK"){
-	    					alert(result.message);
-	    					return;
-	    				}
-	    				self.location.reload();
-	    				return;
-	    			}, "json");
-				$('#myModal').modal("hide");
-			}else{
-				$('#invoiceTypeForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
-			}
-		});
 	});
 	function showInvoiceTypeFormDialog(id) {
     	$.get("<s:url value='/sysparameter/get/'/>" + id + ".json", {},
@@ -252,6 +230,28 @@
 				$("#myModalContent").html(templateContent("invoiceTypeEditTemplate"));
 				$('#invoiceTypeForm').find("#id").val(result.id);
 				$('#invoiceTypeForm').find("#paramValue").val(result.paramValue);
+				$("#myModal .btn-danger").off("click").on("click",function() {
+					var data = {
+						id: $('#invoiceTypeForm').find("#id").val(),
+						paramValue: $('#invoiceTypeForm').find("#paramValue").val(),
+					};
+					if(data.paramValue){
+						$('#invoiceTypeForm').find(".help-block").html("参数值以“/”分隔，前后不需要“/”。");
+				    	$.post("<s:url value='/sysparameter/modify.json'/>", data,
+			    			function(result) {
+			    				//未提交成功，提示错误
+			    				if(result.message != "OK"){
+			    					alert(result.message);
+			    					return;
+			    				}
+			    				self.location.reload();
+			    				return;
+			    			}, "json");
+						$('#myModal').modal("hide");
+					}else{
+						$('#invoiceTypeForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
+					}
+				});
 				$('#myModal').modal('show');
 			}, "json");
 	}

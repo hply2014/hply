@@ -289,6 +289,15 @@ public class ProjectController {
 			
 			List<ProjectTaxRate> lProjectTaxRate = projectTaxRateService.getAllBy(Where.byColumnName("project_id", project.getId()));
 			model.addAttribute("lProjectTaxRate", lProjectTaxRate);
+
+			
+			// 合同总额分项 - 混合税率
+			List<Map<String, Object>> lProjectTotalAmount = service.getTotalAmountByTaxTateCompound(Where.byColumnName("project_id", project.getId()));
+			model.addAttribute("lProjectTotalAmount", lProjectTotalAmount);
+		}else{
+			// 合同总额分项 - 非混合税率
+			List<Map<String, Object>> lProjectTotalAmount = service.getTotalAmountByTaxTateUncompound(project.getId());
+			model.addAttribute("lProjectTotalAmount", lProjectTotalAmount);
 		}
 		
 		List<Map<String, Object>> lProjectCustomerBilling = customerBillingService.getGroupByProject(project.getId());
@@ -337,6 +346,12 @@ public class ProjectController {
 			item.setStep1User(user1 != null ? user1.getRealName() : Utility.EMPTY);
 		}
 		model.addAttribute("lPartyBilling", lPartyBilling);
+		
+		if("混合税率".equals(project.getContractTaxRate()) || "混合销售建安合同".equals(project.getContractType())){
+			List<Map<String,Object>> lPartyBillingGroup = partyBillingService.getGroupByTaxTate(Where.byColumnName("project_id", project.getId()));
+			model.addAttribute("lPartyBillingGroup", lPartyBillingGroup);
+		}
+		
 
 		List<Payment> lPayment = paymentService.getAllByProject(id);
 		for (Payment item : lPayment) {

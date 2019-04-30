@@ -147,7 +147,28 @@
 		+ -1*aa +"\"/><p class=\"help-block\" /></div></div> <div class=\"row\"><label class=\"col-sm-2 control-label\">利息</label><div class=\"col-sm-4 \"><input id=\"repay_amount1\" class=\"form-control\" type=\"text\" value=\"" 
 		+ -1*ia + "\"/><p class=\"help-block\" /></div></div>";
 		$("#myModalContent").html(str);
-		$('#myModal').data("arrears-id", id).modal('show');
+		$('#myModal').data("arrears-id", id);
+		$("#myModal .btn-danger").off("click").on("click",function() {
+			var aid = $('#myModal').data("arrears-id");
+			if(aid != null){
+		    	$.post("<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val(), {},
+		    			function(result) {
+		    				//未提交成功，提示错误
+		    				if(result.message != "OK"){
+		    					alert(result.message);
+		    					return;
+		    				}
+		    				self.location.reload();
+		    				return;
+		    			}, "json");
+			}
+			$('#myModal').modal("hide");
+			var href = $("#myModal").data("href");
+			if(href != null){
+				self.location.replace(href);
+			}
+		});
+		$('#myModal').modal('show');
 	}
 	function showDialog(arrearsId) {
     	var rows = "";
@@ -175,6 +196,9 @@
     				var str = "<table width=\"70%\"border=\"0\"><tr><th>日息</th><th class=\"amount\">天数</th></tr>"
     						+ rows + "</table>";
     				$("#myModalContent").html(str);
+    				$("#myModal .btn-danger").off("click").on("click",function() {
+    					$('#myModal').modal("hide");
+    				});
     				$('#myModal').modal('show');
     			}, "json");
 
@@ -193,28 +217,6 @@ $(function() {
 	$(".org").change(function(){
 		self.location = '<s:url value="/arrears"/>?oid=' + $(this).val();
 	});
-/* 
-	$("#myModal .btn-danger").off("click").on("click",function() {
-		console.log("22222222222222")
-		var aid = $('#myModal').data("arrears-id");
-		if(aid != null){
-	    	$.post("<s:url value='/api/repay/'/>" + aid +"/" + $("#repay_amount0").val() + "/" + $("#repay_amount1").val(), {},
-	    			function(result) {
-	    				//未提交成功，提示错误
-	    				if(result.message != "OK"){
-	    					alert(result.message);
-	    					return;
-	    				}
-	    				self.location.reload();
-	    				return;
-	    			}, "json");
-		}
-		$('#myModal').modal("hide");
-		var href = $("#myModal").data("href");
-		if(href != null){
-			self.location.replace(href);
-		}
-	}); */
 });
 </script>
 <%@ include file="bottom.jsp"%>

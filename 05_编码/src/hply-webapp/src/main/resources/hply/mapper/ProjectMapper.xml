@@ -47,7 +47,7 @@
 		field_04 as field04, field_05 as field05, 
 		vat_additional_coefficient as vatAdditionalCoefficient from t_project
 		where concat(ifnull(project_code, ''), ifnull(project_name,
-		''), ifnull(manager, '')) like #{queryText} and
+		''), ifnull(manager, ''), ifnull(party_name, '')) like #{queryText} and
 		organization_id=#{organizationId} order by trice desc limit #{pageSize}
 		offset #{pageIndex}
 	</select>
@@ -55,7 +55,7 @@
 
 	<select id="getRowCountByOrganization" resultType="int">
 		select count(*) from t_project where
-		concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, '')) like
+		concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, ''), ifnull(party_name, '')) like
 		#{queryText} and
 		organization_id=#{organizationId}
 	</select>
@@ -73,8 +73,25 @@
 		-(select ifnull(sum(amount),0) from t_payment where project_id = tp.id)) as projectTotalBalance,
 		(select ifnull(tax_plan_amount,0) from t_project_summary where project_id=tp.id AND VERSION >= 0 order by serial_id desc limit 1) as taxPlanTotalAmount
 		from t_project as tp
-		where concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, '')) like #{queryText} 
+		where concat(ifnull(project_code, ''), ifnull(project_name, ''), ifnull(manager, ''), ifnull(party_name, '')) like #{queryText} 
 		and organization_id=#{organizationId}) t
 	</select>
+	
+	<!-- 混合税率统计合同总额 -->
+	<select id="getTotalAmountByTaxTateCompound" parameterType="map" resultType="map">
+      select taxRate,sum(amount) as amount,sum(changeAmount) as changeAmount from (
+		select tax_rate as taxRate,sum(amount) as amount,0 as changeAmount from t_project_tax_rate where (${where}) group by tax_rate
+		union all
+		select tax_rate as taxRate,0 as amount,sum(change_amount) as changeAmount from t_contract_change where (${where}) group by tax_rate
+	  ) t group by taxRate order  by taxRate
+    </select>
+    <!-- 非混合税率统计合同总额 -->
+	<select id="getTotalAmountByTaxTateUncompound" resultType="map">
+      select taxRate,sum(amount) as amount,sum(changeAmount) as changeAmount from (
+		select CONVERT(REPLACE(contract_tax_rate,'%',''),decimal(20,4)) as taxRate,sum(contract_amount) as amount,0 as changeAmount from t_project where id=#{id}
+		union all
+		select tax_rate as taxRate,0 as amount,sum(change_amount) as changeAmount from t_contract_change where project_id=#{projectId} group by tax_rate
+	  ) t group by taxRate order  by taxRate
+    </select>
 </mapper>
 

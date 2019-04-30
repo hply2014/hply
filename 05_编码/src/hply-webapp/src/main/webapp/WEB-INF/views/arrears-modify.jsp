@@ -224,29 +224,6 @@
 				$('#arrearsTypesForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
 			}
 		});
-		$("#myModalContent").html(templateContent("arrearsTypesEditTemplate"));
-		$("#myModal .btn-danger").off("click").on("click",function() {
-			var data = {
-				id: $('#arrearsTypesForm').find("#id").val(),
-				paramValue: $('#arrearsTypesForm').find("#paramValueLock").text()+$('#arrearsTypesForm').find("#paramValue").val(),
-			};
-			if(data.paramValue){
-				$('#arrearsTypesForm').find(".help-block").html("参数值以“/”分隔，前后不需要“/”。");
-		    	$.post("<s:url value='/sysparameter/modify.json'/>", data,
-	    			function(result) {
-	    				//未提交成功，提示错误
-	    				if(result.message != "OK"){
-	    					alert(result.message);
-	    					return;
-	    				}
-	    				self.location.reload();
-	    				return;
-	    			}, "json");
-				$('#myModal').modal("hide");
-			}else{
-				$('#arrearsTypesForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
-			}
-		});
 	});
 	function showArrearsTypesFormDialog(id) {
     	$.get("<s:url value='/sysparameter/get/'/>" + id + ".json", {},
@@ -261,6 +238,28 @@
 					}
 				});
 				$('#arrearsTypesForm').find("#paramValue").val(paramValues.join("/"));
+				$("#myModal .btn-danger").off("click").on("click",function() {
+					var data = {
+						id: $('#arrearsTypesForm').find("#id").val(),
+						paramValue: $('#arrearsTypesForm').find("#paramValueLock").text()+$('#arrearsTypesForm').find("#paramValue").val(),
+					};
+					if(data.paramValue){
+						$('#arrearsTypesForm').find(".help-block").html("参数值以“/”分隔，前后不需要“/”。");
+				    	$.post("<s:url value='/sysparameter/modify.json'/>", data,
+			    			function(result) {
+			    				//未提交成功，提示错误
+			    				if(result.message != "OK"){
+			    					alert(result.message);
+			    					return;
+			    				}
+			    				self.location.reload();
+			    				return;
+			    			}, "json");
+						$('#myModal').modal("hide");
+					}else{
+						$('#arrearsTypesForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
+					}
+				});
 				$('#myModal').modal('show');
 			}, "json");
 	}

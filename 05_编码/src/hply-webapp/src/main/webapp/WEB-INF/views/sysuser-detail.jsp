@@ -278,7 +278,7 @@
 			errorElement : function(error, element) {
 				element.parent().addClass("invalid");
 				element.next().html('<b class="glyphicon glyphicon-remove text-danger"></b><i>' + error.html() + "</i>");
-			}
+			},
 			rules : {
 				password : {
 					required : true,

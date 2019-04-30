@@ -3,6 +3,7 @@ package hply.service;
 import hply.core.DataVersionConflictException;
 import hply.core.SessionHelper;
 import hply.domain.PartyBilling;
+import hply.domain.Where;
 import hply.mapper.PartyBillingMapper;
 
 import java.util.List;
@@ -115,6 +116,11 @@ public class PartyBillingService {
 		return mapper.getAllPagedByOrganization(orgId, pageIndex, pageSize);
 	}
 
+
+	public List<Map<String, Object>> getGroupByTaxTate(Where where){
+		return mapper.getGroupByTaxTate(where);
+	};
+	
 
 	public int getRowCount(String orgId) {
 		return mapper.getRowCountByOrganization(orgId);

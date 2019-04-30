@@ -17,7 +17,7 @@
   </delete>
 
   <update id="check" parameterType="string">
-    update t_party_billing set status=1 where id = #{id}
+    update t_party_billing set status=1,step_status=1 where id = #{id}
   </update>
   
   <select id="get" parameterType="string" resultType="PartyBilling">

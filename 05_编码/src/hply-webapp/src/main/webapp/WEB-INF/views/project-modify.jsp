@@ -530,29 +530,7 @@
 				$('#contractTypeForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
 			}
 		});
-		$("#myModalContent").html(templateContent("contractTypeEditTemplate"));
-		$("#myModal .btn-danger").off("click").on("click",function() {
-			var data = {
-				id: $('#contractTypeForm').find("#id").val(),
-				paramValue: $('#contractTypeForm').find("#paramValue").val(),
-			};
-			if(data.paramValue){
-				$('#contractTypeForm').find(".help-block").html("参数值以“/”分隔，前后不需要“/”。");
-		    	$.post("<s:url value='/sysparameter/modify.json'/>", data,
-	    			function(result) {
-	    				//未提交成功，提示错误
-	    				if(result.message != "OK"){
-	    					alert(result.message);
-	    					return;
-	    				}
-	    				self.location.reload();
-	    				return;
-	    			}, "json");
-				$('#myModal').modal("hide");
-			}else{
-				$('#contractTypeForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
-			}
-		});
+		
 	});
 	function showContractTypeFormDialog(id) {
     	$.get("<s:url value='/sysparameter/get/'/>" + id + ".json", {},
@@ -561,6 +539,28 @@
 				$("#myModalContent").html(templateContent("contractTypeEditTemplate"));
 				$('#contractTypeForm').find("#id").val(result.id);
 				$('#contractTypeForm').find("#paramValue").val(result.paramValue);
+				$("#myModal .btn-danger").off("click").on("click",function() {
+					var data = {
+						id: $('#contractTypeForm').find("#id").val(),
+						paramValue: $('#contractTypeForm').find("#paramValue").val(),
+					};
+					if(data.paramValue){
+						$('#contractTypeForm').find(".help-block").html("参数值以“/”分隔，前后不需要“/”。");
+				    	$.post("<s:url value='/sysparameter/modify.json'/>", data,
+			    			function(result) {
+			    				//未提交成功，提示错误
+			    				if(result.message != "OK"){
+			    					alert(result.message);
+			    					return;
+			    				}
+			    				self.location.reload();
+			    				return;
+			    			}, "json");
+						$('#myModal').modal("hide");
+					}else{
+						$('#contractTypeForm').find(".help-block").html('参数值以“/”分隔，前后不需要“/”。<br><b class="glyphicon glyphicon-remove text-danger"></b><i>必须填写</i>');
+					}
+				});
 				$('#myModal').modal('show');
 			}, "json");
 	}

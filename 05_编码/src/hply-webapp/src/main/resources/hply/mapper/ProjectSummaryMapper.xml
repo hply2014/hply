@@ -10,7 +10,7 @@
 		organization_id as organizationId,project_code projectCode,
 		project_name projectName,(select manager from t_project where id=t.project_id)  field03,
 		contract_tax_rate as contractTaxRate,contract_type as contractType,
-		contract_amount as contractAmount,sum(change_amount) as changeAmount,
+		contract_amount as contractAmount,change_amount as changeAmount,
 		change_total_amount as changeTotalAmount,settlement_amount as settlementAmount,
 		management_rate as managementRate,management_plan_amount as managementPlanAmount,
 		(select ifnull(sum(amount),0) from t_collections where source_of = '管理费' and project_id = t.project_id 
@@ -18,18 +18,18 @@
 		(select ifnull(sum(amount),0) from t_collections where source_of = '管理费' and project_id=t.project_id) as managementTotalAmount,
 		management_owe_amount as managementOweAmount,party_billing_amount as partyBillingAmount,
 		party_billing_total_amount as partyBillingTotalAmount,party_billing_output_tax_amount as partyBillingOutputTaxAmount,
-		sum(collections_amount) as collectionsAmount,collections_total_amount as collectionsTotalAmount,
+		collections_amount as collectionsAmount,collections_total_amount as collectionsTotalAmount,
 		collections_total_project_amount as collectionsTotalProjectAmount,collections_total_income_amount as collectionsTotalIncomeAmount,
 		collections_rate as collectionsRate,customer_billing_amount as customerBillingAmount,
 		customer_billing_total_amount as customerBillingTotalAmount,customer_billing_input_tax_amount as customerBillingInputTaxAmount,
-		sum(payment_amount) as paymentAmount,payment_total_amount as paymentTotalAmount,
+		payment_amount as paymentAmount,payment_total_amount as paymentTotalAmount,
 		(select ifnull(sum(amount),0) from t_payment_different_tax_amount where payment_id in (select distinct id from t_payment where project_id =t.project_id) 
 		and date(create_time) between date(concat(#{p1}, '-01')) and (date(concat(#{p2}, '-01')) + interval 1 month - interval 1 day)) as paymentDifferentTaxAmount,
-		tax_rate as taxRate, tax_bearing_amount as taxBearingAmount,tax_plan_amount as taxPlanAmount,sum(tax_real_amount) as taxRealAmount,
+		tax_rate as taxRate, tax_bearing_amount as taxBearingAmount,tax_plan_amount as taxPlanAmount,tax_real_amount as taxRealAmount,
 		tax_total_amount as taxTotalAmount,tax_owe_amount as taxOweAmount,
-		sum(arrears_amount) as arrearsAmount,sum(expected_value_ton) as expectedValueTon,
-		sum(expected_value_square_meter) as expectedValueSquareMeter,profile_point as profilePoint,
-		ifnull(total_others_amount, 0) field01,sum(management_real_amount) + ifnull(total_others_amount, 0) field02,
+		arrears_amount as arrearsAmount,expected_value_ton as expectedValueTon,
+		expected_value_square_meter as expectedValueSquareMeter,profile_point as profilePoint,
+		ifnull(total_others_amount, 0) field01,management_real_amount + ifnull(total_others_amount, 0) field02,
 		version, create_time as createTime, table_name as tableName, contract_date as contractDate, 
 		tax_bearing_rate as taxBearingRate, vat_additional_coefficient as vatAdditionalCoefficient, 
 		(select ifnull(sum(amount),0) from t_payment where date(create_time) between date(concat(#{p1}, '-01')) and (date(concat(#{p2}, '-01')) + interval 1 month - interval 1 day)
@@ -39,13 +39,16 @@
 		payment_total_different_tax_amount as paymentTotalDifferentTaxAmount
 		from (
 		select
-		s.*,(select sum(amount) from t_collections where source_of='其他' and project_id=s.project_id) total_others_amount from
+		s.*,(select sum(amount) from t_collections where source_of='其他' and project_id=s.project_id 
+		  and date(trice) between date(concat(#{p1}, '-01')) and (date(concat(#{p2}, '-01')) + interval 1 month - interval 1 day)) total_others_amount from
 		t_project_summary s
 		where date(trice) between date(concat(#{p1}, '-01')) and (date(concat(#{p2}, '-01')) + interval 1 month - interval 1 day)
 		and organization_id = #{organizationId} and project_id in (select id from t_project)
-		order by s.serial_id desc
+		and serial_id in (select max(serial_id) from t_project_summary 
+		where date(trice) between date(concat(#{p1}, '-01')) and (date(concat(#{p2}, '-01')) + interval 1 month - interval 1 day)
+		and organization_id = #{organizationId} group by project_id)
 		) t
-		group by project_id order by get_project_order(projectCode)
+		order by field_02,CAST(field_03 AS decimal(20,4))
 	</select>
 
 	<!-- month -->
@@ -471,7 +474,7 @@
 		 and project_id in (select id from t_project)
 		order by s.serial_id desc
 		) t
-		group by project_id order by get_project_order(projectCode)
+		group by project_id order by field_02,CAST(field_03 AS decimal(20,4))
 	</select>
 
 	<!-- 输出当月的统计表 -->
@@ -523,13 +526,15 @@
 		table_name as tableName
 		from (
 		select
-		s.*,(select sum(amount) from t_collections where source_of='其他' and project_id=s.project_id) total_others_amount from
+		s.*,(select sum(amount) from t_collections where source_of='其他' and project_id=s.project_id
+		  and DATE_FORMAT(trice,'%Y-%m') = #theMont
+		) total_others_amount from
 		t_project_summary s
 		where organization_id = #{organizationId} and get_this_month(project_id, #theMonth) = 1
 		order by
 		s.serial_id desc
 		) t
-		group by project_id order by get_project_order(project_code)
+		group by project_id order by field_02,CAST(field_03 AS decimal(20,4))
 	</select>
 </mapper>
 

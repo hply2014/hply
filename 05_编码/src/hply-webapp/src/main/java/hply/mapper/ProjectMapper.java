@@ -6,6 +6,7 @@
 package hply.mapper;
 
 import hply.domain.Project;
+import hply.domain.Where;
 import hply.mapper.partial.PartialProjectMapper;
 
 import java.util.List;
@@ -35,4 +36,8 @@ public interface ProjectMapper extends PartialProjectMapper {
 	public void batchCheck(@Param("projectId") String projectId, @Param("modelId") String modelId);
 	
 	public Map<String, Object> getTotalByOrganization(@Param("queryText") String queryText, @Param("organizationId") String orgId);
+
+	public List<Map<String, Object>> getTotalAmountByTaxTateCompound(Where where);
+	
+	public List<Map<String, Object>> getTotalAmountByTaxTateUncompound(@Param("id") String id, @Param("projectId") String projectId);
 }

@@ -57,7 +57,8 @@
                         <th class="amount">发票金额</th>
                         <th>开票人</th>
                         <th>开票时间</th>
-                        <th>审核情况</th>
+                        <th>备注</th>
+                        <!-- <th>审核情况</th> -->
                         <th></th>
                     </tr>
                 </thead>
@@ -79,14 +80,18 @@
                                     pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${partyBilling.createUser}" /></td>
                             <td><fmt:formatDate value="${partyBilling.trice}" pattern="yyyy-MM-dd" /></td>
-                            <td><c:if test="${empty partyBilling.step1Time}">未审核</c:if> <c:if
+                            <td><c:out value="${partyBilling.description}" /></td>
+                            <%-- <td><c:if test="${empty partyBilling.step1Time}">未审核</c:if> <c:if
                                     test="${not empty partyBilling.step1Time}">${partyBilling.step1User}：${partyBilling.step1Idea}，
                                     <fmt:formatDate value="${partyBilling.step1Time}" pattern="yyyy-MM-dd" />
-                                </c:if></td>
+                                </c:if></td> --%>
                             <td><c:if test="${ partyBilling.stepStatus != 1 }">
                                     <shiro:hasPermission name="`partybilling_step1`">
-                                        <a
-                                            href="<s:url value="/partybilling/step1/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">审核</a>
+                                    	<a class="check"
+                                        	data-confirm-message="甲方开票情况数据：<c:out value="${partyBilling.id}" />，审核后所有数据将不能被修改，是否确认？"
+                                            href="<s:url value="/partybilling/check/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">审核</a>
+                                        <%-- <a
+                                            href="<s:url value="/partybilling/step1/{id}"><s:param name="id" value="${partyBilling.id }" /></s:url>">审核</a> --%>
                                     </shiro:hasPermission>
                                     <shiro:hasPermission name="`partybilling_create`">
                                         <a

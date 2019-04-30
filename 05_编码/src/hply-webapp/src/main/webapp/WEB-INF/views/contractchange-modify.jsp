@@ -41,6 +41,12 @@
                                 <sf:input cssClass="form-control" path="changeAmount" placeholder="增减金额" />
                                 <p class="help-block" />
                             </div>
+                            <label for="taxRate" class="col-sm-2 control-label">税率（%）</label>
+                            <div class="col-sm-4 required-field-block">
+                                <b class="required-icon">*</b>
+                                <sf:input cssClass="form-control" path="taxRate" placeholder="税率" />
+                                <p class="help-block" />
+                            </div>
                         </div>
                         <%--
                         <div class="row">

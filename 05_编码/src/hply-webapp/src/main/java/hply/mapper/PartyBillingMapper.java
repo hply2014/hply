@@ -6,6 +6,7 @@
 package hply.mapper;
 
 import hply.domain.PartyBilling;
+import hply.domain.Where;
 import hply.mapper.partial.PartialPartyBillingMapper;
 
 import java.util.List;
@@ -46,6 +47,8 @@ public interface PartyBillingMapper extends PartialPartyBillingMapper {
 
 	
 	public List<Map<String,Object>> getOrgNameByProjectId(@Param("projectId") String projectId);
+
+	public List<Map<String, Object>> getGroupByTaxTate(Where where);
 
 }
 

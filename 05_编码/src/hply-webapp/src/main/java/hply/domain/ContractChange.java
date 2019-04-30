@@ -10,7 +10,9 @@ import java.text.MessageFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
+
 import hply.core.Utility;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -44,6 +46,10 @@ public class ContractChange implements Serializable {
     	 * 增减金额
     	 */
         public static final String FIELD_CHANGE_AMOUNT = "change_amount";
+    	/*
+    	 * 税率
+    	 */
+        public static final String FIELD_TAX_RATE = "tax_rate";
     	/*
     	 * 增补时间
     	 */
@@ -136,6 +142,13 @@ public class ContractChange implements Serializable {
       
       private double managementRate;
       
+      /**
+       * [tax_rate]，
+       * 税率
+       */
+       
+       private double taxRate;
+     	
     /**
       * [change_amount]，
       * 增减金额
@@ -295,6 +308,21 @@ public class ContractChange implements Serializable {
     	public void setManagementRate(double managementRate) {
     		this.managementRate = managementRate;
     	}
+        /**
+         * [tax_rate] getter，
+         * 税率
+         */
+       	public double getTaxRate () {
+       		return this.taxRate;
+       	}
+
+       /**
+         * [tax_rate] setter，
+         * 税率
+         */
+       	public void setTaxRate(double taxRate) {
+       		this.taxRate = taxRate;
+       	}
     /**
       * [change_amount] getter，
       * 增减金额
@@ -515,6 +543,7 @@ public class ContractChange implements Serializable {
         str += MessageFormat.format("ProjectId=\"{0}\",", StringUtils.trimToEmpty(this.getProjectId()));
         str += MessageFormat.format("CsaCode=\"{0}\",", StringUtils.trimToEmpty(this.getCsaCode()));
         str += MessageFormat.format("ManagementRate=\"{0}\",", this.getManagementRate());
+        str += MessageFormat.format("TaxRate=\"{0}\",", this.getTaxRate());
         str += MessageFormat.format("ChangeAmount=\"{0}\",", this.getChangeAmount());
         str += MessageFormat.format("Trice=\"{0}\",", this.getTrice());
         str += MessageFormat.format("CreateTime=\"{0}\",", this.getCreateTime());

@@ -54,6 +54,7 @@
                         <th>项目名称</th>
                         <th>增补协议编号</th>
                        <%--<th class="amount">管理费率</th> --%> 
+                        <th class="amount">税率</th>
                         <th class="amount">增减金额</th>
                         <th>登记人</th>
                         <th>登记时间</th>
@@ -76,6 +77,7 @@
                             <td><c:out value="${contractChange.csaCode}" /></td>
                          <%-- <td class="amount"><fmt:formatNumber value="${contractChange.managementRate}"
                                     pattern="0.00" />%</td> --%>  
+                            <td class="amount"><fmt:formatNumber value="${contractChange.taxRate}" />%</td>
                             <td class="amount"><fmt:formatNumber value="${contractChange.changeAmount}"
                                     pattern="###,###,###,###,##0.00" /></td>
                             <td><c:out value="${contractChange.createUser}" /></td>

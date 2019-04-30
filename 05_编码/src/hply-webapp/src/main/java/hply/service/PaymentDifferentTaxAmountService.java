@@ -117,26 +117,19 @@ public class PaymentDifferentTaxAmountService {
 				String diffId = diffIds[i].trim();
 				switch (diffStatuss[i]) {
 				case -1:
+					break;
+				case 2:
+					// 异地税金修改操作：先删除后新增
 					if(StringUtils.isNotEmpty(diffId)){
 						delete(diffId);
 					}
-					break;
-				case 2:
-					if(StringUtils.isEmpty(diffId)){
-						PaymentDifferentTaxAmount paymentDifferentTaxAmount = new PaymentDifferentTaxAmount();
-						paymentDifferentTaxAmount.setName(diffNames[i]);
-						paymentDifferentTaxAmount.setAmount(diffAmounts[i]);
-						paymentDifferentTaxAmount.setStatus(1);// 保存成功状态为1
-						// 新增需要设置付款情况ID关联
-						paymentDifferentTaxAmount.setPaymentId(payment.getId());
-						insert(paymentDifferentTaxAmount);
-					}else{
-						// TODO tyc 异地税金修改操作：修改 or 删除后新增
-						PaymentDifferentTaxAmount paymentDifferentTaxAmount = get(diffId);
-						paymentDifferentTaxAmount.setName(diffNames[i]);
-						paymentDifferentTaxAmount.setAmount(diffAmounts[i]);
-						update(paymentDifferentTaxAmount);
-					}
+					PaymentDifferentTaxAmount paymentDifferentTaxAmount = new PaymentDifferentTaxAmount();
+					paymentDifferentTaxAmount.setName(diffNames[i]);
+					paymentDifferentTaxAmount.setAmount(diffAmounts[i]);
+					paymentDifferentTaxAmount.setStatus(1);// 保存成功状态为1
+					// 新增需要设置付款情况ID关联
+					paymentDifferentTaxAmount.setPaymentId(payment.getId());
+					insert(paymentDifferentTaxAmount);
 					break;
 				default:
 					// 0和1：不操作

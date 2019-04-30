@@ -226,27 +226,21 @@ public class CustomerBillingController {
 	private void createPament(CustomerBilling customerBilling){
 		Payment payment = paymentService.getBy(Where.byColumnName("customer_billing_id", customerBilling.getId()));
 		if(new Integer(1).equals(customerBilling.getIsAutoCreatePayment())){
-			if(payment==null){
-				// 生成付款记录
-				payment = new Payment();
-				payment.setTrice(new Date());
-				payment.setProjectId(customerBilling.getProjectId());
-				payment.setAmount(customerBilling.getInvoiceAmount());
-				payment.setPaymentItemId(customerBilling.getPaymentItemId());
-				payment.setPayType(customerBilling.getPayType());
-				payment.setCustomerBillingId(customerBilling.getId());
-				payment.setStatus(0);
-				payment.setDescription(customerBilling.getDescription());
-				paymentService.insert(payment);
-			}else{
-				// 已生成修改
-				payment.setProjectId(customerBilling.getProjectId());
-				payment.setAmount(customerBilling.getInvoiceAmount());
-				payment.setPaymentItemId(customerBilling.getPaymentItemId());
-				payment.setPayType(customerBilling.getPayType());
-				payment.setDescription(customerBilling.getDescription());
-				paymentService.update(payment);
+			// 先删除
+			if(payment!=null){
+				paymentService.delete(payment.getId());
 			}
+			// 后新增
+			payment = new Payment();
+			payment.setTrice(new Date());
+			payment.setProjectId(customerBilling.getProjectId());
+			payment.setAmount(customerBilling.getInvoiceAmount());
+			payment.setPaymentItemId(customerBilling.getPaymentItemId());
+			payment.setPayType(customerBilling.getPayType());
+			payment.setCustomerBillingId(customerBilling.getId());
+			payment.setStatus(0);
+			payment.setDescription(customerBilling.getDescription());
+			paymentService.insert(payment);
 		}else{
 			// 取消自动生成付款记录勾选删除
 			if(payment!=null){
