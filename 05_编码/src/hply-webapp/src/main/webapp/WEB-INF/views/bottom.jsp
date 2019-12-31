@@ -57,6 +57,8 @@ $(function() {
             		rTitle = $(this).parent().children("td[id=field01]").text();
         		}else if(self.location.href.indexOf("/paymentitem") > 0){
         			rTitle = $(this).parent().children("td:eq(1)").text();
+        		}else if(self.location.href.indexOf("/information") > 0){
+        			rTitle = $(this).parent().children("td:eq(3)").text();
         		}else{
         			rTitle = $(this).parent().children("td:eq(" + rIndex + ")").text();
         		}
@@ -110,7 +112,7 @@ $(function() {
 			}
 			return false;
 		});
-		$("body").delegate(".delete, .check","click",function() {
+		$("body").delegate(".delete, .check, .seal, .agree","click",function() {
 			$("#myModal .modal-title").html("操作提示");
 			$("#myModalContent").html($(this).attr("data-confirm-message"));
 			$('#myModal').data("href", $(this).attr("href"));
@@ -147,7 +149,7 @@ $(function() {
 		});
 
 		var selfurl = self.location.href;
-		if(selfurl.indexOf('/create') < 0 && selfurl.indexOf('/modify') < 0 && selfurl.indexOf('/step') < 0 && selfurl.indexOf('/paymentitem') < 0){
+		if(selfurl.indexOf('/create') < 0 && selfurl.indexOf('/modify') < 0 && selfurl.indexOf('/step') < 0 && selfurl.indexOf('/paymentitem') < 0 && selfurl.indexOf('/charge') < 0){
 			// alert(selfurl);
 			$.post("<s:url value='/api/setlasturl'/>", {url: selfurl});
 		}

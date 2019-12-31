@@ -11,17 +11,13 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
 	<!-- 配置数据源 -->
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
-		destroy-method="close"> <property name="driverClass" value="com.mysql.jdbc.Driver" 
-		/> <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/hplydb_new" 
-		/> <property name="user" value="root" /> <property name="password" value="qqwQQW" 
-		/> <property name="maxIdleTime" value="3600" /> </bean> -->
-
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
-		destroy-method="close"> <property name="driverClass" value="com.mysql.jdbc.Driver" 
-		/> <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3310/hplydb_new?allowMultiQueries=true&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8" 
-		/> <property name="user" value="root" /> <property name="password" value="" 
-		/> <property name="maxIdleTime" value="3600" /> </bean> -->
+	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3310/hplydb_export?allowMultiQueries=true&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8" />
+		<property name="user" value="root" />
+		<property name="password" value="" />
+		<property name="maxIdleTime" value="3600" />
+	</bean> -->
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
@@ -32,11 +28,6 @@
 		<property name="password" value="Ccqiyi&amp;2019" />
 		<property name="maxIdleTime" value="3600" />
 	</bean>
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
-		destroy-method="close"> <property name="driverClass" value="com.mysql.jdbc.Driver" 
-		/> <property name="jdbcUrl" value="jdbc:mysql://192.168.11.214:3310/hplydb_new?allowMultiQueries=true&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8" 
-		/> <property name="user" value="root" /> <property name="password" value="" 
-		/> <property name="maxIdleTime" value="3600" /> </bean> -->
 	<!-- 事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

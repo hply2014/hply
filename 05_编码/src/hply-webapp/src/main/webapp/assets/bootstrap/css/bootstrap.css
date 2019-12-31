@@ -878,6 +878,12 @@ th {
 .glyphicon-tree-deciduous:before {
   content: "\e200";
 }
+.glyphicon-yen:before {
+  content: "\00a5";
+}
+.glyphicon-pawn:before {
+  content: "\e213";
+}
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;

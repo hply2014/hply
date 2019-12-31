@@ -29,45 +29,85 @@ public class Information implements Serializable {
     	 */
         public static final String FIELD_ID = "id";
     	/*
-    	 * 所在部门
+    	 * 所属部门
     	 */
         public static final String FIELD_ORGANIZATION_ID = "organization_id";
     	/*
-    	 * 项目名称
+    	 * 工程名称
     	 */
         public static final String FIELD_PROJECT_NAME = "project_name";
     	/*
-    	 * 地址
+    	 * 工程地点
     	 */
         public static final String FIELD_ADDRESS = "address";
     	/*
-    	 * 开发商
+    	 * 建设单位
     	 */
-        public static final String FIELD_DEVELOPER = "developer";
+        public static final String FIELD_CONSTRUCTION_COMPANY = "construction_company";
     	/*
-    	 * 总包单位
+    	 * 总包方
     	 */
-        public static final String FIELD_EPC_CORPORATION = "epc_corporation";
+        public static final String FIELD_GENERAL_CONTRACTOR = "general_contractor";
     	/*
-    	 * 品种
+    	 * 加盟客户姓名
     	 */
-        public static final String FIELD_VARIETY = "variety";
+        public static final String FIELD_JOIN_REAL_NAME = "join_real_name";
     	/*
-    	 * 总面积
+    	 * 装饰类别
     	 */
-        public static final String FIELD_TOTAL_AREA = "total_area";
+        public static final String FIELD_DECORATION_TYPE = "decoration_type";
     	/*
-    	 * 姓名
+    	 * 工程量
     	 */
-        public static final String FIELD_REAL_NAME = "real_name";
+        public static final String FIELD_QUANTITIES = "quantities";
     	/*
-    	 * 身份证号
+    	 * 综合服务费
     	 */
-        public static final String FIELD_IDENTIFICATION = "identification";
+        public static final String FIELD_SERVICE_AMOUNT = "service_amount";
     	/*
-    	 * 联系方式
+    	 * 缴费标识0-未缴费，1-已缴费
     	 */
-        public static final String FIELD_CONTACT = "contact";
+        public static final String FIELD_PAY_FLAG = "pay_flag";
+    	/*
+    	 * 确认缴费时间
+    	 */
+        public static final String FIELD_PAY_TIME = "pay_time";
+    	/*
+    	 * 确认缴费用户
+    	 */
+        public static final String FIELD_PAY_USER = "pay_user";
+    	/*
+    	 * 盖章标识0-未盖章，1-已盖章
+    	 */
+        public static final String FIELD_SEAL_FLAG = "seal_flag";
+    	/*
+    	 * 确认盖章时间
+    	 */
+        public static final String FIELD_SEAL_TIME = "seal_time";
+    	/*
+    	 * 确认盖章用户
+    	 */
+        public static final String FIELD_SEAL_USER = "seal_user";
+    	/*
+    	 * 确认审核时间
+    	 */
+        public static final String FIELD_AUDIT_TIME = "audit_time";
+    	/*
+    	 * 确认审核用户
+    	 */
+        public static final String FIELD_AUDIT_USER = "audit_user";
+    	/*
+    	 * 应收证书费
+    	 */
+        public static final String FIELD_CERTIFICATE_PLAN_AMOUNT = "certificate_plan_amount";
+    	/*
+    	 * 已收证书费
+    	 */
+        public static final String FIELD_CERTIFICATE_REAL_AMOUNT = "certificate_real_amount";
+    	/*
+    	 * 尚欠证书费
+    	 */
+        public static final String FIELD_CERTIFICATE_OWE_AMOUNT = "certificate_owe_amount";
     	/*
     	 * 登记人
     	 */
@@ -130,9 +170,14 @@ public class Information implements Serializable {
 	 */
 	public Information() {
 		this.id = Utility.getRandomUUID(); 
+        this.payFlag = "0"; 
+        this.sealFlag = "0"; 
         this.trice = new Date(); 
+        String userId = Utility.getCurrentUserId();
+        this.subscriber = userId; 
         this.createTime = new Date(); 
-		this.createUser = Utility.getCurrentUserId(); 
+		this.createUser = userId; 
+        this.status = 0; 
         this.version = -1; 
 	}
 
@@ -145,73 +190,140 @@ public class Information implements Serializable {
       
     /**
       * [organization_id]，
-      * 所在部门
+      * 所属部门
       */
       
       private String organizationId;
       
     /**
       * [project_name]，
-      * 项目名称
+      * 工程名称
       */
       
       private String projectName;
       
     /**
       * [address]，
-      * 地址
+      * 工程地点
       */
       
       private String address;
       
     /**
-      * [developer]，
-      * 开发商
+      * [construction_company]，
+      * 建设单位
       */
       
-      private String developer;
+      private String constructionCompany;
       
     /**
-      * [epc_corporation]，
-      * 总包单位
+      * [general_contractor]，
+      * 总包方
       */
       
-      private String epcCorporation;
+      private String generalContractor;
       
     /**
-      * [variety]，
-      * 品种
+      * [join_real_name]，
+      * 加盟客户姓名
       */
       
-      private String variety;
+      private String joinRealName;
       
     /**
-      * [total_area]，
-      * 总面积
+      * [decoration_type]，
+      * 装饰类别
       */
       
-      private String totalArea;
+      private String decorationType;
       
     /**
-      * [real_name]，
-      * 姓名
+      * [quantities]，
+      * 工程量
       */
       
-      private String realName;
+      private String quantities;
       
     /**
-      * [identification]，
-      * 身份证号
+      * [service_amount]，
+      * 综合服务费
       */
       
-      private String identification;
+      private double serviceAmount;
       
     /**
-      * [contact]，
-      * 联系方式
+      * [pay_flag]，
+      * 缴费标识0-未缴费，1-已缴费
       */
       
-      private String contact;
+      private String payFlag;
+      /**
+       * [pay_time]，
+       * 确认缴费时间
+       */
+       @DateTimeFormat(iso=ISO.DATE)
+       private Date payTime;
+       
+     /**
+       * [pay_user]，
+       * 确认缴费用户
+       */
+       
+       private String payUser;
+      
+    /**
+      * [seal_flag]，
+      * 盖章标识0-未盖章，1-已盖章
+      */
+      
+      private String sealFlag;
+      /**
+       * [seal_time]，
+       * 确认盖章时间
+       */
+       @DateTimeFormat(iso=ISO.DATE)
+       private Date sealTime;
+       
+     /**
+       * [seal_user]，
+       * 确认盖章用户
+       */
+       
+       private String sealUser;
+       /**
+        * [audit_time]，
+        * 确认审核时间
+        */
+        @DateTimeFormat(iso=ISO.DATE)
+        private Date auditTime;
+        
+      /**
+        * [audit_user]，
+        * 确认审核用户
+        */
+        
+        private String auditUser;
+            
+    /**
+      * [certificate_plan_amount]，
+      * 应收证书费
+      */
+      
+      private double certificatePlanAmount;
+      
+    /**
+      * [certificate_real_amount]，
+      * 已收证书费
+      */
+      
+      private double certificateRealAmount;
+      
+    /**
+      * [certificate_owe_amount]，
+      * 尚欠证书费
+      */
+      
+      private double certificateOweAmount;
       
     /**
       * [subscriber]，
@@ -329,7 +441,7 @@ public class Information implements Serializable {
     	}
     /**
       * [organization_id] getter，
-      * 所在部门
+      * 所属部门
       */
     	public String getOrganizationId () {
     		return this.organizationId;
@@ -337,14 +449,14 @@ public class Information implements Serializable {
 
     /**
       * [organization_id] setter，
-      * 所在部门
+      * 所属部门
       */
     	public void setOrganizationId(String organizationId) {
     		this.organizationId = organizationId;
     	}
     /**
       * [project_name] getter，
-      * 项目名称
+      * 工程名称
       */
     	public String getProjectName () {
     		return this.projectName;
@@ -352,14 +464,14 @@ public class Information implements Serializable {
 
     /**
       * [project_name] setter，
-      * 项目名称
+      * 工程名称
       */
     	public void setProjectName(String projectName) {
     		this.projectName = projectName;
     	}
     /**
       * [address] getter，
-      * 地址
+      * 工程地点
       */
     	public String getAddress () {
     		return this.address;
@@ -367,117 +479,243 @@ public class Information implements Serializable {
 
     /**
       * [address] setter，
-      * 地址
+      * 工程地点
       */
     	public void setAddress(String address) {
     		this.address = address;
     	}
     /**
-      * [developer] getter，
-      * 开发商
+      * [construction_company] getter，
+      * 建设单位
       */
-    	public String getDeveloper () {
-    		return this.developer;
+    	public String getConstructionCompany () {
+    		return this.constructionCompany;
     	}
 
     /**
-      * [developer] setter，
-      * 开发商
+      * [construction_company] setter，
+      * 建设单位
       */
-    	public void setDeveloper(String developer) {
-    		this.developer = developer;
+    	public void setConstructionCompany (String constructionCompany) {
+    		this.constructionCompany = constructionCompany;
     	}
     /**
-      * [epc_corporation] getter，
-      * 总包单位
+      * [general_contractor] getter，
+      * 总包方
       */
-    	public String getEpcCorporation () {
-    		return this.epcCorporation;
-    	}
-
-    /**
-      * [epc_corporation] setter，
-      * 总包单位
-      */
-    	public void setEpcCorporation(String epcCorporation) {
-    		this.epcCorporation = epcCorporation;
-    	}
-    /**
-      * [variety] getter，
-      * 品种
-      */
-    	public String getVariety () {
-    		return this.variety;
+    	public String getGeneralContractor () {
+    		return this.generalContractor;
     	}
 
     /**
-      * [variety] setter，
-      * 品种
+      * [general_contractor] setter，
+      * 总包方
       */
-    	public void setVariety(String variety) {
-    		this.variety = variety;
+    	public void setGeneralContractor(String generalContractor) {
+    		this.generalContractor = generalContractor;
     	}
     /**
-      * [total_area] getter，
-      * 总面积
+      * [join_real_name] getter，
+      * 加盟客户姓名
       */
-    	public String getTotalArea () {
-    		return this.totalArea;
-    	}
-
-    /**
-      * [total_area] setter，
-      * 总面积
-      */
-    	public void setTotalArea(String totalArea) {
-    		this.totalArea = totalArea;
-    	}
-    /**
-      * [real_name] getter，
-      * 姓名
-      */
-    	public String getRealName () {
-    		return this.realName;
+    	public String getJoinRealName () {
+    		return this.joinRealName;
     	}
 
     /**
-      * [real_name] setter，
-      * 姓名
+      * [join_real_name] setter，
+      * 加盟客户姓名
       */
-    	public void setRealName(String realName) {
-    		this.realName = realName;
+    	public void setJoinRealName(String joinRealName) {
+    		this.joinRealName = joinRealName;
     	}
+        /**
+         * [decoration_type] getter，
+         * 装饰类别
+         */
+       	public String getDecorationType () {
+       		return this.decorationType;
+       	}
+
+       /**
+         * [decoration_type] setter，
+         * 装饰类别
+         */
+       	public void setDecorationType(String decorationType) {
+       		this.decorationType = decorationType;
+       	}
+        /**
+         * [quantities] getter，
+         * 工程量
+         */
+       	public String getQuantities () {
+       		return this.quantities;
+       	}
+
+       /**
+         * [quantities] setter，
+         * 工程量
+         */
+       	public void setQuantities(String quantities) {
+       		this.quantities = quantities;
+       	}
+	
+		public double getServiceAmount() {
+			return serviceAmount;
+		}
+	
+		public void setServiceAmount(double serviceAmount) {
+			this.serviceAmount = serviceAmount;
+		}
     /**
-      * [identification] getter，
-      * 身份证号
+      * [pay_flag] getter，
+      * 缴费标识0-未缴费，1-已缴费
       */
-    	public String getIdentification () {
-    		return this.identification;
+    	public String getPayFlag () {
+    		return this.payFlag;
     	}
 
     /**
-      * [identification] setter，
-      * 身份证号
+      * [pay_flag] setter，
+      * 缴费标识0-未缴费，1-已缴费
       */
-    	public void setIdentification(String identification) {
-    		this.identification = identification;
+    	public void setPayFlag(String payFlag) {
+    		this.payFlag = payFlag;
     	}
+
+        /**
+          * [pay_time] getter，
+          * 确认缴费时间
+          */
+        	public Date getPayTime () {
+        		return this.payTime;
+        	}
+
+        /**
+          * [pay_time] setter，
+          * 确认缴费时间
+          */
+        	public void setPayTime(Date payTime) {
+        		this.payTime = payTime;
+        	}
+        /**
+          * [pay_user] getter，
+          * 确认缴费用户
+          */
+        	public String getPayUser () {
+        		return this.payUser;
+        	}
+
+        /**
+          * [pay_user] setter，
+          * 确认缴费用户
+          */
+        	public void setPayUser(String payUser) {
+        		this.payUser = payUser;
+        	}
     /**
-      * [contact] getter，
-      * 联系方式
+      * [seal_flag] getter，
+      * 盖章标识0-未盖章，1-已盖章
       */
-    	public String getContact () {
-    		return this.contact;
+    	public String getSealFlag () {
+    		return this.sealFlag;
     	}
 
     /**
-      * [contact] setter，
-      * 联系方式
+      * [seal_flag] setter，
+      * 盖章标识0-未盖章，1-已盖章
       */
-    	public void setContact(String contact) {
-    		this.contact = contact;
+    	public void setSealFlag(String sealFlag) {
+    		this.sealFlag = sealFlag;
     	}
-    /**
+
+        /**
+          * [seal_time] getter，
+          * 确认盖章时间
+          */
+        	public Date getSealTime () {
+        		return this.sealTime;
+        	}
+
+        /**
+          * [seal_time] setter，
+          * 确认盖章时间
+          */
+        	public void setSealTime(Date sealTime) {
+        		this.sealTime = sealTime;
+        	}
+        /**
+          * [seal_user] getter，
+          * 确认盖章用户
+          */
+        	public String getSealUser () {
+        		return this.sealUser;
+        	}
+
+        /**
+          * [seal_user] setter，
+          * 确认盖章用户
+          */
+        	public void setSealUser(String sealUser) {
+        		this.sealUser = sealUser;
+        	}
+
+            /**
+              * [audit_time] getter，
+              * 确认审核时间
+              */
+            	public Date getAuditTime () {
+            		return this.auditTime;
+            	}
+
+            /**
+              * [audit_time] setter，
+              * 确认审核时间
+              */
+            	public void setAuditTime(Date auditTime) {
+            		this.auditTime = auditTime;
+            	}
+            /**
+              * [audit_user] getter，
+              * 确认审核用户
+              */
+            	public String getAuditUser () {
+            		return this.auditUser;
+            	}
+
+            /**
+              * [audit_user] setter，
+              * 确认审核用户
+              */
+            	public void setAuditUser(String auditUser) {
+            		this.auditUser = auditUser;
+            	}
+	
+		public double getCertificatePlanAmount() {
+			return certificatePlanAmount;
+		}
+	
+		public void setCertificatePlanAmount(double certificatePlanAmount) {
+			this.certificatePlanAmount = certificatePlanAmount;
+		}
+	
+		public double getCertificateRealAmount() {
+			return certificateRealAmount;
+		}
+	
+		public void setCertificateRealAmount(double certificateRealAmount) {
+			this.certificateRealAmount = certificateRealAmount;
+		}
+	
+		public double getCertificateOweAmount() {
+			return certificateOweAmount;
+		}
+	
+		public void setCertificateOweAmount(double certificateOweAmount) {
+			this.certificateOweAmount = certificateOweAmount;
+		}
+
+	/**
       * [subscriber] getter，
       * 登记人
       */
@@ -697,13 +935,23 @@ public class Information implements Serializable {
         str += MessageFormat.format("OrganizationId=\"{0}\",", StringUtils.trimToEmpty(this.getOrganizationId()));
         str += MessageFormat.format("ProjectName=\"{0}\",", StringUtils.trimToEmpty(this.getProjectName()));
         str += MessageFormat.format("Address=\"{0}\",", StringUtils.trimToEmpty(this.getAddress()));
-        str += MessageFormat.format("Developer=\"{0}\",", StringUtils.trimToEmpty(this.getDeveloper()));
-        str += MessageFormat.format("EpcCorporation=\"{0}\",", StringUtils.trimToEmpty(this.getEpcCorporation()));
-        str += MessageFormat.format("Variety=\"{0}\",", StringUtils.trimToEmpty(this.getVariety()));
-        str += MessageFormat.format("TotalArea=\"{0}\",", StringUtils.trimToEmpty(this.getTotalArea()));
-        str += MessageFormat.format("RealName=\"{0}\",", StringUtils.trimToEmpty(this.getRealName()));
-        str += MessageFormat.format("Identification=\"{0}\",", StringUtils.trimToEmpty(this.getIdentification()));
-        str += MessageFormat.format("Contact=\"{0}\",", StringUtils.trimToEmpty(this.getContact()));
+        str += MessageFormat.format("ConstructionCompany=\"{0}\",", StringUtils.trimToEmpty(this.getConstructionCompany()));
+        str += MessageFormat.format("GeneralContractor=\"{0}\",", StringUtils.trimToEmpty(this.getGeneralContractor()));
+        str += MessageFormat.format("JoinRealName=\"{0}\",", StringUtils.trimToEmpty(this.getJoinRealName()));
+        str += MessageFormat.format("DecorationType=\"{0}\",", StringUtils.trimToEmpty(this.getDecorationType()));
+        str += MessageFormat.format("Quantities=\"{0}\",", StringUtils.trimToEmpty(this.getQuantities()));
+        str += MessageFormat.format("ServiceAmount=\"{0}\",", this.getServiceAmount());
+        str += MessageFormat.format("PayFlag=\"{0}\",", StringUtils.trimToEmpty(this.getPayFlag()));
+        str += MessageFormat.format("PayTime=\"{0}\",", this.getPayTime());
+        str += MessageFormat.format("PayUser=\"{0}\",", StringUtils.trimToEmpty(this.getPayUser()));
+        str += MessageFormat.format("SealFlag=\"{0}\",", StringUtils.trimToEmpty(this.getSealFlag()));
+        str += MessageFormat.format("SealTime=\"{0}\",", this.getSealTime());
+        str += MessageFormat.format("SealUser=\"{0}\",", StringUtils.trimToEmpty(this.getSealUser()));
+        str += MessageFormat.format("AuditTime=\"{0}\",", this.getAuditTime());
+        str += MessageFormat.format("AuditUser=\"{0}\",", StringUtils.trimToEmpty(this.getAuditUser()));
+        str += MessageFormat.format("CertificatePlanAmount=\"{0}\",", this.getCertificatePlanAmount());
+        str += MessageFormat.format("CertificateRealAmount=\"{0}\",", this.getCertificateRealAmount());
+        str += MessageFormat.format("CertificateOweAmount=\"{0}\",", this.getCertificateOweAmount());
         str += MessageFormat.format("Subscriber=\"{0}\",", StringUtils.trimToEmpty(this.getSubscriber()));
         str += MessageFormat.format("Trice=\"{0}\",", this.getTrice());
         str += MessageFormat.format("CreateTime=\"{0}\",", this.getCreateTime());
@@ -717,7 +965,7 @@ public class Information implements Serializable {
         str += MessageFormat.format("Field02=\"{0}\",", StringUtils.trimToEmpty(this.getField02()));
         str += MessageFormat.format("Field03=\"{0}\",", StringUtils.trimToEmpty(this.getField03()));
         str += MessageFormat.format("Field04=\"{0}\",", StringUtils.trimToEmpty(this.getField04()));
-        str += MessageFormat.format("Field05=\"{0}\",", StringUtils.trimToEmpty(this.getField05()));;
+        str += MessageFormat.format("Field05=\"{0}\",", StringUtils.trimToEmpty(this.getField05()));
         return str;
                         
 	}

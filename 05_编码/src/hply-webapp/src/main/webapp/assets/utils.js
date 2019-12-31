@@ -10,7 +10,7 @@ function UUID() {
 
     var uuid = s.join("");
     return uuid;
-}
+};
 
 	
 /**
@@ -22,4 +22,24 @@ var templateContent = function(templateId,model){
     var tempFn = doT.template($("#"+templateId).text());
     var resultText = tempFn(model);
     return resultText;
-}
+};
+
+// 输入格式：yyyy-MM-DD
+function monthsBetween(sDate1, sDate2) {
+    var nMonths = 0;
+    try{
+		sDate1 = new Date(sDate1);
+		sDate2 = new Date(sDate2);
+		var nDate1Months = sDate1.getYear() * 12 + sDate1.getMonth();
+		var nDate2Months = sDate2.getYear() * 12 + sDate2.getMonth();
+	    if(nDate1Months == nDate2Months){
+	    	nMonths = 1;
+	    }else{
+	    	nMonths = Math.abs(nDate1Months - nDate2Months);
+	    }
+	}catch(e){
+		nMonths = 0;
+	}
+    return nMonths;
+};
+

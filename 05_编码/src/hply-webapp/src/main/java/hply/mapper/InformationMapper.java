@@ -5,8 +5,14 @@
   
 package hply.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import hply.domain.Information;
+import hply.domain.ProjectSummary;
 import hply.mapper.partial.PartialInformationMapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -18,5 +24,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InformationMapper extends PartialInformationMapper {
 
+	/*
+	 * pharse : 传入格式 '2014-05'，将查询2014-5-01到2014-5-31的项目汇总信息
+	 */
+	public List<Information> getAllBy(@Param("p1") String p1, @Param("p2") String p2, @Param("organizationId") String organizationId);
+
+	public List<String> getMonths();
+	
+	public Map<String,Object> getSimilarity(@Param("text") String text);
 }
 

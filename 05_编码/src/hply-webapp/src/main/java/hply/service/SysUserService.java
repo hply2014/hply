@@ -98,5 +98,15 @@ public class SysUserService {
 			sysUser.setPassword(hashedPassword);
 			// }
 		}
+		
+		// 手动获取密码
+		/*public static void main(String[] args) throws Exception {
+			String password = "a5bd3318-0c3a-11e4-9300-001c42328937";
+			System.out.println(password);
+			String hashedPassword = new Sha256Hash("123456", password, 1).toString();
+			System.out.println(hashedPassword);
+	    }*/
+		
+		
 }
 

@@ -6,6 +6,7 @@
 package hply.mapper.partial;
 
 import hply.domain.Information;
+import hply.domain.Where;
 
 import java.util.List;
 
@@ -33,8 +34,8 @@ public interface PartialInformationMapper {
 	  
 	  public List<Information> getAll();
       
-	  public int getRowCount(@Param("queryText") String queryText);
+	  public int getRowCount(Where where);
 	  
-	  public List<Information> getAllPaged(@Param("queryText") String queryText, @Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+	  public List<Information> getAllPaged(Where where);
 }
 

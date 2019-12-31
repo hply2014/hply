@@ -313,5 +313,40 @@ public class Utility {
         cs[0]-=32;
         return String.valueOf(cs);
     }
+    
+    public static String informationStatusName(int status){
+    	switch (status) {
+		case 1:
+			return "补充修改信息登记";
+		case 3:
+			return "补录信息登记";
+		default:
+			return "修改信息登记";
+		}
+    }
+
+
+	
+    public static String getStatusName(int status){
+		String statusName;
+		switch (status) {
+		case 1:
+			statusName = "待确认缴费";
+			break;
+		case 2:
+			statusName = "已确认缴费，待确认盖章";
+			break;
+		case 3:
+			statusName = "已确认盖章，待补录";
+			break;
+		case 4:
+			statusName = "已审核";
+			break;
+		default:
+			statusName = Utility.EMPTY;
+			break;
+		}
+		return statusName;
+	}
 
 }

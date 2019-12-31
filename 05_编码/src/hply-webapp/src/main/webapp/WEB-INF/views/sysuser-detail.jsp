@@ -269,15 +269,16 @@
 		});
 
 		$("#resetPasswordForm").validate({
+			errorElement : "i",
 			submitHandler : function() {
 				$.post("<s:url value="/api/resetpassword"/>", $("#resetPasswordForm").serialize(), function(data) {
 					alert(data);
 				}, "text");
 				$("#resetPasswordModal").modal("hide");
 			},
-			errorElement : function(error, element) {
-				element.parent().addClass("invalid");
-				element.next().html('<b class="glyphicon glyphicon-remove text-danger"></b><i>' + error.html() + "</i>");
+			errorPlacement : function(error, element) {
+				$(element).parent().addClass("invalid");
+				$(element).next().html('<b class="glyphicon glyphicon-remove text-danger"></b><i>' + error.html() + "</i>");
 			},
 			rules : {
 				password : {

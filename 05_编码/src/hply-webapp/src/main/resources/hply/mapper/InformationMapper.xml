@@ -4,5 +4,24 @@
 
 <mapper namespace="hply.mapper.InformationMapper">
 
+	<select id="getAllBy" resultType="Information">
+		select id as id, organization_id as organizationId, project_name as projectName, address as address, construction_company as constructionCompany, general_contractor as generalContractor, join_real_name as joinRealName, decoration_type as decorationType, quantities as quantities, service_amount as serviceAmount, pay_flag as payFlag, pay_time as payTime, pay_user as payUser, seal_flag as sealFlag, seal_time as sealTime, seal_user as sealUser, audit_time as auditTime, audit_user as auditUser, certificate_plan_amount as certificatePlanAmount, certificate_real_amount as certificateRealAmount, certificate_owe_amount as certificateOweAmount, subscriber as subscriber, trice as trice, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_information
+		where date(trice) between date(concat(#{p1}, '-01')) and (date(concat(#{p2}, '-01')) + interval 1 month - interval 1 day)
+		and organization_id = #{organizationId}
+		order by trice desc
+	</select>
+
+	<select id="getMonths" resultType="string">
+		select distinct date_format(date(trice), '%Y-%m') from t_information order by trice desc
+	</select>
+
+	<select id="getSimilarity" resultType="map">
+		select t.*,tso.organization_name,tsu.real_name from 
+			(select id,DATE_FORMAT(trice,'%Y-%m-%d %H:%i:%s') trice,project_name,organization_id,subscriber, get_similarity(CONCAT(project_name,address,construction_company,general_contractor,join_real_name),#{text}) ratio
+			from t_information order by ratio desc limit 1) t 
+			left join t_sys_organization tso on t.organization_id = tso.id
+			left join t_sys_user tsu on t.subscriber = tsu.id;
+	</select>
+
 </mapper>
 

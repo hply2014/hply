@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hply.mapper.partial.PartialInformationCertificateAmountMapper">
+
+  <insert id="insert" parameterType="InformationCertificateAmount">
+    insert into t_information_certificate_amount(id, information_id, real_name, begin_time, end_time, type, lock_flag, plan_amount, real_amount, owe_amount, create_time, create_user, update_time, update_user, description, status, field_01, field_02, field_03, field_04, field_05) values ( #{id}, #{informationId}, #{realName}, #{beginTime}, #{endTime}, #{type}, #{lockFlag}, #{planAmount}, #{realAmount}, #{oweAmount}, now(), #{createUser}, now(), #{createUser}, #{description}, #{status}, #{field01}, #{field02}, #{field03}, #{field04}, #{field05} )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update t_information_certificate_amount set information_id = #{informationId}, real_name = #{realName}, begin_time = #{beginTime}, end_time = #{endTime},type = #{type}, lock_flag = #{lockFlag}, plan_amount = #{planAmount}, real_amount = #{realAmount}, owe_amount = #{oweAmount},  update_time = now(), update_user = #{updateUser}, description = #{description}, status = #{status}, field_01 = #{field01}, field_02 = #{field02}, field_03 = #{field03}, field_04 = #{field04}, field_05 = #{field05}, version = version + 1 where id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="string">
+    delete from t_information_certificate_amount where id = #{id}
+  </delete>
+
+  <select id="get" parameterType="string" resultType="InformationCertificateAmount">
+    select id as id, information_id as informationId, real_name as realName, begin_time as beginTime, end_time as endTime, type as type, lock_flag as lockFlag, plan_amount as planAmount, real_amount as realAmount, owe_amount as oweAmount, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_information_certificate_amount where id = #{id}
+  </select>
+  
+  <select id="getVersion" parameterType="string" resultType="int">
+    select version from t_information_certificate_amount where id = #{id}
+  </select>
+  
+  <select id="getAll" resultType="Information">
+    select id as id, information_id as informationId, real_name as realName, begin_time as beginTime, end_time as endTime, type as type, lock_flag as lockFlag, plan_amount as planAmount, real_amount as realAmount, owe_amount as oweAmount, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_information_certificate_amount order by create_time desc
+  </select>
+  
+  <select id="getRowCount" resultType="int">
+    select count(*) from t_information_certificate_amount
+  </select>
+
+  <select id="getAllPaged" parameterType="InformationCertificateAmount" resultType="InformationCertificateAmount">
+    select id as id, information_id as informationId, real_name as realName, begin_time as beginTime, end_time as endTime, type as type, lock_flag as lockFlag, plan_amount as planAmount, real_amount as realAmount, owe_amount as oweAmount, create_time as createTime, create_user as createUser, update_time as updateTime, update_user as updateUser, description as description, version as version, status as status, field_01 as field01, field_02 as field02, field_03 as field03, field_04 as field04, field_05 as field05 from t_information_certificate_amount order by create_time desc limit #{pageSize} offset #{pageIndex}
+  </select>
+</mapper>
+
